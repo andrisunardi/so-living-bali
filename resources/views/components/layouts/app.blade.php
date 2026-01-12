@@ -48,7 +48,7 @@
 
     @if (View::getSection('code') != 503)
         @if (Route::is('cms.*'))
-            {{-- @livewire('layouts.cms.footer') --}}
+            @livewire('cms.layouts.footer')
         @else
             {{-- @livewire('layouts.footer') --}}
         @endif
