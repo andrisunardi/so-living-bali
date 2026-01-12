@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Livewire\Forms\CMS;
+namespace App\Livewire\Forms\CMS\Login;
 
 use Illuminate\Support\Facades\Auth;
 use Livewire\Attributes\Validate;

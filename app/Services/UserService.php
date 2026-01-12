@@ -5,6 +5,8 @@ namespace App\Services;
 use App\Models\User;
 use Illuminate\Support\Arr;
 use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Facades\Hash;
+use Illuminate\Support\Str;
 use Spatie\Permission\Models\Role;
 
 class UserService
@@ -106,5 +108,22 @@ class UserService
         $user->syncRoles($role);
 
         return $user->refresh();
+    }
+
+    public function changePassword(User $user, array $data = []): User
+    {
+        $user->update(['password' => Hash::make($data['new_password'])]);
+        $user->refresh();
+
+        return $user;
+    }
+
+    public function resetPassword(User $user): string
+    {
+        $password = Str::random(5);
+        $user->update(['password' => Hash::make($password)]);
+        $user->refresh();
+
+        return $password;
     }
 }

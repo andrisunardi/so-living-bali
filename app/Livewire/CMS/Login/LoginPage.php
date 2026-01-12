@@ -3,9 +3,10 @@
 namespace App\Livewire\CMS\Login;
 
 use App\Livewire\Component;
-use App\Livewire\Forms\CMS\LoginForm;
+use App\Livewire\Forms\CMS\Login\LoginForm;
 use Illuminate\Contracts\View\View;
 use Illuminate\Support\Facades\Auth;
+use Jantinnerezo\LivewireAlert\Facades\LivewireAlert;
 
 class LoginPage extends Component
 {
@@ -16,9 +17,10 @@ class LoginPage extends Component
     public function mount(): void
     {
         if (Auth::check()) {
-            // $this->flash('info', trans('index.login_failed'), [
-            //     'html' => trans('index.you_already_login'),
-            // ]);
+            session()->flash('error', [
+                'title' => trans('index.login').' '.trans('index.failed'),
+                'message' => trans('message.you_already_login'),
+            ]);
 
             $this->redirectIntended(route('cms.index'), navigate: true);
         }
@@ -34,18 +36,22 @@ class LoginPage extends Component
         $result = $this->form->submit();
 
         if ($result) {
-            // $this->flash('success', trans('index.login_success'), [
-            //     'html' => trans('index.login_has_been_successfully'),
-            // ]);
+            session()->flash('success', [
+                'title' => trans('index.login').' '.trans('index.success'),
+                'message' => trans('message.you_have_successfully_logged_in'),
+            ]);
 
             $this->redirectIntended(route('cms.index'), navigate: true);
 
             return;
         }
 
-        // $this->alert('error', trans('index.login_failed'), [
-        //     'html' => trans('index.username_or_password_is_invalid'),
-        // ]);
+        LivewireAlert::title(trans('index.login').' '.trans('index.failed'))
+            ->html(trans('message.username_or_password_is_invalid'))
+            ->withConfirmButton('OK')
+            ->confirmButtonColor('#dc3545')
+            ->error()
+            ->show();
     }
 
     public function render(): View

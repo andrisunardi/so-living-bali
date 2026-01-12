@@ -8,7 +8,7 @@
         </h3>
 
         <p class="text-center">
-            {{ trans('message.enter_your_email_and_username_to_get_new_password') }}
+            {{ trans('message.please_enter_your_data_to_get_new_password') }}
         </p>
 
         <form wire:submit.prevent="submit" role="form" autocomplete="off">
@@ -19,14 +19,15 @@
                         <span class="text-danger">*</span>
                     </label>
                     <div class="input-group">
-                        <div class="input-group-text">
+                        <div class="input-group-text" wire:target="form.username"
+                            wire:dirty.class="border border-primary">
                             <span class="fas fa-user fa-fw "></span>
                         </div>
                         <input type="text" class="form-control" id="username" name="username" minlength="1"
                             maxlength="50" placeholder="{{ trans('field.username') }}" required autocapitalize="none"
-                            autocomplete="username" autofocus wire:key="username" wire:model.lazy="form.username"
+                            autocomplete="username" autofocus wire:key="username" wire:model="form.username"
                             wire:offline.class="disabled" wire:offline.attr="disabled" wire:loading.class="disabled"
-                            wire:loading.attr="disabled">
+                            wire:loading.attr="disabled" wire:dirty.class="border border-primary">
                     </div>
                     @error('form.username')
                         <div class="form-text text-danger">{{ $message }}</div>
@@ -34,43 +35,61 @@
                 </div>
 
                 <div>
-                    <label class="form-label" for="password">
-                        {{ trans('field.password') }}
+                    <label class="form-label" for="email">
+                        {{ trans('field.email') }}
                         <span class="text-danger">*</span>
                     </label>
                     <div class="input-group">
-                        <div class="input-group-text">
-                            <span class="fas fa-lock fa-fw "></span>
+                        <div class="input-group-text" wire:target="form.email" wire:dirty.class="border border-primary">
+                            <span class="fas fa-envelope fa-fw "></span>
                         </div>
-                        <input type="{{ $passwordVisibility ? 'text' : 'password' }}" class="form-control"
-                            id="password" name="password" minlength="1" maxlength="50"
-                            placeholder="{{ trans('field.password') }}" required autocapitalize="none"
-                            autocomplete="current-password" wire:key="password" wire:model.lazy="form.password"
+                        <input type="text" class="form-control" id="email" name="email" minlength="1"
+                            maxlength="50" placeholder="{{ trans('field.email') }}" required autocapitalize="none"
+                            autocomplete="email" autofocus wire:key="email" wire:model="form.email"
                             wire:offline.class="disabled" wire:offline.attr="disabled" wire:loading.class="disabled"
-                            wire:loading.attr="disabled">
-                        <div class="input-group-text pointer">
-                            <span class="fas fa-{{ $passwordVisibility ? 'eye' : 'eye-slash' }} fa-fw"
-                                wire:click="changePasswordVisibility" offline.class="disabled"
-                                wire:offline.attr="disabled" wire:loading.class="disabled" wire:loading.attr="disabled">
-                            </span>
-                        </div>
+                            wire:loading.attr="disabled" wire:dirty.class="border border-primary">
                     </div>
-                    @error('form.username')
+                    @error('form.email')
+                        <div class="form-text text-danger">{{ $message }}</div>
+                    @enderror
+                </div>
+
+                <div>
+                    <label class="form-label" for="phone">
+                        {{ trans('field.phone') }}
+                        <span class="text-danger">*</span>
+                    </label>
+                    <div class="input-group">
+                        <div class="input-group-text" wire:target="form.phone" wire:dirty.class="border border-primary">
+                            <span class="fas fa-phone fa-fw "></span>
+                        </div>
+                        <input type="text" class="form-control" id="phone" name="phone" minlength="1"
+                            maxlength="50" placeholder="{{ trans('field.phone') }}" required autocapitalize="none"
+                            autocomplete="phone" autofocus wire:key="phone" wire:model="form.phone"
+                            wire:offline.class="disabled" wire:offline.attr="disabled" wire:loading.class="disabled"
+                            wire:loading.attr="disabled" wire:dirty.class="border border-primary">
+                    </div>
+                    @error('form.phone')
                         <div class="form-text text-danger">{{ $message }}</div>
                     @enderror
                 </div>
 
                 <div class="d-flex justify-content-between gap-3">
                     <div class="form-check">
-                        <input class="form-check-input" type="checkbox" value="1" id="remember_me"
-                            name="remember_me">
-                        <label class="form-check-label" for="remember_me">
-                            {{ trans('field.remember_me') }}
+                        <input class="form-check-input" type="checkbox" value="1" id="confirm_reset"
+                            name="confirm_reset" required wire.key="confirm_reset" wire:model="form.confirm_reset"
+                            wire.offline.class="disabled" wire:offline.attr="disabled" wire:loading.class="disabled"
+                            wire:loading.attr="disabled">
+                        <label class="form-check-label" for="confirm_reset">
+                            {{ trans('field.confirm_reset') }}
                         </label>
+                        @error('form.confirm_reset')
+                            <div class="form-text text-danger">{{ $message }}</div>
+                        @enderror
                     </div>
                     <div>
                         <a draggable="false" href="{{ route('cms.login') }}" wire:navigate>
-                            {{ trans('page.forgot_password') }}
+                            {{ trans('index.back_to') }} {{ trans('page.login') }}
                         </a>
                     </div>
                 </div>
@@ -79,12 +98,12 @@
                     wire:offline.class="disabled" wire:offline.attr="disabled" wire:loading.class="disabled"
                     wire:loading.attr="disabled">
                     <span wire:loading.remove wire:target="submit">
-                        <span class="fas fa-sign-in-alt fa-fw"></span>
-                        {{ trans('page.login') }}
+                        <span class="fas fa-paper-plane fa-fw"></span>
+                        {{ trans('index.submit') }}
                     </span>
                     <span wire:loading wire:target="submit" class="w-100">
                         <span class="spinner-border spinner-border-sm"></span>
-                        {{ trans('page.login') }}
+                        {{ trans('index.submit') }}
                     </span>
                 </button>
             </div>

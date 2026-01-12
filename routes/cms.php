@@ -7,10 +7,10 @@ use App\Livewire\CMS\Logout;
 use Illuminate\Support\Facades\Route;
 
 Route::any('login', LoginPage::class)->name('login');
-// Route::any('forgot-password', ForgotPasswordPage::class)->name('forgot-password');
+Route::any('forgot-password', ForgotPasswordPage::class)->name('forgot-password');
 
 Route::group(['middleware' => ['auth', 'role:'.config('app.route_cms_roles')]], function () {
-    // Route::any('', HomePage::class)->name('index');
+    Route::any('', HomePage::class)->name('index');
 
     // Route::prefix('contact')->name('contact.')->as('contact.')
     //     ->middleware(['role:Super User|Admin'])

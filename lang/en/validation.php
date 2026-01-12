@@ -163,6 +163,10 @@ return [
     ],
 
     'attributes' => [
+        'username' => 'Username',
+        'password' => 'Password',
+        'email' => 'Email',
+        'phone' => 'Phone',
         'name' => 'Name',
         'guard_name' => 'Guard Name',
         'permission_ids' => 'Permissions',
