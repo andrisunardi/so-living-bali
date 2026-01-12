@@ -47,11 +47,11 @@ Breadcrumbs::for('log-detailer.index', function (BreadcrumbTrail $trail) {
 
 // HOME
 Breadcrumbs::for('index', function (BreadcrumbTrail $trail) {
-    $trail->push(trans('index.home'), route('index'), ['icon' => 'fas fa-home']);
+    $trail->push(trans('page.home'), route('index'), ['icon' => 'fas fa-home']);
 });
 
 // CMS
 // HOME
 Breadcrumbs::for('cms.index', function (BreadcrumbTrail $trail) {
-    $trail->push(trans('index.home'), route('cms.index'), ['icon' => 'fas fa-home']);
+    $trail->push(trans('page.home'), route('cms.index'), ['icon' => 'fas fa-home']);
 });

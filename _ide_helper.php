@@ -23162,1579 +23162,6 @@ namespace Illuminate\Support\Facades {
             }
     }
 
-namespace Barryvdh\Debugbar\Facades {
-    /**
-     * @method static void alert(mixed $message)
-     * @method static void critical(mixed $message)
-     * @method static void debug(mixed $message)
-     * @method static void emergency(mixed $message)
-     * @method static void error(mixed $message)
-     * @method static void info(mixed $message)
-     * @method static void log(mixed $message)
-     * @method static void notice(mixed $message)
-     * @method static void warning(mixed $message)
-     * @see \Barryvdh\Debugbar\LaravelDebugbar
-     */
-    class Debugbar extends \DebugBar\DebugBar {
-        /**
-         * Returns the HTTP driver
-         * 
-         * If no http driver where defined, a PhpHttpDriver is automatically created
-         *
-         * @return \DebugBar\HttpDriverInterface
-         * @static
-         */
-        public static function getHttpDriver()
-        {
-            /** @var \Barryvdh\Debugbar\LaravelDebugbar $instance */
-            return $instance->getHttpDriver();
-        }
-
-        /**
-         * Enable the Debugbar and boot, if not already booted.
-         *
-         * @static
-         */
-        public static function enable()
-        {
-            /** @var \Barryvdh\Debugbar\LaravelDebugbar $instance */
-            return $instance->enable();
-        }
-
-        /**
-         * Boot the debugbar (add collectors, renderer and listener)
-         *
-         * @static
-         */
-        public static function boot()
-        {
-            /** @var \Barryvdh\Debugbar\LaravelDebugbar $instance */
-            return $instance->boot();
-        }
-
-        /**
-         * @static
-         */
-        public static function shouldCollect($name, $default = false)
-        {
-            /** @var \Barryvdh\Debugbar\LaravelDebugbar $instance */
-            return $instance->shouldCollect($name, $default);
-        }
-
-        /**
-         * Adds a data collector
-         *
-         * @param \DebugBar\DataCollector\DataCollectorInterface $collector
-         * @throws DebugBarException
-         * @return \Barryvdh\Debugbar\LaravelDebugbar
-         * @static
-         */
-        public static function addCollector($collector)
-        {
-            /** @var \Barryvdh\Debugbar\LaravelDebugbar $instance */
-            return $instance->addCollector($collector);
-        }
-
-        /**
-         * Handle silenced errors
-         *
-         * @param $level
-         * @param $message
-         * @param string $file
-         * @param int $line
-         * @param array $context
-         * @throws \ErrorException
-         * @static
-         */
-        public static function handleError($level, $message, $file = '', $line = 0, $context = [])
-        {
-            /** @var \Barryvdh\Debugbar\LaravelDebugbar $instance */
-            return $instance->handleError($level, $message, $file, $line, $context);
-        }
-
-        /**
-         * Starts a measure
-         *
-         * @param string $name Internal name, used to stop the measure
-         * @param string $label Public name
-         * @param string|null $collector
-         * @param string|null $group
-         * @static
-         */
-        public static function startMeasure($name, $label = null, $collector = null, $group = null)
-        {
-            /** @var \Barryvdh\Debugbar\LaravelDebugbar $instance */
-            return $instance->startMeasure($name, $label, $collector, $group);
-        }
-
-        /**
-         * Stops a measure
-         *
-         * @param string $name
-         * @static
-         */
-        public static function stopMeasure($name)
-        {
-            /** @var \Barryvdh\Debugbar\LaravelDebugbar $instance */
-            return $instance->stopMeasure($name);
-        }
-
-        /**
-         * Adds an exception to be profiled in the debug bar
-         *
-         * @param \Exception $e
-         * @deprecated in favor of addThrowable
-         * @static
-         */
-        public static function addException($e)
-        {
-            /** @var \Barryvdh\Debugbar\LaravelDebugbar $instance */
-            return $instance->addException($e);
-        }
-
-        /**
-         * Adds an exception to be profiled in the debug bar
-         *
-         * @param \Throwable $e
-         * @static
-         */
-        public static function addThrowable($e)
-        {
-            /** @var \Barryvdh\Debugbar\LaravelDebugbar $instance */
-            return $instance->addThrowable($e);
-        }
-
-        /**
-         * Returns a JavascriptRenderer for this instance
-         *
-         * @param string $baseUrl
-         * @param string $basePath
-         * @return \Barryvdh\Debugbar\JavascriptRenderer
-         * @static
-         */
-        public static function getJavascriptRenderer($baseUrl = null, $basePath = null)
-        {
-            /** @var \Barryvdh\Debugbar\LaravelDebugbar $instance */
-            return $instance->getJavascriptRenderer($baseUrl, $basePath);
-        }
-
-        /**
-         * Modify the response and inject the debugbar (or data in headers)
-         *
-         * @param \Symfony\Component\HttpFoundation\Request $request
-         * @param \Symfony\Component\HttpFoundation\Response $response
-         * @return \Symfony\Component\HttpFoundation\Response
-         * @static
-         */
-        public static function modifyResponse($request, $response)
-        {
-            /** @var \Barryvdh\Debugbar\LaravelDebugbar $instance */
-            return $instance->modifyResponse($request, $response);
-        }
-
-        /**
-         * Check if the Debugbar is enabled
-         *
-         * @return boolean
-         * @static
-         */
-        public static function isEnabled()
-        {
-            /** @var \Barryvdh\Debugbar\LaravelDebugbar $instance */
-            return $instance->isEnabled();
-        }
-
-        /**
-         * Collects the data from the collectors
-         *
-         * @return array
-         * @static
-         */
-        public static function collect()
-        {
-            /** @var \Barryvdh\Debugbar\LaravelDebugbar $instance */
-            return $instance->collect();
-        }
-
-        /**
-         * Injects the web debug toolbar into the given Response.
-         *
-         * @param \Symfony\Component\HttpFoundation\Response $response A Response instance
-         * Based on https://github.com/symfony/WebProfilerBundle/blob/master/EventListener/WebDebugToolbarListener.php
-         * @static
-         */
-        public static function injectDebugbar($response)
-        {
-            /** @var \Barryvdh\Debugbar\LaravelDebugbar $instance */
-            return $instance->injectDebugbar($response);
-        }
-
-        /**
-         * Checks if there is stacked data in the session
-         *
-         * @return boolean
-         * @static
-         */
-        public static function hasStackedData()
-        {
-            /** @var \Barryvdh\Debugbar\LaravelDebugbar $instance */
-            return $instance->hasStackedData();
-        }
-
-        /**
-         * Returns the data stacked in the session
-         *
-         * @param boolean $delete Whether to delete the data in the session
-         * @return array
-         * @static
-         */
-        public static function getStackedData($delete = true)
-        {
-            /** @var \Barryvdh\Debugbar\LaravelDebugbar $instance */
-            return $instance->getStackedData($delete);
-        }
-
-        /**
-         * Disable the Debugbar
-         *
-         * @static
-         */
-        public static function disable()
-        {
-            /** @var \Barryvdh\Debugbar\LaravelDebugbar $instance */
-            return $instance->disable();
-        }
-
-        /**
-         * Adds a measure
-         *
-         * @param string $label
-         * @param float $start
-         * @param float $end
-         * @param array|null $params
-         * @param string|null $collector
-         * @param string|null $group
-         * @static
-         */
-        public static function addMeasure($label, $start, $end, $params = [], $collector = null, $group = null)
-        {
-            /** @var \Barryvdh\Debugbar\LaravelDebugbar $instance */
-            return $instance->addMeasure($label, $start, $end, $params, $collector, $group);
-        }
-
-        /**
-         * Utility function to measure the execution of a Closure
-         *
-         * @param string $label
-         * @param \Closure $closure
-         * @param string|null $collector
-         * @param string|null $group
-         * @return mixed
-         * @static
-         */
-        public static function measure($label, $closure, $collector = null, $group = null)
-        {
-            /** @var \Barryvdh\Debugbar\LaravelDebugbar $instance */
-            return $instance->measure($label, $closure, $collector, $group);
-        }
-
-        /**
-         * Collect data in a CLI request
-         *
-         * @return array
-         * @static
-         */
-        public static function collectConsole()
-        {
-            /** @var \Barryvdh\Debugbar\LaravelDebugbar $instance */
-            return $instance->collectConsole();
-        }
-
-        /**
-         * Adds a message to the MessagesCollector
-         * 
-         * A message can be anything from an object to a string
-         *
-         * @param mixed $message
-         * @param string $label
-         * @static
-         */
-        public static function addMessage($message, $label = 'info')
-        {
-            /** @var \Barryvdh\Debugbar\LaravelDebugbar $instance */
-            return $instance->addMessage($message, $label);
-        }
-
-        /**
-         * Checks if a data collector has been added
-         *
-         * @param string $name
-         * @return boolean
-         * @static
-         */
-        public static function hasCollector($name)
-        {
-            //Method inherited from \DebugBar\DebugBar 
-            /** @var \Barryvdh\Debugbar\LaravelDebugbar $instance */
-            return $instance->hasCollector($name);
-        }
-
-        /**
-         * Returns a data collector
-         *
-         * @param string $name
-         * @return \DebugBar\DataCollector\DataCollectorInterface
-         * @throws DebugBarException
-         * @static
-         */
-        public static function getCollector($name)
-        {
-            //Method inherited from \DebugBar\DebugBar 
-            /** @var \Barryvdh\Debugbar\LaravelDebugbar $instance */
-            return $instance->getCollector($name);
-        }
-
-        /**
-         * Returns an array of all data collectors
-         *
-         * @return array[DataCollectorInterface]
-         * @static
-         */
-        public static function getCollectors()
-        {
-            //Method inherited from \DebugBar\DebugBar 
-            /** @var \Barryvdh\Debugbar\LaravelDebugbar $instance */
-            return $instance->getCollectors();
-        }
-
-        /**
-         * Sets the request id generator
-         *
-         * @param \DebugBar\RequestIdGeneratorInterface $generator
-         * @return \Barryvdh\Debugbar\LaravelDebugbar
-         * @static
-         */
-        public static function setRequestIdGenerator($generator)
-        {
-            //Method inherited from \DebugBar\DebugBar 
-            /** @var \Barryvdh\Debugbar\LaravelDebugbar $instance */
-            return $instance->setRequestIdGenerator($generator);
-        }
-
-        /**
-         * @return \DebugBar\RequestIdGeneratorInterface
-         * @static
-         */
-        public static function getRequestIdGenerator()
-        {
-            //Method inherited from \DebugBar\DebugBar 
-            /** @var \Barryvdh\Debugbar\LaravelDebugbar $instance */
-            return $instance->getRequestIdGenerator();
-        }
-
-        /**
-         * Returns the id of the current request
-         *
-         * @return string
-         * @static
-         */
-        public static function getCurrentRequestId()
-        {
-            //Method inherited from \DebugBar\DebugBar 
-            /** @var \Barryvdh\Debugbar\LaravelDebugbar $instance */
-            return $instance->getCurrentRequestId();
-        }
-
-        /**
-         * Sets the storage backend to use to store the collected data
-         *
-         * @param \DebugBar\StorageInterface $storage
-         * @return \Barryvdh\Debugbar\LaravelDebugbar
-         * @static
-         */
-        public static function setStorage($storage = null)
-        {
-            //Method inherited from \DebugBar\DebugBar 
-            /** @var \Barryvdh\Debugbar\LaravelDebugbar $instance */
-            return $instance->setStorage($storage);
-        }
-
-        /**
-         * @return \DebugBar\StorageInterface
-         * @static
-         */
-        public static function getStorage()
-        {
-            //Method inherited from \DebugBar\DebugBar 
-            /** @var \Barryvdh\Debugbar\LaravelDebugbar $instance */
-            return $instance->getStorage();
-        }
-
-        /**
-         * Checks if the data will be persisted
-         *
-         * @return boolean
-         * @static
-         */
-        public static function isDataPersisted()
-        {
-            //Method inherited from \DebugBar\DebugBar 
-            /** @var \Barryvdh\Debugbar\LaravelDebugbar $instance */
-            return $instance->isDataPersisted();
-        }
-
-        /**
-         * Sets the HTTP driver
-         *
-         * @param \DebugBar\HttpDriverInterface $driver
-         * @return \Barryvdh\Debugbar\LaravelDebugbar
-         * @static
-         */
-        public static function setHttpDriver($driver)
-        {
-            //Method inherited from \DebugBar\DebugBar 
-            /** @var \Barryvdh\Debugbar\LaravelDebugbar $instance */
-            return $instance->setHttpDriver($driver);
-        }
-
-        /**
-         * Returns collected data
-         * 
-         * Will collect the data if none have been collected yet
-         *
-         * @return array
-         * @static
-         */
-        public static function getData()
-        {
-            //Method inherited from \DebugBar\DebugBar 
-            /** @var \Barryvdh\Debugbar\LaravelDebugbar $instance */
-            return $instance->getData();
-        }
-
-        /**
-         * Returns an array of HTTP headers containing the data
-         *
-         * @param string $headerName
-         * @param integer $maxHeaderLength
-         * @return array
-         * @static
-         */
-        public static function getDataAsHeaders($headerName = 'phpdebugbar', $maxHeaderLength = 4096, $maxTotalHeaderLength = 250000)
-        {
-            //Method inherited from \DebugBar\DebugBar 
-            /** @var \Barryvdh\Debugbar\LaravelDebugbar $instance */
-            return $instance->getDataAsHeaders($headerName, $maxHeaderLength, $maxTotalHeaderLength);
-        }
-
-        /**
-         * Sends the data through the HTTP headers
-         *
-         * @param bool $useOpenHandler
-         * @param string $headerName
-         * @param integer $maxHeaderLength
-         * @return \Barryvdh\Debugbar\LaravelDebugbar
-         * @static
-         */
-        public static function sendDataInHeaders($useOpenHandler = null, $headerName = 'phpdebugbar', $maxHeaderLength = 4096)
-        {
-            //Method inherited from \DebugBar\DebugBar 
-            /** @var \Barryvdh\Debugbar\LaravelDebugbar $instance */
-            return $instance->sendDataInHeaders($useOpenHandler, $headerName, $maxHeaderLength);
-        }
-
-        /**
-         * Stacks the data in the session for later rendering
-         *
-         * @static
-         */
-        public static function stackData()
-        {
-            //Method inherited from \DebugBar\DebugBar 
-            /** @var \Barryvdh\Debugbar\LaravelDebugbar $instance */
-            return $instance->stackData();
-        }
-
-        /**
-         * Sets the key to use in the $_SESSION array
-         *
-         * @param string $ns
-         * @return \Barryvdh\Debugbar\LaravelDebugbar
-         * @static
-         */
-        public static function setStackDataSessionNamespace($ns)
-        {
-            //Method inherited from \DebugBar\DebugBar 
-            /** @var \Barryvdh\Debugbar\LaravelDebugbar $instance */
-            return $instance->setStackDataSessionNamespace($ns);
-        }
-
-        /**
-         * Returns the key used in the $_SESSION array
-         *
-         * @return string
-         * @static
-         */
-        public static function getStackDataSessionNamespace()
-        {
-            //Method inherited from \DebugBar\DebugBar 
-            /** @var \Barryvdh\Debugbar\LaravelDebugbar $instance */
-            return $instance->getStackDataSessionNamespace();
-        }
-
-        /**
-         * Sets whether to only use the session to store stacked data even
-         * if a storage is enabled
-         *
-         * @param boolean $enabled
-         * @return \Barryvdh\Debugbar\LaravelDebugbar
-         * @static
-         */
-        public static function setStackAlwaysUseSessionStorage($enabled = true)
-        {
-            //Method inherited from \DebugBar\DebugBar 
-            /** @var \Barryvdh\Debugbar\LaravelDebugbar $instance */
-            return $instance->setStackAlwaysUseSessionStorage($enabled);
-        }
-
-        /**
-         * Checks if the session is always used to store stacked data
-         * even if a storage is enabled
-         *
-         * @return boolean
-         * @static
-         */
-        public static function isStackAlwaysUseSessionStorage()
-        {
-            //Method inherited from \DebugBar\DebugBar 
-            /** @var \Barryvdh\Debugbar\LaravelDebugbar $instance */
-            return $instance->isStackAlwaysUseSessionStorage();
-        }
-
-        /**
-         * @static
-         */
-        public static function offsetSet($key, $value)
-        {
-            //Method inherited from \DebugBar\DebugBar 
-            /** @var \Barryvdh\Debugbar\LaravelDebugbar $instance */
-            return $instance->offsetSet($key, $value);
-        }
-
-        /**
-         * @static
-         */
-        public static function offsetGet($key)
-        {
-            //Method inherited from \DebugBar\DebugBar 
-            /** @var \Barryvdh\Debugbar\LaravelDebugbar $instance */
-            return $instance->offsetGet($key);
-        }
-
-        /**
-         * @static
-         */
-        public static function offsetExists($key)
-        {
-            //Method inherited from \DebugBar\DebugBar 
-            /** @var \Barryvdh\Debugbar\LaravelDebugbar $instance */
-            return $instance->offsetExists($key);
-        }
-
-        /**
-         * @static
-         */
-        public static function offsetUnset($key)
-        {
-            //Method inherited from \DebugBar\DebugBar 
-            /** @var \Barryvdh\Debugbar\LaravelDebugbar $instance */
-            return $instance->offsetUnset($key);
-        }
-
-            }
-    }
-
-namespace Barryvdh\DomPDF\Facade {
-    /**
-     * @method static BasePDF setBaseHost(string $baseHost)
-     * @method static BasePDF setBasePath(string $basePath)
-     * @method static BasePDF setCanvas(\Dompdf\Canvas $canvas)
-     * @method static BasePDF setCallbacks(array<string, mixed> $callbacks)
-     * @method static BasePDF setCss(\Dompdf\Css\Stylesheet $css)
-     * @method static BasePDF setDefaultView(string $defaultView, array<string, mixed> $options)
-     * @method static BasePDF setDom(\DOMDocument $dom)
-     * @method static BasePDF setFontMetrics(\Dompdf\FontMetrics $fontMetrics)
-     * @method static BasePDF setHttpContext(resource|array<string, mixed> $httpContext)
-     * @method static BasePDF setPaper(string|float[] $paper, string $orientation = 'portrait')
-     * @method static BasePDF setProtocol(string $protocol)
-     * @method static BasePDF setTree(\Dompdf\Frame\FrameTree $tree)
-     */
-    class Pdf {
-        /**
-         * Get the DomPDF instance
-         *
-         * @static
-         */
-        public static function getDomPDF()
-        {
-            /** @var \Barryvdh\DomPDF\PDF $instance */
-            return $instance->getDomPDF();
-        }
-
-        /**
-         * Show or hide warnings
-         *
-         * @static
-         */
-        public static function setWarnings($warnings)
-        {
-            /** @var \Barryvdh\DomPDF\PDF $instance */
-            return $instance->setWarnings($warnings);
-        }
-
-        /**
-         * Load a HTML string
-         *
-         * @param string|null $encoding Not used yet
-         * @static
-         */
-        public static function loadHTML($string, $encoding = null)
-        {
-            /** @var \Barryvdh\DomPDF\PDF $instance */
-            return $instance->loadHTML($string, $encoding);
-        }
-
-        /**
-         * Load a HTML file
-         *
-         * @static
-         */
-        public static function loadFile($file)
-        {
-            /** @var \Barryvdh\DomPDF\PDF $instance */
-            return $instance->loadFile($file);
-        }
-
-        /**
-         * Add metadata info
-         *
-         * @param array<string, string> $info
-         * @static
-         */
-        public static function addInfo($info)
-        {
-            /** @var \Barryvdh\DomPDF\PDF $instance */
-            return $instance->addInfo($info);
-        }
-
-        /**
-         * Load a View and convert to HTML
-         *
-         * @param array<string, mixed> $data
-         * @param array<string, mixed> $mergeData
-         * @param string|null $encoding Not used yet
-         * @static
-         */
-        public static function loadView($view, $data = [], $mergeData = [], $encoding = null)
-        {
-            /** @var \Barryvdh\DomPDF\PDF $instance */
-            return $instance->loadView($view, $data, $mergeData, $encoding);
-        }
-
-        /**
-         * Set/Change an option (or array of options) in Dompdf
-         *
-         * @param array<string, mixed>|string $attribute
-         * @param null|mixed $value
-         * @static
-         */
-        public static function setOption($attribute, $value = null)
-        {
-            /** @var \Barryvdh\DomPDF\PDF $instance */
-            return $instance->setOption($attribute, $value);
-        }
-
-        /**
-         * Replace all the Options from DomPDF
-         *
-         * @param array<string, mixed> $options
-         * @static
-         */
-        public static function setOptions($options, $mergeWithDefaults = false)
-        {
-            /** @var \Barryvdh\DomPDF\PDF $instance */
-            return $instance->setOptions($options, $mergeWithDefaults);
-        }
-
-        /**
-         * Output the PDF as a string.
-         * 
-         * The options parameter controls the output. Accepted options are:
-         * 
-         * 'compress' = > 1 or 0 - apply content stream compression, this is
-         *    on (1) by default
-         *
-         * @param array<string, int> $options
-         * @return string The rendered PDF as string
-         * @static
-         */
-        public static function output($options = [])
-        {
-            /** @var \Barryvdh\DomPDF\PDF $instance */
-            return $instance->output($options);
-        }
-
-        /**
-         * Save the PDF to a file
-         *
-         * @static
-         */
-        public static function save($filename, $disk = null)
-        {
-            /** @var \Barryvdh\DomPDF\PDF $instance */
-            return $instance->save($filename, $disk);
-        }
-
-        /**
-         * Make the PDF downloadable by the user
-         *
-         * @static
-         */
-        public static function download($filename = 'document.pdf')
-        {
-            /** @var \Barryvdh\DomPDF\PDF $instance */
-            return $instance->download($filename);
-        }
-
-        /**
-         * Return a response with the PDF to show in the browser
-         *
-         * @static
-         */
-        public static function stream($filename = 'document.pdf')
-        {
-            /** @var \Barryvdh\DomPDF\PDF $instance */
-            return $instance->stream($filename);
-        }
-
-        /**
-         * Render the PDF
-         *
-         * @static
-         */
-        public static function render()
-        {
-            /** @var \Barryvdh\DomPDF\PDF $instance */
-            return $instance->render();
-        }
-
-        /**
-         * @param array<string> $pc
-         * @static
-         */
-        public static function setEncryption($password, $ownerpassword = '', $pc = [])
-        {
-            /** @var \Barryvdh\DomPDF\PDF $instance */
-            return $instance->setEncryption($password, $ownerpassword, $pc);
-        }
-
-            }
-    /**
-     * @method static BasePDF setBaseHost(string $baseHost)
-     * @method static BasePDF setBasePath(string $basePath)
-     * @method static BasePDF setCanvas(\Dompdf\Canvas $canvas)
-     * @method static BasePDF setCallbacks(array<string, mixed> $callbacks)
-     * @method static BasePDF setCss(\Dompdf\Css\Stylesheet $css)
-     * @method static BasePDF setDefaultView(string $defaultView, array<string, mixed> $options)
-     * @method static BasePDF setDom(\DOMDocument $dom)
-     * @method static BasePDF setFontMetrics(\Dompdf\FontMetrics $fontMetrics)
-     * @method static BasePDF setHttpContext(resource|array<string, mixed> $httpContext)
-     * @method static BasePDF setPaper(string|float[] $paper, string $orientation = 'portrait')
-     * @method static BasePDF setProtocol(string $protocol)
-     * @method static BasePDF setTree(\Dompdf\Frame\FrameTree $tree)
-     */
-    class Pdf {
-        /**
-         * Get the DomPDF instance
-         *
-         * @static
-         */
-        public static function getDomPDF()
-        {
-            /** @var \Barryvdh\DomPDF\PDF $instance */
-            return $instance->getDomPDF();
-        }
-
-        /**
-         * Show or hide warnings
-         *
-         * @static
-         */
-        public static function setWarnings($warnings)
-        {
-            /** @var \Barryvdh\DomPDF\PDF $instance */
-            return $instance->setWarnings($warnings);
-        }
-
-        /**
-         * Load a HTML string
-         *
-         * @param string|null $encoding Not used yet
-         * @static
-         */
-        public static function loadHTML($string, $encoding = null)
-        {
-            /** @var \Barryvdh\DomPDF\PDF $instance */
-            return $instance->loadHTML($string, $encoding);
-        }
-
-        /**
-         * Load a HTML file
-         *
-         * @static
-         */
-        public static function loadFile($file)
-        {
-            /** @var \Barryvdh\DomPDF\PDF $instance */
-            return $instance->loadFile($file);
-        }
-
-        /**
-         * Add metadata info
-         *
-         * @param array<string, string> $info
-         * @static
-         */
-        public static function addInfo($info)
-        {
-            /** @var \Barryvdh\DomPDF\PDF $instance */
-            return $instance->addInfo($info);
-        }
-
-        /**
-         * Load a View and convert to HTML
-         *
-         * @param array<string, mixed> $data
-         * @param array<string, mixed> $mergeData
-         * @param string|null $encoding Not used yet
-         * @static
-         */
-        public static function loadView($view, $data = [], $mergeData = [], $encoding = null)
-        {
-            /** @var \Barryvdh\DomPDF\PDF $instance */
-            return $instance->loadView($view, $data, $mergeData, $encoding);
-        }
-
-        /**
-         * Set/Change an option (or array of options) in Dompdf
-         *
-         * @param array<string, mixed>|string $attribute
-         * @param null|mixed $value
-         * @static
-         */
-        public static function setOption($attribute, $value = null)
-        {
-            /** @var \Barryvdh\DomPDF\PDF $instance */
-            return $instance->setOption($attribute, $value);
-        }
-
-        /**
-         * Replace all the Options from DomPDF
-         *
-         * @param array<string, mixed> $options
-         * @static
-         */
-        public static function setOptions($options, $mergeWithDefaults = false)
-        {
-            /** @var \Barryvdh\DomPDF\PDF $instance */
-            return $instance->setOptions($options, $mergeWithDefaults);
-        }
-
-        /**
-         * Output the PDF as a string.
-         * 
-         * The options parameter controls the output. Accepted options are:
-         * 
-         * 'compress' = > 1 or 0 - apply content stream compression, this is
-         *    on (1) by default
-         *
-         * @param array<string, int> $options
-         * @return string The rendered PDF as string
-         * @static
-         */
-        public static function output($options = [])
-        {
-            /** @var \Barryvdh\DomPDF\PDF $instance */
-            return $instance->output($options);
-        }
-
-        /**
-         * Save the PDF to a file
-         *
-         * @static
-         */
-        public static function save($filename, $disk = null)
-        {
-            /** @var \Barryvdh\DomPDF\PDF $instance */
-            return $instance->save($filename, $disk);
-        }
-
-        /**
-         * Make the PDF downloadable by the user
-         *
-         * @static
-         */
-        public static function download($filename = 'document.pdf')
-        {
-            /** @var \Barryvdh\DomPDF\PDF $instance */
-            return $instance->download($filename);
-        }
-
-        /**
-         * Return a response with the PDF to show in the browser
-         *
-         * @static
-         */
-        public static function stream($filename = 'document.pdf')
-        {
-            /** @var \Barryvdh\DomPDF\PDF $instance */
-            return $instance->stream($filename);
-        }
-
-        /**
-         * Render the PDF
-         *
-         * @static
-         */
-        public static function render()
-        {
-            /** @var \Barryvdh\DomPDF\PDF $instance */
-            return $instance->render();
-        }
-
-        /**
-         * @param array<string> $pc
-         * @static
-         */
-        public static function setEncryption($password, $ownerpassword = '', $pc = [])
-        {
-            /** @var \Barryvdh\DomPDF\PDF $instance */
-            return $instance->setEncryption($password, $ownerpassword, $pc);
-        }
-
-            }
-    }
-
-namespace Diglactic\Breadcrumbs {
-    /**
-     * Breadcrumbs facade - allows easy access to the Manager instance.
-     *
-     * @method static array getCurrentRoute()
-     * @mixin \Illuminate\Support\Traits\Macroable
-     * @see \Diglactic\Breadcrumbs\Manager
-     */
-    class Breadcrumbs {
-        /**
-         * Register a breadcrumb-generating callback for a page.
-         *
-         * @param string $name The name of the page.
-         * @param callable $callback The callback, which should accept a Generator instance as the first parameter and may
-         *                           accept additional parameters.
-         * @return void
-         * @throws \Diglactic\Breadcrumbs\Exceptions\DuplicateBreadcrumbException If the given name has already been used.
-         * @static
-         */
-        public static function for($name, $callback)
-        {
-            /** @var \Diglactic\Breadcrumbs\Manager $instance */
-            $instance->for($name, $callback);
-        }
-
-        /**
-         * Register a closure to call before generating breadcrumbs for the current page.
-         * 
-         * For example, this can be used to always prepend the homepage without needing to manually add it to each page.
-         *
-         * @param callable $callback The callback, which should accept a Generator instance as the first and only parameter.
-         * @return void
-         * @static
-         */
-        public static function before($callback)
-        {
-            /** @var \Diglactic\Breadcrumbs\Manager $instance */
-            $instance->before($callback);
-        }
-
-        /**
-         * Register a closure to call after generating breadcrumbs for the current page.
-         * 
-         * For example, this can be used to append the current page number when using pagination.
-         *
-         * @param callable $callback The callback, which should accept a Generator instance as the first and only parameter.
-         * @return void
-         * @static
-         */
-        public static function after($callback)
-        {
-            /** @var \Diglactic\Breadcrumbs\Manager $instance */
-            $instance->after($callback);
-        }
-
-        /**
-         * Check if a breadcrumb with the given name exists.
-         * 
-         * If no name is given, defaults to the current route name.
-         *
-         * @param string|null $name The page name.
-         * @return bool Whether there is a registered callback with that name.
-         * @static
-         */
-        public static function exists($name = null)
-        {
-            /** @var \Diglactic\Breadcrumbs\Manager $instance */
-            return $instance->exists($name);
-        }
-
-        /**
-         * Generate a set of breadcrumbs for a page.
-         *
-         * @param string|null $name The name of the current page.
-         * @param mixed $params The parameters to pass to the closure for the current page.
-         * @return \Illuminate\Support\Collection The generated breadcrumbs.
-         * @throws \Diglactic\Breadcrumbs\Exceptions\UnnamedRouteException if no name is given and the current route doesn't
-         *                                                                 have an associated name.
-         * @throws \Diglactic\Breadcrumbs\Exceptions\InvalidBreadcrumbException if the name is (or any ancestor names  are)
-         *                                                                      not registered.
-         * @static
-         */
-        public static function generate($name = null, ...$params)
-        {
-            /** @var \Diglactic\Breadcrumbs\Manager $instance */
-            return $instance->generate($name, ...$params);
-        }
-
-        /**
-         * Render breadcrumbs for a page with the specified view.
-         *
-         * @param string $view The name of the view to render.
-         * @param string|null $name The name of the current page.
-         * @param mixed $params The parameters to pass to the closure for the current page.
-         * @return \Illuminate\View\View The generated HTML.
-         * @throws \Diglactic\Breadcrumbs\Exceptions\InvalidBreadcrumbException if the name is (or any ancestor names are)
-         *                                                                      not registered.
-         * @throws \Diglactic\Breadcrumbs\Exceptions\UnnamedRouteException if no name is given and the current route doesn't
-         *                                                                 have an associated name.
-         * @static
-         */
-        public static function view($view, $name = null, ...$params)
-        {
-            /** @var \Diglactic\Breadcrumbs\Manager $instance */
-            return $instance->view($view, $name, ...$params);
-        }
-
-        /**
-         * Render breadcrumbs for a page with the default view.
-         *
-         * @param string|null $name The name of the current page.
-         * @param mixed $params The parameters to pass to the closure for the current page.
-         * @return \Illuminate\Contracts\View\View The generated view.
-         * @throws \Diglactic\Breadcrumbs\Exceptions\InvalidBreadcrumbException if the name is (or any ancestor names are)
-         *                                                                      not registered.
-         * @throws \Diglactic\Breadcrumbs\Exceptions\UnnamedRouteException if no name is given and the current route doesn't
-         *                                                                 have an associated name.
-         * @throws \Diglactic\Breadcrumbs\Exceptions\ViewNotSetException if no view has been set.
-         * @static
-         */
-        public static function render($name = null, ...$params)
-        {
-            /** @var \Diglactic\Breadcrumbs\Manager $instance */
-            return $instance->render($name, ...$params);
-        }
-
-        /**
-         * Get the last breadcrumb for the current page.
-         *
-         * @return object|null The breadcrumb for the current page.
-         * @throws \Diglactic\Breadcrumbs\Exceptions\UnnamedRouteException if the current route doesn't have an associated
-         *                                                                 name.
-         * @throws \Diglactic\Breadcrumbs\Exceptions\InvalidBreadcrumbException if the name is (or any ancestor names are)
-         *                                                                      not registered.
-         * @static
-         */
-        public static function current()
-        {
-            /** @var \Diglactic\Breadcrumbs\Manager $instance */
-            return $instance->current();
-        }
-
-        /**
-         * Set the current route name and parameters to use when calling render() or generate() with no parameters.
-         *
-         * @param string $name The name of the current page.
-         * @param mixed $params The parameters to pass to the closure for the current page.
-         * @return void
-         * @static
-         */
-        public static function setCurrentRoute($name, ...$params)
-        {
-            /** @var \Diglactic\Breadcrumbs\Manager $instance */
-            $instance->setCurrentRoute($name, ...$params);
-        }
-
-        /**
-         * Clear the previously set route name and parameters to use when calling render() or generate() with no parameters.
-         * 
-         * Next time it will revert to the default behaviour of using the current route from Laravel.
-         *
-         * @return void
-         * @static
-         */
-        public static function clearCurrentRoute()
-        {
-            /** @var \Diglactic\Breadcrumbs\Manager $instance */
-            $instance->clearCurrentRoute();
-        }
-
-        /**
-         * Register a custom macro.
-         *
-         * @param string $name
-         * @param object|callable $macro
-         * @param-closure-this static  $macro
-         * @return void
-         * @static
-         */
-        public static function macro($name, $macro)
-        {
-            \Diglactic\Breadcrumbs\Manager::macro($name, $macro);
-        }
-
-        /**
-         * Mix another object into the class.
-         *
-         * @param object $mixin
-         * @param bool $replace
-         * @return void
-         * @throws \ReflectionException
-         * @static
-         */
-        public static function mixin($mixin, $replace = true)
-        {
-            \Diglactic\Breadcrumbs\Manager::mixin($mixin, $replace);
-        }
-
-        /**
-         * Checks if macro is registered.
-         *
-         * @param string $name
-         * @return bool
-         * @static
-         */
-        public static function hasMacro($name)
-        {
-            return \Diglactic\Breadcrumbs\Manager::hasMacro($name);
-        }
-
-        /**
-         * Flush the existing macros.
-         *
-         * @return void
-         * @static
-         */
-        public static function flushMacros()
-        {
-            \Diglactic\Breadcrumbs\Manager::flushMacros();
-        }
-
-            }
-    }
-
-namespace Livewire {
-    /**
-     * @see \Livewire\LivewireManager
-     */
-    class Livewire {
-        /**
-         * @static
-         */
-        public static function setProvider($provider)
-        {
-            /** @var \Livewire\LivewireManager $instance */
-            return $instance->setProvider($provider);
-        }
-
-        /**
-         * @static
-         */
-        public static function provide($callback)
-        {
-            /** @var \Livewire\LivewireManager $instance */
-            return $instance->provide($callback);
-        }
-
-        /**
-         * @static
-         */
-        public static function component($name, $class = null)
-        {
-            /** @var \Livewire\LivewireManager $instance */
-            return $instance->component($name, $class);
-        }
-
-        /**
-         * @static
-         */
-        public static function componentHook($hook)
-        {
-            /** @var \Livewire\LivewireManager $instance */
-            return $instance->componentHook($hook);
-        }
-
-        /**
-         * @static
-         */
-        public static function propertySynthesizer($synth)
-        {
-            /** @var \Livewire\LivewireManager $instance */
-            return $instance->propertySynthesizer($synth);
-        }
-
-        /**
-         * @static
-         */
-        public static function directive($name, $callback)
-        {
-            /** @var \Livewire\LivewireManager $instance */
-            return $instance->directive($name, $callback);
-        }
-
-        /**
-         * @static
-         */
-        public static function precompiler($callback)
-        {
-            /** @var \Livewire\LivewireManager $instance */
-            return $instance->precompiler($callback);
-        }
-
-        /**
-         * @static
-         */
-        public static function new($name, $id = null)
-        {
-            /** @var \Livewire\LivewireManager $instance */
-            return $instance->new($name, $id);
-        }
-
-        /**
-         * @static
-         */
-        public static function isDiscoverable($componentNameOrClass)
-        {
-            /** @var \Livewire\LivewireManager $instance */
-            return $instance->isDiscoverable($componentNameOrClass);
-        }
-
-        /**
-         * @static
-         */
-        public static function resolveMissingComponent($resolver)
-        {
-            /** @var \Livewire\LivewireManager $instance */
-            return $instance->resolveMissingComponent($resolver);
-        }
-
-        /**
-         * @static
-         */
-        public static function mount($name, $params = [], $key = null)
-        {
-            /** @var \Livewire\LivewireManager $instance */
-            return $instance->mount($name, $params, $key);
-        }
-
-        /**
-         * @static
-         */
-        public static function snapshot($component, $context = null)
-        {
-            /** @var \Livewire\LivewireManager $instance */
-            return $instance->snapshot($component, $context);
-        }
-
-        /**
-         * @static
-         */
-        public static function fromSnapshot($snapshot)
-        {
-            /** @var \Livewire\LivewireManager $instance */
-            return $instance->fromSnapshot($snapshot);
-        }
-
-        /**
-         * @static
-         */
-        public static function listen($eventName, $callback)
-        {
-            /** @var \Livewire\LivewireManager $instance */
-            return $instance->listen($eventName, $callback);
-        }
-
-        /**
-         * @static
-         */
-        public static function current()
-        {
-            /** @var \Livewire\LivewireManager $instance */
-            return $instance->current();
-        }
-
-        /**
-         * @static
-         */
-        public static function findSynth($keyOrTarget, $component)
-        {
-            /** @var \Livewire\LivewireManager $instance */
-            return $instance->findSynth($keyOrTarget, $component);
-        }
-
-        /**
-         * @static
-         */
-        public static function update($snapshot, $diff, $calls)
-        {
-            /** @var \Livewire\LivewireManager $instance */
-            return $instance->update($snapshot, $diff, $calls);
-        }
-
-        /**
-         * @static
-         */
-        public static function updateProperty($component, $path, $value)
-        {
-            /** @var \Livewire\LivewireManager $instance */
-            return $instance->updateProperty($component, $path, $value);
-        }
-
-        /**
-         * @static
-         */
-        public static function isLivewireRequest()
-        {
-            /** @var \Livewire\LivewireManager $instance */
-            return $instance->isLivewireRequest();
-        }
-
-        /**
-         * @static
-         */
-        public static function componentHasBeenRendered()
-        {
-            /** @var \Livewire\LivewireManager $instance */
-            return $instance->componentHasBeenRendered();
-        }
-
-        /**
-         * @static
-         */
-        public static function forceAssetInjection()
-        {
-            /** @var \Livewire\LivewireManager $instance */
-            return $instance->forceAssetInjection();
-        }
-
-        /**
-         * @static
-         */
-        public static function setUpdateRoute($callback)
-        {
-            /** @var \Livewire\LivewireManager $instance */
-            return $instance->setUpdateRoute($callback);
-        }
-
-        /**
-         * @static
-         */
-        public static function getUpdateUri()
-        {
-            /** @var \Livewire\LivewireManager $instance */
-            return $instance->getUpdateUri();
-        }
-
-        /**
-         * @static
-         */
-        public static function setScriptRoute($callback)
-        {
-            /** @var \Livewire\LivewireManager $instance */
-            return $instance->setScriptRoute($callback);
-        }
-
-        /**
-         * @static
-         */
-        public static function useScriptTagAttributes($attributes)
-        {
-            /** @var \Livewire\LivewireManager $instance */
-            return $instance->useScriptTagAttributes($attributes);
-        }
-
-        /**
-         * @static
-         */
-        public static function withUrlParams($params)
-        {
-            /** @var \Livewire\LivewireManager $instance */
-            return $instance->withUrlParams($params);
-        }
-
-        /**
-         * @static
-         */
-        public static function withQueryParams($params)
-        {
-            /** @var \Livewire\LivewireManager $instance */
-            return $instance->withQueryParams($params);
-        }
-
-        /**
-         * @static
-         */
-        public static function withCookie($name, $value)
-        {
-            /** @var \Livewire\LivewireManager $instance */
-            return $instance->withCookie($name, $value);
-        }
-
-        /**
-         * @static
-         */
-        public static function withCookies($cookies)
-        {
-            /** @var \Livewire\LivewireManager $instance */
-            return $instance->withCookies($cookies);
-        }
-
-        /**
-         * @static
-         */
-        public static function withHeaders($headers)
-        {
-            /** @var \Livewire\LivewireManager $instance */
-            return $instance->withHeaders($headers);
-        }
-
-        /**
-         * @static
-         */
-        public static function withoutLazyLoading()
-        {
-            /** @var \Livewire\LivewireManager $instance */
-            return $instance->withoutLazyLoading();
-        }
-
-        /**
-         * @static
-         */
-        public static function test($name, $params = [])
-        {
-            /** @var \Livewire\LivewireManager $instance */
-            return $instance->test($name, $params);
-        }
-
-        /**
-         * @static
-         */
-        public static function visit($name)
-        {
-            /** @var \Livewire\LivewireManager $instance */
-            return $instance->visit($name);
-        }
-
-        /**
-         * @static
-         */
-        public static function actingAs($user, $driver = null)
-        {
-            /** @var \Livewire\LivewireManager $instance */
-            return $instance->actingAs($user, $driver);
-        }
-
-        /**
-         * @static
-         */
-        public static function isRunningServerless()
-        {
-            /** @var \Livewire\LivewireManager $instance */
-            return $instance->isRunningServerless();
-        }
-
-        /**
-         * @static
-         */
-        public static function addPersistentMiddleware($middleware)
-        {
-            /** @var \Livewire\LivewireManager $instance */
-            return $instance->addPersistentMiddleware($middleware);
-        }
-
-        /**
-         * @static
-         */
-        public static function setPersistentMiddleware($middleware)
-        {
-            /** @var \Livewire\LivewireManager $instance */
-            return $instance->setPersistentMiddleware($middleware);
-        }
-
-        /**
-         * @static
-         */
-        public static function getPersistentMiddleware()
-        {
-            /** @var \Livewire\LivewireManager $instance */
-            return $instance->getPersistentMiddleware();
-        }
-
-        /**
-         * @static
-         */
-        public static function flushState()
-        {
-            /** @var \Livewire\LivewireManager $instance */
-            return $instance->flushState();
-        }
-
-        /**
-         * @static
-         */
-        public static function originalUrl()
-        {
-            /** @var \Livewire\LivewireManager $instance */
-            return $instance->originalUrl();
-        }
-
-        /**
-         * @static
-         */
-        public static function originalPath()
-        {
-            /** @var \Livewire\LivewireManager $instance */
-            return $instance->originalPath();
-        }
-
-        /**
-         * @static
-         */
-        public static function originalMethod()
-        {
-            /** @var \Livewire\LivewireManager $instance */
-            return $instance->originalMethod();
-        }
-
-            }
-    }
-
 namespace Maatwebsite\Excel\Facades {
     /**
      */
@@ -25009,983 +23436,6 @@ namespace Maatwebsite\Excel\Facades {
         {
             /** @var \Maatwebsite\Excel\Fakes\ExcelFake $instance */
             return $instance->assertImported($filePath, $disk, $callback);
-        }
-
-            }
-    }
-
-namespace Opcodes\LogViewer\Facades {
-    /**
-     * @see \Opcodes\LogViewer\LogViewerService
-     */
-    class LogViewer {
-        /**
-         * @static
-         */
-        public static function timezone()
-        {
-            /** @var \Opcodes\LogViewer\LogViewerService $instance */
-            return $instance->timezone();
-        }
-
-        /**
-         * @static
-         */
-        public static function basePathForLogs()
-        {
-            /** @var \Opcodes\LogViewer\LogViewerService $instance */
-            return $instance->basePathForLogs();
-        }
-
-        /**
-         * @return \Opcodes\LogViewer\LogFileCollection|\Opcodes\LogViewer\LogFile[]
-         * @static
-         */
-        public static function getFiles()
-        {
-            /** @var \Opcodes\LogViewer\LogViewerService $instance */
-            return $instance->getFiles();
-        }
-
-        /**
-         * @static
-         */
-        public static function getFilesGroupedByFolder()
-        {
-            /** @var \Opcodes\LogViewer\LogViewerService $instance */
-            return $instance->getFilesGroupedByFolder();
-        }
-
-        /**
-         * Find the file with the given identifier or file name.
-         *
-         * @static
-         */
-        public static function getFile($fileIdentifier)
-        {
-            /** @var \Opcodes\LogViewer\LogViewerService $instance */
-            return $instance->getFile($fileIdentifier);
-        }
-
-        /**
-         * @static
-         */
-        public static function getFolder($folderIdentifier)
-        {
-            /** @var \Opcodes\LogViewer\LogViewerService $instance */
-            return $instance->getFolder($folderIdentifier);
-        }
-
-        /**
-         * @static
-         */
-        public static function supportsHostsFeature()
-        {
-            /** @var \Opcodes\LogViewer\LogViewerService $instance */
-            return $instance->supportsHostsFeature();
-        }
-
-        /**
-         * @static
-         */
-        public static function resolveHostsUsing($callback)
-        {
-            /** @var \Opcodes\LogViewer\LogViewerService $instance */
-            return $instance->resolveHostsUsing($callback);
-        }
-
-        /**
-         * @static
-         */
-        public static function getHosts()
-        {
-            /** @var \Opcodes\LogViewer\LogViewerService $instance */
-            return $instance->getHosts();
-        }
-
-        /**
-         * @static
-         */
-        public static function getHost($hostIdentifier)
-        {
-            /** @var \Opcodes\LogViewer\LogViewerService $instance */
-            return $instance->getHost($hostIdentifier);
-        }
-
-        /**
-         * @static
-         */
-        public static function clearFileCache()
-        {
-            /** @var \Opcodes\LogViewer\LogViewerService $instance */
-            return $instance->clearFileCache();
-        }
-
-        /**
-         * @static
-         */
-        public static function getRouteDomain()
-        {
-            /** @var \Opcodes\LogViewer\LogViewerService $instance */
-            return $instance->getRouteDomain();
-        }
-
-        /**
-         * @static
-         */
-        public static function getRoutePrefix()
-        {
-            /** @var \Opcodes\LogViewer\LogViewerService $instance */
-            return $instance->getRoutePrefix();
-        }
-
-        /**
-         * @static
-         */
-        public static function getRouteMiddleware()
-        {
-            /** @var \Opcodes\LogViewer\LogViewerService $instance */
-            return $instance->getRouteMiddleware();
-        }
-
-        /**
-         * @static
-         */
-        public static function auth($callback = null)
-        {
-            /** @var \Opcodes\LogViewer\LogViewerService $instance */
-            return $instance->auth($callback);
-        }
-
-        /**
-         * @static
-         */
-        public static function hasAuthCallback()
-        {
-            /** @var \Opcodes\LogViewer\LogViewerService $instance */
-            return $instance->hasAuthCallback();
-        }
-
-        /**
-         * @static
-         */
-        public static function lazyScanChunkSize()
-        {
-            /** @var \Opcodes\LogViewer\LogViewerService $instance */
-            return $instance->lazyScanChunkSize();
-        }
-
-        /**
-         * @static
-         */
-        public static function lazyScanTimeout()
-        {
-            /** @var \Opcodes\LogViewer\LogViewerService $instance */
-            return $instance->lazyScanTimeout();
-        }
-
-        /**
-         * Get the maximum number of bytes of the log that we should display.
-         *
-         * @static
-         */
-        public static function maxLogSize()
-        {
-            /** @var \Opcodes\LogViewer\LogViewerService $instance */
-            return $instance->maxLogSize();
-        }
-
-        /**
-         * @static
-         */
-        public static function setMaxLogSize($bytes)
-        {
-            /** @var \Opcodes\LogViewer\LogViewerService $instance */
-            return $instance->setMaxLogSize($bytes);
-        }
-
-        /**
-         * @static
-         */
-        public static function extend($type, $class)
-        {
-            /** @var \Opcodes\LogViewer\LogViewerService $instance */
-            return $instance->extend($type, $class);
-        }
-
-        /**
-         * @static
-         */
-        public static function useLogFileClass($class)
-        {
-            /** @var \Opcodes\LogViewer\LogViewerService $instance */
-            return $instance->useLogFileClass($class);
-        }
-
-        /**
-         * @static
-         */
-        public static function useLogReaderClass($class)
-        {
-            /** @var \Opcodes\LogViewer\LogViewerService $instance */
-            return $instance->useLogReaderClass($class);
-        }
-
-        /**
-         * @static
-         */
-        public static function logReaderClass()
-        {
-            /** @var \Opcodes\LogViewer\LogViewerService $instance */
-            return $instance->logReaderClass();
-        }
-
-        /**
-         * @static
-         */
-        public static function setViewLayout($layout)
-        {
-            /** @var \Opcodes\LogViewer\LogViewerService $instance */
-            return $instance->setViewLayout($layout);
-        }
-
-        /**
-         * @static
-         */
-        public static function getViewLayout()
-        {
-            /** @var \Opcodes\LogViewer\LogViewerService $instance */
-            return $instance->getViewLayout();
-        }
-
-        /**
-         * Determine if Log Viewer's published assets are up-to-date.
-         *
-         * @throws \RuntimeException
-         * @static
-         */
-        public static function assetsAreCurrent()
-        {
-            /** @var \Opcodes\LogViewer\LogViewerService $instance */
-            return $instance->assetsAreCurrent();
-        }
-
-        /**
-         * Get the current version of the Log Viewer
-         *
-         * @static
-         */
-        public static function version()
-        {
-            /** @var \Opcodes\LogViewer\LogViewerService $instance */
-            return $instance->version();
-        }
-
-            }
-    }
-
-namespace SimpleSoftwareIO\QrCode\Facades {
-    /**
-     */
-    class QrCode {
-        /**
-         * Generates the QrCode.
-         *
-         * @param string $text
-         * @param string|null $filename
-         * @return void|\Illuminate\Support\HtmlString|string
-         * @throws WriterException
-         * @throws InvalidArgumentException
-         * @static
-         */
-        public static function generate($text, $filename = null)
-        {
-            /** @var \SimpleSoftwareIO\QrCode\Generator $instance */
-            return $instance->generate($text, $filename);
-        }
-
-        /**
-         * Merges an image over the QrCode.
-         *
-         * @param string $filepath
-         * @param float $percentage
-         * @param \SimpleSoftwareIO\QrCode\SimpleSoftwareIO\QrCode\boolean|bool $absolute
-         * @return \Generator
-         * @static
-         */
-        public static function merge($filepath, $percentage = 0.2, $absolute = false)
-        {
-            /** @var \SimpleSoftwareIO\QrCode\Generator $instance */
-            return $instance->merge($filepath, $percentage, $absolute);
-        }
-
-        /**
-         * Merges an image string with the center of the QrCode.
-         *
-         * @param string $content
-         * @param float $percentage
-         * @return \Generator
-         * @static
-         */
-        public static function mergeString($content, $percentage = 0.2)
-        {
-            /** @var \SimpleSoftwareIO\QrCode\Generator $instance */
-            return $instance->mergeString($content, $percentage);
-        }
-
-        /**
-         * Sets the size of the QrCode.
-         *
-         * @param int $pixels
-         * @return \Generator
-         * @static
-         */
-        public static function size($pixels)
-        {
-            /** @var \SimpleSoftwareIO\QrCode\Generator $instance */
-            return $instance->size($pixels);
-        }
-
-        /**
-         * Sets the format of the QrCode.
-         *
-         * @param string $format
-         * @return \Generator
-         * @throws InvalidArgumentException
-         * @static
-         */
-        public static function format($format)
-        {
-            /** @var \SimpleSoftwareIO\QrCode\Generator $instance */
-            return $instance->format($format);
-        }
-
-        /**
-         * Sets the foreground color of the QrCode.
-         *
-         * @param int $red
-         * @param int $green
-         * @param int $blue
-         * @param null|int $alpha
-         * @return \Generator
-         * @static
-         */
-        public static function color($red, $green, $blue, $alpha = null)
-        {
-            /** @var \SimpleSoftwareIO\QrCode\Generator $instance */
-            return $instance->color($red, $green, $blue, $alpha);
-        }
-
-        /**
-         * Sets the background color of the QrCode.
-         *
-         * @param int $red
-         * @param int $green
-         * @param int $blue
-         * @param null|int $alpha
-         * @return \Generator
-         * @static
-         */
-        public static function backgroundColor($red, $green, $blue, $alpha = null)
-        {
-            /** @var \SimpleSoftwareIO\QrCode\Generator $instance */
-            return $instance->backgroundColor($red, $green, $blue, $alpha);
-        }
-
-        /**
-         * Sets the eye color for the provided eye index.
-         *
-         * @param int $eyeNumber
-         * @param int $innerRed
-         * @param int $innerGreen
-         * @param int $innerBlue
-         * @param int $outterRed
-         * @param int $outterGreen
-         * @param int $outterBlue
-         * @return \Generator
-         * @throws InvalidArgumentException
-         * @static
-         */
-        public static function eyeColor($eyeNumber, $innerRed, $innerGreen, $innerBlue, $outterRed = 0, $outterGreen = 0, $outterBlue = 0)
-        {
-            /** @var \SimpleSoftwareIO\QrCode\Generator $instance */
-            return $instance->eyeColor($eyeNumber, $innerRed, $innerGreen, $innerBlue, $outterRed, $outterGreen, $outterBlue);
-        }
-
-        /**
-         * @static
-         */
-        public static function gradient($startRed, $startGreen, $startBlue, $endRed, $endGreen, $endBlue, $type)
-        {
-            /** @var \SimpleSoftwareIO\QrCode\Generator $instance */
-            return $instance->gradient($startRed, $startGreen, $startBlue, $endRed, $endGreen, $endBlue, $type);
-        }
-
-        /**
-         * Sets the eye style.
-         *
-         * @param string $style
-         * @return \Generator
-         * @throws InvalidArgumentException
-         * @static
-         */
-        public static function eye($style)
-        {
-            /** @var \SimpleSoftwareIO\QrCode\Generator $instance */
-            return $instance->eye($style);
-        }
-
-        /**
-         * Sets the style of the blocks for the QrCode.
-         *
-         * @param string $style
-         * @param float $size
-         * @return \Generator
-         * @throws InvalidArgumentException
-         * @static
-         */
-        public static function style($style, $size = 0.5)
-        {
-            /** @var \SimpleSoftwareIO\QrCode\Generator $instance */
-            return $instance->style($style, $size);
-        }
-
-        /**
-         * Sets the encoding for the QrCode.
-         * 
-         * Possible values are
-         * ISO-8859-2, ISO-8859-3, ISO-8859-4, ISO-8859-5, ISO-8859-6,
-         * ISO-8859-7, ISO-8859-8, ISO-8859-9, ISO-8859-10, ISO-8859-11,
-         * ISO-8859-12, ISO-8859-13, ISO-8859-14, ISO-8859-15, ISO-8859-16,
-         * SHIFT-JIS, WINDOWS-1250, WINDOWS-1251, WINDOWS-1252, WINDOWS-1256,
-         * UTF-16BE, UTF-8, ASCII, GBK, EUC-KR.
-         *
-         * @param string $encoding
-         * @return \Generator
-         * @static
-         */
-        public static function encoding($encoding)
-        {
-            /** @var \SimpleSoftwareIO\QrCode\Generator $instance */
-            return $instance->encoding($encoding);
-        }
-
-        /**
-         * Sets the error correction for the QrCode.
-         * 
-         * L: 7% loss.
-         * M: 15% loss.
-         * Q: 25% loss.
-         * H: 30% loss.
-         *
-         * @param string $errorCorrection
-         * @return \Generator
-         * @static
-         */
-        public static function errorCorrection($errorCorrection)
-        {
-            /** @var \SimpleSoftwareIO\QrCode\Generator $instance */
-            return $instance->errorCorrection($errorCorrection);
-        }
-
-        /**
-         * Sets the margin of the QrCode.
-         *
-         * @param int $margin
-         * @return \Generator
-         * @static
-         */
-        public static function margin($margin)
-        {
-            /** @var \SimpleSoftwareIO\QrCode\Generator $instance */
-            return $instance->margin($margin);
-        }
-
-        /**
-         * Fetches the Writer.
-         *
-         * @param \BaconQrCode\Renderer\ImageRenderer $renderer
-         * @return \BaconQrCode\Writer
-         * @static
-         */
-        public static function getWriter($renderer)
-        {
-            /** @var \SimpleSoftwareIO\QrCode\Generator $instance */
-            return $instance->getWriter($renderer);
-        }
-
-        /**
-         * Fetches the Image Renderer.
-         *
-         * @return \BaconQrCode\Renderer\ImageRenderer
-         * @static
-         */
-        public static function getRenderer()
-        {
-            /** @var \SimpleSoftwareIO\QrCode\Generator $instance */
-            return $instance->getRenderer();
-        }
-
-        /**
-         * Returns the Renderer Style.
-         *
-         * @return \BaconQrCode\Renderer\RendererStyle\RendererStyle
-         * @static
-         */
-        public static function getRendererStyle()
-        {
-            /** @var \SimpleSoftwareIO\QrCode\Generator $instance */
-            return $instance->getRendererStyle();
-        }
-
-        /**
-         * Fetches the formatter.
-         *
-         * @return \BaconQrCode\Renderer\Image\ImageBackEndInterface
-         * @static
-         */
-        public static function getFormatter()
-        {
-            /** @var \SimpleSoftwareIO\QrCode\Generator $instance */
-            return $instance->getFormatter();
-        }
-
-        /**
-         * Fetches the module.
-         *
-         * @return \BaconQrCode\Renderer\Module\ModuleInterface
-         * @static
-         */
-        public static function getModule()
-        {
-            /** @var \SimpleSoftwareIO\QrCode\Generator $instance */
-            return $instance->getModule();
-        }
-
-        /**
-         * Fetches the eye style.
-         *
-         * @return \BaconQrCode\Renderer\Eye\EyeInterface
-         * @static
-         */
-        public static function getEye()
-        {
-            /** @var \SimpleSoftwareIO\QrCode\Generator $instance */
-            return $instance->getEye();
-        }
-
-        /**
-         * Fetches the color fill.
-         *
-         * @return \BaconQrCode\Renderer\RendererStyle\Fill
-         * @static
-         */
-        public static function getFill()
-        {
-            /** @var \SimpleSoftwareIO\QrCode\Generator $instance */
-            return $instance->getFill();
-        }
-
-        /**
-         * Creates a RGB or Alpha channel color.
-         *
-         * @param int $red
-         * @param int $green
-         * @param int $blue
-         * @param null|int $alpha
-         * @return \BaconQrCode\Renderer\Color\ColorInterface
-         * @static
-         */
-        public static function createColor($red, $green, $blue, $alpha = null)
-        {
-            /** @var \SimpleSoftwareIO\QrCode\Generator $instance */
-            return $instance->createColor($red, $green, $blue, $alpha);
-        }
-
-            }
-    }
-
-namespace Spatie\LaravelIgnition\Facades {
-    /**
-     * @see \Spatie\FlareClient\Flare
-     */
-    class Flare {
-        /**
-         * @static
-         */
-        public static function make($apiKey = null, $contextDetector = null)
-        {
-            return \Spatie\FlareClient\Flare::make($apiKey, $contextDetector);
-        }
-
-        /**
-         * @static
-         */
-        public static function setApiToken($apiToken)
-        {
-            /** @var \Spatie\FlareClient\Flare $instance */
-            return $instance->setApiToken($apiToken);
-        }
-
-        /**
-         * @static
-         */
-        public static function apiTokenSet()
-        {
-            /** @var \Spatie\FlareClient\Flare $instance */
-            return $instance->apiTokenSet();
-        }
-
-        /**
-         * @static
-         */
-        public static function setBaseUrl($baseUrl)
-        {
-            /** @var \Spatie\FlareClient\Flare $instance */
-            return $instance->setBaseUrl($baseUrl);
-        }
-
-        /**
-         * @static
-         */
-        public static function setStage($stage)
-        {
-            /** @var \Spatie\FlareClient\Flare $instance */
-            return $instance->setStage($stage);
-        }
-
-        /**
-         * @static
-         */
-        public static function sendReportsImmediately()
-        {
-            /** @var \Spatie\FlareClient\Flare $instance */
-            return $instance->sendReportsImmediately();
-        }
-
-        /**
-         * @static
-         */
-        public static function determineVersionUsing($determineVersionCallable)
-        {
-            /** @var \Spatie\FlareClient\Flare $instance */
-            return $instance->determineVersionUsing($determineVersionCallable);
-        }
-
-        /**
-         * @static
-         */
-        public static function reportErrorLevels($reportErrorLevels)
-        {
-            /** @var \Spatie\FlareClient\Flare $instance */
-            return $instance->reportErrorLevels($reportErrorLevels);
-        }
-
-        /**
-         * @static
-         */
-        public static function filterExceptionsUsing($filterExceptionsCallable)
-        {
-            /** @var \Spatie\FlareClient\Flare $instance */
-            return $instance->filterExceptionsUsing($filterExceptionsCallable);
-        }
-
-        /**
-         * @static
-         */
-        public static function filterReportsUsing($filterReportsCallable)
-        {
-            /** @var \Spatie\FlareClient\Flare $instance */
-            return $instance->filterReportsUsing($filterReportsCallable);
-        }
-
-        /**
-         * @param array<class-string<ArgumentReducer>|ArgumentReducer>|\Spatie\Backtrace\Arguments\ArgumentReducers|null $argumentReducers
-         * @static
-         */
-        public static function argumentReducers($argumentReducers)
-        {
-            /** @var \Spatie\FlareClient\Flare $instance */
-            return $instance->argumentReducers($argumentReducers);
-        }
-
-        /**
-         * @static
-         */
-        public static function withStackFrameArguments($withStackFrameArguments = true, $forcePHPIniSetting = false)
-        {
-            /** @var \Spatie\FlareClient\Flare $instance */
-            return $instance->withStackFrameArguments($withStackFrameArguments, $forcePHPIniSetting);
-        }
-
-        /**
-         * @param class-string $exceptionClass
-         * @static
-         */
-        public static function overrideGrouping($exceptionClass, $type = 'exception_message_and_class')
-        {
-            /** @var \Spatie\FlareClient\Flare $instance */
-            return $instance->overrideGrouping($exceptionClass, $type);
-        }
-
-        /**
-         * @static
-         */
-        public static function version()
-        {
-            /** @var \Spatie\FlareClient\Flare $instance */
-            return $instance->version();
-        }
-
-        /**
-         * @return array<int, FlareMiddleware|class-string<FlareMiddleware>>
-         * @static
-         */
-        public static function getMiddleware()
-        {
-            /** @var \Spatie\FlareClient\Flare $instance */
-            return $instance->getMiddleware();
-        }
-
-        /**
-         * @static
-         */
-        public static function setContextProviderDetector($contextDetector)
-        {
-            /** @var \Spatie\FlareClient\Flare $instance */
-            return $instance->setContextProviderDetector($contextDetector);
-        }
-
-        /**
-         * @static
-         */
-        public static function setContainer($container)
-        {
-            /** @var \Spatie\FlareClient\Flare $instance */
-            return $instance->setContainer($container);
-        }
-
-        /**
-         * @static
-         */
-        public static function registerFlareHandlers()
-        {
-            /** @var \Spatie\FlareClient\Flare $instance */
-            return $instance->registerFlareHandlers();
-        }
-
-        /**
-         * @static
-         */
-        public static function registerExceptionHandler()
-        {
-            /** @var \Spatie\FlareClient\Flare $instance */
-            return $instance->registerExceptionHandler();
-        }
-
-        /**
-         * @static
-         */
-        public static function registerErrorHandler($errorLevels = null)
-        {
-            /** @var \Spatie\FlareClient\Flare $instance */
-            return $instance->registerErrorHandler($errorLevels);
-        }
-
-        /**
-         * @param \Spatie\FlareClient\FlareMiddleware\FlareMiddleware|array<FlareMiddleware>|class-string<FlareMiddleware>|callable $middleware
-         * @return \Spatie\FlareClient\Flare
-         * @static
-         */
-        public static function registerMiddleware($middleware)
-        {
-            /** @var \Spatie\FlareClient\Flare $instance */
-            return $instance->registerMiddleware($middleware);
-        }
-
-        /**
-         * @return array<int,FlareMiddleware|class-string<FlareMiddleware>>
-         * @static
-         */
-        public static function getMiddlewares()
-        {
-            /** @var \Spatie\FlareClient\Flare $instance */
-            return $instance->getMiddlewares();
-        }
-
-        /**
-         * @param string $name
-         * @param string $messageLevel
-         * @param array<int, mixed> $metaData
-         * @return \Spatie\FlareClient\Flare
-         * @static
-         */
-        public static function glow($name, $messageLevel = 'info', $metaData = [])
-        {
-            /** @var \Spatie\FlareClient\Flare $instance */
-            return $instance->glow($name, $messageLevel, $metaData);
-        }
-
-        /**
-         * @static
-         */
-        public static function handleException($throwable)
-        {
-            /** @var \Spatie\FlareClient\Flare $instance */
-            return $instance->handleException($throwable);
-        }
-
-        /**
-         * @return mixed
-         * @static
-         */
-        public static function handleError($code, $message, $file = '', $line = 0)
-        {
-            /** @var \Spatie\FlareClient\Flare $instance */
-            return $instance->handleError($code, $message, $file, $line);
-        }
-
-        /**
-         * @static
-         */
-        public static function applicationPath($applicationPath)
-        {
-            /** @var \Spatie\FlareClient\Flare $instance */
-            return $instance->applicationPath($applicationPath);
-        }
-
-        /**
-         * @static
-         */
-        public static function report($throwable, $callback = null, $report = null, $handled = null)
-        {
-            /** @var \Spatie\FlareClient\Flare $instance */
-            return $instance->report($throwable, $callback, $report, $handled);
-        }
-
-        /**
-         * @static
-         */
-        public static function reportHandled($throwable)
-        {
-            /** @var \Spatie\FlareClient\Flare $instance */
-            return $instance->reportHandled($throwable);
-        }
-
-        /**
-         * @static
-         */
-        public static function reportMessage($message, $logLevel, $callback = null)
-        {
-            /** @var \Spatie\FlareClient\Flare $instance */
-            return $instance->reportMessage($message, $logLevel, $callback);
-        }
-
-        /**
-         * @static
-         */
-        public static function sendTestReport($throwable)
-        {
-            /** @var \Spatie\FlareClient\Flare $instance */
-            return $instance->sendTestReport($throwable);
-        }
-
-        /**
-         * @static
-         */
-        public static function reset()
-        {
-            /** @var \Spatie\FlareClient\Flare $instance */
-            return $instance->reset();
-        }
-
-        /**
-         * @static
-         */
-        public static function anonymizeIp()
-        {
-            /** @var \Spatie\FlareClient\Flare $instance */
-            return $instance->anonymizeIp();
-        }
-
-        /**
-         * @param array<int, string> $fieldNames
-         * @return \Spatie\FlareClient\Flare
-         * @static
-         */
-        public static function censorRequestBodyFields($fieldNames)
-        {
-            /** @var \Spatie\FlareClient\Flare $instance */
-            return $instance->censorRequestBodyFields($fieldNames);
-        }
-
-        /**
-         * @static
-         */
-        public static function createReport($throwable)
-        {
-            /** @var \Spatie\FlareClient\Flare $instance */
-            return $instance->createReport($throwable);
-        }
-
-        /**
-         * @static
-         */
-        public static function createReportFromMessage($message, $logLevel)
-        {
-            /** @var \Spatie\FlareClient\Flare $instance */
-            return $instance->createReportFromMessage($message, $logLevel);
-        }
-
-        /**
-         * @static
-         */
-        public static function stage($stage)
-        {
-            /** @var \Spatie\FlareClient\Flare $instance */
-            return $instance->stage($stage);
-        }
-
-        /**
-         * @static
-         */
-        public static function messageLevel($messageLevel)
-        {
-            /** @var \Spatie\FlareClient\Flare $instance */
-            return $instance->messageLevel($messageLevel);
-        }
-
-        /**
-         * @param string $groupName
-         * @param mixed $default
-         * @return array<int, mixed>
-         * @static
-         */
-        public static function getGroup($groupName = 'context', $default = [])
-        {
-            /** @var \Spatie\FlareClient\Flare $instance */
-            return $instance->getGroup($groupName, $default);
-        }
-
-        /**
-         * @static
-         */
-        public static function context($key, $value)
-        {
-            /** @var \Spatie\FlareClient\Flare $instance */
-            return $instance->context($key, $value);
-        }
-
-        /**
-         * @param string $groupName
-         * @param array<string, mixed> $properties
-         * @return \Spatie\FlareClient\Flare
-         * @static
-         */
-        public static function group($groupName, $properties)
-        {
-            /** @var \Spatie\FlareClient\Flare $instance */
-            return $instance->group($groupName, $properties);
         }
 
             }
@@ -26914,6 +24364,2556 @@ namespace Spatie\Menu\Laravel\Facades {
         public static function flushMacros()
         {
             \Spatie\Menu\Laravel\Menu::flushMacros();
+        }
+
+            }
+    }
+
+namespace Barryvdh\DomPDF\Facade {
+    /**
+     * @method static BasePDF setBaseHost(string $baseHost)
+     * @method static BasePDF setBasePath(string $basePath)
+     * @method static BasePDF setCanvas(\Dompdf\Canvas $canvas)
+     * @method static BasePDF setCallbacks(array<string, mixed> $callbacks)
+     * @method static BasePDF setCss(\Dompdf\Css\Stylesheet $css)
+     * @method static BasePDF setDefaultView(string $defaultView, array<string, mixed> $options)
+     * @method static BasePDF setDom(\DOMDocument $dom)
+     * @method static BasePDF setFontMetrics(\Dompdf\FontMetrics $fontMetrics)
+     * @method static BasePDF setHttpContext(resource|array<string, mixed> $httpContext)
+     * @method static BasePDF setPaper(string|float[] $paper, string $orientation = 'portrait')
+     * @method static BasePDF setProtocol(string $protocol)
+     * @method static BasePDF setTree(\Dompdf\Frame\FrameTree $tree)
+     */
+    class Pdf {
+        /**
+         * Get the DomPDF instance
+         *
+         * @static
+         */
+        public static function getDomPDF()
+        {
+            /** @var \Barryvdh\DomPDF\PDF $instance */
+            return $instance->getDomPDF();
+        }
+
+        /**
+         * Show or hide warnings
+         *
+         * @static
+         */
+        public static function setWarnings($warnings)
+        {
+            /** @var \Barryvdh\DomPDF\PDF $instance */
+            return $instance->setWarnings($warnings);
+        }
+
+        /**
+         * Load a HTML string
+         *
+         * @param string|null $encoding Not used yet
+         * @static
+         */
+        public static function loadHTML($string, $encoding = null)
+        {
+            /** @var \Barryvdh\DomPDF\PDF $instance */
+            return $instance->loadHTML($string, $encoding);
+        }
+
+        /**
+         * Load a HTML file
+         *
+         * @static
+         */
+        public static function loadFile($file)
+        {
+            /** @var \Barryvdh\DomPDF\PDF $instance */
+            return $instance->loadFile($file);
+        }
+
+        /**
+         * Add metadata info
+         *
+         * @param array<string, string> $info
+         * @static
+         */
+        public static function addInfo($info)
+        {
+            /** @var \Barryvdh\DomPDF\PDF $instance */
+            return $instance->addInfo($info);
+        }
+
+        /**
+         * Load a View and convert to HTML
+         *
+         * @param array<string, mixed> $data
+         * @param array<string, mixed> $mergeData
+         * @param string|null $encoding Not used yet
+         * @static
+         */
+        public static function loadView($view, $data = [], $mergeData = [], $encoding = null)
+        {
+            /** @var \Barryvdh\DomPDF\PDF $instance */
+            return $instance->loadView($view, $data, $mergeData, $encoding);
+        }
+
+        /**
+         * Set/Change an option (or array of options) in Dompdf
+         *
+         * @param array<string, mixed>|string $attribute
+         * @param null|mixed $value
+         * @static
+         */
+        public static function setOption($attribute, $value = null)
+        {
+            /** @var \Barryvdh\DomPDF\PDF $instance */
+            return $instance->setOption($attribute, $value);
+        }
+
+        /**
+         * Replace all the Options from DomPDF
+         *
+         * @param array<string, mixed> $options
+         * @static
+         */
+        public static function setOptions($options, $mergeWithDefaults = false)
+        {
+            /** @var \Barryvdh\DomPDF\PDF $instance */
+            return $instance->setOptions($options, $mergeWithDefaults);
+        }
+
+        /**
+         * Output the PDF as a string.
+         * 
+         * The options parameter controls the output. Accepted options are:
+         * 
+         * 'compress' = > 1 or 0 - apply content stream compression, this is
+         *    on (1) by default
+         *
+         * @param array<string, int> $options
+         * @return string The rendered PDF as string
+         * @static
+         */
+        public static function output($options = [])
+        {
+            /** @var \Barryvdh\DomPDF\PDF $instance */
+            return $instance->output($options);
+        }
+
+        /**
+         * Save the PDF to a file
+         *
+         * @static
+         */
+        public static function save($filename, $disk = null)
+        {
+            /** @var \Barryvdh\DomPDF\PDF $instance */
+            return $instance->save($filename, $disk);
+        }
+
+        /**
+         * Make the PDF downloadable by the user
+         *
+         * @static
+         */
+        public static function download($filename = 'document.pdf')
+        {
+            /** @var \Barryvdh\DomPDF\PDF $instance */
+            return $instance->download($filename);
+        }
+
+        /**
+         * Return a response with the PDF to show in the browser
+         *
+         * @static
+         */
+        public static function stream($filename = 'document.pdf')
+        {
+            /** @var \Barryvdh\DomPDF\PDF $instance */
+            return $instance->stream($filename);
+        }
+
+        /**
+         * Render the PDF
+         *
+         * @static
+         */
+        public static function render()
+        {
+            /** @var \Barryvdh\DomPDF\PDF $instance */
+            return $instance->render();
+        }
+
+        /**
+         * @param array<string> $pc
+         * @static
+         */
+        public static function setEncryption($password, $ownerpassword = '', $pc = [])
+        {
+            /** @var \Barryvdh\DomPDF\PDF $instance */
+            return $instance->setEncryption($password, $ownerpassword, $pc);
+        }
+
+            }
+    /**
+     * @method static BasePDF setBaseHost(string $baseHost)
+     * @method static BasePDF setBasePath(string $basePath)
+     * @method static BasePDF setCanvas(\Dompdf\Canvas $canvas)
+     * @method static BasePDF setCallbacks(array<string, mixed> $callbacks)
+     * @method static BasePDF setCss(\Dompdf\Css\Stylesheet $css)
+     * @method static BasePDF setDefaultView(string $defaultView, array<string, mixed> $options)
+     * @method static BasePDF setDom(\DOMDocument $dom)
+     * @method static BasePDF setFontMetrics(\Dompdf\FontMetrics $fontMetrics)
+     * @method static BasePDF setHttpContext(resource|array<string, mixed> $httpContext)
+     * @method static BasePDF setPaper(string|float[] $paper, string $orientation = 'portrait')
+     * @method static BasePDF setProtocol(string $protocol)
+     * @method static BasePDF setTree(\Dompdf\Frame\FrameTree $tree)
+     */
+    class Pdf {
+        /**
+         * Get the DomPDF instance
+         *
+         * @static
+         */
+        public static function getDomPDF()
+        {
+            /** @var \Barryvdh\DomPDF\PDF $instance */
+            return $instance->getDomPDF();
+        }
+
+        /**
+         * Show or hide warnings
+         *
+         * @static
+         */
+        public static function setWarnings($warnings)
+        {
+            /** @var \Barryvdh\DomPDF\PDF $instance */
+            return $instance->setWarnings($warnings);
+        }
+
+        /**
+         * Load a HTML string
+         *
+         * @param string|null $encoding Not used yet
+         * @static
+         */
+        public static function loadHTML($string, $encoding = null)
+        {
+            /** @var \Barryvdh\DomPDF\PDF $instance */
+            return $instance->loadHTML($string, $encoding);
+        }
+
+        /**
+         * Load a HTML file
+         *
+         * @static
+         */
+        public static function loadFile($file)
+        {
+            /** @var \Barryvdh\DomPDF\PDF $instance */
+            return $instance->loadFile($file);
+        }
+
+        /**
+         * Add metadata info
+         *
+         * @param array<string, string> $info
+         * @static
+         */
+        public static function addInfo($info)
+        {
+            /** @var \Barryvdh\DomPDF\PDF $instance */
+            return $instance->addInfo($info);
+        }
+
+        /**
+         * Load a View and convert to HTML
+         *
+         * @param array<string, mixed> $data
+         * @param array<string, mixed> $mergeData
+         * @param string|null $encoding Not used yet
+         * @static
+         */
+        public static function loadView($view, $data = [], $mergeData = [], $encoding = null)
+        {
+            /** @var \Barryvdh\DomPDF\PDF $instance */
+            return $instance->loadView($view, $data, $mergeData, $encoding);
+        }
+
+        /**
+         * Set/Change an option (or array of options) in Dompdf
+         *
+         * @param array<string, mixed>|string $attribute
+         * @param null|mixed $value
+         * @static
+         */
+        public static function setOption($attribute, $value = null)
+        {
+            /** @var \Barryvdh\DomPDF\PDF $instance */
+            return $instance->setOption($attribute, $value);
+        }
+
+        /**
+         * Replace all the Options from DomPDF
+         *
+         * @param array<string, mixed> $options
+         * @static
+         */
+        public static function setOptions($options, $mergeWithDefaults = false)
+        {
+            /** @var \Barryvdh\DomPDF\PDF $instance */
+            return $instance->setOptions($options, $mergeWithDefaults);
+        }
+
+        /**
+         * Output the PDF as a string.
+         * 
+         * The options parameter controls the output. Accepted options are:
+         * 
+         * 'compress' = > 1 or 0 - apply content stream compression, this is
+         *    on (1) by default
+         *
+         * @param array<string, int> $options
+         * @return string The rendered PDF as string
+         * @static
+         */
+        public static function output($options = [])
+        {
+            /** @var \Barryvdh\DomPDF\PDF $instance */
+            return $instance->output($options);
+        }
+
+        /**
+         * Save the PDF to a file
+         *
+         * @static
+         */
+        public static function save($filename, $disk = null)
+        {
+            /** @var \Barryvdh\DomPDF\PDF $instance */
+            return $instance->save($filename, $disk);
+        }
+
+        /**
+         * Make the PDF downloadable by the user
+         *
+         * @static
+         */
+        public static function download($filename = 'document.pdf')
+        {
+            /** @var \Barryvdh\DomPDF\PDF $instance */
+            return $instance->download($filename);
+        }
+
+        /**
+         * Return a response with the PDF to show in the browser
+         *
+         * @static
+         */
+        public static function stream($filename = 'document.pdf')
+        {
+            /** @var \Barryvdh\DomPDF\PDF $instance */
+            return $instance->stream($filename);
+        }
+
+        /**
+         * Render the PDF
+         *
+         * @static
+         */
+        public static function render()
+        {
+            /** @var \Barryvdh\DomPDF\PDF $instance */
+            return $instance->render();
+        }
+
+        /**
+         * @param array<string> $pc
+         * @static
+         */
+        public static function setEncryption($password, $ownerpassword = '', $pc = [])
+        {
+            /** @var \Barryvdh\DomPDF\PDF $instance */
+            return $instance->setEncryption($password, $ownerpassword, $pc);
+        }
+
+            }
+    }
+
+namespace SimpleSoftwareIO\QrCode\Facades {
+    /**
+     */
+    class QrCode {
+        /**
+         * Generates the QrCode.
+         *
+         * @param string $text
+         * @param string|null $filename
+         * @return void|\Illuminate\Support\HtmlString|string
+         * @throws WriterException
+         * @throws InvalidArgumentException
+         * @static
+         */
+        public static function generate($text, $filename = null)
+        {
+            /** @var \SimpleSoftwareIO\QrCode\Generator $instance */
+            return $instance->generate($text, $filename);
+        }
+
+        /**
+         * Merges an image over the QrCode.
+         *
+         * @param string $filepath
+         * @param float $percentage
+         * @param \SimpleSoftwareIO\QrCode\SimpleSoftwareIO\QrCode\boolean|bool $absolute
+         * @return \Generator
+         * @static
+         */
+        public static function merge($filepath, $percentage = 0.2, $absolute = false)
+        {
+            /** @var \SimpleSoftwareIO\QrCode\Generator $instance */
+            return $instance->merge($filepath, $percentage, $absolute);
+        }
+
+        /**
+         * Merges an image string with the center of the QrCode.
+         *
+         * @param string $content
+         * @param float $percentage
+         * @return \Generator
+         * @static
+         */
+        public static function mergeString($content, $percentage = 0.2)
+        {
+            /** @var \SimpleSoftwareIO\QrCode\Generator $instance */
+            return $instance->mergeString($content, $percentage);
+        }
+
+        /**
+         * Sets the size of the QrCode.
+         *
+         * @param int $pixels
+         * @return \Generator
+         * @static
+         */
+        public static function size($pixels)
+        {
+            /** @var \SimpleSoftwareIO\QrCode\Generator $instance */
+            return $instance->size($pixels);
+        }
+
+        /**
+         * Sets the format of the QrCode.
+         *
+         * @param string $format
+         * @return \Generator
+         * @throws InvalidArgumentException
+         * @static
+         */
+        public static function format($format)
+        {
+            /** @var \SimpleSoftwareIO\QrCode\Generator $instance */
+            return $instance->format($format);
+        }
+
+        /**
+         * Sets the foreground color of the QrCode.
+         *
+         * @param int $red
+         * @param int $green
+         * @param int $blue
+         * @param null|int $alpha
+         * @return \Generator
+         * @static
+         */
+        public static function color($red, $green, $blue, $alpha = null)
+        {
+            /** @var \SimpleSoftwareIO\QrCode\Generator $instance */
+            return $instance->color($red, $green, $blue, $alpha);
+        }
+
+        /**
+         * Sets the background color of the QrCode.
+         *
+         * @param int $red
+         * @param int $green
+         * @param int $blue
+         * @param null|int $alpha
+         * @return \Generator
+         * @static
+         */
+        public static function backgroundColor($red, $green, $blue, $alpha = null)
+        {
+            /** @var \SimpleSoftwareIO\QrCode\Generator $instance */
+            return $instance->backgroundColor($red, $green, $blue, $alpha);
+        }
+
+        /**
+         * Sets the eye color for the provided eye index.
+         *
+         * @param int $eyeNumber
+         * @param int $innerRed
+         * @param int $innerGreen
+         * @param int $innerBlue
+         * @param int $outterRed
+         * @param int $outterGreen
+         * @param int $outterBlue
+         * @return \Generator
+         * @throws InvalidArgumentException
+         * @static
+         */
+        public static function eyeColor($eyeNumber, $innerRed, $innerGreen, $innerBlue, $outterRed = 0, $outterGreen = 0, $outterBlue = 0)
+        {
+            /** @var \SimpleSoftwareIO\QrCode\Generator $instance */
+            return $instance->eyeColor($eyeNumber, $innerRed, $innerGreen, $innerBlue, $outterRed, $outterGreen, $outterBlue);
+        }
+
+        /**
+         * @static
+         */
+        public static function gradient($startRed, $startGreen, $startBlue, $endRed, $endGreen, $endBlue, $type)
+        {
+            /** @var \SimpleSoftwareIO\QrCode\Generator $instance */
+            return $instance->gradient($startRed, $startGreen, $startBlue, $endRed, $endGreen, $endBlue, $type);
+        }
+
+        /**
+         * Sets the eye style.
+         *
+         * @param string $style
+         * @return \Generator
+         * @throws InvalidArgumentException
+         * @static
+         */
+        public static function eye($style)
+        {
+            /** @var \SimpleSoftwareIO\QrCode\Generator $instance */
+            return $instance->eye($style);
+        }
+
+        /**
+         * Sets the style of the blocks for the QrCode.
+         *
+         * @param string $style
+         * @param float $size
+         * @return \Generator
+         * @throws InvalidArgumentException
+         * @static
+         */
+        public static function style($style, $size = 0.5)
+        {
+            /** @var \SimpleSoftwareIO\QrCode\Generator $instance */
+            return $instance->style($style, $size);
+        }
+
+        /**
+         * Sets the encoding for the QrCode.
+         * 
+         * Possible values are
+         * ISO-8859-2, ISO-8859-3, ISO-8859-4, ISO-8859-5, ISO-8859-6,
+         * ISO-8859-7, ISO-8859-8, ISO-8859-9, ISO-8859-10, ISO-8859-11,
+         * ISO-8859-12, ISO-8859-13, ISO-8859-14, ISO-8859-15, ISO-8859-16,
+         * SHIFT-JIS, WINDOWS-1250, WINDOWS-1251, WINDOWS-1252, WINDOWS-1256,
+         * UTF-16BE, UTF-8, ASCII, GBK, EUC-KR.
+         *
+         * @param string $encoding
+         * @return \Generator
+         * @static
+         */
+        public static function encoding($encoding)
+        {
+            /** @var \SimpleSoftwareIO\QrCode\Generator $instance */
+            return $instance->encoding($encoding);
+        }
+
+        /**
+         * Sets the error correction for the QrCode.
+         * 
+         * L: 7% loss.
+         * M: 15% loss.
+         * Q: 25% loss.
+         * H: 30% loss.
+         *
+         * @param string $errorCorrection
+         * @return \Generator
+         * @static
+         */
+        public static function errorCorrection($errorCorrection)
+        {
+            /** @var \SimpleSoftwareIO\QrCode\Generator $instance */
+            return $instance->errorCorrection($errorCorrection);
+        }
+
+        /**
+         * Sets the margin of the QrCode.
+         *
+         * @param int $margin
+         * @return \Generator
+         * @static
+         */
+        public static function margin($margin)
+        {
+            /** @var \SimpleSoftwareIO\QrCode\Generator $instance */
+            return $instance->margin($margin);
+        }
+
+        /**
+         * Fetches the Writer.
+         *
+         * @param \BaconQrCode\Renderer\ImageRenderer $renderer
+         * @return \BaconQrCode\Writer
+         * @static
+         */
+        public static function getWriter($renderer)
+        {
+            /** @var \SimpleSoftwareIO\QrCode\Generator $instance */
+            return $instance->getWriter($renderer);
+        }
+
+        /**
+         * Fetches the Image Renderer.
+         *
+         * @return \BaconQrCode\Renderer\ImageRenderer
+         * @static
+         */
+        public static function getRenderer()
+        {
+            /** @var \SimpleSoftwareIO\QrCode\Generator $instance */
+            return $instance->getRenderer();
+        }
+
+        /**
+         * Returns the Renderer Style.
+         *
+         * @return \BaconQrCode\Renderer\RendererStyle\RendererStyle
+         * @static
+         */
+        public static function getRendererStyle()
+        {
+            /** @var \SimpleSoftwareIO\QrCode\Generator $instance */
+            return $instance->getRendererStyle();
+        }
+
+        /**
+         * Fetches the formatter.
+         *
+         * @return \BaconQrCode\Renderer\Image\ImageBackEndInterface
+         * @static
+         */
+        public static function getFormatter()
+        {
+            /** @var \SimpleSoftwareIO\QrCode\Generator $instance */
+            return $instance->getFormatter();
+        }
+
+        /**
+         * Fetches the module.
+         *
+         * @return \BaconQrCode\Renderer\Module\ModuleInterface
+         * @static
+         */
+        public static function getModule()
+        {
+            /** @var \SimpleSoftwareIO\QrCode\Generator $instance */
+            return $instance->getModule();
+        }
+
+        /**
+         * Fetches the eye style.
+         *
+         * @return \BaconQrCode\Renderer\Eye\EyeInterface
+         * @static
+         */
+        public static function getEye()
+        {
+            /** @var \SimpleSoftwareIO\QrCode\Generator $instance */
+            return $instance->getEye();
+        }
+
+        /**
+         * Fetches the color fill.
+         *
+         * @return \BaconQrCode\Renderer\RendererStyle\Fill
+         * @static
+         */
+        public static function getFill()
+        {
+            /** @var \SimpleSoftwareIO\QrCode\Generator $instance */
+            return $instance->getFill();
+        }
+
+        /**
+         * Creates a RGB or Alpha channel color.
+         *
+         * @param int $red
+         * @param int $green
+         * @param int $blue
+         * @param null|int $alpha
+         * @return \BaconQrCode\Renderer\Color\ColorInterface
+         * @static
+         */
+        public static function createColor($red, $green, $blue, $alpha = null)
+        {
+            /** @var \SimpleSoftwareIO\QrCode\Generator $instance */
+            return $instance->createColor($red, $green, $blue, $alpha);
+        }
+
+            }
+    }
+
+namespace Barryvdh\Debugbar\Facades {
+    /**
+     * @method static void alert(mixed $message)
+     * @method static void critical(mixed $message)
+     * @method static void debug(mixed $message)
+     * @method static void emergency(mixed $message)
+     * @method static void error(mixed $message)
+     * @method static void info(mixed $message)
+     * @method static void log(mixed $message)
+     * @method static void notice(mixed $message)
+     * @method static void warning(mixed $message)
+     * @see \Barryvdh\Debugbar\LaravelDebugbar
+     */
+    class Debugbar extends \DebugBar\DebugBar {
+        /**
+         * Returns the HTTP driver
+         * 
+         * If no http driver where defined, a PhpHttpDriver is automatically created
+         *
+         * @return \DebugBar\HttpDriverInterface
+         * @static
+         */
+        public static function getHttpDriver()
+        {
+            /** @var \Barryvdh\Debugbar\LaravelDebugbar $instance */
+            return $instance->getHttpDriver();
+        }
+
+        /**
+         * Enable the Debugbar and boot, if not already booted.
+         *
+         * @static
+         */
+        public static function enable()
+        {
+            /** @var \Barryvdh\Debugbar\LaravelDebugbar $instance */
+            return $instance->enable();
+        }
+
+        /**
+         * Boot the debugbar (add collectors, renderer and listener)
+         *
+         * @static
+         */
+        public static function boot()
+        {
+            /** @var \Barryvdh\Debugbar\LaravelDebugbar $instance */
+            return $instance->boot();
+        }
+
+        /**
+         * @static
+         */
+        public static function shouldCollect($name, $default = false)
+        {
+            /** @var \Barryvdh\Debugbar\LaravelDebugbar $instance */
+            return $instance->shouldCollect($name, $default);
+        }
+
+        /**
+         * Adds a data collector
+         *
+         * @param \DebugBar\DataCollector\DataCollectorInterface $collector
+         * @throws DebugBarException
+         * @return \Barryvdh\Debugbar\LaravelDebugbar
+         * @static
+         */
+        public static function addCollector($collector)
+        {
+            /** @var \Barryvdh\Debugbar\LaravelDebugbar $instance */
+            return $instance->addCollector($collector);
+        }
+
+        /**
+         * Handle silenced errors
+         *
+         * @param $level
+         * @param $message
+         * @param string $file
+         * @param int $line
+         * @param array $context
+         * @throws \ErrorException
+         * @static
+         */
+        public static function handleError($level, $message, $file = '', $line = 0, $context = [])
+        {
+            /** @var \Barryvdh\Debugbar\LaravelDebugbar $instance */
+            return $instance->handleError($level, $message, $file, $line, $context);
+        }
+
+        /**
+         * Starts a measure
+         *
+         * @param string $name Internal name, used to stop the measure
+         * @param string $label Public name
+         * @param string|null $collector
+         * @param string|null $group
+         * @static
+         */
+        public static function startMeasure($name, $label = null, $collector = null, $group = null)
+        {
+            /** @var \Barryvdh\Debugbar\LaravelDebugbar $instance */
+            return $instance->startMeasure($name, $label, $collector, $group);
+        }
+
+        /**
+         * Stops a measure
+         *
+         * @param string $name
+         * @static
+         */
+        public static function stopMeasure($name)
+        {
+            /** @var \Barryvdh\Debugbar\LaravelDebugbar $instance */
+            return $instance->stopMeasure($name);
+        }
+
+        /**
+         * Adds an exception to be profiled in the debug bar
+         *
+         * @param \Exception $e
+         * @deprecated in favor of addThrowable
+         * @static
+         */
+        public static function addException($e)
+        {
+            /** @var \Barryvdh\Debugbar\LaravelDebugbar $instance */
+            return $instance->addException($e);
+        }
+
+        /**
+         * Adds an exception to be profiled in the debug bar
+         *
+         * @param \Throwable $e
+         * @static
+         */
+        public static function addThrowable($e)
+        {
+            /** @var \Barryvdh\Debugbar\LaravelDebugbar $instance */
+            return $instance->addThrowable($e);
+        }
+
+        /**
+         * Returns a JavascriptRenderer for this instance
+         *
+         * @param string $baseUrl
+         * @param string $basePath
+         * @return \Barryvdh\Debugbar\JavascriptRenderer
+         * @static
+         */
+        public static function getJavascriptRenderer($baseUrl = null, $basePath = null)
+        {
+            /** @var \Barryvdh\Debugbar\LaravelDebugbar $instance */
+            return $instance->getJavascriptRenderer($baseUrl, $basePath);
+        }
+
+        /**
+         * Modify the response and inject the debugbar (or data in headers)
+         *
+         * @param \Symfony\Component\HttpFoundation\Request $request
+         * @param \Symfony\Component\HttpFoundation\Response $response
+         * @return \Symfony\Component\HttpFoundation\Response
+         * @static
+         */
+        public static function modifyResponse($request, $response)
+        {
+            /** @var \Barryvdh\Debugbar\LaravelDebugbar $instance */
+            return $instance->modifyResponse($request, $response);
+        }
+
+        /**
+         * Check if the Debugbar is enabled
+         *
+         * @return boolean
+         * @static
+         */
+        public static function isEnabled()
+        {
+            /** @var \Barryvdh\Debugbar\LaravelDebugbar $instance */
+            return $instance->isEnabled();
+        }
+
+        /**
+         * Collects the data from the collectors
+         *
+         * @return array
+         * @static
+         */
+        public static function collect()
+        {
+            /** @var \Barryvdh\Debugbar\LaravelDebugbar $instance */
+            return $instance->collect();
+        }
+
+        /**
+         * Injects the web debug toolbar into the given Response.
+         *
+         * @param \Symfony\Component\HttpFoundation\Response $response A Response instance
+         * Based on https://github.com/symfony/WebProfilerBundle/blob/master/EventListener/WebDebugToolbarListener.php
+         * @static
+         */
+        public static function injectDebugbar($response)
+        {
+            /** @var \Barryvdh\Debugbar\LaravelDebugbar $instance */
+            return $instance->injectDebugbar($response);
+        }
+
+        /**
+         * Checks if there is stacked data in the session
+         *
+         * @return boolean
+         * @static
+         */
+        public static function hasStackedData()
+        {
+            /** @var \Barryvdh\Debugbar\LaravelDebugbar $instance */
+            return $instance->hasStackedData();
+        }
+
+        /**
+         * Returns the data stacked in the session
+         *
+         * @param boolean $delete Whether to delete the data in the session
+         * @return array
+         * @static
+         */
+        public static function getStackedData($delete = true)
+        {
+            /** @var \Barryvdh\Debugbar\LaravelDebugbar $instance */
+            return $instance->getStackedData($delete);
+        }
+
+        /**
+         * Disable the Debugbar
+         *
+         * @static
+         */
+        public static function disable()
+        {
+            /** @var \Barryvdh\Debugbar\LaravelDebugbar $instance */
+            return $instance->disable();
+        }
+
+        /**
+         * Adds a measure
+         *
+         * @param string $label
+         * @param float $start
+         * @param float $end
+         * @param array|null $params
+         * @param string|null $collector
+         * @param string|null $group
+         * @static
+         */
+        public static function addMeasure($label, $start, $end, $params = [], $collector = null, $group = null)
+        {
+            /** @var \Barryvdh\Debugbar\LaravelDebugbar $instance */
+            return $instance->addMeasure($label, $start, $end, $params, $collector, $group);
+        }
+
+        /**
+         * Utility function to measure the execution of a Closure
+         *
+         * @param string $label
+         * @param \Closure $closure
+         * @param string|null $collector
+         * @param string|null $group
+         * @return mixed
+         * @static
+         */
+        public static function measure($label, $closure, $collector = null, $group = null)
+        {
+            /** @var \Barryvdh\Debugbar\LaravelDebugbar $instance */
+            return $instance->measure($label, $closure, $collector, $group);
+        }
+
+        /**
+         * Collect data in a CLI request
+         *
+         * @return array
+         * @static
+         */
+        public static function collectConsole()
+        {
+            /** @var \Barryvdh\Debugbar\LaravelDebugbar $instance */
+            return $instance->collectConsole();
+        }
+
+        /**
+         * Adds a message to the MessagesCollector
+         * 
+         * A message can be anything from an object to a string
+         *
+         * @param mixed $message
+         * @param string $label
+         * @static
+         */
+        public static function addMessage($message, $label = 'info')
+        {
+            /** @var \Barryvdh\Debugbar\LaravelDebugbar $instance */
+            return $instance->addMessage($message, $label);
+        }
+
+        /**
+         * Checks if a data collector has been added
+         *
+         * @param string $name
+         * @return boolean
+         * @static
+         */
+        public static function hasCollector($name)
+        {
+            //Method inherited from \DebugBar\DebugBar 
+            /** @var \Barryvdh\Debugbar\LaravelDebugbar $instance */
+            return $instance->hasCollector($name);
+        }
+
+        /**
+         * Returns a data collector
+         *
+         * @param string $name
+         * @return \DebugBar\DataCollector\DataCollectorInterface
+         * @throws DebugBarException
+         * @static
+         */
+        public static function getCollector($name)
+        {
+            //Method inherited from \DebugBar\DebugBar 
+            /** @var \Barryvdh\Debugbar\LaravelDebugbar $instance */
+            return $instance->getCollector($name);
+        }
+
+        /**
+         * Returns an array of all data collectors
+         *
+         * @return array[DataCollectorInterface]
+         * @static
+         */
+        public static function getCollectors()
+        {
+            //Method inherited from \DebugBar\DebugBar 
+            /** @var \Barryvdh\Debugbar\LaravelDebugbar $instance */
+            return $instance->getCollectors();
+        }
+
+        /**
+         * Sets the request id generator
+         *
+         * @param \DebugBar\RequestIdGeneratorInterface $generator
+         * @return \Barryvdh\Debugbar\LaravelDebugbar
+         * @static
+         */
+        public static function setRequestIdGenerator($generator)
+        {
+            //Method inherited from \DebugBar\DebugBar 
+            /** @var \Barryvdh\Debugbar\LaravelDebugbar $instance */
+            return $instance->setRequestIdGenerator($generator);
+        }
+
+        /**
+         * @return \DebugBar\RequestIdGeneratorInterface
+         * @static
+         */
+        public static function getRequestIdGenerator()
+        {
+            //Method inherited from \DebugBar\DebugBar 
+            /** @var \Barryvdh\Debugbar\LaravelDebugbar $instance */
+            return $instance->getRequestIdGenerator();
+        }
+
+        /**
+         * Returns the id of the current request
+         *
+         * @return string
+         * @static
+         */
+        public static function getCurrentRequestId()
+        {
+            //Method inherited from \DebugBar\DebugBar 
+            /** @var \Barryvdh\Debugbar\LaravelDebugbar $instance */
+            return $instance->getCurrentRequestId();
+        }
+
+        /**
+         * Sets the storage backend to use to store the collected data
+         *
+         * @param \DebugBar\StorageInterface $storage
+         * @return \Barryvdh\Debugbar\LaravelDebugbar
+         * @static
+         */
+        public static function setStorage($storage = null)
+        {
+            //Method inherited from \DebugBar\DebugBar 
+            /** @var \Barryvdh\Debugbar\LaravelDebugbar $instance */
+            return $instance->setStorage($storage);
+        }
+
+        /**
+         * @return \DebugBar\StorageInterface
+         * @static
+         */
+        public static function getStorage()
+        {
+            //Method inherited from \DebugBar\DebugBar 
+            /** @var \Barryvdh\Debugbar\LaravelDebugbar $instance */
+            return $instance->getStorage();
+        }
+
+        /**
+         * Checks if the data will be persisted
+         *
+         * @return boolean
+         * @static
+         */
+        public static function isDataPersisted()
+        {
+            //Method inherited from \DebugBar\DebugBar 
+            /** @var \Barryvdh\Debugbar\LaravelDebugbar $instance */
+            return $instance->isDataPersisted();
+        }
+
+        /**
+         * Sets the HTTP driver
+         *
+         * @param \DebugBar\HttpDriverInterface $driver
+         * @return \Barryvdh\Debugbar\LaravelDebugbar
+         * @static
+         */
+        public static function setHttpDriver($driver)
+        {
+            //Method inherited from \DebugBar\DebugBar 
+            /** @var \Barryvdh\Debugbar\LaravelDebugbar $instance */
+            return $instance->setHttpDriver($driver);
+        }
+
+        /**
+         * Returns collected data
+         * 
+         * Will collect the data if none have been collected yet
+         *
+         * @return array
+         * @static
+         */
+        public static function getData()
+        {
+            //Method inherited from \DebugBar\DebugBar 
+            /** @var \Barryvdh\Debugbar\LaravelDebugbar $instance */
+            return $instance->getData();
+        }
+
+        /**
+         * Returns an array of HTTP headers containing the data
+         *
+         * @param string $headerName
+         * @param integer $maxHeaderLength
+         * @return array
+         * @static
+         */
+        public static function getDataAsHeaders($headerName = 'phpdebugbar', $maxHeaderLength = 4096, $maxTotalHeaderLength = 250000)
+        {
+            //Method inherited from \DebugBar\DebugBar 
+            /** @var \Barryvdh\Debugbar\LaravelDebugbar $instance */
+            return $instance->getDataAsHeaders($headerName, $maxHeaderLength, $maxTotalHeaderLength);
+        }
+
+        /**
+         * Sends the data through the HTTP headers
+         *
+         * @param bool $useOpenHandler
+         * @param string $headerName
+         * @param integer $maxHeaderLength
+         * @return \Barryvdh\Debugbar\LaravelDebugbar
+         * @static
+         */
+        public static function sendDataInHeaders($useOpenHandler = null, $headerName = 'phpdebugbar', $maxHeaderLength = 4096)
+        {
+            //Method inherited from \DebugBar\DebugBar 
+            /** @var \Barryvdh\Debugbar\LaravelDebugbar $instance */
+            return $instance->sendDataInHeaders($useOpenHandler, $headerName, $maxHeaderLength);
+        }
+
+        /**
+         * Stacks the data in the session for later rendering
+         *
+         * @static
+         */
+        public static function stackData()
+        {
+            //Method inherited from \DebugBar\DebugBar 
+            /** @var \Barryvdh\Debugbar\LaravelDebugbar $instance */
+            return $instance->stackData();
+        }
+
+        /**
+         * Sets the key to use in the $_SESSION array
+         *
+         * @param string $ns
+         * @return \Barryvdh\Debugbar\LaravelDebugbar
+         * @static
+         */
+        public static function setStackDataSessionNamespace($ns)
+        {
+            //Method inherited from \DebugBar\DebugBar 
+            /** @var \Barryvdh\Debugbar\LaravelDebugbar $instance */
+            return $instance->setStackDataSessionNamespace($ns);
+        }
+
+        /**
+         * Returns the key used in the $_SESSION array
+         *
+         * @return string
+         * @static
+         */
+        public static function getStackDataSessionNamespace()
+        {
+            //Method inherited from \DebugBar\DebugBar 
+            /** @var \Barryvdh\Debugbar\LaravelDebugbar $instance */
+            return $instance->getStackDataSessionNamespace();
+        }
+
+        /**
+         * Sets whether to only use the session to store stacked data even
+         * if a storage is enabled
+         *
+         * @param boolean $enabled
+         * @return \Barryvdh\Debugbar\LaravelDebugbar
+         * @static
+         */
+        public static function setStackAlwaysUseSessionStorage($enabled = true)
+        {
+            //Method inherited from \DebugBar\DebugBar 
+            /** @var \Barryvdh\Debugbar\LaravelDebugbar $instance */
+            return $instance->setStackAlwaysUseSessionStorage($enabled);
+        }
+
+        /**
+         * Checks if the session is always used to store stacked data
+         * even if a storage is enabled
+         *
+         * @return boolean
+         * @static
+         */
+        public static function isStackAlwaysUseSessionStorage()
+        {
+            //Method inherited from \DebugBar\DebugBar 
+            /** @var \Barryvdh\Debugbar\LaravelDebugbar $instance */
+            return $instance->isStackAlwaysUseSessionStorage();
+        }
+
+        /**
+         * @static
+         */
+        public static function offsetSet($key, $value)
+        {
+            //Method inherited from \DebugBar\DebugBar 
+            /** @var \Barryvdh\Debugbar\LaravelDebugbar $instance */
+            return $instance->offsetSet($key, $value);
+        }
+
+        /**
+         * @static
+         */
+        public static function offsetGet($key)
+        {
+            //Method inherited from \DebugBar\DebugBar 
+            /** @var \Barryvdh\Debugbar\LaravelDebugbar $instance */
+            return $instance->offsetGet($key);
+        }
+
+        /**
+         * @static
+         */
+        public static function offsetExists($key)
+        {
+            //Method inherited from \DebugBar\DebugBar 
+            /** @var \Barryvdh\Debugbar\LaravelDebugbar $instance */
+            return $instance->offsetExists($key);
+        }
+
+        /**
+         * @static
+         */
+        public static function offsetUnset($key)
+        {
+            //Method inherited from \DebugBar\DebugBar 
+            /** @var \Barryvdh\Debugbar\LaravelDebugbar $instance */
+            return $instance->offsetUnset($key);
+        }
+
+            }
+    }
+
+namespace Diglactic\Breadcrumbs {
+    /**
+     * Breadcrumbs facade - allows easy access to the Manager instance.
+     *
+     * @method static array getCurrentRoute()
+     * @mixin \Illuminate\Support\Traits\Macroable
+     * @see \Diglactic\Breadcrumbs\Manager
+     */
+    class Breadcrumbs {
+        /**
+         * Register a breadcrumb-generating callback for a page.
+         *
+         * @param string $name The name of the page.
+         * @param callable $callback The callback, which should accept a Generator instance as the first parameter and may
+         *                           accept additional parameters.
+         * @return void
+         * @throws \Diglactic\Breadcrumbs\Exceptions\DuplicateBreadcrumbException If the given name has already been used.
+         * @static
+         */
+        public static function for($name, $callback)
+        {
+            /** @var \Diglactic\Breadcrumbs\Manager $instance */
+            $instance->for($name, $callback);
+        }
+
+        /**
+         * Register a closure to call before generating breadcrumbs for the current page.
+         * 
+         * For example, this can be used to always prepend the homepage without needing to manually add it to each page.
+         *
+         * @param callable $callback The callback, which should accept a Generator instance as the first and only parameter.
+         * @return void
+         * @static
+         */
+        public static function before($callback)
+        {
+            /** @var \Diglactic\Breadcrumbs\Manager $instance */
+            $instance->before($callback);
+        }
+
+        /**
+         * Register a closure to call after generating breadcrumbs for the current page.
+         * 
+         * For example, this can be used to append the current page number when using pagination.
+         *
+         * @param callable $callback The callback, which should accept a Generator instance as the first and only parameter.
+         * @return void
+         * @static
+         */
+        public static function after($callback)
+        {
+            /** @var \Diglactic\Breadcrumbs\Manager $instance */
+            $instance->after($callback);
+        }
+
+        /**
+         * Check if a breadcrumb with the given name exists.
+         * 
+         * If no name is given, defaults to the current route name.
+         *
+         * @param string|null $name The page name.
+         * @return bool Whether there is a registered callback with that name.
+         * @static
+         */
+        public static function exists($name = null)
+        {
+            /** @var \Diglactic\Breadcrumbs\Manager $instance */
+            return $instance->exists($name);
+        }
+
+        /**
+         * Generate a set of breadcrumbs for a page.
+         *
+         * @param string|null $name The name of the current page.
+         * @param mixed $params The parameters to pass to the closure for the current page.
+         * @return \Illuminate\Support\Collection The generated breadcrumbs.
+         * @throws \Diglactic\Breadcrumbs\Exceptions\UnnamedRouteException if no name is given and the current route doesn't
+         *                                                                 have an associated name.
+         * @throws \Diglactic\Breadcrumbs\Exceptions\InvalidBreadcrumbException if the name is (or any ancestor names  are)
+         *                                                                      not registered.
+         * @static
+         */
+        public static function generate($name = null, ...$params)
+        {
+            /** @var \Diglactic\Breadcrumbs\Manager $instance */
+            return $instance->generate($name, ...$params);
+        }
+
+        /**
+         * Render breadcrumbs for a page with the specified view.
+         *
+         * @param string $view The name of the view to render.
+         * @param string|null $name The name of the current page.
+         * @param mixed $params The parameters to pass to the closure for the current page.
+         * @return \Illuminate\View\View The generated HTML.
+         * @throws \Diglactic\Breadcrumbs\Exceptions\InvalidBreadcrumbException if the name is (or any ancestor names are)
+         *                                                                      not registered.
+         * @throws \Diglactic\Breadcrumbs\Exceptions\UnnamedRouteException if no name is given and the current route doesn't
+         *                                                                 have an associated name.
+         * @static
+         */
+        public static function view($view, $name = null, ...$params)
+        {
+            /** @var \Diglactic\Breadcrumbs\Manager $instance */
+            return $instance->view($view, $name, ...$params);
+        }
+
+        /**
+         * Render breadcrumbs for a page with the default view.
+         *
+         * @param string|null $name The name of the current page.
+         * @param mixed $params The parameters to pass to the closure for the current page.
+         * @return \Illuminate\Contracts\View\View The generated view.
+         * @throws \Diglactic\Breadcrumbs\Exceptions\InvalidBreadcrumbException if the name is (or any ancestor names are)
+         *                                                                      not registered.
+         * @throws \Diglactic\Breadcrumbs\Exceptions\UnnamedRouteException if no name is given and the current route doesn't
+         *                                                                 have an associated name.
+         * @throws \Diglactic\Breadcrumbs\Exceptions\ViewNotSetException if no view has been set.
+         * @static
+         */
+        public static function render($name = null, ...$params)
+        {
+            /** @var \Diglactic\Breadcrumbs\Manager $instance */
+            return $instance->render($name, ...$params);
+        }
+
+        /**
+         * Get the last breadcrumb for the current page.
+         *
+         * @return object|null The breadcrumb for the current page.
+         * @throws \Diglactic\Breadcrumbs\Exceptions\UnnamedRouteException if the current route doesn't have an associated
+         *                                                                 name.
+         * @throws \Diglactic\Breadcrumbs\Exceptions\InvalidBreadcrumbException if the name is (or any ancestor names are)
+         *                                                                      not registered.
+         * @static
+         */
+        public static function current()
+        {
+            /** @var \Diglactic\Breadcrumbs\Manager $instance */
+            return $instance->current();
+        }
+
+        /**
+         * Set the current route name and parameters to use when calling render() or generate() with no parameters.
+         *
+         * @param string $name The name of the current page.
+         * @param mixed $params The parameters to pass to the closure for the current page.
+         * @return void
+         * @static
+         */
+        public static function setCurrentRoute($name, ...$params)
+        {
+            /** @var \Diglactic\Breadcrumbs\Manager $instance */
+            $instance->setCurrentRoute($name, ...$params);
+        }
+
+        /**
+         * Clear the previously set route name and parameters to use when calling render() or generate() with no parameters.
+         * 
+         * Next time it will revert to the default behaviour of using the current route from Laravel.
+         *
+         * @return void
+         * @static
+         */
+        public static function clearCurrentRoute()
+        {
+            /** @var \Diglactic\Breadcrumbs\Manager $instance */
+            $instance->clearCurrentRoute();
+        }
+
+        /**
+         * Register a custom macro.
+         *
+         * @param string $name
+         * @param object|callable $macro
+         * @param-closure-this static  $macro
+         * @return void
+         * @static
+         */
+        public static function macro($name, $macro)
+        {
+            \Diglactic\Breadcrumbs\Manager::macro($name, $macro);
+        }
+
+        /**
+         * Mix another object into the class.
+         *
+         * @param object $mixin
+         * @param bool $replace
+         * @return void
+         * @throws \ReflectionException
+         * @static
+         */
+        public static function mixin($mixin, $replace = true)
+        {
+            \Diglactic\Breadcrumbs\Manager::mixin($mixin, $replace);
+        }
+
+        /**
+         * Checks if macro is registered.
+         *
+         * @param string $name
+         * @return bool
+         * @static
+         */
+        public static function hasMacro($name)
+        {
+            return \Diglactic\Breadcrumbs\Manager::hasMacro($name);
+        }
+
+        /**
+         * Flush the existing macros.
+         *
+         * @return void
+         * @static
+         */
+        public static function flushMacros()
+        {
+            \Diglactic\Breadcrumbs\Manager::flushMacros();
+        }
+
+            }
+    }
+
+namespace Livewire {
+    /**
+     * @see \Livewire\LivewireManager
+     */
+    class Livewire {
+        /**
+         * @static
+         */
+        public static function setProvider($provider)
+        {
+            /** @var \Livewire\LivewireManager $instance */
+            return $instance->setProvider($provider);
+        }
+
+        /**
+         * @static
+         */
+        public static function provide($callback)
+        {
+            /** @var \Livewire\LivewireManager $instance */
+            return $instance->provide($callback);
+        }
+
+        /**
+         * @static
+         */
+        public static function component($name, $class = null)
+        {
+            /** @var \Livewire\LivewireManager $instance */
+            return $instance->component($name, $class);
+        }
+
+        /**
+         * @static
+         */
+        public static function componentHook($hook)
+        {
+            /** @var \Livewire\LivewireManager $instance */
+            return $instance->componentHook($hook);
+        }
+
+        /**
+         * @static
+         */
+        public static function propertySynthesizer($synth)
+        {
+            /** @var \Livewire\LivewireManager $instance */
+            return $instance->propertySynthesizer($synth);
+        }
+
+        /**
+         * @static
+         */
+        public static function directive($name, $callback)
+        {
+            /** @var \Livewire\LivewireManager $instance */
+            return $instance->directive($name, $callback);
+        }
+
+        /**
+         * @static
+         */
+        public static function precompiler($callback)
+        {
+            /** @var \Livewire\LivewireManager $instance */
+            return $instance->precompiler($callback);
+        }
+
+        /**
+         * @static
+         */
+        public static function new($name, $id = null)
+        {
+            /** @var \Livewire\LivewireManager $instance */
+            return $instance->new($name, $id);
+        }
+
+        /**
+         * @static
+         */
+        public static function isDiscoverable($componentNameOrClass)
+        {
+            /** @var \Livewire\LivewireManager $instance */
+            return $instance->isDiscoverable($componentNameOrClass);
+        }
+
+        /**
+         * @static
+         */
+        public static function resolveMissingComponent($resolver)
+        {
+            /** @var \Livewire\LivewireManager $instance */
+            return $instance->resolveMissingComponent($resolver);
+        }
+
+        /**
+         * @static
+         */
+        public static function mount($name, $params = [], $key = null)
+        {
+            /** @var \Livewire\LivewireManager $instance */
+            return $instance->mount($name, $params, $key);
+        }
+
+        /**
+         * @static
+         */
+        public static function snapshot($component, $context = null)
+        {
+            /** @var \Livewire\LivewireManager $instance */
+            return $instance->snapshot($component, $context);
+        }
+
+        /**
+         * @static
+         */
+        public static function fromSnapshot($snapshot)
+        {
+            /** @var \Livewire\LivewireManager $instance */
+            return $instance->fromSnapshot($snapshot);
+        }
+
+        /**
+         * @static
+         */
+        public static function listen($eventName, $callback)
+        {
+            /** @var \Livewire\LivewireManager $instance */
+            return $instance->listen($eventName, $callback);
+        }
+
+        /**
+         * @static
+         */
+        public static function current()
+        {
+            /** @var \Livewire\LivewireManager $instance */
+            return $instance->current();
+        }
+
+        /**
+         * @static
+         */
+        public static function findSynth($keyOrTarget, $component)
+        {
+            /** @var \Livewire\LivewireManager $instance */
+            return $instance->findSynth($keyOrTarget, $component);
+        }
+
+        /**
+         * @static
+         */
+        public static function update($snapshot, $diff, $calls)
+        {
+            /** @var \Livewire\LivewireManager $instance */
+            return $instance->update($snapshot, $diff, $calls);
+        }
+
+        /**
+         * @static
+         */
+        public static function updateProperty($component, $path, $value)
+        {
+            /** @var \Livewire\LivewireManager $instance */
+            return $instance->updateProperty($component, $path, $value);
+        }
+
+        /**
+         * @static
+         */
+        public static function isLivewireRequest()
+        {
+            /** @var \Livewire\LivewireManager $instance */
+            return $instance->isLivewireRequest();
+        }
+
+        /**
+         * @static
+         */
+        public static function componentHasBeenRendered()
+        {
+            /** @var \Livewire\LivewireManager $instance */
+            return $instance->componentHasBeenRendered();
+        }
+
+        /**
+         * @static
+         */
+        public static function forceAssetInjection()
+        {
+            /** @var \Livewire\LivewireManager $instance */
+            return $instance->forceAssetInjection();
+        }
+
+        /**
+         * @static
+         */
+        public static function setUpdateRoute($callback)
+        {
+            /** @var \Livewire\LivewireManager $instance */
+            return $instance->setUpdateRoute($callback);
+        }
+
+        /**
+         * @static
+         */
+        public static function getUpdateUri()
+        {
+            /** @var \Livewire\LivewireManager $instance */
+            return $instance->getUpdateUri();
+        }
+
+        /**
+         * @static
+         */
+        public static function setScriptRoute($callback)
+        {
+            /** @var \Livewire\LivewireManager $instance */
+            return $instance->setScriptRoute($callback);
+        }
+
+        /**
+         * @static
+         */
+        public static function useScriptTagAttributes($attributes)
+        {
+            /** @var \Livewire\LivewireManager $instance */
+            return $instance->useScriptTagAttributes($attributes);
+        }
+
+        /**
+         * @static
+         */
+        public static function withUrlParams($params)
+        {
+            /** @var \Livewire\LivewireManager $instance */
+            return $instance->withUrlParams($params);
+        }
+
+        /**
+         * @static
+         */
+        public static function withQueryParams($params)
+        {
+            /** @var \Livewire\LivewireManager $instance */
+            return $instance->withQueryParams($params);
+        }
+
+        /**
+         * @static
+         */
+        public static function withCookie($name, $value)
+        {
+            /** @var \Livewire\LivewireManager $instance */
+            return $instance->withCookie($name, $value);
+        }
+
+        /**
+         * @static
+         */
+        public static function withCookies($cookies)
+        {
+            /** @var \Livewire\LivewireManager $instance */
+            return $instance->withCookies($cookies);
+        }
+
+        /**
+         * @static
+         */
+        public static function withHeaders($headers)
+        {
+            /** @var \Livewire\LivewireManager $instance */
+            return $instance->withHeaders($headers);
+        }
+
+        /**
+         * @static
+         */
+        public static function withoutLazyLoading()
+        {
+            /** @var \Livewire\LivewireManager $instance */
+            return $instance->withoutLazyLoading();
+        }
+
+        /**
+         * @static
+         */
+        public static function test($name, $params = [])
+        {
+            /** @var \Livewire\LivewireManager $instance */
+            return $instance->test($name, $params);
+        }
+
+        /**
+         * @static
+         */
+        public static function visit($name)
+        {
+            /** @var \Livewire\LivewireManager $instance */
+            return $instance->visit($name);
+        }
+
+        /**
+         * @static
+         */
+        public static function actingAs($user, $driver = null)
+        {
+            /** @var \Livewire\LivewireManager $instance */
+            return $instance->actingAs($user, $driver);
+        }
+
+        /**
+         * @static
+         */
+        public static function isRunningServerless()
+        {
+            /** @var \Livewire\LivewireManager $instance */
+            return $instance->isRunningServerless();
+        }
+
+        /**
+         * @static
+         */
+        public static function addPersistentMiddleware($middleware)
+        {
+            /** @var \Livewire\LivewireManager $instance */
+            return $instance->addPersistentMiddleware($middleware);
+        }
+
+        /**
+         * @static
+         */
+        public static function setPersistentMiddleware($middleware)
+        {
+            /** @var \Livewire\LivewireManager $instance */
+            return $instance->setPersistentMiddleware($middleware);
+        }
+
+        /**
+         * @static
+         */
+        public static function getPersistentMiddleware()
+        {
+            /** @var \Livewire\LivewireManager $instance */
+            return $instance->getPersistentMiddleware();
+        }
+
+        /**
+         * @static
+         */
+        public static function flushState()
+        {
+            /** @var \Livewire\LivewireManager $instance */
+            return $instance->flushState();
+        }
+
+        /**
+         * @static
+         */
+        public static function originalUrl()
+        {
+            /** @var \Livewire\LivewireManager $instance */
+            return $instance->originalUrl();
+        }
+
+        /**
+         * @static
+         */
+        public static function originalPath()
+        {
+            /** @var \Livewire\LivewireManager $instance */
+            return $instance->originalPath();
+        }
+
+        /**
+         * @static
+         */
+        public static function originalMethod()
+        {
+            /** @var \Livewire\LivewireManager $instance */
+            return $instance->originalMethod();
+        }
+
+            }
+    }
+
+namespace Opcodes\LogViewer\Facades {
+    /**
+     * @see \Opcodes\LogViewer\LogViewerService
+     */
+    class LogViewer {
+        /**
+         * @static
+         */
+        public static function timezone()
+        {
+            /** @var \Opcodes\LogViewer\LogViewerService $instance */
+            return $instance->timezone();
+        }
+
+        /**
+         * @static
+         */
+        public static function basePathForLogs()
+        {
+            /** @var \Opcodes\LogViewer\LogViewerService $instance */
+            return $instance->basePathForLogs();
+        }
+
+        /**
+         * @return \Opcodes\LogViewer\LogFileCollection|\Opcodes\LogViewer\LogFile[]
+         * @static
+         */
+        public static function getFiles()
+        {
+            /** @var \Opcodes\LogViewer\LogViewerService $instance */
+            return $instance->getFiles();
+        }
+
+        /**
+         * @static
+         */
+        public static function getFilesGroupedByFolder()
+        {
+            /** @var \Opcodes\LogViewer\LogViewerService $instance */
+            return $instance->getFilesGroupedByFolder();
+        }
+
+        /**
+         * Find the file with the given identifier or file name.
+         *
+         * @static
+         */
+        public static function getFile($fileIdentifier)
+        {
+            /** @var \Opcodes\LogViewer\LogViewerService $instance */
+            return $instance->getFile($fileIdentifier);
+        }
+
+        /**
+         * @static
+         */
+        public static function getFolder($folderIdentifier)
+        {
+            /** @var \Opcodes\LogViewer\LogViewerService $instance */
+            return $instance->getFolder($folderIdentifier);
+        }
+
+        /**
+         * @static
+         */
+        public static function supportsHostsFeature()
+        {
+            /** @var \Opcodes\LogViewer\LogViewerService $instance */
+            return $instance->supportsHostsFeature();
+        }
+
+        /**
+         * @static
+         */
+        public static function resolveHostsUsing($callback)
+        {
+            /** @var \Opcodes\LogViewer\LogViewerService $instance */
+            return $instance->resolveHostsUsing($callback);
+        }
+
+        /**
+         * @static
+         */
+        public static function getHosts()
+        {
+            /** @var \Opcodes\LogViewer\LogViewerService $instance */
+            return $instance->getHosts();
+        }
+
+        /**
+         * @static
+         */
+        public static function getHost($hostIdentifier)
+        {
+            /** @var \Opcodes\LogViewer\LogViewerService $instance */
+            return $instance->getHost($hostIdentifier);
+        }
+
+        /**
+         * @static
+         */
+        public static function clearFileCache()
+        {
+            /** @var \Opcodes\LogViewer\LogViewerService $instance */
+            return $instance->clearFileCache();
+        }
+
+        /**
+         * @static
+         */
+        public static function getRouteDomain()
+        {
+            /** @var \Opcodes\LogViewer\LogViewerService $instance */
+            return $instance->getRouteDomain();
+        }
+
+        /**
+         * @static
+         */
+        public static function getRoutePrefix()
+        {
+            /** @var \Opcodes\LogViewer\LogViewerService $instance */
+            return $instance->getRoutePrefix();
+        }
+
+        /**
+         * @static
+         */
+        public static function getRouteMiddleware()
+        {
+            /** @var \Opcodes\LogViewer\LogViewerService $instance */
+            return $instance->getRouteMiddleware();
+        }
+
+        /**
+         * @static
+         */
+        public static function auth($callback = null)
+        {
+            /** @var \Opcodes\LogViewer\LogViewerService $instance */
+            return $instance->auth($callback);
+        }
+
+        /**
+         * @static
+         */
+        public static function hasAuthCallback()
+        {
+            /** @var \Opcodes\LogViewer\LogViewerService $instance */
+            return $instance->hasAuthCallback();
+        }
+
+        /**
+         * @static
+         */
+        public static function lazyScanChunkSize()
+        {
+            /** @var \Opcodes\LogViewer\LogViewerService $instance */
+            return $instance->lazyScanChunkSize();
+        }
+
+        /**
+         * @static
+         */
+        public static function lazyScanTimeout()
+        {
+            /** @var \Opcodes\LogViewer\LogViewerService $instance */
+            return $instance->lazyScanTimeout();
+        }
+
+        /**
+         * Get the maximum number of bytes of the log that we should display.
+         *
+         * @static
+         */
+        public static function maxLogSize()
+        {
+            /** @var \Opcodes\LogViewer\LogViewerService $instance */
+            return $instance->maxLogSize();
+        }
+
+        /**
+         * @static
+         */
+        public static function setMaxLogSize($bytes)
+        {
+            /** @var \Opcodes\LogViewer\LogViewerService $instance */
+            return $instance->setMaxLogSize($bytes);
+        }
+
+        /**
+         * @static
+         */
+        public static function extend($type, $class)
+        {
+            /** @var \Opcodes\LogViewer\LogViewerService $instance */
+            return $instance->extend($type, $class);
+        }
+
+        /**
+         * @static
+         */
+        public static function useLogFileClass($class)
+        {
+            /** @var \Opcodes\LogViewer\LogViewerService $instance */
+            return $instance->useLogFileClass($class);
+        }
+
+        /**
+         * @static
+         */
+        public static function useLogReaderClass($class)
+        {
+            /** @var \Opcodes\LogViewer\LogViewerService $instance */
+            return $instance->useLogReaderClass($class);
+        }
+
+        /**
+         * @static
+         */
+        public static function logReaderClass()
+        {
+            /** @var \Opcodes\LogViewer\LogViewerService $instance */
+            return $instance->logReaderClass();
+        }
+
+        /**
+         * @static
+         */
+        public static function setViewLayout($layout)
+        {
+            /** @var \Opcodes\LogViewer\LogViewerService $instance */
+            return $instance->setViewLayout($layout);
+        }
+
+        /**
+         * @static
+         */
+        public static function getViewLayout()
+        {
+            /** @var \Opcodes\LogViewer\LogViewerService $instance */
+            return $instance->getViewLayout();
+        }
+
+        /**
+         * Determine if Log Viewer's published assets are up-to-date.
+         *
+         * @throws \RuntimeException
+         * @static
+         */
+        public static function assetsAreCurrent()
+        {
+            /** @var \Opcodes\LogViewer\LogViewerService $instance */
+            return $instance->assetsAreCurrent();
+        }
+
+        /**
+         * Get the current version of the Log Viewer
+         *
+         * @static
+         */
+        public static function version()
+        {
+            /** @var \Opcodes\LogViewer\LogViewerService $instance */
+            return $instance->version();
+        }
+
+            }
+    }
+
+namespace Spatie\LaravelIgnition\Facades {
+    /**
+     * @see \Spatie\FlareClient\Flare
+     */
+    class Flare {
+        /**
+         * @static
+         */
+        public static function make($apiKey = null, $contextDetector = null)
+        {
+            return \Spatie\FlareClient\Flare::make($apiKey, $contextDetector);
+        }
+
+        /**
+         * @static
+         */
+        public static function setApiToken($apiToken)
+        {
+            /** @var \Spatie\FlareClient\Flare $instance */
+            return $instance->setApiToken($apiToken);
+        }
+
+        /**
+         * @static
+         */
+        public static function apiTokenSet()
+        {
+            /** @var \Spatie\FlareClient\Flare $instance */
+            return $instance->apiTokenSet();
+        }
+
+        /**
+         * @static
+         */
+        public static function setBaseUrl($baseUrl)
+        {
+            /** @var \Spatie\FlareClient\Flare $instance */
+            return $instance->setBaseUrl($baseUrl);
+        }
+
+        /**
+         * @static
+         */
+        public static function setStage($stage)
+        {
+            /** @var \Spatie\FlareClient\Flare $instance */
+            return $instance->setStage($stage);
+        }
+
+        /**
+         * @static
+         */
+        public static function sendReportsImmediately()
+        {
+            /** @var \Spatie\FlareClient\Flare $instance */
+            return $instance->sendReportsImmediately();
+        }
+
+        /**
+         * @static
+         */
+        public static function determineVersionUsing($determineVersionCallable)
+        {
+            /** @var \Spatie\FlareClient\Flare $instance */
+            return $instance->determineVersionUsing($determineVersionCallable);
+        }
+
+        /**
+         * @static
+         */
+        public static function reportErrorLevels($reportErrorLevels)
+        {
+            /** @var \Spatie\FlareClient\Flare $instance */
+            return $instance->reportErrorLevels($reportErrorLevels);
+        }
+
+        /**
+         * @static
+         */
+        public static function filterExceptionsUsing($filterExceptionsCallable)
+        {
+            /** @var \Spatie\FlareClient\Flare $instance */
+            return $instance->filterExceptionsUsing($filterExceptionsCallable);
+        }
+
+        /**
+         * @static
+         */
+        public static function filterReportsUsing($filterReportsCallable)
+        {
+            /** @var \Spatie\FlareClient\Flare $instance */
+            return $instance->filterReportsUsing($filterReportsCallable);
+        }
+
+        /**
+         * @param array<class-string<ArgumentReducer>|ArgumentReducer>|\Spatie\Backtrace\Arguments\ArgumentReducers|null $argumentReducers
+         * @static
+         */
+        public static function argumentReducers($argumentReducers)
+        {
+            /** @var \Spatie\FlareClient\Flare $instance */
+            return $instance->argumentReducers($argumentReducers);
+        }
+
+        /**
+         * @static
+         */
+        public static function withStackFrameArguments($withStackFrameArguments = true, $forcePHPIniSetting = false)
+        {
+            /** @var \Spatie\FlareClient\Flare $instance */
+            return $instance->withStackFrameArguments($withStackFrameArguments, $forcePHPIniSetting);
+        }
+
+        /**
+         * @param class-string $exceptionClass
+         * @static
+         */
+        public static function overrideGrouping($exceptionClass, $type = 'exception_message_and_class')
+        {
+            /** @var \Spatie\FlareClient\Flare $instance */
+            return $instance->overrideGrouping($exceptionClass, $type);
+        }
+
+        /**
+         * @static
+         */
+        public static function version()
+        {
+            /** @var \Spatie\FlareClient\Flare $instance */
+            return $instance->version();
+        }
+
+        /**
+         * @return array<int, FlareMiddleware|class-string<FlareMiddleware>>
+         * @static
+         */
+        public static function getMiddleware()
+        {
+            /** @var \Spatie\FlareClient\Flare $instance */
+            return $instance->getMiddleware();
+        }
+
+        /**
+         * @static
+         */
+        public static function setContextProviderDetector($contextDetector)
+        {
+            /** @var \Spatie\FlareClient\Flare $instance */
+            return $instance->setContextProviderDetector($contextDetector);
+        }
+
+        /**
+         * @static
+         */
+        public static function setContainer($container)
+        {
+            /** @var \Spatie\FlareClient\Flare $instance */
+            return $instance->setContainer($container);
+        }
+
+        /**
+         * @static
+         */
+        public static function registerFlareHandlers()
+        {
+            /** @var \Spatie\FlareClient\Flare $instance */
+            return $instance->registerFlareHandlers();
+        }
+
+        /**
+         * @static
+         */
+        public static function registerExceptionHandler()
+        {
+            /** @var \Spatie\FlareClient\Flare $instance */
+            return $instance->registerExceptionHandler();
+        }
+
+        /**
+         * @static
+         */
+        public static function registerErrorHandler($errorLevels = null)
+        {
+            /** @var \Spatie\FlareClient\Flare $instance */
+            return $instance->registerErrorHandler($errorLevels);
+        }
+
+        /**
+         * @param \Spatie\FlareClient\FlareMiddleware\FlareMiddleware|array<FlareMiddleware>|class-string<FlareMiddleware>|callable $middleware
+         * @return \Spatie\FlareClient\Flare
+         * @static
+         */
+        public static function registerMiddleware($middleware)
+        {
+            /** @var \Spatie\FlareClient\Flare $instance */
+            return $instance->registerMiddleware($middleware);
+        }
+
+        /**
+         * @return array<int,FlareMiddleware|class-string<FlareMiddleware>>
+         * @static
+         */
+        public static function getMiddlewares()
+        {
+            /** @var \Spatie\FlareClient\Flare $instance */
+            return $instance->getMiddlewares();
+        }
+
+        /**
+         * @param string $name
+         * @param string $messageLevel
+         * @param array<int, mixed> $metaData
+         * @return \Spatie\FlareClient\Flare
+         * @static
+         */
+        public static function glow($name, $messageLevel = 'info', $metaData = [])
+        {
+            /** @var \Spatie\FlareClient\Flare $instance */
+            return $instance->glow($name, $messageLevel, $metaData);
+        }
+
+        /**
+         * @static
+         */
+        public static function handleException($throwable)
+        {
+            /** @var \Spatie\FlareClient\Flare $instance */
+            return $instance->handleException($throwable);
+        }
+
+        /**
+         * @return mixed
+         * @static
+         */
+        public static function handleError($code, $message, $file = '', $line = 0)
+        {
+            /** @var \Spatie\FlareClient\Flare $instance */
+            return $instance->handleError($code, $message, $file, $line);
+        }
+
+        /**
+         * @static
+         */
+        public static function applicationPath($applicationPath)
+        {
+            /** @var \Spatie\FlareClient\Flare $instance */
+            return $instance->applicationPath($applicationPath);
+        }
+
+        /**
+         * @static
+         */
+        public static function report($throwable, $callback = null, $report = null, $handled = null)
+        {
+            /** @var \Spatie\FlareClient\Flare $instance */
+            return $instance->report($throwable, $callback, $report, $handled);
+        }
+
+        /**
+         * @static
+         */
+        public static function reportHandled($throwable)
+        {
+            /** @var \Spatie\FlareClient\Flare $instance */
+            return $instance->reportHandled($throwable);
+        }
+
+        /**
+         * @static
+         */
+        public static function reportMessage($message, $logLevel, $callback = null)
+        {
+            /** @var \Spatie\FlareClient\Flare $instance */
+            return $instance->reportMessage($message, $logLevel, $callback);
+        }
+
+        /**
+         * @static
+         */
+        public static function sendTestReport($throwable)
+        {
+            /** @var \Spatie\FlareClient\Flare $instance */
+            return $instance->sendTestReport($throwable);
+        }
+
+        /**
+         * @static
+         */
+        public static function reset()
+        {
+            /** @var \Spatie\FlareClient\Flare $instance */
+            return $instance->reset();
+        }
+
+        /**
+         * @static
+         */
+        public static function anonymizeIp()
+        {
+            /** @var \Spatie\FlareClient\Flare $instance */
+            return $instance->anonymizeIp();
+        }
+
+        /**
+         * @param array<int, string> $fieldNames
+         * @return \Spatie\FlareClient\Flare
+         * @static
+         */
+        public static function censorRequestBodyFields($fieldNames)
+        {
+            /** @var \Spatie\FlareClient\Flare $instance */
+            return $instance->censorRequestBodyFields($fieldNames);
+        }
+
+        /**
+         * @static
+         */
+        public static function createReport($throwable)
+        {
+            /** @var \Spatie\FlareClient\Flare $instance */
+            return $instance->createReport($throwable);
+        }
+
+        /**
+         * @static
+         */
+        public static function createReportFromMessage($message, $logLevel)
+        {
+            /** @var \Spatie\FlareClient\Flare $instance */
+            return $instance->createReportFromMessage($message, $logLevel);
+        }
+
+        /**
+         * @static
+         */
+        public static function stage($stage)
+        {
+            /** @var \Spatie\FlareClient\Flare $instance */
+            return $instance->stage($stage);
+        }
+
+        /**
+         * @static
+         */
+        public static function messageLevel($messageLevel)
+        {
+            /** @var \Spatie\FlareClient\Flare $instance */
+            return $instance->messageLevel($messageLevel);
+        }
+
+        /**
+         * @param string $groupName
+         * @param mixed $default
+         * @return array<int, mixed>
+         * @static
+         */
+        public static function getGroup($groupName = 'context', $default = [])
+        {
+            /** @var \Spatie\FlareClient\Flare $instance */
+            return $instance->getGroup($groupName, $default);
+        }
+
+        /**
+         * @static
+         */
+        public static function context($key, $value)
+        {
+            /** @var \Spatie\FlareClient\Flare $instance */
+            return $instance->context($key, $value);
+        }
+
+        /**
+         * @param string $groupName
+         * @param array<string, mixed> $properties
+         * @return \Spatie\FlareClient\Flare
+         * @static
+         */
+        public static function group($groupName, $properties)
+        {
+            /** @var \Spatie\FlareClient\Flare $instance */
+            return $instance->group($groupName, $properties);
         }
 
             }
@@ -32133,19 +32133,22 @@ namespace  {
     class Validator extends \Illuminate\Support\Facades\Validator {}
     class View extends \Illuminate\Support\Facades\View {}
     class Vite extends \Illuminate\Support\Facades\Vite {}
-    class Debugbar extends \Barryvdh\Debugbar\Facades\Debugbar {}
+    class Excel extends \Maatwebsite\Excel\Facades\Excel {}
+    class Menu extends \Spatie\Menu\Laravel\Facades\Menu {}
     class PDF extends \Barryvdh\DomPDF\Facade\Pdf {}
+    class permission extends \Spatie\Permission\Middleware\PermissionMiddleware {}
+    class QrCode extends \SimpleSoftwareIO\QrCode\Facades\QrCode {}
+    class role_or_permission extends \Spatie\Permission\Middleware\RoleOrPermissionMiddleware {}
+    class role extends \Spatie\Permission\Middleware\RoleMiddleware {}
+    class Debugbar extends \Barryvdh\Debugbar\Facades\Debugbar {}
     class Pdf extends \Barryvdh\DomPDF\Facade\Pdf {}
     class Webp extends \Buglinjo\LaravelWebp\Webp {}
     class Breadcrumbs extends \Diglactic\Breadcrumbs\Breadcrumbs {}
     class LivewireAlert extends \Jantinnerezo\LivewireAlert\LivewireAlert {}
     class Horizon extends \Laravel\Horizon\Horizon {}
     class Livewire extends \Livewire\Livewire {}
-    class Excel extends \Maatwebsite\Excel\Facades\Excel {}
     class LogViewer extends \Opcodes\LogViewer\Facades\LogViewer {}
-    class QrCode extends \SimpleSoftwareIO\QrCode\Facades\QrCode {}
     class Flare extends \Spatie\LaravelIgnition\Facades\Flare {}
-    class Menu extends \Spatie\Menu\Laravel\Facades\Menu {}
 }
 
 

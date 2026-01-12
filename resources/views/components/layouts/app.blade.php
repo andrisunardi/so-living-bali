@@ -6,8 +6,11 @@
     <x-layouts.meta />
 
     <title>
-        @if (!Route::is('home'))
+        @if (!Route::is('home') && !Route::is('cms.home'))
             @yield('title') |
+        @endif
+        @if (Route::is('cms.*'))
+            CMS |
         @endif
         {{ config('app.name') }}
     </title>
