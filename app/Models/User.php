@@ -96,6 +96,7 @@ class User extends Authenticatable
         'name',
         'phone',
         'email',
+        'password',
         'phone_verified_at',
         'email_verified_at',
         'is_active',
@@ -104,7 +105,10 @@ class User extends Authenticatable
         'deleted_by',
     ];
 
-    protected $hidden = [];
+    protected $hidden = [
+        'password',
+        'remember_me',
+    ];
 
     protected function casts(): array
     {

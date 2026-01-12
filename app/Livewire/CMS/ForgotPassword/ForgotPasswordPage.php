@@ -6,6 +6,7 @@ use App\Livewire\Component;
 use App\Livewire\Forms\CMS\ForgotPassword\ForgotPasswordForm;
 use Illuminate\Contracts\View\View;
 use Illuminate\Support\Facades\Auth;
+use Jantinnerezo\LivewireAlert\Facades\LivewireAlert;
 
 class ForgotPasswordPage extends Component
 {
@@ -16,9 +17,10 @@ class ForgotPasswordPage extends Component
     public function mount(): void
     {
         if (Auth::check()) {
-            // $this->flash('info', trans('index.login_failed'), [
-            //     'html' => trans('index.you_already_login'),
-            // ]);
+            session()->flash('error', [
+                'title' => trans('index.login').' '.trans('index.failed'),
+                'message' => trans('message.you_already_login'),
+            ]);
 
             $this->redirectIntended(route('cms.index'), navigate: true);
         }
@@ -34,18 +36,22 @@ class ForgotPasswordPage extends Component
         $result = $this->form->submit();
 
         if (! $result) {
-            $this->alert('error', trans('index.forgot_password_failed'), [
-                'html' => trans('index.username_or_email_or_phone_is_invalid'),
-            ]);
+            LivewireAlert::title(trans('index.forgot_password').' '.trans('index.failed'))
+                ->html(trans('message.username_or_email_or_phone_is_invalid'))
+                ->withConfirmButton('OK')
+                ->confirmButtonColor('#dc3545')
+                ->error()
+                ->show();
 
             return;
         }
 
-        $this->flash('success', trans('index.forgot_password_success'), [
-            'html' => trans('validation.attributes.new_password')." : {$result}",
+        session()->flash('success', [
+            'title' => trans('index.forgot_password').' '.trans('index.success'),
+            'message' => trans('field.new_password')." : {$result}",
         ]);
 
-        $this->redirect(route('cms.login'), navigate: true);
+        $this->redirectIntended(route('cms.login'), navigate: true);
     }
 
     public function render(): View

@@ -5,6 +5,7 @@ return [
     'please_login_with_your_account_to_continue' => 'Please Login With Your Account To Continue',
     'please_enter_your_data_to_get_new_password' => 'Please Enter Your Data To Get New Password',
     'username_or_password_is_invalid' => 'Username or Password is Invalid',
+    'username_or_email_or_phone_is_invalid' => 'Username or Password or Phone is Invalid',
 
     'no_data_available' => 'No Data Available',
 
