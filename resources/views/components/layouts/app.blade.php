@@ -22,7 +22,7 @@
 <body class="d-flex flex-column min-vh-100">
     @if (View::getSection('code') != 503)
         @if (Route::is('cms.*'))
-            {{-- @livewire('layouts.cms.header') --}}
+            @livewire('cms.layouts.header')
         @else
             {{-- @livewire('layouts.header') --}}
         @endif
