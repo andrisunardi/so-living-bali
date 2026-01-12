@@ -75,5 +75,5 @@ Route::group(['middleware' => ['auth', 'role:'.config('app.route_cms_roles')]], 
     // Route::prefix('profile')->name('profile.')->as('profile.')
     //     ->group(base_path('routes/cms/profile.php'));
 
-    // Route::any('logout', Logout::class)->name('logout');
+    Route::any('logout', Logout::class)->name('logout');
 });
