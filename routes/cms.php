@@ -12,9 +12,9 @@ Route::any('forgot-password', ForgotPasswordPage::class)->name('forgot-password'
 Route::group(['middleware' => ['auth', 'role:'.config('app.route_cms_roles')]], function () {
     Route::any('', HomePage::class)->name('index');
 
-    // Route::prefix('contact')->name('contact.')->as('contact.')
-    //     ->middleware(['role:Super User|Admin'])
-    //     ->group(base_path('routes/cms/contact.php'));
+    Route::prefix('contact')->name('contact.')->as('contact.')
+        ->middleware(['permission:contact'])
+        ->group(base_path('routes/cms/contact.php'));
 
     // Route::prefix('article')->name('article.')->as('article.')
     //     ->middleware(['role:Super User|Admin'])

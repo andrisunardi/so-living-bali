@@ -11,7 +11,7 @@ return [
     'language' => 'Language',
     'failed' => 'Failed',
     'success' => 'Success',
-    'all' => 'All',
+    'enter_to_search' => 'Enter to Search',
     'all' => 'All',
     'all' => 'All',
     'all' => 'All',

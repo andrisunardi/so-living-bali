@@ -1,0 +1,61 @@
+<?php
+
+namespace App\Livewire\CMS\Contact;
+
+use App\Exports\ContactExport;
+use App\Livewire\Component;
+use App\Services\ContactService;
+use Illuminate\Contracts\View\View;
+use Jantinnerezo\LivewireAlert\Facades\LivewireAlert;
+use Livewire\Attributes\Url;
+use Maatwebsite\Excel\Facades\Excel;
+use Symfony\Component\HttpFoundation\BinaryFileResponse;
+
+class ContactPage extends Component
+{
+    #[Url(except: '')]
+    public $search = '';
+
+    public function resetFields(): void
+    {
+        $this->resetPage();
+
+        $this->reset([
+            'search',
+        ]);
+    }
+
+    public function updating(): void
+    {
+        $this->resetPage();
+    }
+
+    public function getContacts(bool $paginate = true): object
+    {
+        return (new ContactService)->index(
+            search: $this->search,
+            paginate: $paginate,
+        );
+    }
+
+    public function exportToExcel(): BinaryFileResponse
+    {
+        LivewireAlert::title(trans('index.export').' '.trans('index.success'))
+            ->html(session('success.message'))
+            ->withConfirmButton('OK')
+            ->confirmButtonColor('#198754')
+            ->success()
+            ->show();
+
+        return Excel::download(new ContactExport(
+            contacts: $this->getContacts(paginate: false),
+        ), trans('index.contact').'.xlsx');
+    }
+
+    public function render(): View
+    {
+        return view('livewire.cms.contact.index', [
+            'contacts' => $this->getContacts(),
+        ]);
+    }
+}

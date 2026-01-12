@@ -22,7 +22,9 @@
 <body class="d-flex flex-column min-vh-100">
     @if (View::getSection('code') != 503)
         @if (Route::is('cms.*'))
-            @livewire('cms.layouts.header')
+            @auth
+                @livewire('cms.layouts.header')
+            @endauth
         @else
             {{-- @livewire('layouts.header') --}}
         @endif
@@ -53,13 +55,15 @@
     @endif
 
     @if (Route::is('cms.*'))
-        {{-- @livewire('modal.modal-logs') --}}
+        @auth
+            {{-- @livewire('modal.modal-logs') --}}
 
-        {{-- @livewire('modal.modal-language') --}}
+            {{-- @livewire('modal.modal-language') --}}
 
-        {{-- @livewire('modal.modal-theme') --}}
+            {{-- @livewire('modal.modal-theme') --}}
 
-        {{-- @livewire('modal.modal-account') --}}
+            {{-- @livewire('modal.modal-account') --}}
+        @endauth
     @endif
 
     <script src="{{ asset('js/color-modes.js') }}"></script>

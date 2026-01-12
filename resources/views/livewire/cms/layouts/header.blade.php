@@ -23,6 +23,28 @@
                                     <span class="fas fa-home fa-fw"></span>
                                     {{ trans('page.home') }}
                                 </a>
+
+                                <a draggable="false"
+                                    class="btn btn-outline-primary icon-link w-100 {{ Route::is('cms.index') ? 'active' : '' }}"
+                                    href="{{ route('cms.index') }}" wire:navigate>
+                                    <span class="fas fa-home fa-fw"></span>
+                                    {{ trans('page.home') }}
+                                </a>
+
+                                @can('module')
+                                    <div class="fw-bold text-uppercase border-bottom pt-2 pb-2">
+                                        {{ trans('page.module') }}
+                                    </div>
+                                @endcan
+
+                                @can('contact')
+                                    <a draggable="false"
+                                        class="btn btn-outline-primary icon-link w-100 {{ Route::is('cms.contact.*') ? 'active' : '' }}"
+                                        href="{{ route('cms.contact.index') }}" wire:navigate>
+                                        <span class="fas fa-phone fa-fw"></span>
+                                        {{ trans('page.contact') }}
+                                    </a>
+                                @endcan
                             </div>
                         </div>
                     </div>
