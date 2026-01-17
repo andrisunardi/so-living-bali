@@ -26,7 +26,7 @@
     @if (View::getSection('code') != 503)
         @if (Route::is('cms.*'))
             @auth
-                @livewire('cms.layouts.header')
+                @livewire('c-m-s.layouts.header')
             @endauth
         @else
             {{-- @livewire('layouts.header') --}}
@@ -36,7 +36,7 @@
     <main class="flex-grow-1 @if (!Route::is(['cms.login', 'cms.forgot-password'])) pt-5 my-4 @endif">
         @if (View::hasSection('code'))
             @if (Route::is('cms.*'))
-                {{-- @livewire('layouts.cms.error') --}}
+                {{-- @livewire('layouts.c-m-s.error') --}}
             @else
                 {{-- @livewire('layouts.error') --}}
             @endif
@@ -51,7 +51,7 @@
 
     @if (View::getSection('code') != 503)
         @if (Route::is('cms.*'))
-            @livewire('cms.layouts.footer')
+            @livewire('c-m-s.layouts.footer')
         @else
             {{-- @livewire('layouts.footer') --}}
         @endif
