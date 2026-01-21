@@ -15,7 +15,7 @@ class Logout extends Component
 
         session()->flash('success', [
             'title' => trans('index.logout').' '.trans('index.success'),
-            'message' => trans('field.you_have_been_successfully_logged_out'),
+            'message' => trans('message.you_have_successfully_logged_out'),
         ]);
 
         $this->redirect(route('cms.login'), navigate: true);

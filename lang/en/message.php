@@ -9,7 +9,7 @@ return [
 
     'no_data_available' => 'No Data Available',
 
-    'you_have_been_successfully_logged_out' => 'You have successfully logged out.',
+    'you_have_successfully_logged_out' => 'You have successfully logged out.',
     'you_have_successfully_logged_in' => 'You have successfully logged in.',
     'has_been_successfully_synced' => 'has been successfully synced.',
     'has_been_successfully_export' => 'has been successfully exported.',

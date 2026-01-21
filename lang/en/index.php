@@ -12,7 +12,7 @@ return [
     'failed' => 'Failed',
     'success' => 'Success',
     'enter_to_search' => 'Enter to Search',
-    'all' => 'All',
+    'logout' => 'Logout',
     'all' => 'All',
     'all' => 'All',
     'all' => 'All',
