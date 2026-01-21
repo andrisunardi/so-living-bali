@@ -63,11 +63,23 @@
 
             {{-- @livewire('modal.modal-language') --}}
 
-            {{-- @livewire('modal.modal-theme') --}}
+            @livewire('modal.modal-theme')
 
             {{-- @livewire('modal.modal-account') --}}
         @endauth
     @endif
+
+    <script>
+        document.addEventListener('livewire:navigated', () => {
+            Livewire.on('openModalTheme', () => {
+                $('#modal-theme').modal('show');
+            });
+
+            Livewire.on('closeModalTheme', () => {
+                $('#modal-theme').modal('hide');
+            });
+        });
+    </script>
 
     <script src="{{ asset('js/color-modes.js') }}"></script>
     <script src="{{ asset('js/app.js') }}"></script>
