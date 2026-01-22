@@ -2,6 +2,7 @@
 
 return [
 
+    'previous_page' => 'Previous Page',
     'login' => 'Login',
     'forgot_password' => 'Forgot Password',
 

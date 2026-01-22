@@ -16,7 +16,8 @@
                         <div class="d-flex justify-content-center text-center">
                             <img draggable="false" class="img-fluid rounded-circle" width="100"
                                 src="{{ Auth::user()->image_url ?? asset('images/user.png') }}"
-                                alt="{{ trans('field.image') }}" />
+                                alt="{{ trans('field.image') }} - {{ config('app.name') }}"
+                                onerror="asset('images/user.png')" />
                         </div>
 
                         <div class="text-center">

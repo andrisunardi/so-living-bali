@@ -31,7 +31,7 @@ return [
 
     'join_date' => 'Join Date',
     'image' => 'Image',
-    'index' => 'Index',
+    'logo' => 'Logo',
     'index' => 'Index',
     'index' => 'Index',
     'index' => 'Index',
