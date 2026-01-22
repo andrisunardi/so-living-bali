@@ -2,15 +2,10 @@
 
 namespace App\Livewire\CMS\Contact;
 
-use App\Models\Contact;
 use App\Livewire\Component;
-use Livewire\Attributes\Url;
-use App\Exports\ContactExport;
+use App\Models\Contact;
 use App\Services\ContactService;
 use Illuminate\Contracts\View\View;
-use Maatwebsite\Excel\Facades\Excel;
-use Jantinnerezo\LivewireAlert\Facades\LivewireAlert;
-use Symfony\Component\HttpFoundation\BinaryFileResponse;
 
 class ContactDetailPage extends Component
 {

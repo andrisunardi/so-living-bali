@@ -2,11 +2,11 @@
 
 return [
 
-    'previous' => '&laquo; Previous',
-    'next' => 'Next &raquo;',
+    'previous' => 'Previous',
+    'next' => 'Next',
     'showing' => 'Showing',
-    'to' => 'To',
-    'total' => 'Total',
-    'data' => 'Data',
+    'results' => 'results',
+    'of' => 'of',
+    'to' => 'to',
 
 ];

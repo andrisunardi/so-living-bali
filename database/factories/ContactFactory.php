@@ -11,7 +11,7 @@ class ContactFactory extends Factory
         return [
             'contact_id' => fake()->unique()->uuid(),
             'name' => fake()->name(),
-            'company' => fake()->name(),
+            'company' => fake()->company(),
             'email' => fake()->freeEmail(),
             'phone' => fake()->phoneNumber(),
         ];

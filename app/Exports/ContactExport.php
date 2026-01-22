@@ -17,7 +17,7 @@ class ContactExport implements FromView, ShouldAutoSize
 
     public object $contacts;
 
-    public function __construct(string $startDate = '', string $endDate = '', object $contacts)
+    public function __construct(string $startDate, string $endDate, object $contacts)
     {
         $this->startDate = $startDate;
         $this->endDate = $endDate;

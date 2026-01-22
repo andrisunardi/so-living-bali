@@ -51,7 +51,7 @@ class ContactPage extends Component
     public function export(): BinaryFileResponse
     {
         LivewireAlert::title(trans('index.export').' '.trans('index.success'))
-            ->html(trans('page.contact').' ' . trans('message.has_been_successfully_export'))
+            ->html(trans('page.contact').' '.trans('message.has_been_successfully_export'))
             ->withConfirmButton('OK')
             ->confirmButtonColor('#198754')
             ->success()

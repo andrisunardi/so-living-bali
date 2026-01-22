@@ -15,7 +15,7 @@ return new class extends Migration
             $table->string('name', 50);
             $table->string('company', 50);
             $table->string('email', 50);
-            $table->string('phone', 15);
+            $table->string('phone', 20);
             $table->foreignIdFor(User::class, 'created_by')->nullable()->constrained('users')->nullOnDelete();
             $table->foreignIdFor(User::class, 'updated_by')->nullable()->constrained('users')->nullOnDelete();
             $table->foreignIdFor(User::class, 'deleted_by')->nullable()->constrained('users')->nullOnDelete();

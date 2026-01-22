@@ -90,29 +90,25 @@
 
                 <div class="row">
                     <div class="col-sm-5 col-md-4 col-lg-3 col-xl-2">
-                        <div class="fw-bold">{{ trans('index.created_by') }}</div>
+                        <div class="fw-bold">{{ trans('field.created_by') }}</div>
                     </div>
                     <div class="col-sm-7 col-md-8 col-lg-9 col-xl-10">
-                        @if ($contact->createdBy)
-                            {{ $contact->createdBy->name }}
-                        @endif
+                        {{ $contact->createdBy?->name ?? '-' }}
                     </div>
                 </div>
 
                 <div class="row">
                     <div class="col-sm-5 col-md-4 col-lg-3 col-xl-2">
-                        <div class="fw-bold">{{ trans('index.updated_by') }}</div>
+                        <div class="fw-bold">{{ trans('field.updated_by') }}</div>
                     </div>
                     <div class="col-sm-7 col-md-8 col-lg-9 col-xl-10">
-                        @if ($contact->updatedBy)
-                            {{ $contact->updatedBy->name }}
-                        @endif
+                        {{ $contact->updatedBy?->name ?? '-' }}
                     </div>
                 </div>
 
                 <div class="row">
                     <div class="col-sm-5 col-md-4 col-lg-3 col-xl-2">
-                        <div class="fw-bold">{{ trans('index.created_at') }}</div>
+                        <div class="fw-bold">{{ trans('field.created_at') }}</div>
                     </div>
                     <div class="col-sm-7 col-md-8 col-lg-9 col-xl-10">
                         @if ($contact->created_at)
@@ -125,7 +121,7 @@
 
                 <div class="row">
                     <div class="col-sm-5 col-md-4 col-lg-3 col-xl-2">
-                        <div class="fw-bold">{{ trans('index.updated_at') }}</div>
+                        <div class="fw-bold">{{ trans('field.updated_at') }}</div>
                     </div>
                     <div class="col-sm-7 col-md-8 col-lg-9 col-xl-10">
                         @if ($contact->updated_at)
@@ -136,9 +132,7 @@
                     </div>
                 </div>
 
-                <hr />
-
-                <div class="row">
+                <div class="row border-top pt-3">
                     @can('contact.edit')
                         <div class="col-6 col-sm-auto">
                             {{-- <a draggable="false" class="btn btn-success w-100"
@@ -150,16 +144,16 @@
                     @endcan
                     @can('contact.delete')
                         <div class="col-6 col-sm-auto">
-                            <button type="button" class="btn btn-danger" wire:click="delete" wire:key="delete"
+                            <button type="button" class="btn btn-danger w-100" wire:click="delete" wire:key="delete"
                                 wire:offline.class="disabled" wire:offline.attr="disabled" wire:loading.class="disabled"
                                 wire:loading.attr="disabled">
                                 <span wire:loading.remove wire:target="delete">
                                     <span class="fas fa-trash fa-fw"></span>
-                                    <span class="d-none d-sm-inline">{{ trans('index.delete') }}</span>
+                                    <span>{{ trans('index.delete') }}</span>
                                 </span>
                                 <span wire:loading wire:target="delete" class="w-100">
                                     <span class="spinner-border spinner-border-sm"></span>
-                                    <span class="d-none d-sm-inline">{{ trans('index.delete') }}</span>
+                                    <span>{{ trans('index.delete') }}</span>
                                 </span>
                             </button>
                         </div>
