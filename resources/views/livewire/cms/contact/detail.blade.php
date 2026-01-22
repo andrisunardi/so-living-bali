@@ -35,7 +35,11 @@
                         <div class="fw-bold">{{ trans('field.code') }}</div>
                     </div>
                     <div class="col-sm-7 col-md-8 col-lg-9 col-xl-10">
-                        {{ $contact->code }}
+                        <a draggable="false"
+                            href="{{ config('constants.ghl.app_url') }}/v2/location/{{ config('constants.ghl.location_id') }}/contacts/detail/{{ $contact->code }}"
+                            target="_blank">
+                            {{ $contact->code }}
+                        </a>
                     </div>
                 </div>
 

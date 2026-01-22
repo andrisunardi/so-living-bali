@@ -25,16 +25,23 @@
                     <div class="col-12">
                         <label class="form-label" for="code">
                             {{ trans('validation.attributes.code') }}
-                            <span class="text-danger">*</span>
                         </label>
                         <div class="input-group">
                             <div class="input-group-text">
                                 <span class="fas fa-code fa-fw "></span>
                             </div>
                             <input type="text" class="form-control" id="code" name="code" minlength="20"
-                                maxlength="20" placeholder="{{ trans('index.ex') . '. ABCDEFGHIJKLMNOPQRST' }}" required
+                                maxlength="20" placeholder="{{ trans('index.ex') . '. ABCDEFGHIJKLMNOPQRST' }}"
                                 wire:model="form.code" wire:offline.class="disabled" wire:offline.attr="disabled"
                                 wire:loading.class="disabled" wire:loading.attr="disabled">
+                        </div>
+                        <div class="form-text">
+                            {{ trans('helper.minlength') }} : 20,
+                            {{ trans('helper.maxlength') }} : 20,
+                            {{ trans('helper.unique') }}
+                        </div>
+                        <div class="form-text">
+                            {{ trans('helper.contact.code.add') }}
                         </div>
                         @error('form.code')
                             <div class="form-text text-danger">{{ $message }}</div>
@@ -55,6 +62,10 @@
                                 wire:model="form.name" wire:offline.class="disabled" wire:offline.attr="disabled"
                                 wire:loading.class="disabled" wire:loading.attr="disabled">
                         </div>
+                        <div class="form-text">
+                            {{ trans('helper.minlength') }} : 1,
+                            {{ trans('helper.maxlength') }} : 50
+                        </div>
                         @error('form.name')
                             <div class="form-text text-danger">{{ $message }}</div>
                         @enderror
@@ -73,6 +84,10 @@
                                 maxlength="50" placeholder="{{ trans('index.ex') . '. PT. Bali Real Estate' }}"
                                 required wire:model="form.company" wire:offline.class="disabled"
                                 wire:offline.attr="disabled" wire:loading.class="disabled" wire:loading.attr="disabled">
+                        </div>
+                        <div class="form-text">
+                            {{ trans('helper.minlength') }} : 1,
+                            {{ trans('helper.maxlength') }} : 50
                         </div>
                         @error('form.company')
                             <div class="form-text text-danger">{{ $message }}</div>
@@ -93,6 +108,10 @@
                                 wire:model="form.email" wire:offline.class="disabled" wire:offline.attr="disabled"
                                 wire:loading.class="disabled" wire:loading.attr="disabled">
                         </div>
+                        <div class="form-text">
+                            {{ trans('helper.minlength') }} : 1,
+                            {{ trans('helper.maxlength') }} : 50
+                        </div>
                         @error('form.email')
                             <div class="form-text text-danger">{{ $message }}</div>
                         @enderror
@@ -111,6 +130,10 @@
                                 maxlength="20" placeholder="{{ trans('index.ex') . '. 6281234567890' }}" required
                                 wire:model="form.phone" wire:offline.class="disabled" wire:offline.attr="disabled"
                                 wire:loading.class="disabled" wire:loading.attr="disabled">
+                        </div>
+                        <div class="form-text">
+                            {{ trans('helper.minlength') }} : 1,
+                            {{ trans('helper.maxlength') }} : 20
                         </div>
                         @error('form.phone')
                             <div class="form-text text-danger">{{ $message }}</div>

@@ -9,7 +9,7 @@ use Livewire\Form;
 
 class ContactAddForm extends Form
 {
-    #[Validate('required|string|min:20|max:20|unique:contacts,code')]
+    #[Validate('nullable|string|min:20|max:20|unique:contacts,code')]
     public string $code = '';
 
     #[Validate('required|string|min:1|max:50')]

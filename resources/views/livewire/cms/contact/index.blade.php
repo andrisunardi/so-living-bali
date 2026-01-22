@@ -121,7 +121,13 @@
                             <tr wire:key="contact-{{ $contact->id }}">
                                 <td class="text-center">{{ $loop->iteration }}</td>
                                 <td>{{ $contact->id }}</td>
-                                <td>{{ $contact->code }}</td>
+                                <td>
+                                    <a draggable="false"
+                                        href="{{ config('constants.ghl.app_url') }}/v2/location/{{ config('constants.ghl.location_id') }}/contacts/detail/{{ $contact->code }}"
+                                        target="_blank">
+                                        {{ $contact->code }}
+                                    </a>
+                                </td>
                                 <td>{{ $contact->name }}</td>
                                 <td>{{ $contact->company }}</td>
                                 <td>{{ $contact->email }}</td>
