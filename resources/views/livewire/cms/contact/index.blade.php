@@ -101,12 +101,13 @@
 
             <hr />
 
-            <div class="table-responsive mb-3">
+            <div class="table-responsive border-bottom mb-3">
                 <table class="table table-striped table-hover table-bordered text-nowrap table-responsive align-middle">
                     <thead>
                         <tr class="text-center align-middle table-primary">
                             <th width="1%">{{ trans('field.#') }}</th>
                             <th>{{ trans('field.id') }}</th>
+                            <th>{{ trans('field.code') }}</th>
                             <th>{{ trans('field.name') }}</th>
                             <th>{{ trans('field.company') }}</th>
                             <th>{{ trans('field.email') }}</th>
@@ -119,7 +120,8 @@
                         @forelse ($contacts as $contact)
                             <tr wire:key="contact-{{ $contact->id }}">
                                 <td class="text-center">{{ $loop->iteration }}</td>
-                                <td>{{ $contact->contact_id }}</td>
+                                <td>{{ $contact->id }}</td>
+                                <td>{{ $contact->code }}</td>
                                 <td>{{ $contact->name }}</td>
                                 <td>{{ $contact->company }}</td>
                                 <td>{{ $contact->email }}</td>
@@ -141,15 +143,17 @@
                                             <span>{{ trans('index.edit') }}</span>
                                         </a>
 
-                                        <button type="button" class="btn btn-danger btn-sm" wire:click="delete"
-                                            wire:key="delete" wire:offline.class="disabled"
+                                        <button type="button" class="btn btn-danger btn-sm"
+                                            wire:click="delete({{ $contact->id }})"
+                                            wire:key="delete({{ $contact->id }})" wire:offline.class="disabled"
                                             wire:offline.attr="disabled" wire:loading.class="disabled"
                                             wire:loading.attr="disabled">
-                                            <span wire:loading.remove wire:target="delete">
+                                            <span wire:loading.remove wire:target="delete({{ $contact->id }})">
                                                 <span class="fas fa-trash fa-fw"></span>
                                                 <span>{{ trans('index.delete') }}</span>
                                             </span>
-                                            <span wire:loading wire:target="delete" class="w-100">
+                                            <span wire:loading wire:target="delete({{ $contact->id }})"
+                                                class="w-100">
                                                 <span class="spinner-border spinner-border-sm"></span>
                                                 <span>{{ trans('index.delete') }}</span>
                                             </span>

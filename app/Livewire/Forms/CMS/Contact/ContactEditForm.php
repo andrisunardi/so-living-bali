@@ -11,7 +11,7 @@ class ContactEditForm extends Form
 {
     public Contact $contact;
 
-    public string $contact_id = '';
+    public string $code = '';
 
     #[Validate('required|string|min:1|max:50')]
     public string $name = '';
@@ -28,6 +28,7 @@ class ContactEditForm extends Form
     public function set(Contact $contact): void
     {
         $this->contact = $contact;
+        $this->code = $contact->code;
         $this->name = $contact->name;
         $this->company = $contact->company;
         $this->email = $contact->email;
@@ -37,7 +38,7 @@ class ContactEditForm extends Form
     public function rules(): array
     {
         return [
-            'name' => "required|string|min:20|max:20|unique:contacts,contact_id,{$this->contact->id}",
+            'name' => "required|string|min:20|max:20|unique:contacts,code,{$this->contact->id}",
         ];
     }
 

@@ -170,6 +170,8 @@ return [
         'name' => 'Name',
         'guard_name' => 'Guard Name',
         'permission_ids' => 'Permissions',
+        'code' => 'Code',
+        'company' => 'Company',
     ],
 
 ];

@@ -24,7 +24,7 @@ class ContactService
         $contacts = Contact::query()
             ->when($search, function ($query) use ($search) {
                 $query->where(function ($query) use ($search) {
-                    $query->where('contact_id', 'like', "%{$search}%")
+                    $query->where('code', 'like', "%{$search}%")
                         ->orWhere('name', 'like', "%{$search}%")
                         ->orWhere('ompany', 'like', "%{$search}%")
                         ->orWhere('email', 'like', "%{$search}%")

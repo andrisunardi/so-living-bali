@@ -19,9 +19,10 @@ class ContactAddPage extends Component
     {
         $this->form->submit();
 
-        // $this->flash('success', trans('index.add').' '.trans('index.success'), [
-        //     'html' => trans('index.affiliate').' '.trans('index.has_been_successfully_added'),
-        // ]);
+        session()->flash('success', [
+            'title' => trans('index.add').' '.trans('index.success'),
+            'message' => trans('page.contact').' '.trans('message.has_been_successfully_addd'),
+        ]);
 
         $this->redirect(route('cms.contact.index'), navigate: true);
     }

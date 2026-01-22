@@ -16,7 +16,7 @@ use Spatie\Activitylog\Traits\LogsActivity;
 #[ObservedBy([ContactObserver::class])]
 /**
  * @property int $id
- * @property string|null $contact_id
+ * @property string|null $code
  * @property string $name
  * @property string $company
  * @property string $email
@@ -52,6 +52,7 @@ use Spatie\Activitylog\Traits\LogsActivity;
  * @method static \Illuminate\Database\Eloquent\Builder<static>|Contact whereUpdatedBy($value)
  * @method static \Illuminate\Database\Eloquent\Builder<static>|Contact withTrashed(bool $withTrashed = true)
  * @method static \Illuminate\Database\Eloquent\Builder<static>|Contact withoutTrashed()
+ * @method static \Illuminate\Database\Eloquent\Builder<static>|Contact whereCode($value)
  *
  * @mixin \Eloquent
  */
@@ -64,7 +65,7 @@ class Contact extends Model
     protected $table = 'contacts';
 
     protected $fillable = [
-        'contact_id',
+        'code',
         'name',
         'company',
         'phone',
@@ -76,7 +77,7 @@ class Contact extends Model
     protected function casts(): array
     {
         return [
-            'contact_id' => 'string',
+            'code' => 'string',
             'name' => 'string',
             'company' => 'string',
             'email' => 'string',

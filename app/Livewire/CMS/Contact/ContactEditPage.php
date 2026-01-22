@@ -28,9 +28,10 @@ class ContactEditPage extends Component
     {
         $this->form->submit(contact: $this->contact);
 
-        // $this->flash('success', trans('index.edit').' '.trans('index.success'), [
-        //     'html' => trans('index.contact').' '.trans('index.has_been_successfully_edited'),
-        // ]);
+        session()->flash('success', [
+            'title' => trans('index.edit').' '.trans('index.success'),
+            'message' => trans('page.contact').' '.trans('message.has_been_successfully_edited'),
+        ]);
 
         $this->redirect(route('cms.contact.index'), navigate: true);
     }

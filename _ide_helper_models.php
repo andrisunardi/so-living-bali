@@ -14,7 +14,7 @@
 namespace App\Models{
 /**
  * @property int $id
- * @property string|null $contact_id
+ * @property string|null $code
  * @property string $name
  * @property string $company
  * @property string $email
@@ -50,6 +50,7 @@ namespace App\Models{
  * @method static \Illuminate\Database\Eloquent\Builder<static>|Contact withTrashed(bool $withTrashed = true)
  * @method static \Illuminate\Database\Eloquent\Builder<static>|Contact withoutTrashed()
  * @mixin \Eloquent
+ * @method static \Illuminate\Database\Eloquent\Builder<static>|Contact whereCode($value)
  */
 	class Contact extends \Eloquent {}
 }

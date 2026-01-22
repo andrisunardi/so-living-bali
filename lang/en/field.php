@@ -4,6 +4,7 @@ return [
 
     '#' => '#',
     'action' => 'Action',
+    'code' => 'Code',
     'company' => 'Company',
     'confirm_password' => 'Confirm Password',
     'confirm_reset' => 'Confirm Reset',

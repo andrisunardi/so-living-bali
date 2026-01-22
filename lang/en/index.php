@@ -10,6 +10,7 @@ return [
     'detail' => 'Detail',
     'edit' => 'Edit',
     'enter_to_search' => 'Enter to Search',
+    'ex' => 'Ex',
     'export' => 'Export',
     'failed' => 'Failed',
     'forgot_password' => 'Forgot Password',
@@ -23,6 +24,13 @@ return [
     'search' => 'Search',
     'data' => 'Data',
 
+    'reset' => 'Reset',
+    'index' => 'Index',
+    'index' => 'Index',
+    'index' => 'Index',
+    'index' => 'Index',
+    'index' => 'Index',
+    'index' => 'Index',
     'index' => 'Index',
     'index' => 'Index',
 

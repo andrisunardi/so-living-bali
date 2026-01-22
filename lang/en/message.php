@@ -11,7 +11,12 @@ return [
 
     'you_have_successfully_logged_out' => 'You have successfully logged out.',
     'you_have_successfully_logged_in' => 'You have successfully logged in.',
+
+    'has_been_successfully_added' => 'has been successfully added.',
+    'has_been_successfully_edited' => 'has been successfully edited.',
+    'has_been_successfully_deleted' => 'has been successfully deleted.',
+
+    'has_been_successfully_exported' => 'has been successfully exported.',
     'has_been_successfully_synced' => 'has been successfully synced.',
-    'has_been_successfully_export' => 'has been successfully exported.',
 
 ];

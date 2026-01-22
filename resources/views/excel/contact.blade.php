@@ -1,34 +1,34 @@
 <table>
     <thead>
         <tr>
-            <th align="center" colspan="7">
+            <th align="center" colspan="8">
                 <b>{{ trans('page.contact') }}</b>
             </th>
         </tr>
         @if ($startDate)
             <tr>
-                <th align="center" colspan="7">
+                <th align="center" colspan="8">
                     {{ trans('field.start_date') }} : {{ Date::parse($startDate)->isoFormat('LL') }}
                 </th>
             </tr>
         @endif
         @if ($endDate)
             <tr>
-                <th align="center" colspan="7">
+                <th align="center" colspan="8">
                     {{ trans('field.end_date') }} : {{ Date::parse($endDate)->isoFormat('LL') }}
                 </th>
             </tr>
         @endif
         <tr>
-            <td colspan="7"></td>
+            <td colspan="8"></td>
         </tr>
         <tr>
-            <th align="center" colspan="7">
+            <th align="center" colspan="8">
                 {{ trans('field.printed_at') }} : {{ now()->isoFormat('LLLL') }}
             </th>
         </tr>
         <tr>
-            <td colspan="7"></td>
+            <td colspan="8"></td>
         </tr>
         <tr>
             <th valign="middle" align="center">
@@ -36,6 +36,9 @@
             </th>
             <th valign="middle" align="center">
                 <b>{{ trans('field.id') }}</b>
+            </th>
+            <th valign="middle" align="center">
+                <b>{{ trans('field.code') }}</b>
             </th>
             <th valign="middle" align="center">
                 <b>{{ trans('field.name') }}</b>
@@ -60,8 +63,11 @@
                 <td valign="middle" align="center">
                     {{ $loop->iteration }}
                 </td>
-                <td valign="middle">
-                    {{ $contact->contact_id }}
+                <td valign="middle" align="center">
+                    {{ $contact->id }}
+                </td>
+                <td valign="middle" align="center">
+                    {{ $contact->code }}
                 </td>
                 <td valign="middle">
                     {{ $contact->name }}
@@ -81,7 +87,7 @@
             </tr>
         @empty
             <tr>
-                <td align="center" colspan="7">
+                <td align="center" colspan="8">
                     {{ trans('message.no_data_available') }}
                 </td>
             </tr>
@@ -89,7 +95,7 @@
     </tbody>
     <tfoot>
         <tr>
-            <td colspan="7"></td>
+            <td colspan="8"></td>
         </tr>
     </tfoot>
 </table>

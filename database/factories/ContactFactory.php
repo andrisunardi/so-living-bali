@@ -3,13 +3,14 @@
 namespace Database\Factories;
 
 use Illuminate\Database\Eloquent\Factories\Factory;
+use Illuminate\Support\Str;
 
 class ContactFactory extends Factory
 {
     public function definition(): array
     {
         return [
-            'contact_id' => fake()->unique()->uuid(),
+            'code' => Str::random(20),
             'name' => fake()->name(),
             'company' => fake()->company(),
             'email' => fake()->freeEmail(),

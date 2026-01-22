@@ -16,13 +16,14 @@ class ContactDetailPage extends Component
         $this->contact = $contact;
     }
 
-    public function delete(Contact $contact): void
+    public function delete(): void
     {
-        (new ContactService)->delete(contact: $contact);
+        (new ContactService)->delete(contact: $this->contact);
 
-        // $this->flash('success', trans('index.delete').' '.trans('index.success'), [
-        //     'html' => trans('page.contact').' '.trans('index.has_been_successfully_deleted'),
-        // ]);
+        session()->flash('success', [
+            'title' => trans('index.delete').' '.trans('index.success'),
+            'message' => trans('page.contact').' '.trans('message.has_been_successfully_deleted'),
+        ]);
 
         $this->redirect(route('cms.contact.index'), navigate: true);
     }

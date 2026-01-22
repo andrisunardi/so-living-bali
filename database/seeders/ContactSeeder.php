@@ -10,7 +10,7 @@ class ContactSeeder extends Seeder
     public function run(): void
     {
         Contact::create([
-            'contact_id' => null,
+            'code' => 'ABCDEFGHIJKLMNOPQRST',
             'name' => 'Andri Sunardi',
             'company' => 'DIW.co.id',
             'email' => 'account@andrisunardi.com',
