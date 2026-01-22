@@ -38,17 +38,33 @@
                                         {{ trans('page.contact') }}
                                     </a>
                                 @endcan
+
+                                @can('property')
+                                    <a draggable="false"
+                                        class="btn btn-outline-primary icon-link w-100 {{ Route::is('cms.property.*') ? 'active' : '' }}"
+                                        href="{{ route('cms.property.index') }}" wire:navigate>
+                                        <span class="fas fa-building fa-fw"></span>
+                                        {{ trans('page.property') }}
+                                    </a>
+                                @endcan
+
+                                @can('article')
+                                    <a draggable="false"
+                                        class="btn btn-outline-primary icon-link w-100 {{ Route::is('cms.article.*') ? 'active' : '' }}"
+                                        href="{{ route('cms.article.index') }}" wire:navigate>
+                                        <span class="fas fa-newspaper fa-fw"></span>
+                                        {{ trans('page.article') }}
+                                    </a>
+                                @endcan
                             </div>
                         </div>
                     </div>
                 </div>
 
-                @if (Route::is('cms.*'))
-                    <a draggable="false" class="navbar-brand" href="{{ route('cms.index') }}" wire:navigate>
-                        <span class="d-block d-sm-none">CMS</span>
-                        <span class="d-none d-sm-block">Content Management System</span>
-                    </a>
-                @endif
+                <a draggable="false" class="navbar-brand" href="{{ route('cms.index') }}" wire:navigate wire:ignore>
+                    <span class="d-block d-sm-none">CMS</span>
+                    <span class="d-none d-sm-block">Content Management System</span>
+                </a>
             </div>
 
             <div class="d-flex gap-2">

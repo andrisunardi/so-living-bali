@@ -16,13 +16,13 @@ Route::group(['middleware' => ['auth']], function () {
         ->middleware(['permission:contact'])
         ->group(base_path('routes/cms/contact.php'));
 
-    // Route::prefix('article')->name('article.')->as('article.')
-    //     ->middleware(['role:Super User|Admin'])
-    //     ->group(base_path('routes/cms/article.php'));
+    Route::prefix('article')->name('article.')->as('article.')
+        ->middleware(['permission:article'])
+        ->group(base_path('routes/cms/article.php'));
 
-    // Route::prefix('product')->name('product.')->as('product.')
-    //     ->middleware(['role:Super User|Admin'])
-    //     ->group(base_path('routes/cms/product.php'));
+    Route::prefix('property')->name('property.')->as('property.')
+        ->middleware(['permission:property'])
+        ->group(base_path('routes/cms/property.php'));
 
     // Route::prefix('product-category')->name('product-category.')->as('product-category.')
     //     ->middleware(['role:Super User|Admin'])
