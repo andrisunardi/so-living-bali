@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\GoHighLevelController;
 use App\Http\Middleware\Localization;
 use App\Livewire\Home\HomePage;
 use Illuminate\Support\Facades\App;
@@ -20,3 +21,5 @@ Route::group(['middleware' => [
 
     Route::prefix('cms')->name('cms.')->as('cms.')->group(base_path('routes/cms.php'));
 });
+
+Route::get('oauth', [GoHighLevelController::class, 'oauth']);
