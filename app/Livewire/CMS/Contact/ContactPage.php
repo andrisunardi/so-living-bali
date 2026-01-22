@@ -16,12 +16,20 @@ class ContactPage extends Component
     #[Url(except: '')]
     public $search = '';
 
-    public function resetFields(): void
+    #[Url(except: '')]
+    public $start_date = '';
+
+    #[Url(except: '')]
+    public $end_date = '';
+
+    public function resetFilter(): void
     {
         $this->resetPage();
 
         $this->reset([
             'search',
+            'start_date',
+            'end_date',
         ]);
     }
 
@@ -34,6 +42,8 @@ class ContactPage extends Component
     {
         return (new ContactService)->index(
             search: $this->search,
+            startDate: $this->start_date,
+            endDate: $this->end_date,
             paginate: $paginate,
         );
     }

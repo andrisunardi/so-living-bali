@@ -10,6 +10,8 @@ return [
 
     'home' => 'Home',
     'contact' => 'Contact',
+    'property' => 'Property',
+    'article' => 'Article',
 
     'permission' => 'Permission',
     'role' => 'Role',

@@ -9,6 +9,8 @@ class ContactService
 {
     public function index(
         ?string $search = null,
+        ?string $startDate = null,
+        ?string $endDate = null,
         bool $random = false,
         bool $trash = false,
         string $orderBy = 'id',
@@ -29,6 +31,8 @@ class ContactService
                         ->orWhere('phone', 'like', "%{$search}%");
                 });
             })
+            ->when($startDate, fn ($q) => $q->whereDate('created_at', '>=', $startDate))
+            ->when($endDate, fn ($q) => $q->whereDate('created_at', '<=', $endDate))
             ->when($random, fn ($q) => $q->inRandomOrder())
             ->when($trash, fn ($q) => $q->onlyTrashed())
             ->orderBy($orderBy, $sortBy)

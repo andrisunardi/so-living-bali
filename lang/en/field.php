@@ -2,14 +2,20 @@
 
 return [
 
-    'name' => 'Name',
-    'email' => 'Email',
-    'phone' => 'Phone',
-    'username' => 'Username',
-    'password' => 'Password',
-    'new_password' => 'New Password',
+    '#' => '#',
+    'id' => 'ID',
+    'company' => 'Company',
     'confirm_password' => 'Confirm Password',
-    'remember_me' => 'Remember Me',
     'confirm_reset' => 'Confirm Reset',
+    'email' => 'Email',
+    'name' => 'Name',
+    'new_password' => 'New Password',
+    'password' => 'Password',
+    'phone' => 'Phone',
+    'remember_me' => 'Remember Me',
+    'username' => 'Username',
+    'user' => 'User',
+    'contact' => 'Contact',
+    'created_at' => 'Created At',
 
 ];
