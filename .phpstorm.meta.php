@@ -3905,7 +3905,8 @@ namespace PHPSTORM_META {
 'log-viewer.files.delete-multiple-files','log-viewer.logs','log-viewer.folders.download','log-viewer.files.download','log-viewer.index',
 'ignition.healthCheck','ignition.executeSolution','ignition.updateConfig',
 'locale','index','cms.login','cms.forgot-password','cms.index',
-'cms.contact.index','cms.contact.detail','cms.article.index','cms.property.index','cms.logout','storage.local',);
+'cms.contact.index','cms.contact.add','cms.contact.edit','cms.contact.detail','cms.article.index',
+'cms.property.index','cms.logout','storage.local',);
         registerArgumentsSet('views', 
 'breadcrumbs::bootstrap4','breadcrumbs::bootstrap5','breadcrumbs::bulma','breadcrumbs::foundation6','breadcrumbs::materialize',
 'breadcrumbs::tailwind','breadcrumbs::uikit','components.layouts.app','components.layouts.breadcrumbs','components.layouts.meta',

@@ -68,28 +68,6 @@
 
                 <div class="row">
                     <div class="col-sm-5 col-md-4 col-lg-3 col-xl-2">
-                        <div class="fw-bold">{{ trans('field.created_at') }}</div>
-                    </div>
-                    <div class="col-sm-7 col-md-8 col-lg-9 col-xl-10">
-                        {{ $contact->created_at->isoFormat('LLLL') }}
-                        <br class="d-lg-none">
-                        ({{ $contact->created_at->diffForHumans() }})
-                    </div>
-                </div>
-
-                <div class="row">
-                    <div class="col-sm-5 col-md-4 col-lg-3 col-xl-2">
-                        <div class="fw-bold">{{ trans('field.updated_at') }}</div>
-                    </div>
-                    <div class="col-sm-7 col-md-8 col-lg-9 col-xl-10">
-                        {{ $contact->created_at->isoFormat('LLLL') }}
-                        <br class="d-lg-none">
-                        ({{ $contact->created_at->diffForHumans() }})
-                    </div>
-                </div>
-
-                <div class="row">
-                    <div class="col-sm-5 col-md-4 col-lg-3 col-xl-2">
                         <div class="fw-bold">{{ trans('field.created_by') }}</div>
                     </div>
                     <div class="col-sm-7 col-md-8 col-lg-9 col-xl-10">
@@ -131,34 +109,36 @@
                         @endif
                     </div>
                 </div>
+            </div>
 
-                <div class="row border-top pt-3">
-                    @can('contact.edit')
-                        <div class="col-6 col-sm-auto">
-                            {{-- <a draggable="false" class="btn btn-success w-100"
-                                href="{{ route('cms.contact.edit', ['contact' => $contact]) }}" wire:navigate>
-                                <span class="fas fa-arrow-left fa-fw"></span>
-                                {{ trans('index.back') }}
-                            </a> --}}
-                        </div>
-                    @endcan
-                    @can('contact.delete')
-                        <div class="col-6 col-sm-auto">
-                            <button type="button" class="btn btn-danger w-100" wire:click="delete" wire:key="delete"
-                                wire:offline.class="disabled" wire:offline.attr="disabled" wire:loading.class="disabled"
-                                wire:loading.attr="disabled">
-                                <span wire:loading.remove wire:target="delete">
-                                    <span class="fas fa-trash fa-fw"></span>
-                                    <span>{{ trans('index.delete') }}</span>
-                                </span>
-                                <span wire:loading wire:target="delete" class="w-100">
-                                    <span class="spinner-border spinner-border-sm"></span>
-                                    <span>{{ trans('index.delete') }}</span>
-                                </span>
-                            </button>
-                        </div>
-                    @endcan
-                </div>
+            <hr />
+
+            <div class="row g-3">
+                @can('contact.edit')
+                    <div class="col-6 col-sm-auto">
+                        <a draggable="false" class="btn btn-success w-100"
+                            href="{{ route('cms.contact.edit', ['contact' => $contact]) }}" wire:navigate>
+                            <span class="fas fa-edit fa-fw"></span>
+                            {{ trans('index.edit') }}
+                        </a>
+                    </div>
+                @endcan
+                @can('contact.delete')
+                    <div class="col-6 col-sm-auto">
+                        <button type="button" class="btn btn-danger w-100" wire:click="delete" wire:key="delete"
+                            wire:offline.class="disabled" wire:offline.attr="disabled" wire:loading.class="disabled"
+                            wire:loading.attr="disabled">
+                            <span wire:loading.remove wire:target="delete">
+                                <span class="fas fa-trash fa-fw"></span>
+                                <span>{{ trans('index.delete') }}</span>
+                            </span>
+                            <span wire:loading wire:target="delete" class="w-100">
+                                <span class="spinner-border spinner-border-sm"></span>
+                                <span>{{ trans('index.delete') }}</span>
+                            </span>
+                        </button>
+                    </div>
+                @endcan
             </div>
         </div>
     </div>

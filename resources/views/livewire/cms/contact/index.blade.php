@@ -73,7 +73,7 @@
             <div class="row g-3">
                 @can('contact.add')
                     <div class="col col-sm-auto">
-                        <a draggable="false" class="btn btn-primary w-100" href="{{ route('cms.contact.index') }}"
+                        <a draggable="false" class="btn btn-primary w-100" href="{{ route('cms.contact.add') }}"
                             wire:navigate>
                             <span class="fas fa-plus fa-fw"></span>
                             <span>{{ trans('index.add') }}</span>
@@ -132,6 +132,13 @@
                                             wire:navigate>
                                             <span class="fas fa-list fa-fw"></span>
                                             <span>{{ trans('index.detail') }}</span>
+                                        </a>
+
+                                        <a draggable="false" class="btn btn-success btn-sm"
+                                            href="{{ route('cms.contact.edit', ['contact' => $contact]) }}"
+                                            wire:navigate>
+                                            <span class="fas fa-edit fa-fw"></span>
+                                            <span>{{ trans('index.edit') }}</span>
                                         </a>
 
                                         <button type="button" class="btn btn-danger btn-sm" wire:click="delete"

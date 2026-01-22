@@ -62,7 +62,49 @@ Breadcrumbs::for('cms.contact.index', function (BreadcrumbTrail $trail) {
     $trail->push(trans('page.contact'), route('cms.contact.index'), ['icon' => 'fas fa-phone']);
 });
 
+Breadcrumbs::for('cms.contact.add', function (BreadcrumbTrail $trail) {
+    $trail->parent('cms.contact.index');
+    $trail->push(trans('index.add'), route('cms.contact.add'), ['icon' => 'fas fa-plus']);
+});
+
+Breadcrumbs::for('cms.contact.edit', function (BreadcrumbTrail $trail, $contact) {
+    $trail->parent('cms.contact.index');
+    $trail->push(trans('index.edit'), route('cms.contact.edit', $contact), ['icon' => 'fas fa-edit']);
+});
+
 Breadcrumbs::for('cms.contact.detail', function (BreadcrumbTrail $trail, $contact) {
     $trail->parent('cms.contact.index');
     $trail->push(trans('index.detail'), route('cms.contact.detail', $contact), ['icon' => 'fas fa-list']);
+});
+
+// PROPERTY
+Breadcrumbs::for('cms.property.index', function (BreadcrumbTrail $trail) {
+    $trail->parent('cms.index');
+    $trail->push(trans('page.property'), route('cms.property.index'), ['icon' => 'fas fa-building']);
+});
+
+Breadcrumbs::for('cms.property.add', function (BreadcrumbTrail $trail) {
+    $trail->parent('cms.property.index');
+    $trail->push(trans('index.add'), route('cms.property.add'), ['icon' => 'fas fa-plus']);
+});
+
+Breadcrumbs::for('cms.property.edit', function (BreadcrumbTrail $trail, $property) {
+    $trail->parent('cms.property.index');
+    $trail->push(trans('index.edit'), route('cms.property.edit', $property), ['icon' => 'fas fa-edit']);
+});
+
+// ARTICLE
+Breadcrumbs::for('cms.article.index', function (BreadcrumbTrail $trail) {
+    $trail->parent('cms.index');
+    $trail->push(trans('page.article'), route('cms.article.index'), ['icon' => 'fas fa-newspaper']);
+});
+
+Breadcrumbs::for('cms.article.add', function (BreadcrumbTrail $trail) {
+    $trail->parent('cms.article.index');
+    $trail->push(trans('index.add'), route('cms.article.add'), ['icon' => 'fas fa-plus']);
+});
+
+Breadcrumbs::for('cms.article.edit', function (BreadcrumbTrail $trail, $article) {
+    $trail->parent('cms.article.index');
+    $trail->push(trans('index.edit'), route('cms.article.edit', $article), ['icon' => 'fas fa-edit']);
 });

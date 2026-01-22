@@ -16,5 +16,7 @@ class ContactSeeder extends Seeder
             'email' => 'account@andrisunardi.com',
             'phone' => '6282298089363',
         ]);
+
+        Contact::factory()->count(50)->create();
     }
 }
