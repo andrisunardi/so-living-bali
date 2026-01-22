@@ -14,6 +14,7 @@ return [
     'enter_to_search' => 'Enter to Search',
     'reset_filter' => 'Reset Filter',
     'logout' => 'Logout',
+    'back' => 'Back',
 
     'add' => 'Add',
     'edit' => 'Edit',

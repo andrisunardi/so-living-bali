@@ -48,18 +48,20 @@ class ContactPage extends Component
         );
     }
 
-    public function exportToExcel(): BinaryFileResponse
+    public function export(): BinaryFileResponse
     {
         LivewireAlert::title(trans('index.export').' '.trans('index.success'))
-            ->html(session('success.message'))
+            ->html(trans('page.contact').' ' . trans('message.has_been_successfully_export'))
             ->withConfirmButton('OK')
             ->confirmButtonColor('#198754')
             ->success()
             ->show();
 
         return Excel::download(new ContactExport(
+            startDate: $this->start_date,
+            endDate: $this->end_date,
             contacts: $this->getContacts(paginate: false),
-        ), trans('index.contact').'.xlsx');
+        ), trans('page.contact').'.xlsx');
     }
 
     public function render(): View

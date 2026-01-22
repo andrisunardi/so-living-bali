@@ -61,3 +61,8 @@ Breadcrumbs::for('cms.contact.index', function (BreadcrumbTrail $trail) {
     $trail->parent('cms.index');
     $trail->push(trans('page.contact'), route('cms.contact.index'), ['icon' => 'fas fa-phone']);
 });
+
+Breadcrumbs::for('cms.contact.detail', function (BreadcrumbTrail $trail, $contact) {
+    $trail->parent('cms.contact.index');
+    $trail->push(trans('index.detail'), route('cms.contact.detail', $contact), ['icon' => 'fas fa-list']);
+});

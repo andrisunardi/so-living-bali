@@ -15,7 +15,12 @@ return [
     'remember_me' => 'Remember Me',
     'username' => 'Username',
     'user' => 'User',
+    'search' => 'Search',
     'contact' => 'Contact',
+    'start_date' => 'Start Date',
+    'end_date' => 'End Date',
     'created_at' => 'Created At',
+    'printed_at' => 'Printed At',
+    'action' => 'Action',
 
 ];
