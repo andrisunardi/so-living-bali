@@ -61,7 +61,7 @@
                     </div>
                 </div>
 
-                <a draggable="false" class="navbar-brand" href="{{ route('cms.index') }}" wire:navigate wire:ignore>
+                <a draggable="false" class="navbar-brand" href="{{ route('cms.index') }}" wire:navigate>
                     <span class="d-block d-md-none">CMS</span>
                     <span class="d-none d-md-block">Content Management System</span>
                 </a>

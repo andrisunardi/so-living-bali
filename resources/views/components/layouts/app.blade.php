@@ -61,7 +61,7 @@
         @auth
             {{-- @livewire('modal.modal-logs') --}}
 
-            {{-- @livewire('modal.modal-language') --}}
+            @livewire('modal.modal-language')
 
             @livewire('modal.modal-theme')
 
@@ -71,6 +71,14 @@
 
     <script>
         document.addEventListener('livewire:navigated', () => {
+            Livewire.on('openModalLanguage', () => {
+                $('#modal-language').modal('show');
+            });
+
+            Livewire.on('closeModalLanguage', () => {
+                $('#modal-language').modal('hide');
+            });
+
             Livewire.on('openModalTheme', () => {
                 $('#modal-theme').modal('show');
             });
