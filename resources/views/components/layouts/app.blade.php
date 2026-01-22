@@ -65,7 +65,7 @@
 
             @livewire('modal.modal-theme')
 
-            {{-- @livewire('modal.modal-account') --}}
+            @livewire('modal.modal-account')
         @endauth
     @endif
 
@@ -85,6 +85,14 @@
 
             Livewire.on('closeModalTheme', () => {
                 $('#modal-theme').modal('hide');
+            });
+
+            Livewire.on('openModalAccount', () => {
+                $('#modal-account').modal('show');
+            });
+
+            Livewire.on('closeModalAccount', () => {
+                $('#modal-account').modal('hide');
             });
         });
     </script>

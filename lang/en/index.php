@@ -25,7 +25,7 @@ return [
     'data' => 'Data',
 
     'reset' => 'Reset',
-    'index' => 'Index',
+    'image' => 'Image',
     'index' => 'Index',
     'index' => 'Index',
     'index' => 'Index',

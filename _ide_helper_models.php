@@ -49,8 +49,8 @@ namespace App\Models{
  * @method static \Illuminate\Database\Eloquent\Builder<static>|Contact whereUpdatedBy($value)
  * @method static \Illuminate\Database\Eloquent\Builder<static>|Contact withTrashed(bool $withTrashed = true)
  * @method static \Illuminate\Database\Eloquent\Builder<static>|Contact withoutTrashed()
- * @mixin \Eloquent
  * @method static \Illuminate\Database\Eloquent\Builder<static>|Contact whereCode($value)
+ * @mixin \Eloquent
  */
 	class Contact extends \Eloquent {}
 }

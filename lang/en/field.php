@@ -27,5 +27,18 @@ return [
     'created_by' => 'Created By',
     'updated_by' => 'Updated By',
     'username' => 'Username',
+    'roles' => 'Roles',
+
+    'join_date' => 'Join Date',
+    'image' => 'Image',
+    'index' => 'Index',
+    'index' => 'Index',
+    'index' => 'Index',
+    'index' => 'Index',
+    'index' => 'Index',
+    'index' => 'Index',
+    'index' => 'Index',
+    'index' => 'Index',
+    'index' => 'Index',
 
 ];

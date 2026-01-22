@@ -16,5 +16,7 @@ return [
     'permission' => 'Permission',
     'role' => 'Role',
     'user' => 'User',
+    'account' => 'Account',
+    'logout' => 'Logout',
 
 ];
