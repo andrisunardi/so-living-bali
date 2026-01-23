@@ -1,35 +1,27 @@
 <table>
     <thead>
         <tr>
-            <th align="center" colspan="9">
-                <b>{{ trans('page.user') }}</b>
+            <th align="center" colspan="8">
+                <b>{{ trans('page.role') }}</b>
             </th>
         </tr>
-        @if ($role)
+        @if ($permission)
             <tr>
-                <th align="center" colspan="9">
-                    {{ trans('page.role') }} : {{ $role->name }}
-                </th>
-            </tr>
-        @endif
-        @if ($isActive)
-            <tr>
-                <th align="center" colspan="9">
-                    {{ trans('field.active') }} :
-                    {{ collect($isActive)->map(fn($v) => $v ? 'Yes' : 'No')->implode(', ') }}
+                <th align="center" colspan="8">
+                    {{ trans('page.permission') }} : {{ $permission->name }}
                 </th>
             </tr>
         @endif
         <tr>
-            <td colspan="9"></td>
+            <td colspan="8"></td>
         </tr>
         <tr>
-            <th align="center" colspan="9">
+            <th align="center" colspan="8">
                 {{ trans('field.printed_at') }} : {{ now()->isoFormat('LLLL') }}
             </th>
         </tr>
         <tr>
-            <td colspan="9"></td>
+            <td colspan="8"></td>
         </tr>
         <tr>
             <th valign="middle" align="center">
@@ -39,19 +31,16 @@
                 <b>{{ trans('field.id') }}</b>
             </th>
             <th valign="middle" align="center">
-                <b>{{ trans('field.roles') }}</b>
-            </th>
-            <th valign="middle" align="center">
                 <b>{{ trans('field.name') }}</b>
             </th>
             <th valign="middle" align="center">
-                <b>{{ trans('field.email') }}</b>
+                <b>{{ trans('field.guard_name') }}</b>
             </th>
             <th valign="middle" align="center">
-                <b>{{ trans('field.phone') }}</b>
+                <b>{{ trans('index.total') }} {{ trans('page.permission') }}</b>
             </th>
             <th valign="middle" align="center">
-                <b>{{ trans('field.username') }}</b>
+                <b>{{ trans('index.total') }} {{ trans('page.user') }}</b>
             </th>
             <th valign="middle" align="center">
                 <b>{{ trans('field.created_at') }}</b>
@@ -62,39 +51,36 @@
         </tr>
     </thead>
     <tbody>
-        @forelse ($users as $user)
+        @forelse ($roles as $role)
             <tr>
                 <td valign="middle" align="center">
                     {{ $loop->iteration }}
                 </td>
                 <td valign="middle" align="center">
-                    {{ $user->id }}
-                </td>
-                <td valign="middle" align="center">
-                    {{ $user->roles->pluck('name')->join(', ') }}
+                    {{ $role->id }}
                 </td>
                 <td valign="middle">
-                    {{ $user->name }}
+                    {{ $role->name }}
                 </td>
                 <td valign="middle">
-                    {{ $user->email }}
+                    {{ $role->guard_name }}
                 </td>
                 <td valign="middle">
-                    {{ $user->phone }}
+                    {{ $role->permissions_count }}
                 </td>
                 <td valign="middle">
-                    {{ $user->username }}
+                    {{ $role->users_count }}
                 </td>
                 <td valign="middle">
-                    {{ $user->created_at }}
+                    {{ $role->created_at }}
                 </td>
                 <td valign="middle">
-                    {{ $user->updated_at }}
+                    {{ $role->updated_at }}
                 </td>
             </tr>
         @empty
             <tr>
-                <td align="center" colspan="9">
+                <td align="center" colspan="8">
                     {{ trans('message.no_data_available') }}
                 </td>
             </tr>
@@ -102,7 +88,7 @@
     </tbody>
     <tfoot>
         <tr>
-            <td colspan="9"></td>
+            <td colspan="8"></td>
         </tr>
     </tfoot>
 </table>

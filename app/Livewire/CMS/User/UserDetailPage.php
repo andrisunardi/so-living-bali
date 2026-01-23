@@ -6,6 +6,7 @@ use App\Livewire\Component;
 use App\Models\User;
 use App\Services\UserService;
 use Illuminate\Contracts\View\View;
+use Jantinnerezo\LivewireAlert\Facades\LivewireAlert;
 
 class UserDetailPage extends Component
 {
@@ -14,6 +15,18 @@ class UserDetailPage extends Component
     public function mount(User $user): void
     {
         $this->user = $user;
+    }
+
+    public function changeActive(): void
+    {
+        (new UserService)->active(user: $this->user);
+
+        LivewireAlert::title(trans('index.change_active').' '.trans('index.success'))
+            ->html(trans('page.user').' '.trans('message.has_been_successfully_changed'))
+            ->withConfirmButton('OK')
+            ->confirmButtonColor('#198754')
+            ->success()
+            ->show();
     }
 
     public function delete(): void

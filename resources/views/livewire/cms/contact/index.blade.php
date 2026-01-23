@@ -110,8 +110,8 @@
                     <thead>
                         <tr class="text-center align-middle table-primary">
                             <th width="1%">{{ trans('field.#') }}</th>
-                            <th>{{ trans('field.id') }}</th>
-                            <th>{{ trans('field.code') }}</th>
+                            <th width="1%">{{ trans('field.id') }}</th>
+                            <th width="1%">{{ trans('field.code') }}</th>
                             <th>{{ trans('field.name') }}</th>
                             <th>{{ trans('field.company') }}</th>
                             <th>{{ trans('field.email') }}</th>

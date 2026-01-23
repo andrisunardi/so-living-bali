@@ -29,8 +29,8 @@ return [
     'yes' => 'Yes',
     'no' => 'No',
     'change_active' => 'Change Active',
-    'index' => 'Index',
-    'index' => 'Index',
+    'total' => 'Total',
+    'save' => 'Save',
     'index' => 'Index',
     'index' => 'Index',
 

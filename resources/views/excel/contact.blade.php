@@ -1,34 +1,34 @@
 <table>
     <thead>
         <tr>
-            <th align="center" colspan="8">
+            <th align="center" colspan="9">
                 <b>{{ trans('page.contact') }}</b>
             </th>
         </tr>
         @if ($startDate)
             <tr>
-                <th align="center" colspan="8">
+                <th align="center" colspan="9">
                     {{ trans('field.start_date') }} : {{ Date::parse($startDate)->isoFormat('LL') }}
                 </th>
             </tr>
         @endif
         @if ($endDate)
             <tr>
-                <th align="center" colspan="8">
+                <th align="center" colspan="9">
                     {{ trans('field.end_date') }} : {{ Date::parse($endDate)->isoFormat('LL') }}
                 </th>
             </tr>
         @endif
         <tr>
-            <td colspan="8"></td>
+            <td colspan="9"></td>
         </tr>
         <tr>
-            <th align="center" colspan="8">
+            <th align="center" colspan="9">
                 {{ trans('field.printed_at') }} : {{ now()->isoFormat('LLLL') }}
             </th>
         </tr>
         <tr>
-            <td colspan="8"></td>
+            <td colspan="9"></td>
         </tr>
         <tr>
             <th valign="middle" align="center">
@@ -54,6 +54,9 @@
             </th>
             <th valign="middle" align="center">
                 <b>{{ trans('field.created_at') }}</b>
+            </th>
+            <th valign="middle" align="center">
+                <b>{{ trans('field.updated_at') }}</b>
             </th>
         </tr>
     </thead>
@@ -84,10 +87,13 @@
                 <td valign="middle">
                     {{ $contact->created_at }}
                 </td>
+                <td valign="middle">
+                    {{ $contact->updated_at }}
+                </td>
             </tr>
         @empty
             <tr>
-                <td align="center" colspan="8">
+                <td align="center" colspan="9">
                     {{ trans('message.no_data_available') }}
                 </td>
             </tr>
@@ -95,7 +101,7 @@
     </tbody>
     <tfoot>
         <tr>
-            <td colspan="8"></td>
+            <td colspan="9"></td>
         </tr>
     </tfoot>
 </table>

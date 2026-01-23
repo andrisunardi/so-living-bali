@@ -145,16 +145,16 @@
 
                 <div class="row">
                     <div class="col-6 col-sm-auto">
-                        <button type="submit" class="btn btn-primary w-100" wire:click="submit" wire:key="submit"
+                        <button type="submit" class="btn btn-success w-100" wire:click="submit" wire:key="submit"
                             wire:offline.class="disabled" wire:offline.attr="disabled" wire:loading.class="disabled"
                             wire:loading.attr="disabled">
                             <span wire:loading.remove wire:target="submit">
-                                <span class="fas fa-paper-plane fa-fw"></span>
-                                {{ trans('index.submit') }}
+                                <span class="fas fa-save fa-fw"></span>
+                                {{ trans('index.save') }}
                             </span>
                             <span wire:loading wire:target="submit" class="w-100">
                                 <span class="spinner-border spinner-border-sm"></span>
-                                {{ trans('index.submit') }}
+                                {{ trans('index.save') }}
                             </span>
                         </button>
                     </div>

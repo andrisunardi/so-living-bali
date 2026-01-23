@@ -57,11 +57,20 @@
                                     </a>
                                 @endcan
 
-                                @canany(['user'])
+                                @canany(['role', 'user'])
                                     <div class="fw-bold text-uppercase border-bottom pt-2 pb-2">
                                         {{ trans('page.access') }}
                                     </div>
                                 @endcanany
+
+                                @can('role')
+                                    <a draggable="false"
+                                        class="btn btn-outline-primary icon-link w-100 {{ Route::is('cms.role.*') ? 'active' : '' }}"
+                                        href="{{ route('cms.role.index') }}" wire:navigate>
+                                        <span class="fas fa-key fa-fw"></span>
+                                        {{ trans('page.role') }}
+                                    </a>
+                                @endcan
 
                                 @can('user')
                                     <a draggable="false"

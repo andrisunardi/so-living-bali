@@ -119,6 +119,27 @@ Breadcrumbs::for('cms.article.detail', function (BreadcrumbTrail $trail, $articl
     $trail->push(trans('index.detail'), route('cms.article.detail', $article), ['icon' => 'fas fa-list']);
 });
 
+// ROLE
+Breadcrumbs::for('cms.role.index', function (BreadcrumbTrail $trail) {
+    $trail->parent('cms.index');
+    $trail->push(trans('page.role'), route('cms.role.index'), ['icon' => 'fas fa-key']);
+});
+
+Breadcrumbs::for('cms.role.add', function (BreadcrumbTrail $trail) {
+    $trail->parent('cms.role.index');
+    $trail->push(trans('index.add'), route('cms.role.add'), ['icon' => 'fas fa-plus']);
+});
+
+Breadcrumbs::for('cms.role.edit', function (BreadcrumbTrail $trail, $role) {
+    $trail->parent('cms.role.index');
+    $trail->push(trans('index.edit'), route('cms.role.edit', $role), ['icon' => 'fas fa-edit']);
+});
+
+Breadcrumbs::for('cms.role.detail', function (BreadcrumbTrail $trail, $role) {
+    $trail->parent('cms.role.index');
+    $trail->push(trans('index.detail'), route('cms.role.detail', $role), ['icon' => 'fas fa-list']);
+});
+
 // USER
 Breadcrumbs::for('cms.user.index', function (BreadcrumbTrail $trail) {
     $trail->parent('cms.index');
