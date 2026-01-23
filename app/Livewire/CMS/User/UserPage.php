@@ -1,27 +1,28 @@
 <?php
 
-namespace App\Livewire\CMS\Contact;
+namespace App\Livewire\CMS\User;
 
-use App\Exports\ContactExport;
+use App\Exports\UserExport;
 use App\Livewire\Component;
-use App\Models\Contact;
-use App\Services\ContactService;
+use App\Models\User;
+use App\Services\RoleService;
+use App\Services\UserService;
 use Illuminate\Contracts\View\View;
 use Jantinnerezo\LivewireAlert\Facades\LivewireAlert;
 use Livewire\Attributes\Url;
 use Maatwebsite\Excel\Facades\Excel;
 use Symfony\Component\HttpFoundation\BinaryFileResponse;
 
-class ContactPage extends Component
+class UserPage extends Component
 {
     #[Url(except: '')]
     public string $search = '';
 
-    #[Url(except: '')]
-    public string $start_date = '';
+    #[Url(except: [])]
+    public array $is_active = [];
 
     #[Url(except: '')]
-    public string $end_date = '';
+    public string $role_id = '';
 
     public function mount(): void
     {
@@ -50,8 +51,6 @@ class ContactPage extends Component
 
         $this->reset([
             'search',
-            'start_date',
-            'end_date',
         ]);
     }
 
@@ -60,48 +59,74 @@ class ContactPage extends Component
         $this->resetPage();
     }
 
-    public function delete(Contact $contact): void
+    public function changeActive(User $user): void
     {
-        (new ContactService)->delete(contact: $contact);
+        (new UserService)->active(user: $user);
 
-        LivewireAlert::title(trans('index.delete').' '.trans('index.success'))
-            ->html(trans('page.contact').' '.trans('message.has_been_successfully_deleted'))
+        LivewireAlert::title(trans('index.change_active').' '.trans('index.success'))
+            ->html(trans('page.user').' '.trans('message.has_been_successfully_changed'))
             ->withConfirmButton('OK')
             ->confirmButtonColor('#198754')
             ->success()
             ->show();
     }
 
-    public function getContacts(bool $paginate = true): object
+    public function delete(User $user): void
     {
-        return (new ContactService)->index(
+        (new UserService)->delete(user: $user);
+
+        LivewireAlert::title(trans('index.delete').' '.trans('index.success'))
+            ->html(trans('page.user').' '.trans('message.has_been_successfully_deleted'))
+            ->withConfirmButton('OK')
+            ->confirmButtonColor('#198754')
+            ->success()
+            ->show();
+    }
+
+    public function getRoles(): object
+    {
+        return (new RoleService)->index(
+            orderBy: 'name',
+            sortBy: 'asc',
+            paginate: false,
+        );
+    }
+
+    public function getUsers(bool $paginate = true): object
+    {
+        $users = (new UserService)->index(
             search: $this->search,
-            startDate: $this->start_date,
-            endDate: $this->end_date,
+            isActive: $this->is_active,
+            roleId: $this->role_id,
             paginate: $paginate,
         );
+
+        $users->loadMissing(['roles']);
+
+        return $users;
     }
 
     public function export(): BinaryFileResponse
     {
         LivewireAlert::title(trans('index.export').' '.trans('index.success'))
-            ->html(trans('page.contact').' '.trans('message.has_been_successfully_exported'))
+            ->html(trans('page.user').' '.trans('message.has_been_successfully_exported'))
             ->withConfirmButton('OK')
             ->confirmButtonColor('#198754')
             ->success()
             ->show();
 
-        return Excel::download(new ContactExport(
-            startDate: $this->start_date,
-            endDate: $this->end_date,
-            contacts: $this->getContacts(paginate: false),
-        ), trans('page.contact').'.xlsx');
+        return Excel::download(new UserExport(
+            roleId: $this->role_id,
+            isActive: $this->is_active,
+            users: $this->getUsers(paginate: false),
+        ), trans('page.user').'.xlsx');
     }
 
     public function render(): View
     {
-        return view('livewire.cms.contact.index', [
-            'contacts' => $this->getContacts(),
+        return view('livewire.cms.user.index', [
+            'roles' => $this->getRoles(),
+            'users' => $this->getUsers(),
         ]);
     }
 }

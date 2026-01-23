@@ -1,4 +1,4 @@
-@section('title', trans('page.contact'))
+@section('title', trans('page.user'))
 @section('icon', 'fas fa-phone')
 
 <div class="container-fluid">
@@ -39,27 +39,50 @@
                 </div>
 
                 <div class="row g-3">
-                    <div class="col-6 col-sm-3 col-lg-auto">
-                        <label class="form-label" for="start_date">
-                            {{ trans('field.start_date') }}
+                    <div class="col-12 col-sm-5 col-md-4 col-lg-3 col-xl-2" wire:ignore>
+                        <label class="form-label" for="role_id">
+                            {{ trans('field.role_id') }}
                         </label>
                         <div class="input-group">
-                            <input type="date" class="form-control" id="start_date" name="start_date"
-                                min="2026-01-01" max="2099-12-12" wire:key="start_date" wire:model.lazy="start_date"
-                                wire:offline.class="disabled" wire:offline.attr="disabled" wire:loading.class="disabled"
-                                wire:loading.attr="disabled">
+                            <div class="input-group-text">
+                                <span class="fas fa-key fa-fw "></span>
+                            </div>
+                            <select class="form-select select2" id="role_id" name="role_id" wire:key="role_id"
+                                wire:model.lazy="role_id" wire:offline.class="disabled" wire:offline.attr="disabled"
+                                wire:loading.class="disabled" wire:loading.attr="disabled">
+                                <option value="">{{ trans('index.all') }} {{ trans('page.role') }}</option>
+                                @foreach ($roles as $role)
+                                    <option value="{{ $role->id }}" wire:key="role-{{ $role->id }}">
+                                        {{ $role->name }}
+                                    </option>
+                                @endforeach
+                            </select>
                         </div>
                     </div>
 
-                    <div class="col-6 col-sm-3 col-lg-auto">
-                        <label class="form-label" for="end_date">
-                            {{ trans('field.end_date') }}
+                    <div class="col-6 col-sm-auto">
+                        <label class="form-label" for="is_active">
+                            {{ trans('field.is_active') }}
                         </label>
-                        <div class="input-group">
-                            <input type="date" class="form-control" id="end_date" name="end_date" min="2026-01-01"
-                                max="2099-12-12" wire:key="end_date" wire:model.lazy="end_date"
-                                wire:offline.class="disabled" wire:offline.attr="disabled" wire:loading.class="disabled"
-                                wire:loading.attr="disabled">
+                        <div>
+                            <div class="form-check form-check-inline">
+                                <input type="checkbox" class="form-check-input" id="is_active_1" name="is_active"
+                                    value="1" wire:key="is_active" wire:model.lazy="is_active"
+                                    wire:offline.class="disabled" wire:offline.attr="disabled"
+                                    wire:loading.class="disabled" wire:loading.attr="disabled">
+                                <label class="form-check-label" for="is_active_1">
+                                    {{ trans('index.yes') }}
+                                </label>
+                            </div>
+                            <div class="form-check form-check-inline">
+                                <input type="checkbox" class="form-check-input" id="is_active_0" name="is_active"
+                                    value="0" wire:key="is_active" wire:model.lazy="is_active"
+                                    wire:offline.class="disabled" wire:offline.attr="disabled"
+                                    wire:loading.class="disabled" wire:loading.attr="disabled">
+                                <label class="form-check-label" for="is_active_0">
+                                    {{ trans('index.no') }}
+                                </label>
+                            </div>
                         </div>
                     </div>
                 </div>
@@ -75,9 +98,9 @@
 
         <div class="card-body">
             <div class="row g-3">
-                @can('contact.add')
+                @can('user.add')
                     <div class="col col-sm-auto">
-                        <a draggable="false" class="btn btn-primary w-100" href="{{ route('cms.contact.add') }}"
+                        <a draggable="false" class="btn btn-primary w-100" href="{{ route('cms.user.add') }}"
                             wire:navigate>
                             <span class="fas fa-plus fa-fw"></span>
                             <span>{{ trans('index.add') }}</span>
@@ -85,7 +108,7 @@
                     </div>
                 @endcan
 
-                @can('contact.export')
+                @can('user.export')
                     <div class="col col-sm-auto">
                         <button type="button" class="btn btn-success w-100" wire:click="export" wire:key="export"
                             wire:offline.class="disabled" wire:offline.attr="disabled" wire:loading.class="disabled"
@@ -106,68 +129,85 @@
             <hr />
 
             <div class="table-responsive border-bottom mb-3">
-                <table class="table table-striped table-hover table-bordered text-nowrap table-responsive align-middle">
+                <table
+                    class="table table-striped table-hover table-bordered text-nowrap table-responsive align-middle">
                     <thead>
                         <tr class="text-center align-middle table-primary">
                             <th width="1%">{{ trans('field.#') }}</th>
                             <th>{{ trans('field.id') }}</th>
-                            <th>{{ trans('field.code') }}</th>
+                            <th>{{ trans('field.roles') }}</th>
                             <th>{{ trans('field.name') }}</th>
-                            <th>{{ trans('field.company') }}</th>
                             <th>{{ trans('field.email') }}</th>
                             <th>{{ trans('field.phone') }}</th>
+                            <th>{{ trans('field.username') }}</th>
+                            <th>{{ trans('field.is_active') }}</th>
                             <th width="1%">{{ trans('field.created_at') }}</th>
                             <th width="1%">{{ trans('field.action') }}</th>
                         </tr>
                     </thead>
                     <tbody>
-                        @forelse ($contacts as $contact)
-                            <tr wire:key="contact-{{ $contact->id }}">
+                        @forelse ($users as $user)
+                            <tr wire:key="user-{{ $user->id }}">
                                 <td class="text-center">{{ $loop->iteration }}</td>
-                                <td class="text-center">{{ $contact->id }}</td>
+                                <td class="text-center">{{ $user->id }}</td>
+                                <td>{{ $user->roles->pluck('name')->join(', ') }}</td>
+                                <td>{{ $user->name }}</td>
+                                <td>{{ $user->email }}</td>
+                                <td>{{ $user->phone }}</td>
+                                <td>{{ $user->username }}</td>
                                 <td>
-                                    <a draggable="false"
-                                        href="{{ config('constants.ghl.app_url') }}/v2/location/{{ config('constants.ghl.location_id') }}/contacts/detail/{{ $contact->code }}"
-                                        target="_blank">
-                                        {{ $contact->code }}
-                                    </a>
+                                    @can('user.edit')
+                                        <div class="form-check form-switch">
+                                            <input class="form-check-input" type="checkbox" role="switch"
+                                                id="is_active_{{ $user->id }}" name="is_active" value="1"
+                                                {{ $user->is_active ? 'checked' : '' }}
+                                                wire:key="is_active_{{ $user->id }}"
+                                                wire:click="changeActive({{ $user->id }})"
+                                                wire:offline.class="disabled" wire:offline.attr="disabled"
+                                                wire:loading.class="disabled" wire:loading.attr="disabled">
+                                            <label
+                                                class="form-check-label text-{{ $user->is_active ? 'success' : 'danger' }}"
+                                                for="is_active_{{ $user->id }}">
+                                                {{ $user->is_active ? trans('index.yes') : trans('index.no') }}
+                                            </label>
+                                        </div>
+                                    @else
+                                        <span
+                                            class="badge rounded-pill text-bg-{{ $user->is_active ? 'success' : 'danger' }}">
+                                            {{ $user->is_active ? trans('index.yes') : trans('index.no') }}
+                                        </span>
+                                    @endcan
                                 </td>
-                                <td>{{ $contact->name }}</td>
-                                <td>{{ $contact->company }}</td>
-                                <td>{{ $contact->email }}</td>
-                                <td>{{ $contact->phone }}</td>
-                                <td>{{ $contact->created_at->isoFormat('HH:mm - ddd, DD MMM YYYY') }}</td>
+                                <td>{{ $user->created_at->isoFormat('HH:mm - ddd, DD MMM YYYY') }}</td>
                                 <td>
                                     <div class="d-flex gap-2">
-                                        @can('contact.detail')
+                                        @can('user.detail')
                                             <a draggable="false" class="btn btn-info btn-sm"
-                                                href="{{ route('cms.contact.detail', ['contact' => $contact]) }}"
-                                                wire:navigate>
+                                                href="{{ route('cms.user.detail', ['user' => $user]) }}" wire:navigate>
                                                 <span class="fas fa-list fa-fw"></span>
                                                 <span>{{ trans('index.detail') }}</span>
                                             </a>
                                         @endcan
 
-                                        @can('contact.edit')
+                                        @can('user.edit')
                                             <a draggable="false" class="btn btn-success btn-sm"
-                                                href="{{ route('cms.contact.edit', ['contact' => $contact]) }}"
-                                                wire:navigate>
+                                                href="{{ route('cms.user.edit', ['user' => $user]) }}" wire:navigate>
                                                 <span class="fas fa-edit fa-fw"></span>
                                                 <span>{{ trans('index.edit') }}</span>
                                             </a>
                                         @endcan
 
-                                        @can('contact.delete')
+                                        @can('user.delete')
                                             <button type="button" class="btn btn-danger btn-sm"
-                                                wire:click="delete({{ $contact->id }})"
-                                                wire:key="delete({{ $contact->id }})" wire:offline.class="disabled"
+                                                wire:click="delete({{ $user->id }})"
+                                                wire:key="delete({{ $user->id }})" wire:offline.class="disabled"
                                                 wire:offline.attr="disabled" wire:loading.class="disabled"
                                                 wire:loading.attr="disabled">
-                                                <span wire:loading.remove wire:target="delete({{ $contact->id }})">
+                                                <span wire:loading.remove wire:target="delete({{ $user->id }})">
                                                     <span class="fas fa-trash fa-fw"></span>
                                                     <span>{{ trans('index.delete') }}</span>
                                                 </span>
-                                                <span wire:loading wire:target="delete({{ $contact->id }})"
+                                                <span wire:loading wire:target="delete({{ $user->id }})"
                                                     class="w-100">
                                                     <span class="spinner-border spinner-border-sm"></span>
                                                     <span>{{ trans('index.delete') }}</span>
@@ -188,7 +228,15 @@
                 </table>
             </div>
 
-            {{ $contacts->links('components.layouts.pagination') }}
+            {{ $users->links('components.layouts.pagination') }}
         </div>
     </div>
 </div>
+
+@push('script')
+    <script>
+        $("#role_id").on("change", function() {
+            @this.set("role_id", $(this).val())
+        })
+    </script>
+@endpush

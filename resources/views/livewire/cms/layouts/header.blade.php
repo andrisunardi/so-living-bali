@@ -24,11 +24,11 @@
                                     {{ trans('page.home') }}
                                 </a>
 
-                                @can('module')
+                                @canany(['contact', 'property', 'article'])
                                     <div class="fw-bold text-uppercase border-bottom pt-2 pb-2">
                                         {{ trans('page.module') }}
                                     </div>
-                                @endcan
+                                @endcanany
 
                                 @can('contact')
                                     <a draggable="false"
@@ -54,6 +54,21 @@
                                         href="{{ route('cms.article.index') }}" wire:navigate>
                                         <span class="fas fa-newspaper fa-fw"></span>
                                         {{ trans('page.article') }}
+                                    </a>
+                                @endcan
+
+                                @canany(['user'])
+                                    <div class="fw-bold text-uppercase border-bottom pt-2 pb-2">
+                                        {{ trans('page.access') }}
+                                    </div>
+                                @endcanany
+
+                                @can('user')
+                                    <a draggable="false"
+                                        class="btn btn-outline-primary icon-link w-100 {{ Route::is('cms.user.*') ? 'active' : '' }}"
+                                        href="{{ route('cms.user.index') }}" wire:navigate>
+                                        <span class="fas fa-user fa-fw"></span>
+                                        {{ trans('page.user') }}
                                     </a>
                                 @endcan
                             </div>

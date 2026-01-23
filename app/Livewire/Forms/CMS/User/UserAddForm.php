@@ -1,0 +1,37 @@
+<?php
+
+namespace App\Livewire\Forms\CMS\User;
+
+use App\Models\User;
+use App\Services\UserService;
+use Livewire\Attributes\Validate;
+use Livewire\Form;
+
+class UserAddForm extends Form
+{
+    #[Validate('required|string|min:1|max:50|unique:users,name')]
+    public string $name = '';
+
+    #[Validate('required|email:rfc,dns|min:1|max:50|unique:users,email')]
+    public string $email = '';
+
+    #[Validate('required|string|min:1|max:20|unique:users,phone')]
+    public string $phone = '';
+
+    #[Validate('required|string|min:1|max:50|unique:users,username')]
+    public string $username = '';
+
+    #[Validate('required|string|min:1|max:50')]
+    public string $password = '';
+
+    #[Validate('required|boolean')]
+    public bool $is_active = true;
+
+    #[Validate('nullable|array|exists:roles,id')]
+    public array $role_ids = [];
+
+    public function submit(): User
+    {
+        return (new UserService)->create(data: $this->validate());
+    }
+}

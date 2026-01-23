@@ -163,15 +163,17 @@ return [
     ],
 
     'attributes' => [
-        'username' => 'Username',
-        'password' => 'Password',
-        'email' => 'Email',
-        'phone' => 'Phone',
-        'name' => 'Name',
-        'guard_name' => 'Guard Name',
-        'permission_ids' => 'Permissions',
         'code' => 'Code',
         'company' => 'Company',
+        'email' => 'Email',
+        'guard_name' => 'Guard Name',
+        'is_active' => 'Active',
+        'name' => 'Name',
+        'password' => 'Password',
+        'permission_ids' => 'Permissions',
+        'phone' => 'Phone',
+        'role_ids' => 'Roles',
+        'username' => 'Username',
     ],
 
 ];

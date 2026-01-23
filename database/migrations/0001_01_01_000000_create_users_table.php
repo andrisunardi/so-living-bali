@@ -13,7 +13,7 @@ return new class extends Migration
             $table->id();
             $table->string('name', 50)->unique();
             $table->string('email', 50)->unique();
-            $table->string('phone', 15)->unique();
+            $table->string('phone', 20)->unique();
             $table->string('username', 50)->unique();
             $table->string('password', 60);
             $table->string('image_url', 80)->nullable();

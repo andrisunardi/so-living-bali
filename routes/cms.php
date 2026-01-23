@@ -24,6 +24,10 @@ Route::group(['middleware' => ['auth']], function () {
         ->middleware(['permission:property'])
         ->group(base_path('routes/cms/property.php'));
 
+    Route::prefix('user')->name('user.')->as('user.')
+        ->middleware(['permission:user'])
+        ->group(base_path('routes/cms/user.php'));
+
     // Route::prefix('product-category')->name('product-category.')->as('product-category.')
     //     ->middleware(['role:Super User|Admin'])
     //     ->group(base_path('routes/cms/product-category.php'));

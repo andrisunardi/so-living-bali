@@ -38,7 +38,7 @@ class ContactEditForm extends Form
     public function rules(): array
     {
         return [
-            'name' => "required|string|min:20|max:20|unique:contacts,code,{$this->contact->id}",
+            'code' => "required|string|min:20|max:20|unique:contacts,code,{$this->contact->id}",
         ];
     }
 

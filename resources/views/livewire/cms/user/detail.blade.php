@@ -1,4 +1,4 @@
-@section('title', trans('page.contact'))
+@section('title', trans('page.user'))
 @section('icon', 'fas fa-list')
 
 <div class="container-fluid">
@@ -10,8 +10,7 @@
         <div class="card-body">
             <div class="row g-3">
                 <div class="col-auto">
-                    <a draggable="false" class="btn btn-primary w-100" href="{{ route('cms.contact.index') }}"
-                        wire:navigate>
+                    <a draggable="false" class="btn btn-primary w-100" href="{{ route('cms.user.index') }}" wire:navigate>
                         <span class="fas fa-arrow-left fa-fw"></span>
                         {{ trans('index.back') }}
                     </a>
@@ -26,20 +25,16 @@
                         <div class="fw-bold">{{ trans('field.id') }}</div>
                     </div>
                     <div class="col-sm-7 col-md-8 col-lg-9 col-xl-10">
-                        {{ $contact->id }}
+                        {{ $user->id }}
                     </div>
                 </div>
 
                 <div class="row">
                     <div class="col-sm-5 col-md-4 col-lg-3 col-xl-2">
-                        <div class="fw-bold">{{ trans('field.code') }}</div>
+                        <div class="fw-bold">{{ trans('field.roles') }}</div>
                     </div>
                     <div class="col-sm-7 col-md-8 col-lg-9 col-xl-10">
-                        <a draggable="false"
-                            href="{{ config('constants.ghl.app_url') }}/v2/location/{{ config('constants.ghl.location_id') }}/contacts/detail/{{ $contact->code }}"
-                            target="_blank">
-                            {{ $contact->code }}
-                        </a>
+                        {{ $user->roles->pluck('name')->join(', ') }}
                     </div>
                 </div>
 
@@ -48,16 +43,7 @@
                         <div class="fw-bold">{{ trans('field.name') }}</div>
                     </div>
                     <div class="col-sm-7 col-md-8 col-lg-9 col-xl-10">
-                        {{ $contact->name }}
-                    </div>
-                </div>
-
-                <div class="row">
-                    <div class="col-sm-5 col-md-4 col-lg-3 col-xl-2">
-                        <div class="fw-bold">{{ trans('field.company') }}</div>
-                    </div>
-                    <div class="col-sm-7 col-md-8 col-lg-9 col-xl-10">
-                        {{ $contact->company }}
+                        {{ $user->name }}
                     </div>
                 </div>
 
@@ -66,7 +52,7 @@
                         <div class="fw-bold">{{ trans('field.email') }}</div>
                     </div>
                     <div class="col-sm-7 col-md-8 col-lg-9 col-xl-10">
-                        {{ $contact->email }}
+                        {{ $user->email }}
                     </div>
                 </div>
 
@@ -75,7 +61,16 @@
                         <div class="fw-bold">{{ trans('field.phone') }}</div>
                     </div>
                     <div class="col-sm-7 col-md-8 col-lg-9 col-xl-10">
-                        {{ $contact->phone }}
+                        {{ $user->phone }}
+                    </div>
+                </div>
+
+                <div class="row">
+                    <div class="col-sm-5 col-md-4 col-lg-3 col-xl-2">
+                        <div class="fw-bold">{{ trans('field.username') }}</div>
+                    </div>
+                    <div class="col-sm-7 col-md-8 col-lg-9 col-xl-10">
+                        {{ $user->username }}
                     </div>
                 </div>
 
@@ -84,7 +79,7 @@
                         <div class="fw-bold">{{ trans('field.created_by') }}</div>
                     </div>
                     <div class="col-sm-7 col-md-8 col-lg-9 col-xl-10">
-                        {{ $contact->createdBy?->name ?? '-' }}
+                        {{ $user->createdBy?->name ?? '-' }}
                     </div>
                 </div>
 
@@ -93,7 +88,7 @@
                         <div class="fw-bold">{{ trans('field.updated_by') }}</div>
                     </div>
                     <div class="col-sm-7 col-md-8 col-lg-9 col-xl-10">
-                        {{ $contact->updatedBy?->name ?? '-' }}
+                        {{ $user->updatedBy?->name ?? '-' }}
                     </div>
                 </div>
 
@@ -102,10 +97,10 @@
                         <div class="fw-bold">{{ trans('field.created_at') }}</div>
                     </div>
                     <div class="col-sm-7 col-md-8 col-lg-9 col-xl-10">
-                        @if ($contact->created_at)
-                            {{ $contact->created_at->isoFormat('LLLL') }}
+                        @if ($user->created_at)
+                            {{ $user->created_at->isoFormat('LLLL') }}
                             <br class="d-lg-none">
-                            ({{ $contact->created_at->diffForHumans() }})
+                            ({{ $user->created_at->diffForHumans() }})
                         @endif
                     </div>
                 </div>
@@ -115,10 +110,10 @@
                         <div class="fw-bold">{{ trans('field.updated_at') }}</div>
                     </div>
                     <div class="col-sm-7 col-md-8 col-lg-9 col-xl-10">
-                        @if ($contact->updated_at)
-                            {{ $contact->updated_at->isoFormat('LLLL') }}
+                        @if ($user->updated_at)
+                            {{ $user->updated_at->isoFormat('LLLL') }}
                             <br class="d-lg-none">
-                            ({{ $contact->updated_at->diffForHumans() }})
+                            ({{ $user->updated_at->diffForHumans() }})
                         @endif
                     </div>
                 </div>
@@ -127,17 +122,17 @@
             <hr />
 
             <div class="row g-3">
-                @can('contact.edit')
+                @can('user.edit')
                     <div class="col-6 col-sm-auto">
                         <a draggable="false" class="btn btn-success w-100"
-                            href="{{ route('cms.contact.edit', ['contact' => $contact]) }}" wire:navigate>
+                            href="{{ route('cms.user.edit', ['user' => $user]) }}" wire:navigate>
                             <span class="fas fa-edit fa-fw"></span>
                             {{ trans('index.edit') }}
                         </a>
                     </div>
                 @endcan
 
-                @can('contact.delete')
+                @can('user.delete')
                     <div class="col-6 col-sm-auto">
                         <button type="button" class="btn btn-danger w-100" wire:click="delete" wire:key="delete"
                             wire:offline.class="disabled" wire:offline.attr="disabled" wire:loading.class="disabled"

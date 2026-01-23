@@ -16,6 +16,7 @@ return [
     'has_been_successfully_edited' => 'has been successfully edited.',
     'has_been_successfully_deleted' => 'has been successfully deleted.',
 
+    'has_been_successfully_changed' => 'has been successfully changed.',
     'has_been_successfully_exported' => 'has been successfully exported.',
     'has_been_successfully_synced' => 'has been successfully synced.',
 

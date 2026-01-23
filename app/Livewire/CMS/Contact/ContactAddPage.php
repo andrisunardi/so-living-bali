@@ -21,7 +21,7 @@ class ContactAddPage extends Component
 
         session()->flash('success', [
             'title' => trans('index.add').' '.trans('index.success'),
-            'message' => trans('page.contact').' '.trans('message.has_been_successfully_addd'),
+            'message' => trans('page.contact').' '.trans('message.has_been_successfully_added'),
         ]);
 
         $this->redirect(route('cms.contact.index'), navigate: true);

@@ -26,9 +26,9 @@ return [
 
     'reset' => 'Reset',
     'image' => 'Image',
-    'index' => 'Index',
-    'index' => 'Index',
-    'index' => 'Index',
+    'yes' => 'Yes',
+    'no' => 'No',
+    'change_active' => 'Change Active',
     'index' => 'Index',
     'index' => 'Index',
     'index' => 'Index',

@@ -93,6 +93,11 @@ Breadcrumbs::for('cms.property.edit', function (BreadcrumbTrail $trail, $propert
     $trail->push(trans('index.edit'), route('cms.property.edit', $property), ['icon' => 'fas fa-edit']);
 });
 
+Breadcrumbs::for('cms.property.detail', function (BreadcrumbTrail $trail, $property) {
+    $trail->parent('cms.property.index');
+    $trail->push(trans('index.detail'), route('cms.property.detail', $property), ['icon' => 'fas fa-list']);
+});
+
 // ARTICLE
 Breadcrumbs::for('cms.article.index', function (BreadcrumbTrail $trail) {
     $trail->parent('cms.index');
@@ -107,4 +112,30 @@ Breadcrumbs::for('cms.article.add', function (BreadcrumbTrail $trail) {
 Breadcrumbs::for('cms.article.edit', function (BreadcrumbTrail $trail, $article) {
     $trail->parent('cms.article.index');
     $trail->push(trans('index.edit'), route('cms.article.edit', $article), ['icon' => 'fas fa-edit']);
+});
+
+Breadcrumbs::for('cms.article.detail', function (BreadcrumbTrail $trail, $article) {
+    $trail->parent('cms.article.index');
+    $trail->push(trans('index.detail'), route('cms.article.detail', $article), ['icon' => 'fas fa-list']);
+});
+
+// USER
+Breadcrumbs::for('cms.user.index', function (BreadcrumbTrail $trail) {
+    $trail->parent('cms.index');
+    $trail->push(trans('page.user'), route('cms.user.index'), ['icon' => 'fas fa-user']);
+});
+
+Breadcrumbs::for('cms.user.add', function (BreadcrumbTrail $trail) {
+    $trail->parent('cms.user.index');
+    $trail->push(trans('index.add'), route('cms.user.add'), ['icon' => 'fas fa-plus']);
+});
+
+Breadcrumbs::for('cms.user.edit', function (BreadcrumbTrail $trail, $user) {
+    $trail->parent('cms.user.index');
+    $trail->push(trans('index.edit'), route('cms.user.edit', $user), ['icon' => 'fas fa-edit']);
+});
+
+Breadcrumbs::for('cms.user.detail', function (BreadcrumbTrail $trail, $user) {
+    $trail->parent('cms.user.index');
+    $trail->push(trans('index.detail'), route('cms.user.detail', $user), ['icon' => 'fas fa-list']);
 });

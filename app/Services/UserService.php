@@ -70,17 +70,31 @@ class UserService
         $table = (new User)->getTable();
         DB::statement("ALTER TABLE {$table} AUTO_INCREMENT = 1");
 
-        return User::create($data);
+        $roles = Role::find($data['role_ids']);
+
+        $data['password'] = Hash::make($data['password']);
+
+        Arr::pull($data, 'role_ids');
+
+        $user = User::create($data);
+        $user->assignRole($roles);
+
+        return $user;
     }
 
     public function update(User $user, array $data = []): User
     {
-        if (isset($data['role_ids'])) {
-            $roleIds = $data['role_ids'];
-            Arr::pull($data, 'role_ids');
+        $roles = Role::find($data['role_ids']);
 
-            $user->syncRoles($roleIds);
+        $user->syncRoles($roles);
+
+        if ($data['password']) {
+            $data['password'] = Hash::make($data['password']);
+        } else {
+            Arr::pull($data, 'password');
         }
+
+        Arr::pull($data, 'role_ids');
 
         $user->update($data);
         $user->refresh();

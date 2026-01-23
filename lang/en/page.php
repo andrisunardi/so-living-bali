@@ -8,6 +8,7 @@ return [
 
     'report' => 'Report',
     'module' => 'Module',
+    'access' => 'Access',
 
     'home' => 'Home',
     'contact' => 'Contact',
