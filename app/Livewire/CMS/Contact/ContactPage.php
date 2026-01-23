@@ -23,27 +23,6 @@ class ContactPage extends Component
     #[Url(except: '')]
     public string $end_date = '';
 
-    public function mount(): void
-    {
-        if (session()->has('error')) {
-            LivewireAlert::title(session('error.title'))
-                ->html(session('error.message'))
-                ->withConfirmButton('OK')
-                ->confirmButtonColor('#dc3545')
-                ->error()
-                ->show();
-        }
-
-        if (session()->has('success')) {
-            LivewireAlert::title(session('success.title'))
-                ->html(session('success.message'))
-                ->withConfirmButton('OK')
-                ->confirmButtonColor('#198754')
-                ->success()
-                ->show();
-        }
-    }
-
     public function resetFilter(): void
     {
         $this->resetPage();

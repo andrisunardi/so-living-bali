@@ -1,16 +1,16 @@
-@section('title', trans('page.user'))
-@section('icon', 'fas fa-plus')
+@section('title', trans('page.role'))
+@section('icon', 'fas fa-edit')
 
 <div class="container-fluid">
     <div class="card">
         <div class="card-header text-bg-success">
-            <span class="fas fa-plus fa-fw"></span>
-            {{ trans('index.add') }} @yield('title')
+            <span class="fas fa-edit fa-fw"></span>
+            {{ trans('index.edit') }} @yield('title')
         </div>
         <div class="card-body">
             <div class="row g-3">
                 <div class="col-auto">
-                    <a draggable="false" class="btn btn-primary w-100" href="{{ route('cms.user.index') }}" wire:navigate>
+                    <a draggable="false" class="btn btn-primary w-100" href="{{ route('cms.role.index') }}" wire:navigate>
                         <span class="fas fa-arrow-left fa-fw"></span>
                         {{ trans('index.back') }}
                     </a>

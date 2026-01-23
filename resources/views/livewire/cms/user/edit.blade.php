@@ -1,11 +1,11 @@
 @section('title', trans('page.user'))
-@section('icon', 'fas fa-plus')
+@section('icon', 'fas fa-edit')
 
 <div class="container-fluid">
     <div class="card">
         <div class="card-header text-bg-success">
-            <span class="fas fa-plus fa-fw"></span>
-            {{ trans('index.add') }} @yield('title')
+            <span class="fas fa-edit fa-fw"></span>
+            {{ trans('index.edit') }} @yield('title')
         </div>
         <div class="card-body">
             <div class="row g-3">

@@ -24,15 +24,6 @@ class LoginPage extends Component
 
             $this->redirectIntended(route('cms.index'), navigate: true);
         }
-
-        if (session()->has('success')) {
-            LivewireAlert::title(session('success.title'))
-                ->html(session('success.message'))
-                ->withConfirmButton('OK')
-                ->confirmButtonColor('#198754')
-                ->success()
-                ->show();
-        }
     }
 
     public function changePasswordVisibility(): void
