@@ -2,15 +2,13 @@
 
 namespace App\Services;
 
-use App\Models\Contact;
+use App\Models\Property;
 use Illuminate\Support\Facades\DB;
 
-class ContactService
+class PropertyService
 {
     public function index(
         ?string $search = null,
-        ?string $startDate = null,
-        ?string $endDate = null,
         bool $random = false,
         bool $trash = false,
         string $orderBy = 'id',
@@ -21,60 +19,56 @@ class ContactService
         bool $paginate = true,
         int $perPage = 10,
     ): object|int|null {
-        $contacts = Contact::query()
+        $properties = Property::query()
             ->when($search, function ($query) use ($search) {
                 $query->where(function ($query) use ($search) {
                     $query->where('code', 'like', "%{$search}%")
                         ->orWhere('name', 'like', "%{$search}%")
-                        ->orWhere('company', 'like', "%{$search}%")
-                        ->orWhere('email', 'like', "%{$search}%")
-                        ->orWhere('phone', 'like', "%{$search}%");
+                        ->orWhere('address', 'like', "%{$search}%");
                 });
             })
-            ->when($startDate, fn ($q) => $q->whereDate('created_at', '>=', $startDate))
-            ->when($endDate, fn ($q) => $q->whereDate('created_at', '<=', $endDate))
             ->when($random, fn ($q) => $q->inRandomOrder())
             ->when($trash, fn ($q) => $q->onlyTrashed())
             ->orderBy($orderBy, $sortBy)
             ->limit($limit);
 
         if ($first) {
-            return $contacts->first();
+            return $properties->first();
         }
 
         if ($count) {
-            return $contacts->count();
+            return $properties->count();
         }
 
         if ($paginate) {
-            return $contacts->paginate($perPage);
+            return $properties->paginate($perPage);
         }
 
         if ($paginate) {
-            return $contacts->paginate($perPage);
+            return $properties->paginate($perPage);
         }
 
-        return $contacts->get();
+        return $properties->get();
     }
 
-    public function create(array $data = []): Contact
+    public function create(array $data = []): Property
     {
-        $table = (new Contact)->getTable();
+        $table = (new Property)->getTable();
         DB::statement("ALTER TABLE {$table} AUTO_INCREMENT = 1");
 
-        return Contact::create($data);
+        return Property::create($data);
     }
 
-    public function update(Contact $contact, array $data = []): Contact
+    public function update(Property $property, array $data = []): Property
     {
-        $contact->update($data);
-        $contact->refresh();
+        $property->update($data);
+        $property->refresh();
 
-        return $contact;
+        return $property;
     }
 
-    public function delete(Contact $contact): bool
+    public function delete(Property $property): bool
     {
-        return $contact->delete();
+        return $property->delete();
     }
 }

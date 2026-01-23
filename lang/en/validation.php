@@ -163,6 +163,7 @@ return [
     ],
 
     'attributes' => [
+        'address' => 'Address',
         'code' => 'Code',
         'company' => 'Company',
         'email' => 'Email',

@@ -1,8 +1,12 @@
 <?php
 
-// use App\Livewire\CMS\Contact\ContactDetailPage;
-use App\Livewire\CMS\Contact\ContactPage;
+use App\Livewire\CMS\Property\PropertyAddPage;
+use App\Livewire\CMS\Property\PropertyDetailPage;
+use App\Livewire\CMS\Property\PropertyEditPage;
+use App\Livewire\CMS\Property\PropertyPage;
 use Illuminate\Support\Facades\Route;
 
-Route::any('', ContactPage::class)->name('index')->middleware('permission:contact');
-// Route::any('detail/{contact}', ContactDetailPage::class)->name('detail')->middleware('permission:contact.detail');
+Route::any('', PropertyPage::class)->name('index')->middleware('permission:property');
+Route::any('add', PropertyAddPage::class)->name('add')->middleware('permission:property.add');
+Route::any('edit/{property}', PropertyEditPage::class)->name('edit')->middleware('permission:property.edit');
+Route::any('detail/{property}', PropertyDetailPage::class)->name('detail')->middleware('permission:property.detail');
