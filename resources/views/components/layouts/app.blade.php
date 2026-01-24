@@ -29,7 +29,7 @@
                 @livewire('c-m-s.layouts.header')
             @endauth
         @else
-            {{-- @livewire('layouts.header') --}}
+            @livewire('layouts.header')
         @endif
     @endif
 
@@ -41,7 +41,7 @@
                 {{-- @livewire('layouts.error') --}}
             @endif
         @else
-            @if (!Route::is(['home', 'cms.home', 'cms.login', 'cms.forgot-password']))
+            @if (!Route::is(['index', 'cms.index', 'cms.login', 'cms.forgot-password']))
                 {{ Breadcrumbs::render() }}
             @endif
 
