@@ -39,6 +39,8 @@ class ContactEditForm extends Form
     {
         return [
             'code' => "required|string|min:20|max:20|unique:contacts,code,{$this->contact->id}",
+            'email' => "required|rfc,dns|min:1|max:50|unique:contacts,email,{$this->contact->id}",
+            'phone' => "required|string|min:1|max:20|unique:contacts,phone,{$this->contact->id}",
         ];
     }
 

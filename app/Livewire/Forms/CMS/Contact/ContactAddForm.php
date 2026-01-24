@@ -18,10 +18,10 @@ class ContactAddForm extends Form
     #[Validate('required|string|min:1|max:50')]
     public string $company = '';
 
-    #[Validate('required|email:rfc,dns|min:1|max:50')]
+    #[Validate('required|email:rfc,dns|min:1|max:50|unique:contacts,email')]
     public string $email = '';
 
-    #[Validate('required|string|min:1|max:20')]
+    #[Validate('required|string|min:1|max:20|unique:contacts,phone')]
     public string $phone = '';
 
     public function submit(): Contact
