@@ -1,14 +1,9 @@
 @section('title', trans('page.home'))
 
 <div>
-    @livewire('layouts.hero', [
-        // 'title' => $page['title'] ?? null,
-        // 'subTitle' => $page['sub_title'] ?? null,
-        // 'description' => $page['description'] ?? null,
-        // 'buttonName' => trans('index.reservation'),
-        // 'buttonLink' => route('reservation'),
-        // 'isExternalLink' => false,
-        'videoDesktop' => asset('videos/home.mp4'),
-        'videoMobile' => asset('videos/home.mp4'),
+    @livewire('components.home.hero', [
+        'title' => trans('home.hero.title') ?? null,
+        'description' => trans('home.hero.description') ?? null,
+        'image' => asset('images/banner/home.jpg'),
     ])
 </div>
