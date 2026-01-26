@@ -113,7 +113,7 @@
             <div class="small">
                 &copy; {{ trans('footer.copyright') }}
                 2025 - {{ now()->year }} &reg;
-                <a draggable="false" href="{{ route('index') }}" target="_blank"
+                <a draggable="false" href="{{ route('home') }}" target="_blank"
                     class="text-body text-decoration-none">
                     <strong>{{ config('app.name') }}</strong>&trade;
                 </a>

@@ -33,7 +33,7 @@
         @endif
     @endif
 
-    <main class="flex-grow-1 @if (!Route::is(['cms.login', 'cms.forgot-password'])) pt-5 my-4 @endif">
+    <main class="flex-grow-1 @if (!Route::is(['home', 'cms.login', 'cms.forgot-password'])) pt-5 my-4 @endif">
         @if (View::hasSection('code'))
             @if (Request::segment(1) == 'cms')
                 @livewire('c-m-s.layouts.error')
@@ -41,7 +41,7 @@
                 {{-- @livewire('layouts.error') --}}
             @endif
         @else
-            @if (!Route::is(['index', 'cms.index', 'cms.login', 'cms.forgot-password']))
+            @if (!Route::is(['home', 'cms.home', 'cms.login', 'cms.forgot-password']))
                 {{ Breadcrumbs::render() }}
             @endif
 
@@ -97,7 +97,9 @@
         });
     </script>
 
-    <script src="{{ asset('js/color-modes.js') }}"></script>
+    @if (Route::is('cms.*'))
+        <script src="{{ asset('js/color-modes.js') }}"></script>
+    @endif
     <script src="{{ asset('js/app.js') }}"></script>
 
     @stack('script')

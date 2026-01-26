@@ -10,7 +10,7 @@ Route::any('login', LoginPage::class)->name('login');
 Route::any('forgot-password', ForgotPasswordPage::class)->name('forgot-password');
 
 Route::group(['middleware' => ['auth']], function () {
-    Route::any('', HomePage::class)->name('index');
+    Route::any('', HomePage::class)->name('home');
 
     Route::prefix('contact')->name('contact.')->as('contact.')
         ->middleware(['permission:contact'])

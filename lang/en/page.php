@@ -2,6 +2,10 @@
 
 return [
 
+    'home' => 'Home',
+    'service' => 'Service',
+    'about' => 'About',
+
     'previous_page' => 'Previous Page',
     'login' => 'Login',
     'forgot_password' => 'Forgot Password',
@@ -10,7 +14,6 @@ return [
     'module' => 'Module',
     'access' => 'Access',
 
-    'home' => 'Home',
     'contact' => 'Contact',
     'property' => 'Property',
     'article' => 'Article',

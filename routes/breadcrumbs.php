@@ -46,14 +46,14 @@ Breadcrumbs::for('log-detailer.index', function (BreadcrumbTrail $trail) {
 });
 
 // HOME
-Breadcrumbs::for('index', function (BreadcrumbTrail $trail) {
-    $trail->push(trans('page.home'), route('index'), ['icon' => 'fas fa-home']);
+Breadcrumbs::for('home', function (BreadcrumbTrail $trail) {
+    $trail->push(trans('page.home'), route('home'), ['icon' => 'fas fa-home']);
 });
 
 // CMS
 // HOME
-Breadcrumbs::for('cms.index', function (BreadcrumbTrail $trail) {
-    $trail->push(trans('page.home'), route('cms.index'), ['icon' => 'fas fa-home']);
+Breadcrumbs::for('cms.home', function (BreadcrumbTrail $trail) {
+    $trail->push(trans('page.home'), route('cms.home'), ['icon' => 'fas fa-home']);
 });
 
 // CONTACT
