@@ -175,6 +175,11 @@ return [
         'phone' => 'Phone',
         'role_ids' => 'Roles',
         'username' => 'Username',
+        'area' => 'Area',
+        'when' => 'When',
+        'bedrooms' => 'Bedrooms',
+        'property_type' => 'Property Type',
+        'price_range' => 'Price Range',
     ],
 
 ];

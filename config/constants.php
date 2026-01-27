@@ -8,6 +8,12 @@ return [
         'channel' => env('SLACK_CHANNEL'),
     ],
 
+    // CONTACT
+    'contact' => [
+        'whatsapp' => env('CONTACT_WHATSAPP'),
+        'email' => env('CONTACT_EMAIL'),
+    ],
+
     // GHL
     'ghl' => [
         'app_url' => env('GHL_APP_URL'),
