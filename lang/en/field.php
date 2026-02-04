@@ -41,7 +41,7 @@ return [
     'username' => 'Username',
 
     'type' => 'Type',
-    'index' => 'Index',
+    'bedroom' => 'Bedroom',
     'index' => 'Index',
     'index' => 'Index',
     'index' => 'Index',

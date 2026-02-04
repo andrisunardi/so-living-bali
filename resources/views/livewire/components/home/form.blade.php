@@ -23,9 +23,6 @@
                         </optgroup>
                     </select>
                 </div>
-                @error('form.name')
-                    <div class="form-text text-danger">{{ $message }}</div>
-                @enderror
             </div>
 
             <div class="col-6">
@@ -40,19 +37,16 @@
                         wire:offline.class="disabled" wire:offline.attr="disabled" wire:loading.class="disabled"
                         wire:loading.attr="disabled">
                 </div>
-                @error('form.name')
-                    <div class="form-text text-danger">{{ $message }}</div>
-                @enderror
             </div>
 
             <div class="col-6">
                 <label class="form-label">
                     <span class="fas fa-bed fa-fw"></span>
-                    {{ trans('validation.attributes.bedrooms') }}
+                    {{ trans('validation.attributes.bedroom') }}
                     <span class="text-danger">*</span>
                 </label>
                 <div class="input-group">
-                    <select class="form-select" id="bedrooms" name="bedrooms"
+                    {{-- <select class="form-select" id="bedrooms" name="bedrooms"
                         placeholder="{{ trans('home.form.bedrooms') }}" required wire:model="form.bedrooms"
                         wire:offline.class="disabled" wire:offline.attr="disabled" wire:loading.class="disabled"
                         wire:loading.attr="disabled">
@@ -64,11 +58,34 @@
                                 {{ $propertyType->name }}
                             </option>
                         @endforeach
-                    </select>
+                    </select> --}}
+
+                    <button type="button"
+                        class="btn d-flex justify-content-between align-items-center border w-100 dropdown-toggle"
+                        data-bs-toggle="dropdown">
+                        @if ($bedroom)
+                            {{ PropertyBedroom::getDescription($bedroom) }}
+                        @else
+                            {{ trans('index.all') }} {{ trans('field.bedroom') }}
+                        @endif
+                    </button>
+
+                    <ul class="dropdown-menu w-100 mt-2">
+                        <li wire:key="bedroom">
+                            <button type="button" class="dropdown-item" wire:click="changeBedroom">
+                                {{ trans('index.all') }} {{ trans('field.bedroom') }}
+                            </button>
+                        </li>
+                        @foreach ($propertyBedrooms as $propertyBedroom)
+                            <li wire:key="property-bedroom-{{ $propertyBedroom }}">
+                                <button type="button" class="dropdown-item"
+                                    wire:click="changeBedroom({{ $propertyBedroom->value }})">
+                                    {{ $propertyBedroom->description() }}
+                                </button>
+                            </li>
+                        @endforeach
+                    </ul>
                 </div>
-                @error('form.bedrooms')
-                    <div class="form-text text-danger">{{ $message }}</div>
-                @enderror
             </div>
 
             <div class="col-6">
@@ -109,9 +126,8 @@
                         </button>
 
                         <ul class="dropdown-menu w-100 mt-2">
-                            <li wire:key="type-{{ $propertyType }}">
+                            <li wire:key="type">
                                 <button type="button" class="dropdown-item" wire:click="changeType">
-                                    <span class="fas fa-caret-right fa-fw"></span>
                                     {{ trans('index.all') }} {{ trans('field.type') }}
                                 </button>
                             </li>
@@ -119,8 +135,7 @@
                                 <li wire:key="property-type-{{ $propertyType }}">
                                     <button type="button" class="dropdown-item"
                                         wire:click="changeType({{ $propertyType->value }})">
-                                        <span class="fas fa-caret-right fa-fw"></span>
-                                        {{ $propertyType->name }}
+                                        {{ $propertyType->description() }}
                                     </button>
                                 </li>
                             @endforeach
@@ -138,20 +153,12 @@
                 <div class="input-group">
                     <div class="dropdown w-100">
                         <input type="text" class="form-control" minlength="1" maxlength="50"
-                            data-bs-toggle="dropdown" placeholder="{{ trans('home.form.price_range') }}" required
-                            wire:model="form.name" wire:offline.class="disabled" wire:offline.attr="disabled"
-                            wire:loading.class="disabled" wire:loading.attr="disabled">
-
-                        <ul class="dropdown-menu mt-2">
-                            <li><a class="dropdown-item" href="#">Action</a></li>
-                            <li><a class="dropdown-item" href="#">Another action</a></li>
-                            <li><a class="dropdown-item" href="#">Something else here</a></li>
+                            placeholder="{{ trans('home.form.price_range') }}" required wire:model="form.name"
+                            wire:offline.class="disabled" wire:offline.attr="disabled" wire:loading.class="disabled"
+                            wire:loading.attr="disabled">
                         </ul>
                     </div>
                 </div>
-                @error('form.price_range')
-                    <div class="form-text text-danger">{{ $message }}</div>
-                @enderror
             </div>
 
             <div class="col-12">

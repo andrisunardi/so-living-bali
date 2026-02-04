@@ -11,7 +11,7 @@ return [
         'button' => 'Find a home',
         'area' => 'Choose preferred area',
         'when' => 'Planned move-in',
-        'bedrooms' => 'Number of bedrooms',
+        'bedroom' => 'Number of bedrooms',
         'type' => 'All type',
         'price_range' => 'Budget range',
     ],

@@ -177,7 +177,7 @@ return [
         'username' => 'Username',
         'area' => 'Area',
         'when' => 'When',
-        'bedrooms' => 'Bedrooms',
+        'bedroom' => 'Bedroom',
         'property_type' => 'Property Type',
         'price_range' => 'Price Range',
     ],
