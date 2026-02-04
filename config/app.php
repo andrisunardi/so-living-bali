@@ -43,6 +43,7 @@ return [
         'PropertyPowerBackup' => App\Enums\Property\PropertyPowerBackup::class,
         'PropertyPriceFlexibility' => App\Enums\Property\PropertyPriceFlexibility::class,
         'PropertyRentalType' => App\Enums\Property\PropertyRentalType::class,
+        'PropertyTargetProfile' => App\Enums\Property\PropertyTargetProfile::class,
         'PropertyType' => App\Enums\Property\PropertyType::class,
         'PropertyWaterSource' => App\Enums\Property\PropertyWaterSource::class,
 
