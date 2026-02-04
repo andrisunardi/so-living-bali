@@ -32134,7 +32134,17 @@ namespace  {
     class View extends \Illuminate\Support\Facades\View {}
     class Vite extends \Illuminate\Support\Facades\Vite {}
     class PropertyBedroom extends \App\Enums\Property\PropertyBedroom {}
+    class PropertyElectricity extends \App\Enums\Property\PropertyElectricity {}
+    class PropertyLivingStyle extends \App\Enums\Property\PropertyLivingStyle {}
+    class PropertyOperationalRisk extends \App\Enums\Property\PropertyOperationalRisk {}
+    class PropertyOrientation extends \App\Enums\Property\PropertyOrientation {}
+    class PropertyPowerBackup extends \App\Enums\Property\PropertyPowerBackup {}
+    class PropertyPriceFlexibility extends \App\Enums\Property\PropertyPriceFlexibility {}
+    class PropertyRentalType extends \App\Enums\Property\PropertyRentalType {}
+    class PropertyStatus extends \App\Enums\Property\PropertyStatus {}
+    class PropertyTargetProfile extends \App\Enums\Property\PropertyTargetProfile {}
     class PropertyType extends \App\Enums\Property\PropertyType {}
+    class PropertyWaterSource extends \App\Enums\Property\PropertyWaterSource {}
     class Excel extends \Maatwebsite\Excel\Facades\Excel {}
     class Menu extends \Spatie\Menu\Laravel\Facades\Menu {}
     class PDF extends \Barryvdh\DomPDF\Facade\Pdf {}

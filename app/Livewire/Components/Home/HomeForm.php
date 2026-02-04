@@ -2,10 +2,10 @@
 
 namespace App\Livewire\Components\Home;
 
+use App\Enums\Property\PropertyBedroom;
+use App\Enums\Property\PropertyType;
 use App\Livewire\Component;
 use Illuminate\Contracts\View\View;
-use App\Enums\Property\PropertyType;
-use App\Enums\Property\PropertyBedroom;
 
 class HomeForm extends Component
 {
