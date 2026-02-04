@@ -43,6 +43,7 @@ return [
         'PropertyPriceFlexibility' => App\Enums\Property\PropertyPriceFlexibility::class,
         'PropertyRentalType' => App\Enums\Property\PropertyRentalType::class,
         'PropertyType' => App\Enums\Property\PropertyType::class,
+        'PropertyWaterSource' => App\Enums\Property\PropertyWaterSource::class,
 
         'Excel' => Maatwebsite\Excel\Facades\Excel::class,
         'Menu' => Spatie\Menu\Laravel\Facades\Menu::class,
