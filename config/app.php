@@ -36,6 +36,8 @@ return [
     ],
 
     'aliases' => Facade::defaultAliases()->merge([
+        'PropertyType' => App\Enums\Property\PropertyType::class,
+
         'Excel' => Maatwebsite\Excel\Facades\Excel::class,
         'Menu' => Spatie\Menu\Laravel\Facades\Menu::class,
         'PDF' => Barryvdh\DomPDF\Facade\Pdf::class,
