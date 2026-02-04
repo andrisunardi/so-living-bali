@@ -39,6 +39,7 @@ return [
         'PropertyBedroom' => App\Enums\Property\PropertyBedroom::class,
         'PropertyLivingStyle' => App\Enums\Property\PropertyLivingStyle::class,
         'PropertyOrientation' => App\Enums\Property\PropertyOrientation::class,
+        'PropertyPowerBackup' => App\Enums\Property\PropertyPowerBackup::class,
         'PropertyPriceFlexibility' => App\Enums\Property\PropertyPriceFlexibility::class,
         'PropertyRentalType' => App\Enums\Property\PropertyRentalType::class,
         'PropertyType' => App\Enums\Property\PropertyType::class,
