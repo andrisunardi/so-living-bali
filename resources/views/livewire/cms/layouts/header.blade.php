@@ -18,8 +18,8 @@
                         <div class="navbar-nav justify-content-start flex-grow-1">
                             <div class="d-grid gap-3">
                                 <a draggable="false"
-                                    class="btn btn-outline-primary icon-link w-100 {{ Route::is('cms.index') ? 'active' : '' }}"
-                                    href="{{ route('cms.index') }}" wire:navigate>
+                                    class="btn btn-outline-primary icon-link w-100 {{ Route::is('cms.home') ? 'active' : '' }}"
+                                    href="{{ route('cms.home') }}" wire:navigate>
                                     <span class="fas fa-home fa-fw"></span>
                                     {{ trans('page.home') }}
                                 </a>
@@ -85,7 +85,7 @@
                     </div>
                 </div>
 
-                <a draggable="false" class="navbar-brand" href="{{ route('cms.index') }}" wire:navigate>
+                <a draggable="false" class="navbar-brand" href="{{ route('cms.home') }}" wire:navigate>
                     <span class="d-block d-md-none">CMS</span>
                     <span class="d-none d-md-block">Content Management System</span>
                 </a>

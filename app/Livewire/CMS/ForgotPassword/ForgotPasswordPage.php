@@ -22,7 +22,7 @@ class ForgotPasswordPage extends Component
                 'message' => trans('message.you_already_login'),
             ]);
 
-            $this->redirectIntended(route('cms.index'), navigate: true);
+            $this->redirectIntended(route('cms.home'), navigate: true);
         }
     }
 

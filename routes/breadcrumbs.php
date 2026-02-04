@@ -58,7 +58,7 @@ Breadcrumbs::for('cms.home', function (BreadcrumbTrail $trail) {
 
 // CONTACT
 Breadcrumbs::for('cms.contact.index', function (BreadcrumbTrail $trail) {
-    $trail->parent('cms.index');
+    $trail->parent('cms.home');
     $trail->push(trans('page.contact'), route('cms.contact.index'), ['icon' => 'fas fa-phone']);
 });
 
@@ -79,7 +79,7 @@ Breadcrumbs::for('cms.contact.detail', function (BreadcrumbTrail $trail, $contac
 
 // PROPERTY
 Breadcrumbs::for('cms.property.index', function (BreadcrumbTrail $trail) {
-    $trail->parent('cms.index');
+    $trail->parent('cms.home');
     $trail->push(trans('page.property'), route('cms.property.index'), ['icon' => 'fas fa-building']);
 });
 
@@ -100,7 +100,7 @@ Breadcrumbs::for('cms.property.detail', function (BreadcrumbTrail $trail, $prope
 
 // ARTICLE
 Breadcrumbs::for('cms.article.index', function (BreadcrumbTrail $trail) {
-    $trail->parent('cms.index');
+    $trail->parent('cms.home');
     $trail->push(trans('page.article'), route('cms.article.index'), ['icon' => 'fas fa-newspaper']);
 });
 
@@ -121,7 +121,7 @@ Breadcrumbs::for('cms.article.detail', function (BreadcrumbTrail $trail, $articl
 
 // ROLE
 Breadcrumbs::for('cms.role.index', function (BreadcrumbTrail $trail) {
-    $trail->parent('cms.index');
+    $trail->parent('cms.home');
     $trail->push(trans('page.role'), route('cms.role.index'), ['icon' => 'fas fa-key']);
 });
 
@@ -142,7 +142,7 @@ Breadcrumbs::for('cms.role.detail', function (BreadcrumbTrail $trail, $role) {
 
 // USER
 Breadcrumbs::for('cms.user.index', function (BreadcrumbTrail $trail) {
-    $trail->parent('cms.index');
+    $trail->parent('cms.home');
     $trail->push(trans('page.user'), route('cms.user.index'), ['icon' => 'fas fa-user']);
 });
 

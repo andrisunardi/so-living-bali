@@ -9,6 +9,7 @@ return [
 
     'no_data_available' => 'No Data Available',
 
+    'you_already_login' => 'You already login.',
     'you_have_successfully_logged_out' => 'You have successfully logged out.',
     'you_have_successfully_logged_in' => 'You have successfully logged in.',
 

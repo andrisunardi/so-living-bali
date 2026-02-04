@@ -22,7 +22,7 @@ class LoginPage extends Component
                 'message' => trans('message.you_already_login'),
             ]);
 
-            $this->redirectIntended(route('cms.index'), navigate: true);
+            $this->redirectIntended(route('cms.home'), navigate: true);
         }
     }
 
@@ -41,7 +41,7 @@ class LoginPage extends Component
                 'message' => trans('message.you_have_successfully_logged_in'),
             ]);
 
-            $this->redirectIntended(route('cms.index'), navigate: true);
+            $this->redirectIntended(route('cms.home'), navigate: true);
 
             return;
         }
