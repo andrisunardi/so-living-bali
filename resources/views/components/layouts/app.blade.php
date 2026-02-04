@@ -108,6 +108,7 @@
     @if (Route::is('cms.*'))
         <script src="{{ asset('js/color-modes.js') }}"></script>
     @endif
+
     <script src="{{ asset('js/app.js') }}"></script>
 
     @stack('script')
