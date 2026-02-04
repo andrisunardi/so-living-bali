@@ -3,7 +3,7 @@
 
     <form wire:submit.prevent="submit" role="form" autocomplete="off">
         <div class="row g-4">
-            <div class="col-12">
+            <div class="col-12" wire:ignore>
                 <label class="form-label">
                     <span class="fas fa-location-dot fa-fw"></span>
                     {{ trans('validation.attributes.area') }}
@@ -78,7 +78,7 @@
                     <span class="text-danger">*</span>
                 </label>
                 <div class="input-group">
-                    <select class="form-select" id="property_type" name="property_type"
+                    {{-- <select class="form-select" id="property_type" name="property_type"
                         placeholder="{{ trans('home.form.property_type') }}" required wire:model="form.property_type"
                         wire:offline.class="disabled" wire:offline.attr="disabled" wire:loading.class="disabled"
                         wire:loading.attr="disabled">
@@ -90,11 +90,43 @@
                                 {{ $propertyType->name }}
                             </option>
                         @endforeach
-                    </select>
+                    </select> --}}
+
+                    <div class="dropdown w-100">
+                        {{-- <input type="text" class="form-control" readonly minlength="1" maxlength="50"
+                            data-bs-toggle="dropdown" placeholder="{{ trans('home.form.type') }}" required
+                            wire:model="type" wire:offline.class="disabled" wire:offline.attr="disabled"
+                            wire:loading.class="disabled" wire:loading.attr="disabled"> --}}
+
+                        <button type="button"
+                            class="btn d-flex justify-content-between align-items-center border w-100 dropdown-toggle"
+                            data-bs-toggle="dropdown">
+                            @if ($type)
+                                {{ PropertyType::getDescription($type) }}
+                            @else
+                                {{ trans('index.all') }} {{ trans('field.type') }}
+                            @endif
+                        </button>
+
+                        <ul class="dropdown-menu w-100 mt-2">
+                            <li wire:key="type-{{ $propertyType }}">
+                                <button type="button" class="dropdown-item" wire:click="changeType">
+                                    <span class="fas fa-caret-right fa-fw"></span>
+                                    {{ trans('index.all') }} {{ trans('field.type') }}
+                                </button>
+                            </li>
+                            @foreach ($propertyTypes as $propertyType)
+                                <li wire:key="property-type-{{ $propertyType }}">
+                                    <button type="button" class="dropdown-item"
+                                        wire:click="changeType({{ $propertyType->value }})">
+                                        <span class="fas fa-caret-right fa-fw"></span>
+                                        {{ $propertyType->name }}
+                                    </button>
+                                </li>
+                            @endforeach
+                        </ul>
+                    </div>
                 </div>
-                @error('form.property_type')
-                    <div class="form-text text-danger">{{ $message }}</div>
-                @enderror
             </div>
 
             <div class="col-6">
@@ -104,10 +136,18 @@
                     <span class="text-danger">*</span>
                 </label>
                 <div class="input-group">
-                    <input type="text" class="form-control" minlength="1" maxlength="50"
-                        placeholder="{{ trans('home.form.price_range') }}" required wire:model="form.name"
-                        wire:offline.class="disabled" wire:offline.attr="disabled" wire:loading.class="disabled"
-                        wire:loading.attr="disabled">
+                    <div class="dropdown w-100">
+                        <input type="text" class="form-control" minlength="1" maxlength="50"
+                            data-bs-toggle="dropdown" placeholder="{{ trans('home.form.price_range') }}" required
+                            wire:model="form.name" wire:offline.class="disabled" wire:offline.attr="disabled"
+                            wire:loading.class="disabled" wire:loading.attr="disabled">
+
+                        <ul class="dropdown-menu mt-2">
+                            <li><a class="dropdown-item" href="#">Action</a></li>
+                            <li><a class="dropdown-item" href="#">Another action</a></li>
+                            <li><a class="dropdown-item" href="#">Something else here</a></li>
+                        </ul>
+                    </div>
                 </div>
                 @error('form.price_range')
                     <div class="form-text text-danger">{{ $message }}</div>

@@ -8,6 +8,13 @@ use Illuminate\Contracts\View\View;
 
 class HomeForm extends Component
 {
+    public string $type = '';
+
+    public function changeType(string $value = ''): void
+    {
+        $this->type = $value;
+    }
+
     public function propertyTypes(): array
     {
         return PropertyType::cases();

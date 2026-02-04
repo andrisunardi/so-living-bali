@@ -12,7 +12,7 @@ return [
         'area' => 'Choose preferred area',
         'when' => 'Planned move-in',
         'bedrooms' => 'Number of bedrooms',
-        'property_type' => 'All type',
+        'type' => 'All type',
         'price_range' => 'Budget range',
     ],
 
