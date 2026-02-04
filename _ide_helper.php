@@ -32133,6 +32133,8 @@ namespace  {
     class Validator extends \Illuminate\Support\Facades\Validator {}
     class View extends \Illuminate\Support\Facades\View {}
     class Vite extends \Illuminate\Support\Facades\Vite {}
+    class PropertyBedroom extends \App\Enums\Property\PropertyBedroom {}
+    class PropertyType extends \App\Enums\Property\PropertyType {}
     class Excel extends \Maatwebsite\Excel\Facades\Excel {}
     class Menu extends \Spatie\Menu\Laravel\Facades\Menu {}
     class PDF extends \Barryvdh\DomPDF\Facade\Pdf {}

@@ -52,12 +52,21 @@
                     <span class="text-danger">*</span>
                 </label>
                 <div class="input-group">
-                    <input type="text" class="form-control" minlength="1" maxlength="50"
-                        placeholder="{{ trans('home.form.bedrooms') }}" required wire:model="form.name"
+                    <select class="form-select" id="bedrooms" name="bedrooms"
+                        placeholder="{{ trans('home.form.bedrooms') }}" required wire:model="form.bedrooms"
                         wire:offline.class="disabled" wire:offline.attr="disabled" wire:loading.class="disabled"
                         wire:loading.attr="disabled">
+                        <option class="">
+                            {{ trans('index.all') }} {{ trans('field.type') }}
+                        </option>
+                        @foreach ($propertyTypes as $propertyType)
+                            <option value="{{ $propertyType->value }}" wire:key="property-type-{{ $propertyType }}">
+                                {{ $propertyType->name }}
+                            </option>
+                        @endforeach
+                    </select>
                 </div>
-                @error('form.name')
+                @error('form.bedrooms')
                     <div class="form-text text-danger">{{ $message }}</div>
                 @enderror
             </div>
@@ -107,6 +116,7 @@
 
             <div class="col-12">
                 <button type="submit" class="btn btn-success w-100 rounded-5">
+                    <span class="fas fa-search fa-fw"></span>
                     {{ trans('home.form.button') }}
                 </button>
             </div>
