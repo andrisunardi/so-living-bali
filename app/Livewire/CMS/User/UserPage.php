@@ -80,6 +80,7 @@ class UserPage extends Component
             paginate: $paginate,
         );
 
+        $users->loadCount(['properties']);
         $users->loadMissing(['roles']);
 
         return $users;

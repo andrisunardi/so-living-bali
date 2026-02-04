@@ -15,11 +15,14 @@ class UserDetailPage extends Component
     public function mount(User $user): void
     {
         $this->user = $user;
+        $this->user->loadCount('properties');
     }
 
     public function changeActive(): void
     {
         (new UserService)->active(user: $this->user);
+
+        $this->user->loadCount('properties');
 
         LivewireAlert::title(trans('index.change_active').' '.trans('index.success'))
             ->html(trans('page.user').' '.trans('message.has_been_successfully_changed'))

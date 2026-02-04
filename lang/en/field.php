@@ -52,6 +52,5 @@ return [
     'index' => 'Index',
     'index' => 'Index',
     'index' => 'Index',
-    'index' => 'Index',
 
 ];

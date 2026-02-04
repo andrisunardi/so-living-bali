@@ -160,7 +160,7 @@ class User extends Authenticatable
 
     public function properties(): HasMany
     {
-        return $this->hasMany(User::class);
+        return $this->hasMany(Property::class);
     }
 
     public function createdBy(): BelongsTo

@@ -9,6 +9,12 @@ class PermissionSeeder extends Seeder
 {
     public function run(): void
     {
+        Permission::create(['name' => 'property', 'guard_name' => 'web'])->assignRole('Admin', 'Agent');
+        Permission::create(['name' => 'property.add', 'guard_name' => 'web'])->assignRole('Admin', 'Agent');
+        Permission::create(['name' => 'property.edit', 'guard_name' => 'web'])->assignRole('Admin', 'Agent');
+        Permission::create(['name' => 'property.delete', 'guard_name' => 'web'])->assignRole('Admin');
+        Permission::create(['name' => 'property.detail', 'guard_name' => 'web'])->assignRole('Admin', 'Agent');
+
         Permission::create(['name' => 'contact', 'guard_name' => 'web'])->assignRole('Admin');
         Permission::create(['name' => 'contact.add', 'guard_name' => 'web'])->assignRole('Admin');
         Permission::create(['name' => 'contact.edit', 'guard_name' => 'web'])->assignRole('Admin');

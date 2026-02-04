@@ -19,5 +19,15 @@ class UserSeeder extends Seeder
             'image_url' => null,
             'is_active' => true,
         ])->assignRole('Admin');
+
+        User::create([
+            'name' => 'Agent',
+            'email' => 'agent@gmail.com',
+            'phone' => '0123456789',
+            'username' => 'agent',
+            'password' => Hash::make('12345678'),
+            'image_url' => null,
+            'is_active' => true,
+        ])->assignRole('Agent');
     }
 }

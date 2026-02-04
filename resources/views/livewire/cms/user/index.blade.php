@@ -1,5 +1,5 @@
 @section('title', trans('page.user'))
-@section('icon', 'fas fa-phone')
+@section('icon', 'fas fa-user')
 
 <div class="container-fluid">
     <div class="card">
@@ -28,11 +28,11 @@
                             wire:loading.attr="disabled">
                             <span wire:loading.remove wire:target="resetFilter">
                                 <span class="fas fa-eraser fa-fw"></span>
-                                <span>{{ trans('index.reset_filter') }}</span>
+                                <span class="d-none d-sm-inline">{{ trans('index.reset_filter') }}</span>
                             </span>
                             <span wire:loading wire:target="resetFilter" class="w-100">
                                 <span class="spinner-border spinner-border-sm"></span>
-                                <span>{{ trans('index.reset_filter') }}</span>
+                                <span class="d-none d-sm-inline">{{ trans('index.reset_filter') }}</span>
                             </span>
                         </button>
                     </div>
@@ -142,6 +142,7 @@
                             <th>{{ trans('field.username') }}</th>
                             <th width="1%">{{ trans('field.is_active') }}</th>
                             <th width="1%">{{ trans('field.created_at') }}</th>
+                            <th width="1%">{{ trans('index.total') }} {{ trans('page.property') }}</th>
                             <th width="1%">{{ trans('field.action') }}</th>
                         </tr>
                     </thead>
@@ -179,6 +180,13 @@
                                     @endcan
                                 </td>
                                 <td>{{ $user->created_at->isoFormat('HH:mm - ddd, DD MMM YYYY') }}</td>
+                                <td class="text-center">
+                                    <a draggable="false"
+                                        href="{{ route('cms.property.index', ['user_id' => $user->id]) }}"
+                                        wire:navigate>
+                                        {{ $user->properties_count }}
+                                    </a>
+                                </td>
                                 <td>
                                     <div class="d-flex gap-2">
                                         @can('user.detail')

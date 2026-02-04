@@ -101,6 +101,18 @@
 
                 <div class="row">
                     <div class="col-sm-5 col-md-4 col-lg-3 col-xl-2">
+                        <div class="fw-bold">{{ trans('index.total') }} {{ trans('page.property') }}</div>
+                    </div>
+                    <div class="col-sm-7 col-md-8 col-lg-9 col-xl-10">
+                        <a draggable="false" href="{{ route('cms.property.index', ['user_id' => $user->id]) }}"
+                            wire:navigate>
+                            {{ $user->properties_count }}
+                        </a>
+                    </div>
+                </div>
+
+                <div class="row">
+                    <div class="col-sm-5 col-md-4 col-lg-3 col-xl-2">
                         <div class="fw-bold">{{ trans('field.created_by') }}</div>
                     </div>
                     <div class="col-sm-7 col-md-8 col-lg-9 col-xl-10">
