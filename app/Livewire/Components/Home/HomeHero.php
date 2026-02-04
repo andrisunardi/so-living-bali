@@ -5,7 +5,7 @@ namespace App\Livewire\Components\Home;
 use App\Livewire\Component;
 use Illuminate\Contracts\View\View;
 
-class Hero extends Component
+class HomeHero extends Component
 {
     public ?string $title = '';
 

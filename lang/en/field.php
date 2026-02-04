@@ -40,6 +40,17 @@ return [
     'user' => 'User',
     'username' => 'Username',
 
+    'type' => 'Type',
+    'index' => 'Index',
+    'index' => 'Index',
+    'index' => 'Index',
+    'index' => 'Index',
+    'index' => 'Index',
+    'index' => 'Index',
+    'index' => 'Index',
+    'index' => 'Index',
+    'index' => 'Index',
+    'index' => 'Index',
     'index' => 'Index',
     'index' => 'Index',
 
