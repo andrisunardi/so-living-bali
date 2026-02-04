@@ -38,6 +38,7 @@ return [
     'aliases' => Facade::defaultAliases()->merge([
         'PropertyBedroom' => App\Enums\Property\PropertyBedroom::class,
         'PropertyLivingStyle' => App\Enums\Property\PropertyLivingStyle::class,
+        'PropertyRentalType' => App\Enums\Property\PropertyRentalType::class,
         'PropertyType' => App\Enums\Property\PropertyType::class,
 
         'Excel' => Maatwebsite\Excel\Facades\Excel::class,
