@@ -8,6 +8,7 @@ use Illuminate\Database\Eloquent\Attributes\ObservedBy;
 use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
+use Illuminate\Database\Eloquent\Relations\HasMany;
 use Illuminate\Database\Eloquent\SoftDeletes;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Support\Carbon;
@@ -20,9 +21,14 @@ use Spatie\Permission\Traits\HasRoles;
 /**
  * @property int $id
  * @property string $name
- * @property string|null $phone
- * @property string|null $email
+ * @property string $email
+ * @property string $phone
+ * @property string $username
+ * @property string $password
+ * @property string|null $image_url
  * @property bool $is_active
+ * @property Carbon|null $email_verified_at
+ * @property Carbon|null $phone_verified_at
  * @property int|null $created_by
  * @property int|null $updated_by
  * @property int|null $deleted_by
@@ -36,6 +42,8 @@ use Spatie\Permission\Traits\HasRoles;
  * @property-read User|null $deletedBy
  * @property-read \Illuminate\Database\Eloquent\Collection<int, \Spatie\Permission\Models\Permission> $permissions
  * @property-read int|null $permissions_count
+ * @property-read \Illuminate\Database\Eloquent\Collection<int, User> $properties
+ * @property-read int|null $properties_count
  * @property-read \Illuminate\Database\Eloquent\Collection<int, \Spatie\Permission\Models\Role> $roles
  * @property-read int|null $roles_count
  * @property-read \Illuminate\Database\Eloquent\Collection<int, \Laravel\Sanctum\PersonalAccessToken> $tokens
@@ -56,29 +64,22 @@ use Spatie\Permission\Traits\HasRoles;
  * @method static Builder<static>|User whereDeletedAt($value)
  * @method static Builder<static>|User whereDeletedBy($value)
  * @method static Builder<static>|User whereEmail($value)
+ * @method static Builder<static>|User whereEmailVerifiedAt($value)
  * @method static Builder<static>|User whereId($value)
+ * @method static Builder<static>|User whereImageUrl($value)
  * @method static Builder<static>|User whereIsActive($value)
  * @method static Builder<static>|User whereName($value)
+ * @method static Builder<static>|User wherePassword($value)
  * @method static Builder<static>|User wherePhone($value)
+ * @method static Builder<static>|User wherePhoneVerifiedAt($value)
  * @method static Builder<static>|User whereRememberToken($value)
  * @method static Builder<static>|User whereUpdatedAt($value)
  * @method static Builder<static>|User whereUpdatedBy($value)
+ * @method static Builder<static>|User whereUsername($value)
  * @method static Builder<static>|User withTrashed(bool $withTrashed = true)
  * @method static Builder<static>|User withoutPermission($permissions)
  * @method static Builder<static>|User withoutRole($roles, $guard = null)
  * @method static Builder<static>|User withoutTrashed()
- *
- * @property string $username
- * @property string $password
- * @property string|null $image_url
- * @property Carbon|null $email_verified_at
- * @property Carbon|null $phone_verified_at
- *
- * @method static Builder<static>|User whereEmailVerifiedAt($value)
- * @method static Builder<static>|User whereImageUrl($value)
- * @method static Builder<static>|User wherePassword($value)
- * @method static Builder<static>|User wherePhoneVerifiedAt($value)
- * @method static Builder<static>|User whereUsername($value)
  *
  * @mixin \Eloquent
  */
@@ -155,6 +156,11 @@ class User extends Authenticatable
     public function scopeInactive(Builder $query): void
     {
         $query->where('is_active', false);
+    }
+
+    public function properties(): HasMany
+    {
+        return $this->hasMany(User::class);
     }
 
     public function createdBy(): BelongsTo
