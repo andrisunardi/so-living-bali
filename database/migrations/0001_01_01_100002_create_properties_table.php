@@ -24,9 +24,9 @@ return new class extends Migration
             $table->string('area', 50)->nullable();
 
             $table->integer('land_size')->nullable();
-            $table->integer('building_size_sqm')->unsigned()->nullable();
+            $table->integer('building_size')->unsigned()->nullable();
             $table->tinyInteger('number_of_floors')->unsigned()->nullable();
-            $table->integer('outdoor_area_size_sqm')->unsigned()->nullable();
+            $table->integer('outdoor_area_size')->unsigned()->nullable();
             $table->string('pool_size', 50)->nullable();
 
             $table->tinyInteger('number_of_bathrooms')->unsigned()->nullable();
@@ -54,7 +54,7 @@ return new class extends Migration
             $table->boolean('bedroom_2_has_natural_light')->unsigned()->default(false);
             $table->text('noise_source_identified')->nullable();
 
-            $table->integer('internet_speedtest_mpbs')->nullable();
+            $table->integer('internet_speedtest')->nullable();
             $table->boolean('power_backup')->unsigned()->nullable();
             $table->boolean('water_source')->unsigned()->nullable();
             $table->boolean('electricity')->unsigned()->nullable();

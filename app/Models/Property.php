@@ -36,9 +36,9 @@ use Spatie\Activitylog\Traits\LogsActivity;
  * @property string|null $address
  * @property string|null $area
  * @property int|null $land_size
- * @property int|null $building_size_sqm
+ * @property int|null $building_size
  * @property int|null $number_of_floors
- * @property int|null $outdoor_area_size_sqm
+ * @property int|null $outdoor_area_size
  * @property string|null $pool_size
  * @property bool|null $number_of_bathrooms
  * @property bool $ensuite_bathrooms
@@ -61,7 +61,7 @@ use Spatie\Activitylog\Traits\LogsActivity;
  * @property bool $bedroom_1_has_natural_light
  * @property bool $bedroom_2_has_natural_light
  * @property string|null $noise_source_identified
- * @property int|null $internet_speedtest_mpbs
+ * @property int|null $internet_speedtest
  * @property PropertyPowerBackup|null $power_backup
  * @property PropertyWaterSource|null $water_source
  * @property PropertyElectricity|null $electricity
@@ -183,6 +183,9 @@ use Spatie\Activitylog\Traits\LogsActivity;
  * @method static Builder<static>|Property withTrashed(bool $withTrashed = true)
  * @method static Builder<static>|Property withoutTrashed()
  * @method static Builder<static>|Property yearly()
+ * @method static Builder<static>|Property whereBuildingSize($value)
+ * @method static Builder<static>|Property whereInternetSpeedtest($value)
+ * @method static Builder<static>|Property whereOutdoorAreaSize($value)
  *
  * @mixin \Eloquent
  */
@@ -207,9 +210,9 @@ class Property extends Model
         'area',
 
         'land_size',
-        'building_size_sqm',
+        'building_size',
         'number_of_floors',
-        'outdoor_area_size_sqm',
+        'outdoor_area_size',
         'pool_size',
 
         'number_of_bathrooms',
@@ -237,7 +240,7 @@ class Property extends Model
         'bedroom_2_has_natural_light',
         'noise_source_identified',
 
-        'internet_speedtest_mpbs',
+        'internet_speedtest',
         'power_backup',
         'water_source',
         'electricity',
@@ -275,9 +278,9 @@ class Property extends Model
             'area' => 'string',
 
             'land_size' => 'integer',
-            'building_size_sqm' => 'integer',
+            'building_size' => 'integer',
             'number_of_floors' => 'integer',
-            'outdoor_area_size_sqm' => 'integer',
+            'outdoor_area_size' => 'integer',
             'pool_size' => 'string',
 
             'number_of_bathrooms' => 'boolean',
@@ -305,7 +308,7 @@ class Property extends Model
             'bedroom_2_has_natural_light' => 'boolean',
             'noise_source_identified' => 'string',
 
-            'internet_speedtest_mpbs' => 'integer',
+            'internet_speedtest' => 'integer',
             'power_backup' => PropertyPowerBackup::class,
             'water_source' => PropertyWaterSource::class,
             'electricity' => PropertyElectricity::class,

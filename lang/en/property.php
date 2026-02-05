@@ -1,0 +1,76 @@
+<?php
+
+return [
+
+    'property_identity' => 'Property Identity',
+    'internal_property_code' => 'Internal Property Code',
+    'availability_date' => 'Availability Date',
+    'agent_name' => 'Agent Name',
+    'date_of_visit' => 'Date of Visit',
+
+    'location' => 'Location',
+    'gps_coordinates' => 'GPS Coordinates (Lat / Long):',
+    'address' => 'Address (if available)',
+    'district_area' => 'District / Area ',
+
+    'size_and_surfaces' => 'Size & Surfaces',
+    'land_size' => 'Land Size (sqm)',
+    'building_size' => 'Building Size (sqm)',
+    'number_of_floors' => 'Number of Floors',
+    'outdoor_area_size' => 'Outdoor Area Size (sqm, optional)',
+    'pool_size' => 'Pool Size (L x W, if applicable)',
+
+    'bathrooms_and_layout' => 'Bathrooms & Layout',
+    'number_of_bathrooms' => 'Number of Bathrooms',
+    'ensuite_bathrooms' => 'Ensuite Bathrooms (YES / NO)',
+    'guest_toilet' => 'Guest Toilet (YES / NO)',
+    'storage_or_staff_area' => 'Storage / Staff Area (YES / NO)',
+    'living_style' => 'Living Style (Open / Closed / Mixed)',
+
+    'legal_and_basic_eligibility' => 'Legal & Basic Eligibility (YES / NO)',
+    'full_legal_documentation_available' => 'Full Legal Documentation Available',
+    'fully_furnished' => 'Fully Furnished (no semi-furnished)',
+    'rental_type_accepted' => 'Rental Type Accepted (Monthly / Yearly / Both)',
+    'minimum_rental_duration' => 'Minimum Rental Duration (months)',
+    'owner_price_flexibility' => 'Owner Price Flexibility (Fixed / Negotiable)',
+    'price_coherent_with_upper_or_premium_positioning' => 'Price Coherent With Upper / Premium Positioning',
+
+    'environment_and_tranquillity' => 'Envrionment & Tranquillity',
+    'not_directly_exposed_to_main_road' => 'Not Directly Exposed To Main Road',
+    'no_festive_venue_nearby' => 'No Festive Venue Nearby',
+    'no_ongoing_or_imminent_construction' => 'No Ongoing or Imminent Construction',
+    'quiet_access_road_or_gang' => 'Quiet Access Road or Gang',
+    'orientation' => 'Orientation (Morning / Afternoon / Mixed Sun)',
+    'view' => 'View (free text)',
+
+    'light_and_acoustics' => 'light & Acoustics',
+    'living_area_has_natural_light' => 'Living Area Has Natural Light',
+    'bedroom_1_has_natural_light' => 'Bedroom 1 Has Natural Light',
+    'bedroom_2_has_natural_light' => 'Bedroom 2 Has Natural Light',
+    'noise_source_identified' => 'Noise Source Identified (if any)',
+
+    'utilities_and_technical' => 'Utilitied & Technical',
+    'internet_speedtest' => 'Internet Speedtest (Mbps)',
+    'power_backup' => 'Power Backup (Generator / Solar / None)',
+    'water_source' => 'Water Source (PDAM, Well, Mixed)',
+    'electricty' => 'Electricity (Standard / Solar / Hybrid)',
+
+    'category_assessment' => 'Category Assessment',
+    'eligible_for_upper' => 'Eligible For Upper',
+    'eligible_for_premium' => 'Eligible For Premium',
+
+    'design_led_or_instagrammable' => 'Design-LED / Instagrammable',
+    'design_driven_property' => 'Design-Driven Property (YES / NO)',
+    'usability_limitations_identified' => 'Usability Limitations Identified',
+
+    'trade_off_or_target_profile' => 'Trade-Off & Target Profile',
+    'trade_off_identified' => 'Trade-Off Identified',
+    'if_yes_describe_briefly' => 'If YES, Describe Briefly',
+    'target_profile' => 'Target Profile (Fmaily / Couple / Remote Worker / Design Lover)',
+
+    'operational_risk' => 'Operational Risk',
+    'operational_risk_level' => 'Low / Medium / High',
+    'comments_if_medium_or_high' => 'Comments if Medium or High',
+    'final_decision' => 'Final Decision',
+    'status' => 'Status',
+];

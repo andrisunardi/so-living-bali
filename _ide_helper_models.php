@@ -68,9 +68,9 @@ namespace App\Models{
  * @property string|null $address
  * @property string|null $area
  * @property int|null $land_size
- * @property int|null $building_size_sqm
+ * @property int|null $building_size
  * @property int|null $number_of_floors
- * @property int|null $outdoor_area_size_sqm
+ * @property int|null $outdoor_area_size
  * @property string|null $pool_size
  * @property bool|null $number_of_bathrooms
  * @property bool $ensuite_bathrooms
@@ -93,7 +93,7 @@ namespace App\Models{
  * @property bool $bedroom_1_has_natural_light
  * @property bool $bedroom_2_has_natural_light
  * @property string|null $noise_source_identified
- * @property int|null $internet_speedtest_mpbs
+ * @property int|null $internet_speedtest
  * @property PropertyPowerBackup|null $power_backup
  * @property PropertyWaterSource|null $water_source
  * @property PropertyElectricity|null $electricity
@@ -215,6 +215,9 @@ namespace App\Models{
  * @method static Builder<static>|Property withoutTrashed()
  * @method static Builder<static>|Property yearly()
  * @mixin \Eloquent
+ * @method static \Illuminate\Database\Eloquent\Builder<static>|Property whereBuildingSize($value)
+ * @method static \Illuminate\Database\Eloquent\Builder<static>|Property whereInternetSpeedtest($value)
+ * @method static \Illuminate\Database\Eloquent\Builder<static>|Property whereOutdoorAreaSize($value)
  */
 	class Property extends \Eloquent {}
 }

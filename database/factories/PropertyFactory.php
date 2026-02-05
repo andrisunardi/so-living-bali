@@ -35,9 +35,9 @@ class PropertyFactory extends Factory
             'area' => fake()->city(),
 
             'land_size' => fake()->numberBetween(1, 100),
-            'building_size_sqm' => fake()->numberBetween(1, 100),
+            'building_size' => fake()->numberBetween(1, 100),
             'number_of_floors' => fake()->numberBetween(1, 100),
-            'outdoor_area_size_sqm' => fake()->numberBetween(1, 100),
+            'outdoor_area_size' => fake()->numberBetween(1, 100),
             'pool_size' => fake()->numberBetween(1, 100),
 
             'number_of_bathrooms' => fake()->numberBetween(1, 100),
@@ -65,7 +65,7 @@ class PropertyFactory extends Factory
             'bedroom_2_has_natural_light' => fake()->boolean(),
             'noise_source_identified' => fake()->text(),
 
-            'internet_speedtest_mpbs' => fake()->numberBetween(1, 100),
+            'internet_speedtest' => fake()->numberBetween(1, 100),
             'power_backup' => fake()->randomElement(PropertyPowerBackup::cases()),
             'water_source' => fake()->randomElement(PropertyWaterSource::cases()),
             'electricity' => fake()->randomElement(PropertyElectricity::cases()),
