@@ -185,7 +185,10 @@
                         <div class="fw-bold">{{ trans('property.ensuite_bathrooms') }}</div>
                     </div>
                     <div class="col-sm-7 col-md-8 col-lg-9 col-xl-10">
-                        {{ $property->ensuite_bathrooms ?? '-' }}
+                        <span
+                            class="badge rounded-pill text-bg-{{ $property->ensuite_bathrooms ? 'success' : 'danger' }}">
+                            {{ $property->ensuite_bathrooms ? trans('index.yes') : trans('index.no') }}
+                        </span>
                     </div>
                 </div>
 
@@ -194,7 +197,9 @@
                         <div class="fw-bold">{{ trans('property.guest_toilet') }}</div>
                     </div>
                     <div class="col-sm-7 col-md-8 col-lg-9 col-xl-10">
-                        {{ $property->guest_toilet ?? '-' }}
+                        <span class="badge rounded-pill text-bg-{{ $property->guest_toilet ? 'success' : 'danger' }}">
+                            {{ $property->guest_toilet ? trans('index.yes') : trans('index.no') }}
+                        </span>
                     </div>
                 </div>
 
@@ -203,7 +208,9 @@
                         <div class="fw-bold">{{ trans('property.storage_or_staff_area') }}</div>
                     </div>
                     <div class="col-sm-7 col-md-8 col-lg-9 col-xl-10">
-                        {{ $property->storage ?? '-' }}
+                        <span class="badge rounded-pill text-bg-{{ $property->storage ? 'success' : 'danger' }}">
+                            {{ $property->storage ? trans('index.yes') : trans('index.no') }}
+                        </span>
                     </div>
                 </div>
 
@@ -227,7 +234,8 @@
                         <div class="fw-bold">{{ trans('property.full_legal_documentation_available') }}</div>
                     </div>
                     <div class="col-sm-7 col-md-8 col-lg-9 col-xl-10">
-                        <span class="badge rounded-pill text-bg-{{ $property->full_legal_documentation }}">
+                        <span
+                            class="badge rounded-pill text-bg-{{ $property->full_legal_documentation ? 'success' : 'danger' }}">
                             {{ $property->full_legal_documentation ? trans('index.yes') : trans('index.no') }}
                         </span>
                     </div>
@@ -238,7 +246,8 @@
                         <div class="fw-bold">{{ trans('property.fully_furnished') }}</div>
                     </div>
                     <div class="col-sm-7 col-md-8 col-lg-9 col-xl-10">
-                        <span class="badge rounded-pill text-bg-{{ $property->fully_furnished }}">
+                        <span
+                            class="badge rounded-pill text-bg-{{ $property->fully_furnished ? 'success' : 'danger' }}">
                             {{ $property->fully_furnished ? trans('index.yes') : trans('index.no') }}
                         </span>
                     </div>
@@ -273,11 +282,13 @@
 
                 <div class="row">
                     <div class="col-sm-5 col-md-4 col-lg-3 col-xl-2">
-                        <div class="fw-bold">{{ trans('property.price_coherent_with_upper_or_premium_positioning') }}
+                        <div class="fw-bold">
+                            {{ trans('property.price_coherent_with_upper_or_premium_positioning') }}
                         </div>
                     </div>
                     <div class="col-sm-7 col-md-8 col-lg-9 col-xl-10">
-                        <span class="badge rounded-pill text-bg-{{ $property->price_coherent_with_upper }}">
+                        <span
+                            class="badge rounded-pill text-bg-{{ $property->price_coherent_with_upper ? 'success' : 'danger' }}">
                             {{ $property->price_coherent_with_upper ? trans('index.yes') : trans('index.no') }}
                         </span>
                     </div>
@@ -294,7 +305,8 @@
                         <div class="fw-bold">{{ trans('property.not_directly_exposed_to_main_road') }}</div>
                     </div>
                     <div class="col-sm-7 col-md-8 col-lg-9 col-xl-10">
-                        <span class="badge rounded-pill text-bg-{{ $property->not_directly_exposed_to_main_road }}">
+                        <span
+                            class="badge rounded-pill text-bg-{{ $property->not_directly_exposed_to_main_road ? 'success' : 'danger' }}">
                             {{ $property->not_directly_exposed_to_main_road ? trans('index.yes') : trans('index.no') }}
                         </span>
                     </div>
@@ -305,7 +317,8 @@
                         <div class="fw-bold">{{ trans('property.no_festive_venue_nearby') }}</div>
                     </div>
                     <div class="col-sm-7 col-md-8 col-lg-9 col-xl-10">
-                        <span class="badge rounded-pill text-bg-{{ $property->no_festive_venue_nearby }}">
+                        <span
+                            class="badge rounded-pill text-bg-{{ $property->no_festive_venue_nearby ? 'success' : 'danger' }}">
                             {{ $property->no_festive_venue_nearby ? trans('index.yes') : trans('index.no') }}
                         </span>
                     </div>
@@ -316,7 +329,7 @@
                         <div class="fw-bold">{{ trans('property.no_ongoing_or_imminent_construction') }}</div>
                     </div>
                     <div class="col-sm-7 col-md-8 col-lg-9 col-xl-10">
-                        <span class="badge rounded-pill text-bg-{{ $property->no_ongoing }}">
+                        <span class="badge rounded-pill text-bg-{{ $property->no_ongoing ? 'success' : 'danger' }}">
                             {{ $property->no_ongoing ? trans('index.yes') : trans('index.no') }}
                         </span>
                     </div>
@@ -327,7 +340,8 @@
                         <div class="fw-bold">{{ trans('property.quiet_access_road_or_gang') }}</div>
                     </div>
                     <div class="col-sm-7 col-md-8 col-lg-9 col-xl-10">
-                        <span class="badge rounded-pill text-bg-{{ $property->quiet_access_road }}">
+                        <span
+                            class="badge rounded-pill text-bg-{{ $property->quiet_access_road ? 'success' : 'danger' }}">
                             {{ $property->quiet_access_road ? trans('index.yes') : trans('index.no') }}
                         </span>
                     </div>
@@ -414,7 +428,7 @@
                 <br />
 
                 <h5 class="fw-bold text-uppercase border-bottom pb-3">
-                    {{ trans('property.utilities_and_techical') }}
+                    {{ trans('property.utilities_and_technical') }}
                 </h5>
 
                 <div class="row">
