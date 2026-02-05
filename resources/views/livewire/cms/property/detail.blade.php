@@ -107,7 +107,7 @@
 
                 <div class="row">
                     <div class="col-sm-5 col-md-4 col-lg-3 col-xl-2">
-                        <div class="fw-bold">{{ trans('property.district_area') }}</div>
+                        <div class="fw-bold">{{ trans('property.district_or_area') }}</div>
                     </div>
                     <div class="col-sm-7 col-md-8 col-lg-9 col-xl-10">
                         {{ $property->area ?? '-' }}

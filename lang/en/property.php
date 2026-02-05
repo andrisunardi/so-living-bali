@@ -11,7 +11,7 @@ return [
     'location' => 'Location',
     'gps_coordinates' => 'GPS Coordinates (Lat / Long):',
     'address' => 'Address (if available)',
-    'district_area' => 'District / Area ',
+    'district_or_area' => 'District / Area ',
 
     'size_and_surfaces' => 'Size & Surfaces',
     'land_size' => 'Land Size (sqm)',

@@ -2,6 +2,7 @@
 
 namespace App\Livewire\CMS\Property;
 
+use App\Enums\Property\PropertyLivingStyle;
 use App\Enums\Property\PropertyStatus;
 use App\Livewire\Component;
 use App\Livewire\Forms\CMS\Property\PropertyAddForm;
@@ -40,6 +41,11 @@ class PropertyAddPage extends Component
         );
     }
 
+    public function getPropertyLivingStyles(): array
+    {
+        return PropertyLivingStyle::cases();
+    }
+
     public function getPropertyStatuses(): array
     {
         return PropertyStatus::cases();
@@ -49,6 +55,7 @@ class PropertyAddPage extends Component
     {
         return view('livewire.cms.property.add', [
             'users' => $this->getUsers(),
+            'propertyLivingStyles' => $this->getPropertyLivingStyles(),
             'propertyStatuses' => $this->getPropertyStatuses(),
         ]);
     }
