@@ -18,10 +18,21 @@ enum PropertyStatus: int
     {
         return match ($this) {
             self::Pending => 'Pending',
-            self::AcceptUpper => 'AcceptUpper',
-            self::AcceptPremium => 'AcceptPremium',
+            self::AcceptUpper => 'Accept Upper',
+            self::AcceptPremium => 'Accept Premium',
             self::Reject => 'Reject',
             self::Escalate => 'Escalate For Arbitration',
+        };
+    }
+
+    public function color(): string
+    {
+        return match ($this) {
+            self::Pending => 'warning',
+            self::AcceptUpper => 'success',
+            self::AcceptPremium => 'primary',
+            self::Reject => 'danger',
+            self::Escalate => 'info',
         };
     }
 
@@ -29,10 +40,21 @@ enum PropertyStatus: int
     {
         return match ($value) {
             self::Pending->value => 'Pending',
-            self::AcceptUpper->value => 'AcceptUpper',
-            self::AcceptPremium->value => 'AcceptPremium',
+            self::AcceptUpper->value => 'Accep tUpper',
+            self::AcceptPremium->value => 'Accept Premium',
             self::Reject->value => 'Reject',
             self::Escalate->value => 'Escalate For Arbitration',
+        };
+    }
+
+    public static function getColor(int $value): string
+    {
+        return match ($value) {
+            self::Pending->value => 'warning',
+            self::AcceptUpper->value => 'success',
+            self::AcceptPremium->value => 'primary',
+            self::Reject->value => 'danger',
+            self::Escalate->value => 'info',
         };
     }
 }

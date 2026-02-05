@@ -9,6 +9,10 @@ class PropertyService
 {
     public function index(
         ?string $search = null,
+        ?string $userId = null,
+        ?string $status = null,
+        ?string $startDate = null,
+        ?string $endDate = null,
         bool $random = false,
         bool $trash = false,
         string $orderBy = 'id',
@@ -24,9 +28,16 @@ class PropertyService
                 $query->where(function ($query) use ($search) {
                     $query->where('code', 'like', "%{$search}%")
                         ->orWhere('name', 'like', "%{$search}%")
-                        ->orWhere('address', 'like', "%{$search}%");
+                        ->orWhere('address', 'like', "%{$search}%")
+                        ->orWhereRelation('user', 'name', 'like', "%{$search}%")
+                        ->orWhereRelation('user', 'phone', 'like', "%{$search}%")
+                        ->orWhereRelation('user', 'email', 'like', "%{$search}%");
                 });
             })
+            ->when($userId, fn ($q) => $q->where('user_id', $userId))
+            ->when($status, fn ($q) => $q->where('status', $status))
+            ->when($startDate, fn ($q) => $q->whereDate('created_at', '>=', $startDate))
+            ->when($endDate, fn ($q) => $q->whereDate('created_at', '<=', $endDate))
             ->when($random, fn ($q) => $q->inRandomOrder())
             ->when($trash, fn ($q) => $q->onlyTrashed())
             ->orderBy($orderBy, $sortBy)

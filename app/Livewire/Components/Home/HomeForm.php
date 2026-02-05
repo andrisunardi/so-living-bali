@@ -23,12 +23,12 @@ class HomeForm extends Component
         $this->type = $value;
     }
 
-    public function propertyBedrooms(): array
+    public function getPropertyBedrooms(): array
     {
         return PropertyBedroom::cases();
     }
 
-    public function propertyTypes(): array
+    public function getPropertyTypes(): array
     {
         return PropertyType::cases();
     }
@@ -36,8 +36,8 @@ class HomeForm extends Component
     public function render(): View
     {
         return view('livewire.components.home.form', [
-            'propertyBedrooms' => $this->propertyBedrooms(),
-            'propertyTypes' => $this->propertyTypes(),
+            'propertyBedrooms' => $this->getPropertyBedrooms(),
+            'propertyTypes' => $this->getPropertyTypes(),
         ]);
     }
 }

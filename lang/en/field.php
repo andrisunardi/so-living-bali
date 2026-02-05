@@ -42,9 +42,9 @@ return [
 
     'type' => 'Type',
     'bedroom' => 'Bedroom',
-    'index' => 'Index',
-    'index' => 'Index',
-    'index' => 'Index',
+    'agent' => 'Agent',
+    'status' => 'Status',
+    'user_id' => 'User',
     'index' => 'Index',
     'index' => 'Index',
     'index' => 'Index',

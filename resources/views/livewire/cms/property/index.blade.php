@@ -28,13 +28,82 @@
                             wire:loading.attr="disabled">
                             <span wire:loading.remove wire:target="resetFilter">
                                 <span class="fas fa-eraser fa-fw"></span>
-                                <span>{{ trans('index.reset_filter') }}</span>
+                                <span class="d-none d-sm-inline">{{ trans('index.reset_filter') }}</span>
                             </span>
                             <span wire:loading wire:target="resetFilter" class="w-100">
                                 <span class="spinner-border spinner-border-sm"></span>
-                                <span>{{ trans('index.reset_filter') }}</span>
+                                <span class="d-none d-sm-inline">{{ trans('index.reset_filter') }}</span>
                             </span>
                         </button>
+                    </div>
+                </div>
+
+                <div class="row g-3">
+                    <div class="col-12 col-sm-6 col-lg-3 col-xl-2" wire:ignore>
+                        <label class="form-label" for="user_id">
+                            {{ trans('field.user_id') }}
+                        </label>
+                        <div class="input-group">
+                            <div class="input-group-text">
+                                <span class="fas fa-key fa-fw "></span>
+                            </div>
+                            <select class="form-select select2" id="user_id" name="user_id" wire:key="user_id"
+                                wire:model.lazy="user_id" wire:offline.class="disabled" wire:offline.attr="disabled"
+                                wire:loading.class="disabled" wire:loading.attr="disabled">
+                                <option value="">{{ trans('index.all') }} {{ trans('page.user') }}</option>
+                                @foreach ($users as $user)
+                                    <option value="{{ $user->id }}" wire:key="user-{{ $user->id }}">
+                                        {{ $user->name }}
+                                    </option>
+                                @endforeach
+                            </select>
+                        </div>
+                    </div>
+
+                    <div class="col-12 col-sm-6 col-lg-3 col-xl-2" wire:ignore>
+                        <label class="form-label" for="status">
+                            {{ trans('field.status') }}
+                        </label>
+                        <div class="input-group">
+                            <div class="input-group-text">
+                                <span class="fas fa-key fa-fw "></span>
+                            </div>
+                            <select class="form-select select2" id="status" name="status" wire:key="status"
+                                wire:model.lazy="status" wire:offline.class="disabled" wire:offline.attr="disabled"
+                                wire:loading.class="disabled" wire:loading.attr="disabled">
+                                <option value="">{{ trans('index.all') }} {{ trans('field.status') }}</option>
+                                @foreach ($propertyStatuses as $propertyStatus)
+                                    <option value="{{ $propertyStatus->value }}"
+                                        wire:key="property-status-{{ $propertyStatus->value }}">
+                                        {{ $propertyStatus->description() }}
+                                    </option>
+                                @endforeach
+                            </select>
+                        </div>
+                    </div>
+
+                    <div class="col-6 col-sm-6 col-lg-3 col-xl-auto">
+                        <label class="form-label" for="start_date">
+                            {{ trans('field.start_date') }}
+                        </label>
+                        <div class="input-group">
+                            <input type="date" class="form-control" id="start_date" name="start_date"
+                                min="2026-01-01" max="2099-12-12" wire:key="start_date" wire:model.lazy="start_date"
+                                wire:offline.class="disabled" wire:offline.attr="disabled" wire:loading.class="disabled"
+                                wire:loading.attr="disabled">
+                        </div>
+                    </div>
+
+                    <div class="col-6 col-sm-6 col-lg-3 col-xl-auto">
+                        <label class="form-label" for="end_date">
+                            {{ trans('field.end_date') }}
+                        </label>
+                        <div class="input-group">
+                            <input type="date" class="form-control" id="end_date" name="end_date" min="2026-01-01"
+                                max="2099-12-12" wire:key="end_date" wire:model.lazy="end_date"
+                                wire:offline.class="disabled" wire:offline.attr="disabled"
+                                wire:loading.class="disabled" wire:loading.attr="disabled">
+                        </div>
                     </div>
                 </div>
             </div>
@@ -80,14 +149,16 @@
             <hr />
 
             <div class="table-responsive border-bottom mb-3">
-                <table class="table table-striped table-hover table-bordered text-nowrap table-responsive align-middle">
+                <table
+                    class="table table-striped table-hover table-bordered text-nowrap table-responsive align-middle">
                     <thead>
                         <tr class="text-center align-middle table-primary">
                             <th width="1%">{{ trans('field.#') }}</th>
                             <th width="1%">{{ trans('field.id') }}</th>
                             <th width="1%">{{ trans('field.code') }}</th>
                             <th>{{ trans('field.name') }}</th>
-                            <th>{{ trans('field.address') }}</th>
+                            <th width="1%">{{ trans('field.agent') }}</th>
+                            <th width="1%">{{ trans('field.status') }}</th>
                             <th width="1%">{{ trans('field.created_at') }}</th>
                             <th width="1%">{{ trans('field.action') }}</th>
                         </tr>
@@ -99,7 +170,12 @@
                                 <td class="text-center">{{ $property->id }}</td>
                                 <td>{{ $property->code }}</td>
                                 <td>{{ $property->name }}</td>
-                                <td>{{ $property->address }}</td>
+                                <td>{{ $property->user->name }}</td>
+                                <td>
+                                    <span class="badge text-bg-{{ $property->status->color() }} rounded-pill w-100">
+                                        {{ $property->status->description() }}
+                                    </span>
+                                </td>
                                 <td>{{ $property->created_at->isoFormat('HH:mm - ddd, DD MMM YYYY') }}</td>
                                 <td>
                                     <div class="d-flex gap-2">
@@ -156,3 +232,15 @@
         </div>
     </div>
 </div>
+
+@push('script')
+    <script>
+        $("#user_id").on("change", function() {
+            @this.set("user_id", $(this).val())
+        })
+
+        $("#status").on("change", function() {
+            @this.set("status", $(this).val())
+        })
+    </script>
+@endpush
