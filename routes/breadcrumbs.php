@@ -119,6 +119,27 @@ Breadcrumbs::for('cms.article.detail', function (BreadcrumbTrail $trail, $articl
     $trail->push(trans('index.detail'), route('cms.article.detail', $article), ['icon' => 'fas fa-list']);
 });
 
+// PERMISSION
+Breadcrumbs::for('cms.permission.index', function (BreadcrumbTrail $trail) {
+    $trail->parent('cms.home');
+    $trail->push(trans('page.permission'), route('cms.permission.index'), ['icon' => 'fas fa-lock-open']);
+});
+
+Breadcrumbs::for('cms.permission.add', function (BreadcrumbTrail $trail) {
+    $trail->parent('cms.permission.index');
+    $trail->push(trans('index.add'), route('cms.permission.add'), ['icon' => 'fas fa-plus']);
+});
+
+Breadcrumbs::for('cms.permission.edit', function (BreadcrumbTrail $trail, $permission) {
+    $trail->parent('cms.permission.index');
+    $trail->push(trans('index.edit'), route('cms.permission.edit', $permission), ['icon' => 'fas fa-edit']);
+});
+
+Breadcrumbs::for('cms.permission.detail', function (BreadcrumbTrail $trail, $permission) {
+    $trail->parent('cms.permission.index');
+    $trail->push(trans('index.detail'), route('cms.permission.detail', $permission), ['icon' => 'fas fa-list']);
+});
+
 // ROLE
 Breadcrumbs::for('cms.role.index', function (BreadcrumbTrail $trail) {
     $trail->parent('cms.home');

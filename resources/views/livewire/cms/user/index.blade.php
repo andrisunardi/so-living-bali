@@ -135,13 +135,13 @@
                         <tr class="text-center align-middle table-primary">
                             <th width="1%">{{ trans('field.#') }}</th>
                             <th width="1%">{{ trans('field.id') }}</th>
-                            <th width="1%">{{ trans('field.roles') }}</th>
                             <th>{{ trans('field.name') }}</th>
                             <th>{{ trans('field.email') }}</th>
                             <th>{{ trans('field.phone') }}</th>
                             <th>{{ trans('field.username') }}</th>
                             <th width="1%">{{ trans('field.is_active') }}</th>
                             <th width="1%">{{ trans('field.created_at') }}</th>
+                            <th width="1%">{{ trans('field.roles') }}</th>
                             <th width="1%">{{ trans('index.total') }} {{ trans('page.property') }}</th>
                             <th width="1%">{{ trans('field.action') }}</th>
                         </tr>
@@ -151,7 +151,6 @@
                             <tr wire:key="user-{{ $user->id }}">
                                 <td class="text-center">{{ $loop->iteration }}</td>
                                 <td class="text-center">{{ $user->id }}</td>
-                                <td>{{ $user->roles->pluck('name')->join(', ') }}</td>
                                 <td>{{ $user->name }}</td>
                                 <td>{{ $user->email }}</td>
                                 <td>{{ $user->phone }}</td>
@@ -180,6 +179,7 @@
                                     @endcan
                                 </td>
                                 <td>{{ $user->created_at->isoFormat('HH:mm - ddd, DD MMM YYYY') }}</td>
+                                <td>{{ $user->roles->pluck('name')->join(', ') }}</td>
                                 <td class="text-center">
                                     <a draggable="false"
                                         href="{{ route('cms.property.index', ['user_id' => $user->id]) }}"

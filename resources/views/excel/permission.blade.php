@@ -1,35 +1,27 @@
 <table>
     <thead>
         <tr>
-            <th align="center" colspan="10">
-                <b>{{ trans('page.user') }}</b>
+            <th align="center" colspan="9">
+                <b>{{ trans('page.permission') }}</b>
             </th>
         </tr>
         @if ($role)
             <tr>
-                <th align="center" colspan="10">
+                <th align="center" colspan="9">
                     {{ trans('page.role') }} : {{ $role->name }}
                 </th>
             </tr>
         @endif
-        @if ($isActive)
-            <tr>
-                <th align="center" colspan="10">
-                    {{ trans('field.active') }} :
-                    {{ collect($isActive)->map(fn($v) => $v ? 'Yes' : 'No')->implode(', ') }}
-                </th>
-            </tr>
-        @endif
         <tr>
-            <td colspan="10"></td>
+            <td colspan="9"></td>
         </tr>
         <tr>
-            <th align="center" colspan="10">
+            <th align="center" colspan="9">
                 {{ trans('field.printed_at') }} : {{ now()->isoFormat('LLLL') }}
             </th>
         </tr>
         <tr>
-            <td colspan="10"></td>
+            <td colspan="9"></td>
         </tr>
         <tr>
             <th valign="middle" align="center">
@@ -42,13 +34,16 @@
                 <b>{{ trans('field.name') }}</b>
             </th>
             <th valign="middle" align="center">
-                <b>{{ trans('field.email') }}</b>
+                <b>{{ trans('field.guard_name') }}</b>
             </th>
             <th valign="middle" align="center">
-                <b>{{ trans('field.phone') }}</b>
+                <b>{{ trans('field.roles') }}</b>
             </th>
             <th valign="middle" align="center">
-                <b>{{ trans('field.username') }}</b>
+                <b>{{ trans('index.total') }} {{ trans('page.permission') }}</b>
+            </th>
+            <th valign="middle" align="center">
+                <b>{{ trans('index.total') }} {{ trans('page.user') }}</b>
             </th>
             <th valign="middle" align="center">
                 <b>{{ trans('field.created_at') }}</b>
@@ -56,51 +51,42 @@
             <th valign="middle" align="center">
                 <b>{{ trans('field.updated_at') }}</b>
             </th>
-            <th valign="middle" align="center">
-                <b>{{ trans('field.roles') }}</b>
-            </th>
-            <th valign="middle" align="center">
-                <b>{{ trans('index.total') }} {{ trans('page.property') }}</b>
-            </th>
         </tr>
     </thead>
     <tbody>
-        @forelse ($users as $user)
+        @forelse ($permissions as $permission)
             <tr>
                 <td valign="middle" align="center">
                     {{ $loop->iteration }}
                 </td>
                 <td valign="middle" align="center">
-                    {{ $user->id }}
+                    {{ $permission->id }}
                 </td>
                 <td valign="middle" align="left">
-                    {{ $user->name }}
-                </td>
-                <td valign="middle" align="left">
-                    {{ $user->email }}
-                </td>
-                <td valign="middle" align="left">
-                    {{ $user->phone }}
-                </td>
-                <td valign="middle" align="left">
-                    {{ $user->username }}
-                </td>
-                <td valign="middle" align="left">
-                    {{ $user->created_at }}
-                </td>
-                <td valign="middle" align="left">
-                    {{ $user->updated_at }}
+                    {{ $permission->name }}
                 </td>
                 <td valign="middle" align="center">
-                    {{ $user->roles->pluck('name')->join(', ') }}
+                    {{ $permission->guard_name }}
+                </td>
+                <td valign="middle" align="left">
+                    {{ $permission->roles->pluck('name')->join(', ') }}
                 </td>
                 <td valign="middle" align="center">
-                    {{ $user->properties_count }}
+                    {{ $permission->roles_count }}
+                </td>
+                <td valign="middle" align="center">
+                    {{ $permission->users_count }}
+                </td>
+                <td valign="middle" align="left">
+                    {{ $permission->created_at }}
+                </td>
+                <td valign="middle" align="left">
+                    {{ $permission->updated_at }}
                 </td>
             </tr>
         @empty
             <tr>
-                <td align="center" colspan="10">
+                <td align="center" colspan="9">
                     {{ trans('message.no_data_available') }}
                 </td>
             </tr>
@@ -108,7 +94,7 @@
     </tbody>
     <tfoot>
         <tr>
-            <td colspan="10"></td>
+            <td colspan="9"></td>
         </tr>
     </tfoot>
 </table>

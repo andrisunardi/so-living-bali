@@ -1,4 +1,4 @@
-@section('title', trans('page.user'))
+@section('title', trans('page.permission'))
 @section('icon', 'fas fa-list')
 
 <div class="container-fluid">
@@ -10,7 +10,7 @@
         <div class="card-body">
             <div class="row g-3">
                 <div class="col-auto">
-                    <a draggable="false" class="btn btn-primary w-100" href="{{ route('cms.user.index') }}" wire:navigate>
+                    <a draggable="false" class="btn btn-primary w-100" href="{{ route('cms.permission.index') }}" wire:navigate>
                         <span class="fas fa-arrow-left fa-fw"></span>
                         {{ trans('index.back') }}
                     </a>
@@ -25,7 +25,7 @@
                         <div class="fw-bold">{{ trans('field.id') }}</div>
                     </div>
                     <div class="col-sm-7 col-md-8 col-lg-9 col-xl-10">
-                        {{ $user->id }}
+                        {{ $permission->id }}
                     </div>
                 </div>
 
@@ -34,59 +34,16 @@
                         <div class="fw-bold">{{ trans('field.name') }}</div>
                     </div>
                     <div class="col-sm-7 col-md-8 col-lg-9 col-xl-10">
-                        {{ $user->name }}
+                        {{ $permission->name }}
                     </div>
                 </div>
 
                 <div class="row">
                     <div class="col-sm-5 col-md-4 col-lg-3 col-xl-2">
-                        <div class="fw-bold">{{ trans('field.email') }}</div>
+                        <div class="fw-bold">{{ trans('field.guard_name') }}</div>
                     </div>
                     <div class="col-sm-7 col-md-8 col-lg-9 col-xl-10">
-                        {{ $user->email }}
-                    </div>
-                </div>
-
-                <div class="row">
-                    <div class="col-sm-5 col-md-4 col-lg-3 col-xl-2">
-                        <div class="fw-bold">{{ trans('field.phone') }}</div>
-                    </div>
-                    <div class="col-sm-7 col-md-8 col-lg-9 col-xl-10">
-                        {{ $user->phone }}
-                    </div>
-                </div>
-
-                <div class="row">
-                    <div class="col-sm-5 col-md-4 col-lg-3 col-xl-2">
-                        <div class="fw-bold">{{ trans('field.username') }}</div>
-                    </div>
-                    <div class="col-sm-7 col-md-8 col-lg-9 col-xl-10">
-                        {{ $user->username }}
-                    </div>
-                </div>
-
-                <div class="row">
-                    <div class="col-sm-5 col-md-4 col-lg-3 col-xl-2">
-                        <div class="fw-bold">{{ trans('field.is_active') }}</div>
-                    </div>
-                    <div class="col-sm-7 col-md-8 col-lg-9 col-xl-10">
-                        @can('user.edit')
-                            <div class="form-check form-switch">
-                                <input class="form-check-input" type="checkbox" role="switch"
-                                    id="is_active_{{ $user->id }}" name="is_active" value="1"
-                                    {{ $user->is_active ? 'checked' : '' }} wire:key="is_active_{{ $user->id }}"
-                                    wire:click="changeActive({{ $user->id }})" wire:offline.class="disabled"
-                                    wire:offline.attr="disabled" wire:loading.class="disabled" wire:loading.attr="disabled">
-                                <label class="form-check-label text-{{ $user->is_active ? 'success' : 'danger' }}"
-                                    for="is_active_{{ $user->id }}">
-                                    {{ $user->is_active ? trans('index.yes') : trans('index.no') }}
-                                </label>
-                            </div>
-                        @else
-                            <span class="badge rounded-pill text-bg-{{ $user->is_active ? 'success' : 'danger' }}">
-                                {{ $user->is_active ? trans('index.yes') : trans('index.no') }}
-                            </span>
-                        @endcan
+                        {{ $permission->guard_name }}
                     </div>
                 </div>
 
@@ -95,37 +52,25 @@
                         <div class="fw-bold">{{ trans('field.roles') }}</div>
                     </div>
                     <div class="col-sm-7 col-md-8 col-lg-9 col-xl-10">
-                        {{ $user->roles->pluck('name')->join(', ') }}
+                        {{ $permission->roles->pluck('name')->join(', ') }}
                     </div>
                 </div>
 
                 <div class="row">
                     <div class="col-sm-5 col-md-4 col-lg-3 col-xl-2">
-                        <div class="fw-bold">{{ trans('index.total') }} {{ trans('page.property') }}</div>
+                        <div class="fw-bold">{{ trans('index.total') }} {{ trans('page.role') }}</div>
                     </div>
                     <div class="col-sm-7 col-md-8 col-lg-9 col-xl-10">
-                        <a draggable="false" href="{{ route('cms.property.index', ['user_id' => $user->id]) }}"
-                            wire:navigate>
-                            {{ $user->properties_count }}
-                        </a>
+                        {{ $permission->roles_count }}
                     </div>
                 </div>
 
                 <div class="row">
                     <div class="col-sm-5 col-md-4 col-lg-3 col-xl-2">
-                        <div class="fw-bold">{{ trans('field.created_by') }}</div>
+                        <div class="fw-bold">{{ trans('index.total') }} {{ trans('page.user') }}</div>
                     </div>
                     <div class="col-sm-7 col-md-8 col-lg-9 col-xl-10">
-                        {{ $user->createdBy?->name ?? '-' }}
-                    </div>
-                </div>
-
-                <div class="row">
-                    <div class="col-sm-5 col-md-4 col-lg-3 col-xl-2">
-                        <div class="fw-bold">{{ trans('field.updated_by') }}</div>
-                    </div>
-                    <div class="col-sm-7 col-md-8 col-lg-9 col-xl-10">
-                        {{ $user->updatedBy?->name ?? '-' }}
+                        {{ $permission->users_count }}
                     </div>
                 </div>
 
@@ -134,10 +79,10 @@
                         <div class="fw-bold">{{ trans('field.created_at') }}</div>
                     </div>
                     <div class="col-sm-7 col-md-8 col-lg-9 col-xl-10">
-                        @if ($user->created_at)
-                            {{ $user->created_at->isoFormat('LLLL') }}
+                        @if ($permission->created_at)
+                            {{ $permission->created_at->isoFormat('LLLL') }}
                             <br class="d-lg-none">
-                            ({{ $user->created_at->diffForHumans() }})
+                            ({{ $permission->created_at->diffForHumans() }})
                         @endif
                     </div>
                 </div>
@@ -147,10 +92,10 @@
                         <div class="fw-bold">{{ trans('field.updated_at') }}</div>
                     </div>
                     <div class="col-sm-7 col-md-8 col-lg-9 col-xl-10">
-                        @if ($user->updated_at)
-                            {{ $user->updated_at->isoFormat('LLLL') }}
+                        @if ($permission->updated_at)
+                            {{ $permission->updated_at->isoFormat('LLLL') }}
                             <br class="d-lg-none">
-                            ({{ $user->updated_at->diffForHumans() }})
+                            ({{ $permission->updated_at->diffForHumans() }})
                         @endif
                     </div>
                 </div>
@@ -159,17 +104,17 @@
             <hr />
 
             <div class="row g-3">
-                @can('user.edit')
+                @can('permission.edit')
                     <div class="col-6 col-sm-auto">
                         <a draggable="false" class="btn btn-success w-100"
-                            href="{{ route('cms.user.edit', ['user' => $user]) }}" wire:navigate>
+                            href="{{ route('cms.permission.edit', ['permission' => $permission]) }}" wire:navigate>
                             <span class="fas fa-edit fa-fw"></span>
                             {{ trans('index.edit') }}
                         </a>
                     </div>
                 @endcan
 
-                @can('user.delete')
+                @can('permission.delete')
                     <div class="col-6 col-sm-auto">
                         <button type="button" class="btn btn-danger w-100" wire:click="delete" wire:key="delete"
                             wire:offline.class="disabled" wire:offline.attr="disabled" wire:loading.class="disabled"

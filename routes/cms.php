@@ -24,6 +24,10 @@ Route::group(['middleware' => ['auth']], function () {
         ->middleware(['permission:property'])
         ->group(base_path('routes/cms/property.php'));
 
+    Route::prefix('permission')->name('permission.')->as('permission.')
+        ->middleware(['permission:permission'])
+        ->group(base_path('routes/cms/permission.php'));
+
     Route::prefix('role')->name('role.')->as('role.')
         ->middleware(['permission:role'])
         ->group(base_path('routes/cms/role.php'));

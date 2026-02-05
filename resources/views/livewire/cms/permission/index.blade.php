@@ -1,5 +1,5 @@
-@section('title', trans('page.role'))
-@section('icon', 'fas fa-key')
+@section('title', trans('page.permission'))
+@section('icon', 'fas fa-lock-open')
 
 <div class="container-fluid">
     <div class="card">
@@ -40,20 +40,20 @@
 
                 <div class="row g-3">
                     <div class="col-12 col-sm-5 col-md-4 col-lg-3 col-xl-2" wire:ignore>
-                        <label class="form-label" for="permission_id">
-                            {{ trans('field.permission_id') }}
+                        <label class="form-label" for="role_id">
+                            {{ trans('field.role_id') }}
                         </label>
                         <div class="input-group">
                             <div class="input-group-text">
                                 <span class="fas fa-key fa-fw "></span>
                             </div>
-                            <select class="form-select select2" id="permission_id" name="permission_id"
-                                wire:key="permission_id" wire:model.lazy="permission_id" wire:offline.class="disabled"
-                                wire:offline.attr="disabled" wire:loading.class="disabled" wire:loading.attr="disabled">
-                                <option value="">{{ trans('index.all') }} {{ trans('page.permission') }}</option>
-                                @foreach ($permissions as $permission)
-                                    <option value="{{ $permission->id }}" wire:key="permission-{{ $permission->id }}">
-                                        {{ $permission->name }}
+                            <select class="form-select select2" id="role_id" name="role_id" wire:key="role_id"
+                                wire:model.lazy="role_id" wire:offline.class="disabled" wire:offline.attr="disabled"
+                                wire:loading.class="disabled" wire:loading.attr="disabled">
+                                <option value="">{{ trans('index.all') }} {{ trans('page.role') }}</option>
+                                @foreach ($roles as $role)
+                                    <option value="{{ $role->id }}" wire:key="role-{{ $role->id }}">
+                                        {{ $role->name }}
                                     </option>
                                 @endforeach
                             </select>
@@ -72,9 +72,9 @@
 
         <div class="card-body">
             <div class="row g-3">
-                @can('role.add')
+                @can('permission.add')
                     <div class="col col-sm-auto">
-                        <a draggable="false" class="btn btn-primary w-100" href="{{ route('cms.role.add') }}"
+                        <a draggable="false" class="btn btn-primary w-100" href="{{ route('cms.permission.add') }}"
                             wire:navigate>
                             <span class="fas fa-plus fa-fw"></span>
                             <span>{{ trans('index.add') }}</span>
@@ -82,7 +82,7 @@
                     </div>
                 @endcan
 
-                @can('role.export')
+                @can('permission.export')
                     <div class="col col-sm-auto">
                         <button type="button" class="btn btn-success w-100" wire:click="export" wire:key="export"
                             wire:offline.class="disabled" wire:offline.attr="disabled" wire:loading.class="disabled"
@@ -110,6 +110,7 @@
                             <th width="1%">{{ trans('field.id') }}</th>
                             <th>{{ trans('field.name') }}</th>
                             <th width="1%">{{ trans('field.guard_name') }}</th>
+                            <th width="1%">{{ trans('field.roles') }}</th>
                             <th width="1%">{{ trans('index.total') }} {{ trans('page.permission') }}</th>
                             <th width="1%">{{ trans('index.total') }} {{ trans('page.user') }}</th>
                             <th width="1%">{{ trans('field.created_at') }}</th>
@@ -117,55 +118,59 @@
                         </tr>
                     </thead>
                     <tbody>
-                        @forelse ($roles as $role)
-                            <tr wire:key="role-{{ $role->id }}">
+                        @forelse ($permissions as $permission)
+                            <tr wire:key="permission-{{ $permission->id }}">
                                 <td class="text-center">{{ $loop->iteration }}</td>
-                                <td class="text-center">{{ $role->id }}</td>
-                                <td>{{ $role->name }}</td>
-                                <td class="text-center">{{ $role->guard_name }}</td>
+                                <td class="text-center">{{ $permission->id }}</td>
+                                <td>{{ $permission->name }}</td>
+                                <td class="text-center">{{ $permission->guard_name }}</td>
+                                <td>{{ $permission->roles->pluck('name')->join(', ') }}</td>
                                 <td class="text-center">
                                     <a draggable="false"
-                                        href="{{ route('cms.permission.index', ['role_id' => $role->id]) }}"
+                                        href="{{ route('cms.role.index', ['permission_id' => $permission->id]) }}"
                                         wire:navigate>
-                                        {{ $role->permissions_count }}
+                                        {{ $permission->roles_count }}
                                     </a>
                                 </td>
                                 <td class="text-center">
                                     <a draggable="false"
-                                        href="{{ route('cms.user.index', ['role_id' => $role->id]) }}" wire:navigate>
-                                        {{ $role->users_count }}
+                                        href="{{ route('cms.user.index', ['permission_id' => $permission->id]) }}"
+                                        wire:navigate>
+                                        {{ $permission->users_count }}
                                     </a>
                                 </td>
-                                <td>{{ $role->created_at->isoFormat('HH:mm - ddd, DD MMM YYYY') }}</td>
+                                <td>{{ $permission->created_at->isoFormat('HH:mm - ddd, DD MMM YYYY') }}</td>
                                 <td>
                                     <div class="d-flex gap-2">
-                                        @can('role.detail')
+                                        @can('permission.detail')
                                             <a draggable="false" class="btn btn-info btn-sm"
-                                                href="{{ route('cms.role.detail', ['role' => $role]) }}" wire:navigate>
+                                                href="{{ route('cms.permission.detail', ['permission' => $permission]) }}"
+                                                wire:navigate>
                                                 <span class="fas fa-list fa-fw"></span>
                                                 <span>{{ trans('index.detail') }}</span>
                                             </a>
                                         @endcan
 
-                                        @can('role.edit')
+                                        @can('permission.edit')
                                             <a draggable="false" class="btn btn-success btn-sm"
-                                                href="{{ route('cms.role.edit', ['role' => $role]) }}" wire:navigate>
+                                                href="{{ route('cms.permission.edit', ['permission' => $permission]) }}"
+                                                wire:navigate>
                                                 <span class="fas fa-edit fa-fw"></span>
                                                 <span>{{ trans('index.edit') }}</span>
                                             </a>
                                         @endcan
 
-                                        @can('role.delete')
+                                        @can('permission.delete')
                                             <button type="button" class="btn btn-danger btn-sm"
-                                                wire:click="delete({{ $role->id }})"
-                                                wire:key="delete({{ $role->id }})" wire:offline.class="disabled"
+                                                wire:click="delete({{ $permission->id }})"
+                                                wire:key="delete({{ $permission->id }})" wire:offline.class="disabled"
                                                 wire:offline.attr="disabled" wire:loading.class="disabled"
                                                 wire:loading.attr="disabled">
-                                                <span wire:loading.remove wire:target="delete({{ $role->id }})">
+                                                <span wire:loading.remove wire:target="delete({{ $permission->id }})">
                                                     <span class="fas fa-trash fa-fw"></span>
                                                     <span>{{ trans('index.delete') }}</span>
                                                 </span>
-                                                <span wire:loading wire:target="delete({{ $role->id }})"
+                                                <span wire:loading wire:target="delete({{ $permission->id }})"
                                                     class="w-100">
                                                     <span class="spinner-border spinner-border-sm"></span>
                                                     <span>{{ trans('index.delete') }}</span>
@@ -186,7 +191,7 @@
                 </table>
             </div>
 
-            {{ $roles->links('components.layouts.pagination') }}
+            {{ $permissions->links('components.layouts.pagination') }}
         </div>
     </div>
 </div>

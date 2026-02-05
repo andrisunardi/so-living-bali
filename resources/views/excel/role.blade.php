@@ -59,22 +59,22 @@
                 <td valign="middle" align="center">
                     {{ $role->id }}
                 </td>
-                <td valign="middle">
+                <td valign="middle" align="left">
                     {{ $role->name }}
                 </td>
-                <td valign="middle">
+                <td valign="middle" align="center">
                     {{ $role->guard_name }}
                 </td>
-                <td valign="middle">
+                <td valign="middle" align="center">
                     {{ $role->permissions_count }}
                 </td>
-                <td valign="middle">
+                <td valign="middle" align="center">
                     {{ $role->users_count }}
                 </td>
-                <td valign="middle">
+                <td valign="middle" align="left">
                     {{ $role->created_at }}
                 </td>
-                <td valign="middle">
+                <td valign="middle" align="left">
                     {{ $role->updated_at }}
                 </td>
             </tr>
