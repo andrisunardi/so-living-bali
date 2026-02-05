@@ -107,9 +107,8 @@
 
                 <div class="row">
                     <div class="col-6 col-sm-auto">
-                        <button type="submit" class="btn btn-primary w-100" wire:click="submit" wire:key="submit"
-                            wire:offline.class="disabled" wire:offline.attr="disabled" wire:loading.class="disabled"
-                            wire:loading.attr="disabled">
+                        <button type="submit" class="btn btn-primary w-100" wire:offline.class="disabled"
+                            wire:offline.attr="disabled" wire:loading.class="disabled" wire:loading.attr="disabled">
                             <span wire:loading.remove wire:target="submit">
                                 <span class="fas fa-paper-plane fa-fw"></span>
                                 {{ trans('index.submit') }}
@@ -121,7 +120,7 @@
                         </button>
                     </div>
                     <div class="col-6 col-sm-auto">
-                        <button type="button" class="btn btn-warning w-100" wire:click="resetForm" wire:key="resetForm"
+                        <button type="button" class="btn btn-warning w-100" wire:click="resetForm"
                             wire:offline.class="disabled" wire:offline.attr="disabled" wire:loading.class="disabled"
                             wire:loading.attr="disabled">
                             <span wire:loading.remove wire:target="resetForm">
