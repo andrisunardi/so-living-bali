@@ -187,6 +187,12 @@ use Spatie\Activitylog\Traits\LogsActivity;
  * @method static Builder<static>|Property whereInternetSpeedtest($value)
  * @method static Builder<static>|Property whereOutdoorAreaSize($value)
  *
+ * @property string|null $image_url
+ * @property string $slug
+ *
+ * @method static Builder<static>|Property whereImageUrl($value)
+ * @method static Builder<static>|Property whereSlug($value)
+ *
  * @mixin \Eloquent
  */
 class Property extends Model
@@ -258,7 +264,9 @@ class Property extends Model
         'operational_risk',
         'operational_risk_comment',
 
+        'image_url',
         'status',
+        'slug',
     ];
 
     protected $hidden = [];
@@ -326,7 +334,9 @@ class Property extends Model
             'operational_risk' => PropertyOperationalRisk::class,
             'operational_risk_comment' => 'string',
 
+            'image_url' => 'string',
             'status' => PropertyStatus::class,
+            'slug' => 'string',
         ];
     }
 

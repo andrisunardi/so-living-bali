@@ -72,7 +72,9 @@ return new class extends Migration
             $table->boolean('operational_risk')->unsigned()->nullable();
             $table->text('operational_risk_comment')->nullable();
 
+            $table->string('image_url', 200)->nullable();
             $table->boolean('status')->unsigned()->default(PropertyStatus::Pending);
+            $table->string('slug', 10)->unique();
 
             $table->foreignIdFor(User::class, 'created_by')->nullable()->constrained('users')->nullOnDelete();
             $table->foreignIdFor(User::class, 'updated_by')->nullable()->constrained('users')->nullOnDelete();

@@ -218,6 +218,10 @@ namespace App\Models{
  * @method static Builder<static>|Property whereInternetSpeedtest($value)
  * @method static Builder<static>|Property whereOutdoorAreaSize($value)
  * @mixin \Eloquent
+ * @property string|null $image_url
+ * @property string $slug
+ * @method static \Illuminate\Database\Eloquent\Builder<static>|Property whereImageUrl($value)
+ * @method static \Illuminate\Database\Eloquent\Builder<static>|Property whereSlug($value)
  */
 	class Property extends \Eloquent {}
 }

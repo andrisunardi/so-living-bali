@@ -2,10 +2,13 @@
 
 return [
 
+    'format' => 'Format',
     'min' => 'Min',
     'max' => 'Max',
     'minlength' => 'Minlength',
     'maxlength' => 'Maxlength',
+    'min_size' => 'Min Size',
+    'max_size' => 'Max Size',
     'length' => 'Length',
     'characters' => 'Characters',
     'unique' => 'Unique',

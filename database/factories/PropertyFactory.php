@@ -22,8 +22,11 @@ class PropertyFactory extends Factory
     {
         $user = User::first() ?? User::factory()->create();
 
+        $code = Str::random(10);
+        $slug = Str::slug($code);
+
         return [
-            'code' => Str::random(10),
+            'code' => $code,
             'name' => fake()->name(),
             'user_id' => $user->id,
             'availability_date' => fake()->date(),
@@ -83,7 +86,9 @@ class PropertyFactory extends Factory
             'operational_risk' => fake()->randomElement(PropertyOperationalRisk::cases()),
             'operational_risk_comment' => fake()->text(),
 
+            'image_url' => fake()->imageUrl(),
             'status' => fake()->randomElement(PropertyStatus::cases()),
+            'slug' => $slug,
         ];
     }
 }

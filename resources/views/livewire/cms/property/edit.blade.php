@@ -129,3 +129,15 @@
         </div>
     </div>
 </div>
+
+@push('script')
+    <script>
+        $("#user_id").on("change", function() {
+            @this.set("user_id", $(this).val())
+        })
+
+        $("#status").on("change", function() {
+            @this.set("status", $(this).val())
+        })
+    </script>
+@endpush

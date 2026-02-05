@@ -181,7 +181,8 @@ return [
         'property_type' => 'Property Type',
         'price_range' => 'Price Range',
         'availability_date' => 'Availability Date',
-        'index' => 'Index',
+        'image' => 'Image',
+
         'index' => 'Index',
         'index' => 'Index',
         'index' => 'Index',

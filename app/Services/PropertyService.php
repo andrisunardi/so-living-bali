@@ -3,7 +3,9 @@
 namespace App\Services;
 
 use App\Models\Property;
+use Illuminate\Support\Arr;
 use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Str;
 
 class PropertyService
 {
@@ -67,11 +69,36 @@ class PropertyService
         $table = (new Property)->getTable();
         DB::statement("ALTER TABLE {$table} AUTO_INCREMENT = 1");
 
+        $data['availability_date'] = $data['availability_date'] ?: null;
+        $data['visit_date'] = $data['visit_date'] ?: null;
+        $data['latitude'] = $data['latitude'] ?: null;
+        $data['longitude'] = $data['longitude'] ?: null;
+
+        if ($data['image']) {
+            $data['image_url'] = null;
+        }
+
+        $data['slug'] = Str::slug($data['code']);
+
+        Arr::pull($data, 'image');
+
         return Property::create($data);
     }
 
     public function update(Property $property, array $data = []): Property
     {
+        $data['availability_date'] = $data['availability_date'] ?: null;
+        $data['visit_date'] = $data['visit_date'] ?: null;
+        $data['latitude'] = $data['latitude'] ?: null;
+
+        if ($data['image']) {
+            $data['image_url'] = null;
+        }
+
+        $data['slug'] = Str::slug($data['code']);
+
+        Arr::pull($data, 'image');
+
         $property->update($data);
         $property->refresh();
 
