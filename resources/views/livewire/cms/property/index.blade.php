@@ -39,11 +39,11 @@
                 </div>
 
                 <div class="row g-3">
-                    <div class="col-12 col-sm-6 col-lg-3 col-xl-2" wire:ignore>
+                    <div class="col-12 col-sm-6 col-lg-3 col-xl-2">
                         <label class="form-label" for="user_id">
                             {{ trans('field.user_id') }}
                         </label>
-                        <div class="input-group">
+                        <div class="input-group" wire:ignore>
                             <div class="input-group-text">
                                 <span class="fas fa-user fa-fw "></span>
                             </div>
@@ -60,11 +60,11 @@
                         </div>
                     </div>
 
-                    <div class="col-12 col-sm-6 col-lg-3 col-xl-2" wire:ignore>
+                    <div class="col-12 col-sm-6 col-lg-3 col-xl-2">
                         <label class="form-label" for="status">
                             {{ trans('field.status') }}
                         </label>
-                        <div class="input-group">
+                        <div class="input-group" wire:ignore>
                             <div class="input-group-text">
                                 <span class="fas fa-list fa-fw "></span>
                             </div>

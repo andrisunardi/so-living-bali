@@ -3,10 +3,11 @@
 namespace App\Livewire\Forms\CMS\Property;
 
 use App\Enums\Property\PropertyElectricity;
+use App\Enums\Property\PropertyLivingStyle;
 use App\Enums\Property\PropertyOperationalRisk;
 use App\Enums\Property\PropertyOrientation;
+use App\Enums\Property\PropertyOwnerPriceFlexibility;
 use App\Enums\Property\PropertyPowerBackup;
-use App\Enums\Property\PropertyPriceFlexibility;
 use App\Enums\Property\PropertyRentalType;
 use App\Enums\Property\PropertyStatus;
 use App\Enums\Property\PropertyTargetProfile;
@@ -30,23 +31,23 @@ class PropertyEditForm extends Form
     #[Validate('nullable|integer|exists:users,id')]
     public ?int $user_id = null;
 
-    #[Validate('nullable|date|date_format:Y-m-d|min:today|max:2099-12-31')]
-    public string $availability_date = '';
+    #[Validate('nullable|date|date_format:Y-m-d|after_or_equal:today|before_or_equal:2999-12-31')]
+    public ?string $availability_date = '';
 
-    #[Validate('nullable|date|date_format:Y-m-d|min:today|max:2099-12-31')]
-    public string $visit_date = '';
+    #[Validate('nullable|date|date_format:Y-m-d|after_or_equal:today|before_or_equal:2999-12-31')]
+    public ?string $visit_date = '';
 
     #[Validate('nullable|decimal:0,8|between:-90,90')]
-    public string $latitude = '';
+    public ?string $latitude = '';
 
     #[Validate('nullable|decimal:0,8|between:-180,180')]
-    public string $longitude = '';
+    public ?string $longitude = '';
 
     #[Validate('nullable|string|min:1|max:200')]
-    public string $address = '';
+    public ?string $address = '';
 
     #[Validate('nullable|string|min:1|max:50')]
-    public string $area = '';
+    public ?string $area = '';
 
     #[Validate('nullable|integer|min:0|max:9999999999')]
     public ?int $land_size = null;
@@ -64,7 +65,7 @@ class PropertyEditForm extends Form
     public ?int $number_of_bathrooms = null;
 
     #[Validate('nullable|string|min:1|max:50')]
-    public string $pool_size = '';
+    public ?string $pool_size = '';
 
     #[Validate('nullable|boolean')]
     public bool $ensuite_bathrooms = false;
@@ -75,8 +76,8 @@ class PropertyEditForm extends Form
     #[Validate('nullable|boolean')]
     public bool $storage = false;
 
-    #[Validate('nullable|boolean')]
-    public bool $living_style = false;
+    #[Validate(['nullable', 'integer', new Enum(PropertyLivingStyle::class)])]
+    public ?int $living_style = null;
 
     #[Validate('nullable|boolean')]
     public bool $full_legal_documentation = false;
@@ -90,7 +91,7 @@ class PropertyEditForm extends Form
     #[Validate('nullable|integer|min:0|max:9999999999')]
     public ?int $minimum_rental_duration_months = null;
 
-    #[Validate(['nullable', 'integer', new Enum(PropertyPriceFlexibility::class)])]
+    #[Validate(['nullable', 'integer', new Enum(PropertyOwnerPriceFlexibility::class)])]
     public ?int $owner_price_flexibility = null;
 
     #[Validate('nullable|boolean')]
@@ -112,7 +113,7 @@ class PropertyEditForm extends Form
     public ?int $orientation = null;
 
     #[Validate('nullable|string|min:0|max:65535')]
-    public string $view = '';
+    public ?string $view = '';
 
     #[Validate('nullable|boolean')]
     public bool $living_area_has_natural_light = false;
@@ -148,13 +149,13 @@ class PropertyEditForm extends Form
     public bool $design_driven_property = false;
 
     #[Validate('nullable|string|min:0|max:65535')]
-    public string $usability_limitations = '';
+    public ?string $usability_limitations = '';
 
     #[Validate('nullable|boolean')]
     public bool $trade_off_identified = false;
 
     #[Validate('nullable|string|min:0|max:65535')]
-    public string $trade_off_description = '';
+    public ?string $trade_off_description = '';
 
     #[Validate(['nullable', 'integer', new Enum(PropertyTargetProfile::class)])]
     public ?int $target_profile = null;
@@ -163,7 +164,7 @@ class PropertyEditForm extends Form
     public ?int $operational_risk = null;
 
     #[Validate('nullable|string|min:0|max:65535')]
-    public string $operational_risk_comment = '';
+    public ?string $operational_risk_comment = '';
 
     #[Validate('nullable|image|file|mimes:jpg,jpeg,png,gif,webp|max:12288')]
     public ?TemporaryUploadedFile $image = null;
@@ -176,7 +177,53 @@ class PropertyEditForm extends Form
         $this->property = $property;
         $this->code = $property->code;
         $this->name = $property->name;
+        $this->user_id = $property->user_id;
+        $this->availability_date = $property->availability_date?->toDateString();
+        $this->visit_date = $property->visit_date?->toDateString();
+        $this->latitude = $property->latitude;
+        $this->longitude = $property->longitude;
         $this->address = $property->address;
+        $this->area = $property->area;
+        $this->land_size = $property->land_size;
+        $this->building_size = $property->building_size;
+        $this->number_of_floors = $property->number_of_floors;
+        $this->outdoor_area_size = $property->outdoor_area_size;
+        $this->number_of_bathrooms = $property->number_of_bathrooms;
+        $this->pool_size = $property->pool_size;
+        $this->ensuite_bathrooms = $property->ensuite_bathrooms;
+        $this->guest_toilet = $property->guest_toilet;
+        $this->storage = $property->storage;
+        $this->living_style = $property->living_style?->value;
+        $this->full_legal_documentation = $property->full_legal_documentation;
+        $this->fully_furnished = $property->fully_furnished;
+        $this->rental_type = $property->rental_type?->value;
+        $this->minimum_rental_duration_months = $property->minimum_rental_duration_months;
+        $this->owner_price_flexibility = $property->owner_price_flexibility?->value;
+        $this->price_coherent_with_upper = $property->price_coherent_with_upper;
+        $this->not_directly_exposed_to_main_road = $property->not_directly_exposed_to_main_road;
+        $this->no_festive_venue_nearby = $property->no_festive_venue_nearby;
+        $this->no_ongoing = $property->no_ongoing;
+        $this->quiet_access_road = $property->quiet_access_road;
+        $this->orientation = $property->orientation?->value;
+        $this->view = $property->view;
+        $this->living_area_has_natural_light = $property->living_area_has_natural_light;
+        $this->bedroom_1_has_natural_light = $property->bedroom_1_has_natural_light;
+        $this->bedroom_2_has_natural_light = $property->bedroom_2_has_natural_light;
+        $this->noise_source_identified = $property->noise_source_identified;
+        $this->internet_speedtest = $property->internet_speedtest;
+        $this->power_backup = $property->power_backup?->value;
+        $this->water_source = $property->water_source?->value;
+        $this->electricity = $property->electricity?->value;
+        $this->eligible_for_upper = $property->eligible_for_upper;
+        $this->eligible_for_premium = $property->eligible_for_premium;
+        $this->design_driven_property = $property->design_driven_property;
+        $this->usability_limitations = $property->usability_limitations;
+        $this->trade_off_identified = $property->trade_off_identified;
+        $this->trade_off_description = $property->trade_off_description;
+        $this->target_profile = $property->target_profile?->value;
+        $this->operational_risk = $property->operational_risk?->value;
+        $this->operational_risk_comment = $property->operational_risk_comment;
+        $this->status = $property->status?->value;
     }
 
     public function rules(): array

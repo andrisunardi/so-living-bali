@@ -2,7 +2,7 @@
 
 namespace App\Enums\Property;
 
-enum PropertyPriceFlexibility: int
+enum PropertyOwnerPriceFlexibility: int
 {
     case Fixed = 1;
 

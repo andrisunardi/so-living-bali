@@ -42,7 +42,7 @@ return [
         'PropertyOperationalRisk' => App\Enums\Property\PropertyOperationalRisk::class,
         'PropertyOrientation' => App\Enums\Property\PropertyOrientation::class,
         'PropertyPowerBackup' => App\Enums\Property\PropertyPowerBackup::class,
-        'PropertyPriceFlexibility' => App\Enums\Property\PropertyPriceFlexibility::class,
+        'PropertyOwnerPriceFlexibility' => App\Enums\Property\PropertyOwnerPriceFlexibility::class,
         'PropertyRentalType' => App\Enums\Property\PropertyRentalType::class,
         'PropertyStatus' => App\Enums\Property\PropertyStatus::class,
         'PropertyTargetProfile' => App\Enums\Property\PropertyTargetProfile::class,

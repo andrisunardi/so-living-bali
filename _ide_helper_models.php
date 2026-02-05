@@ -81,7 +81,7 @@ namespace App\Models{
  * @property bool $fully_furnished
  * @property PropertyRentalType|null $rental_type
  * @property int|null $minimum_rental_duration_months
- * @property PropertyPriceFlexibility|null $owner_price_flexibility
+ * @property PropertyOwnerPriceFlexibility|null $owner_price_flexibility
  * @property bool $price_coherent_with_upper
  * @property bool $not_directly_exposed_to_main_road
  * @property bool $no_festive_venue_nearby

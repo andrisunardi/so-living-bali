@@ -6,8 +6,8 @@ use App\Enums\Property\PropertyElectricity;
 use App\Enums\Property\PropertyLivingStyle;
 use App\Enums\Property\PropertyOperationalRisk;
 use App\Enums\Property\PropertyOrientation;
+use App\Enums\Property\PropertyOwnerPriceFlexibility;
 use App\Enums\Property\PropertyPowerBackup;
-use App\Enums\Property\PropertyPriceFlexibility;
 use App\Enums\Property\PropertyRentalType;
 use App\Enums\Property\PropertyStatus;
 use App\Enums\Property\PropertyTargetProfile;
@@ -49,7 +49,7 @@ use Spatie\Activitylog\Traits\LogsActivity;
  * @property bool $fully_furnished
  * @property PropertyRentalType|null $rental_type
  * @property int|null $minimum_rental_duration_months
- * @property PropertyPriceFlexibility|null $owner_price_flexibility
+ * @property PropertyOwnerPriceFlexibility|null $owner_price_flexibility
  * @property bool $price_coherent_with_upper
  * @property bool $not_directly_exposed_to_main_road
  * @property bool $no_festive_venue_nearby
@@ -301,7 +301,7 @@ class Property extends Model
             'fully_furnished' => 'boolean',
             'rental_type' => PropertyRentalType::class,
             'minimum_rental_duration_months' => 'integer',
-            'owner_price_flexibility' => PropertyPriceFlexibility::class,
+            'owner_price_flexibility' => PropertyOwnerPriceFlexibility::class,
             'price_coherent_with_upper' => 'boolean',
 
             'not_directly_exposed_to_main_road' => 'boolean',
@@ -392,12 +392,12 @@ class Property extends Model
 
     public function scopeFixed(Builder $query): void
     {
-        $query->where('price_flexibility', PropertyPriceFlexibility::Fixed);
+        $query->where('price_flexibility', PropertyOwnerPriceFlexibility::Fixed);
     }
 
     public function scopeNegotiable(Builder $query): void
     {
-        $query->where('price_flexibility', PropertyPriceFlexibility::Negotiable);
+        $query->where('price_flexibility', PropertyOwnerPriceFlexibility::Negotiable);
     }
 
     public function scopeMorning(Builder $query): void

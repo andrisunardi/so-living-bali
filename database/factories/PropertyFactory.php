@@ -6,8 +6,8 @@ use App\Enums\Property\PropertyElectricity;
 use App\Enums\Property\PropertyLivingStyle;
 use App\Enums\Property\PropertyOperationalRisk;
 use App\Enums\Property\PropertyOrientation;
+use App\Enums\Property\PropertyOwnerPriceFlexibility;
 use App\Enums\Property\PropertyPowerBackup;
-use App\Enums\Property\PropertyPriceFlexibility;
 use App\Enums\Property\PropertyRentalType;
 use App\Enums\Property\PropertyStatus;
 use App\Enums\Property\PropertyTargetProfile;
@@ -53,7 +53,7 @@ class PropertyFactory extends Factory
             'fully_furnished' => fake()->boolean(),
             'rental_type' => fake()->randomElement(PropertyRentalType::cases()),
             'minimum_rental_duration_months' => fake()->numberBetween(1, 12),
-            'owner_price_flexibility' => fake()->randomElement(PropertyPriceFlexibility::cases()),
+            'owner_price_flexibility' => fake()->randomElement(PropertyOwnerPriceFlexibility::cases()),
             'price_coherent_with_upper' => fake()->boolean(),
 
             'not_directly_exposed_to_main_road' => fake()->boolean(),

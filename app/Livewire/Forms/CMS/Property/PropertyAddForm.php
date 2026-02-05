@@ -3,10 +3,11 @@
 namespace App\Livewire\Forms\CMS\Property;
 
 use App\Enums\Property\PropertyElectricity;
+use App\Enums\Property\PropertyLivingStyle;
 use App\Enums\Property\PropertyOperationalRisk;
 use App\Enums\Property\PropertyOrientation;
+use App\Enums\Property\PropertyOwnerPriceFlexibility;
 use App\Enums\Property\PropertyPowerBackup;
-use App\Enums\Property\PropertyPriceFlexibility;
 use App\Enums\Property\PropertyRentalType;
 use App\Enums\Property\PropertyStatus;
 use App\Enums\Property\PropertyTargetProfile;
@@ -17,7 +18,6 @@ use Illuminate\Validation\Rules\Enum;
 use Livewire\Attributes\Validate;
 use Livewire\Features\SupportFileUploads\TemporaryUploadedFile;
 use Livewire\Form;
-use PropertyLivingStyle;
 
 class PropertyAddForm extends Form
 {
@@ -30,10 +30,10 @@ class PropertyAddForm extends Form
     #[Validate('nullable|integer|exists:users,id')]
     public ?int $user_id = null;
 
-    #[Validate('nullable|date|date_format:Y-m-d|min:today|max:2099-12-31')]
+    #[Validate('nullable|date|date_format:Y-m-d|after_or_equal:today|before_or_equal:2999-12-31')]
     public string $availability_date = '';
 
-    #[Validate('nullable|date|date_format:Y-m-d|min:today|max:2099-12-31')]
+    #[Validate('nullable|date|date_format:Y-m-d|after_or_equal:today|before_or_equal:2999-12-31')]
     public string $visit_date = '';
 
     #[Validate('nullable|decimal:0,8|between:-90,90')]
@@ -48,19 +48,19 @@ class PropertyAddForm extends Form
     #[Validate('nullable|string|min:1|max:50')]
     public string $area = '';
 
-    #[Validate('nullable|integer|min:0|max:9999999999')]
+    #[Validate('nullable|integer|min:1|max:9999999999')]
     public ?int $land_size = null;
 
-    #[Validate('nullable|integer|min:0|max:9999999999')]
+    #[Validate('nullable|integer|min:1|max:9999999999')]
     public ?int $building_size = null;
 
-    #[Validate('nullable|integer|min:0|max:255')]
+    #[Validate('nullable|integer|min:1|max:255')]
     public ?int $number_of_floors = null;
 
-    #[Validate('nullable|integer|min:0|max:9999999999')]
+    #[Validate('nullable|integer|min:1|max:9999999999')]
     public ?int $outdoor_area_size = null;
 
-    #[Validate('nullable|integer|min:0|max:255')]
+    #[Validate('nullable|integer|min:1|max:255')]
     public ?int $number_of_bathrooms = null;
 
     #[Validate('nullable|string|min:1|max:50')]
@@ -87,10 +87,10 @@ class PropertyAddForm extends Form
     #[Validate(['nullable', 'integer', new Enum(PropertyRentalType::class)])]
     public ?int $rental_type = null;
 
-    #[Validate('nullable|integer|min:0|max:9999999999')]
+    #[Validate('nullable|integer|min:1|max:9999999999')]
     public ?int $minimum_rental_duration_months = null;
 
-    #[Validate(['nullable', 'integer', new Enum(PropertyPriceFlexibility::class)])]
+    #[Validate(['nullable', 'integer', new Enum(PropertyOwnerPriceFlexibility::class)])]
     public ?int $owner_price_flexibility = null;
 
     #[Validate('nullable|boolean')]
@@ -111,7 +111,7 @@ class PropertyAddForm extends Form
     #[Validate(['nullable', 'integer', new Enum(PropertyOrientation::class)])]
     public ?int $orientation = null;
 
-    #[Validate('nullable|string|min:0|max:65535')]
+    #[Validate('nullable|string|min:1|max:65535')]
     public string $view = '';
 
     #[Validate('nullable|boolean')]
@@ -123,10 +123,10 @@ class PropertyAddForm extends Form
     #[Validate('nullable|boolean')]
     public bool $bedroom_2_has_natural_light = false;
 
-    #[Validate('nullable|boolean')]
-    public bool $noise_source_identified = false;
+    #[Validate('nullable|string|min:1|max:65535')]
+    public string $noise_source_identified = '';
 
-    #[Validate('nullable|integer|min:0|max:9999999999')]
+    #[Validate('nullable|integer|min:1|max:9999999999')]
     public ?int $internet_speedtest = null;
 
     #[Validate(['nullable', 'integer', new Enum(PropertyPowerBackup::class)])]
@@ -147,13 +147,13 @@ class PropertyAddForm extends Form
     #[Validate('nullable|boolean')]
     public bool $design_driven_property = false;
 
-    #[Validate('nullable|string|min:0|max:65535')]
+    #[Validate('nullable|string|min:1|max:65535')]
     public string $usability_limitations = '';
 
     #[Validate('nullable|boolean')]
     public bool $trade_off_identified = false;
 
-    #[Validate('nullable|string|min:0|max:65535')]
+    #[Validate('nullable|string|min:1|max:65535')]
     public string $trade_off_description = '';
 
     #[Validate(['nullable', 'integer', new Enum(PropertyTargetProfile::class)])]
@@ -162,7 +162,7 @@ class PropertyAddForm extends Form
     #[Validate(['nullable', 'integer', new Enum(PropertyOperationalRisk::class)])]
     public ?int $operational_risk = null;
 
-    #[Validate('nullable|string|min:0|max:65535')]
+    #[Validate('nullable|string|min:1|max:65535')]
     public string $operational_risk_comment = '';
 
     #[Validate('nullable|image|file|mimes:jpg,jpeg,png,gif,webp|max:12288')]

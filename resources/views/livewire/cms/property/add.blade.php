@@ -104,11 +104,11 @@
                         @enderror
                     </div>
 
-                    <div class="col-sm-6" wire:ignore>
+                    <div class="col-sm-6">
                         <label class="form-label" for="user_id">
                             {{ trans('property.agent_name') }}
                         </label>
-                        <div class="input-group">
+                        <div class="input-group" wire:ignore>
                             <div class="input-group-text">
                                 <span class="fas fa-user fa-fw "></span>
                             </div>
@@ -123,7 +123,7 @@
                                 @endforeach
                             </select>
                         </div>
-                        @error('form.code')
+                        @error('form.user_id')
                             <div class="form-text text-danger">{{ $message }}</div>
                         @enderror
                     </div>
@@ -191,9 +191,13 @@
                             </div>
                             <input type="number" class="form-control" id="latitude" name="latitude"
                                 min="-90" max="90" step="0.0000001"
-                                placeholder="{{ trans('index.ex') . '. -8.6648246' }}" required
-                                wire:model="form.latitude" wire:offline.class="disabled" wire:offline.attr="disabled"
+                                placeholder="{{ trans('index.ex') . '. -8.6648246' }}" wire:model="form.latitude"
+                                wire:offline.class="disabled" wire:offline.attr="disabled"
                                 wire:loading.class="disabled" wire:loading.attr="disabled">
+                        </div>
+                        <div class="form-text">
+                            {{ trans('helper.min') }} : -90,
+                            {{ trans('helper.max') }} : 90
                         </div>
                         @error('form.latitude')
                             <div class="form-text text-danger">{{ $message }}</div>
@@ -210,10 +214,13 @@
                             </div>
                             <input type="number" class="form-control" id="longitude" name="longitude"
                                 min="-180" max="180" step="0.0000001"
-                                placeholder="{{ trans('index.ex') . '. -8.6648246' }}" required
-                                wire:model="form.longitude" wire:offline.class="disabled"
-                                wire:offline.attr="disabled" wire:loading.class="disabled"
-                                wire:loading.attr="disabled">
+                                placeholder="{{ trans('index.ex') . '. -8.6648246' }}" wire:model="form.longitude"
+                                wire:offline.class="disabled" wire:offline.attr="disabled"
+                                wire:loading.class="disabled" wire:loading.attr="disabled">
+                        </div>
+                        <div class="form-text">
+                            {{ trans('helper.min') }} : -180,
+                            {{ trans('helper.max') }} : 180
                         </div>
                         @error('form.longitude')
                             <div class="form-text text-danger">{{ $message }}</div>
@@ -229,7 +236,7 @@
                                 <span class="fas fa-map-location-dot fa-fw "></span>
                             </div>
                             <input type="text" class="form-control" id="address" name="address" minlength="1"
-                                maxlength="100" placeholder="{{ trans('index.ex') . '. Denpasar' }}" required
+                                maxlength="100" placeholder="{{ trans('index.ex') . '. Jalan Raya Canggu I No 1' }}"
                                 wire:model="form.address" wire:offline.class="disabled" wire:offline.attr="disabled"
                                 wire:loading.class="disabled" wire:loading.attr="disabled">
                         </div>
@@ -251,7 +258,7 @@
                                 <span class="fas fa-city fa-fw "></span>
                             </div>
                             <input type="text" class="form-control" id="area" name="area" minlength="1"
-                                maxlength="50" placeholder="{{ trans('index.ex') . '. Denpasar' }}" required
+                                maxlength="50" placeholder="{{ trans('index.ex') . '. Badung' }}"
                                 wire:model="form.area" wire:offline.class="disabled" wire:offline.attr="disabled"
                                 wire:loading.class="disabled" wire:loading.attr="disabled">
                         </div>
@@ -282,9 +289,13 @@
                             </div>
                             <input type="number" class="form-control" id="land_size" name="land_size"
                                 min="1" max="999999999" placeholder="{{ trans('index.ex') . '. 100' }}"
-                                required wire:model="form.land_size" wire:offline.class="disabled"
+                                wire:model="form.land_size" wire:offline.class="disabled"
                                 wire:offline.attr="disabled" wire:loading.class="disabled"
                                 wire:loading.attr="disabled">
+                        </div>
+                        <div class="form-text">
+                            {{ trans('helper.min') }} : 1,
+                            {{ trans('helper.max') }} : 999999999
                         </div>
                         @error('form.land_size')
                             <div class="form-text text-danger">{{ $message }}</div>
@@ -301,9 +312,13 @@
                             </div>
                             <input type="number" class="form-control" id="building_size" name="building_size"
                                 min="1" max="999999999" placeholder="{{ trans('index.ex') . '. 100' }}"
-                                required wire:model="form.building_size" wire:offline.class="disabled"
+                                wire:model="form.building_size" wire:offline.class="disabled"
                                 wire:offline.attr="disabled" wire:loading.class="disabled"
                                 wire:loading.attr="disabled">
+                        </div>
+                        <div class="form-text">
+                            {{ trans('helper.min') }} : 1,
+                            {{ trans('helper.max') }} : 999999999
                         </div>
                         @error('form.building_size')
                             <div class="form-text text-danger">{{ $message }}</div>
@@ -319,10 +334,14 @@
                                 <span class="fas fa-layer-group fa-fw "></span>
                             </div>
                             <input type="number" class="form-control" id="number_of_floors" name="number_of_floors"
-                                min="1" max="255" placeholder="{{ trans('index.ex') . '. 2' }}" required
+                                min="1" max="255" placeholder="{{ trans('index.ex') . '. 2' }}"
                                 wire:model="form.number_of_floors" wire:offline.class="disabled"
                                 wire:offline.attr="disabled" wire:loading.class="disabled"
                                 wire:loading.attr="disabled">
+                        </div>
+                        <div class="form-text">
+                            {{ trans('helper.min') }} : 1,
+                            {{ trans('helper.max') }} : 255
                         </div>
                         @error('form.number_of_floors')
                             <div class="form-text text-danger">{{ $message }}</div>
@@ -339,10 +358,13 @@
                             </div>
                             <input type="number" class="form-control" id="outdoor_area_size"
                                 name="outdoor_area_size" min="1" max="999999999"
-                                placeholder="{{ trans('index.ex') . '. 100' }}" required
-                                wire:model="form.outdoor_area_size" wire:offline.class="disabled"
-                                wire:offline.attr="disabled" wire:loading.class="disabled"
-                                wire:loading.attr="disabled">
+                                placeholder="{{ trans('index.ex') . '. 100' }}" wire:model="form.outdoor_area_size"
+                                wire:offline.class="disabled" wire:offline.attr="disabled"
+                                wire:loading.class="disabled" wire:loading.attr="disabled">
+                        </div>
+                        <div class="form-text">
+                            {{ trans('helper.min') }} : 1,
+                            {{ trans('helper.max') }} : 999999999
                         </div>
                         @error('form.outdoor_area_size')
                             <div class="form-text text-danger">{{ $message }}</div>
@@ -359,7 +381,7 @@
                             </div>
                             <input type="text" class="form-control" id="pool_size" name="pool_size"
                                 minlength="1" maxlength="50" placeholder="{{ trans('index.ex') . '. 10 x 20' }}"
-                                required wire:model="form.pool_size" wire:offline.class="disabled"
+                                wire:model="form.pool_size" wire:offline.class="disabled"
                                 wire:offline.attr="disabled" wire:loading.class="disabled"
                                 wire:loading.attr="disabled">
                         </div>
@@ -389,11 +411,14 @@
                                 <span class="fas fa-pen-ruler fa-fw "></span>
                             </div>
                             <input type="number" class="form-control" id="number_of_bathrooms"
-                                name="number_of_bathrooms" min="1" max="999999999"
-                                placeholder="{{ trans('index.ex') . '. 100' }}" required
-                                wire:model="form.number_of_bathrooms" wire:offline.class="disabled"
-                                wire:offline.attr="disabled" wire:loading.class="disabled"
-                                wire:loading.attr="disabled">
+                                name="number_of_bathrooms" min="1" max="255"
+                                placeholder="{{ trans('index.ex') . '. 2' }}" wire:model="form.number_of_bathrooms"
+                                wire:offline.class="disabled" wire:offline.attr="disabled"
+                                wire:loading.class="disabled" wire:loading.attr="disabled">
+                        </div>
+                        <div class="form-text">
+                            {{ trans('helper.min') }} : 1,
+                            {{ trans('helper.max') }} : 255
                         </div>
                         @error('form.number_of_bathrooms')
                             <div class="form-text text-danger">{{ $message }}</div>
@@ -498,35 +523,684 @@
                             </div>
                             <input type="number" class="form-control" id="outdoor_area_size"
                                 name="outdoor_area_size" min="1" max="999999999"
-                                placeholder="{{ trans('index.ex') . '. 100' }}" required
-                                wire:model="form.outdoor_area_size" wire:offline.class="disabled"
-                                wire:offline.attr="disabled" wire:loading.class="disabled"
-                                wire:loading.attr="disabled">
+                                placeholder="{{ trans('index.ex') . '. 100' }}" wire:model="form.outdoor_area_size"
+                                wire:offline.class="disabled" wire:offline.attr="disabled"
+                                wire:loading.class="disabled" wire:loading.attr="disabled">
+                        </div>
+                        <div class="form-text">
+                            {{ trans('helper.min') }} : 1,
+                            {{ trans('helper.max') }} : 999999999
                         </div>
                         @error('form.outdoor_area_size')
                             <div class="form-text text-danger">{{ $message }}</div>
                         @enderror
                     </div>
+                </div>
+
+                <hr />
+
+                <h5 class="fw-bold text-uppercase border-bottom pb-3">
+                    {{ trans('property.legal_and_basic_eligibility') }}
+                </h5>
+
+                <div class="row g-3 mb-3">
+                    <div class="col-sm-6">
+                        <label class="form-label" for="full_legal_documentation">
+                            {{ trans('property.full_legal_documentation_available') }}
+                        </label>
+                        <div class="form-check form-switch">
+                            <input class="form-check-input" type="checkbox" role="switch"
+                                id="full_legal_documentation" name="full_legal_documentation" value="1"
+                                {{ $form->full_legal_documentation ? 'checked' : '' }}
+                                wire:model.lazy="form.full_legal_documentation" wire:offline.class="disabled"
+                                wire:offline.attr="disabled" wire:loading.class="disabled"
+                                wire:loading.attr="disabled">
+                            <label
+                                class="form-check-label text-{{ $form->full_legal_documentation ? 'success' : 'danger' }}"
+                                for="full_legal_documentation">
+                                {{ $form->full_legal_documentation ? trans('index.yes') : trans('index.no') }}
+                            </label>
+                        </div>
+                        @error('form.full_legal_documentation')
+                            <div class="form-text text-danger">{{ $message }}</div>
+                        @enderror
+                    </div>
 
                     <div class="col-sm-6">
-                        <label class="form-label" for="pool_size">
-                            {{ trans('property.pool_size') }}
+                        <label class="form-label" for="fully_furnished">
+                            {{ trans('property.fully_furnished') }}
+                        </label>
+                        <div class="form-check form-switch">
+                            <input class="form-check-input" type="checkbox" role="switch" id="fully_furnished"
+                                name="fully_furnished" value="1" {{ $form->fully_furnished ? 'checked' : '' }}
+                                wire:model.lazy="form.fully_furnished" wire:offline.class="disabled"
+                                wire:offline.attr="disabled" wire:loading.class="disabled"
+                                wire:loading.attr="disabled">
+                            <label class="form-check-label text-{{ $form->fully_furnished ? 'success' : 'danger' }}"
+                                for="fully_furnished">
+                                {{ $form->fully_furnished ? trans('index.yes') : trans('index.no') }}
+                            </label>
+                        </div>
+                        @error('form.fully_furnished')
+                            <div class="form-text text-danger">{{ $message }}</div>
+                        @enderror
+                    </div>
+
+                    <div class="col-sm-6">
+                        <label class="form-label" for="rental_type">
+                            {{ trans('property.rental_type_accepted') }}
+                        </label>
+                        <div>
+                            @foreach ($propertyRentalTypes as $propertyRentalType)
+                                <div class="form-check form-check-inline"
+                                    wire:key="rental-type-{{ $propertyRentalType->value }}">
+                                    <input class="form-check-input" type="radio"
+                                        id="rental_type_{{ $propertyRentalType->value }}" name="rental_type"
+                                        value="{{ $propertyRentalType->value }}"
+                                        {{ $propertyRentalType->value == $form->rental_type ? 'checked' : '' }}
+                                        wire:model.lazy="form.rental_type" wire:offline.class="disabled"
+                                        wire:offline.attr="disabled" wire:loading.class="disabled"
+                                        wire:loading.attr="disabled">
+                                    <label class="form-check-label"
+                                        for="rental_type_{{ $propertyRentalType->value }}">
+                                        {{ $propertyRentalType->description() }}
+                                    </label>
+                                </div>
+                            @endforeach
+                        </div>
+                        @error('form.rental_type')
+                            <div class="form-text text-danger">{{ $message }}</div>
+                        @enderror
+                    </div>
+
+                    <div class="col-sm-6">
+                        <label class="form-label" for="minimum_rental_duration_months">
+                            {{ trans('property.minimum_rental_duration_months') }}
                         </label>
                         <div class="input-group">
                             <div class="input-group-text">
-                                <span class="fas fa-water-ladder fa-fw "></span>
+                                <span class="fas fa-calendar fa-fw "></span>
                             </div>
-                            <input type="text" class="form-control" id="pool_size" name="pool_size"
-                                minlength="1" maxlength="50" placeholder="{{ trans('index.ex') . '. 10 x 20' }}"
-                                required wire:model="form.pool_size" wire:offline.class="disabled"
+                            <input type="number" class="form-control" id="minimum_rental_duration_months"
+                                name="minimum_rental_duration_months" min="1" max="255"
+                                placeholder="{{ trans('index.ex') . '. 12' }}"
+                                wire:model="form.minimum_rental_duration_months" wire:offline.class="disabled"
+                                wire:offline.attr="disabled" wire:loading.class="disabled"
+                                wire:loading.attr="disabled">
+                        </div>
+                        <div class="form-text">
+                            {{ trans('helper.min') }} : 1,
+                            {{ trans('helper.max') }} : 255
+                        </div>
+                        @error('form.minimum_rental_duration_months')
+                            <div class="form-text text-danger">{{ $message }}</div>
+                        @enderror
+                    </div>
+
+                    <div class="col-sm-6">
+                        <label class="form-label" for="owner_price_flexibility">
+                            {{ trans('property.owner_price_flexibility') }}
+                        </label>
+                        <div>
+                            @foreach ($propertyOwnerPriceFlexibility as $propertyOwnerPriceFlexibility)
+                                <div class="form-check form-check-inline"
+                                    wire:key="owner-price-flexbility-{{ $propertyOwnerPriceFlexibility->value }}">
+                                    <input class="form-check-input" type="radio"
+                                        id="owner_price_flexibility_{{ $propertyOwnerPriceFlexibility->value }}"
+                                        name="owner_price_flexibility"
+                                        value="{{ $propertyOwnerPriceFlexibility->value }}"
+                                        {{ $propertyOwnerPriceFlexibility->value == $form->owner_price_flexibility ? 'checked' : '' }}
+                                        wire:model.lazy="form.owner_price_flexibility" wire:offline.class="disabled"
+                                        wire:offline.attr="disabled" wire:loading.class="disabled"
+                                        wire:loading.attr="disabled">
+                                    <label class="form-check-label"
+                                        for="owner_price_flexibility_{{ $propertyOwnerPriceFlexibility->value }}">
+                                        {{ $propertyOwnerPriceFlexibility->description() }}
+                                    </label>
+                                </div>
+                            @endforeach
+                        </div>
+                        @error('form.owner_price_flexibility')
+                            <div class="form-text text-danger">{{ $message }}</div>
+                        @enderror
+                    </div>
+
+                    <div class="col-sm-6">
+                        <label class="form-label" for="price_coherent_with_upper">
+                            {{ trans('property.price_coherent_with_upper_or_premium_positioning') }}
+                        </label>
+                        <div class="form-check form-switch">
+                            <input class="form-check-input" type="checkbox" role="switch"
+                                id="price_coherent_with_upper" name="price_coherent_with_upper" value="1"
+                                {{ $form->price_coherent_with_upper ? 'checked' : '' }}
+                                wire:model.lazy="form.price_coherent_with_upper" wire:offline.class="disabled"
+                                wire:offline.attr="disabled" wire:loading.class="disabled"
+                                wire:loading.attr="disabled">
+                            <label
+                                class="form-check-label text-{{ $form->price_coherent_with_upper ? 'success' : 'danger' }}"
+                                for="price_coherent_with_upper">
+                                {{ $form->price_coherent_with_upper ? trans('index.yes') : trans('index.no') }}
+                            </label>
+                        </div>
+                        @error('form.price_coherent_with_upper')
+                            <div class="form-text text-danger">{{ $message }}</div>
+                        @enderror
+                    </div>
+                </div>
+
+                <hr />
+
+                <h5 class="fw-bold text-uppercase border-bottom pb-3">
+                    {{ trans('property.environment_and_tranquillity') }}
+                </h5>
+
+                <div class="row g-3 mb-3">
+                    <div class="col-sm-6">
+                        <label class="form-label" for="not_directly_exposed_to_main_road">
+                            {{ trans('property.not_directly_exposed_to_main_road') }}
+                        </label>
+                        <div class="form-check form-switch">
+                            <input class="form-check-input" type="checkbox" role="switch"
+                                id="not_directly_exposed_to_main_road" name="not_directly_exposed_to_main_road"
+                                value="1" {{ $form->not_directly_exposed_to_main_road ? 'checked' : '' }}
+                                wire:model.lazy="form.not_directly_exposed_to_main_road" wire:offline.class="disabled"
+                                wire:offline.attr="disabled" wire:loading.class="disabled"
+                                wire:loading.attr="disabled">
+                            <label
+                                class="form-check-label text-{{ $form->not_directly_exposed_to_main_road ? 'success' : 'danger' }}"
+                                for="not_directly_exposed_to_main_road">
+                                {{ $form->not_directly_exposed_to_main_road ? trans('index.yes') : trans('index.no') }}
+                            </label>
+                        </div>
+                        @error('form.not_directly_exposed_to_main_road')
+                            <div class="form-text text-danger">{{ $message }}</div>
+                        @enderror
+                    </div>
+
+                    <div class="col-sm-6">
+                        <label class="form-label" for="no_festive_venue_nearby">
+                            {{ trans('property.no_festive_venue_nearby') }}
+                        </label>
+                        <div class="form-check form-switch">
+                            <input class="form-check-input" type="checkbox" role="switch"
+                                id="no_festive_venue_nearby" name="no_festive_venue_nearby" value="1"
+                                {{ $form->no_festive_venue_nearby ? 'checked' : '' }}
+                                wire:model.lazy="form.no_festive_venue_nearby" wire:offline.class="disabled"
+                                wire:offline.attr="disabled" wire:loading.class="disabled"
+                                wire:loading.attr="disabled">
+                            <label
+                                class="form-check-label text-{{ $form->no_festive_venue_nearby ? 'success' : 'danger' }}"
+                                for="no_festive_venue_nearby">
+                                {{ $form->no_festive_venue_nearby ? trans('index.yes') : trans('index.no') }}
+                            </label>
+                        </div>
+                        @error('form.no_festive_venue_nearby')
+                            <div class="form-text text-danger">{{ $message }}</div>
+                        @enderror
+                    </div>
+
+                    <div class="col-sm-6">
+                        <label class="form-label" for="no_ongoing">
+                            {{ trans('property.no_ongoing_or_imminent_construction') }}
+                        </label>
+                        <div class="form-check form-switch">
+                            <input class="form-check-input" type="checkbox" role="switch" id="no_ongoing"
+                                name="no_ongoing" value="1" {{ $form->no_ongoing ? 'checked' : '' }}
+                                wire:model.lazy="form.no_ongoing" wire:offline.class="disabled"
+                                wire:offline.attr="disabled" wire:loading.class="disabled"
+                                wire:loading.attr="disabled">
+                            <label class="form-check-label text-{{ $form->no_ongoing ? 'success' : 'danger' }}"
+                                for="no_ongoing">
+                                {{ $form->no_ongoing ? trans('index.yes') : trans('index.no') }}
+                            </label>
+                        </div>
+                        @error('form.no_ongoing')
+                            <div class="form-text text-danger">{{ $message }}</div>
+                        @enderror
+                    </div>
+
+                    <div class="col-sm-6">
+                        <label class="form-label" for="quiet_access_road">
+                            {{ trans('property.quiet_access_road_or_gang') }}
+                        </label>
+                        <div class="form-check form-switch">
+                            <input class="form-check-input" type="checkbox" role="switch" id="quiet_access_road"
+                                name="quiet_access_road" value="1"
+                                {{ $form->quiet_access_road ? 'checked' : '' }}
+                                wire:model.lazy="form.quiet_access_road" wire:offline.class="disabled"
+                                wire:offline.attr="disabled" wire:loading.class="disabled"
+                                wire:loading.attr="disabled">
+                            <label
+                                class="form-check-label text-{{ $form->quiet_access_road ? 'success' : 'danger' }}"
+                                for="quiet_access_road">
+                                {{ $form->quiet_access_road ? trans('index.yes') : trans('index.no') }}
+                            </label>
+                        </div>
+                        @error('form.quiet_access_road')
+                            <div class="form-text text-danger">{{ $message }}</div>
+                        @enderror
+                    </div>
+
+                    <div class="col-sm-6">
+                        <label class="form-label" for="orientation">
+                            {{ trans('property.orientation') }}
+                        </label>
+                        <div>
+                            @foreach ($propertyOrientations as $propertyOrientation)
+                                <div class="form-check form-check-inline"
+                                    wire:key="orientation-{{ $propertyOrientation->value }}">
+                                    <input class="form-check-input" type="radio"
+                                        id="orientation_{{ $propertyOrientation->value }}" name="orientation"
+                                        value="{{ $propertyOrientation->value }}"
+                                        {{ $propertyOrientation->value == $form->orientation ? 'checked' : '' }}
+                                        wire:model.lazy="form.orientation" wire:offline.class="disabled"
+                                        wire:offline.attr="disabled" wire:loading.class="disabled"
+                                        wire:loading.attr="disabled">
+                                    <label class="form-check-label"
+                                        for="orientation_{{ $propertyOrientation->value }}">
+                                        {{ $propertyOrientation->description() }}
+                                    </label>
+                                </div>
+                            @endforeach
+                        </div>
+                        @error('form.orientation')
+                            <div class="form-text text-danger">{{ $message }}</div>
+                        @enderror
+                    </div>
+
+                    <div class="col-sm-6">
+                        <label class="form-label" for="view">
+                            {{ trans('property.view') }}
+                        </label>
+                        <div class="input-group">
+                            <div class="input-group-text">
+                                <span class="fas fa-comment fa-fw "></span>
+                            </div>
+                            <input type="text" class="form-control" id="view" name="view" minlength="1"
+                                maxlength="100" placeholder="{{ trans('index.ex') . '. Ocean View' }}"
+                                wire:model="form.view" wire:offline.class="disabled" wire:offline.attr="disabled"
+                                wire:loading.class="disabled" wire:loading.attr="disabled">
+                        </div>
+                        <div class="form-text">
+                            {{ trans('helper.minlength') }} : 1,
+                            {{ trans('helper.maxlength') }} : 65.535
+                        </div>
+                        @error('form.view')
+                            <div class="form-text text-danger">{{ $message }}</div>
+                        @enderror
+                    </div>
+                </div>
+
+                <hr />
+
+                <h5 class="fw-bold text-uppercase border-bottom pb-3">
+                    {{ trans('property.light_and_acoustics') }}
+                </h5>
+
+                <div class="row g-3 mb-3">
+                    <div class="col-sm-6">
+                        <label class="form-label" for="living_area_has_natural_light">
+                            {{ trans('property.living_area_has_natural_light') }}
+                        </label>
+                        <div class="form-check form-switch">
+                            <input class="form-check-input" type="checkbox" role="switch"
+                                id="living_area_has_natural_light" name="living_area_has_natural_light"
+                                value="1" {{ $form->living_area_has_natural_light ? 'checked' : '' }}
+                                wire:model.lazy="form.living_area_has_natural_light" wire:offline.class="disabled"
+                                wire:offline.attr="disabled" wire:loading.class="disabled"
+                                wire:loading.attr="disabled">
+                            <label
+                                class="form-check-label text-{{ $form->living_area_has_natural_light ? 'success' : 'danger' }}"
+                                for="living_area_has_natural_light">
+                                {{ $form->living_area_has_natural_light ? trans('index.yes') : trans('index.no') }}
+                            </label>
+                        </div>
+                        @error('form.living_area_has_natural_light')
+                            <div class="form-text text-danger">{{ $message }}</div>
+                        @enderror
+                    </div>
+
+                    <div class="col-sm-6">
+                        <label class="form-label" for="bedroom_1_has_natural_light">
+                            {{ trans('property.bedroom_1_has_natural_light') }}
+                        </label>
+                        <div class="form-check form-switch">
+                            <input class="form-check-input" type="checkbox" role="switch"
+                                id="bedroom_1_has_natural_light" name="bedroom_1_has_natural_light" value="1"
+                                {{ $form->bedroom_1_has_natural_light ? 'checked' : '' }}
+                                wire:model.lazy="form.bedroom_1_has_natural_light" wire:offline.class="disabled"
+                                wire:offline.attr="disabled" wire:loading.class="disabled"
+                                wire:loading.attr="disabled">
+                            <label
+                                class="form-check-label text-{{ $form->bedroom_1_has_natural_light ? 'success' : 'danger' }}"
+                                for="bedroom_1_has_natural_light">
+                                {{ $form->bedroom_1_has_natural_light ? trans('index.yes') : trans('index.no') }}
+                            </label>
+                        </div>
+                        @error('form.bedroom_1_has_natural_light')
+                            <div class="form-text text-danger">{{ $message }}</div>
+                        @enderror
+                    </div>
+
+                    <div class="col-sm-6">
+                        <label class="form-label" for="bedroom_2_has_natural_light">
+                            {{ trans('property.bedroom_2_has_natural_light') }}
+                        </label>
+                        <div class="form-check form-switch">
+                            <input class="form-check-input" type="checkbox" role="switch"
+                                id="bedroom_2_has_natural_light" name="bedroom_2_has_natural_light" value="1"
+                                {{ $form->bedroom_2_has_natural_light ? 'checked' : '' }}
+                                wire:model.lazy="form.bedroom_2_has_natural_light" wire:offline.class="disabled"
+                                wire:offline.attr="disabled" wire:loading.class="disabled"
+                                wire:loading.attr="disabled">
+                            <label
+                                class="form-check-label text-{{ $form->bedroom_2_has_natural_light ? 'success' : 'danger' }}"
+                                for="bedroom_2_has_natural_light">
+                                {{ $form->bedroom_2_has_natural_light ? trans('index.yes') : trans('index.no') }}
+                            </label>
+                        </div>
+                        @error('form.bedroom_2_has_natural_light')
+                            <div class="form-text text-danger">{{ $message }}</div>
+                        @enderror
+                    </div>
+
+                    <div class="col-sm-6">
+                        <label class="form-label" for="noise_source_identified">
+                            {{ trans('property.noise_source_identified') }}
+                        </label>
+                        <div class="input-group">
+                            <div class="input-group-text">
+                                <span class="fas fa-comment fa-fw "></span>
+                            </div>
+                            <input type="text" class="form-control" id="noise_source_identified"
+                                name="noise_source_identified" minlength="1" maxlength="100"
+                                placeholder="{{ trans('index.ex') . '. Construction Noise / Road Noise' }}"
+                                wire:model="form.noise_source_identified" wire:offline.class="disabled"
                                 wire:offline.attr="disabled" wire:loading.class="disabled"
                                 wire:loading.attr="disabled">
                         </div>
                         <div class="form-text">
                             {{ trans('helper.minlength') }} : 1,
-                            {{ trans('helper.maxlength') }} : 50
+                            {{ trans('helper.maxlength') }} : 65.535
                         </div>
-                        @error('form.pool_size')
+                        @error('form.noise_source_identified')
+                            <div class="form-text text-danger">{{ $message }}</div>
+                        @enderror
+                    </div>
+                </div>
+
+                <hr />
+
+                <h5 class="fw-bold text-uppercase border-bottom pb-3">
+                    {{ trans('property.utilities_and_technical') }}
+                </h5>
+
+                <div class="row g-3 mb-3">
+                    <div class="col-sm-6">
+                        <label class="form-label" for="internet_speedtest">
+                            {{ trans('property.internet_speedtest') }}
+                        </label>
+                        <div class="input-group">
+                            <div class="input-group-text">
+                                <span class="fas fa-pen-ruler fa-fw "></span>
+                            </div>
+                            <input type="number" class="form-control" id="internet_speedtest"
+                                name="internet_speedtest" min="1" max="999999999"
+                                placeholder="{{ trans('index.ex') . '. 100' }}" wire:model="form.internet_speedtest"
+                                wire:offline.class="disabled" wire:offline.attr="disabled"
+                                wire:loading.class="disabled" wire:loading.attr="disabled">
+                        </div>
+                        <div class="form-text">
+                            {{ trans('helper.min') }} : 1,
+                            {{ trans('helper.max') }} : 999999999
+                        </div>
+                        @error('form.internet_speedtest')
+                            <div class="form-text text-danger">{{ $message }}</div>
+                        @enderror
+                    </div>
+
+                    <div class="col-sm-6">
+                        <label class="form-label" for="power_backup">
+                            {{ trans('property.power_backup') }}
+                        </label>
+                        <div>
+                            @foreach ($propertyPowerBackups as $propertyPowerBackup)
+                                <div class="form-check form-check-inline"
+                                    wire:key="power-backup-{{ $propertyPowerBackup->value }}">
+                                    <input class="form-check-input" type="radio"
+                                        id="power_backup_{{ $propertyPowerBackup->value }}" name="power_backup"
+                                        value="{{ $propertyPowerBackup->value }}"
+                                        {{ $propertyPowerBackup->value == $form->power_backup ? 'checked' : '' }}
+                                        wire:model.lazy="form.power_backup" wire:offline.class="disabled"
+                                        wire:offline.attr="disabled" wire:loading.class="disabled"
+                                        wire:loading.attr="disabled">
+                                    <label class="form-check-label"
+                                        for="power_backup_{{ $propertyPowerBackup->value }}">
+                                        {{ $propertyPowerBackup->description() }}
+                                    </label>
+                                </div>
+                            @endforeach
+                        </div>
+                        @error('form.power_backup')
+                            <div class="form-text text-danger">{{ $message }}</div>
+                        @enderror
+                    </div>
+
+                    <div class="col-sm-6">
+                        <label class="form-label" for="water_source">
+                            {{ trans('property.water_source') }}
+                        </label>
+                        <div>
+                            @foreach ($propertyWaterSources as $propertyWaterSource)
+                                <div class="form-check form-check-inline"
+                                    wire:key="water_source-{{ $propertyWaterSource->value }}">
+                                    <input class="form-check-input" type="radio"
+                                        id="water_source_{{ $propertyWaterSource->value }}" name="water_source"
+                                        value="{{ $propertyWaterSource->value }}"
+                                        {{ $propertyWaterSource->value == $form->water_source ? 'checked' : '' }}
+                                        wire:model.lazy="form.water_source" wire:offline.class="disabled"
+                                        wire:offline.attr="disabled" wire:loading.class="disabled"
+                                        wire:loading.attr="disabled">
+                                    <label class="form-check-label"
+                                        for="water_source_{{ $propertyWaterSource->value }}">
+                                        {{ $propertyWaterSource->description() }}
+                                    </label>
+                                </div>
+                            @endforeach
+                        </div>
+                        @error('form.water_source')
+                            <div class="form-text text-danger">{{ $message }}</div>
+                        @enderror
+                    </div>
+
+                    <div class="col-sm-6">
+                        <label class="form-label" for="electricity">
+                            {{ trans('property.electricity') }}
+                        </label>
+                        <div>
+                            @foreach ($propertyElectricities as $propertyElectricity)
+                                <div class="form-check form-check-inline"
+                                    wire:key="electricity-{{ $propertyElectricity->value }}">
+                                    <input class="form-check-input" type="radio"
+                                        id="electricity_{{ $propertyElectricity->value }}" name="electricity"
+                                        value="{{ $propertyElectricity->value }}"
+                                        {{ $propertyElectricity->value == $form->electricity ? 'checked' : '' }}
+                                        wire:model.lazy="form.electricity" wire:offline.class="disabled"
+                                        wire:offline.attr="disabled" wire:loading.class="disabled"
+                                        wire:loading.attr="disabled">
+                                    <label class="form-check-label"
+                                        for="electricity_{{ $propertyElectricity->value }}">
+                                        {{ $propertyElectricity->description() }}
+                                    </label>
+                                </div>
+                            @endforeach
+                        </div>
+                        @error('form.electricity')
+                            <div class="form-text text-danger">{{ $message }}</div>
+                        @enderror
+                    </div>
+                </div>
+
+                <hr />
+
+                <h5 class="fw-bold text-uppercase border-bottom pb-3">
+                    {{ trans('property.design_led_or_instagrammable') }}
+                </h5>
+
+                <div class="row g-3 mb-3">
+                    <div class="col-sm-6">
+                        <label class="form-label" for="design_driven_property">
+                            {{ trans('property.design_driven_property') }}
+                        </label>
+                        <div class="form-check form-switch">
+                            <input class="form-check-input" type="checkbox" role="switch"
+                                id="design_driven_property" name="design_driven_property" value="1"
+                                {{ $form->design_driven_property ? 'checked' : '' }}
+                                wire:model.lazy="form.design_driven_property" wire:offline.class="disabled"
+                                wire:offline.attr="disabled" wire:loading.class="disabled"
+                                wire:loading.attr="disabled">
+                            <label
+                                class="form-check-label text-{{ $form->design_driven_property ? 'success' : 'danger' }}"
+                                for="design_driven_property">
+                                {{ $form->design_driven_property ? trans('index.yes') : trans('index.no') }}
+                            </label>
+                        </div>
+                        @error('form.design_driven_property')
+                            <div class="form-text text-danger">{{ $message }}</div>
+                        @enderror
+                    </div>
+
+                    <div class="col-sm-6">
+                        <label class="form-label" for="usability_limitations">
+                            {{ trans('property.usability_limitations_identified') }}
+                        </label>
+                        <div class="input-group">
+                            <div class="input-group-text">
+                                <span class="fas fa-comment fa-fw "></span>
+                            </div>
+                            <input type="text" class="form-control" id="usability_limitations"
+                                name="usability_limitations" minlength="1" maxlength="100"
+                                placeholder="{{ trans('index.ex') . '. Construction Noise / Road Noise' }}"
+                                wire:model="form.usability_limitations" wire:offline.class="disabled"
+                                wire:offline.attr="disabled" wire:loading.class="disabled"
+                                wire:loading.attr="disabled">
+                        </div>
+                        <div class="form-text">
+                            {{ trans('helper.minlength') }} : 1,
+                            {{ trans('helper.maxlength') }} : 65.535
+                        </div>
+                        @error('form.usability_limitations')
+                            <div class="form-text text-danger">{{ $message }}</div>
+                        @enderror
+                    </div>
+                </div>
+
+                <hr />
+
+                <h5 class="fw-bold text-uppercase border-bottom pb-3">
+                    {{ trans('property.trade_off_or_target_profile') }}
+                </h5>
+
+                <div class="row g-3 mb-3">
+                    <div class="col-sm-6">
+                        <label class="form-label" for="trade_off_identified">
+                            {{ trans('property.trade_off_identified') }}
+                        </label>
+                        <div class="form-check form-switch">
+                            <input class="form-check-input" type="checkbox" role="switch" id="trade_off_identified"
+                                name="trade_off_identified" value="1"
+                                {{ $form->trade_off_identified ? 'checked' : '' }}
+                                wire:model.lazy="form.trade_off_identified" wire:offline.class="disabled"
+                                wire:offline.attr="disabled" wire:loading.class="disabled"
+                                wire:loading.attr="disabled">
+                            <label
+                                class="form-check-label text-{{ $form->trade_off_identified ? 'success' : 'danger' }}"
+                                for="trade_off_identified">
+                                {{ $form->trade_off_identified ? trans('index.yes') : trans('index.no') }}
+                            </label>
+                        </div>
+                        @error('form.trade_off_identified')
+                            <div class="form-text text-danger">{{ $message }}</div>
+                        @enderror
+                    </div>
+
+                    @if ($form->trade_off_identified)
+                        <div class="col-sm-6">
+                            <label class="form-label" for="trade_off_description">
+                                {{ trans('property.if_yes_describe_briefly') }}
+                            </label>
+                            <div class="input-group">
+                                <div class="input-group-text">
+                                    <span class="fas fa-comment fa-fw "></span>
+                                </div>
+                                <input type="text" class="form-control" id="trade_off_description"
+                                    name="trade_off_description" minlength="1" maxlength="100"
+                                    placeholder="{{ trans('index.ex') . '. Limited Parkind / No Pool' }}"
+                                    wire:model="form.trade_off_description" wire:offline.class="disabled"
+                                    wire:offline.attr="disabled" wire:loading.class="disabled"
+                                    wire:loading.attr="disabled">
+                            </div>
+                            <div class="form-text">
+                                {{ trans('helper.minlength') }} : 1,
+                                {{ trans('helper.maxlength') }} : 65.535
+                            </div>
+                            @error('form.trade_off_description')
+                                <div class="form-text text-danger">{{ $message }}</div>
+                            @enderror
+                        </div>
+                    @endif
+
+                    <div class="col-sm-6">
+                        <label class="form-label" for="target_profile">
+                            {{ trans('property.target_profile') }}
+                        </label>
+                        <div>
+                            @foreach ($propertyTargetProfiles as $propertyTargetProfile)
+                                <div class="form-check form-check-inline"
+                                    wire:key="target-profile-{{ $propertyTargetProfile->value }}">
+                                    <input class="form-check-input" type="radio"
+                                        id="target_profile_{{ $propertyTargetProfile->value }}"
+                                        name="target_profile" value="{{ $propertyTargetProfile->value }}"
+                                        {{ $propertyTargetProfile->value == $form->target_profile ? 'checked' : '' }}
+                                        wire:model.lazy="form.target_profile" wire:offline.class="disabled"
+                                        wire:offline.attr="disabled" wire:loading.class="disabled"
+                                        wire:loading.attr="disabled">
+                                    <label class="form-check-label"
+                                        for="target_profile_{{ $propertyTargetProfile->value }}">
+                                        {{ $propertyTargetProfile->description() }}
+                                    </label>
+                                </div>
+                            @endforeach
+                        </div>
+                        @error('form.target_profile')
+                            <div class="form-text text-danger">{{ $message }}</div>
+                        @enderror
+                    </div>
+                </div>
+
+                <div class="row g-3 mb-3">
+                    <div class="col-12">
+                        <label class="form-label" for="status">
+                            {{ trans('property.status') }}
+                        </label>
+                        <div>
+                            @foreach ($propertyStatuses as $propertyStatus)
+                                <div class="form-check form-check-inline"
+                                    wire:key="status-{{ $propertyStatus->value }}">
+                                    <input class="form-check-input" type="radio"
+                                        id="status_{{ $propertyStatus->value }}" name="status"
+                                        value="{{ $propertyStatus->value }}"
+                                        {{ $propertyStatus->value == $form->status ? 'checked' : '' }}
+                                        wire:model.lazy="form.status" wire:offline.class="disabled"
+                                        wire:offline.attr="disabled" wire:loading.class="disabled"
+                                        wire:loading.attr="disabled">
+                                    <label class="form-check-label" for="status_{{ $propertyStatus->value }}">
+                                        {{ $propertyStatus->description() }}
+                                    </label>
+                                </div>
+                            @endforeach
+                        </div>
+                        @error('form.status')
                             <div class="form-text text-danger">{{ $message }}</div>
                         @enderror
                     </div>
@@ -536,9 +1210,8 @@
 
                 <div class="row">
                     <div class="col-6 col-sm-auto">
-                        <button type="submit" class="btn btn-primary w-100" wire:click="submit" wire:key="submit"
-                            wire:offline.class="disabled" wire:offline.attr="disabled" wire:loading.class="disabled"
-                            wire:loading.attr="disabled">
+                        <button type="submit" class="btn btn-primary w-100" wire:offline.class="disabled"
+                            wire:offline.attr="disabled" wire:loading.class="disabled" wire:loading.attr="disabled">
                             <span wire:loading.remove wire:target="submit">
                                 <span class="fas fa-paper-plane fa-fw"></span>
                                 {{ trans('index.submit') }}
@@ -551,8 +1224,8 @@
                     </div>
                     <div class="col-6 col-sm-auto">
                         <button type="button" class="btn btn-warning w-100" wire:click="resetForm"
-                            wire:key="resetForm" wire:offline.class="disabled" wire:offline.attr="disabled"
-                            wire:loading.class="disabled" wire:loading.attr="disabled">
+                            wire:offline.class="disabled" wire:offline.attr="disabled" wire:loading.class="disabled"
+                            wire:loading.attr="disabled">
                             <span wire:loading.remove wire:target="resetForm">
                                 <span class="fas fa-eraser fa-fw"></span>
                                 {{ trans('index.reset') }}

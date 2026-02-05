@@ -32139,7 +32139,7 @@ namespace  {
     class PropertyOperationalRisk extends \App\Enums\Property\PropertyOperationalRisk {}
     class PropertyOrientation extends \App\Enums\Property\PropertyOrientation {}
     class PropertyPowerBackup extends \App\Enums\Property\PropertyPowerBackup {}
-    class PropertyPriceFlexibility extends \App\Enums\Property\PropertyPriceFlexibility {}
+    class PropertyOwnerPriceFlexibility extends \App\Enums\Property\PropertyOwnerPriceFlexibility {}
     class PropertyRentalType extends \App\Enums\Property\PropertyRentalType {}
     class PropertyStatus extends \App\Enums\Property\PropertyStatus {}
     class PropertyTargetProfile extends \App\Enums\Property\PropertyTargetProfile {}

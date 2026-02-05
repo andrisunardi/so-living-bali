@@ -53,7 +53,7 @@ return [
     'internet_speedtest' => 'Internet Speedtest (Mbps)',
     'power_backup' => 'Power Backup (Generator / Solar / None)',
     'water_source' => 'Water Source (PDAM, Well, Mixed)',
-    'electricty' => 'Electricity (Standard / Solar / Hybrid)',
+    'electricity' => 'Electricity (Standard / Solar / Hybrid)',
 
     'category_assessment' => 'Category Assessment',
     'eligible_for_upper' => 'Eligible For Upper',
@@ -66,7 +66,7 @@ return [
     'trade_off_or_target_profile' => 'Trade-Off & Target Profile',
     'trade_off_identified' => 'Trade-Off Identified',
     'if_yes_describe_briefly' => 'If YES, Describe Briefly',
-    'target_profile' => 'Target Profile (Fmaily / Couple / Remote Worker / Design Lover)',
+    'target_profile' => 'Target Profile (Family / Couple / Remote Worker / Design Lover)',
 
     'operational_risk' => 'Operational Risk',
     'operational_risk_level' => 'Low / Medium / High',

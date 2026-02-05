@@ -39,11 +39,11 @@
                 </div>
 
                 <div class="row g-3">
-                    <div class="col-12 col-sm-5 col-md-4 col-lg-3 col-xl-2" wire:ignore>
+                    <div class="col-12 col-sm-5 col-md-4 col-lg-3 col-xl-2">
                         <label class="form-label" for="role_id">
                             {{ trans('field.role_id') }}
                         </label>
-                        <div class="input-group">
+                        <div class="input-group" wire:ignore>
                             <div class="input-group-text">
                                 <span class="fas fa-key fa-fw "></span>
                             </div>
