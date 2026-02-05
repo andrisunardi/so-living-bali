@@ -45,7 +45,7 @@
                         </label>
                         <div class="input-group">
                             <div class="input-group-text">
-                                <span class="fas fa-key fa-fw "></span>
+                                <span class="fas fa-user fa-fw "></span>
                             </div>
                             <select class="form-select select2" id="user_id" name="user_id" wire:key="user_id"
                                 wire:model.lazy="user_id" wire:offline.class="disabled" wire:offline.attr="disabled"
@@ -66,7 +66,7 @@
                         </label>
                         <div class="input-group">
                             <div class="input-group-text">
-                                <span class="fas fa-key fa-fw "></span>
+                                <span class="fas fa-list fa-fw "></span>
                             </div>
                             <select class="form-select select2" id="status" name="status" wire:key="status"
                                 wire:model.lazy="status" wire:offline.class="disabled" wire:offline.attr="disabled"
@@ -170,7 +170,7 @@
                                 <td class="text-center">{{ $property->id }}</td>
                                 <td>{{ $property->code }}</td>
                                 <td>{{ $property->name }}</td>
-                                <td>{{ $property->user->name }}</td>
+                                <td>{{ $property->user->name ?? '-' }}</td>
                                 <td>
                                     <span class="badge text-bg-{{ $property->status->color() }} rounded-pill w-100">
                                         {{ $property->status->description() }}

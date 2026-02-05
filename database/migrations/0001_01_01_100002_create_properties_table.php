@@ -20,7 +20,7 @@ return new class extends Migration
 
             $table->decimal('latitude', 10, 7)->nullable();
             $table->decimal('longitude', 10, 7)->nullable();
-            $table->text('address', 200)->nullable();
+            $table->string('address', 200)->nullable();
             $table->string('area', 50)->nullable();
 
             $table->integer('land_size')->nullable();

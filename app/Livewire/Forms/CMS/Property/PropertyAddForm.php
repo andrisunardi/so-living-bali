@@ -2,8 +2,18 @@
 
 namespace App\Livewire\Forms\CMS\Property;
 
+use App\Enums\Property\PropertyElectricity;
+use App\Enums\Property\PropertyOperationalRisk;
+use App\Enums\Property\PropertyOrientation;
+use App\Enums\Property\PropertyPowerBackup;
+use App\Enums\Property\PropertyPriceFlexibility;
+use App\Enums\Property\PropertyRentalType;
+use App\Enums\Property\PropertyStatus;
+use App\Enums\Property\PropertyTargetProfile;
+use App\Enums\Property\PropertyWaterSource;
 use App\Models\Property;
 use App\Services\PropertyService;
+use Illuminate\Validation\Rules\Enum;
 use Livewire\Attributes\Validate;
 use Livewire\Form;
 
@@ -15,8 +25,146 @@ class PropertyAddForm extends Form
     #[Validate('required|string|min:1|max:50')]
     public string $name = '';
 
-    #[Validate('required|string|min:1|max:100')]
+    #[Validate('nullable|integer|exists:users,id')]
+    public ?int $user_id = null;
+
+    #[Validate('nullable|date|date_format:Y-m-d|min:today|max:2099-12-31')]
+    public string $availability_date = '';
+
+    #[Validate('nullable|date|date_format:Y-m-d|min:today|max:2099-12-31')]
+    public string $visit_date = '';
+
+    #[Validate('nullable|decimal:0,8|between:-90,90')]
+    public string $latitude = '';
+
+    #[Validate('nullable|decimal:0,8|between:-180,180')]
+    public string $longitude = '';
+
+    #[Validate('nullable|string|min:1|max:200')]
     public string $address = '';
+
+    #[Validate('nullable|string|min:1|max:50')]
+    public string $area = '';
+
+    #[Validate('nullable|integer|min:0|max:9999999999')]
+    public ?int $land_size = null;
+
+    #[Validate('nullable|integer|min:0|max:9999999999')]
+    public ?int $building_size = null;
+
+    #[Validate('nullable|integer|min:0|max:255')]
+    public ?int $number_of_floors = null;
+
+    #[Validate('nullable|integer|min:0|max:9999999999')]
+    public ?int $outdoor_area_size = null;
+
+    #[Validate('nullable|integer|min:0|max:255')]
+    public ?int $number_of_bathrooms = null;
+
+    #[Validate('nullable|string|min:1|max:50')]
+    public string $pool_size = '';
+
+    #[Validate('nullable|boolean')]
+    public bool $ensuite_bathrooms = false;
+
+    #[Validate('nullable|boolean')]
+    public bool $guest_toilet = false;
+
+    #[Validate('nullable|boolean')]
+    public bool $storage = false;
+
+    #[Validate('nullable|boolean')]
+    public bool $living_style = false;
+
+    #[Validate('nullable|boolean')]
+    public bool $full_legal_documentation = false;
+
+    #[Validate('nullable|boolean')]
+    public bool $fully_furnished = false;
+
+    #[Validate(['nullable', 'integer', new Enum(PropertyRentalType::class)])]
+    public ?int $rental_type = null;
+
+    #[Validate('nullable|integer|min:0|max:9999999999')]
+    public ?int $minimum_rental_duration_months = null;
+
+    #[Validate(['nullable', 'integer', new Enum(PropertyPriceFlexibility::class)])]
+    public ?int $owner_price_flexibility = null;
+
+    #[Validate('nullable|boolean')]
+    public bool $price_coherent_with_upper = false;
+
+    #[Validate('nullable|boolean')]
+    public bool $not_directly_exposed_to_main_road = false;
+
+    #[Validate('nullable|boolean')]
+    public bool $no_festive_venue_nearby = false;
+
+    #[Validate('nullable|boolean')]
+    public bool $no_ongoing = false;
+
+    #[Validate('nullable|boolean')]
+    public bool $quiet_access_road = false;
+
+    #[Validate(['nullable', 'integer', new Enum(PropertyOrientation::class)])]
+    public ?int $orientation = null;
+
+    #[Validate('nullable|string|min:0|max:65535')]
+    public string $view = '';
+
+    #[Validate('nullable|boolean')]
+    public bool $living_area_has_natural_light = false;
+
+    #[Validate('nullable|boolean')]
+    public bool $bedroom_1_has_natural_light = false;
+
+    #[Validate('nullable|boolean')]
+    public bool $bedroom_2_has_natural_light = false;
+
+    #[Validate('nullable|boolean')]
+    public bool $noise_source_identified = false;
+
+    #[Validate('nullable|integer|min:0|max:9999999999')]
+    public ?int $internet_speedtest = null;
+
+    #[Validate(['nullable', 'integer', new Enum(PropertyPowerBackup::class)])]
+    public ?int $power_backup = null;
+
+    #[Validate(['nullable', 'integer', new Enum(PropertyWaterSource::class)])]
+    public ?int $water_source = null;
+
+    #[Validate(['nullable', 'integer', new Enum(PropertyElectricity::class)])]
+    public ?int $electricity = null;
+
+    #[Validate('nullable|boolean')]
+    public bool $eligible_for_upper = false;
+
+    #[Validate('nullable|boolean')]
+    public bool $eligible_for_premium = false;
+
+    #[Validate('nullable|boolean')]
+    public bool $design_driven_property = false;
+
+    #[Validate('nullable|string|min:0|max:65535')]
+    public string $usability_limitations = '';
+
+    #[Validate('nullable|boolean')]
+    public bool $trade_off_identified = false;
+
+    #[Validate('nullable|string|min:0|max:65535')]
+    public string $trade_off_description = '';
+
+    #[Validate(['nullable', 'integer', new Enum(PropertyTargetProfile::class)])]
+    public ?int $target_profile = null;
+
+    #[Validate(['nullable', 'integer', new Enum(PropertyOperationalRisk::class)])]
+    public ?int $operational_risk = null;
+
+    #[Validate('nullable|string|min:0|max:65535')]
+    public string $operational_risk_comment = '';
+
+    #[Validate(['nullable', 'integer', new Enum(PropertyStatus::class)])]
+    public int $status = PropertyStatus::Pending->value;
 
     public function submit(): Property
     {

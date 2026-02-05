@@ -2,8 +2,10 @@
 
 namespace App\Livewire\CMS\Property;
 
+use App\Enums\Property\PropertyStatus;
 use App\Livewire\Component;
 use App\Livewire\Forms\CMS\Property\PropertyAddForm;
+use App\Services\UserService;
 use Illuminate\Contracts\View\View;
 
 class PropertyAddPage extends Component
@@ -27,8 +29,27 @@ class PropertyAddPage extends Component
         $this->redirect(route('cms.property.index'), navigate: true);
     }
 
+    public function getUsers(): object
+    {
+        return (new UserService)->index(
+            roleName: 'Agent',
+            isActive: [true],
+            orderBy: 'name',
+            sortBy: 'asc',
+            paginate: false,
+        );
+    }
+
+    public function getPropertyStatuses(): array
+    {
+        return PropertyStatus::cases();
+    }
+
     public function render(): View
     {
-        return view('livewire.cms.property.add');
+        return view('livewire.cms.property.add', [
+            'users' => $this->getUsers(),
+            'propertyStatuses' => $this->getPropertyStatuses(),
+        ]);
     }
 }

@@ -2,9 +2,11 @@
 
 namespace App\Livewire\CMS\Property;
 
+use App\Enums\Property\PropertyStatus;
 use App\Livewire\Component;
 use App\Livewire\Forms\CMS\Property\PropertyEditForm;
 use App\Models\Property;
+use App\Services\UserService;
 use Illuminate\Contracts\View\View;
 
 class PropertyEditPage extends Component
@@ -36,8 +38,27 @@ class PropertyEditPage extends Component
         $this->redirect(route('cms.property.index'), navigate: true);
     }
 
+    public function getUsers(): object
+    {
+        return (new UserService)->index(
+            roleName: 'Agent',
+            isActive: [true],
+            orderBy: 'name',
+            sortBy: 'asc',
+            paginate: false,
+        );
+    }
+
+    public function getPropertyStatuses(): array
+    {
+        return PropertyStatus::cases();
+    }
+
     public function render(): View
     {
-        return view('livewire.cms.property.edit');
+        return view('livewire.cms.property.edit', [
+            'users' => $this->getUsers(),
+            'propertyStatuses' => $this->getPropertyStatuses(),
+        ]);
     }
 }

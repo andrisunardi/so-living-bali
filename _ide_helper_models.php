@@ -214,10 +214,10 @@ namespace App\Models{
  * @method static Builder<static>|Property withTrashed(bool $withTrashed = true)
  * @method static Builder<static>|Property withoutTrashed()
  * @method static Builder<static>|Property yearly()
+ * @method static Builder<static>|Property whereBuildingSize($value)
+ * @method static Builder<static>|Property whereInternetSpeedtest($value)
+ * @method static Builder<static>|Property whereOutdoorAreaSize($value)
  * @mixin \Eloquent
- * @method static \Illuminate\Database\Eloquent\Builder<static>|Property whereBuildingSize($value)
- * @method static \Illuminate\Database\Eloquent\Builder<static>|Property whereInternetSpeedtest($value)
- * @method static \Illuminate\Database\Eloquent\Builder<static>|Property whereOutdoorAreaSize($value)
  */
 	class Property extends \Eloquent {}
 }

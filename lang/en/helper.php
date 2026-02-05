@@ -2,6 +2,8 @@
 
 return [
 
+    'min' => 'Min',
+    'max' => 'Max',
     'minlength' => 'Minlength',
     'maxlength' => 'Maxlength',
     'length' => 'Length',
