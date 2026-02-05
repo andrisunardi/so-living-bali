@@ -111,7 +111,7 @@
                             <th>{{ trans('field.name') }}</th>
                             <th width="1%">{{ trans('field.guard_name') }}</th>
                             <th width="1%">{{ trans('field.roles') }}</th>
-                            <th width="1%">{{ trans('index.total') }} {{ trans('page.permission') }}</th>
+                            <th width="1%">{{ trans('index.total') }} {{ trans('page.role') }}</th>
                             <th width="1%">{{ trans('index.total') }} {{ trans('page.user') }}</th>
                             <th width="1%">{{ trans('field.created_at') }}</th>
                             <th width="1%">{{ trans('field.action') }}</th>

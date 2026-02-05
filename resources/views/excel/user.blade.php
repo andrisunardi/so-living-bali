@@ -51,6 +51,15 @@
                 <b>{{ trans('field.username') }}</b>
             </th>
             <th valign="middle" align="center">
+                <b>{{ trans('field.active') }}</b>
+            </th>
+            <th valign="middle" align="center">
+                <b>{{ trans('field.roles') }}</b>
+            </th>
+            <th valign="middle" align="center">
+                <b>{{ trans('index.total') }} {{ trans('page.property') }}</b>
+            </th>
+            <th valign="middle" align="center">
                 <b>{{ trans('field.created_at') }}</b>
             </th>
             <th valign="middle" align="center">
@@ -84,6 +93,15 @@
                 </td>
                 <td valign="middle" align="left">
                     {{ $user->username }}
+                </td>
+                <td valign="middle" align="left">
+                    {{ $user->is_active ? 'Yes' : 'No' }}
+                </td>
+                <td valign="middle" align="left">
+                    {{ $user->roles->pluck('name')->join(', ') }}
+                </td>
+                <td valign="middle" align="left">
+                    {{ $user->properties_count }}
                 </td>
                 <td valign="middle" align="left">
                     {{ $user->created_at }}

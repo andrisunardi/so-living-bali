@@ -140,9 +140,9 @@
                             <th>{{ trans('field.phone') }}</th>
                             <th>{{ trans('field.username') }}</th>
                             <th width="1%">{{ trans('field.is_active') }}</th>
-                            <th width="1%">{{ trans('field.created_at') }}</th>
                             <th width="1%">{{ trans('field.roles') }}</th>
                             <th width="1%">{{ trans('index.total') }} {{ trans('page.property') }}</th>
+                            <th width="1%">{{ trans('field.created_at') }}</th>
                             <th width="1%">{{ trans('field.action') }}</th>
                         </tr>
                     </thead>
@@ -178,7 +178,6 @@
                                         </span>
                                     @endcan
                                 </td>
-                                <td>{{ $user->created_at->isoFormat('HH:mm - ddd, DD MMM YYYY') }}</td>
                                 <td>{{ $user->roles->pluck('name')->join(', ') }}</td>
                                 <td class="text-center">
                                     <a draggable="false"
@@ -187,6 +186,7 @@
                                         {{ $user->properties_count }}
                                     </a>
                                 </td>
+                                <td>{{ $user->created_at->isoFormat('HH:mm - ddd, DD MMM YYYY') }}</td>
                                 <td>
                                     <div class="d-flex gap-2">
                                         @can('user.detail')
