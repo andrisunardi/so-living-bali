@@ -2,6 +2,7 @@
 
 namespace App\Services;
 
+use Exception;
 use Illuminate\Support\Arr;
 use Illuminate\Support\Facades\DB;
 use Spatie\Permission\Models\Permission;
@@ -11,6 +12,7 @@ class PermissionService
 {
     public function index(
         ?string $search = '',
+        ?string $guardName = '',
         int|string|null $roleId = null,
         int|string|null $userId = null,
         bool $random = false,
@@ -32,6 +34,7 @@ class PermissionService
                         ->orWhereRelation('users', 'email', 'like', "%{$search}%");
                 });
             })
+            ->when($guardName, fn ($q) => $q->where('guard_name', $guardName))
             ->when($roleId, fn ($q) => $q->whereRelation('roles', 'id', $roleId))
             ->when($userId, fn ($q) => $q->whereRelation('users', 'id', $userId))
             ->when($random, fn ($q) => $q->inRandomOrder())
@@ -55,28 +58,46 @@ class PermissionService
 
     public function create(array $data = []): Permission
     {
-        $roles = Role::whereIn('id', $data['role_ids'])->get();
-        Arr::pull($data, 'role_ids');
-
         $table = (new Permission)->getTable();
         DB::statement("ALTER TABLE {$table} AUTO_INCREMENT = 1");
 
-        $permission = Permission::create($data);
-        $permission->assignRole($roles);
+        try {
+            DB::beginTransaction();
 
-        return $permission;
+            $roles = Role::whereIn('id', $data['role_ids'])->get();
+            Arr::pull($data, 'role_ids');
+
+            $permission = Permission::create($data);
+            $permission->assignRole($roles);
+
+            DB::commit();
+
+            return $permission;
+        } catch (Exception $e) {
+            DB::rollBack();
+            throw $e;
+        }
     }
 
     public function update(Permission $permission, array $data = []): Permission
     {
-        $roles = Role::whereIn('id', $data['role_ids'])->get();
-        Arr::pull($data, 'role_ids');
+        try {
+            DB::beginTransaction();
 
-        $permission->update($data);
-        $permission->syncRoles($roles);
-        $permission->refresh();
+            $roles = Role::whereIn('id', $data['role_ids'])->get();
+            Arr::pull($data, 'role_ids');
 
-        return $permission;
+            $permission->update($data);
+            $permission->syncRoles($roles);
+            $permission->refresh();
+
+            DB::commit();
+
+            return $permission;
+        } catch (Exception $e) {
+            DB::rollBack();
+            throw $e;
+        }
     }
 
     public function delete(Permission $permission): bool

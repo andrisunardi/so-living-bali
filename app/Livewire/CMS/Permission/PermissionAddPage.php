@@ -31,6 +31,7 @@ class PermissionAddPage extends Component
     public function getRoles(): object
     {
         return (new RoleService)->index(
+            guardName: 'web',
             orderBy: 'name',
             sortBy: 'asc',
             paginate: false,

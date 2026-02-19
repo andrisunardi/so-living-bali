@@ -27,6 +27,7 @@ class RolePage extends Component
 
         $this->reset([
             'search',
+            'permission_id',
         ]);
     }
 

@@ -193,8 +193,8 @@
 
 @push('script')
     <script>
-        $("#role_id").on("change", function() {
-            @this.set("role_id", $(this).val())
+        $("#permission_id").on("change", function() {
+            @this.set("permission_id", $(this).val())
         })
     </script>
 @endpush

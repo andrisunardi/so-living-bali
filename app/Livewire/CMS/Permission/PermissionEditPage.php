@@ -40,6 +40,7 @@ class PermissionEditPage extends Component
     public function getRoles(): object
     {
         return (new PermissionService)->index(
+            guardName: 'web',
             orderBy: 'name',
             sortBy: 'asc',
             paginate: false,

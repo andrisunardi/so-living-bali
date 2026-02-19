@@ -3,6 +3,7 @@
 namespace App\Services;
 
 use App\Models\User;
+use Exception;
 use Illuminate\Support\Arr;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Hash;
@@ -70,36 +71,54 @@ class UserService
         $table = (new User)->getTable();
         DB::statement("ALTER TABLE {$table} AUTO_INCREMENT = 1");
 
-        $roles = Role::find($data['role_ids']);
+        try {
+            DB::beginTransaction();
 
-        $data['password'] = Hash::make($data['password']);
+            $roles = Role::find($data['role_ids']);
 
-        Arr::pull($data, 'role_ids');
+            $data['password'] = Hash::make($data['password']);
 
-        $user = User::create($data);
-        $user->assignRole($roles);
+            Arr::pull($data, 'role_ids');
 
-        return $user;
+            $user = User::create($data);
+            $user->assignRole($roles);
+
+            DB::commit();
+
+            return $user;
+        } catch (Exception $e) {
+            DB::rollBack();
+            throw $e;
+        }
     }
 
     public function update(User $user, array $data = []): User
     {
-        $roles = Role::find($data['role_ids']);
+        try {
+            DB::beginTransaction();
 
-        $user->syncRoles($roles);
+            $roles = Role::find($data['role_ids']);
 
-        if ($data['password']) {
-            $data['password'] = Hash::make($data['password']);
-        } else {
-            Arr::pull($data, 'password');
+            $user->syncRoles($roles);
+
+            if ($data['password']) {
+                $data['password'] = Hash::make($data['password']);
+            } else {
+                Arr::pull($data, 'password');
+            }
+
+            Arr::pull($data, 'role_ids');
+
+            $user->update($data);
+            $user->refresh();
+
+            DB::commit();
+
+            return $user;
+        } catch (Exception $e) {
+            DB::rollBack();
+            throw $e;
         }
-
-        Arr::pull($data, 'role_ids');
-
-        $user->update($data);
-        $user->refresh();
-
-        return $user;
     }
 
     public function delete(User $user): bool

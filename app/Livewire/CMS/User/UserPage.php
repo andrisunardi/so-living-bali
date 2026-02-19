@@ -30,6 +30,8 @@ class UserPage extends Component
 
         $this->reset([
             'search',
+            'is_active',
+            'role_id',
         ]);
     }
 
