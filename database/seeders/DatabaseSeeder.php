@@ -13,6 +13,8 @@ class DatabaseSeeder extends Seeder
             PermissionSeeder::class,
             UserSeeder::class,
 
+            DistrictSeeder::class,
+
             ContactSeeder::class,
             PropertySeeder::class,
         ]);

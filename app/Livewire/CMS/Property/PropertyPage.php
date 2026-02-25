@@ -88,7 +88,7 @@ class PropertyPage extends Component
             paginate: $paginate,
         );
 
-        $properties->loadMissing('user');
+        $properties->loadMissing(['user']);
 
         return $properties;
     }

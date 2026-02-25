@@ -58,6 +58,47 @@ namespace App\Models{
 namespace App\Models{
 /**
  * @property int $id
+ * @property string $name
+ * @property bool $is_show
+ * @property bool $is_active
+ * @property int|null $created_by
+ * @property int|null $updated_by
+ * @property int|null $deleted_by
+ * @property \Illuminate\Support\Carbon $created_at
+ * @property \Illuminate\Support\Carbon $updated_at
+ * @property \Illuminate\Support\Carbon|null $deleted_at
+ * @property-read \Illuminate\Database\Eloquent\Collection<int, \Spatie\Activitylog\Models\Activity> $activities
+ * @property-read int|null $activities_count
+ * @property-read \App\Models\User|null $createdBy
+ * @property-read \App\Models\User|null $deletedBy
+ * @property-read \App\Models\User|null $updatedBy
+ * @property-read \App\Models\User|null $user
+ * @method static \Illuminate\Database\Eloquent\Builder<static>|District inactive()
+ * @method static \Illuminate\Database\Eloquent\Builder<static>|District newModelQuery()
+ * @method static \Illuminate\Database\Eloquent\Builder<static>|District newQuery()
+ * @method static \Illuminate\Database\Eloquent\Builder<static>|District notShown()
+ * @method static \Illuminate\Database\Eloquent\Builder<static>|District onlyTrashed()
+ * @method static \Illuminate\Database\Eloquent\Builder<static>|District query()
+ * @method static \Illuminate\Database\Eloquent\Builder<static>|District show()
+ * @method static \Illuminate\Database\Eloquent\Builder<static>|District whereCreatedAt($value)
+ * @method static \Illuminate\Database\Eloquent\Builder<static>|District whereCreatedBy($value)
+ * @method static \Illuminate\Database\Eloquent\Builder<static>|District whereDeletedAt($value)
+ * @method static \Illuminate\Database\Eloquent\Builder<static>|District whereDeletedBy($value)
+ * @method static \Illuminate\Database\Eloquent\Builder<static>|District whereId($value)
+ * @method static \Illuminate\Database\Eloquent\Builder<static>|District whereIsActive($value)
+ * @method static \Illuminate\Database\Eloquent\Builder<static>|District whereIsShow($value)
+ * @method static \Illuminate\Database\Eloquent\Builder<static>|District whereName($value)
+ * @method static \Illuminate\Database\Eloquent\Builder<static>|District whereUpdatedAt($value)
+ * @method static \Illuminate\Database\Eloquent\Builder<static>|District whereUpdatedBy($value)
+ * @method static \Illuminate\Database\Eloquent\Builder<static>|District withTrashed(bool $withTrashed = true)
+ * @method static \Illuminate\Database\Eloquent\Builder<static>|District withoutTrashed()
+ */
+	class District extends \Eloquent {}
+}
+
+namespace App\Models{
+/**
+ * @property int $id
  * @property string $code
  * @property string $name
  * @property int|null $user_id

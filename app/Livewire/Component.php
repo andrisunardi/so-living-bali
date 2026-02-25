@@ -32,4 +32,14 @@ class Component extends LivewireComponent
                 ->show();
         }
     }
+
+    public function alertSuccess(string $title = '', string $body = ''): void
+    {
+        LivewireAlert::title($title)->html($body)->withConfirmButton('OK')->confirmButtonColor('#198754')->success()->show();
+    }
+
+    public function alertError(string $title = '', string $body = ''): void
+    {
+        LivewireAlert::title($title)->html($body)->withConfirmButton('OK')->confirmButtonColor('#dc3545')->error()->show();
+    }
 }

@@ -8,7 +8,6 @@ use App\Models\User;
 use App\Services\RoleService;
 use App\Services\UserService;
 use Illuminate\Contracts\View\View;
-use Jantinnerezo\LivewireAlert\Facades\LivewireAlert;
 use Livewire\Attributes\Url;
 use Maatwebsite\Excel\Facades\Excel;
 use Symfony\Component\HttpFoundation\BinaryFileResponse;
@@ -44,24 +43,20 @@ class UserPage extends Component
     {
         (new UserService)->active(user: $user);
 
-        LivewireAlert::title(trans('index.change_active').' '.trans('index.success'))
-            ->html(trans('page.user').' '.trans('message.has_been_successfully_changed'))
-            ->withConfirmButton('OK')
-            ->confirmButtonColor('#198754')
-            ->success()
-            ->show();
+        $this->alertSuccess(
+            title: trans('index.change_active').' '.trans('index.success'),
+            body: trans('page.user').' '.trans('message.has_been_successfully_changed')
+        );
     }
 
     public function delete(User $user): void
     {
         (new UserService)->delete(user: $user);
 
-        LivewireAlert::title(trans('index.delete').' '.trans('index.success'))
-            ->html(trans('page.user').' '.trans('message.has_been_successfully_deleted'))
-            ->withConfirmButton('OK')
-            ->confirmButtonColor('#198754')
-            ->success()
-            ->show();
+        $this->alertSuccess(
+            title: trans('index.delete').' '.trans('index.success'),
+            body: trans('page.user').' '.trans('message.has_been_successfully_deleted')
+        );
     }
 
     public function getRoles(): object
@@ -90,12 +85,10 @@ class UserPage extends Component
 
     public function export(): BinaryFileResponse
     {
-        LivewireAlert::title(trans('index.export').' '.trans('index.success'))
-            ->html(trans('page.user').' '.trans('message.has_been_successfully_exported'))
-            ->withConfirmButton('OK')
-            ->confirmButtonColor('#198754')
-            ->success()
-            ->show();
+        $this->alertSuccess(
+            title: trans('index.export').' '.trans('index.success'),
+            body: trans('page.user').' '.trans('message.has_been_successfully_exported')
+        );
 
         return Excel::download(new UserExport(
             roleId: $this->role_id,

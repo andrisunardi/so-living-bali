@@ -4,6 +4,7 @@ return [
 
     '#' => '#',
     'action' => 'Action',
+    'show' => 'Show',
     'active' => 'Active',
     'address' => 'Address',
     'code' => 'Code',
@@ -18,6 +19,7 @@ return [
     'guard_name' => 'Guard Name',
     'id' => 'ID',
     'image' => 'Image',
+    'is_show' => 'Show',
     'is_active' => 'Active',
     'join_date' => 'Join Date',
     'logo' => 'Logo',

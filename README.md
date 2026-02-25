@@ -231,3 +231,55 @@ https://tailux.piniastudio.com/tables/advanced-tables
         </div>
     </div>
 </nav>
+
+•⁠  ⁠Link of gmaps instead of the  latitude and longitude? Possible?
+•⁠  ⁠District/Area : Could you pls use a dropdown with single choice? you will find below the list of area/sub area that we want
+•⁠  ⁠Date visited? Do you mean the date when we visited with the client? I would like to automatize this data? We need to discuss it
+•⁠  ⁠Full Legal Documentation Available : Pls insert a dropdown with multiple choice instead of YES/NO. You will find below the list to use
+•⁠  ⁠Environment and tranquility (typo) : Pls correct the title
+•⁠  ⁠Internet speedtest : Can you insert as well the possibility to doxnload a picture of the speed test
+•⁠  ⁠Trade off : What do you mean?
+•⁠  ⁠Target profil : pls autorize multiple choice
+
+List of districts
+CANGGU
+•⁠  ⁠Berawa
+•⁠  ⁠Batu Bolong/Echo Beach
+•⁠  ⁠Padonan/Babakan
+•⁠  ⁠Cepaka/Kaba-Kaba
+PERERENAN
+•⁠  ⁠Beach Side
+•⁠  ⁠Tumbak Bayuh/Tiying Tutul
+SESEH/CEMAGI
+BUKIT:
+•⁠  ⁠Nusa Dusa
+•⁠  ⁠Uluwatu
+SEMINYAK :
+•⁠  ⁠Batu Belig
+•⁠  ⁠Oberoi
+•⁠  ⁠Petintenget
+•⁠  ⁠Seminyak Beach
+•⁠  ⁠Others
+UMALAS
+KEROBOKAN
+
+LEGAL DOCUMENTATION LIST :
+•⁠  ⁠Land Certificate
+•⁠  ⁠Lease Agreement
+•⁠  ⁠ID
+•⁠  ⁠Building Permit
+
+
+The CMS doesnt the price and the inclusion
+Could you pls add the price per month (if monthly rental is possible)
+Could you pls add the price per year (if yearly rental is possible)
+Could you pls add for monthly and for yearly (NOTE : the inclusions can be different for the same property between MONTHLY and YEARLY)
+Pls insert a dropdown list with multiple choice 
+•⁠  ⁠Housekeeper (and insert a box "How many time per week" : ?)
+•⁠  ⁠Pool maintenance
+•⁠  ⁠Gardener
+•⁠  ⁠Internet
+•⁠  ⁠Banjar
+•⁠  ⁠Garbage
+•⁠  ⁠Security
+•⁠  ⁠Others : ?

@@ -18,6 +18,10 @@ return [
     'property' => 'Property',
     'article' => 'Article',
 
+    'master' => 'Master',
+    'area' => 'Area',
+    'district' => 'District',
+
     'permission' => 'Permission',
     'role' => 'Role',
     'user' => 'User',

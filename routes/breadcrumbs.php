@@ -56,6 +56,7 @@ Breadcrumbs::for('cms.home', function (BreadcrumbTrail $trail) {
     $trail->push(trans('page.home'), route('cms.home'), ['icon' => 'fas fa-home']);
 });
 
+// MODULE
 // CONTACT
 Breadcrumbs::for('cms.contact.index', function (BreadcrumbTrail $trail) {
     $trail->parent('cms.home');
@@ -119,6 +120,29 @@ Breadcrumbs::for('cms.article.detail', function (BreadcrumbTrail $trail, $articl
     $trail->push(trans('index.detail'), route('cms.article.detail', $article), ['icon' => 'fas fa-list']);
 });
 
+// MASTER
+// DISTRICT
+Breadcrumbs::for('cms.district.index', function (BreadcrumbTrail $trail) {
+    $trail->parent('cms.home');
+    $trail->push(trans('page.district'), route('cms.district.index'), ['icon' => 'fas fa-archway']);
+});
+
+Breadcrumbs::for('cms.district.add', function (BreadcrumbTrail $trail) {
+    $trail->parent('cms.district.index');
+    $trail->push(trans('index.add'), route('cms.district.add'), ['icon' => 'fas fa-plus']);
+});
+
+Breadcrumbs::for('cms.district.edit', function (BreadcrumbTrail $trail, $district) {
+    $trail->parent('cms.district.index');
+    $trail->push(trans('index.edit'), route('cms.district.edit', $district), ['icon' => 'fas fa-edit']);
+});
+
+Breadcrumbs::for('cms.district.detail', function (BreadcrumbTrail $trail, $district) {
+    $trail->parent('cms.district.index');
+    $trail->push(trans('index.detail'), route('cms.district.detail', $district), ['icon' => 'fas fa-list']);
+});
+
+// ACCESS
 // PERMISSION
 Breadcrumbs::for('cms.permission.index', function (BreadcrumbTrail $trail) {
     $trail->parent('cms.home');

@@ -21,6 +21,12 @@ class PermissionSeeder extends Seeder
         Permission::create(['name' => 'contact.delete', 'guard_name' => 'web'])->assignRole('Admin');
         Permission::create(['name' => 'contact.detail', 'guard_name' => 'web'])->assignRole('Admin');
 
+        Permission::create(['name' => 'district', 'guard_name' => 'web'])->assignRole('Admin');
+        Permission::create(['name' => 'district.add', 'guard_name' => 'web'])->assignRole('Admin');
+        Permission::create(['name' => 'district.edit', 'guard_name' => 'web'])->assignRole('Admin');
+        Permission::create(['name' => 'district.delete', 'guard_name' => 'web'])->assignRole('Admin');
+        Permission::create(['name' => 'district.detail', 'guard_name' => 'web'])->assignRole('Admin');
+
         Permission::create(['name' => 'permission', 'guard_name' => 'web'])->assignRole('Admin');
         Permission::create(['name' => 'permission.add', 'guard_name' => 'web'])->assignRole('Admin');
         Permission::create(['name' => 'permission.edit', 'guard_name' => 'web'])->assignRole('Admin');

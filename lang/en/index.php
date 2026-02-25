@@ -28,6 +28,7 @@ return [
     'image' => 'Image',
     'yes' => 'Yes',
     'no' => 'No',
+    'change_show' => 'Change Show',
     'change_active' => 'Change Active',
     'total' => 'Total',
     'save' => 'Save',

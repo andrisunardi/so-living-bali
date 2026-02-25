@@ -182,6 +182,7 @@ return [
         'guest_toilet' => 'Guest Toilet',
         'image' => 'Image',
         'internet_speedtest' => 'Internet Speedtest',
+        'is_show' => 'Show',
         'is_active' => 'Active',
         'land_size' => 'Land Size',
         'latitude' => 'Latitude',

@@ -57,6 +57,21 @@
                                     </a>
                                 @endcan
 
+                                @canany(['district'])
+                                    <div class="fw-bold text-uppercase border-bottom pt-2 pb-2">
+                                        {{ trans('page.master') }}
+                                    </div>
+                                @endcanany
+
+                                @can('district')
+                                    <a draggable="false"
+                                        class="btn btn-outline-primary icon-link w-100 {{ Route::is('cms.district.*') ? 'active' : '' }}"
+                                        href="{{ route('cms.district.index') }}" wire:navigate>
+                                        <span class="fas fa-archway fa-fw"></span>
+                                        {{ trans('page.district') }}
+                                    </a>
+                                @endcan
+
                                 @canany(['permission', 'role', 'user'])
                                     <div class="fw-bold text-uppercase border-bottom pt-2 pb-2">
                                         {{ trans('page.access') }}
