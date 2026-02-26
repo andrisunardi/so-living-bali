@@ -10,7 +10,7 @@
         <div class="card-body">
             <div class="row g-3">
                 <div class="col-auto">
-                    <a draggable="false" class="btn btn-primary w-100" href="{{ route('cms.district.index') }}"
+                    <a draggable="false" class="btn btn-success w-100" href="{{ route('cms.district.index') }}"
                         wire:navigate>
                         <span class="fas fa-arrow-left fa-fw"></span>
                         {{ trans('index.back') }}
@@ -119,15 +119,15 @@
 
                 <div class="row">
                     <div class="col-6 col-sm-auto">
-                        <button type="submit" class="btn btn-primary w-100" wire:offline.class="disabled"
+                        <button type="submit" class="btn btn-success w-100" wire:offline.class="disabled"
                             wire:offline.attr="disabled" wire:loading.class="disabled" wire:loading.attr="disabled">
                             <span wire:loading.remove wire:target="submit">
-                                <span class="fas fa-paper-plane fa-fw"></span>
-                                {{ trans('index.submit') }}
+                                <span class="fas fa-save fa-fw"></span>
+                                {{ trans('index.save') }}
                             </span>
                             <span wire:loading wire:target="submit" class="w-100">
                                 <span class="spinner-border spinner-border-sm"></span>
-                                {{ trans('index.submit') }}
+                                {{ trans('index.save') }}
                             </span>
                         </button>
                     </div>
