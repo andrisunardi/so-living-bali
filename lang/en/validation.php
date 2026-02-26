@@ -224,7 +224,7 @@ return [
         'when' => 'When',
         'user_id' => 'User',
         'living_area_has_natural_light' => 'Living Area Has Natural Light',
-        'index' => 'Index',
+        'district_id' => 'District',
         'index' => 'Index',
         'index' => 'Index',
         'index' => 'Index',

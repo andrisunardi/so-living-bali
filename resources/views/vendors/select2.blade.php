@@ -10,9 +10,9 @@
     <script src="{{ asset('vendors/select2-4.1.0/js/select2.min.js') }}"></script>
     <script>
         $(".select2").select2({
-            theme: "bootstrap4",
+            theme: "bootstrap4", // classic
             dropdownAutoWidth: true,
-            width: "auto",
+            width: "resolve", // auto
         });
     </script>
 
@@ -31,9 +31,9 @@
                 }) => {
                     queueMicrotask(() => {
                         $(".select2").select2({
-                            theme: "bootstrap4",
+                            theme: "bootstrap4", // classic
                             dropdownAutoWidth: true,
-                            width: "auto",
+                            width: "resolve", // auto
                         });
                     })
                 })

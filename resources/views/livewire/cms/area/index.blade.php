@@ -1,5 +1,5 @@
-@section('title', trans('page.district'))
-@section('icon', 'fas fa-city')
+@section('title', trans('page.area'))
+@section('icon', 'fas fa-archway')
 
 <div class="container-fluid">
     <div class="card">
@@ -28,23 +28,44 @@
                             wire:loading.attr="disabled">
                             <span wire:loading.remove wire:target="resetFilter">
                                 <span class="fas fa-eraser fa-fw"></span>
-                                <span class="d-none d-sm-inline">{{ trans('index.reset_filter') }}</span>
+                                {{ trans('index.reset_filter') }}
                             </span>
                             <span wire:loading wire:target="resetFilter" class="w-100">
                                 <span class="spinner-border spinner-border-sm"></span>
-                                <span class="d-none d-sm-inline">{{ trans('index.reset_filter') }}</span>
+                                {{ trans('index.reset_filter') }}
                             </span>
                         </button>
                     </div>
                 </div>
 
                 <div class="row g-3">
+                    <div class="col-12 col-sm">
+                        <label class="form-label" for="district_id">
+                            {{ trans('field.district_id') }}
+                        </label>
+                        <div class="input-group" wire:ignore>
+                            <div class="input-group-text">
+                                <span class="fas fa-city fa-fw "></span>
+                            </div>
+                            <select class="form-select select2" id="district_id" name="district_id"
+                                wire:key="district_id" wire:model.lazy="district_id" wire:offline.class="disabled"
+                                wire:offline.attr="disabled" wire:loading.class="disabled" wire:loading.attr="disabled">
+                                <option value="">{{ trans('index.all') }} {{ trans('page.district') }}</option>
+                                @foreach ($districts as $district)
+                                    <option value="{{ $district->id }}" wire:key="district-{{ $district->id }}">
+                                        {{ $district->name }}
+                                    </option>
+                                @endforeach
+                            </select>
+                        </div>
+                    </div>
+
                     <div class="col-6 col-sm-auto">
                         <label class="form-label" for="is_show">
                             {{ trans('field.is_show') }}
                         </label>
                         <div>
-                            <div class="form-check form-check-inline">
+                            <div class="form-check">
                                 <input type="checkbox" class="form-check-input" id="is_show_1" name="is_show"
                                     value="1" wire:key="is_show" wire:model.lazy="is_show"
                                     wire:offline.class="disabled" wire:offline.attr="disabled"
@@ -53,7 +74,7 @@
                                     {{ trans('index.yes') }}
                                 </label>
                             </div>
-                            <div class="form-check form-check-inline">
+                            <div class="form-check">
                                 <input type="checkbox" class="form-check-input" id="is_show_0" name="is_show"
                                     value="0" wire:key="is_show" wire:model.lazy="is_show"
                                     wire:offline.class="disabled" wire:offline.attr="disabled"
@@ -70,7 +91,7 @@
                             {{ trans('field.is_active') }}
                         </label>
                         <div>
-                            <div class="form-check form-check-inline">
+                            <div class="form-check">
                                 <input type="checkbox" class="form-check-input" id="is_active_1" name="is_active"
                                     value="1" wire:key="is_active" wire:model.lazy="is_active"
                                     wire:offline.class="disabled" wire:offline.attr="disabled"
@@ -79,7 +100,7 @@
                                     {{ trans('index.yes') }}
                                 </label>
                             </div>
-                            <div class="form-check form-check-inline">
+                            <div class="form-check">
                                 <input type="checkbox" class="form-check-input" id="is_active_0" name="is_active"
                                     value="0" wire:key="is_active" wire:model.lazy="is_active"
                                     wire:offline.class="disabled" wire:offline.attr="disabled"
@@ -103,9 +124,9 @@
 
         <div class="card-body">
             <div class="row g-3">
-                @can('district.add')
-                    <div class="col col-sm-auto">
-                        <a draggable="false" class="btn btn-primary w-100" href="{{ route('cms.district.add') }}"
+                @can('area.add')
+                    <div class="col-auto">
+                        <a draggable="false" class="btn btn-primary w-100" href="{{ route('cms.area.add') }}"
                             wire:navigate>
                             <span class="fas fa-plus fa-fw"></span>
                             <span>{{ trans('index.add') }}</span>
@@ -113,8 +134,8 @@
                     </div>
                 @endcan
 
-                @can('district.export')
-                    <div class="col col-sm-auto">
+                @can('area.export')
+                    <div class="col-auto">
                         <button type="button" class="btn btn-success w-100" wire:click="export" wire:key="export"
                             wire:offline.class="disabled" wire:offline.attr="disabled" wire:loading.class="disabled"
                             wire:loading.attr="disabled">
@@ -140,8 +161,8 @@
                         <tr class="text-center align-middle table-primary">
                             <th width="1%">{{ trans('field.#') }}</th>
                             <th width="1%">{{ trans('field.id') }}</th>
+                            <th width="1%">{{ trans('field.district_id') }}</th>
                             <th>{{ trans('field.name') }}</th>
-                            <th width="1%">{{ trans('index.total') }} {{ trans('page.area') }}</th>
                             <th width="1%">{{ trans('index.total') }} {{ trans('page.property') }}</th>
                             <th width="1%">{{ trans('field.show') }}</th>
                             <th width="1%">{{ trans('field.active') }}</th>
@@ -150,103 +171,106 @@
                         </tr>
                     </thead>
                     <tbody>
-                        @forelse ($districts as $district)
-                            <tr wire:key="district-{{ $district->id }}">
+                        @forelse ($areas as $area)
+                            <tr wire:key="area-{{ $area->id }}">
                                 <td class="text-center">{{ $loop->iteration }}</td>
                                 <td class="text-center">
-                                    <a draggable="false"
-                                        href="{{ route('cms.district.detail', ['district' => $district]) }}"
+                                    <a draggable="false" href="{{ route('cms.area.detail', ['area' => $area]) }}"
                                         wire:navigate>
-                                        {{ $district->id }}
+                                        {{ $area->id }}
                                     </a>
                                 </td>
                                 <td>
-                                    <a draggable="false"
-                                        href="{{ route('cms.district.detail', ['district' => $district]) }}"
+                                    @if ($area->district)
+                                        <a draggable="false"
+                                            href="{{ route('cms.district.detail', ['district' => $area->district]) }}"
+                                            wire:navigate>
+                                            {{ $area->district->name }}
+                                        </a>
+                                    @endif
+                                <td>
+                                    <a draggable="false" href="{{ route('cms.area.detail', ['area' => $area]) }}"
                                         wire:navigate>
-                                        {{ $district->name }}
+                                        {{ $area->name }}
                                     </a>
                                 </td>
                                 <td class="text-center">0</td>
-                                <td class="text-center">0</td>
                                 <td>
-                                    @can('district.edit')
+                                    @can('area.edit')
                                         <div class="form-check form-switch">
                                             <input class="form-check-input" type="checkbox" role="switch"
-                                                id="is_show_{{ $district->id }}" name="is_show" value="1"
-                                                {{ $district->is_show ? 'checked' : '' }}
-                                                wire:key="is_show_{{ $district->id }}"
-                                                wire:click="changeActive({{ $district->id }})"
+                                                id="is_show_{{ $area->id }}" name="is_show" value="1"
+                                                {{ $area->is_show ? 'checked' : '' }}
+                                                wire:key="is_show_{{ $area->id }}"
+                                                wire:click="changeActive({{ $area->id }})"
                                                 wire:offline.class="disabled" wire:offline.attr="disabled"
                                                 wire:loading.class="disabled" wire:loading.attr="disabled">
                                             <label
-                                                class="form-check-label text-{{ $district->is_show ? 'success' : 'danger' }}"
-                                                for="is_show_{{ $district->id }}">
-                                                {{ $district->is_show ? trans('index.yes') : trans('index.no') }}
+                                                class="form-check-label text-{{ $area->is_show ? 'success' : 'danger' }}"
+                                                for="is_show_{{ $area->id }}">
+                                                {{ $area->is_show ? trans('index.yes') : trans('index.no') }}
                                             </label>
                                         </div>
                                     @else
                                         <span
-                                            class="badge rounded-pill text-bg-{{ $district->is_show ? 'success' : 'danger' }}">
-                                            {{ $district->is_show ? trans('index.yes') : trans('index.no') }}
+                                            class="badge rounded-pill text-bg-{{ $area->is_show ? 'success' : 'danger' }}">
+                                            {{ $area->is_show ? trans('index.yes') : trans('index.no') }}
                                         </span>
                                     @endcan
                                 </td>
                                 <td>
-                                    @can('district.edit')
+                                    @can('area.edit')
                                         <div class="form-check form-switch">
                                             <input class="form-check-input" type="checkbox" role="switch"
-                                                id="is_active_{{ $district->id }}" name="is_active" value="1"
-                                                {{ $district->is_active ? 'checked' : '' }}
-                                                wire:key="is_active_{{ $district->id }}"
-                                                wire:click="changeActive({{ $district->id }})"
+                                                id="is_active_{{ $area->id }}" name="is_active" value="1"
+                                                {{ $area->is_active ? 'checked' : '' }}
+                                                wire:key="is_active_{{ $area->id }}"
+                                                wire:click="changeActive({{ $area->id }})"
                                                 wire:offline.class="disabled" wire:offline.attr="disabled"
                                                 wire:loading.class="disabled" wire:loading.attr="disabled">
                                             <label
-                                                class="form-check-label text-{{ $district->is_active ? 'success' : 'danger' }}"
-                                                for="is_active_{{ $district->id }}">
-                                                {{ $district->is_active ? trans('index.yes') : trans('index.no') }}
+                                                class="form-check-label text-{{ $area->is_active ? 'success' : 'danger' }}"
+                                                for="is_active_{{ $area->id }}">
+                                                {{ $area->is_active ? trans('index.yes') : trans('index.no') }}
                                             </label>
                                         </div>
                                     @else
                                         <span
-                                            class="badge rounded-pill text-bg-{{ $district->is_active ? 'success' : 'danger' }}">
-                                            {{ $district->is_active ? trans('index.yes') : trans('index.no') }}
+                                            class="badge rounded-pill text-bg-{{ $area->is_active ? 'success' : 'danger' }}">
+                                            {{ $area->is_active ? trans('index.yes') : trans('index.no') }}
                                         </span>
                                     @endcan
                                 </td>
-                                <td>{{ $district->created_at->isoFormat('HH:mm - ddd, DD MMM YYYY') }}</td>
+                                <td>{{ $area->created_at->isoFormat('HH:mm - ddd, DD MMM YYYY') }}</td>
                                 <td>
                                     <div class="d-flex gap-2">
-                                        @can('district.detail')
+                                        @can('area.detail')
                                             <a draggable="false" class="btn btn-info btn-sm"
-                                                href="{{ route('cms.district.detail', ['district' => $district]) }}"
-                                                wire:navigate>
+                                                href="{{ route('cms.area.detail', ['area' => $area]) }}" wire:navigate>
                                                 <span class="fas fa-list fa-fw"></span>
                                                 <span>{{ trans('index.detail') }}</span>
                                             </a>
                                         @endcan
 
-                                        @can('district.edit')
+                                        @can('area.edit')
                                             <a draggable="false" class="btn btn-success btn-sm"
-                                                href="{{ route('cms.district.edit', ['district' => $district]) }}"
-                                                wire:navigate>
+                                                href="{{ route('cms.area.edit', ['area' => $area]) }}" wire:navigate>
                                                 <span class="fas fa-edit fa-fw"></span>
                                                 <span>{{ trans('index.edit') }}</span>
                                             </a>
                                         @endcan
 
-                                        @can('district.delete')
+                                        @can('area.delete')
                                             <button type="button" class="btn btn-danger btn-sm"
-                                                wire:click="delete({{ $district->id }})"
-                                                wire:key="delete({{ $district->id }})" wire:offline.class="disabled"
+                                                wire:click="delete({{ $area->id }})"
+                                                wire:key="delete({{ $area->id }})" wire:offline.class="disabled"
                                                 wire:offline.attr="disabled" wire:loading.class="disabled"
                                                 wire:loading.attr="disabled">
-                                                <span wire:loading.remove wire:target="delete({{ $district->id }})">
+                                                <span wire:loading.remove wire:target="delete({{ $area->id }})">
                                                     <span class="fas fa-trash fa-fw"></span>
                                                     <span>{{ trans('index.delete') }}</span>
                                                 </span>
-                                                <span wire:loading wire:target="delete({{ $district->id }})"
+                                                <span wire:loading wire:target="delete({{ $area->id }})"
                                                     class="w-100">
                                                     <span class="spinner-border spinner-border-sm"></span>
                                                     <span>{{ trans('index.delete') }}</span>
@@ -267,7 +291,15 @@
                 </table>
             </div>
 
-            {{ $districts->links('components.layouts.pagination') }}
+            {{ $areas->links('components.layouts.pagination') }}
         </div>
     </div>
 </div>
+
+@push('script')
+    <script>
+        $("#district_id").on("change", function() {
+            @this.set("district_id", $(this).val())
+        })
+    </script>
+@endpush

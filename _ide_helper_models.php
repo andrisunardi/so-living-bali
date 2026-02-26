@@ -14,6 +14,51 @@
 namespace App\Models{
 /**
  * @property int $id
+ * @property int $district_id
+ * @property string $name
+ * @property bool $is_show
+ * @property bool $is_active
+ * @property int|null $created_by
+ * @property int|null $updated_by
+ * @property int|null $deleted_by
+ * @property Carbon $created_at
+ * @property Carbon $updated_at
+ * @property Carbon|null $deleted_at
+ * @property-read \Illuminate\Database\Eloquent\Collection<int, \Spatie\Activitylog\Models\Activity> $activities
+ * @property-read int|null $activities_count
+ * @property-read \App\Models\User|null $createdBy
+ * @property-read \App\Models\User|null $deletedBy
+ * @property-read \App\Models\District $district
+ * @property-read \App\Models\User|null $updatedBy
+ * @property-read \App\Models\User|null $user
+ * @method static Builder<static>|Area inactive()
+ * @method static Builder<static>|Area newModelQuery()
+ * @method static Builder<static>|Area newQuery()
+ * @method static Builder<static>|Area notShown()
+ * @method static Builder<static>|Area onlyTrashed()
+ * @method static Builder<static>|Area query()
+ * @method static Builder<static>|Area show()
+ * @method static Builder<static>|Area whereCreatedAt($value)
+ * @method static Builder<static>|Area whereCreatedBy($value)
+ * @method static Builder<static>|Area whereDeletedAt($value)
+ * @method static Builder<static>|Area whereDeletedBy($value)
+ * @method static Builder<static>|Area whereDistrictId($value)
+ * @method static Builder<static>|Area whereId($value)
+ * @method static Builder<static>|Area whereIsActive($value)
+ * @method static Builder<static>|Area whereIsShow($value)
+ * @method static Builder<static>|Area whereName($value)
+ * @method static Builder<static>|Area whereUpdatedAt($value)
+ * @method static Builder<static>|Area whereUpdatedBy($value)
+ * @method static Builder<static>|Area withTrashed(bool $withTrashed = true)
+ * @method static Builder<static>|Area withoutTrashed()
+ * @mixin \Eloquent
+ */
+	class Area extends \Eloquent {}
+}
+
+namespace App\Models{
+/**
+ * @property int $id
  * @property string|null $code
  * @property string $name
  * @property string $company
@@ -93,6 +138,8 @@ namespace App\Models{
  * @method static Builder<static>|District withTrashed(bool $withTrashed = true)
  * @method static Builder<static>|District withoutTrashed()
  * @mixin \Eloquent
+ * @property-read \Illuminate\Database\Eloquent\Collection<int, \App\Models\Area> $areas
+ * @property-read int|null $areas_count
  */
 	class District extends \Eloquent {}
 }

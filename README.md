@@ -241,28 +241,6 @@ https://tailux.piniastudio.com/tables/advanced-tables
 •⁠  ⁠Trade off : What do you mean?
 •⁠  ⁠Target profil : pls autorize multiple choice
 
-List of districts
-CANGGU
-•⁠  ⁠Berawa
-•⁠  ⁠Batu Bolong/Echo Beach
-•⁠  ⁠Padonan/Babakan
-•⁠  ⁠Cepaka/Kaba-Kaba
-PERERENAN
-•⁠  ⁠Beach Side
-•⁠  ⁠Tumbak Bayuh/Tiying Tutul
-SESEH/CEMAGI
-BUKIT:
-•⁠  ⁠Nusa Dusa
-•⁠  ⁠Uluwatu
-SEMINYAK :
-•⁠  ⁠Batu Belig
-•⁠  ⁠Oberoi
-•⁠  ⁠Petintenget
-•⁠  ⁠Seminyak Beach
-•⁠  ⁠Others
-UMALAS
-KEROBOKAN
-
 LEGAL DOCUMENTATION LIST :
 •⁠  ⁠Land Certificate
 •⁠  ⁠Lease Agreement

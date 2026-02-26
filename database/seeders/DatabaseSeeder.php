@@ -14,6 +14,7 @@ class DatabaseSeeder extends Seeder
             UserSeeder::class,
 
             DistrictSeeder::class,
+            AreaSeeder::class,
 
             ContactSeeder::class,
             PropertySeeder::class,

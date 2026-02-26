@@ -2,21 +2,21 @@
 
 namespace App\Models;
 
-use App\Observers\DistrictObserver;
+use App\Observers\AreaObserver;
 use Illuminate\Database\Eloquent\Attributes\ObservedBy;
 use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
-use Illuminate\Database\Eloquent\Relations\HasMany;
 use Illuminate\Database\Eloquent\SoftDeletes;
 use Illuminate\Support\Carbon;
 use Spatie\Activitylog\LogOptions;
 use Spatie\Activitylog\Traits\LogsActivity;
 
-#[ObservedBy([DistrictObserver::class])]
+#[ObservedBy([AreaObserver::class])]
 /**
  * @property int $id
+ * @property int $district_id
  * @property string $name
  * @property bool $is_show
  * @property bool $is_active
@@ -30,43 +30,43 @@ use Spatie\Activitylog\Traits\LogsActivity;
  * @property-read int|null $activities_count
  * @property-read \App\Models\User|null $createdBy
  * @property-read \App\Models\User|null $deletedBy
+ * @property-read \App\Models\District $district
  * @property-read \App\Models\User|null $updatedBy
  * @property-read \App\Models\User|null $user
  *
- * @method static Builder<static>|District inactive()
- * @method static Builder<static>|District newModelQuery()
- * @method static Builder<static>|District newQuery()
- * @method static Builder<static>|District notShown()
- * @method static Builder<static>|District onlyTrashed()
- * @method static Builder<static>|District query()
- * @method static Builder<static>|District show()
- * @method static Builder<static>|District whereCreatedAt($value)
- * @method static Builder<static>|District whereCreatedBy($value)
- * @method static Builder<static>|District whereDeletedAt($value)
- * @method static Builder<static>|District whereDeletedBy($value)
- * @method static Builder<static>|District whereId($value)
- * @method static Builder<static>|District whereIsActive($value)
- * @method static Builder<static>|District whereIsShow($value)
- * @method static Builder<static>|District whereName($value)
- * @method static Builder<static>|District whereUpdatedAt($value)
- * @method static Builder<static>|District whereUpdatedBy($value)
- * @method static Builder<static>|District withTrashed(bool $withTrashed = true)
- * @method static Builder<static>|District withoutTrashed()
- *
- * @property-read \Illuminate\Database\Eloquent\Collection<int, \App\Models\Area> $areas
- * @property-read int|null $areas_count
+ * @method static Builder<static>|Area inactive()
+ * @method static Builder<static>|Area newModelQuery()
+ * @method static Builder<static>|Area newQuery()
+ * @method static Builder<static>|Area notShown()
+ * @method static Builder<static>|Area onlyTrashed()
+ * @method static Builder<static>|Area query()
+ * @method static Builder<static>|Area show()
+ * @method static Builder<static>|Area whereCreatedAt($value)
+ * @method static Builder<static>|Area whereCreatedBy($value)
+ * @method static Builder<static>|Area whereDeletedAt($value)
+ * @method static Builder<static>|Area whereDeletedBy($value)
+ * @method static Builder<static>|Area whereDistrictId($value)
+ * @method static Builder<static>|Area whereId($value)
+ * @method static Builder<static>|Area whereIsActive($value)
+ * @method static Builder<static>|Area whereIsShow($value)
+ * @method static Builder<static>|Area whereName($value)
+ * @method static Builder<static>|Area whereUpdatedAt($value)
+ * @method static Builder<static>|Area whereUpdatedBy($value)
+ * @method static Builder<static>|Area withTrashed(bool $withTrashed = true)
+ * @method static Builder<static>|Area withoutTrashed()
  *
  * @mixin \Eloquent
  */
-class District extends Model
+class Area extends Model
 {
     use HasFactory;
     use LogsActivity;
     use SoftDeletes;
 
-    protected $table = 'districts';
+    protected $table = 'areas';
 
     protected $fillable = [
+        'district_id',
         'name',
         'is_show',
         'is_active',
@@ -77,6 +77,7 @@ class District extends Model
     protected function casts(): array
     {
         return [
+            'district_id' => 'integer',
             'name' => 'string',
             'is_show' => 'boolean',
             'is_active' => 'boolean',
@@ -118,15 +119,10 @@ class District extends Model
         $query->where('is_active', false);
     }
 
-    public function areas(): HasMany
+    public function district(): BelongsTo
     {
-        return $this->hasMany(Area::class);
+        return $this->belongsTo(District::class);
     }
-
-    // public function properties(): HasMany
-    // {
-    //     return $this->hasMany(Property::class);
-    // }
 
     public function user(): BelongsTo
     {

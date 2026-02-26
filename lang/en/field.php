@@ -47,7 +47,7 @@ return [
     'agent' => 'Agent',
     'status' => 'Status',
     'user_id' => 'User',
-    'index' => 'Index',
+    'district_id' => 'District',
     'index' => 'Index',
     'index' => 'Index',
     'index' => 'Index',

@@ -57,17 +57,26 @@
                                     </a>
                                 @endcan
 
-                                @canany(['district'])
+                                @canany(['area', 'district'])
                                     <div class="fw-bold text-uppercase border-bottom pt-2 pb-2">
                                         {{ trans('page.master') }}
                                     </div>
                                 @endcanany
 
+                                @can('area')
+                                    <a draggable="false"
+                                        class="btn btn-outline-primary icon-link w-100 {{ Route::is('cms.area.*') ? 'active' : '' }}"
+                                        href="{{ route('cms.area.index') }}" wire:navigate>
+                                        <span class="fas fa-archway fa-fw"></span>
+                                        {{ trans('page.area') }}
+                                    </a>
+                                @endcan
+
                                 @can('district')
                                     <a draggable="false"
                                         class="btn btn-outline-primary icon-link w-100 {{ Route::is('cms.district.*') ? 'active' : '' }}"
                                         href="{{ route('cms.district.index') }}" wire:navigate>
-                                        <span class="fas fa-archway fa-fw"></span>
+                                        <span class="fas fa-city fa-fw"></span>
                                         {{ trans('page.district') }}
                                     </a>
                                 @endcan

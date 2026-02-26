@@ -11,6 +11,7 @@ return [
     'max_size' => 'Max Size',
     'length' => 'Length',
     'characters' => 'Characters',
+    'required' => 'Required',
     'unique' => 'Unique',
     'default' => 'Default',
 
