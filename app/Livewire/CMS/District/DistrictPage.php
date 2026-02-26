@@ -68,12 +68,17 @@ class DistrictPage extends Component
         );
     }
 
-    public function getDistricts(bool $paginate = true): object
-    {
+    public function getDistricts(
+        string $orderBy = 'id',
+        string $sortBy = 'desc',
+        bool $paginate = true,
+    ): object {
         $districts = (new DistrictService)->index(
             search: $this->search,
             isShow: $this->is_show,
             isActive: $this->is_active,
+            orderBy: $orderBy,
+            sortBy: $sortBy,
             paginate: $paginate,
         );
 
@@ -92,7 +97,7 @@ class DistrictPage extends Component
         return Excel::download(new DistrictExport(
             isShow: $this->is_show,
             isActive: $this->is_active,
-            districts: $this->getDistricts(paginate: false),
+            districts: $this->getDistricts(orderBy: 'id', sortBy: 'asc', paginate: false),
         ), trans('page.district').'.xlsx');
     }
 
