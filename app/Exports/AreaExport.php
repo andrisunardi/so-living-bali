@@ -7,21 +7,21 @@ use Maatwebsite\Excel\Concerns\Exportable;
 use Maatwebsite\Excel\Concerns\FromView;
 use Maatwebsite\Excel\Concerns\ShouldAutoSize;
 
-class AnnouncementExport implements FromView, ShouldAutoSize
+class AreaExport implements FromView, ShouldAutoSize
 {
     use Exportable;
 
-    public object $announcements;
+    public object $areas;
 
-    public function __construct(object $announcements)
+    public function __construct(object $areas)
     {
-        $this->announcements = $announcements;
+        $this->areas = $areas;
     }
 
     public function view(): View
     {
-        return view('excel.announcement', [
-            'announcements' => $this->announcements,
+        return view('excel.area', [
+            'areas' => $this->areas,
         ]);
     }
 }

@@ -7,21 +7,21 @@ use Maatwebsite\Excel\Concerns\Exportable;
 use Maatwebsite\Excel\Concerns\FromView;
 use Maatwebsite\Excel\Concerns\ShouldAutoSize;
 
-class NationalityExport implements FromView, ShouldAutoSize
+class DistrictExport implements FromView, ShouldAutoSize
 {
     use Exportable;
 
-    public object $nationalities;
+    public object $districts;
 
-    public function __construct(object $nationalities)
+    public function __construct(object $districts)
     {
-        $this->nationalities = $nationalities;
+        $this->districts = $districts;
     }
 
     public function view(): View
     {
-        return view('excel.nationality', [
-            'nationalities' => $this->nationalities,
+        return view('excel.district', [
+            'districts' => $this->districts,
         ]);
     }
 }

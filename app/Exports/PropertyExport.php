@@ -7,21 +7,21 @@ use Maatwebsite\Excel\Concerns\Exportable;
 use Maatwebsite\Excel\Concerns\FromView;
 use Maatwebsite\Excel\Concerns\ShouldAutoSize;
 
-class OutletExport implements FromView, ShouldAutoSize
+class PropertyExport implements FromView, ShouldAutoSize
 {
     use Exportable;
 
-    public object $outlets;
+    public object $properties;
 
-    public function __construct(object $outlets)
+    public function __construct(object $properties)
     {
-        $this->outlets = $outlets;
+        $this->properties = $properties;
     }
 
     public function view(): View
     {
-        return view('excel.outlet', [
-            'outlets' => $this->outlets,
+        return view('excel.property', [
+            'properties' => $this->properties,
         ]);
     }
 }

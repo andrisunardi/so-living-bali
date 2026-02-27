@@ -34,7 +34,7 @@
     <main class="flex-grow-1 @if (!Route::is(['home', 'cms.login', 'cms.forgot-password'])) pt-5 my-4 @endif">
         @if (View::hasSection('code'))
             @if (Request::segment(1) == 'cms')
-                @livewire('c-m-s.layouts.error')
+                <livewire:layouts::cms.error />
             @else
                 <livewire:layouts::error />
             @endif
