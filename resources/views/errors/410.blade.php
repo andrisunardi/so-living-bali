@@ -1,4 +1,4 @@
-@extends('components.layouts.app')
+@extends('layouts.app')
 
 @section("title", "410 - Gone")
 @section("code", "410")

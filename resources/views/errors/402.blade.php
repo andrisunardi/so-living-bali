@@ -1,4 +1,4 @@
-@extends('components.layouts.app')
+@extends('layouts.app')
 
 @section("title", "402 - Payment Required")
 @section("code", "402")

@@ -1,4 +1,4 @@
-@extends('components.layouts.app')
+@extends('layouts.app')
 
 @section("title", "415 - Unsupported Media Type")
 @section("code", "415")

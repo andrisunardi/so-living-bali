@@ -1,4 +1,4 @@
-@extends('components.layouts.app')
+@extends('layouts.app')
 
 @section("title", "421 - Misdirected Request")
 @section("code", "421")

@@ -2,7 +2,6 @@
 
 namespace App\Services;
 
-use Exception;
 use Illuminate\Support\Arr;
 use Illuminate\Support\Facades\DB;
 use Spatie\Permission\Models\Permission;
@@ -58,46 +57,28 @@ class PermissionService
 
     public function create(array $data = []): Permission
     {
+        $roles = Role::whereIn('id', $data['role_ids'])->get();
+        Arr::pull($data, 'role_ids');
+
         $table = (new Permission)->getTable();
         DB::statement("ALTER TABLE {$table} AUTO_INCREMENT = 1");
 
-        try {
-            DB::beginTransaction();
+        $permission = Permission::create($data);
+        $permission->assignRole($roles);
 
-            $roles = Role::whereIn('id', $data['role_ids'])->get();
-            Arr::pull($data, 'role_ids');
-
-            $permission = Permission::create($data);
-            $permission->assignRole($roles);
-
-            DB::commit();
-
-            return $permission;
-        } catch (Exception $e) {
-            DB::rollBack();
-            throw $e;
-        }
+        return $permission;
     }
 
     public function update(Permission $permission, array $data = []): Permission
     {
-        try {
-            DB::beginTransaction();
+        $roles = Role::whereIn('id', $data['role_ids'])->get();
+        Arr::pull($data, 'role_ids');
 
-            $roles = Role::whereIn('id', $data['role_ids'])->get();
-            Arr::pull($data, 'role_ids');
+        $permission->update($data);
+        $permission->syncRoles($roles);
+        $permission->refresh();
 
-            $permission->update($data);
-            $permission->syncRoles($roles);
-            $permission->refresh();
-
-            DB::commit();
-
-            return $permission;
-        } catch (Exception $e) {
-            DB::rollBack();
-            throw $e;
-        }
+        return $permission;
     }
 
     public function delete(Permission $permission): bool

@@ -1,4 +1,4 @@
-@extends('components.layouts.app')
+@extends('layouts.app')
 
 @section("title", "506 - Variant Also Negotiates")
 @section("code", "506")

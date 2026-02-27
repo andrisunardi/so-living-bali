@@ -15,28 +15,8 @@ use Spatie\LaravelIgnition\FlareMiddleware\AddNotifierName;
 use Spatie\LaravelIgnition\FlareMiddleware\AddQueries;
 
 return [
-    /*
-    |
-    |--------------------------------------------------------------------------
-    | Flare API key
-    |--------------------------------------------------------------------------
-    |
-    | Specify Flare's API key below to enable error reporting to the service.
-    |
-    | More info: https://flareapp.io/docs/general/projects
-    |
-    */
 
     'key' => env('FLARE_KEY'),
-
-    /*
-    |--------------------------------------------------------------------------
-    | Middleware
-    |--------------------------------------------------------------------------
-    |
-    | These middleware will modify the contents of the report sent to Flare.
-    |
-    */
 
     'flare_middleware' => [
         RemoveRequestIp::class,
@@ -74,16 +54,6 @@ return [
             ],
         ],
     ],
-
-    /*
-    |--------------------------------------------------------------------------
-    | Reporting log statements
-    |--------------------------------------------------------------------------
-    |
-    | If this setting is `false` log statements won't be sent as events to Flare,
-    | no matter which error level you specified in the Flare log channel.
-    |
-    */
 
     'send_logs_as_events' => true,
 ];

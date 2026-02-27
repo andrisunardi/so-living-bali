@@ -1,4 +1,4 @@
-@extends('components.layouts.app')
+@extends('layouts.app')
 
 @section("title", "504 - Gateway Timeout")
 @section("code", "504")

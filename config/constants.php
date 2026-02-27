@@ -6,6 +6,7 @@ return [
         'sms' => env('SLACK_SMS'),
         'mail' => env('SLACK_MAIL'),
         'channel' => env('SLACK_CHANNEL'),
+        'webhook_url' => env('LOG_SLACK_WEBHOOK_URL'),
     ],
 
     // CONTACT

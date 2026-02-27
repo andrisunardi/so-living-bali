@@ -9,13 +9,13 @@ use Livewire\Form;
 
 class ForgotPasswordForm extends Form
 {
-    #[Validate('required|string|min:1|max:50|exists:users,username')]
+    #[Validate('required|string|min:1|max:50')]
     public string $username = '';
 
-    #[Validate('required|string|min:1|max:50|email:rfc,dns|exists:users,email')]
+    #[Validate('required|string|min:1|max:50|email:rfc,dns')]
     public string $email = '';
 
-    #[Validate('required|string|min:1|max:50|exists:users,phone')]
+    #[Validate('required|string|min:1|max:50')]
     public string $phone = '';
 
     #[Validate('nullable|boolean')]

@@ -1,4 +1,4 @@
-@extends('components.layouts.app')
+@extends('layouts.app')
 
 @section("title", "407 - Proxy Authentication Required")
 @section("code", "407")

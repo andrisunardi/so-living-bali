@@ -35,7 +35,7 @@ return [
     'banner' => 'Banner',
     'select' => 'Select',
     'today' => 'Today',
-    'index' => 'Index',
+    'printed_date' => 'Printed Today',
     'index' => 'Index',
     'index' => 'Index',
     'index' => 'Index',

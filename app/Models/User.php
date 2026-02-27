@@ -8,12 +8,12 @@ use Illuminate\Database\Eloquent\Attributes\ObservedBy;
 use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
-use Illuminate\Database\Eloquent\Relations\HasMany;
 use Illuminate\Database\Eloquent\SoftDeletes;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Support\Carbon;
 use Laravel\Sanctum\HasApiTokens;
 use Spatie\Activitylog\LogOptions;
+use Illuminate\Database\Eloquent\Relations\HasMany;
 use Spatie\Activitylog\Traits\LogsActivity;
 use Spatie\Permission\Traits\HasRoles;
 
@@ -91,14 +91,15 @@ class User extends Authenticatable
     use LogsActivity;
     use SoftDeletes;
 
-    protected $table = 'users';
+    protected $table = 'new_users';
 
     protected $fillable = [
         'name',
-        'phone',
         'email',
+        'phone',
         'username',
         'password',
+        'image_url',
         'phone_verified_at',
         'email_verified_at',
         'is_active',
@@ -119,6 +120,8 @@ class User extends Authenticatable
             'email' => 'string',
             'phone' => 'string',
             'username' => 'string',
+            'password' => 'hashed',
+            'image_url' => 'string',
             'phone_verified_at' => 'datetime',
             'email_verified_at' => 'datetime',
             'is_active' => 'boolean',
@@ -140,12 +143,12 @@ class User extends Authenticatable
 
     public function getCreatedAtAttribute(string $value): Carbon
     {
-        return Carbon::parse(config('app.timezone'));
+        return Carbon::parse($value)->timezone(config('app.timezone'));
     }
 
     public function getUpdatedAtAttribute(string $value): Carbon
     {
-        return Carbon::parse(config('app.timezone'));
+        return Carbon::parse($value)->timezone(config('app.timezone'));
     }
 
     public function scopeActive(Builder $query): void

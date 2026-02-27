@@ -2,16 +2,17 @@
 
 namespace App\Livewire\Forms\CMS\Login;
 
+use App\Models\User;
 use Illuminate\Support\Facades\Auth;
 use Livewire\Attributes\Validate;
 use Livewire\Form;
 
 class LoginForm extends Form
 {
-    #[Validate('required|string|min:1|max:50|exists:users,username')]
+    #[Validate('required|string|min:1|max:30')]
     public string $username = '';
 
-    #[Validate('required|string|min:1|max:50')]
+    #[Validate('required|string|min:1|max:30')]
     public string $password = '';
 
     #[Validate('nullable|boolean')]
@@ -22,16 +23,20 @@ class LoginForm extends Form
         $this->reset();
     }
 
-    public function submit(): bool
+    public function submit(): ?User
     {
         $this->validate();
 
-        return Auth::attempt(
-            [
-                'username' => $this->username,
-                'password' => $this->password,
-            ],
-            $this->remember,
-        );
+        $data = [
+            'username' => $this->username,
+            'password' => $this->password,
+            'is_active' => true,
+        ];
+
+        if (Auth::attempt($data, $this->remember)) {
+            return Auth::user();
+        }
+
+        return null;
     }
 }

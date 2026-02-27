@@ -1,4 +1,4 @@
-@extends('components.layouts.app')
+@extends('layouts.app')
 
 @section("title", "509 - Bandwidth Limit Exceeded")
 @section("code", "509")

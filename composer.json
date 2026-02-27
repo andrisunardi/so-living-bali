@@ -17,24 +17,28 @@
         "jantinnerezo/livewire-alert": "^4.0",
         "laravel/envoy": "^2.10",
         "laravel/framework": "^12.0",
-        "laravel/horizon": "^5.41",
+        "laravel/horizon": "^5.44",
         "laravel/sanctum": "^4.0",
-        "laravel/telescope": "^5.16",
+        "laravel/telescope": "^5.17",
         "laravel/tinker": "^2.10.1",
-        "league/flysystem-aws-s3-v3": "^3.30",
-        "livewire/livewire": "^3.7",
+        "league/flysystem-aws-s3-v3": "^3.31",
+        "livewire/livewire": "^4.1",
         "maatwebsite/excel": "^3.1",
+        "mike42/escpos-php": "^4.0",
         "mobiledetect/mobiledetectlib": "^4.8",
         "opcodesio/log-viewer": "^3.21",
-        "predis/predis": "^3.3",
+        "predis/predis": "^3.4",
+        "s-ichikawa/laravel-sendgrid-driver": "^4.0",
         "simplesoftwareio/simple-qrcode": "^4.2",
-        "spatie/laravel-activitylog": "^4.10",
-        "spatie/laravel-ignition": "^2.9",
+        "spatie/laravel-activitylog": "^4.11",
+        "spatie/laravel-ignition": "^2.10",
         "spatie/laravel-menu": "^4.2",
-        "spatie/laravel-permission": "^6.24"
+        "spatie/laravel-permission": "^6.24",
+        "symfony/postmark-mailer": "^7.4",
+        "wildbit/postmark-php": "^7.0"
     },
     "require-dev": {
-        "barryvdh/laravel-debugbar": "^3.16",
+        "barryvdh/laravel-debugbar": "^4.0",
         "barryvdh/laravel-ide-helper": "^3.6",
         "brianium/paratest": "^7.8",
         "fakerphp/faker": "^1.23",
@@ -68,7 +72,7 @@
         ],
         "dev": [
             "Composer\\Config::disableProcessTimeout",
-            "npx concurrently -c \"#93c5fd,#c4b5fd,#fb7185,#fdba74\" \"php artisan serve\" \"php artisan queue:listen --tries=1\" \"php artisan pail --timeout=0\" \"npm run dev\" --names=server,queue,logs,vite --kill-others"
+            "npx concurrently -c \"#93c5fd,#c4b5fd,#fb7185,#fdba74\" \"php artisan serve\" \"php artisan queue:listen --tries=1 --timeout=0\" \"php artisan pail --timeout=0\" \"npm run dev\" --names=server,queue,logs,vite --kill-others"
         ],
         "test": [
             "@php artisan config:clear --ansi",

@@ -1,4 +1,4 @@
-@extends('components.layouts.app')
+@extends('layouts.app')
 
 @section("title", "413 - Request Entity Too Large")
 @section("code", "413")

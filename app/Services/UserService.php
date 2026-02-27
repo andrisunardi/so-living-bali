@@ -3,6 +3,7 @@
 namespace App\Services;
 
 use App\Models\User;
+// use App\Utils\Upload;
 use Exception;
 use Illuminate\Support\Arr;
 use Illuminate\Support\Facades\DB;
@@ -34,13 +35,14 @@ class UserService
                 $query->where(function ($query) use ($search) {
                     $query->where('name', 'like', "%{$search}%")
                         ->orWhere('email', 'like', "%{$search}%")
-                        ->orWhere('phone', 'like', "%{$search}%");
+                        ->orWhere('phone', 'like', "%{$search}%")
+                        ->orWhere('username', 'like', "%{$search}%");
                 });
             })
             ->when($isActive, fn ($q) => $q->whereIn('is_active', $isActive))
-            ->when($roleId, fn ($q) => $q->whereHas('roles', fn ($r) => $r->where('id', $roleId)))
+            ->when($roleId, fn ($q) => $q->whereHas('roles', fn ($q) => $q->where('id', $roleId)))
             ->when($roleName, fn ($q) => $q->role($roleName))
-            ->when($permissionId, fn ($q) => $q->whereHas('permissions', fn ($r) => $r->where('id', $permissionId)))
+            ->when($permissionId, fn ($q) => $q->whereHas('permissions', fn ($q) => $q->where('id', $permissionId)))
             ->when($permissionName, fn ($q) => $q->permission($permissionName))
             ->when($random, fn ($q) => $q->inRandomOrder())
             ->when($trash, fn ($q) => $q->onlyTrashed())
@@ -74,10 +76,19 @@ class UserService
         try {
             DB::beginTransaction();
 
+            if ($data['image'] ?? null) {
+                // $data['image_url'] = (new Upload)->image(
+                //     image: $data['image'],
+                //     directory: 'user',
+                //     name: $data['username'].'-'.Str::slug($data['name']),
+                // );
+            }
+
             $roles = Role::find($data['role_ids']);
 
             $data['password'] = Hash::make($data['password']);
 
+            Arr::pull($data, 'image');
             Arr::pull($data, 'role_ids');
 
             $user = User::create($data);
@@ -97,6 +108,14 @@ class UserService
         try {
             DB::beginTransaction();
 
+            if ($data['image'] ?? null) {
+                // $data['image_url'] = (new Upload)->image(
+                //     image: $data['image'],
+                //     directory: 'user',
+                //     name: $data['username'].'-'.Str::slug($data['name']),
+                // );
+            }
+
             $roles = Role::find($data['role_ids']);
 
             $user->syncRoles($roles);
@@ -107,6 +126,7 @@ class UserService
                 Arr::pull($data, 'password');
             }
 
+            Arr::pull($data, 'image');
             Arr::pull($data, 'role_ids');
 
             $user->update($data);
@@ -135,12 +155,22 @@ class UserService
         return $user;
     }
 
-    public function assignRole(User $user, ?string $roleId = ''): User
+    public function editProfile(User $user, array $data = []): User
     {
-        $role = Role::find($roleId);
-        $user->syncRoles($role);
+        if ($data['image'] ?? null) {
+            // $data['image_url'] = (new Upload)->image(
+            //     image: $data['image'],
+            //     directory: 'user',
+            //     name: $data['username'].'-'.Str::slug($data['name']),
+            // );
+        }
 
-        return $user->refresh();
+        Arr::pull($data, 'image');
+
+        $user->update($data);
+        $user->refresh();
+
+        return $user;
     }
 
     public function changePassword(User $user, array $data = []): User

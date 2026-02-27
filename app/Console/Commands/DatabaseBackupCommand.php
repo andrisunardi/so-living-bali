@@ -17,7 +17,7 @@ class DatabaseBackupCommand extends Command
         $password = config('database.mysql.password');
         $database = config('database.mysql.database');
 
-        $date = today()->toDateString();
+        $date = now()->today()->toDateString();
         $path = storage_path("app/private/database/{$date}.sql");
 
         exec("mysqldump -u {$username} -p{$password} {$database} > {$path}");

@@ -1,4 +1,4 @@
-@extends('components.layouts.app')
+@extends('layouts.app')
 
 @section("title", "414 - Request-URI Too Long")
 @section("code", "414")

@@ -1,4 +1,4 @@
-@extends('components.layouts.app')
+@extends('layouts.app')
 
 @section("title", "422 - Unprocessable Entity")
 @section("code", "422")

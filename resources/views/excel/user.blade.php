@@ -1,75 +1,63 @@
 <table>
     <thead>
         <tr>
-            <th align="center" colspan="10">
-                <b>{{ trans('page.user') }}</b>
-            </th>
-        </tr>
-        @if ($role)
-            <tr>
-                <th align="center" colspan="10">
-                    {{ trans('page.role') }} : {{ $role->name }}
-                </th>
-            </tr>
-        @endif
-        @if ($isActive)
-            <tr>
-                <th align="center" colspan="10">
-                    {{ trans('field.active') }} :
-                    {{ collect($isActive)->map(fn($v) => $v ? 'Yes' : 'No')->implode(', ') }}
-                </th>
-            </tr>
-        @endif
-        <tr>
-            <td colspan="10"></td>
-        </tr>
-        <tr>
-            <th align="center" colspan="10">
-                {{ trans('field.printed_at') }} : {{ now()->isoFormat('LLLL') }}
+            <th align="center" colspan="14">
+                <b>User</b>
             </th>
         </tr>
         <tr>
-            <td colspan="10"></td>
+            <td colspan="14"></td>
+        </tr>
+        <tr>
+            <th align="center" colspan="14">
+                Printed Date : {{ now()->isoFormat('LLLL') }}
+            </th>
+        </tr>
+        <tr>
+            <td colspan="14"></td>
         </tr>
         <tr>
             <th valign="middle" align="center">
-                <b>{{ trans('field.#') }}</b>
+                <b>#</b>
             </th>
             <th valign="middle" align="center">
-                <b>{{ trans('field.id') }}</b>
+                <b>ID</b>
             </th>
             <th valign="middle" align="center">
-                <b>{{ trans('field.name') }}</b>
+                <b>Name</b>
             </th>
             <th valign="middle" align="center">
-                <b>{{ trans('field.email') }}</b>
+                <b>Email</b>
             </th>
             <th valign="middle" align="center">
-                <b>{{ trans('field.phone') }}</b>
+                <b>Phone</b>
             </th>
             <th valign="middle" align="center">
-                <b>{{ trans('field.username') }}</b>
+                <b>Username</b>
             </th>
             <th valign="middle" align="center">
-                <b>{{ trans('field.active') }}</b>
+                <b>Active</b>
             </th>
             <th valign="middle" align="center">
-                <b>{{ trans('field.roles') }}</b>
+                <b>Roles</b>
             </th>
             <th valign="middle" align="center">
-                <b>{{ trans('index.total') }} {{ trans('page.property') }}</b>
+                <b>Total Role</b>
             </th>
             <th valign="middle" align="center">
-                <b>{{ trans('field.created_at') }}</b>
+                <b>Total Permission</b>
             </th>
             <th valign="middle" align="center">
-                <b>{{ trans('field.updated_at') }}</b>
+                <b>Created By</b>
             </th>
             <th valign="middle" align="center">
-                <b>{{ trans('field.roles') }}</b>
+                <b>Updated By</b>
             </th>
             <th valign="middle" align="center">
-                <b>{{ trans('index.total') }} {{ trans('page.property') }}</b>
+                <b>Created At</b>
+            </th>
+            <th valign="middle" align="center">
+                <b>Updated At</b>
             </th>
         </tr>
     </thead>
@@ -82,51 +70,52 @@
                 <td valign="middle" align="center">
                     {{ $user->id }}
                 </td>
-                <td valign="middle" align="left">
+                <td valign="middle">
                     {{ $user->name }}
                 </td>
-                <td valign="middle" align="left">
+                <td valign="middle">
                     {{ $user->email }}
                 </td>
-                <td valign="middle" align="left">
-                    {{ $user->phone }}
+                <td valign="middle">
+                    '{{ $user->phone }}
                 </td>
-                <td valign="middle" align="left">
+                <td valign="middle">
                     {{ $user->username }}
                 </td>
-                <td valign="middle" align="left">
-                    {{ $user->is_active ? 'Yes' : 'No' }}
+                <td valign="middle" align="center">
+                    {{ Str::yesNo($user->is_active) }}
                 </td>
-                <td valign="middle" align="left">
+                <td valign="middle">
                     {{ $user->roles->pluck('name')->join(', ') }}
                 </td>
-                <td valign="middle" align="left">
-                    {{ $user->properties_count }}
+                <td valign="middle" align="center">
+                    {{ $user->roles_count }}
                 </td>
-                <td valign="middle" align="left">
+                <td valign="middle" align="center">
+                    {{ $user->permissions_count }}
+                </td>
+                <td valign="middle">
+                    {{ $user->createdBy?->name }}
+                </td>
+                <td valign="middle">
+                    {{ $user->updatedBy?->name }}
+                </td>
+                <td valign="middle">
                     {{ $user->created_at }}
                 </td>
-                <td valign="middle" align="left">
+                <td valign="middle">
                     {{ $user->updated_at }}
-                </td>
-                <td valign="middle" align="center">
-                    {{ $user->roles->pluck('name')->join(', ') }}
-                </td>
-                <td valign="middle" align="center">
-                    {{ $user->properties_count }}
                 </td>
             </tr>
         @empty
             <tr>
-                <td align="center" colspan="10">
-                    {{ trans('message.no_data_available') }}
-                </td>
+                <td align="center" colspan="14">No Data Available</td>
             </tr>
         @endforelse
     </tbody>
     <tfoot>
         <tr>
-            <td colspan="10"></td>
+            <td colspan="14"></td>
         </tr>
     </tfoot>
 </table>

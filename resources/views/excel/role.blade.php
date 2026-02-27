@@ -2,22 +2,15 @@
     <thead>
         <tr>
             <th align="center" colspan="8">
-                <b>{{ trans('page.role') }}</b>
+                <b>Role</b>
             </th>
         </tr>
-        @if ($permission)
-            <tr>
-                <th align="center" colspan="8">
-                    {{ trans('page.permission') }} : {{ $permission->name }}
-                </th>
-            </tr>
-        @endif
         <tr>
             <td colspan="8"></td>
         </tr>
         <tr>
             <th align="center" colspan="8">
-                {{ trans('field.printed_at') }} : {{ now()->isoFormat('LLLL') }}
+                Printed Date : {{ now()->isoFormat('LLLL') }}
             </th>
         </tr>
         <tr>
@@ -25,28 +18,28 @@
         </tr>
         <tr>
             <th valign="middle" align="center">
-                <b>{{ trans('field.#') }}</b>
+                <b>#</b>
             </th>
             <th valign="middle" align="center">
-                <b>{{ trans('field.id') }}</b>
+                <b>ID</b>
             </th>
             <th valign="middle" align="center">
-                <b>{{ trans('field.name') }}</b>
+                <b>Name</b>
             </th>
             <th valign="middle" align="center">
-                <b>{{ trans('field.guard_name') }}</b>
+                <b>Guard Name</b>
             </th>
             <th valign="middle" align="center">
-                <b>{{ trans('index.total') }} {{ trans('page.permission') }}</b>
+                <b>Total Permission</b>
             </th>
             <th valign="middle" align="center">
-                <b>{{ trans('index.total') }} {{ trans('page.user') }}</b>
+                <b>Total User</b>
             </th>
             <th valign="middle" align="center">
-                <b>{{ trans('field.created_at') }}</b>
+                <b>Created At</b>
             </th>
             <th valign="middle" align="center">
-                <b>{{ trans('field.updated_at') }}</b>
+                <b>Updated At</b>
             </th>
         </tr>
     </thead>
@@ -59,7 +52,7 @@
                 <td valign="middle" align="center">
                     {{ $role->id }}
                 </td>
-                <td valign="middle" align="left">
+                <td valign="middle">
                     {{ $role->name }}
                 </td>
                 <td valign="middle" align="center">
@@ -71,18 +64,16 @@
                 <td valign="middle" align="center">
                     {{ $role->users_count }}
                 </td>
-                <td valign="middle" align="left">
+                <td valign="middle">
                     {{ $role->created_at }}
                 </td>
-                <td valign="middle" align="left">
+                <td valign="middle">
                     {{ $role->updated_at }}
                 </td>
             </tr>
         @empty
             <tr>
-                <td align="center" colspan="8">
-                    {{ trans('message.no_data_available') }}
-                </td>
+                <td align="center" colspan="8">No Data Available</td>
             </tr>
         @endforelse
     </tbody>

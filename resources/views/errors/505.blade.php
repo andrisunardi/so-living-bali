@@ -1,4 +1,4 @@
-@extends('components.layouts.app')
+@extends('layouts.app')
 
 @section("title", "505 - HTTP Version Not Supported")
 @section("code", "505")

@@ -1,0 +1,41 @@
+<?php
+
+use App\Livewire\Component;
+
+new class extends Component {};
+?>
+
+<nav class="navbar bg-body-tertiary fixed-top border-bottom">
+    <div class="container-fluid">
+        <div class="d-flex justify-content-between align-items-center w-100">
+            <div class="d-flex align-items-center text-truncate">
+                <button class="btn me-2" type="button" data-bs-toggle="offcanvas" data-bs-target="#navbar">
+                    <span class="fas fa-bars fa-fw"></span>
+                </button>
+
+                <div class="offcanvas offcanvas-start" tabindex="-1" id="navbar">
+                    <div class="offcanvas-header border-bottom">
+                        <h5 class="offcanvas-title">
+                            Navigation Menu
+                        </h5>
+                        <button type="button" class="btn-close" data-bs-dismiss="offcanvas"></button>
+                    </div>
+
+                    <div class="offcanvas-body">
+                        <livewire:navigation />
+                    </div>
+                </div>
+
+                <a draggable="false" class="navbar-brand" href="{{ route('home') }}" wire:navigate>
+                    {{ config('app.name') }}
+                </a>
+            </div>
+
+            <div class="d-flex gap-1">
+                <livewire:network />
+
+                <livewire:profile />
+            </div>
+        </div>
+    </div>
+</nav>

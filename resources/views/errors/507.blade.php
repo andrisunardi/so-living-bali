@@ -1,4 +1,4 @@
-@extends('components.layouts.app')
+@extends('layouts.app')
 
 @section("title", "507 - Insufficient Storage")
 @section("code", "507")

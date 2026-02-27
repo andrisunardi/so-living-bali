@@ -1,4 +1,4 @@
-@extends('components.layouts.app')
+@extends('layouts.app')
 
 @section("title", "511 - Network Authentication Required")
 @section("code", "511")
