@@ -2,17 +2,9 @@
     <thead>
         <tr>
             <th align="center" colspan="9">
-                <b>{{ trans('page.permission') }}</b>
+                <b>{{ trans('page.contact') }}</b>
             </th>
         </tr>
-        @if ($role)
-            <tr>
-                <th align="center" colspan="9">
-                    {{ trans('page.role') }} : {{ $role->name }}
-                </th>
-            </tr>
-        @endif
-        <tr>
             <td colspan="9"></td>
         </tr>
         <tr>
@@ -31,19 +23,19 @@
                 <b>{{ trans('field.id') }}</b>
             </th>
             <th valign="middle" align="center">
+                <b>{{ trans('field.code') }}</b>
+            </th>
+            <th valign="middle" align="center">
                 <b>{{ trans('field.name') }}</b>
             </th>
             <th valign="middle" align="center">
-                <b>{{ trans('field.guard_name') }}</b>
+                <b>{{ trans('field.company') }}</b>
             </th>
             <th valign="middle" align="center">
-                <b>{{ trans('field.roles') }}</b>
+                <b>{{ trans('field.email') }}</b>
             </th>
             <th valign="middle" align="center">
-                <b>{{ trans('index.total') }} {{ trans('page.permission') }}</b>
-            </th>
-            <th valign="middle" align="center">
-                <b>{{ trans('index.total') }} {{ trans('page.user') }}</b>
+                <b>{{ trans('field.phone') }}</b>
             </th>
             <th valign="middle" align="center">
                 <b>{{ trans('field.created_at') }}</b>
@@ -54,34 +46,34 @@
         </tr>
     </thead>
     <tbody>
-        @forelse ($permissions as $permission)
+        @forelse ($contacts as $contact)
             <tr>
                 <td valign="middle" align="center">
                     {{ $loop->iteration }}
                 </td>
                 <td valign="middle" align="center">
-                    {{ $permission->id }}
-                </td>
-                <td valign="middle" align="left">
-                    {{ $permission->name }}
+                    {{ $contact->id }}
                 </td>
                 <td valign="middle" align="center">
-                    {{ $permission->guard_name }}
+                    {{ $contact->code }}
                 </td>
                 <td valign="middle" align="left">
-                    {{ $permission->roles->pluck('name')->join(', ') }}
-                </td>
-                <td valign="middle" align="center">
-                    {{ $permission->roles_count }}
-                </td>
-                <td valign="middle" align="center">
-                    {{ $permission->users_count }}
+                    {{ $contact->name }}
                 </td>
                 <td valign="middle" align="left">
-                    {{ $permission->created_at }}
+                    {{ $contact->company }}
                 </td>
                 <td valign="middle" align="left">
-                    {{ $permission->updated_at }}
+                    {{ $contact->email }}
+                </td>
+                <td valign="middle" align="left">
+                    {{ $contact->phone }}
+                </td>
+                <td valign="middle" align="left">
+                    {{ $contact->created_at }}
+                </td>
+                <td valign="middle" align="left">
+                    {{ $contact->updated_at }}
                 </td>
             </tr>
         @empty

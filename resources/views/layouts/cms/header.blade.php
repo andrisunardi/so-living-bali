@@ -16,7 +16,7 @@ new class extends Component {};
                 <div class="offcanvas offcanvas-start" tabindex="-1" id="navbar">
                     <div class="offcanvas-header border-bottom">
                         <h5 class="offcanvas-title">
-                            Navigation Menu
+                            {{ trans('index.navigation_menu') }}
                         </h5>
                         <button type="button" class="btn-close" data-bs-dismiss="offcanvas"></button>
                     </div>
@@ -26,7 +26,7 @@ new class extends Component {};
                     </div>
                 </div>
 
-                <a draggable="false" class="navbar-brand" href="{{ route('home') }}" wire:navigate>
+                <a draggable="false" class="navbar-brand" href="{{ route('cms.home') }}" wire:navigate>
                     {{ config('app.name') }}
                 </a>
             </div>

@@ -51,8 +51,8 @@ namespace App\Models{
  * @method static Builder<static>|Area whereUpdatedBy($value)
  * @method static Builder<static>|Area withTrashed(bool $withTrashed = true)
  * @method static Builder<static>|Area withoutTrashed()
- * @mixin \Eloquent
  * @method static \Database\Factories\AreaFactory factory($count = null, $state = [])
+ * @mixin \Eloquent
  */
 	class Area extends \Eloquent {}
 }
@@ -140,8 +140,8 @@ namespace App\Models{
  * @method static Builder<static>|District withoutTrashed()
  * @property-read \Illuminate\Database\Eloquent\Collection<int, \App\Models\Area> $areas
  * @property-read int|null $areas_count
- * @mixin \Eloquent
  * @method static \Database\Factories\DistrictFactory factory($count = null, $state = [])
+ * @mixin \Eloquent
  */
 	class District extends \Eloquent {}
 }

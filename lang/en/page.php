@@ -25,7 +25,12 @@ return [
     'permission' => 'Permission',
     'role' => 'Role',
     'user' => 'User',
-    'account' => 'Account',
+
+    'profile' => 'Profile',
+    'edit_profile' => 'Edit Profile',
+    'change_password' => 'Change Password',
+    'setting' => 'Setting',
+    'activity' => 'Activity',
     'logout' => 'Logout',
 
 ];

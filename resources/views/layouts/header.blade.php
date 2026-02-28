@@ -60,7 +60,7 @@ new class extends Component {
                 'image_url' => asset('images/flag/id.svg'),
             ],
             [
-                'id' => 2,
+                'id' => 3,
                 'code' => 'zh',
                 'name' => 'Chinese',
                 'image_url' => asset('images/flag/zh.svg'),

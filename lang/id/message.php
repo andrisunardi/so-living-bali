@@ -2,18 +2,22 @@
 
 return [
 
-    'not_authorized_title' => 'Tidak Diizinkan',
-    'not_authorized_subtitle' => 'Anda tidak diizinkan untuk mengakses halaman ini.',
-    'not_authorized_description' => 'Silakan bergabung dengan CG (Connect Group) atau hubungi pemimpin Anda (CGL) untuk informasi lebih lanjut.',
+    'please_login_with_your_account_to_continue' => 'Silakan Masuk Dengan Akun Anda Untuk Melanjutkan',
+    'please_enter_your_data_to_get_new_password' => 'Silakan Masukkan Data Anda Untuk Mendapatkan Kata Sandi Baru',
+    'username_or_password_is_invalid' => 'Nama Pengguna atau Kata Sandi Tidak Valid',
+    'username_or_email_or_phone_is_invalid' => 'Nama Pengguna atau Kata Sandi atau Telepon Tidak Valid',
 
-    'you_have_already_registered' => 'Anda sudah terdaftar.',
-    'the_location_you_selected_is_out_of_quota' => 'Lokasi yang Anda pilih sudah kehabisan kuota.',
-    'please_select_one_location' => 'Silakan pilih satu lokasi',
-    'please_try_again_later' => 'Silakan coba lagi nanti',
+    'no_data_available' => 'Tidak Ada Data Tersedia',
 
-    'registration_has_been_canceled' => 'Pendaftaran telah dibatalkan.',
-    're_registration_has_been_successfully' => 'Pendaftaran ulang berhasil.',
+    'you_already_login' => 'Anda sudah masuk.',
+    'you_have_successfully_logged_out' => 'Anda telah berhasil keluar.',
+    'you_have_successfully_logged_in' => 'Anda telah berhasil masuk.',
 
-    'are_you_sure_to_cancel_this_registration' => 'Apakah Anda yakin ingin membatalkan pendaftaran ini?',
+    'has_been_successfully_added' => 'telah berhasil ditambahkan.',
+    'has_been_successfully_edited' => 'telah berhasil diedit.',
+    'has_been_successfully_deleted' => 'telah berhasil dihapus.',
 
+    'has_been_successfully_changed' => 'telah berhasil diubah.',
+    'has_been_successfully_exported' => 'telah berhasil diekspor.',
+    'has_been_successfully_synced' => 'telah berhasil disinkronkan.',
 ];

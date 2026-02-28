@@ -5,14 +5,6 @@
                 <b>{{ trans('page.area') }}</b>
             </th>
         </tr>
-        @if ($isActive)
-            <tr>
-                <th align="center" colspan="8">
-                    {{ trans('field.active') }} :
-                    {{ collect($isActive)->map(fn($v) => $v ? 'Yes' : 'No')->implode(', ') }}
-                </th>
-            </tr>
-        @endif
         <tr>
             <td colspan="8"></td>
         </tr>

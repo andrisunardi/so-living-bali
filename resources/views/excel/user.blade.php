@@ -2,7 +2,7 @@
     <thead>
         <tr>
             <th align="center" colspan="14">
-                <b>User</b>
+                <b>{{ trans('page.user') }}</b>
             </th>
         </tr>
         <tr>
@@ -10,7 +10,7 @@
         </tr>
         <tr>
             <th align="center" colspan="14">
-                Printed Date : {{ now()->isoFormat('LLLL') }}
+                {{ trans('index.printed_date') }} : {{ now()->isoFormat('LLLL') }}
             </th>
         </tr>
         <tr>
@@ -70,22 +70,22 @@
                 <td valign="middle" align="center">
                     {{ $user->id }}
                 </td>
-                <td valign="middle">
+                <td valign="middle" align="left">
                     {{ $user->name }}
                 </td>
-                <td valign="middle">
+                <td valign="middle" align="left">
                     {{ $user->email }}
                 </td>
-                <td valign="middle">
+                <td valign="middle" align="left">
                     '{{ $user->phone }}
                 </td>
-                <td valign="middle">
+                <td valign="middle" align="left">
                     {{ $user->username }}
                 </td>
                 <td valign="middle" align="center">
                     {{ Str::yesNo($user->is_active) }}
                 </td>
-                <td valign="middle">
+                <td valign="middle" align="left">
                     {{ $user->roles->pluck('name')->join(', ') }}
                 </td>
                 <td valign="middle" align="center">
@@ -94,16 +94,16 @@
                 <td valign="middle" align="center">
                     {{ $user->permissions_count }}
                 </td>
-                <td valign="middle">
+                <td valign="middle" align="left">
                     {{ $user->createdBy?->name }}
                 </td>
-                <td valign="middle">
+                <td valign="middle" align="left">
                     {{ $user->updatedBy?->name }}
                 </td>
-                <td valign="middle">
+                <td valign="middle" align="left">
                     {{ $user->created_at }}
                 </td>
-                <td valign="middle">
+                <td valign="middle" align="left">
                     {{ $user->updated_at }}
                 </td>
             </tr>

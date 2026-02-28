@@ -14,11 +14,13 @@ new class extends Component {};
             {{ trans('footer.all_rights_reserved') }}.
         </div>
         <div class="col-md-auto text-center text-md-end">
-            {{ trans('footer.created_and_designed_by') }}
-            <a draggable="false" href="https://www.diw.co.id" target="_blank">
-                <img draggable="false" src="{{ asset('images/icon-diw.co.id.png') }}" alt="Icon DIW.co.id"
-                    title="{{ trans('footer.created_and_designed_by') }} DIW.co.id">
-            </a>
+            <div class="d-flex justify-content-center gap-1">
+                {{ trans('footer.created_and_designed_by') }}
+                <a draggable="false" href="https://www.diw.co.id" target="_blank">
+                    <img draggable="false" src="{{ asset('images/icon-diw.co.id.png') }}" alt="Icon DIW.co.id"
+                        title="{{ trans('footer.created_and_designed_by') }} DIW.co.id">
+                </a>
+            </div>
         </div>
     </div>
 </footer>
