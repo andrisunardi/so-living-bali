@@ -56,6 +56,8 @@ use Spatie\Activitylog\Traits\LogsActivity;
  * @property-read \Illuminate\Database\Eloquent\Collection<int, \App\Models\Area> $areas
  * @property-read int|null $areas_count
  *
+ * @method static \Database\Factories\DistrictFactory factory($count = null, $state = [])
+ *
  * @mixin \Eloquent
  */
 class District extends Model

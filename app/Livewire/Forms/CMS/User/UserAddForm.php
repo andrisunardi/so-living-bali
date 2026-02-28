@@ -10,16 +10,16 @@ use Livewire\Form;
 
 class UserAddForm extends Form
 {
-    #[Validate('required|string|min:1|max:50|unique:new_users,name')]
+    #[Validate('required|string|min:1|max:50|unique:users,name')]
     public string $name = '';
 
-    #[Validate('required|email:rfc,dns|min:1|max:50|unique:new_users,email')]
+    #[Validate('required|email:rfc,dns|min:1|max:50|unique:users,email')]
     public string $email = '';
 
-    #[Validate('required|string|min:1|max:20|unique:new_users,phone')]
+    #[Validate('required|string|min:1|max:20|unique:users,phone')]
     public string $phone = '';
 
-    #[Validate('required|string|min:1|max:50|unique:new_users,username')]
+    #[Validate('required|string|min:1|max:50|unique:users,username')]
     public string $username = '';
 
     #[Validate('required|string|min:1|max:50')]

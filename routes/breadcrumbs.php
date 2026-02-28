@@ -232,3 +232,29 @@ Breadcrumbs::for('cms.user.detail', function (BreadcrumbTrail $trail, $user) {
     $trail->parent('cms.user.index');
     $trail->push(trans('index.detail'), route('cms.user.detail', $user), ['icon' => 'fas fa-list']);
 });
+
+// PROFILE
+Breadcrumbs::for('cms.profile.index', function (BreadcrumbTrail $trail) {
+    $trail->parent('cms.home');
+    $trail->push(trans('page.profile'), route('cms.profile.index'), ['icon' => 'fas fa-user']);
+});
+
+Breadcrumbs::for('cms.profile.edit-profile', function (BreadcrumbTrail $trail) {
+    $trail->parent('cms.profile.index');
+    $trail->push(trans('page.edit_profile'), route('cms.profile.edit-profile'), ['icon' => 'fas fa-user-edit']);
+});
+
+Breadcrumbs::for('cms.profile.change-password', function (BreadcrumbTrail $trail) {
+    $trail->parent('cms.profile.index');
+    $trail->push(trans('page.change_password'), route('cms.profile.change-password'), ['icon' => 'fas fa-user-lock']);
+});
+
+Breadcrumbs::for('cms.profile.setting', function (BreadcrumbTrail $trail) {
+    $trail->parent('cms.profile.index');
+    $trail->push(trans('page.setting'), route('cms.profile.setting'), ['icon' => 'fas fa-user-gear']);
+});
+
+Breadcrumbs::for('cms.profile.activity', function (BreadcrumbTrail $trail) {
+    $trail->parent('cms.profile.index');
+    $trail->push(trans('page.activity'), route('cms.profile.activity'), ['icon' => 'fas fa-user-clock']);
+});

@@ -20,19 +20,17 @@ new class extends Component {};
             <a draggable="false" class="btn btn-primary rounded-pill"
                 href="{{ url()->previous() == url()->current() ? route('home') : url()->previous() }}">
                 <span class="fas fa-arrow-left fa-fw"></span>
-                Back To Previous Page
+                {{ trans('index.back_to') }} {{ trans('page.previous_page') }}
             </a>
         </div>
 
         <div class="text-body-secondary text-center small">
-            <div class="small">
-                &copy; Copyright {{ now()->year }} &reg;
+            <small>
+                &copy; {{ trans('footer.copyright') }} {{ now()->year }} &reg;
                 <strong>{{ config('app.name') }}</strong>&trade;
-                All Rights Reserved.
-            </div>
-            <div class="small">
-                Created and Designed By <b>DIW.co.id</b>
-            </div>
+                <br class="d-block d-sm-none" />
+                {{ trans('footer.all_rights_reserved') }}.
+            </small>
         </div>
     </div>
 </main>

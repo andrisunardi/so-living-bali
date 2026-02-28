@@ -1,13 +1,10 @@
 <?php
 
-namespace App\Livewire\CMS;
-
 use App\Livewire\Component;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Session;
 
-class Logout extends Component
-{
+new class extends Component {
     public function mount(): void
     {
         Auth::logout();
@@ -20,4 +17,5 @@ class Logout extends Component
 
         $this->redirect(route('cms.login'), navigate: true);
     }
-}
+};
+?>

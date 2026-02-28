@@ -2,7 +2,7 @@
 
 use App\Livewire\Component;
 
-use App\Livewire\Forms\Profile\EditProfileForm;
+use App\Livewire\Forms\CMS\Profile\EditProfileForm;
 use Illuminate\Support\Facades\Auth;
 use Jantinnerezo\LivewireAlert\Facades\LivewireAlert;
 
@@ -40,7 +40,7 @@ new class extends Component {
     <div class="card-body">
         <div class="row g-3">
             <div class="col-auto">
-                <a draggable="false" class="btn btn-success w-100" href="{{ route('profile.index') }}" wire:navigate>
+                <a draggable="false" class="btn btn-primary w-100" href="{{ route('cms.profile.index') }}" wire:navigate>
                     <span class="fas fa-arrow-left fa-fw"></span> Back
                 </a>
             </div>
@@ -132,28 +132,6 @@ new class extends Component {
                                 Required, Minlength : 1, Maxlength : 50, Unique
                             </div>
                             @error('form.username')
-                                <div class="form-text text-danger">{{ $message }}</div>
-                            @enderror
-                        </div>
-
-                        <div>
-                            <label class="form-label" for="password">
-                                Password
-                            </label>
-                            <div class="input-group">
-                                <div class="input-group-text">
-                                    <span class="fas fa-lock fa-fw "></span>
-                                </div>
-                                <input type="text" class="form-control" id="password" name="password"
-                                    minlength="1" maxlength="50" placeholder="Ex. 12345678"
-                                    wire:model="form.password" wire:offline.class="disabled"
-                                    wire:offline.attr="disabled" wire:loading.class="disabled"
-                                    wire:loading.attr="disabled">
-                            </div>
-                            <div class="form-text">
-                                Required, Minlength : 1, Maxlength : 50
-                            </div>
-                            @error('form.password')
                                 <div class="form-text text-danger">{{ $message }}</div>
                             @enderror
                         </div>

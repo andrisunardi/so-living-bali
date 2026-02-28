@@ -35,10 +35,10 @@ class EditProfileForm extends Form
     public function rules(): array
     {
         return [
-            'name' => "required|string|min:1|max:50|unique:new_users,name,{$this->user->id}",
-            'phone' => "required|string|min:1|max:20|unique:new_users,phone,{$this->user->id}",
-            'email' => "required|email:rfc,dns|regex:/^\S*$/u|max:50|unique:new_users,email,{$this->user->id}",
-            'username' => "required|string|min:1|max:20|unique:new_users,username,{$this->user->id}",
+            'name' => "required|string|min:1|max:50|unique:users,name,{$this->user->id}",
+            'phone' => "required|string|min:1|max:20|unique:users,phone,{$this->user->id}",
+            'email' => "required|email:rfc,dns|regex:/^\S*$/u|max:50|unique:users,email,{$this->user->id}",
+            'username' => "required|string|min:1|max:20|unique:users,username,{$this->user->id}",
         ];
     }
 

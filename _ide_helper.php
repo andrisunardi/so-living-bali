@@ -32743,11 +32743,18 @@ namespace  {
     class Validator extends \Illuminate\Support\Facades\Validator {}
     class View extends \Illuminate\Support\Facades\View {}
     class Vite extends \Illuminate\Support\Facades\Vite {}
-    class HotelInquiryStatus extends \App\Enums\HotelInquiry\HotelInquiryStatus {}
-    class NewsletterStatus extends \App\Enums\Newsletter\NewsletterStatus {}
-    class PartnershipCategory extends \App\Enums\Partnership\PartnershipCategory {}
-    class ProductType extends \App\Enums\Product\ProductType {}
-    class SalesOutboundType extends \App\Enums\SalesOutbound\SalesOutboundType {}
+    class PropertyBedroom extends \App\Enums\Property\PropertyBedroom {}
+    class PropertyElectricity extends \App\Enums\Property\PropertyElectricity {}
+    class PropertyLivingStyle extends \App\Enums\Property\PropertyLivingStyle {}
+    class PropertyOperationalRisk extends \App\Enums\Property\PropertyOperationalRisk {}
+    class PropertyOrientation extends \App\Enums\Property\PropertyOrientation {}
+    class PropertyPowerBackup extends \App\Enums\Property\PropertyPowerBackup {}
+    class PropertyOwnerPriceFlexibility extends \App\Enums\Property\PropertyOwnerPriceFlexibility {}
+    class PropertyRentalType extends \App\Enums\Property\PropertyRentalType {}
+    class PropertyStatus extends \App\Enums\Property\PropertyStatus {}
+    class PropertyTargetProfile extends \App\Enums\Property\PropertyTargetProfile {}
+    class PropertyType extends \App\Enums\Property\PropertyType {}
+    class PropertyWaterSource extends \App\Enums\Property\PropertyWaterSource {}
     class Excel extends \Maatwebsite\Excel\Facades\Excel {}
     class Menu extends \Spatie\Menu\Laravel\Facades\Menu {}
     class PDF extends \Barryvdh\DomPDF\Facade\Pdf {}

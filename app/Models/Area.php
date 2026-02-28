@@ -54,6 +54,7 @@ use Spatie\Activitylog\Traits\LogsActivity;
  * @method static Builder<static>|Area whereUpdatedBy($value)
  * @method static Builder<static>|Area withTrashed(bool $withTrashed = true)
  * @method static Builder<static>|Area withoutTrashed()
+ * @method static \Database\Factories\AreaFactory factory($count = null, $state = [])
  *
  * @mixin \Eloquent
  */

@@ -79,14 +79,14 @@ new class extends Component {};
 
             <div class="row g-3">
                 <div class="col-md-auto">
-                    <a draggable="false" class="btn btn-success w-100" href="{{ route('profile.edit-profile') }}"
+                    <a draggable="false" class="btn btn-success w-100" href="{{ route('cms.profile.edit-profile') }}"
                         wire:navigate>
                         <span class="fas fa-user-edit fa-fw"></span> Edit Profile
                     </a>
                 </div>
 
                 <div class="col-md-auto">
-                    <a draggable="false" class="btn btn-danger w-100" href="{{ route('profile.change-password') }}"
+                    <a draggable="false" class="btn btn-danger w-100" href="{{ route('cms.profile.change-password') }}"
                         wire:navigate>
                         <span class="fas fa-user-lock fa-fw"></span> Change Password
                     </a>

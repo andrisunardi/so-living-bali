@@ -2,7 +2,7 @@
 
 use App\Livewire\Component;
 
-use App\Livewire\Forms\Profile\ChangePasswordForm;
+use App\Livewire\Forms\CMS\Profile\ChangePasswordForm;
 use App\Services\UserService;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Hash;
@@ -74,7 +74,7 @@ new class extends Component {
     <div class="card-body">
         <div class="row g-3">
             <div class="col-auto">
-                <a draggable="false" class="btn btn-danger w-100" href="{{ route('profile.index') }}" wire:navigate>
+                <a draggable="false" class="btn btn-primary w-100" href="{{ route('cms.profile.index') }}" wire:navigate>
                     <span class="fas fa-arrow-left fa-fw"></span> Back
                 </a>
             </div>
