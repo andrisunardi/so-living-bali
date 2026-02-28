@@ -91,7 +91,7 @@ class User extends Authenticatable
     use LogsActivity;
     use SoftDeletes;
 
-    protected $table = 'new_users';
+    protected $table = 'users';
 
     protected $fillable = [
         'name',

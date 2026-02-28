@@ -1,12 +1,19 @@
 <?php
 
-use App\Livewire\CMS\Permission\PermissionAddPage;
-use App\Livewire\CMS\Permission\PermissionDetailPage;
-use App\Livewire\CMS\Permission\PermissionEditPage;
-use App\Livewire\CMS\Permission\PermissionPage;
 use Illuminate\Support\Facades\Route;
 
-Route::any('', PermissionPage::class)->name('index')->middleware('permission:role');
-Route::any('add', PermissionAddPage::class)->name('add')->middleware('permission:role.add');
-Route::any('edit/{permission}', PermissionEditPage::class)->name('edit')->middleware('permission:permission.edit');
-Route::any('detail/{permission}', PermissionDetailPage::class)->name('detail')->middleware('permission:role.detail');
+Route::livewire('/', 'pages::cms.permission')
+    ->name('index')
+    ->middleware('permission:permission');
+
+Route::livewire('/add', 'pages::cms.permission.add')
+    ->name('add')
+    ->middleware('permission:permission.add');
+
+Route::livewire('/edit/{permission}', 'pages::cms.permission.edit')
+    ->name('edit')
+    ->middleware('permission:permission.edit');
+
+Route::livewire('/detail/{permission}', 'pages::cms.permission.detail')
+    ->name('detail')
+    ->middleware('permission:permission.detail');
