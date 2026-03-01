@@ -18,6 +18,7 @@ new #[Title('Detail | User')] class extends Component {
     {
         $service = new UserService();
         $service->active(user: $this->user);
+        $this->user->loadCount(['properties', 'roles', 'permissions']);
 
         $this->alertSuccess(title: trans('index.change_active') . ' ' . trans('index.success'), body: trans('page.user') . ' ' . trans('message.has_been_successfully_changed'));
     }
@@ -126,7 +127,7 @@ new #[Title('Detail | User')] class extends Component {
 
                 <div class="row">
                     <div class="col-sm-5 col-md-4 col-lg-3 col-xl-2">
-                        <div class="fw-bold">{{ trans('active') }}</div>
+                        <div class="fw-bold">{{ trans('field.active') }}</div>
                     </div>
                     <div class="col-sm-7 col-md-8 col-lg-9 col-xl-10">
                         @can('customer.user.edit')
@@ -178,7 +179,7 @@ new #[Title('Detail | User')] class extends Component {
 
                 <div class="row">
                     <div class="col-sm-5 col-md-4 col-lg-3 col-xl-2">
-                        <div class="fw-bold">{{ trans('field.total') }} {{ trans('page.role') }}</div>
+                        <div class="fw-bold">{{ trans('index.total') }} {{ trans('page.role') }}</div>
                     </div>
                     <div class="col-sm-7 col-md-8 col-lg-9 col-xl-10">
                         {{ $user->roles_count }}
@@ -187,7 +188,7 @@ new #[Title('Detail | User')] class extends Component {
 
                 <div class="row">
                     <div class="col-sm-5 col-md-4 col-lg-3 col-xl-2">
-                        <div class="fw-bold">{{ trans('field.total') }} {{ trans('field.permission') }}</div>
+                        <div class="fw-bold">{{ trans('index.total') }} {{ trans('field.permission') }}</div>
                     </div>
                     <div class="col-sm-7 col-md-8 col-lg-9 col-xl-10">
                         {{ $user->permissions_count }}

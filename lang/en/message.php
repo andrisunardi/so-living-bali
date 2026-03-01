@@ -7,6 +7,7 @@ return [
     'username_or_password_is_invalid' => 'Username or Password is Invalid',
     'username_or_email_or_phone_is_invalid' => 'Username or Password or Phone is Invalid',
 
+    'please_wait_until_the_uploading_finished' => 'Please wait until the uploading finished.',
     'no_data_available' => 'No Data Available',
 
     'you_already_login' => 'You already login.',

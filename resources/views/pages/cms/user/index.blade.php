@@ -221,7 +221,7 @@ new #[Title('User')] class extends Component {
                         <a draggable="false" class="btn btn-primary w-100" href="{{ route('cms.user.add') }}"
                             wire:navigate>
                             <span class="fas fa-plus fa-fw"></span>
-                            {{ trans('index.all') }}
+                            {{ trans('index.add') }}
                         </a>
                     </div>
                 @endcan
@@ -260,9 +260,9 @@ new #[Title('User')] class extends Component {
                             <th>{{ trans('field.username') }}</th>
                             <th>{{ trans('field.created_at') }}</th>
                             <th>{{ trans('field.roles') }}</th>
-                            <th width="1%">{{ trans('field.total') }}</th>
+                            <th width="1%">{{ trans('index.total') }}</th>
                             <th width="1%">{{ trans('field.active') }}</th>
-                            <th width="1%">{{ trans('field.action') }}</th>
+                            <th width="1%">{{ trans('index.action') }}</th>
                         </tr>
                     </thead>
                     <tbody>

@@ -1,7 +1,7 @@
 <?php
 
 use App\Livewire\Component;
-use App\Livewire\Forms\User\UserEditForm;
+use App\Livewire\Forms\CMS\User\UserEditForm;
 use App\Models\User;
 use App\Services\RoleService;
 use Illuminate\Support\Str;
@@ -35,15 +35,15 @@ new #[Title('Edit | User')] class extends Component {
             $this->form->submit(user: $this->user);
 
             session()->flash('success', [
-                'title' => 'Edit Success',
-                'message' => 'User has been successfully edited.',
+                'title' => trans('index.edit') . ' ' . trans('index.success'),
+                'message' => trans('page.user') . ' ' . trans('message.has_been_successfully_edited'),
             ]);
 
-            $this->redirect(route('user.index'), navigate: true);
+            $this->redirect(route('cms.user.index'), navigate: true);
         } catch (ValidationException $e) {
             $errors = collect($e->validator->errors()->all())->implode('<br>');
 
-            $this->alertError(title: 'Edit Failed', body: $errors);
+            $this->alertError(title: trans('index.edit') . ' ' . trans('failed'), body: $errors);
         }
     }
 
@@ -61,13 +61,14 @@ new #[Title('Edit | User')] class extends Component {
     <div class="card">
         <div class="card-header text-bg-success">
             <span class="fas fa-edit fa-fw"></span>
-            Edit @yield('title')
+            {{ trans('index.edit') }} @yield('title')
         </div>
         <div class="card-body">
             <div class="row g-3">
                 <div class="col-auto">
-                    <a draggable="false" class="btn btn-success w-100" href="{{ route('user.index') }}" wire:navigate>
-                        <span class="fas fa-arrow-left fa-fw"></span> Back
+                    <a draggable="false" class="btn btn-success w-100" href="{{ route('cms.user.index') }}" wire:navigate>
+                        <span class="fas fa-arrow-left fa-fw"></span>
+                        {{ trans('index.back') }}
                     </a>
                 </div>
             </div>
@@ -82,20 +83,24 @@ new #[Title('Edit | User')] class extends Component {
                         <div class="d-grid gap-3">
                             <div>
                                 <label class="form-label" for="name">
-                                    Name <span class="text-danger">*</span>
+                                    {{ trans('validation.attributes.name') }}
+                                    <span class="text-danger">*</span>
                                 </label>
                                 <div class="input-group">
                                     <div class="input-group-text">
                                         <span class="fas fa-user fa-fw "></span>
                                     </div>
                                     <input type="text" class="form-control" id="name" name="name"
-                                        minlength="1" maxlength="50" placeholder="Ex. John Doe" required
-                                        wire:model="form.name" wire:offline.class="disabled"
+                                        minlength="1" maxlength="50" placeholder="{{ trans('index.ex') }}. John Doe"
+                                        required wire:model="form.name" wire:offline.class="disabled"
                                         wire:offline.attr="disabled" wire:loading.class="disabled"
                                         wire:loading.attr="disabled">
                                 </div>
                                 <div class="form-text">
-                                    Required, Minlength : 1, Maxlength : 50, Unique
+                                    {{ trans('helper.required') }},
+                                    {{ trans('helper.minlength') }} : 1,
+                                    {{ trans('helper.maxlength') }} : 50,
+                                    {{ trans('helper.unique') }}
                                 </div>
                                 @error('form.name')
                                     <div class="form-text text-danger">{{ $message }}</div>
@@ -104,20 +109,25 @@ new #[Title('Edit | User')] class extends Component {
 
                             <div>
                                 <label class="form-label" for="email">
-                                    Email <span class="text-danger">*</span>
+                                    {{ trans('email') }}
+                                    <span class="text-danger">*</span>
                                 </label>
                                 <div class="input-group">
                                     <div class="input-group-text">
                                         <span class="fas fa-envelope fa-fw "></span>
                                     </div>
                                     <input type="email" class="form-control" id="email" name="email"
-                                        minlength="1" maxlength="50" placeholder="Ex. johndoe@gmail.com" required
+                                        minlength="1" maxlength="50"
+                                        placeholder="{{ trans('index.ex') }}. johndoe@gmail.com" required
                                         wire:model="form.email" wire:offline.class="disabled"
                                         wire:offline.attr="disabled" wire:loading.class="disabled"
                                         wire:loading.attr="disabled">
                                 </div>
                                 <div class="form-text">
-                                    Required, Minlength : 1, Maxlength : 50, Unique
+                                    {{ trans('helper.required') }},
+                                    {{ trans('helper.minlength') }} : 1,
+                                    {{ trans('helper.maxlength') }} : 20,
+                                    {{ trans('helper.unique') }}
                                 </div>
                                 @error('form.email')
                                     <div class="form-text text-danger">{{ $message }}</div>
@@ -126,20 +136,25 @@ new #[Title('Edit | User')] class extends Component {
 
                             <div>
                                 <label class="form-label" for="phone">
-                                    Phone <span class="text-danger">*</span>
+                                    {{ trans('validation.attributes.phone') }}
+                                    <span class="text-danger">*</span>
                                 </label>
                                 <div class="input-group">
                                     <div class="input-group-text">
                                         <span class="fas fa-phone fa-fw "></span>
                                     </div>
                                     <input type="tel" class="form-control" id="phone" name="phone"
-                                        minlength="1" maxlength="20" placeholder="Ex. 6281234567890" required
+                                        minlength="1" maxlength="20"
+                                        placeholder="{{ trans('index.ex') }}. 6281234567890" required
                                         wire:model="form.phone" wire:offline.class="disabled"
                                         wire:offline.attr="disabled" wire:loading.class="disabled"
                                         wire:loading.attr="disabled">
                                 </div>
                                 <div class="form-text">
-                                    Required, Minlength : 1, Maxlength : 20, Unique
+                                    {{ trans('helper.required') }},
+                                    {{ trans('helper.minlength') }} : 1,
+                                    {{ trans('helper.maxlength') }} : 50,
+                                    {{ trans('helper.unique') }}
                                 </div>
                                 @error('form.phone')
                                     <div class="form-text text-danger">{{ $message }}</div>
@@ -148,20 +163,24 @@ new #[Title('Edit | User')] class extends Component {
 
                             <div>
                                 <label class="form-label" for="username">
-                                    Username <span class="text-danger">*</span>
+                                    {{ trans('validation.attributes.username') }}
+                                    <span class="text-danger">*</span>
                                 </label>
                                 <div class="input-group">
                                     <div class="input-group-text">
                                         <span class="fas fa-id-badge fa-fw "></span>
                                     </div>
                                     <input type="text" class="form-control" id="username" name="username"
-                                        minlength="1" maxlength="50" placeholder="Ex. 012345" required
-                                        wire:model="form.username" wire:offline.class="disabled"
+                                        minlength="1" maxlength="50" placeholder="{{ trans('index.ex') }}. 012345"
+                                        required wire:model="form.username" wire:offline.class="disabled"
                                         wire:offline.attr="disabled" wire:loading.class="disabled"
                                         wire:loading.attr="disabled">
                                 </div>
                                 <div class="form-text">
-                                    Required, Minlength : 1, Maxlength : 50, Unique
+                                    {{ trans('helper.required') }},
+                                    {{ trans('helper.minlength') }} : 1,
+                                    {{ trans('helper.maxlength') }} : 50,
+                                    {{ trans('helper.unique') }}
                                 </div>
                                 @error('form.username')
                                     <div class="form-text text-danger">{{ $message }}</div>
@@ -170,32 +189,36 @@ new #[Title('Edit | User')] class extends Component {
 
                             <div>
                                 <label class="form-label" for="password">
-                                    Password
+                                    {{ trans('validation.attributes.password') }}
                                 </label>
                                 <div class="input-group">
                                     <div class="input-group-text">
                                         <span class="fas fa-lock fa-fw "></span>
                                     </div>
                                     <input type="text" class="form-control" id="password" name="password"
-                                        minlength="1" maxlength="50" placeholder="Ex. 12345678"
-                                        wire:model="form.password" wire:offline.class="disabled"
-                                        wire:offline.attr="disabled" wire:loading.class="disabled"
-                                        wire:loading.attr="disabled">
+                                        minlength="1" maxlength="50"
+                                        placeholder="{{ trans('index.ex') }}. 12345678" wire:model="form.password"
+                                        wire:offline.class="disabled" wire:offline.attr="disabled"
+                                        wire:loading.class="disabled" wire:loading.attr="disabled">
 
                                     <button type="button" class="icon-link input-group-text"
                                         wire:click="generateRandomPassword" wire:dirty.class="border border-primary"
                                         wire:offline.class="disabled" wire:offline.attr="disabled"
                                         wire:loading.class="disabled" wire:loading.attr="disabled">
                                         <span wire:loading.remove wire:target="generateRandomPassword">
-                                            <span class="fas fa-rotate fa-fw"></span> Generate
+                                            <span class="fas fa-rotate fa-fw"></span>
+                                            {{ trans('index.generate') }}
                                         </span>
                                         <span wire:loading wire:target="generateRandomPassword" class="w-100">
-                                            <span class="spinner-border spinner-border-sm"></span> Generate
+                                            <span class="spinner-border spinner-border-sm"></span>
+                                            {{ trans('index.generate') }}
                                         </span>
                                     </button>
                                 </div>
                                 <div class="form-text">
-                                    Required, Minlength : 1, Maxlength : 50
+                                    {{ trans('helper.minlength') }} : 1,
+                                    {{ trans('helper.maxlength') }} : 50,
+                                    {{ trans('helper.unique') }}
                                 </div>
                                 @error('form.password')
                                     <div class="form-text text-danger">{{ $message }}</div>
@@ -204,7 +227,7 @@ new #[Title('Edit | User')] class extends Component {
 
                             <div>
                                 <label class="form-label" for="image">
-                                    Image
+                                    {{ trans('validation.attributes.image') }}
                                 </label>
                                 <div class="input-group">
                                     <div class="input-group-text">
@@ -217,7 +240,8 @@ new #[Title('Edit | User')] class extends Component {
                                         wire:loading.attr="disabled">
                                 </div>
                                 <div class="form-text">
-                                    Format : .jpg .jpeg .png .gif .webp | Size : 12 MB
+                                    {{ trans('helper.format') }} : .jpg .jpeg .png .gif .webp
+                                    {{ trans('helper.size') }} : 12 MB
                                 </div>
                                 @error('form.image')
                                     <div class="form-text text-danger">{{ $message }}</div>
@@ -228,7 +252,7 @@ new #[Title('Edit | User')] class extends Component {
                                 <div>
                                     <div class="alert alert-info w-100" role="alert" wire:loading
                                         wire:target="form.image">
-                                        Please wait until the uploading finished.
+                                        {{ trans('message.please_wait_until_the_uploading_finished') }}
                                     </div>
 
                                     <div>
@@ -241,7 +265,8 @@ new #[Title('Edit | User')] class extends Component {
                                 <div>
                                     <a draggable="false" href="{{ $user->image_url }}" target="_blank">
                                         <img draggable="false" class="img-fluid w-100 rounded" width="100"
-                                            src="{{ $user->image_url }}" alt="User - {{ $user->id }}"
+                                            src="{{ $user->image_url }}"
+                                            alt="{{ trans('page.user') }} - {{ $user->id }}"
                                             onerror="asset('images/image-not-available.png')" />
                                     </a>
                                 </div>
@@ -249,7 +274,8 @@ new #[Title('Edit | User')] class extends Component {
 
                             <div>
                                 <label class="form-label" for="is_active">
-                                    Active <span class="text-danger">*</span>
+                                    {{ trans('validation.attributes.is_active') }}
+                                    <span class="text-danger">*</span>
                                 </label>
                                 <div>
                                     <div class="form-check form-check-inline">
@@ -258,7 +284,7 @@ new #[Title('Edit | User')] class extends Component {
                                             wire:offline.class="disabled" wire:offline.attr="disabled"
                                             wire:loading.class="disabled" wire:loading.attr="disabled">
                                         <label class="form-check-label" for="is_active_1">
-                                            Yes
+                                            {{ trans('index.yes') }}
                                         </label>
                                     </div>
                                     <div class="form-check form-check-inline">
@@ -267,7 +293,7 @@ new #[Title('Edit | User')] class extends Component {
                                             wire:offline.class="disabled" wire:offline.attr="disabled"
                                             wire:loading.class="disabled" wire:loading.attr="disabled">
                                         <label class="form-check-label" for="is_active_0">
-                                            No
+                                            {{ trans('index.no') }}
                                         </label>
                                     </div>
                                 </div>
@@ -282,7 +308,7 @@ new #[Title('Edit | User')] class extends Component {
                         <div class="d-grid gap-3">
                             <div>
                                 <label class="form-label" for="role_ids">
-                                    Roles
+                                    {{ trans('validation.attributes.role_ids') }}
                                 </label>
                                 @foreach ($this->roles() as $role)
                                     <div class="form-check" wire:key="role-{{ $role->id }}">
@@ -312,10 +338,12 @@ new #[Title('Edit | User')] class extends Component {
                         <button type="submit" class="btn btn-success w-100" wire:offline.class="disabled"
                             wire:offline.attr="disabled" wire:loading.class="disabled" wire:loading.attr="disabled">
                             <span wire:loading.remove wire:target="submit">
-                                <span class="fas fa-save fa-fw"></span> Save
+                                <span class="fas fa-save fa-fw"></span>
+                                {{ trans('index.save') }}
                             </span>
                             <span wire:loading wire:target="submit" class="w-100">
-                                <span class="spinner-border spinner-border-sm"></span> Save
+                                <span class="spinner-border spinner-border-sm"></span>
+                                {{ trans('index.save') }}
                             </span>
                         </button>
                     </div>
@@ -324,10 +352,12 @@ new #[Title('Edit | User')] class extends Component {
                             wire:offline.class="disabled" wire:offline.attr="disabled" wire:loading.class="disabled"
                             wire:loading.attr="disabled">
                             <span wire:loading.remove wire:target="resetForm">
-                                <span class="fas fa-eraser fa-fw"></span> Reset
+                                <span class="fas fa-eraser fa-fw"></span>
+                                {{ trans('index.reset') }}
                             </span>
                             <span wire:loading wire:target="resetForm" class="w-100">
-                                <span class="spinner-border spinner-border-sm"></span> Reset
+                                <span class="spinner-border spinner-border-sm"></span>
+                                {{ trans('index.reset') }}
                             </span>
                         </button>
                     </div>

@@ -1,63 +1,66 @@
 <table>
     <thead>
         <tr>
-            <th align="center" colspan="14">
+            <th align="center" colspan="15">
                 <b>{{ trans('page.user') }}</b>
             </th>
         </tr>
         <tr>
-            <td colspan="14"></td>
+            <td colspan="15"></td>
         </tr>
         <tr>
-            <th align="center" colspan="14">
+            <th align="center" colspan="15">
                 {{ trans('index.printed_date') }} : {{ now()->isoFormat('LLLL') }}
             </th>
         </tr>
         <tr>
-            <td colspan="14"></td>
+            <td colspan="15"></td>
         </tr>
         <tr>
             <th valign="middle" align="center">
-                <b>#</b>
+                <b>{{ trans('field.#') }}</b>
             </th>
             <th valign="middle" align="center">
-                <b>ID</b>
+                <b>{{ trans('field.id') }}</b>
             </th>
             <th valign="middle" align="center">
-                <b>Name</b>
+                <b>{{ trans('field.name') }}</b>
             </th>
             <th valign="middle" align="center">
-                <b>Email</b>
+                <b>{{ trans('field.email') }}</b>
             </th>
             <th valign="middle" align="center">
-                <b>Phone</b>
+                <b>{{ trans('field.phone') }}</b>
             </th>
             <th valign="middle" align="center">
-                <b>Username</b>
+                <b>{{ trans('field.username') }}</b>
             </th>
             <th valign="middle" align="center">
-                <b>Active</b>
+                <b>{{ trans('field.is_active') }}</b>
             </th>
             <th valign="middle" align="center">
-                <b>Roles</b>
+                <b>{{ trans('field.roles') }}</b>
             </th>
             <th valign="middle" align="center">
-                <b>Total Role</b>
+                <b>{{ trans('index.total') }} {{ trans('page.property') }}</b>
             </th>
             <th valign="middle" align="center">
-                <b>Total Permission</b>
+                <b>{{ trans('index.total') }} {{ trans('page.role') }}</b>
             </th>
             <th valign="middle" align="center">
-                <b>Created By</b>
+                <b>{{ trans('index.total') }} {{ trans('page.permission') }}</b>
             </th>
             <th valign="middle" align="center">
-                <b>Updated By</b>
+                <b>{{ trans('field.created_by') }}</b>
             </th>
             <th valign="middle" align="center">
-                <b>Created At</b>
+                <b>{{ trans('field.updated_by') }}</b>
             </th>
             <th valign="middle" align="center">
-                <b>Updated At</b>
+                <b>{{ trans('field.created_at') }}</b>
+            </th>
+            <th valign="middle" align="center">
+                <b>{{ trans('field.updated_at') }}</b>
             </th>
         </tr>
     </thead>
@@ -89,6 +92,9 @@
                     {{ $user->roles->pluck('name')->join(', ') }}
                 </td>
                 <td valign="middle" align="center">
+                    {{ $user->properties_count }}
+                </td>
+                <td valign="middle" align="center">
                     {{ $user->roles_count }}
                 </td>
                 <td valign="middle" align="center">
@@ -109,13 +115,13 @@
             </tr>
         @empty
             <tr>
-                <td align="center" colspan="14">No Data Available</td>
+                <td align="center" colspan="15">No Data Available</td>
             </tr>
         @endforelse
     </tbody>
     <tfoot>
         <tr>
-            <td colspan="14"></td>
+            <td colspan="15"></td>
         </tr>
     </tfoot>
 </table>

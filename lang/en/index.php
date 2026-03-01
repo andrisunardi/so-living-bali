@@ -39,7 +39,7 @@ return [
 
     'navigation_menu' => 'Navigation Menu',
     'profile_menu' => 'Profile Menu',
-    'index' => 'Index',
+    'generate' => 'Generate',
     'index' => 'Index',
     'index' => 'Index',
     'index' => 'Index',
