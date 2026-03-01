@@ -11,7 +11,7 @@ new #[Title('Detail | User')] class extends Component {
     public function mount(User $user): void
     {
         $this->user = $user;
-        $this->user->loadCount(['roles', 'permissions']);
+        $this->user->loadCount(['properties', 'roles', 'permissions']);
     }
 
     public function changeActive(): void
@@ -19,7 +19,7 @@ new #[Title('Detail | User')] class extends Component {
         $service = new UserService();
         $service->active(user: $this->user);
 
-        $this->alertSuccess(title: 'Change Active Success', body: 'User has been successfully changed.');
+        $this->alertSuccess(title: trans('index.change_active') . ' ' . trans('index.success'), body: trans('page.user') . ' ' . trans('message.has_been_successfully_changed'));
     }
 
     public function delete(): void
@@ -28,28 +28,29 @@ new #[Title('Detail | User')] class extends Component {
         $service->delete(user: $this->user);
 
         session()->flash('success', [
-            'title' => 'Delete Success',
-            'message' => 'User has been successfully deleted.',
+            'title' => trans('index.delete') . ' ' . trans('index.success'),
+            'message' => trans('page.user') . ' ' . trans('message.has_been_successfully_deleted'),
         ]);
 
-        $this->redirect(route('user.index'), navigate: true);
+        $this->redirect(route('cms.user.index'), navigate: true);
     }
 };
 ?>
 
-@section('title', 'User')
+@section('title', trans('page.user'))
 
 <div class="container-fluid">
     <div class="card">
         <div class="card-header text-bg-info">
             <span class="fas fa-list fa-fw"></span>
-            Detail @yield('title')
+            {{ trans('index.detail') }} @yield('title')
         </div>
         <div class="card-body">
             <div class="row g-3">
                 <div class="col-auto">
-                    <a draggable="false" class="btn btn-info w-100" href="{{ route('user.index') }}" wire:navigate>
-                        <span class="fas fa-arrow-left fa-fw"></span> Back
+                    <a draggable="false" class="btn btn-info w-100" href="{{ route('cms.user.index') }}" wire:navigate>
+                        <span class="fas fa-arrow-left fa-fw"></span>
+                        {{ trans('index.back') }}
                     </a>
                 </div>
             </div>
@@ -59,7 +60,7 @@ new #[Title('Detail | User')] class extends Component {
             <div class="d-grid gap-3">
                 <div class="row">
                     <div class="col-sm-5 col-md-4 col-lg-3 col-xl-2">
-                        <div class="fw-bold">ID</div>
+                        <div class="fw-bold">{{ trans('field.id') }}</div>
                     </div>
                     <div class="col-sm-7 col-md-8 col-lg-9 col-xl-10">
                         {{ $user->id }}
@@ -68,7 +69,7 @@ new #[Title('Detail | User')] class extends Component {
 
                 <div class="row">
                     <div class="col-sm-5 col-md-4 col-lg-3 col-xl-2">
-                        <div class="fw-bold">Name</div>
+                        <div class="fw-bold">{{ trans('field.name') }}</div>
                     </div>
                     <div class="col-sm-7 col-md-8 col-lg-9 col-xl-10">
                         {{ $user->name }}
@@ -77,7 +78,7 @@ new #[Title('Detail | User')] class extends Component {
 
                 <div class="row">
                     <div class="col-sm-5 col-md-4 col-lg-3 col-xl-2">
-                        <div class="fw-bold">Email</div>
+                        <div class="fw-bold">{{ trans('field.email') }}</div>
                     </div>
                     <div class="col-sm-7 col-md-8 col-lg-9 col-xl-10">
                         <a draggable="false" href="mailto:{{ $user->email }}">
@@ -88,7 +89,7 @@ new #[Title('Detail | User')] class extends Component {
 
                 <div class="row">
                     <div class="col-sm-5 col-md-4 col-lg-3 col-xl-2">
-                        <div class="fw-bold">Phone</div>
+                        <div class="fw-bold">{{ trans('field.phone') }}</div>
                     </div>
                     <div class="col-sm-7 col-md-8 col-lg-9 col-xl-10">
                         <a draggable="false"
@@ -101,7 +102,7 @@ new #[Title('Detail | User')] class extends Component {
 
                 <div class="row">
                     <div class="col-sm-5 col-md-4 col-lg-3 col-xl-2">
-                        <div class="fw-bold">Username</div>
+                        <div class="fw-bold">{{ trans('field.username') }}</div>
                     </div>
                     <div class="col-sm-7 col-md-8 col-lg-9 col-xl-10">
                         {{ $user->username }}
@@ -110,7 +111,7 @@ new #[Title('Detail | User')] class extends Component {
 
                 <div class="row">
                     <div class="col-sm-5 col-md-4 col-lg-3 col-xl-2">
-                        <div class="fw-bold">Image</div>
+                        <div class="fw-bold">{{ trans('field.image') }}</div>
                     </div>
                     <div class="col-sm-7 col-md-6 col-lg-5 col-xl-4">
                         @if ($user->image_url)
@@ -125,7 +126,7 @@ new #[Title('Detail | User')] class extends Component {
 
                 <div class="row">
                     <div class="col-sm-5 col-md-4 col-lg-3 col-xl-2">
-                        <div class="fw-bold">Active</div>
+                        <div class="fw-bold">{{ trans('active') }}</div>
                     </div>
                     <div class="col-sm-7 col-md-8 col-lg-9 col-xl-10">
                         @can('customer.user.edit')
@@ -150,12 +151,12 @@ new #[Title('Detail | User')] class extends Component {
 
                 <div class="row">
                     <div class="col-sm-5 col-md-4 col-lg-3 col-xl-2">
-                        <div class="fw-bold">Roles</div>
+                        <div class="fw-bold">{{ trans('field.roles') }}</div>
                     </div>
                     <div class="col-sm-7 col-md-8 col-lg-9 col-xl-10">
                         @foreach ($user->roles as $role)
                             <div wire:key="role-{{ $role->id }}">
-                                <a draggable="false" href="{{ route('role.detail', ['role' => $role]) }}">
+                                <a draggable="false" href="{{ route('cms.role.detail', ['role' => $role]) }}">
                                     {{ $loop->iteration }}. {{ $role->name }}
                                 </a>
                             </div>
@@ -165,7 +166,19 @@ new #[Title('Detail | User')] class extends Component {
 
                 <div class="row">
                     <div class="col-sm-5 col-md-4 col-lg-3 col-xl-2">
-                        <div class="fw-bold">Total Role</div>
+                        <div class="fw-bold">{{ trans('index.total') }} {{ trans('page.property') }}</div>
+                    </div>
+                    <div class="col-sm-7 col-md-8 col-lg-9 col-xl-10">
+                        <a draggable="false" href="{{ route('cms.property.index', ['user_id' => $user->id]) }}"
+                            wire:navigate>
+                            {{ $user->properties_count }}
+                        </a>
+                    </div>
+                </div>
+
+                <div class="row">
+                    <div class="col-sm-5 col-md-4 col-lg-3 col-xl-2">
+                        <div class="fw-bold">{{ trans('field.total') }} {{ trans('page.role') }}</div>
                     </div>
                     <div class="col-sm-7 col-md-8 col-lg-9 col-xl-10">
                         {{ $user->roles_count }}
@@ -174,7 +187,7 @@ new #[Title('Detail | User')] class extends Component {
 
                 <div class="row">
                     <div class="col-sm-5 col-md-4 col-lg-3 col-xl-2">
-                        <div class="fw-bold">Total Permission</div>
+                        <div class="fw-bold">{{ trans('field.total') }} {{ trans('field.permission') }}</div>
                     </div>
                     <div class="col-sm-7 col-md-8 col-lg-9 col-xl-10">
                         {{ $user->permissions_count }}
@@ -183,7 +196,7 @@ new #[Title('Detail | User')] class extends Component {
 
                 <div class="row">
                     <div class="col-sm-5 col-md-4 col-lg-3 col-xl-2">
-                        <div class="fw-bold">Created By</div>
+                        <div class="fw-bold">{{ trans('field.created_by') }}</div>
                     </div>
                     <div class="col-sm-7 col-md-8 col-lg-9 col-xl-10">
                         {{ $user->createdBy?->name ?? '-' }}
@@ -192,7 +205,7 @@ new #[Title('Detail | User')] class extends Component {
 
                 <div class="row">
                     <div class="col-sm-5 col-md-4 col-lg-3 col-xl-2">
-                        <div class="fw-bold">Updated By</div>
+                        <div class="fw-bold">{{ trans('field.updated_by') }}</div>
                     </div>
                     <div class="col-sm-7 col-md-8 col-lg-9 col-xl-10">
                         {{ $user->updatedBy?->name ?? '-' }}
@@ -201,7 +214,7 @@ new #[Title('Detail | User')] class extends Component {
 
                 <div class="row">
                     <div class="col-sm-5 col-md-4 col-lg-3 col-xl-2">
-                        <div class="fw-bold">Created At</div>
+                        <div class="fw-bold">{{ trans('field.created_at') }}</div>
                     </div>
                     <div class="col-sm-7 col-md-8 col-lg-9 col-xl-10">
                         @if ($user->created_at)
@@ -214,7 +227,7 @@ new #[Title('Detail | User')] class extends Component {
 
                 <div class="row">
                     <div class="col-sm-5 col-md-4 col-lg-3 col-xl-2">
-                        <div class="fw-bold">Updated At</div>
+                        <div class="fw-bold">{{ trans('field.updated_at') }}</div>
                     </div>
                     <div class="col-sm-7 col-md-8 col-lg-9 col-xl-10">
                         @if ($user->updated_at)
@@ -232,8 +245,9 @@ new #[Title('Detail | User')] class extends Component {
                 @can('customer.user.edit')
                     <div class="col-auto">
                         <a draggable="false" class="btn btn-success w-100"
-                            href="{{ route('user.edit', ['user' => $user]) }}" wire:navigate>
-                            <span class="fas fa-edit fa-fw"></span> Edit
+                            href="{{ route('cms.user.edit', ['user' => $user]) }}" wire:navigate>
+                            <span class="fas fa-edit fa-fw"></span>
+                            {{ trans('index.edit') }}
                         </a>
                     </div>
                 @endcan
@@ -244,10 +258,12 @@ new #[Title('Detail | User')] class extends Component {
                             wire:offline.class="disabled" wire:offline.attr="disabled" wire:loading.class="disabled"
                             wire:loading.attr="disabled">
                             <span wire:loading.remove wire:target="delete">
-                                <span class="fas fa-trash fa-fw"></span> Delete
+                                <span class="fas fa-trash fa-fw"></span>
+                                {{ trans('index.delete') }}
                             </span>
                             <span wire:loading wire:target="delete" class="w-100">
-                                <span class="spinner-border spinner-border-sm"></span> Delete
+                                <span class="spinner-border spinner-border-sm"></span>
+                                {{ trans('index.delete') }}
                             </span>
                         </button>
                     </div>
