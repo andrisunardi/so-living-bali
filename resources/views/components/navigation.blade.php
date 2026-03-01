@@ -13,6 +13,70 @@ new class extends Component {};
         </a>
     </li>
 
+    @canany(['contact', 'property', 'article'])
+        <li>
+            <h6 class="fw-bold text-uppercase border-bottom pb-2 mt-3">
+                <span>{{ trans('page.module') }}</span>
+            </h6>
+        </li>
+    @endcanany
+
+    @can('contact')
+        <li class="nav-item">
+            <a draggable="false" class="nav-link {{ Route::is('cms.contact.*') ? 'active' : '' }}"
+                href="{{ route('cms.contact.index') }}" wire:navigate>
+                <span class="fas fa-phone fa-fw"></span>
+                {{ trans('page.contact') }}
+            </a>
+        </li>
+    @endcan
+
+    @can('property')
+        <li class="nav-item">
+            <a draggable="false" class="nav-link {{ Route::is('cms.property.*') ? 'active' : '' }}"
+                href="{{ route('cms.property.index') }}" wire:navigate>
+                <span class="fas fa-building fa-fw"></span>
+                {{ trans('page.property') }}
+            </a>
+        </li>
+    @endcan
+
+    @can('article')
+        <li class="nav-item">
+            <a draggable="false" class="nav-link {{ Route::is('cms.article.*') ? 'active' : '' }}"
+                href="{{ route('cms.article.index') }}" wire:navigate>
+                <span class="fas fa-newspaper fa-fw"></span>
+                {{ trans('page.article') }}
+            </a>
+        </li>
+    @endcan
+
+    @canany(['district', 'area'])
+        <li>
+            <h6 class="fw-bold text-uppercase border-bottom pb-2 mt-3">
+                <span>{{ trans('page.master') }}</span>
+            </h6>
+        </li>
+    @endcanany
+
+    @can('area')
+        <li class="nav-item">
+            <a draggable="false" class="nav-link {{ Route::is('cms.area.*') ? 'active' : '' }}"
+                href="{{ route('cms.area.index') }}" wire:navigate>
+                <span class="fas fa-lock-open fa-fw"></span> {{ trans('page.area') }}
+            </a>
+        </li>
+    @endcan
+
+    @can('district')
+        <li class="nav-item">
+            <a draggable="false" class="nav-link {{ Route::is('cms.district.*') ? 'active' : '' }}"
+                href="{{ route('cms.district.index') }}" wire:navigate>
+                <span class="fas fa-lock-open fa-fw"></span> {{ trans('page.district') }}
+            </a>
+        </li>
+    @endcan
+
     @canany(['permission', 'role', 'user'])
         <li>
             <h6 class="fw-bold text-uppercase border-bottom pb-2 mt-3">

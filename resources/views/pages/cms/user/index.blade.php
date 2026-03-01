@@ -41,7 +41,7 @@ new #[Title('User')] class extends Component {
         $service = new UserService();
         $service->active(user: $user);
 
-        $this->alertSuccess(title: 'Change Active Success', body: 'User has been successfully changed.');
+        $this->alertSuccess(title: trans('index.change_active') . ' ' . trans('index.success'), body: trans('page.user') . ' ' . trans('message.has_been_successfully_changed'));
     }
 
     public function delete(User $user): void
@@ -49,7 +49,7 @@ new #[Title('User')] class extends Component {
         $service = new UserService();
         $service->delete(user: $user);
 
-        $this->alertSuccess(title: 'Delete Success', body: 'User has been successfully deleted.');
+        $this->alertSuccess(title: trans('index.delete') . ' ' . trans('index.success'), body: trans('page.user') . ' ' . trans('message.has_been_successfully_deleted'));
     }
 
     public function roles(): object
@@ -68,7 +68,7 @@ new #[Title('User')] class extends Component {
     {
         $service = new UserService();
         $users = $service->index(search: $this->search, isActive: $this->is_active, roleId: $this->role_id, permissionId: $this->permission_id, paginate: $paginate);
-        $users->loadCount(['roles', 'permissions']);
+        $users->loadCount(['properties', 'roles', 'permissions']);
         $users->loadMissing(['roles']);
 
         return $users;
@@ -76,11 +76,11 @@ new #[Title('User')] class extends Component {
 
     public function export(): BinaryFileResponse
     {
-        $this->alertSuccess(title: 'Export Success', body: 'User has been successfully exported.');
+        $this->alertSuccess(title: trans('index.export') . ' ' . trans('index.success'), body: trans('page.user') . ' ' . trans('message.has_been_successfully_exported'));
 
         $service = new UserService();
         $users = $service->index(orderBy: 'id', sortBy: 'asc', paginate: false);
-        $users->loadCount(['roles', 'permissions']);
+        $users->loadCount(['properties', 'roles', 'permissions']);
         $users->loadMissing(['roles', 'createdBy', 'updatedBy']);
 
         return Excel::download(new UserExport(users: $users), 'User.xlsx');
@@ -88,13 +88,13 @@ new #[Title('User')] class extends Component {
 };
 ?>
 
-@section('title', 'User')
+@section('title', trans('page.user'))
 
 <div class="container-fluid">
     <div class="card">
         <div class="card-header text-bg-primary">
             <span class="fas fa-search fa-fw"></span>
-            Search @yield('title')
+            {{ trans('index.search') }} @yield('title')
         </div>
         <div class="card-body">
             <div class="d-grid gap-3">
@@ -105,7 +105,7 @@ new #[Title('User')] class extends Component {
                                 <span class="fas fa-search fa-fw "></span>
                             </div>
                             <input type="search" class="form-control" id="search" name="search" minlength="1"
-                                maxlength="50" placeholder="Search" wire:model.lazy="search"
+                                maxlength="50" placeholder="{{ trans('index.search') }}" wire:model.lazy="search"
                                 wire:offline.class="disabled" wire:offline.attr="disabled" wire:loading.class="disabled"
                                 wire:loading.attr="disabled">
                         </div>
@@ -116,10 +116,12 @@ new #[Title('User')] class extends Component {
                             wire:offline.class="disabled" wire:offline.attr="disabled" wire:loading.class="disabled"
                             wire:loading.attr="disabled">
                             <span wire:loading.remove wire:target="resetFilter">
-                                <span class="fas fa-eraser fa-fw"></span> Reset Filter
+                                <span class="fas fa-eraser fa-fw"></span>
+                                {{ trans('index.reset_filter') }}
                             </span>
                             <span wire:loading wire:target="resetFilter" class="w-100">
-                                <span class="spinner-border spinner-border-sm"></span> Reset Filter
+                                <span class="spinner-border spinner-border-sm"></span>
+                                {{ trans('index.reset_filter') }}
                             </span>
                         </button>
                     </div>
@@ -127,7 +129,9 @@ new #[Title('User')] class extends Component {
 
                 <div class="row g-3">
                     <div class="col-sm-6 col-md" wire:ignore>
-                        <label class="form-label" for="role_id">Role</label>
+                        <label class="form-label" for="role_id">
+                            {{ trans('validation.attributes.role_id') }}
+                        </label>
                         <div class="input-group">
                             <div class="input-group-text">
                                 <span class="fas fa-key fa-fw "></span>
@@ -135,7 +139,10 @@ new #[Title('User')] class extends Component {
                             <select class="form-select select2" id="role_id" name="role_id" wire:model.lazy="role_id"
                                 wire:offline.class="disabled" wire:offline.attr="disabled" wire:loading.class="disabled"
                                 wire:loading.attr="disabled">
-                                <option value="">All Role</option>
+                                <option value="">
+                                    {{ trans('index.all') }}
+                                    {{ trans('validation.attributes.role_id') }}
+                                </option>
                                 @foreach ($this->roles() as $role)
                                     <option value="{{ $role->id }}" wire:key="role-{{ $role->id }}"
                                         {{ $role->id == $role_id ? 'selected' : '' }}>
@@ -147,7 +154,9 @@ new #[Title('User')] class extends Component {
                     </div>
 
                     <div class="col-sm-6 col-md" wire:ignore>
-                        <label class="form-label" for="permission_id">Permission</label>
+                        <label class="form-label" for="permission_id">
+                            {{ trans('validation.attributes.permission_id') }}
+                        </label>
                         <div class="input-group">
                             <div class="input-group-text">
                                 <span class="fas fa-lock-open fa-fw "></span>
@@ -155,7 +164,10 @@ new #[Title('User')] class extends Component {
                             <select class="form-select select2" id="permission_id" name="permission_id"
                                 wire:model.lazy="permission_id" wire:offline.class="disabled"
                                 wire:offline.attr="disabled" wire:loading.class="disabled" wire:loading.attr="disabled">
-                                <option value="">All Permission</option>
+                                <option value="">
+                                    {{ trans('index.all') }}
+                                    {{ trans('validation.attributes.permission_id') }}
+                                </option>
                                 @foreach ($this->permissions() as $permission)
                                     <option value="{{ $permission->id }}" wire:key="permission-{{ $permission->id }}"
                                         {{ $permission->id == $permission_id ? 'selected' : '' }}>
@@ -167,21 +179,27 @@ new #[Title('User')] class extends Component {
                     </div>
 
                     <div class="col-sm-auto">
-                        <label class="form-label" for="is_active">Active</label>
+                        <label class="form-label" for="is_active">
+                            {{ trans('validation.attributes.is_active') }}
+                        </label>
                         <div>
                             <div class="form-check">
                                 <input type="checkbox" class="form-check-input" id="is_active_1" name="is_active"
                                     value="1" wire:model.lazy="is_active" wire:offline.class="disabled"
                                     wire:offline.attr="disabled" wire:loading.class="disabled"
                                     wire:loading.attr="disabled">
-                                <label class="form-check-label" for="is_active_1">Yes</label>
+                                <label class="form-check-label" for="is_active_1">
+                                    {{ trans('index.yes') }}
+                                </label>
                             </div>
                             <div class="form-check">
                                 <input type="checkbox" class="form-check-input" id="is_active_0" name="is_active"
                                     value="0" wire:model.lazy="is_active" wire:offline.class="disabled"
                                     wire:offline.attr="disabled" wire:loading.class="disabled"
                                     wire:loading.attr="disabled">
-                                <label class="form-check-label" for="is_active_0">No</label>
+                                <label class="form-check-label" for="is_active_0">
+                                    {{ trans('index.no') }}
+                                </label>
                             </div>
                         </div>
                     </div>
@@ -198,24 +216,28 @@ new #[Title('User')] class extends Component {
 
         <div class="card-body">
             <div class="row g-3">
-                @can('customer.user.add')
+                @can('user.add')
                     <div class="col-auto">
-                        <a draggable="false" class="btn btn-primary w-100" href="{{ route('user.add') }}" wire:navigate>
-                            <span class="fas fa-plus fa-fw"></span> Add
+                        <a draggable="false" class="btn btn-primary w-100" href="{{ route('cms.user.add') }}"
+                            wire:navigate>
+                            <span class="fas fa-plus fa-fw"></span>
+                            {{ trans('index.all') }}
                         </a>
                     </div>
                 @endcan
 
-                @can('customer.user.export')
+                @can('user.export')
                     <div class="col-auto">
                         <button type="button" class="btn btn-success w-100" wire:click="export"
                             wire:offline.class="disabled" wire:offline.attr="disabled" wire:loading.class="disabled"
                             wire:loading.attr="disabled">
                             <span wire:loading.remove wire:target="export">
-                                <span class="fas fa-file-excel fa-fw"></span> Export
+                                <span class="fas fa-file-excel fa-fw"></span>
+                                {{ trans('index.export') }}
                             </span>
                             <span wire:loading wire:target="export" class="w-100">
-                                <span class="spinner-border spinner-border-sm"></span> Export
+                                <span class="spinner-border spinner-border-sm"></span>
+                                {{ trans('index.export') }}
                             </span>
                         </button>
                     </div>
@@ -229,18 +251,18 @@ new #[Title('User')] class extends Component {
                     class="table table-striped table-hover table-bordered text-nowrap table-responsive align-middle">
                     <thead>
                         <tr class="text-center align-middle table-primary">
-                            <th width="1%">#</th>
-                            <th width="1%">ID</th>
-                            <th width="1%">Image</th>
-                            <th>Name</th>
-                            <th>Email</th>
-                            <th>Phone</th>
-                            <th>Username</th>
-                            <th>Join Date</th>
-                            <th>Roles</th>
-                            <th width="1%">Total</th>
-                            <th width="1%">Active</th>
-                            <th width="1%">Action</th>
+                            <th width="1%">{{ trans('field.#') }}</th>
+                            <th width="1%">{{ trans('field.id') }}</th>
+                            <th width="1%">{{ trans('field.image') }}</th>
+                            <th>{{ trans('field.name') }}</th>
+                            <th>{{ trans('field.email') }}</th>
+                            <th>{{ trans('field.phone') }}</th>
+                            <th>{{ trans('field.username') }}</th>
+                            <th>{{ trans('field.created_at') }}</th>
+                            <th>{{ trans('field.roles') }}</th>
+                            <th width="1%">{{ trans('field.total') }}</th>
+                            <th width="1%">{{ trans('field.active') }}</th>
+                            <th width="1%">{{ trans('field.action') }}</th>
                         </tr>
                     </thead>
                     <tbody>
@@ -250,7 +272,7 @@ new #[Title('User')] class extends Component {
                                     {{ ($this->users()->currentPage() - 1) * $this->users()->perPage() + $loop->iteration }}
                                 </td>
                                 <td class="text-center">
-                                    <a draggable="false" href="{{ route('user.detail', ['user' => $user]) }}"
+                                    <a draggable="false" href="{{ route('cms.user.detail', ['user' => $user]) }}"
                                         wire:navigate>
                                         {{ $user->id }}
                                     </a>
@@ -261,14 +283,15 @@ new #[Title('User')] class extends Component {
                                             <div class="ratio ratio-1x1">
                                                 <img draggable="false"
                                                     class="img-fluid w-100 h-100 rounded-circle object-fit-cover"
-                                                    src="{{ $user->image_url }}" alt="User - {{ $user->id }}"
+                                                    src="{{ $user->image_url }}"
+                                                    alt="{{ trans('page.user') }} - {{ $user->id }}"
                                                     onerror="asset('images/user.png')" />
                                             </div>
                                         </a>
                                     @endif
                                 </td>
                                 <td>
-                                    <a draggable="false" href="{{ route('user.detail', ['user' => $user]) }}"
+                                    <a draggable="false" href="{{ route('cms.user.detail', ['user' => $user]) }}"
                                         wire:navigate>
                                         {{ $user->name }}
                                     </a>
@@ -291,18 +314,26 @@ new #[Title('User')] class extends Component {
                                     @foreach ($user->roles as $role)
                                         <div wire:key="role-{{ $role->id }}">
                                             <a draggable="false"
-                                                href="{{ route('role.detail', ['role' => $role]) }}">
+                                                href="{{ route('cms.role.detail', ['role' => $role]) }}">
                                                 {{ $loop->iteration }}. {{ $role->name }}
                                             </a>
                                         </div>
                                     @endforeach
                                 </td>
                                 <td>
-                                    <div>Role : {{ $user->roles_count }}</div>
-                                    <div>Permission : {{ $user->permissions_count }}</div>
+                                    <div>
+                                        {{ trans('page.property') }} :
+                                        <a draggable="false"
+                                            href="{{ route('cms.property.index', ['user_id' => $user->id]) }}"
+                                            wire:navigate>
+                                            {{ $user->properties_count }}
+                                        </a>
+                                    </div>
+                                    <div>{{ trans('page.role') }} : {{ $user->roles_count }}</div>
+                                    <div>{{ trans('page.permission') }} : {{ $user->permissions_count }}</div>
                                 </td>
                                 <td>
-                                    @can('customer.user.edit')
+                                    @can('user.edit')
                                         <div class="form-check form-switch">
                                             <input class="form-check-input" type="checkbox" role="switch"
                                                 id="is_active_{{ $user->id }}" name="is_active" value="1"
@@ -325,31 +356,35 @@ new #[Title('User')] class extends Component {
                                 </td>
                                 <td>
                                     <div class="d-flex gap-2">
-                                        @can('customer.user.detail')
+                                        @can('user.detail')
                                             <a draggable="false" class="btn btn-info btn-sm"
-                                                href="{{ route('user.detail', ['user' => $user]) }}" wire:navigate>
-                                                <span class="fas fa-list fa-fw"></span> Detail
+                                                href="{{ route('cms.user.detail', ['user' => $user]) }}" wire:navigate>
+                                                <span class="fas fa-list fa-fw"></span>
+                                                {{ trans('index.detail') }}
                                             </a>
                                         @endcan
 
-                                        @can('customer.user.edit')
+                                        @can('user.edit')
                                             <a draggable="false" class="btn btn-success btn-sm"
-                                                href="{{ route('user.edit', ['user' => $user]) }}" wire:navigate>
-                                                <span class="fas fa-edit fa-fw"></span> Edit
+                                                href="{{ route('cms.user.edit', ['user' => $user]) }}" wire:navigate>
+                                                <span class="fas fa-edit fa-fw"></span>
+                                                {{ trans('index.edit') }}
                                             </a>
                                         @endcan
 
-                                        @can('customer.user.delete')
+                                        @can('user.delete')
                                             <button type="button" class="btn btn-danger btn-sm"
                                                 wire:click="delete({{ $user->id }})" wire:offline.class="disabled"
                                                 wire:offline.attr="disabled" wire:loading.class="disabled"
                                                 wire:loading.attr="disabled">
                                                 <span wire:loading.remove wire:target="delete({{ $user->id }})">
-                                                    <span class="fas fa-trash fa-fw"></span> Delete
+                                                    <span class="fas fa-trash fa-fw"></span>
+                                                    {{ trans('index.delete') }}
                                                 </span>
                                                 <span wire:loading wire:target="delete({{ $user->id }})"
                                                     class="w-100">
-                                                    <span class="spinner-border spinner-border-sm"></span> Delete
+                                                    <span class="spinner-border spinner-border-sm"></span>
+                                                    {{ trans('index.delete') }}
                                                 </span>
                                             </button>
                                         @endcan
@@ -359,7 +394,7 @@ new #[Title('User')] class extends Component {
                         @empty
                             <tr>
                                 <td class="text-center" colspan="100%">
-                                    No Data Available
+                                    {{ trans('message.no_data_available') }}
                                 </td>
                             </tr>
                         @endforelse

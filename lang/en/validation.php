@@ -228,6 +228,12 @@ return [
         'water_source' => 'Water Souce',
         'when' => 'When',
 
+        'role_id' => 'Role',
+        'permission_id' => 'Permission',
+        'index' => 'Index',
+        'index' => 'Index',
+        'index' => 'Index',
+        'index' => 'Index',
         'index' => 'Index',
         'index' => 'Index',
         'index' => 'Index',
