@@ -129,7 +129,8 @@ new #[Title('Add | Property')] class extends Component {
         <div class="card-body">
             <div class="row g-3">
                 <div class="col-auto">
-                    <a draggable="false" class="btn btn-primary w-100" href="{{ route('cms.property.index') }}" wire:navigate>
+                    <a draggable="false" class="btn btn-primary w-100" href="{{ route('cms.property.index') }}"
+                        wire:navigate>
                         <span class="fas fa-arrow-left fa-fw"></span> {{ trans('index.back') }}
                     </a>
                 </div>
@@ -312,6 +313,12 @@ new #[Title('Add | Property')] class extends Component {
 
                 <div class="row g-3 mb-3">
                     <div class="col-sm-6">
+                        <div id="map" style="height:400px;" wire:ignore></div>
+                        <div>Latitude : {{ $form->latitude }}</div>
+                        <div>Longitude : {{ $form->longitude }}</div>
+                    </div>
+
+                    {{-- <div class="col-sm-6">
                         <label class="form-label" for="latitude">
                             {{ trans('validation.attributes.latitude') }}
                         </label>
@@ -332,9 +339,9 @@ new #[Title('Add | Property')] class extends Component {
                         @error('form.latitude')
                             <div class="form-text text-danger">{{ $message }}</div>
                         @enderror
-                    </div>
+                    </div> --}}
 
-                    <div class="col-sm-6">
+                    {{-- <div class="col-sm-6">
                         <label class="form-label" for="longitude">
                             {{ trans('validation.attributes.longitude') }}
                         </label>
@@ -355,7 +362,7 @@ new #[Title('Add | Property')] class extends Component {
                         @error('form.longitude')
                             <div class="form-text text-danger">{{ $message }}</div>
                         @enderror
-                    </div>
+                    </div> --}}
 
                     <div class="col-sm-6">
                         <label class="form-label" for="address">
@@ -1422,5 +1429,45 @@ new #[Title('Add | Property')] class extends Component {
         $("#status").on("change", function() {
             @this.set("form.status", $(this).val())
         })
+
+        const map = L.map('map').setView([-6.2, 106.8], 12);
+
+        L.tileLayer('https://tile.openstreetmap.org/{z}/{x}/{y}.png', {
+            maxZoom: 19,
+        }).addTo(map);
+
+        let marker = L.marker([-6.2, 106.8], {
+            draggable: true
+        }).addTo(map);
+
+        if (navigator.geolocation) {
+            navigator.geolocation.getCurrentPosition(
+                function(position) {
+                    const lat = position.coords.latitude;
+                    const lng = position.coords.longitude;
+
+                    map.setView([lat, lng], 15);
+
+                    marker.setLatLng([lat, lng]);
+
+                    @this.set('form.latitude', lat);
+                    @this.set('form.longitude', lng);
+
+                    console.log('My location:', lat, lng);
+                },
+                function(error) {
+                    console.log('Location access denied or unavailable');
+                }
+            );
+        } else {
+            console.log('Geolocation not supported');
+        }
+
+        marker.on('dragend', function() {
+            const position = marker.getLatLng();
+            console.log(position.lat, position.lng);
+            @this.set('form.latitude', e.latitude);
+            @this.set('form.longitude', e.longitude);
+        });
     </script>
 @endscript
