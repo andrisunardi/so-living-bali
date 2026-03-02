@@ -35,7 +35,7 @@ return [
     'owner_price_flexibility' => 'Owner Price Flexibility (Fixed / Negotiable)',
     'price_coherent_with_upper_or_premium_positioning' => 'Price Coherent With Upper / Premium Positioning',
 
-    'environment_and_tranquillity' => 'Envrionment & Tranquillity',
+    'environment_and_tranquility' => 'Environment And Tranquility',
     'not_directly_exposed_to_main_road' => 'Not Directly Exposed To Main Road',
     'no_festive_venue_nearby' => 'No Festive Venue Nearby',
     'no_ongoing_or_imminent_construction' => 'No Ongoing or Imminent Construction',

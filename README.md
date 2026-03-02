@@ -233,11 +233,8 @@ https://tailux.piniastudio.com/tables/advanced-tables
 </nav>
 
 •⁠  ⁠Link of gmaps instead of the  latitude and longitude? Possible?
-•⁠  ⁠Date visited? Do you mean the date when we visited with the client? I would like to automatize this data? We need to discuss it
 •⁠  ⁠Full Legal Documentation Available : Pls insert a dropdown with multiple choice instead of YES/NO. You will find below the list to use
-•⁠  ⁠Environment and tranquility (typo) : Pls correct the title
 •⁠  ⁠Internet speedtest : Can you insert as well the possibility to doxnload a picture of the speed test
-•⁠  ⁠Trade off : What do you mean?
 •⁠  ⁠Target profil : pls autorize multiple choice
 
 LEGAL DOCUMENTATION LIST :
