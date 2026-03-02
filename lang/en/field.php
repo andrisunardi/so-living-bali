@@ -16,6 +16,7 @@ return [
     'created_at' => 'Created At',
     'created_by' => 'Created By',
     'district_id' => 'District',
+    'area_id' => 'Area',
     'email' => 'Email',
     'end_date' => 'End Date',
     'guard_name' => 'Guard Name',

@@ -1,6 +1,8 @@
 <?php
 
 use App\Enums\Property\PropertyStatus;
+use App\Models\Area;
+use App\Models\District;
 use App\Models\User;
 use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
@@ -21,7 +23,8 @@ return new class extends Migration
             $table->decimal('latitude', 10, 7)->nullable();
             $table->decimal('longitude', 10, 7)->nullable();
             $table->string('address', 200)->nullable();
-            $table->string('area', 50)->nullable();
+            $table->foreignIdFor(District::class)->nullable()->constrained()->nullOnDelete();
+            $table->foreignIdFor(Area::class)->nullable()->constrained()->nullOnDelete();
 
             $table->integer('land_size')->nullable();
             $table->integer('building_size')->unsigned()->nullable();

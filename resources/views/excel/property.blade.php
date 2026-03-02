@@ -33,6 +33,12 @@
                 <b>{{ trans('field.address') }}</b>
             </th>
             <th valign="middle" align="center">
+                <b>{{ trans('field.district_id') }}</b>
+            </th>
+            <th valign="middle" align="center">
+                <b>{{ trans('field.area_id') }}</b>
+            </th>
+            <th valign="middle" align="center">
                 <b>{{ trans('field.created_at') }}</b>
             </th>
             <th valign="middle" align="center">
@@ -57,6 +63,12 @@
                 </td>
                 <td valign="middle">
                     {{ $property->address }}
+                </td>
+                <td valign="middle">
+                    {{ $property->district?->name }}
+                </td>
+                <td valign="middle">
+                    {{ $property->area?->name }}
                 </td>
                 <td valign="middle">
                     {{ $property->created_at }}

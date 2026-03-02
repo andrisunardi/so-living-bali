@@ -12,6 +12,8 @@ use App\Enums\Property\PropertyRentalType;
 use App\Enums\Property\PropertyStatus;
 use App\Enums\Property\PropertyTargetProfile;
 use App\Enums\Property\PropertyWaterSource;
+use App\Models\Area;
+use App\Models\District;
 use App\Models\User;
 use Illuminate\Database\Eloquent\Factories\Factory;
 use Illuminate\Support\Str;
@@ -21,6 +23,8 @@ class PropertyFactory extends Factory
     public function definition(): array
     {
         $user = User::first() ?? User::factory()->create();
+        $district = District::first() ?? District::factory()->create();
+        $area = Area::first() ?? Area::factory()->create();
 
         $code = Str::random(10);
         $slug = Str::slug($code);
@@ -35,7 +39,8 @@ class PropertyFactory extends Factory
             'latitude' => fake()->latitude(),
             'longitude' => fake()->longitude(),
             'address' => fake()->address(),
-            'area' => fake()->city(),
+            'district_id' => $district->id,
+            'area_id' => $user->id,
 
             'land_size' => fake()->numberBetween(1, 100),
             'building_size' => fake()->numberBetween(1, 100),

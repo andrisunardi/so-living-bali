@@ -62,7 +62,7 @@ new #[Title('Property')] class extends Component {
     {
         $service = new PropertyService();
         $properties = $service->index(search: $this->search, userId: $this->user_id, status: $this->status, startDate: $this->start_date, endDate: $this->end_date, paginate: $paginate);
-        $properties->loadMissing(['user']);
+        $properties->loadMissing(['user', 'district', 'area']);
 
         return $properties;
     }
@@ -73,7 +73,7 @@ new #[Title('Property')] class extends Component {
 
         $service = new PropertyService();
         $properties = $service->index(orderBy: 'id', sortBy: 'asc', paginate: false);
-        $properties->loadMissing(['user', 'createdBy', 'updatedBy']);
+        $properties->loadMissing(['user', 'district', 'area', 'createdBy', 'updatedBy']);
 
         return Excel::download(new PropertyExport(properties: $properties), trans('page.orioerty') . '.xlsx');
     }
@@ -244,6 +244,7 @@ new #[Title('Property')] class extends Component {
                             <th width="1%">{{ trans('field.code') }}</th>
                             <th>{{ trans('field.name') }}</th>
                             <th width="1%">{{ trans('field.agent') }}</th>
+                            <th width="1%">{{ trans('field.district_id') }} / {{ trans('field.area_id') }}</th>
                             <th width="1%">{{ trans('field.status') }}</th>
                             <th width="1%">{{ trans('field.created_at') }}</th>
                             <th width="1%">{{ trans('field.action') }}</th>
@@ -296,6 +297,26 @@ new #[Title('Property')] class extends Component {
                                             wire:navigate>
                                             {{ $property->user->name }}
                                         </a>
+                                    @endif
+                                </td>
+                                <td>
+                                    @if ($property->district)
+                                        <div>
+                                            <a draggable="false"
+                                                href="{{ route('cms.district.detail', ['district' => $property->district]) }}"
+                                                wire:navigate>
+                                                {{ $property->district->name }}
+                                            </a>
+                                        </div>
+                                    @endif
+                                    @if ($property->area)
+                                        <div>
+                                            <a draggable="false"
+                                                href="{{ route('cms.area.detail', ['area' => $property->area]) }}"
+                                                wire:navigate>
+                                                {{ $property->area->name }}
+                                            </a>
+                                        </div>
                                     @endif
                                 </td>
                                 <td>

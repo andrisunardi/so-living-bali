@@ -34,7 +34,8 @@ use Spatie\Activitylog\Traits\LogsActivity;
  * @property numeric|null $latitude
  * @property numeric|null $longitude
  * @property string|null $address
- * @property string|null $area
+ * @property int|null $district_id
+ * @property int|null $area_id
  * @property int|null $land_size
  * @property int|null $building_size
  * @property int|null $number_of_floors
@@ -74,7 +75,9 @@ use Spatie\Activitylog\Traits\LogsActivity;
  * @property PropertyTargetProfile|null $target_profile
  * @property PropertyOperationalRisk|null $operational_risk
  * @property string|null $operational_risk_comment
+ * @property string|null $image_url
  * @property PropertyStatus $status
+ * @property string $slug
  * @property int|null $created_by
  * @property int|null $updated_by
  * @property int|null $deleted_by
@@ -83,8 +86,10 @@ use Spatie\Activitylog\Traits\LogsActivity;
  * @property Carbon|null $deleted_at
  * @property-read \Illuminate\Database\Eloquent\Collection<int, \Spatie\Activitylog\Models\Activity> $activities
  * @property-read int|null $activities_count
+ * @property-read \App\Models\Area|null $area
  * @property-read \App\Models\User|null $createdBy
  * @property-read \App\Models\User|null $deletedBy
+ * @property-read \App\Models\District|null $district
  * @property-read \App\Models\User|null $updatedBy
  * @property-read \App\Models\User|null $user
  *
@@ -125,17 +130,18 @@ use Spatie\Activitylog\Traits\LogsActivity;
  * @method static Builder<static>|Property wSMixed()
  * @method static Builder<static>|Property well()
  * @method static Builder<static>|Property whereAddress($value)
- * @method static Builder<static>|Property whereArea($value)
+ * @method static Builder<static>|Property whereAreaId($value)
  * @method static Builder<static>|Property whereAvailabilityDate($value)
  * @method static Builder<static>|Property whereBedroom1HasNaturalLight($value)
  * @method static Builder<static>|Property whereBedroom2HasNaturalLight($value)
- * @method static Builder<static>|Property whereBuildingSizeSqm($value)
+ * @method static Builder<static>|Property whereBuildingSize($value)
  * @method static Builder<static>|Property whereCode($value)
  * @method static Builder<static>|Property whereCreatedAt($value)
  * @method static Builder<static>|Property whereCreatedBy($value)
  * @method static Builder<static>|Property whereDeletedAt($value)
  * @method static Builder<static>|Property whereDeletedBy($value)
  * @method static Builder<static>|Property whereDesignDrivenProperty($value)
+ * @method static Builder<static>|Property whereDistrictId($value)
  * @method static Builder<static>|Property whereElectricity($value)
  * @method static Builder<static>|Property whereEligibleForPremium($value)
  * @method static Builder<static>|Property whereEligibleForUpper($value)
@@ -144,7 +150,8 @@ use Spatie\Activitylog\Traits\LogsActivity;
  * @method static Builder<static>|Property whereFullyFurnished($value)
  * @method static Builder<static>|Property whereGuestToilet($value)
  * @method static Builder<static>|Property whereId($value)
- * @method static Builder<static>|Property whereInternetSpeedtestMpbs($value)
+ * @method static Builder<static>|Property whereImageUrl($value)
+ * @method static Builder<static>|Property whereInternetSpeedtest($value)
  * @method static Builder<static>|Property whereLandSize($value)
  * @method static Builder<static>|Property whereLatitude($value)
  * @method static Builder<static>|Property whereLivingAreaHasNaturalLight($value)
@@ -161,13 +168,14 @@ use Spatie\Activitylog\Traits\LogsActivity;
  * @method static Builder<static>|Property whereOperationalRisk($value)
  * @method static Builder<static>|Property whereOperationalRiskComment($value)
  * @method static Builder<static>|Property whereOrientation($value)
- * @method static Builder<static>|Property whereOutdoorAreaSizeSqm($value)
+ * @method static Builder<static>|Property whereOutdoorAreaSize($value)
  * @method static Builder<static>|Property whereOwnerPriceFlexibility($value)
  * @method static Builder<static>|Property wherePoolSize($value)
  * @method static Builder<static>|Property wherePowerBackup($value)
  * @method static Builder<static>|Property wherePriceCoherentWithUpper($value)
  * @method static Builder<static>|Property whereQuietAccessRoad($value)
  * @method static Builder<static>|Property whereRentalType($value)
+ * @method static Builder<static>|Property whereSlug($value)
  * @method static Builder<static>|Property whereStatus($value)
  * @method static Builder<static>|Property whereStorage($value)
  * @method static Builder<static>|Property whereTargetProfile($value)
@@ -183,15 +191,6 @@ use Spatie\Activitylog\Traits\LogsActivity;
  * @method static Builder<static>|Property withTrashed(bool $withTrashed = true)
  * @method static Builder<static>|Property withoutTrashed()
  * @method static Builder<static>|Property yearly()
- * @method static Builder<static>|Property whereBuildingSize($value)
- * @method static Builder<static>|Property whereInternetSpeedtest($value)
- * @method static Builder<static>|Property whereOutdoorAreaSize($value)
- *
- * @property string|null $image_url
- * @property string $slug
- *
- * @method static Builder<static>|Property whereImageUrl($value)
- * @method static Builder<static>|Property whereSlug($value)
  *
  * @mixin \Eloquent
  */
@@ -213,7 +212,8 @@ class Property extends Model
         'latitude',
         'longitude',
         'address',
-        'area',
+        'district_id',
+        'area_id',
 
         'land_size',
         'building_size',
@@ -283,7 +283,8 @@ class Property extends Model
             'latitude' => 'decimal:7',
             'longitude' => 'decimal:7',
             'address' => 'string',
-            'area' => 'string',
+            'district_id' => 'integer',
+            'area_id' => 'integer',
 
             'land_size' => 'integer',
             'building_size' => 'integer',
@@ -523,6 +524,16 @@ class Property extends Model
     public function user(): BelongsTo
     {
         return $this->belongsTo(User::class);
+    }
+
+    public function district(): BelongsTo
+    {
+        return $this->belongsTo(District::class);
+    }
+
+    public function area(): BelongsTo
+    {
+        return $this->belongsTo(Area::class);
     }
 
     public function createdBy(): BelongsTo
