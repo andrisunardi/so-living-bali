@@ -205,7 +205,7 @@ new #[Title('Property')] class extends Component {
             <div class="row g-3">
                 @can('property.add')
                     <div class="col-auto">
-                        <a draggable="false" class="btn btn-primary w-100" href="{{ route('cms.user.add') }}"
+                        <a draggable="false" class="btn btn-primary w-100" href="{{ route('cms.property.add') }}"
                             wire:navigate>
                             <span class="fas fa-plus fa-fw"></span>
                             {{ trans('index.add') }}

@@ -39,7 +39,7 @@ new #[Title('Detail | Property')] class extends Component {
         <div class="card-body">
             <div class="row g-3">
                 <div class="col-auto">
-                    <a draggable="false" class="btn btn-info w-100" href="{{ route('cms.user.index') }}" wire:navigate>
+                    <a draggable="false" class="btn btn-info w-100" href="{{ route('cms.property.index') }}" wire:navigate>
                         <span class="fas fa-arrow-left fa-fw"></span>
                         {{ trans('index.back') }}
                     </a>

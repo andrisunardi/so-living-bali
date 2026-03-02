@@ -46,8 +46,11 @@ class PropertyEditForm extends Form
     #[Validate('nullable|string|min:1|max:200')]
     public ?string $address = '';
 
-    #[Validate('nullable|string|min:1|max:50')]
-    public ?string $area = '';
+    #[Validate('nullable|integer|exists:districts,id')]
+    public ?int $district_id = null;
+
+    #[Validate('nullable|integer|exists:areas,id')]
+    public ?int $area_id = null;
 
     #[Validate('nullable|integer|min:0|max:9999999999')]
     public ?int $land_size = null;
