@@ -166,7 +166,7 @@ new #[Title('Role')] class extends Component {
 
         <div class="card-body">
             <div class="row g-3">
-                @can('customer.role.add')
+                @can('role.add')
                     <div class="col-auto">
                         <a draggable="false" class="btn btn-primary w-100" href="{{ route('cms.role.add') }}"
                             wire:navigate>
@@ -176,7 +176,7 @@ new #[Title('Role')] class extends Component {
                     </div>
                 @endcan
 
-                @can('customer.role.export')
+                @can('role.export')
                     <div class="col-auto">
                         <button type="button" class="btn btn-success w-100" wire:click="export"
                             wire:offline.class="disabled" wire:offline.attr="disabled" wire:loading.class="disabled"
@@ -246,7 +246,7 @@ new #[Title('Role')] class extends Component {
                                 <td>{{ $role->created_at?->isoFormat('HH:mm - ddd, DD MMM YYYY') }}</td>
                                 <td>
                                     <div class="d-flex gap-2">
-                                        @can('customer.role.detail')
+                                        @can('role.detail')
                                             <a draggable="false" class="btn btn-info btn-sm"
                                                 href="{{ route('cms.role.detail', ['role' => $role]) }}" wire:navigate>
                                                 <span class="fas fa-list fa-fw"></span>
@@ -254,7 +254,7 @@ new #[Title('Role')] class extends Component {
                                             </a>
                                         @endcan
 
-                                        @can('customer.role.edit')
+                                        @can('role.edit')
                                             <a draggable="false" class="btn btn-success btn-sm"
                                                 href="{{ route('cms.role.edit', ['role' => $role]) }}" wire:navigate>
                                                 <span class="fas fa-edit fa-fw"></span>
@@ -262,7 +262,7 @@ new #[Title('Role')] class extends Component {
                                             </a>
                                         @endcan
 
-                                        @can('customer.role.delete')
+                                        @can('role.delete')
                                             <button type="button" class="btn btn-danger btn-sm"
                                                 wire:click="delete({{ $role->id }})" wire:offline.class="disabled"
                                                 wire:offline.attr="disabled" wire:loading.class="disabled"

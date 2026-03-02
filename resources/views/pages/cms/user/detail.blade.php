@@ -130,7 +130,7 @@ new #[Title('Detail | User')] class extends Component {
                         <div class="fw-bold">{{ trans('field.active') }}</div>
                     </div>
                     <div class="col-sm-7 col-md-8 col-lg-9 col-xl-10">
-                        @can('customer.user.edit')
+                        @can('user.edit')
                             <div class="form-check form-switch">
                                 <input class="form-check-input" type="checkbox" role="switch"
                                     id="is_active_{{ $user->id }}" name="is_active" value="1"
@@ -243,7 +243,7 @@ new #[Title('Detail | User')] class extends Component {
             <hr />
 
             <div class="row g-3">
-                @can('customer.user.edit')
+                @can('user.edit')
                     <div class="col-auto">
                         <a draggable="false" class="btn btn-success w-100"
                             href="{{ route('cms.user.edit', ['user' => $user]) }}" wire:navigate>
@@ -253,7 +253,7 @@ new #[Title('Detail | User')] class extends Component {
                     </div>
                 @endcan
 
-                @can('customer.user.delete')
+                @can('user.delete')
                     <div class="col-auto">
                         <button type="button" class="btn btn-danger w-100" wire:click="delete"
                             wire:offline.class="disabled" wire:offline.attr="disabled" wire:loading.class="disabled"

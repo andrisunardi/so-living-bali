@@ -155,7 +155,7 @@ new #[Title('Permission')] class extends Component {
 
         <div class="card-body">
             <div class="row g-3">
-                @can('customer.permission.add')
+                @can('permission.add')
                     <div class="col-auto">
                         <a draggable="false" class="btn btn-primary w-100" href="{{ route('permission.add') }}"
                             wire:navigate>
@@ -164,7 +164,7 @@ new #[Title('Permission')] class extends Component {
                     </div>
                 @endcan
 
-                @can('customer.permission.export')
+                @can('permission.export')
                     <div class="col-auto">
                         <button type="button" class="btn btn-success w-100" wire:click="export"
                             wire:offline.class="disabled" wire:offline.attr="disabled" wire:loading.class="disabled"
@@ -235,7 +235,7 @@ new #[Title('Permission')] class extends Component {
                                 <td>{{ $permission->created_at?->isoFormat('HH:mm - ddd, DD MMM YYYY') }}</td>
                                 <td>
                                     <div class="d-flex gap-2">
-                                        @can('customer.permission.detail')
+                                        @can('permission.detail')
                                             <a draggable="false" class="btn btn-info btn-sm"
                                                 href="{{ route('permission.detail', ['permission' => $permission]) }}"
                                                 wire:navigate>
@@ -243,7 +243,7 @@ new #[Title('Permission')] class extends Component {
                                             </a>
                                         @endcan
 
-                                        @can('customer.permission.edit')
+                                        @can('permission.edit')
                                             <a draggable="false" class="btn btn-success btn-sm"
                                                 href="{{ route('permission.edit', ['permission' => $permission]) }}"
                                                 wire:navigate>
@@ -251,7 +251,7 @@ new #[Title('Permission')] class extends Component {
                                             </a>
                                         @endcan
 
-                                        @can('customer.permission.delete')
+                                        @can('permission.delete')
                                             <button type="button" class="btn btn-danger btn-sm"
                                                 wire:click="delete({{ $permission->id }})" wire:offline.class="disabled"
                                                 wire:offline.attr="disabled" wire:loading.class="disabled"

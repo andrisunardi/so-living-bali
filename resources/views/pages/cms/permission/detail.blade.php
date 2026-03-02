@@ -158,7 +158,7 @@ new #[Title('Detail | Permission')] class extends Component {
             <hr />
 
             <div class="row g-3">
-                @can('customer.permission.edit')
+                @can('permission.edit')
                     <div class="col-auto">
                         <a draggable="false" class="btn btn-success w-100"
                             href="{{ route('permission.edit', ['permission' => $permission]) }}" wire:navigate>
@@ -167,7 +167,7 @@ new #[Title('Detail | Permission')] class extends Component {
                     </div>
                 @endcan
 
-                @can('customer.permission.delete')
+                @can('permission.delete')
                     <div class="col-auto">
                         <button type="button" class="btn btn-danger w-100" wire:click="delete"
                             wire:offline.class="disabled" wire:offline.attr="disabled" wire:loading.class="disabled"

@@ -158,7 +158,7 @@ new #[Title('Detail | Role')] class extends Component {
             <hr />
 
             <div class="row g-3">
-                @can('customer.role.edit')
+                @can('role.edit')
                     <div class="col-auto">
                         <a draggable="false" class="btn btn-success w-100"
                             href="{{ route('role.edit', ['role' => $role]) }}" wire:navigate>
@@ -167,7 +167,7 @@ new #[Title('Detail | Role')] class extends Component {
                     </div>
                 @endcan
 
-                @can('customer.role.delete')
+                @can('role.delete')
                     <div class="col-auto">
                         <button type="button" class="btn btn-danger w-100" wire:click="delete"
                             wire:offline.class="disabled" wire:offline.attr="disabled" wire:loading.class="disabled"
