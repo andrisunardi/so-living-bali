@@ -230,8 +230,8 @@ return [
 
         'role_id' => 'Role',
         'permission_id' => 'Permission',
-        'index' => 'Index',
-        'index' => 'Index',
+        'start_date' => 'Start Date',
+        'end_date' => 'End Date',
         'index' => 'Index',
         'index' => 'Index',
         'index' => 'Index',
