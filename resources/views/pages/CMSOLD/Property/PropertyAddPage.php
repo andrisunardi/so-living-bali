@@ -95,8 +95,6 @@ class PropertyAddPage extends Component
 
     public function render(): View
     {
-        abort(500);
-
         return view('livewire.cms.property.add', [
             'users' => $this->getUsers(),
             'propertyLivingStyles' => $this->getPropertyLivingStyles(),

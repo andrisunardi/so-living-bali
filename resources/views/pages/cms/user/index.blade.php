@@ -83,7 +83,7 @@ new #[Title('User')] class extends Component {
         $users->loadCount(['properties', 'roles', 'permissions']);
         $users->loadMissing(['roles', 'createdBy', 'updatedBy']);
 
-        return Excel::download(new UserExport(users: $users), 'User.xlsx');
+        return Excel::download(new UserExport(users: $users), trans('page.user') . '.xlsx');
     }
 };
 ?>
@@ -211,7 +211,7 @@ new #[Title('User')] class extends Component {
     <div class="card mt-3">
         <div class="card-header text-bg-primary">
             <span class="fas fa-table fa-fw"></span>
-            Data @yield('title')
+            {{ trans('data') }} @yield('title')
         </div>
 
         <div class="card-body">
