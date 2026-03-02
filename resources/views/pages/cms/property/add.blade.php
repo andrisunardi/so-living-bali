@@ -35,11 +35,6 @@ new #[Title('Add | Property')] class extends Component {
         $this->form->reset();
     }
 
-    public function generateRandomPassword(): void
-    {
-        $this->form->password = Str::random(10);
-    }
-
     public function submit(): void
     {
         try {
@@ -134,7 +129,7 @@ new #[Title('Add | Property')] class extends Component {
         <div class="card-body">
             <div class="row g-3">
                 <div class="col-auto">
-                    <a draggable="false" class="btn btn-primary w-100" href="{{ route('cms.user.index') }}" wire:navigate>
+                    <a draggable="false" class="btn btn-primary w-100" href="{{ route('cms.property.index') }}" wire:navigate>
                         <span class="fas fa-arrow-left fa-fw"></span> {{ trans('index.back') }}
                     </a>
                 </div>

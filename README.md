@@ -233,7 +233,6 @@ https://tailux.piniastudio.com/tables/advanced-tables
 </nav>
 
 •⁠  ⁠Link of gmaps instead of the  latitude and longitude? Possible?
-•⁠  ⁠District/Area : Could you pls use a dropdown with single choice? you will find below the list of area/sub area that we want
 •⁠  ⁠Date visited? Do you mean the date when we visited with the client? I would like to automatize this data? We need to discuss it
 •⁠  ⁠Full Legal Documentation Available : Pls insert a dropdown with multiple choice instead of YES/NO. You will find below the list to use
 •⁠  ⁠Environment and tranquility (typo) : Pls correct the title
