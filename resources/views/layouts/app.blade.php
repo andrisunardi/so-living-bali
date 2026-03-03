@@ -13,9 +13,6 @@
 
     <link href="{{ asset('css/app.css') }}" rel="stylesheet">
 
-    <link rel="stylesheet" href="https://unpkg.com/leaflet/dist/leaflet.css" />
-    <script src="https://unpkg.com/leaflet/dist/leaflet.js"></script>
-
     @vite(['resources/css/app.css', 'resources/js/app.js'])
 
     @livewireStyles

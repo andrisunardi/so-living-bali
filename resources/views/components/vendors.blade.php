@@ -14,6 +14,8 @@
 
 @include('vendors.html5-qrcode')
 
+@include('vendors.leaflet')
+
 @include('vendors.lozad')
 
 @include('vendors.pace')
