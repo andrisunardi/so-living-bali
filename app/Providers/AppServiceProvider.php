@@ -50,7 +50,7 @@ class AppServiceProvider extends ServiceProvider
         });
 
         Str::macro('yesNo', function ($value) {
-            return $value ? 'Yes' : 'No';
+            return $value ? trans('index.yes') : trans('index.no');
         });
     }
 }

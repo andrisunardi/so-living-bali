@@ -1,5 +1,56 @@
+<?php
+
+use App\Livewire\Component;
+use App\Services\DistrictService;
+use Livewire\Attributes\Title;
+use App\Models\District;
+
+new #[Title('Detail | District')] class extends Component {
+    public District $district;
+
+    public function mount(District $district): void
+    {
+        $this->district = $district;
+        $this->district->loadCount(['areas']);
+        // $this->district->loadCount(['areas', 'properties']);
+    }
+
+    public function changeShow(): void
+    {
+        $service = new DistrictService();
+        $service->show(district: $this->district);
+        $this->district->loadCount(['areas']);
+        // $this->district->loadCount(['areas', 'properties']);
+
+        $this->alertSuccess(title: trans('index.change_show') . ' ' . trans('index.success'), body: trans('page.district') . ' ' . trans('message.has_been_successfully_changed'));
+    }
+
+    public function changeActive(): void
+    {
+        $service = new DistrictService();
+        $service->active(district: $this->district);
+        $this->district->loadCount(['areas']);
+        // $this->district->loadCount(['areas', 'properties']);
+
+        $this->alertSuccess(title: trans('index.change_active') . ' ' . trans('index.success'), body: trans('page.district') . ' ' . trans('message.has_been_successfully_changed'));
+    }
+
+    public function delete(): void
+    {
+        $service = new DistrictService();
+        $service->delete(district: $this->district);
+
+        session()->flash('success', [
+            'title' => trans('index.delete') . ' ' . trans('index.success'),
+            'message' => trans('page.district') . ' ' . trans('message.has_been_successfully_deleted'),
+        ]);
+
+        $this->redirect(route('cms.district.index'), navigate: true);
+    }
+};
+?>
+
 @section('title', trans('page.district'))
-@section('icon', 'fas fa-list')
 
 <div class="container-fluid">
     <div class="card">
@@ -10,8 +61,7 @@
         <div class="card-body">
             <div class="row g-3">
                 <div class="col-auto">
-                    <a draggable="false" class="btn btn-primary w-100" href="{{ route('cms.district.index') }}"
-                        wire:navigate>
+                    <a draggable="false" class="btn btn-info w-100" href="{{ route('cms.district.index') }}" wire:navigate>
                         <span class="fas fa-arrow-left fa-fw"></span>
                         {{ trans('index.back') }}
                     </a>
@@ -44,21 +94,21 @@
                         <div class="fw-bold">{{ trans('field.show') }}</div>
                     </div>
                     <div class="col-sm-7 col-md-8 col-lg-9 col-xl-10">
-                        @can('district.edit')
+                        @can('customer.district.edit')
                             <div class="form-check form-switch">
                                 <input class="form-check-input" type="checkbox" role="switch"
                                     id="is_show_{{ $district->id }}" name="is_show" value="1"
-                                    {{ $district->is_show ? 'checked' : '' }} wire:key="is_show_{{ $district->id }}"
-                                    wire:click="changeShow({{ $district->id }})" wire:offline.class="disabled"
-                                    wire:offline.attr="disabled" wire:loading.class="disabled" wire:loading.attr="disabled">
-                                <label class="form-check-label text-{{ $district->is_show ? 'success' : 'danger' }}"
+                                    {{ $district->is_show ? 'checked' : '' }} wire:click="changeShow({{ $district->id }})"
+                                    wire:offline.class="disabled" wire:offline.attr="disabled" wire:loading.class="disabled"
+                                    wire:loading.attr="disabled">
+                                <label class="form-check-label text-{{ Str::successDanger($district->is_show) }}"
                                     for="is_show_{{ $district->id }}">
-                                    {{ $district->is_show ? trans('index.yes') : trans('index.no') }}
+                                    {{ Str::yesNo($district->is_show) }}
                                 </label>
                             </div>
                         @else
-                            <span class="badge rounded-pill text-bg-{{ $district->is_show ? 'success' : 'danger' }}">
-                                {{ $district->is_show ? trans('index.yes') : trans('index.no') }}
+                            <span class="badge rounded-pill text-bg-{{ Str::successDanger($district->is_show) }}">
+                                {{ Str::yesNo($district->is_show) }}
                             </span>
                         @endcan
                     </div>
@@ -69,21 +119,21 @@
                         <div class="fw-bold">{{ trans('field.active') }}</div>
                     </div>
                     <div class="col-sm-7 col-md-8 col-lg-9 col-xl-10">
-                        @can('district.edit')
+                        @can('customer.district.edit')
                             <div class="form-check form-switch">
                                 <input class="form-check-input" type="checkbox" role="switch"
                                     id="is_active_{{ $district->id }}" name="is_active" value="1"
-                                    {{ $district->is_active ? 'checked' : '' }} wire:key="is_active_{{ $district->id }}"
+                                    {{ $district->is_active ? 'checked' : '' }}
                                     wire:click="changeActive({{ $district->id }})" wire:offline.class="disabled"
                                     wire:offline.attr="disabled" wire:loading.class="disabled" wire:loading.attr="disabled">
-                                <label class="form-check-label text-{{ $district->is_active ? 'success' : 'danger' }}"
+                                <label class="form-check-label text-{{ Str::successDanger($district->is_active) }}"
                                     for="is_active_{{ $district->id }}">
-                                    {{ $district->is_active ? trans('index.yes') : trans('index.no') }}
+                                    {{ Str::yesNo($district->is_active) }}
                                 </label>
                             </div>
                         @else
-                            <span class="badge rounded-pill text-bg-{{ $district->is_active ? 'success' : 'danger' }}">
-                                {{ $district->is_active ? trans('index.yes') : trans('index.no') }}
+                            <span class="badge rounded-pill text-bg-{{ Str::successDanger($district->is_active) }}">
+                                {{ Str::yesNo($district->is_active) }}
                             </span>
                         @endcan
                     </div>
@@ -94,7 +144,10 @@
                         <div class="fw-bold">{{ trans('index.total') }} {{ trans('page.area') }}</div>
                     </div>
                     <div class="col-sm-7 col-md-8 col-lg-9 col-xl-10">
-                        0
+                        <a draggable="false" href="{{ route('cms.area.index', ['district_id' => $district->id]) }}"
+                            wire:navigate>
+                            {{ $district->areas_count }}
+                        </a>
                     </div>
                 </div>
 
@@ -155,8 +208,8 @@
             <hr />
 
             <div class="row g-3">
-                @can('district.edit')
-                    <div class="col-6 col-sm-auto">
+                @can('customer.district.edit')
+                    <div class="col-auto">
                         <a draggable="false" class="btn btn-success w-100"
                             href="{{ route('cms.district.edit', ['district' => $district]) }}" wire:navigate>
                             <span class="fas fa-edit fa-fw"></span>
@@ -165,18 +218,18 @@
                     </div>
                 @endcan
 
-                @can('district.delete')
-                    <div class="col-6 col-sm-auto">
-                        <button type="button" class="btn btn-danger w-100" wire:click="delete" wire:key="delete"
+                @can('customer.district.delete')
+                    <div class="col-auto">
+                        <button type="button" class="btn btn-danger w-100" wire:click="delete"
                             wire:offline.class="disabled" wire:offline.attr="disabled" wire:loading.class="disabled"
                             wire:loading.attr="disabled">
                             <span wire:loading.remove wire:target="delete">
                                 <span class="fas fa-trash fa-fw"></span>
-                                <span>{{ trans('index.delete') }}</span>
+                                {{ trans('index.delete') }}
                             </span>
                             <span wire:loading wire:target="delete" class="w-100">
                                 <span class="spinner-border spinner-border-sm"></span>
-                                <span>{{ trans('index.delete') }}</span>
+                                {{ trans('index.delete') }}
                             </span>
                         </button>
                     </div>
@@ -184,4 +237,6 @@
             </div>
         </div>
     </div>
+
+    <livewire:activity-log :model="$district" />
 </div>
