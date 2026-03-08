@@ -55,7 +55,7 @@ new #[Title('Edit | User')] class extends Component {
 };
 ?>
 
-@section('title', 'User')
+@section('title', trans('page.user'))
 
 <div class="container-fluid">
     <div class="card">

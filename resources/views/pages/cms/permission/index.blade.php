@@ -122,26 +122,6 @@ new #[Title('Permission')] class extends Component {
                             </select>
                         </div>
                     </div>
-
-                    <div class="col-sm-auto">
-                        <label class="form-label" for="is_active">Active</label>
-                        <div>
-                            <div class="form-check">
-                                <input type="checkbox" class="form-check-input" id="is_active_1" name="is_active"
-                                    value="1" wire:model.lazy="is_active" wire:offline.class="disabled"
-                                    wire:offline.attr="disabled" wire:loading.class="disabled"
-                                    wire:loading.attr="disabled">
-                                <label class="form-check-label" for="is_active_1">Yes</label>
-                            </div>
-                            <div class="form-check">
-                                <input type="checkbox" class="form-check-input" id="is_active_0" name="is_active"
-                                    value="0" wire:model.lazy="is_active" wire:offline.class="disabled"
-                                    wire:offline.attr="disabled" wire:loading.class="disabled"
-                                    wire:loading.attr="disabled">
-                                <label class="form-check-label" for="is_active_0">No</label>
-                            </div>
-                        </div>
-                    </div>
                 </div>
             </div>
         </div>

@@ -20,28 +20,29 @@ new #[Title('Detail | Role')] class extends Component {
         $service->delete(role: $this->role);
 
         session()->flash('success', [
-            'title' => 'Delete Success',
-            'message' => 'Role has been successfully deleted.',
+            'title' => trans('index.delete') . ' ' . trans('index.success'),
+            'message' => trans('page.role') . ' ' . trans('message.has_been_successfully_deleted'),
         ]);
 
-        $this->redirect(route('role.index'), navigate: true);
+        $this->redirect(route('cms.role.index'), navigate: true);
     }
 };
 ?>
 
-@section('title', 'Role')
+@section('title', trans('page.role'))
 
 <div class="container-fluid">
     <div class="card">
         <div class="card-header text-bg-info">
             <span class="fas fa-list fa-fw"></span>
-            Detail @yield('title')
+            {{ trans('index.detail') }} @yield('title')
         </div>
         <div class="card-body">
             <div class="row g-3">
                 <div class="col-auto">
-                    <a draggable="false" class="btn btn-info w-100" href="{{ route('role.index') }}" wire:navigate>
-                        <span class="fas fa-arrow-left fa-fw"></span> Back
+                    <a draggable="false" class="btn btn-info w-100" href="{{ route('cms.role.index') }}" wire:navigate>
+                        <span class="fas fa-arrow-left fa-fw"></span>
+                        {{ trans('index.back') }}
                     </a>
                 </div>
             </div>
@@ -51,7 +52,7 @@ new #[Title('Detail | Role')] class extends Component {
             <div class="d-grid gap-3">
                 <div class="row">
                     <div class="col-sm-5 col-md-4 col-lg-3 col-xl-2">
-                        <div class="fw-bold">ID</div>
+                        <div class="fw-bold">{{ trans('field.id') }}</div>
                     </div>
                     <div class="col-sm-7 col-md-8 col-lg-9 col-xl-10">
                         {{ $role->id }}
@@ -60,7 +61,7 @@ new #[Title('Detail | Role')] class extends Component {
 
                 <div class="row">
                     <div class="col-sm-5 col-md-4 col-lg-3 col-xl-2">
-                        <div class="fw-bold">Name</div>
+                        <div class="fw-bold">{{ trans('field.name') }}</div>
                     </div>
                     <div class="col-sm-7 col-md-8 col-lg-9 col-xl-10">
                         {{ $role->name }}
@@ -69,7 +70,7 @@ new #[Title('Detail | Role')] class extends Component {
 
                 <div class="row">
                     <div class="col-sm-5 col-md-4 col-lg-3 col-xl-2">
-                        <div class="fw-bold">Guard Name</div>
+                        <div class="fw-bold">{{ trans('field.guard_name') }}</div>
                     </div>
                     <div class="col-sm-7 col-md-8 col-lg-9 col-xl-10">
                         {{ $role->guard_name }}
@@ -78,10 +79,10 @@ new #[Title('Detail | Role')] class extends Component {
 
                 <div class="row">
                     <div class="col-sm-5 col-md-4 col-lg-3 col-xl-2">
-                        <div class="fw-bold">Total Permission</div>
+                        <div class="fw-bold">{{ trans('index.total') }} {{ trans('page.permission') }}</div>
                     </div>
                     <div class="col-sm-7 col-md-8 col-lg-9 col-xl-10">
-                        <a draggable="false" href="{{ route('permission.index', ['role_id' => $role->id]) }}"
+                        <a draggable="false" href="{{ route('cms.permission.index', ['role_id' => $role->id]) }}"
                             wire:navigate>
                             {{ $role->permissions->count() }}
                         </a>
@@ -90,10 +91,10 @@ new #[Title('Detail | Role')] class extends Component {
 
                 <div class="row">
                     <div class="col-sm-5 col-md-4 col-lg-3 col-xl-2">
-                        <div class="fw-bold">Total User</div>
+                        <div class="fw-bold">{{ trans('index.total') }} {{ trans('page.user') }}</div>
                     </div>
                     <div class="col-sm-7 col-md-8 col-lg-9 col-xl-10">
-                        <a draggable="false" href="{{ route('user.index', ['role_id' => $role->id]) }}" wire:navigate>
+                        <a draggable="false" href="{{ route('cms.user.index', ['role_id' => $role->id]) }}" wire:navigate>
                             {{ $role->users->count() }}
                         </a>
                     </div>
@@ -101,7 +102,7 @@ new #[Title('Detail | Role')] class extends Component {
 
                 <div class="row">
                     <div class="col-sm-5 col-md-4 col-lg-3 col-xl-2">
-                        <div class="fw-bold">Created At</div>
+                        <div class="fw-bold">{{ trans('field.created_at') }}</div>
                     </div>
                     <div class="col-sm-7 col-md-8 col-lg-9 col-xl-10">
                         @if ($role->created_at)
@@ -114,7 +115,7 @@ new #[Title('Detail | Role')] class extends Component {
 
                 <div class="row">
                     <div class="col-sm-5 col-md-4 col-lg-3 col-xl-2">
-                        <div class="fw-bold">Updated At</div>
+                        <div class="fw-bold">{{ trans('field.updated_at') }}</div>
                     </div>
                     <div class="col-sm-7 col-md-8 col-lg-9 col-xl-10">
                         @if ($role->updated_at)
@@ -130,12 +131,12 @@ new #[Title('Detail | Role')] class extends Component {
 
             <div class="row g-3">
                 <div class="col-lg-6">
-                    <h6>List Permission :</h6>
+                    <h6>{{ trans('index.list_permission') }} :</h6>
                     @foreach ($role->permissions as $permission)
                         <div>
                             {{ $loop->iteration }}.
                             <a draggable="false"
-                                href="{{ route('permission.detail', ['permission' => $permission]) }}">
+                                href="{{ route('cms.permission.detail', ['permission' => $permission]) }}">
                                 {{ $permission->name }}
                             </a>
                         </div>
@@ -143,11 +144,11 @@ new #[Title('Detail | Role')] class extends Component {
                 </div>
 
                 <div class="col-lg-6">
-                    <h6>List User :</h6>
+                    <h6>{{ trans('index.list_user') }} :</h6>
                     @foreach ($role->users as $user)
                         <div>
                             {{ $loop->iteration }}.
-                            <a draggable="false" href="{{ route('user.detail', ['user' => $user]) }}">
+                            <a draggable="false" href="{{ route('cms.user.detail', ['user' => $user]) }}">
                                 {{ $user->name }}
                             </a>
                         </div>
@@ -161,8 +162,9 @@ new #[Title('Detail | Role')] class extends Component {
                 @can('role.edit')
                     <div class="col-auto">
                         <a draggable="false" class="btn btn-success w-100"
-                            href="{{ route('role.edit', ['role' => $role]) }}" wire:navigate>
-                            <span class="fas fa-edit fa-fw"></span> Edit
+                            href="{{ route('cms.role.edit', ['role' => $role]) }}" wire:navigate>
+                            <span class="fas fa-edit fa-fw"></span>
+                            {{ trans('index.edit') }}
                         </a>
                     </div>
                 @endcan
@@ -173,10 +175,12 @@ new #[Title('Detail | Role')] class extends Component {
                             wire:offline.class="disabled" wire:offline.attr="disabled" wire:loading.class="disabled"
                             wire:loading.attr="disabled">
                             <span wire:loading.remove wire:target="delete">
-                                <span class="fas fa-trash fa-fw"></span> Delete
+                                <span class="fas fa-trash fa-fw"></span>
+                                {{ trans('index.delete') }}
                             </span>
                             <span wire:loading wire:target="delete" class="w-100">
-                                <span class="spinner-border spinner-border-sm"></span> Delete
+                                <span class="spinner-border spinner-border-sm"></span>
+                                {{ trans('index.delete') }}
                             </span>
                         </button>
                     </div>
