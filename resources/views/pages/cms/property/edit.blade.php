@@ -231,7 +231,7 @@ new #[Title('Edit | Property')] class extends Component {
                         <label class="form-label" for="user_id">
                             {{ trans('property.agent_name') }}
                         </label>
-                        <div class="input-group" wire:ignore>
+                        <div class="input-group"ignore>
                             <div class="input-group-text">
                                 <span class="fas fa-user fa-fw "></span>
                             </div>
@@ -1406,3 +1406,23 @@ new #[Title('Edit | Property')] class extends Component {
         </div>
     </div>
 </div>
+
+@script
+    <script>
+        $("#user_id").on("change", function() {
+            @this.set("form.user_id", $(this).val())
+        })
+
+        $("#district_id").on("change", function() {
+            @this.set("form.district_id", $(this).val())
+        })
+
+        $("#area_id").on("change", function() {
+            @this.set("form.area_id", $(this).val())
+        })
+
+        $("#status").on("change", function() {
+            @this.set("form.status", $(this).val())
+        })
+    </script>
+@endscript

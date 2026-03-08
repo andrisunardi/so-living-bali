@@ -186,7 +186,8 @@ class PropertyEditForm extends Form
         $this->latitude = $property->latitude;
         $this->longitude = $property->longitude;
         $this->address = $property->address;
-        $this->area = $property->area;
+        $this->district_id = $property->district_id;
+        $this->area_id = $property->area_id;
         $this->land_size = $property->land_size;
         $this->building_size = $property->building_size;
         $this->number_of_floors = $property->number_of_floors;

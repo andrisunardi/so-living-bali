@@ -35,7 +35,7 @@ return [
     'owner_price_flexibility' => 'Fleksibilitas Harga Pemilik (Tetap / Nego)',
     'price_coherent_with_upper_or_premium_positioning' => 'Harga Sesuai Dengan Penempatan Upper / Premium',
 
-    'environment_and_tranquillity' => 'Lingkungan & Ketenangan',
+    'environment_and_tranquility' => 'Lingkungan & Ketenangan',
     'not_directly_exposed_to_main_road' => 'Tidak Menghadap Langsung ke Jalan Raya',
     'no_festive_venue_nearby' => 'Tidak Ada Tempat Keramaian di Sekitar',
     'no_ongoing_or_imminent_construction' => 'Tidak Ada Konstruksi Berlangsung atau Akan Datang',

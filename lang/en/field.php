@@ -49,7 +49,7 @@ return [
     'user' => 'User',
     'username' => 'Username',
 
-    'index' => 'Index',
+    'date' => 'Date',
     'index' => 'Index',
     'index' => 'Index',
     'index' => 'Index',

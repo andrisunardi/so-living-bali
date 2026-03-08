@@ -142,7 +142,9 @@ new #[Title('Area')] class extends Component {
                                 wire:offline.attr="disabled" wire:loading.class="disabled" wire:loading.attr="disabled">
                                 <option value="">{{ trans('index.all') }} {{ trans('page.district') }}</option>
                                 @foreach ($this->districts() as $district)
-                                    <option value="{{ $district->id }}" wire:key="district-{{ $district->id }}">
+                                    <option value="{{ $district->id }}"
+                                        {{ $district->id == $district_id ? 'selected' : '' }}
+                                        wire:key="district-{{ $district->id }}">
                                         {{ $district->name }}
                                     </option>
                                 @endforeach

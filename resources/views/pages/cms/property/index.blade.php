@@ -4,6 +4,8 @@ use App\Enums\Property\PropertyStatus;
 use App\Exports\PropertyExport;
 use App\Livewire\Component;
 use App\Models\Property;
+use App\Services\AreaService;
+use App\Services\DistrictService;
 use App\Services\PropertyService;
 use App\Services\UserService;
 use Livewire\Attributes\Title;
@@ -17,6 +19,12 @@ new #[Title('Property')] class extends Component {
 
     #[Url(except: '')]
     public string $user_id = '';
+
+    #[Url(except: '')]
+    public string $district_id = '';
+
+    #[Url(except: '')]
+    public string $area_id = '';
 
     #[Url(except: '')]
     public string $status = '';
@@ -36,7 +44,7 @@ new #[Title('Property')] class extends Component {
     {
         $this->resetPage();
 
-        $this->reset(['search', 'user_id', 'status', 'start_date', 'end_date']);
+        $this->reset(['search', 'user_id', 'district_id', 'area_id', 'status', 'start_date', 'end_date']);
     }
 
     public function delete(Property $property): void
@@ -53,6 +61,18 @@ new #[Title('Property')] class extends Component {
         return $service->index(roleName: 'Agent', isActive: [true], orderBy: 'name', sortBy: 'asc', paginate: false);
     }
 
+    public function districts(): object
+    {
+        $service = new DistrictService();
+        return $service->index(isActive: [true], orderBy: 'name', sortBy: 'asc', paginate: false);
+    }
+
+    public function areas(): object
+    {
+        $service = new AreaService();
+        return $service->index(districtId: $this->district_id, isActive: [true], orderBy: 'name', sortBy: 'asc', paginate: false);
+    }
+
     public function propertyStatuses(): array
     {
         return PropertyStatus::cases();
@@ -61,7 +81,7 @@ new #[Title('Property')] class extends Component {
     public function properties(bool $paginate = true): object
     {
         $service = new PropertyService();
-        $properties = $service->index(search: $this->search, userId: $this->user_id, status: $this->status, startDate: $this->start_date, endDate: $this->end_date, paginate: $paginate);
+        $properties = $service->index(search: $this->search, userId: $this->user_id, districtId: $this->district_id, areaId: $this->area_id, status: $this->status, startDate: $this->start_date, endDate: $this->end_date, paginate: $paginate);
         $properties->loadMissing(['user', 'district', 'area']);
 
         return $properties;
@@ -120,7 +140,7 @@ new #[Title('Property')] class extends Component {
                 </div>
 
                 <div class="row g-3">
-                    <div class="col-12 col-sm-6 col-lg">
+                    <div class="col-12 col-sm-6 col-lg-3">
                         <label class="form-label" for="user_id">
                             {{ trans('validation.attributes.user_id') }}
                         </label>
@@ -135,7 +155,8 @@ new #[Title('Property')] class extends Component {
                                     {{ trans('index.all') }} {{ trans('validation.attributes.user_id') }}
                                 </option>
                                 @foreach ($this->users() as $user)
-                                    <option value="{{ $user->id }}" wire:key="user-{{ $user->id }}">
+                                    <option value="{{ $user->id }}" {{ $user->id == $user_id ? 'selected' : '' }}
+                                        wire:key="user-{{ $user->id }}">
                                         {{ $user->name }}
                                     </option>
                                 @endforeach
@@ -143,7 +164,56 @@ new #[Title('Property')] class extends Component {
                         </div>
                     </div>
 
-                    <div class="col-12 col-sm-6 col-lg">
+                    <div class="col-12 col-sm-6 col-lg-3">
+                        <label class="form-label" for="district_id">
+                            {{ trans('validation.attributes.district_id') }}
+                        </label>
+                        <div class="input-group" wire:ignore>
+                            <div class="input-group-text">
+                                <span class="fas fa-city fa-fw "></span>
+                            </div>
+                            <select class="form-select select2" id="district_id" name="district_id"
+                                wire:key="district_id" wire:model.lazy="district_id" wire:offline.class="disabled"
+                                wire:offline.attr="disabled" wire:loading.class="disabled" wire:loading.attr="disabled">
+                                <option value="">
+                                    {{ trans('index.all') }} {{ trans('validation.attributes.district_id') }}
+                                </option>
+                                @foreach ($this->districts() as $district)
+                                    <option value="{{ $district->id }}"
+                                        {{ $district->id == $district_id ? 'selected' : '' }}
+                                        wire:key="district-{{ $district->id }}">
+                                        {{ $district->name }}
+                                    </option>
+                                @endforeach
+                            </select>
+                        </div>
+                    </div>
+
+                    <div class="col-12 col-sm-6 col-lg-3">
+                        <label class="form-label" for="area_id">
+                            {{ trans('validation.attributes.area_id') }}
+                        </label>
+                        <div class="input-group" wire:ignore>
+                            <div class="input-group-text">
+                                <span class="fas fa-archway fa-fw "></span>
+                            </div>
+                            <select class="form-select select2" id="area_id" name="area_id" wire:key="area_id"
+                                wire:model.lazy="area_id" wire:offline.class="disabled" wire:offline.attr="disabled"
+                                wire:loading.class="disabled" wire:loading.attr="disabled">
+                                <option value="">
+                                    {{ trans('index.all') }} {{ trans('validation.attributes.area_id') }}
+                                </option>
+                                @foreach ($this->areas() as $area)
+                                    <option value="{{ $area->id }}" {{ $area->id == $area_id ? 'selected' : '' }}
+                                        wire:key="area-{{ $area->id }}">
+                                        {{ $area->name }}
+                                    </option>
+                                @endforeach
+                            </select>
+                        </div>
+                    </div>
+
+                    <div class="col-12 col-sm-6 col-lg-3">
                         <label class="form-label" for="status">
                             {{ trans('validation.attributes.status') }}
                         </label>
@@ -174,8 +244,8 @@ new #[Title('Property')] class extends Component {
                         <div class="input-group">
                             <input type="date" class="form-control" id="start_date" name="start_date"
                                 min="2026-01-01" max="2099-12-12" wire:key="start_date" wire:model.lazy="start_date"
-                                wire:offline.class="disabled" wire:offline.attr="disabled" wire:loading.class="disabled"
-                                wire:loading.attr="disabled">
+                                wire:offline.class="disabled" wire:offline.attr="disabled"
+                                wire:loading.class="disabled" wire:loading.attr="disabled">
                         </div>
                     </div>
 
@@ -184,8 +254,8 @@ new #[Title('Property')] class extends Component {
                             {{ trans('validation.attributes.end_date') }}
                         </label>
                         <div class="input-group">
-                            <input type="date" class="form-control" id="end_date" name="end_date" min="2026-01-01"
-                                max="2099-12-12" wire:key="end_date" wire:model.lazy="end_date"
+                            <input type="date" class="form-control" id="end_date" name="end_date"
+                                min="2026-01-01" max="2099-12-12" wire:key="end_date" wire:model.lazy="end_date"
                                 wire:offline.class="disabled" wire:offline.attr="disabled"
                                 wire:loading.class="disabled" wire:loading.attr="disabled">
                         </div>
@@ -241,10 +311,10 @@ new #[Title('Property')] class extends Component {
                             <th width="1%">{{ trans('field.#') }}</th>
                             <th width="1%">{{ trans('field.id') }}</th>
                             <th width="1%">{{ trans('field.image') }}</th>
-                            <th width="1%">{{ trans('field.code') }}</th>
-                            <th>{{ trans('field.name') }}</th>
+                            <th>{{ trans('field.code') }} & {{ trans('field.name') }}</th>
                             <th width="1%">{{ trans('field.agent') }}</th>
-                            <th width="1%">{{ trans('field.district_id') }} / {{ trans('field.area_id') }}</th>
+                            <th width="1%">{{ trans('field.date') }}</th>
+                            <th width="1%">{{ trans('field.address') }}</th>
                             <th width="1%">{{ trans('field.status') }}</th>
                             <th width="1%">{{ trans('field.created_at') }}</th>
                             <th width="1%">{{ trans('field.action') }}</th>
@@ -277,18 +347,20 @@ new #[Title('Property')] class extends Component {
                                     @endif
                                 </td>
                                 <td>
-                                    <a draggable="false"
-                                        href="{{ route('cms.property.detail', ['property' => $property]) }}"
-                                        wire:navigate>
-                                        {{ $property->code }}
-                                    </a>
-                                </td>
-                                <td>
-                                    <a draggable="false"
-                                        href="{{ route('cms.property.detail', ['property' => $property]) }}"
-                                        wire:navigate>
-                                        {{ $property->name }}
-                                    </a>
+                                    <div class="fw-bold">
+                                        <a draggable="false"
+                                            href="{{ route('cms.property.detail', ['property' => $property]) }}"
+                                            wire:navigate>
+                                            {{ $property->code }}
+                                        </a>
+                                    </div>
+                                    <div>
+                                        <a draggable="false"
+                                            href="{{ route('cms.property.detail', ['property' => $property]) }}"
+                                            wire:navigate>
+                                            {{ $property->name }}
+                                        </a>
+                                    </div>
                                 </td>
                                 <td>
                                     @if ($property->user)
@@ -300,23 +372,32 @@ new #[Title('Property')] class extends Component {
                                     @endif
                                 </td>
                                 <td>
+                                    <div>
+                                        {{ trans('index.availability') }} :
+                                        {{ $property->availability_date?->isoFormat('ddd, DD MMM YYYY') }}
+                                    </div>
+                                    <div>
+                                        {{ trans('index.visit') }} :
+                                        {{ $property->visit_date?->isoFormat('ddd, DD MMM YYYY') }}
+                                    </div>
+                                </td>
+                                <td>
+                                    <div>{{ $property->address }}</div>
                                     @if ($property->district)
-                                        <div>
-                                            <a draggable="false"
-                                                href="{{ route('cms.district.detail', ['district' => $property->district]) }}"
-                                                wire:navigate>
-                                                {{ $property->district->name }}
-                                            </a>
-                                        </div>
+                                        <a draggable="false"
+                                            href="{{ route('cms.district.detail', ['district' => $property->district]) }}"
+                                            wire:navigate>
+                                            {{ trans('field.district_id') }} :
+                                            {{ $property->district->name }}
+                                        </a>
                                     @endif
                                     @if ($property->area)
-                                        <div>
-                                            <a draggable="false"
-                                                href="{{ route('cms.area.detail', ['area' => $property->area]) }}"
-                                                wire:navigate>
-                                                {{ $property->area->name }}
-                                            </a>
-                                        </div>
+                                        <a draggable="false"
+                                            href="{{ route('cms.area.detail', ['area' => $property->area]) }}"
+                                            wire:navigate>
+                                            {{ trans('field.area_id') }} :
+                                            {{ $property->area->name }}
+                                        </a>
                                     @endif
                                 </td>
                                 <td>
@@ -384,6 +465,14 @@ new #[Title('Property')] class extends Component {
     <script>
         $("#user_id").on("change", function() {
             @this.set("user_id", $(this).val())
+        })
+
+        $("#district_id").on("change", function() {
+            @this.set("district_id", $(this).val())
+        })
+
+        $("#area_id").on("change", function() {
+            @this.set("area_id", $(this).val())
         })
 
         $("#status").on("change", function() {

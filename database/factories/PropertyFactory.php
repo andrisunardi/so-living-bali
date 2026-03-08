@@ -40,7 +40,7 @@ class PropertyFactory extends Factory
             'longitude' => fake()->longitude(),
             'address' => fake()->address(),
             'district_id' => $district->id,
-            'area_id' => $user->id,
+            'area_id' => $area->id,
 
             'land_size' => fake()->numberBetween(1, 100),
             'building_size' => fake()->numberBetween(1, 100),
