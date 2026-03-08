@@ -244,7 +244,9 @@ new #[Title('Edit | Property')] class extends Component {
                                         {{ trans('index.select') }} {{ trans('validation.attributes.user_id') }}
                                     </option>
                                     @foreach ($this->users() as $user)
-                                        <option value="{{ $user->id }}" wire:key="user-{{ $user->id }}">
+                                        <option value="{{ $user->id }}"
+                                            {{ $user->id == $form->user_id ? 'selected' : '' }}
+                                            wire:key="user-{{ $user->id }}">
                                             {{ $user->name }}
                                         </option>
                                     @endforeach
@@ -397,7 +399,9 @@ new #[Title('Edit | Property')] class extends Component {
                                     {{ trans('index.select') }} {{ trans('validation.attributes.district_id') }}
                                 </option>
                                 @foreach ($this->districts() as $district)
-                                    <option value="{{ $district->id }}" wire:key="district-{{ $district->id }}">
+                                    <option value="{{ $district->id }}"
+                                        {{ $district->id == $form->district_id ? 'selected' : '' }}
+                                        wire:key="district-{{ $district->id }}">
                                         {{ $district->name }}
                                     </option>
                                 @endforeach
@@ -424,7 +428,9 @@ new #[Title('Edit | Property')] class extends Component {
                                     {{ trans('index.select') }} {{ trans('validation.attributes.area_id') }}
                                 </option>
                                 @foreach ($this->areas() as $area)
-                                    <option value="{{ $area->id }}" wire:key="area-{{ $area->id }}">
+                                    <option value="{{ $area->id }}"
+                                        {{ $area->id == $form->area_id ? 'selected' : '' }}
+                                        wire:key="area-{{ $area->id }}">
                                         {{ $area->name }}
                                     </option>
                                 @endforeach

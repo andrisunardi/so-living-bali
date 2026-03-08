@@ -140,7 +140,7 @@ new #[Title('Property')] class extends Component {
                 </div>
 
                 <div class="row g-3">
-                    <div class="col-12 col-sm-6 col-lg-3">
+                    <div class="col-12 col-sm-6 col-lg-3 col-xl">
                         <label class="form-label" for="user_id">
                             {{ trans('validation.attributes.user_id') }}
                         </label>
@@ -164,7 +164,7 @@ new #[Title('Property')] class extends Component {
                         </div>
                     </div>
 
-                    <div class="col-12 col-sm-6 col-lg-3">
+                    <div class="col-12 col-sm-6 col-lg-3 col-xl">
                         <label class="form-label" for="district_id">
                             {{ trans('validation.attributes.district_id') }}
                         </label>
@@ -189,7 +189,7 @@ new #[Title('Property')] class extends Component {
                         </div>
                     </div>
 
-                    <div class="col-12 col-sm-6 col-lg-3">
+                    <div class="col-12 col-sm-6 col-lg-3 col-xl">
                         <label class="form-label" for="area_id">
                             {{ trans('validation.attributes.area_id') }}
                         </label>
@@ -213,7 +213,7 @@ new #[Title('Property')] class extends Component {
                         </div>
                     </div>
 
-                    <div class="col-12 col-sm-6 col-lg-3">
+                    <div class="col-12 col-sm-6 col-lg-3 col-xl">
                         <label class="form-label" for="status">
                             {{ trans('validation.attributes.status') }}
                         </label>
