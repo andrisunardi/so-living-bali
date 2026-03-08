@@ -35,7 +35,8 @@
         "spatie/laravel-menu": "^4.2",
         "spatie/laravel-permission": "^6.24",
         "symfony/postmark-mailer": "^7.4",
-        "wildbit/postmark-php": "^7.0"
+        "wildbit/postmark-php": "^7.0",
+        "yaza/laravel-google-drive-storage": "^4.1"
     },
     "require-dev": {
         "barryvdh/laravel-debugbar": "^4.0",
