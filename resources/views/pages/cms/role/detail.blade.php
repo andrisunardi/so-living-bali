@@ -12,6 +12,7 @@ new #[Title('Detail | Role')] class extends Component {
     {
         $this->role = $role;
         $this->role->loadMissing(['permissions', 'users']);
+        $this->role->loadCount(['permissions', 'users']);
     }
 
     public function delete(): void
@@ -84,7 +85,7 @@ new #[Title('Detail | Role')] class extends Component {
                     <div class="col-sm-7 col-md-8 col-lg-9 col-xl-10">
                         <a draggable="false" href="{{ route('cms.permission.index', ['role_id' => $role->id]) }}"
                             wire:navigate>
-                            {{ $role->permissions->count() }}
+                            {{ $role->permissions_count }}
                         </a>
                     </div>
                 </div>
@@ -94,8 +95,9 @@ new #[Title('Detail | Role')] class extends Component {
                         <div class="fw-bold">{{ trans('index.total') }} {{ trans('page.user') }}</div>
                     </div>
                     <div class="col-sm-7 col-md-8 col-lg-9 col-xl-10">
-                        <a draggable="false" href="{{ route('cms.user.index', ['role_id' => $role->id]) }}" wire:navigate>
-                            {{ $role->users->count() }}
+                        <a draggable="false" href="{{ route('cms.user.index', ['role_id' => $role->id]) }}"
+                            wire:navigate>
+                            {{ $role->users_count }}
                         </a>
                     </div>
                 </div>

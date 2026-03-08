@@ -1,7 +1,7 @@
 <?php
 
 use App\Livewire\Component;
-use App\Livewire\Forms\Permission\PermissionEditForm;
+use App\Livewire\Forms\CMS\Permission\PermissionEditForm;
 use App\Services\RoleService;
 use Illuminate\Validation\ValidationException;
 use Livewire\Attributes\Title;
@@ -29,15 +29,15 @@ new #[Title('Edit | Permission')] class extends Component {
             $this->form->submit(permission: $this->permission);
 
             session()->flash('success', [
-                'title' => 'Edit Success',
-                'message' => 'Permission has been successfully edited.',
+                'title' => trans('index.edit') . ' ' . trans('index.success'),
+                'message' => trans('page.permission') . ' ' . trans('message.has_been_successfully_edited'),
             ]);
 
-            $this->redirect(route('permission.index'), navigate: true);
+            $this->redirect(route('cms.permission.index'), navigate: true);
         } catch (ValidationException $e) {
             $errors = collect($e->validator->errors()->all())->implode('<br>');
 
-            $this->alertError(title: 'Edit Failed', body: $errors);
+            $this->alertError(title: trans('index.edit') . ' ' . trans('index.failed'), body: $errors);
         }
     }
 
@@ -49,20 +49,21 @@ new #[Title('Edit | Permission')] class extends Component {
 };
 ?>
 
-@section('title', 'Permission')
+@section('title', trans('page.permission'))
 
 <div class="container-fluid">
     <div class="card">
         <div class="card-header text-bg-success">
             <span class="fas fa-edit fa-fw"></span>
-            Edit @yield('title')
+            {{ trans('index.edit') }} @yield('title')
         </div>
         <div class="card-body">
             <div class="row g-3">
                 <div class="col-auto">
-                    <a draggable="false" class="btn btn-success w-100" href="{{ route('permission.index') }}"
+                    <a draggable="false" class="btn btn-success w-100" href="{{ route('cms.permission.index') }}"
                         wire:navigate>
-                        <span class="fas fa-arrow-left fa-fw"></span> Back
+                        <span class="fas fa-arrow-left fa-fw"></span>
+                        {{ trans('index.back') }}
                     </a>
                 </div>
             </div>
@@ -77,20 +78,24 @@ new #[Title('Edit | Permission')] class extends Component {
                         <div class="d-grid gap-3">
                             <div>
                                 <label class="form-label" for="name">
-                                    Name <span class="text-danger">*</span>
+                                    {{ trans('validation.attributes.name') }}
+                                    <span class="text-danger">*</span>
                                 </label>
                                 <div class="input-group">
                                     <div class="input-group-text">
                                         <span class="fas fa-key fa-fw "></span>
                                     </div>
                                     <input type="text" class="form-control" id="name" name="name"
-                                        minlength="1" maxlength="255" placeholder="Ex. Admin" required
-                                        wire:model="form.name" wire:offline.class="disabled"
+                                        minlength="1" maxlength="255" placeholder="{{ trans('index.ex') }}. Admin"
+                                        required wire:model="form.name" wire:offline.class="disabled"
                                         wire:offline.attr="disabled" wire:loading.class="disabled"
                                         wire:loading.attr="disabled">
                                 </div>
                                 <div class="form-text">
-                                    Required, Minlength : 1, Maxlength : 255, Unique
+                                    {{ trans('helper.required') }},
+                                    {{ trans('helper.minlength') }} : 1,
+                                    {{ trans('helper.maxlength') }} : 255,
+                                    {{ trans('helper.unique') }}
                                 </div>
                                 @error('form.name')
                                     <div class="form-text text-danger">{{ $message }}</div>
@@ -99,20 +104,24 @@ new #[Title('Edit | Permission')] class extends Component {
 
                             <div>
                                 <label class="form-label" for="guard_name">
-                                    Guard Name <span class="text-danger">*</span>
+                                    {{ trans('validation.attributes.guard_name') }}
+                                    <span class="text-danger">*</span>
                                 </label>
                                 <div class="input-group">
                                     <div class="input-group-text">
                                         <span class="fas fa-shield fa-fw "></span>
                                     </div>
                                     <input type="text" class="form-control" id="guard_name" name="guard_name"
-                                        minlength="1" maxlength="255" placeholder="Ex. web" required
-                                        wire:model="form.guard_name" wire:offline.class="disabled"
+                                        minlength="1" maxlength="255" placeholder="{{ trans('index.ex') }}. web"
+                                        required wire:model="form.guard_name" wire:offline.class="disabled"
                                         wire:offline.attr="disabled" wire:loading.class="disabled"
                                         wire:loading.attr="disabled">
                                 </div>
                                 <div class="form-text">
-                                    Required, Minlength : 1, Maxlength : 255, Default : web
+                                    {{ trans('helper.required') }},
+                                    {{ trans('helper.minlength') }} : 1,
+                                    {{ trans('helper.maxlength') }} : 255,
+                                    {{ trans('helper.unique') }}
                                 </div>
                                 @error('form.guard_name')
                                     <div class="form-text text-danger">{{ $message }}</div>
@@ -125,7 +134,7 @@ new #[Title('Edit | Permission')] class extends Component {
                         <div class="d-grid gap-3">
                             <div>
                                 <label class="form-label" for="role_ids">
-                                    Roles
+                                    {{ trans('validation.attributes.role_ids') }}
                                 </label>
                                 @foreach ($this->roles() as $role)
                                     <div class="form-check" wire:key="role-{{ $role->id }}">
@@ -155,10 +164,12 @@ new #[Title('Edit | Permission')] class extends Component {
                         <button type="submit" class="btn btn-success w-100" wire:offline.class="disabled"
                             wire:offline.attr="disabled" wire:loading.class="disabled" wire:loading.attr="disabled">
                             <span wire:loading.remove wire:target="submit">
-                                <span class="fas fa-save fa-fw"></span> Save
+                                <span class="fas fa-save fa-fw"></span>
+                                {{ trans('index.save') }}
                             </span>
                             <span wire:loading wire:target="submit" class="w-100">
-                                <span class="spinner-border spinner-border-sm"></span> Save
+                                <span class="spinner-border spinner-border-sm"></span>
+                                {{ trans('index.save') }}
                             </span>
                         </button>
                     </div>
@@ -167,10 +178,12 @@ new #[Title('Edit | Permission')] class extends Component {
                             wire:offline.class="disabled" wire:offline.attr="disabled" wire:loading.class="disabled"
                             wire:loading.attr="disabled">
                             <span wire:loading.remove wire:target="resetForm">
-                                <span class="fas fa-eraser fa-fw"></span> Reset
+                                <span class="fas fa-eraser fa-fw"></span>
+                                {{ trans('index.reset') }}
                             </span>
                             <span wire:loading wire:target="resetForm" class="w-100">
-                                <span class="spinner-border spinner-border-sm"></span> Reset
+                                <span class="spinner-border spinner-border-sm"></span>
+                                {{ trans('index.reset') }}
                             </span>
                         </button>
                     </div>

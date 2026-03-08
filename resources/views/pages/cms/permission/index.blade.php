@@ -34,7 +34,7 @@ new #[Title('Permission')] class extends Component {
         $service = new PermissionService();
         $service->delete(permission: $permission);
 
-        $this->alertSuccess(title: 'Delete Success', body: 'Permission has been successfully deleted.');
+        $this->alertSuccess(title: trans('index.delete') . ' ' . trans('index.success'), body: trans('page.permission') . ' ' . trans('message.has_been_successfully_deleted'));
     }
 
     public function roles(): object
@@ -54,24 +54,24 @@ new #[Title('Permission')] class extends Component {
 
     public function export(): BinaryFileResponse
     {
-        $this->alertSuccess(title: 'Export Success', body: 'Permission has been successfully exported.');
+        $this->alertSuccess(title: trans('index.export') . ' ' . trans('index.success'), body: trans('page.permission') . ' ' . trans('message.has_been_successfully_exported'));
 
         $service = new PermissionService();
         $permissions = $service->index(guardName: 'web', orderBy: 'id', sortBy: 'asc', paginate: false);
         $permissions->loadCount(['roles', 'users']);
 
-        return Excel::download(new PermissionExport(permissions: $permissions), 'Permission.xlsx');
+        return Excel::download(new PermissionExport(permissions: $permissions), trans('page.permission') . '.xlsx');
     }
 };
 ?>
 
-@section('title', 'Permission')
+@section('title', trans('page.permission'))
 
 <div class="container-fluid">
     <div class="card">
         <div class="card-header text-bg-primary">
             <span class="fas fa-search fa-fw"></span>
-            Search @yield('title')
+            {{ trans('index.search') }} @yield('title')
         </div>
         <div class="card-body">
             <div class="d-grid gap-3">
@@ -82,7 +82,7 @@ new #[Title('Permission')] class extends Component {
                                 <span class="fas fa-search fa-fw "></span>
                             </div>
                             <input type="search" class="form-control" id="search" name="search" minlength="1"
-                                maxlength="50" placeholder="Search" wire:model.lazy="search"
+                                maxlength="50" placeholder="{{ trans('field.search') }}" wire:model.lazy="search"
                                 wire:offline.class="disabled" wire:offline.attr="disabled" wire:loading.class="disabled"
                                 wire:loading.attr="disabled">
                         </div>
@@ -93,10 +93,12 @@ new #[Title('Permission')] class extends Component {
                             wire:offline.class="disabled" wire:offline.attr="disabled" wire:loading.class="disabled"
                             wire:loading.attr="disabled">
                             <span wire:loading.remove wire:target="resetFilter">
-                                <span class="fas fa-eraser fa-fw"></span> Reset Filter
+                                <span class="fas fa-eraser fa-fw"></span>
+                                {{ trans('index.reset_filter') }}
                             </span>
                             <span wire:loading wire:target="resetFilter" class="w-100">
-                                <span class="spinner-border spinner-border-sm"></span> Reset Filter
+                                <span class="spinner-border spinner-border-sm"></span>
+                                {{ trans('index.reset_filter') }}
                             </span>
                         </button>
                     </div>
@@ -104,7 +106,9 @@ new #[Title('Permission')] class extends Component {
 
                 <div class="row g-3">
                     <div class="col" wire:ignore>
-                        <label class="form-label" for="role_id">Role</label>
+                        <label class="form-label" for="role_id">
+                            {{ trans('validation.attributes.role_id') }}
+                        </label>
                         <div class="input-group">
                             <div class="input-group-text">
                                 <span class="fas fa-key fa-fw "></span>
@@ -112,7 +116,7 @@ new #[Title('Permission')] class extends Component {
                             <select class="form-select select2" id="role_id" name="role_id" wire:model.lazy="role_id"
                                 wire:offline.class="disabled" wire:offline.attr="disabled" wire:loading.class="disabled"
                                 wire:loading.attr="disabled">
-                                <option value="">All Role</option>
+                                <option value="">{{ trans('index.all') }} {{ trans('page.role') }}</option>
                                 @foreach ($this->roles() as $role)
                                     <option value="{{ $role->id }}" wire:key="role-{{ $role->id }}"
                                         {{ $role->id == $role_id ? 'selected' : '' }}>
@@ -130,16 +134,17 @@ new #[Title('Permission')] class extends Component {
     <div class="card mt-3">
         <div class="card-header text-bg-primary">
             <span class="fas fa-table fa-fw"></span>
-            Data @yield('title')
+            {{ trans('index.data') }} @yield('title')
         </div>
 
         <div class="card-body">
             <div class="row g-3">
                 @can('permission.add')
                     <div class="col-auto">
-                        <a draggable="false" class="btn btn-primary w-100" href="{{ route('permission.add') }}"
+                        <a draggable="false" class="btn btn-primary w-100" href="{{ route('cms.permission.add') }}"
                             wire:navigate>
-                            <span class="fas fa-plus fa-fw"></span> Add
+                            <span class="fas fa-plus fa-fw"></span>
+                            <span>{{ trans('index.add') }}</span>
                         </a>
                     </div>
                 @endcan
@@ -150,10 +155,12 @@ new #[Title('Permission')] class extends Component {
                             wire:offline.class="disabled" wire:offline.attr="disabled" wire:loading.class="disabled"
                             wire:loading.attr="disabled">
                             <span wire:loading.remove wire:target="export">
-                                <span class="fas fa-file-excel fa-fw"></span> Export
+                                <span class="fas fa-file-excel fa-fw"></span>
+                                <span>{{ trans('index.export') }}</span>
                             </span>
                             <span wire:loading wire:target="export" class="w-100">
-                                <span class="spinner-border spinner-border-sm"></span> Export
+                                <span class="spinner-border spinner-border-sm"></span>
+                                <span>{{ trans('index.export') }}</span>
                             </span>
                         </button>
                     </div>
@@ -163,18 +170,17 @@ new #[Title('Permission')] class extends Component {
             <hr />
 
             <div class="table-responsive border-bottom mb-3">
-                <table
-                    class="table table-striped table-hover table-bordered text-nowrap table-responsive align-middle">
+                <table class="table table-striped table-hover table-bordered text-nowrap table-responsive align-middle">
                     <thead>
                         <tr class="text-center align-middle table-primary">
-                            <th width="1%">#</th>
-                            <th width="1%">ID</th>
-                            <th>Name</th>
-                            <th width="1%">Guard Name</th>
-                            <th width="1%">Total Role</th>
-                            <th width="1%">Total User</th>
-                            <th width="1%">Created At</th>
-                            <th width="1%">Action</th>
+                            <th width="1%">{{ trans('field.#') }}</th>
+                            <th width="1%">{{ trans('field.id') }}</th>
+                            <th>{{ trans('field.name') }}</th>
+                            <th width="1%">{{ trans('field.guard_name') }}</th>
+                            <th width="1%">{{ trans('index.total') }} {{ trans('page.role') }}</th>
+                            <th width="1%">{{ trans('index.total') }} {{ trans('page.user') }}</th>
+                            <th width="1%">{{ trans('field.created_at') }}</th>
+                            <th width="1%">{{ trans('field.action') }}</th>
                         </tr>
                     </thead>
                     <tbody>
@@ -185,14 +191,14 @@ new #[Title('Permission')] class extends Component {
                                 </td>
                                 <td class="text-center">
                                     <a draggable="false"
-                                        href="{{ route('permission.detail', ['permission' => $permission]) }}"
+                                        href="{{ route('cms.permission.detail', ['permission' => $permission]) }}"
                                         wire:navigate>
                                         {{ $permission->id }}
                                     </a>
                                 </td>
                                 <td>
                                     <a draggable="false"
-                                        href="{{ route('permission.detail', ['permission' => $permission]) }}"
+                                        href="{{ route('cms.permission.detail', ['permission' => $permission]) }}"
                                         wire:navigate>
                                         {{ $permission->name }}
                                     </a>
@@ -200,14 +206,14 @@ new #[Title('Permission')] class extends Component {
                                 <td class="text-center">{{ $permission->guard_name }}</td>
                                 <td class="text-center">
                                     <a draggable="false"
-                                        href="{{ route('role.index', ['permission_id' => $permission->id]) }}"
+                                        href="{{ route('cms.role.index', ['permission_id' => $permission->id]) }}"
                                         wire:navigate>
                                         {{ $permission->roles_count }}
                                     </a>
                                 </td>
                                 <td class="text-center">
                                     <a draggable="false"
-                                        href="{{ route('user.index', ['permission_id' => $permission->id]) }}"
+                                        href="{{ route('cms.user.index', ['permission_id' => $permission->id]) }}"
                                         wire:navigate>
                                         {{ $permission->users_count }}
                                     </a>
@@ -217,17 +223,19 @@ new #[Title('Permission')] class extends Component {
                                     <div class="d-flex gap-2">
                                         @can('permission.detail')
                                             <a draggable="false" class="btn btn-info btn-sm"
-                                                href="{{ route('permission.detail', ['permission' => $permission]) }}"
+                                                href="{{ route('cms.permission.detail', ['permission' => $permission]) }}"
                                                 wire:navigate>
-                                                <span class="fas fa-list fa-fw"></span> Detail
+                                                <span class="fas fa-list fa-fw"></span>
+                                                <span>{{ trans('index.detail') }}</span>
                                             </a>
                                         @endcan
 
                                         @can('permission.edit')
                                             <a draggable="false" class="btn btn-success btn-sm"
-                                                href="{{ route('permission.edit', ['permission' => $permission]) }}"
+                                                href="{{ route('cms.permission.edit', ['permission' => $permission]) }}"
                                                 wire:navigate>
-                                                <span class="fas fa-edit fa-fw"></span> Edit
+                                                <span class="fas fa-edit fa-fw"></span>
+                                                <span>{{ trans('index.edit') }}</span>
                                             </a>
                                         @endcan
 
@@ -237,11 +245,13 @@ new #[Title('Permission')] class extends Component {
                                                 wire:offline.attr="disabled" wire:loading.class="disabled"
                                                 wire:loading.attr="disabled">
                                                 <span wire:loading.remove wire:target="delete({{ $permission->id }})">
-                                                    <span class="fas fa-trash fa-fw"></span> Delete
+                                                    <span class="fas fa-trash fa-fw"></span>
+                                                    <span>{{ trans('index.delete') }}</span>
                                                 </span>
                                                 <span wire:loading wire:target="delete({{ $permission->id }})"
                                                     class="w-100">
-                                                    <span class="spinner-border spinner-border-sm"></span> Delete
+                                                    <span class="spinner-border spinner-border-sm"></span>
+                                                    <span>{{ trans('index.delete') }}</span>
                                                 </span>
                                             </button>
                                         @endcan
@@ -251,7 +261,7 @@ new #[Title('Permission')] class extends Component {
                         @empty
                             <tr>
                                 <td class="text-center" colspan="100%">
-                                    No Data Available
+                                    {{ trans('message.no_data_available') }}
                                 </td>
                             </tr>
                         @endforelse

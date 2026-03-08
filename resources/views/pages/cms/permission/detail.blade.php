@@ -11,7 +11,8 @@ new #[Title('Detail | Permission')] class extends Component {
     public function mount(Permission $permission): void
     {
         $this->permission = $permission;
-        $this->permission->loadMissing(['permissions', 'users']);
+        $this->permission->loadMissing(['roles', 'users']);
+        $this->permission->loadCount(['roles', 'users']);
     }
 
     public function delete(): void
@@ -20,28 +21,30 @@ new #[Title('Detail | Permission')] class extends Component {
         $service->delete(permission: $this->permission);
 
         session()->flash('success', [
-            'title' => 'Delete Success',
-            'message' => 'Permission has been successfully deleted.',
+            'title' => trans('index.delete') . ' ' . trans('index.success'),
+            'message' => trans('page.permission') . ' ' . trans('message.has_been_successfully_deleted'),
         ]);
 
-        $this->redirect(route('permission.index'), navigate: true);
+        $this->redirect(route('cms.permission.index'), navigate: true);
     }
 };
 ?>
 
-@section('title', 'Permission')
+@section('title', trans('page.permission'))
 
 <div class="container-fluid">
     <div class="card">
         <div class="card-header text-bg-info">
             <span class="fas fa-list fa-fw"></span>
-            Detail @yield('title')
+            {{ trans('index.detail') }} @yield('title')
         </div>
         <div class="card-body">
             <div class="row g-3">
                 <div class="col-auto">
-                    <a draggable="false" class="btn btn-info w-100" href="{{ route('permission.index') }}" wire:navigate>
-                        <span class="fas fa-arrow-left fa-fw"></span> Back
+                    <a draggable="false" class="btn btn-info w-100" href="{{ route('cms.permission.index') }}"
+                        wire:navigate>
+                        <span class="fas fa-arrow-left fa-fw"></span>
+                        {{ trans('index.back') }}
                     </a>
                 </div>
             </div>
@@ -51,7 +54,7 @@ new #[Title('Detail | Permission')] class extends Component {
             <div class="d-grid gap-3">
                 <div class="row">
                     <div class="col-sm-5 col-md-4 col-lg-3 col-xl-2">
-                        <div class="fw-bold">ID</div>
+                        <div class="fw-bold">{{ trans('field.id') }}</div>
                     </div>
                     <div class="col-sm-7 col-md-8 col-lg-9 col-xl-10">
                         {{ $permission->id }}
@@ -60,7 +63,7 @@ new #[Title('Detail | Permission')] class extends Component {
 
                 <div class="row">
                     <div class="col-sm-5 col-md-4 col-lg-3 col-xl-2">
-                        <div class="fw-bold">Name</div>
+                        <div class="fw-bold">{{ trans('field.name') }}</div>
                     </div>
                     <div class="col-sm-7 col-md-8 col-lg-9 col-xl-10">
                         {{ $permission->name }}
@@ -69,7 +72,7 @@ new #[Title('Detail | Permission')] class extends Component {
 
                 <div class="row">
                     <div class="col-sm-5 col-md-4 col-lg-3 col-xl-2">
-                        <div class="fw-bold">Guard Name</div>
+                        <div class="fw-bold">{{ trans('field.guard_name') }}</div>
                     </div>
                     <div class="col-sm-7 col-md-8 col-lg-9 col-xl-10">
                         {{ $permission->guard_name }}
@@ -78,31 +81,31 @@ new #[Title('Detail | Permission')] class extends Component {
 
                 <div class="row">
                     <div class="col-sm-5 col-md-4 col-lg-3 col-xl-2">
-                        <div class="fw-bold">Total Role</div>
+                        <div class="fw-bold">{{ trans('index.total') }} {{ trans('page.role') }}</div>
                     </div>
                     <div class="col-sm-7 col-md-8 col-lg-9 col-xl-10">
-                        <a draggable="false" href="{{ route('role.index', ['permission_id' => $permission->id]) }}"
+                        <a draggable="false" href="{{ route('cms.role.index', ['permission_id' => $permission->id]) }}"
                             wire:navigate>
-                            {{ $permission->roles->count() }}
+                            {{ $permission->roles_count }}
                         </a>
                     </div>
                 </div>
 
                 <div class="row">
                     <div class="col-sm-5 col-md-4 col-lg-3 col-xl-2">
-                        <div class="fw-bold">Total User</div>
+                        <div class="fw-bold">{{ trans('index.total') }} {{ trans('page.user') }}</div>
                     </div>
                     <div class="col-sm-7 col-md-8 col-lg-9 col-xl-10">
-                        <a draggable="false" href="{{ route('user.index', ['permission_id' => $permission->id]) }}"
+                        <a draggable="false" href="{{ route('cms.user.index', ['permission_id' => $permission->id]) }}"
                             wire:navigate>
-                            {{ $permission->users->count() }}
+                            {{ $permission->users_count }}
                         </a>
                     </div>
                 </div>
 
                 <div class="row">
                     <div class="col-sm-5 col-md-4 col-lg-3 col-xl-2">
-                        <div class="fw-bold">Created At</div>
+                        <div class="fw-bold">{{ trans('field.created_at') }}</div>
                     </div>
                     <div class="col-sm-7 col-md-8 col-lg-9 col-xl-10">
                         @if ($permission->created_at)
@@ -115,7 +118,7 @@ new #[Title('Detail | Permission')] class extends Component {
 
                 <div class="row">
                     <div class="col-sm-5 col-md-4 col-lg-3 col-xl-2">
-                        <div class="fw-bold">Updated At</div>
+                        <div class="fw-bold">{{ trans('field.updated_at') }}</div>
                     </div>
                     <div class="col-sm-7 col-md-8 col-lg-9 col-xl-10">
                         @if ($permission->updated_at)
@@ -131,11 +134,11 @@ new #[Title('Detail | Permission')] class extends Component {
 
             <div class="row g-3">
                 <div class="col-lg-6">
-                    <h6>List Role :</h6>
+                    <h6>{{ trans('index.list_role') }} :</h6>
                     @foreach ($permission->roles as $role)
                         <div>
                             {{ $loop->iteration }}.
-                            <a draggable="false" href="{{ route('role.detail', ['role' => $role]) }}">
+                            <a draggable="false" href="{{ route('cms.role.detail', ['role' => $role]) }}">
                                 {{ $role->name }}
                             </a>
                         </div>
@@ -143,11 +146,11 @@ new #[Title('Detail | Permission')] class extends Component {
                 </div>
 
                 <div class="col-lg-6">
-                    <h6>List User :</h6>
+                    <h6>{{ trans('index.list_user') }} :</h6>
                     @foreach ($permission->users as $user)
                         <div>
                             {{ $loop->iteration }}.
-                            <a draggable="false" href="{{ route('user.detail', ['user' => $user]) }}">
+                            <a draggable="false" href="{{ route('cms.user.detail', ['user' => $user]) }}">
                                 {{ $user->name }}
                             </a>
                         </div>
@@ -161,8 +164,9 @@ new #[Title('Detail | Permission')] class extends Component {
                 @can('permission.edit')
                     <div class="col-auto">
                         <a draggable="false" class="btn btn-success w-100"
-                            href="{{ route('permission.edit', ['permission' => $permission]) }}" wire:navigate>
-                            <span class="fas fa-edit fa-fw"></span> Edit
+                            href="{{ route('cms.permission.edit', ['permission' => $permission]) }}" wire:navigate>
+                            <span class="fas fa-edit fa-fw"></span>
+                            {{ trans('index.edit') }}
                         </a>
                     </div>
                 @endcan
@@ -173,10 +177,12 @@ new #[Title('Detail | Permission')] class extends Component {
                             wire:offline.class="disabled" wire:offline.attr="disabled" wire:loading.class="disabled"
                             wire:loading.attr="disabled">
                             <span wire:loading.remove wire:target="delete">
-                                <span class="fas fa-trash fa-fw"></span> Delete
+                                <span class="fas fa-trash fa-fw"></span>
+                                <span>{{ trans('index.delete') }}</span>
                             </span>
                             <span wire:loading wire:target="delete" class="w-100">
-                                <span class="spinner-border spinner-border-sm"></span> Delete
+                                <span class="spinner-border spinner-border-sm"></span>
+                                <span>{{ trans('index.delete') }}</span>
                             </span>
                         </button>
                     </div>

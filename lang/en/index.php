@@ -42,7 +42,7 @@ return [
     'generate' => 'Generate',
     'list_permission' => 'List Permission',
     'list_user' => 'List User',
-    'index' => 'Index',
+    'list_role' => 'List Role',
     'index' => 'Index',
     'index' => 'Index',
     'index' => 'Index',
