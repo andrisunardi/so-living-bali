@@ -311,12 +311,18 @@ new #[Title('Property')] class extends Component {
                             <th width="1%">{{ trans('field.#') }}</th>
                             <th width="1%">{{ trans('field.id') }}</th>
                             <th width="1%">{{ trans('field.image') }}</th>
-                            <th>{{ trans('field.code') }} & {{ trans('field.name') }}</th>
+                            <th>
+                                {{ trans('field.code') }} &
+                                {{ trans('field.name') }} &
+                                {{ trans('field.status') }}
+                            </th>
                             <th width="1%">{{ trans('field.agent') }}</th>
                             <th width="1%">{{ trans('field.date') }}</th>
-                            <th width="1%">{{ trans('field.address') }}</th>
-                            <th width="1%">{{ trans('field.status') }}</th>
-                            <th width="1%">{{ trans('field.created_at') }}</th>
+                            <th width="1%">
+                                {{ trans('field.address') }} &
+                                {{ trans('field.district_id') }} &
+                                {{ trans('field.area_id') }}
+                            </th>
                             <th width="1%">{{ trans('field.action') }}</th>
                         </tr>
                     </thead>
@@ -353,6 +359,10 @@ new #[Title('Property')] class extends Component {
                                             wire:navigate>
                                             {{ $property->code }}
                                         </a>
+
+                                        <span class="badge text-bg-{{ $property->status->color() }} rounded-pill">
+                                            {{ $property->status->description() }}
+                                        </span>
                                     </div>
                                     <div>
                                         <a draggable="false"
@@ -384,28 +394,22 @@ new #[Title('Property')] class extends Component {
                                 <td>
                                     <div>{{ $property->address }}</div>
                                     @if ($property->district)
+                                        {{ trans('field.district_id') }} :
                                         <a draggable="false"
                                             href="{{ route('cms.district.detail', ['district' => $property->district]) }}"
                                             wire:navigate>
-                                            {{ trans('field.district_id') }} :
                                             {{ $property->district->name }}
                                         </a>
                                     @endif
                                     @if ($property->area)
+                                        {{ trans('field.area_id') }} :
                                         <a draggable="false"
                                             href="{{ route('cms.area.detail', ['area' => $property->area]) }}"
                                             wire:navigate>
-                                            {{ trans('field.area_id') }} :
                                             {{ $property->area->name }}
                                         </a>
                                     @endif
                                 </td>
-                                <td>
-                                    <span class="badge text-bg-{{ $property->status->color() }} rounded-pill w-100">
-                                        {{ $property->status->description() }}
-                                    </span>
-                                </td>
-                                <td>{{ $property->created_at?->isoFormat('HH:mm - ddd, DD MMM YYYY') }}</td>
                                 <td>
                                     <div class="d-flex gap-2">
                                         @can('property.detail')
