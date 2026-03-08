@@ -36,7 +36,7 @@ new #[Title('Edit | District')] class extends Component {
         } catch (ValidationException $e) {
             $errors = collect($e->validator->errors()->all())->implode('<br>');
 
-            $this->alertError(title: 'Edit Failed', body: $errors);
+            $this->alertError(title: trans('index.edit').' '.trans('index.failed'), body: $errors);
         }
     }
 };

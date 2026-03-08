@@ -1,5 +1,53 @@
+<?php
+
+use App\Livewire\Component;
+use App\Services\AreaService;
+use Livewire\Attributes\Title;
+use App\Models\Area;
+
+new #[Title('Detail | Area')] class extends Component {
+    public Area $area;
+
+    public function mount(Area $area): void
+    {
+        $this->area = $area;
+        // $this->area->loadCount(['properties']);
+    }
+
+    public function changeShow(): void
+    {
+        $service = new AreaService();
+        $service->show(area: $this->area);
+        // $this->area->loadCount(['properties']);
+
+        $this->alertSuccess(title: trans('index.change_show') . ' ' . trans('index.success'), body: trans('page.area') . ' ' . trans('message.has_been_successfully_changed'));
+    }
+
+    public function changeActive(): void
+    {
+        $service = new AreaService();
+        $service->active(area: $this->area);
+        // $this->area->loadCount(['properties']);
+
+        $this->alertSuccess(title: trans('index.change_active') . ' ' . trans('index.success'), body: trans('page.area') . ' ' . trans('message.has_been_successfully_changed'));
+    }
+
+    public function delete(): void
+    {
+        $service = new AreaService();
+        $service->delete(area: $this->area);
+
+        session()->flash('success', [
+            'title' => trans('index.delete') . ' ' . trans('index.success'),
+            'message' => trans('page.area') . ' ' . trans('message.has_been_successfully_deleted'),
+        ]);
+
+        $this->redirect(route('cms.area.index'), navigate: true);
+    }
+};
+?>
+
 @section('title', trans('page.area'))
-@section('icon', 'fas fa-list')
 
 <div class="container-fluid">
     <div class="card">
@@ -10,7 +58,7 @@
         <div class="card-body">
             <div class="row g-3">
                 <div class="col-auto">
-                    <a draggable="false" class="btn btn-primary w-100" href="{{ route('cms.area.index') }}" wire:navigate>
+                    <a draggable="false" class="btn btn-info w-100" href="{{ route('cms.area.index') }}" wire:navigate>
                         <span class="fas fa-arrow-left fa-fw"></span>
                         {{ trans('index.back') }}
                     </a>
@@ -35,7 +83,8 @@
                     </div>
                     <div class="col-sm-7 col-md-8 col-lg-9 col-xl-10">
                         @if ($area->district)
-                            <a draggable="false" href="{{ route('cms.district.detail', ['district' => $area->district]) }}"
+                            <a draggable="false"
+                                href="{{ route('cms.district.detail', ['district' => $area->district]) }}"
                                 wire:navigate>
                                 {{ $area->district->name }}
                             </a>
@@ -61,17 +110,17 @@
                             <div class="form-check form-switch">
                                 <input class="form-check-input" type="checkbox" role="switch"
                                     id="is_show_{{ $area->id }}" name="is_show" value="1"
-                                    {{ $area->is_show ? 'checked' : '' }} wire:key="is_show_{{ $area->id }}"
-                                    wire:click="changeShow({{ $area->id }})" wire:offline.class="disabled"
-                                    wire:offline.attr="disabled" wire:loading.class="disabled" wire:loading.attr="disabled">
-                                <label class="form-check-label text-{{ $area->is_show ? 'success' : 'danger' }}"
+                                    {{ $area->is_show ? 'checked' : '' }} wire:click="changeShow({{ $area->id }})"
+                                    wire:offline.class="disabled" wire:offline.attr="disabled" wire:loading.class="disabled"
+                                    wire:loading.attr="disabled">
+                                <label class="form-check-label text-{{ Str::successDanger($area->is_show) }}"
                                     for="is_show_{{ $area->id }}">
-                                    {{ $area->is_show ? trans('index.yes') : trans('index.no') }}
+                                    {{ Str::yesNo($area->is_show) }}
                                 </label>
                             </div>
                         @else
-                            <span class="badge rounded-pill text-bg-{{ $area->is_show ? 'success' : 'danger' }}">
-                                {{ $area->is_show ? trans('index.yes') : trans('index.no') }}
+                            <span class="badge rounded-pill text-bg-{{ Str::successDanger($area->is_show) }}">
+                                {{ Str::yesNo($area->is_show) }}
                             </span>
                         @endcan
                     </div>
@@ -86,17 +135,17 @@
                             <div class="form-check form-switch">
                                 <input class="form-check-input" type="checkbox" role="switch"
                                     id="is_active_{{ $area->id }}" name="is_active" value="1"
-                                    {{ $area->is_active ? 'checked' : '' }} wire:key="is_active_{{ $area->id }}"
-                                    wire:click="changeActive({{ $area->id }})" wire:offline.class="disabled"
-                                    wire:offline.attr="disabled" wire:loading.class="disabled" wire:loading.attr="disabled">
-                                <label class="form-check-label text-{{ $area->is_active ? 'success' : 'danger' }}"
+                                    {{ $area->is_active ? 'checked' : '' }} wire:click="changeActive({{ $area->id }})"
+                                    wire:offline.class="disabled" wire:offline.attr="disabled" wire:loading.class="disabled"
+                                    wire:loading.attr="disabled">
+                                <label class="form-check-label text-{{ Str::successDanger($area->is_active) }}"
                                     for="is_active_{{ $area->id }}">
-                                    {{ $area->is_active ? trans('index.yes') : trans('index.no') }}
+                                    {{ Str::yesNo($area->is_active) }}
                                 </label>
                             </div>
                         @else
-                            <span class="badge rounded-pill text-bg-{{ $area->is_active ? 'success' : 'danger' }}">
-                                {{ $area->is_active ? trans('index.yes') : trans('index.no') }}
+                            <span class="badge rounded-pill text-bg-{{ Str::successDanger($area->is_active) }}">
+                                {{ Str::yesNo($area->is_active) }}
                             </span>
                         @endcan
                     </div>
@@ -160,7 +209,7 @@
 
             <div class="row g-3">
                 @can('area.edit')
-                    <div class="col-6 col-sm-auto">
+                    <div class="col-auto">
                         <a draggable="false" class="btn btn-success w-100"
                             href="{{ route('cms.area.edit', ['area' => $area]) }}" wire:navigate>
                             <span class="fas fa-edit fa-fw"></span>
@@ -170,17 +219,17 @@
                 @endcan
 
                 @can('area.delete')
-                    <div class="col-6 col-sm-auto">
-                        <button type="button" class="btn btn-danger w-100" wire:click="delete" wire:key="delete"
+                    <div class="col-auto">
+                        <button type="button" class="btn btn-danger w-100" wire:click="delete"
                             wire:offline.class="disabled" wire:offline.attr="disabled" wire:loading.class="disabled"
                             wire:loading.attr="disabled">
                             <span wire:loading.remove wire:target="delete">
                                 <span class="fas fa-trash fa-fw"></span>
-                                <span>{{ trans('index.delete') }}</span>
+                                {{ trans('index.delete') }}
                             </span>
                             <span wire:loading wire:target="delete" class="w-100">
                                 <span class="spinner-border spinner-border-sm"></span>
-                                <span>{{ trans('index.delete') }}</span>
+                                {{ trans('index.delete') }}
                             </span>
                         </button>
                     </div>
@@ -188,4 +237,6 @@
             </div>
         </div>
     </div>
+
+    <livewire:activity-log :model="$area" />
 </div>

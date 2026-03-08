@@ -1,20 +1,20 @@
 <table>
     <thead>
         <tr>
-            <th align="center" colspan="10">
+            <th align="center" colspan="11">
                 <b>{{ trans('page.area') }}</b>
             </th>
         </tr>
         <tr>
-            <td colspan="10"></td>
+            <td colspan="11"></td>
         </tr>
         <tr>
-            <th align="center" colspan="10">
+            <th align="center" colspan="11">
                 {{ trans('field.printed_at') }} : {{ now()->isoFormat('LLLL') }}
             </th>
         </tr>
         <tr>
-            <td colspan="10"></td>
+            <td colspan="11"></td>
         </tr>
         <tr>
             <th valign="middle" align="center">
@@ -31,6 +31,9 @@
             </th>
             <th valign="middle" align="center">
                 <b>{{ trans('field.active') }}</b>
+            </th>
+            <th valign="middle" align="center">
+                <b>{{ trans('field.show') }}</b>
             </th>
             <th valign="middle" align="center">
                 <b>{{ trans('index.total') }} {{ trans('page.property') }}</b>
@@ -65,10 +68,13 @@
                     {{ $area->name }}
                 </td>
                 <td valign="middle" align="center">
-                    {{ $area->is_active ? 'Yes' : 'No' }}
+                    {{ Str::yesNo($area->is_show) }}
                 </td>
                 <td valign="middle" align="center">
-                    {{ $area->properties_count }}
+                    {{ Str::yesNo($area->is_active) }}
+                </td>
+                <td valign="middle" align="center">
+                    {{-- {{ $area->properties_count }} --}}
                 </td>
                 <td valign="middle" align="left">
                     {{ $area->createdBy?->name }}
@@ -85,7 +91,7 @@
             </tr>
         @empty
             <tr>
-                <td align="center" colspan="10">
+                <td align="center" colspan="11">
                     {{ trans('message.no_data_available') }}
                 </td>
             </tr>
@@ -93,7 +99,7 @@
     </tbody>
     <tfoot>
         <tr>
-            <td colspan="10"></td>
+            <td colspan="11"></td>
         </tr>
     </tfoot>
 </table>

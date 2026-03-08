@@ -184,7 +184,7 @@ new #[Title('District')] class extends Component {
 
         <div class="card-body">
             <div class="row g-3">
-                @can('customer.district.add')
+                @can('district.add')
                     <div class="col-auto">
                         <a draggable="false" class="btn btn-primary w-100" href="{{ route('cms.district.add') }}"
                             wire:navigate>
@@ -194,7 +194,7 @@ new #[Title('District')] class extends Component {
                     </div>
                 @endcan
 
-                @can('customer.district.export')
+                @can('district.export')
                     <div class="col-auto">
                         <button type="button" class="btn btn-success w-100" wire:click="export"
                             wire:offline.class="disabled" wire:offline.attr="disabled" wire:loading.class="disabled"
@@ -243,7 +243,13 @@ new #[Title('District')] class extends Component {
                                         {{ $district->id }}
                                     </a>
                                 </td>
-                                <td>{{ $district->name }}</td>
+                                <td>
+                                    <a draggable="false"
+                                        href="{{ route('cms.district.detail', ['district' => $district]) }}"
+                                        wire:navigate>
+                                        {{ $district->name }}
+                                    </a>
+                                </td>
                                 <td class="text-center">
                                     <a draggable="false"
                                         href="{{ route('cms.area.index', ['district_id' => $district->id]) }}"
@@ -254,7 +260,7 @@ new #[Title('District')] class extends Component {
                                 <td class="text-center">0</td>
                                 <td>{{ $district->created_at?->isoFormat('HH:mm - ddd, DD MMM YYYY') }}</td>
                                 <td>
-                                    @can('customer.district.edit')
+                                    @can('district.edit')
                                         <div class="form-check form-switch">
                                             <input class="form-check-input" type="checkbox" role="switch"
                                                 id="is_show_{{ $district->id }}" name="is_show" value="1"
@@ -276,7 +282,7 @@ new #[Title('District')] class extends Component {
                                     @endcan
                                 </td>
                                 <td>
-                                    @can('customer.district.edit')
+                                    @can('district.edit')
                                         <div class="form-check form-switch">
                                             <input class="form-check-input" type="checkbox" role="switch"
                                                 id="is_active_{{ $district->id }}" name="is_active" value="1"
@@ -299,7 +305,7 @@ new #[Title('District')] class extends Component {
                                 </td>
                                 <td>
                                     <div class="d-flex gap-2">
-                                        @can('customer.district.detail')
+                                        @can('district.detail')
                                             <a draggable="false" class="btn btn-info btn-sm"
                                                 href="{{ route('cms.district.detail', ['district' => $district]) }}"
                                                 wire:navigate>
@@ -308,7 +314,7 @@ new #[Title('District')] class extends Component {
                                             </a>
                                         @endcan
 
-                                        @can('customer.district.edit')
+                                        @can('district.edit')
                                             <a draggable="false" class="btn btn-success btn-sm"
                                                 href="{{ route('cms.district.edit', ['district' => $district]) }}"
                                                 wire:navigate>
@@ -317,7 +323,7 @@ new #[Title('District')] class extends Component {
                                             </a>
                                         @endcan
 
-                                        @can('customer.district.delete')
+                                        @can('district.delete')
                                             <button type="button" class="btn btn-danger btn-sm"
                                                 wire:click="delete({{ $district->id }})" wire:offline.class="disabled"
                                                 wire:offline.attr="disabled" wire:loading.class="disabled"

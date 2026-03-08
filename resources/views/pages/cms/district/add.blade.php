@@ -27,7 +27,7 @@ new #[Title('Add | District')] class extends Component {
         } catch (ValidationException $e) {
             $errors = collect($e->validator->errors()->all())->implode('<br>');
 
-            $this->alertError(title: 'Add Failed', body: $errors);
+            $this->alertError(title: trans('index.add').' '.trans('index.failed'), body: $errors);
         }
     }
 };
