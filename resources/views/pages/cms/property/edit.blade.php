@@ -311,7 +311,7 @@ new #[Title('Edit | Property')] class extends Component {
                 <hr />
 
                 <h5 class="fw-bold text-uppercase border-bottom pb-3">
-                    {{ trans('property.property_identity') }}
+                    {{ trans('property.location') }}
                 </h5>
 
                 <div class="row g-3 mb-3">

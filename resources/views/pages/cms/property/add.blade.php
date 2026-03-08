@@ -147,27 +147,142 @@ new #[Title('Add | Property')] class extends Component {
 
                 <div class="row g-3 mb-3">
                     <div class="col-sm-6">
-                        <label class="form-label" for="name">
-                            {{ trans('validation.attributes.name') }}
-                            <span class="text-danger">*</span>
-                        </label>
-                        <div class="input-group">
-                            <div class="input-group-text">
-                                <span class="fas fa-building fa-fw "></span>
+                        <div class="d-grid gap-3">
+                            <div>
+                                <label class="form-label" for="name">
+                                    {{ trans('validation.attributes.name') }}
+                                    <span class="text-danger">*</span>
+                                </label>
+                                <div class="input-group">
+                                    <div class="input-group-text">
+                                        <span class="fas fa-building fa-fw "></span>
+                                    </div>
+                                    <input type="text" class="form-control" id="name" name="name"
+                                        minlength="1" maxlength="50"
+                                        placeholder="{{ trans('index.ex') . '. Canggu Villa' }}" required
+                                        wire:model="form.name" wire:offline.class="disabled"
+                                        wire:offline.attr="disabled" wire:loading.class="disabled"
+                                        wire:loading.attr="disabled">
+                                </div>
+                                <div class="form-text">
+                                    {{ trans('helper.required') }},
+                                    {{ trans('helper.minlength') }} : 1,
+                                    {{ trans('helper.maxlength') }} : 50
+                                </div>
+                                @error('form.name')
+                                    <div class="form-text text-danger">{{ $message }}</div>
+                                @enderror
                             </div>
-                            <input type="text" class="form-control" id="name" name="name" minlength="1"
-                                maxlength="50" placeholder="{{ trans('index.ex') . '. Canggu Villa' }}" required
-                                wire:model="form.name" wire:offline.class="disabled" wire:offline.attr="disabled"
-                                wire:loading.class="disabled" wire:loading.attr="disabled">
+
+                            <div>
+                                <label class="form-label" for="code">
+                                    {{ trans('property.internal_property_code') }}
+                                    <span class="text-danger">*</span>
+                                </label>
+                                <div class="input-group">
+                                    <div class="input-group-text">
+                                        <span class="fas fa-code fa-fw "></span>
+                                    </div>
+                                    <input type="text" class="form-control" id="code" name="code"
+                                        minlength="1" maxlength="10"
+                                        placeholder="{{ trans('index.ex') . '. ABCDE12345' }}" required
+                                        wire:model="form.code" wire:offline.class="disabled"
+                                        wire:offline.attr="disabled" wire:loading.class="disabled"
+                                        wire:loading.attr="disabled">
+                                </div>
+                                <div class="form-text">
+                                    {{ trans('helper.required') }},
+                                    {{ trans('helper.minlength') }} : 1,
+                                    {{ trans('helper.maxlength') }} : 10,
+                                    {{ trans('helper.unique') }}
+                                </div>
+                                @error('form.code')
+                                    <div class="form-text text-danger">{{ $message }}</div>
+                                @enderror
+                            </div>
+
+                            <div>
+                                <label class="form-label" for="user_id">
+                                    {{ trans('property.agent_name') }}
+                                </label>
+                                <div class="input-group" wire:ignore>
+                                    <div class="input-group-text">
+                                        <span class="fas fa-user fa-fw "></span>
+                                    </div>
+                                    @if (Auth::user()->hasRole('Admin'))
+                                        <select class="form-select select2" id="user_id" name="user_id"
+                                            wire:key="form.user_id" wire:model.lazy="user_id"
+                                            wire:offline.class="disabled" wire:offline.attr="disabled"
+                                            wire:loading.class="disabled" wire:loading.attr="disabled">
+                                            <option value="">
+                                                {{ trans('index.select') }}
+                                                {{ trans('validation.attributes.user_id') }}
+                                            </option>
+                                            @foreach ($this->users() as $user)
+                                                <option value="{{ $user->id }}"
+                                                    wire:key="user-{{ $user->id }}">
+                                                    {{ $user->name }}
+                                                </option>
+                                            @endforeach
+                                        </select>
+                                    @else
+                                        <input class="form-control" type="text" value="{{ Auth::user()->name }}"
+                                            disabled>
+                                    @endif
+                                </div>
+                                @error('form.user_id')
+                                    <div class="form-text text-danger">{{ $message }}</div>
+                                @enderror
+                            </div>
+
+                            <div>
+                                <label class="form-label" for="availability_date">
+                                    {{ trans('property.availability_date') }}
+                                </label>
+                                <div class="input-group">
+                                    <div class="input-group-text">
+                                        <span class="fas fa-calendar fa-fw "></span>
+                                    </div>
+                                    <input type="date" class="form-control" id="availability_date"
+                                        name="availability_date" min="{{ now()->toDateString() }}" max="2099-12-31"
+                                        wire:model="form.availability_date" wire:offline.class="disabled"
+                                        wire:offline.attr="disabled" wire:loading.class="disabled"
+                                        wire:loading.attr="disabled">
+                                </div>
+                                <div class="form-text">
+                                    {{ trans('helper.min') }} : {{ trans('index.today') }},
+                                    {{ trans('helper.max') }} :
+                                    {{ Date::parse('2099-12-31')->isoFormat('DD MMMM YYYY') }}
+                                </div>
+                                @error('form.availability_date')
+                                    <div class="form-text text-danger">{{ $message }}</div>
+                                @enderror
+                            </div>
+
+                            <div>
+                                <label class="form-label" for="visit_date">
+                                    {{ trans('property.date_of_visit') }}
+                                </label>
+                                <div class="input-group">
+                                    <div class="input-group-text">
+                                        <span class="fas fa-calendar fa-fw "></span>
+                                    </div>
+                                    <input type="date" class="form-control" id="visit_date" name="visit_date"
+                                        min="{{ now()->toDateString() }}" max="2099-12-31"
+                                        @if (!Auth::user()->hasRole('Admin')) disabled @endif wire:model="form.visit_date"
+                                        wire:offline.class="disabled" wire:offline.attr="disabled"
+                                        wire:loading.class="disabled" wire:loading.attr="disabled">
+                                </div>
+                                <div class="form-text">
+                                    {{ trans('helper.min') }} : {{ trans('index.today') }},
+                                    {{ trans('helper.max') }} :
+                                    {{ Date::parse('2099-12-31')->isoFormat('DD MMMM YYYY') }}
+                                </div>
+                                @error('form.visit_date')
+                                    <div class="form-text text-danger">{{ $message }}</div>
+                                @enderror
+                            </div>
                         </div>
-                        <div class="form-text">
-                            {{ trans('helper.required') }},
-                            {{ trans('helper.minlength') }} : 1,
-                            {{ trans('helper.maxlength') }} : 50
-                        </div>
-                        @error('form.name')
-                            <div class="form-text text-danger">{{ $message }}</div>
-                        @enderror
                     </div>
 
                     <div class="col-sm-6">
@@ -200,244 +315,149 @@ new #[Title('Add | Property')] class extends Component {
                             </div>
                         @endif
                     </div>
-
-                    <div class="col-sm-6">
-                        <label class="form-label" for="code">
-                            {{ trans('property.internal_property_code') }}
-                            <span class="text-danger">*</span>
-                        </label>
-                        <div class="input-group">
-                            <div class="input-group-text">
-                                <span class="fas fa-code fa-fw "></span>
-                            </div>
-                            <input type="text" class="form-control" id="code" name="code" minlength="1"
-                                maxlength="10" placeholder="{{ trans('index.ex') . '. ABCDE12345' }}" required
-                                wire:model="form.code" wire:offline.class="disabled" wire:offline.attr="disabled"
-                                wire:loading.class="disabled" wire:loading.attr="disabled">
-                        </div>
-                        <div class="form-text">
-                            {{ trans('helper.required') }},
-                            {{ trans('helper.minlength') }} : 1,
-                            {{ trans('helper.maxlength') }} : 10,
-                            {{ trans('helper.unique') }}
-                        </div>
-                        @error('form.code')
-                            <div class="form-text text-danger">{{ $message }}</div>
-                        @enderror
-                    </div>
-
-                    <div class="col-sm-6">
-                        <label class="form-label" for="user_id">
-                            {{ trans('property.agent_name') }}
-                        </label>
-                        <div class="input-group" wire:ignore>
-                            <div class="input-group-text">
-                                <span class="fas fa-user fa-fw "></span>
-                            </div>
-                            @if (Auth::user()->hasRole('Admin'))
-                                <select class="form-select select2" id="user_id" name="user_id"
-                                    wire:key="form.user_id" wire:model.lazy="user_id" wire:offline.class="disabled"
-                                    wire:offline.attr="disabled" wire:loading.class="disabled"
-                                    wire:loading.attr="disabled">
-                                    <option value="">
-                                        {{ trans('index.select') }} {{ trans('validation.attributes.user_id') }}
-                                    </option>
-                                    @foreach ($this->users() as $user)
-                                        <option value="{{ $user->id }}" wire:key="user-{{ $user->id }}">
-                                            {{ $user->name }}
-                                        </option>
-                                    @endforeach
-                                </select>
-                            @else
-                                <input class="form-control" type="text" value="{{ Auth::user()->name }}"
-                                    disabled>
-                            @endif
-                        </div>
-                        @error('form.user_id')
-                            <div class="form-text text-danger">{{ $message }}</div>
-                        @enderror
-                    </div>
-
-                    <div class="col-sm-6">
-                        <label class="form-label" for="availability_date">
-                            {{ trans('property.availability_date') }}
-                        </label>
-                        <div class="input-group">
-                            <div class="input-group-text">
-                                <span class="fas fa-calendar fa-fw "></span>
-                            </div>
-                            <input type="date" class="form-control" id="availability_date"
-                                name="availability_date" min="{{ now()->toDateString() }}" max="2099-12-31"
-                                wire:model="form.availability_date" wire:offline.class="disabled"
-                                wire:offline.attr="disabled" wire:loading.class="disabled"
-                                wire:loading.attr="disabled">
-                        </div>
-                        <div class="form-text">
-                            {{ trans('helper.min') }} : {{ trans('index.today') }},
-                            {{ trans('helper.max') }} : {{ Date::parse('2099-12-31')->isoFormat('DD MMMM YYYY') }}
-                        </div>
-                        @error('form.availability_date')
-                            <div class="form-text text-danger">{{ $message }}</div>
-                        @enderror
-                    </div>
-
-                    <div class="col-sm-6">
-                        <label class="form-label" for="visit_date">
-                            {{ trans('property.date_of_visit') }}
-                        </label>
-                        <div class="input-group">
-                            <div class="input-group-text">
-                                <span class="fas fa-calendar fa-fw "></span>
-                            </div>
-                            <input type="date" class="form-control" id="visit_date" name="visit_date"
-                                min="{{ now()->toDateString() }}" max="2099-12-31"
-                                @if (!Auth::user()->hasRole('Admin')) disabled @endif wire:model="form.visit_date"
-                                wire:offline.class="disabled" wire:offline.attr="disabled"
-                                wire:loading.class="disabled" wire:loading.attr="disabled">
-                        </div>
-                        <div class="form-text">
-                            {{ trans('helper.min') }} : {{ trans('index.today') }},
-                            {{ trans('helper.max') }} : {{ Date::parse('2099-12-31')->isoFormat('DD MMMM YYYY') }}
-                        </div>
-                        @error('form.visit_date')
-                            <div class="form-text text-danger">{{ $message }}</div>
-                        @enderror
-                    </div>
                 </div>
 
                 <hr />
 
                 <h5 class="fw-bold text-uppercase border-bottom pb-3">
-                    {{ trans('property.property_identity') }}
+                    {{ trans('property.location') }}
                 </h5>
 
                 <div class="row g-3 mb-3">
                     <div class="col-sm-6">
-                        <div id="map" style="height:400px;" wire:ignore></div>
-                        <div>Latitude : {{ $form->latitude }}</div>
-                        <div>Longitude : {{ $form->longitude }}</div>
-                    </div>
-
-                    {{-- <div class="col-sm-6">
-                        <label class="form-label" for="latitude">
-                            {{ trans('validation.attributes.latitude') }}
-                        </label>
-                        <div class="input-group">
-                            <div class="input-group-text">
-                                <span class="fas fa-globe fa-fw "></span>
-                            </div>
-                            <input type="number" class="form-control" id="latitude" name="latitude"
-                                min="-90" max="90" step="0.0000001"
-                                placeholder="{{ trans('index.ex') . '. -8.6648246' }}" wire:model="form.latitude"
-                                wire:offline.class="disabled" wire:offline.attr="disabled"
-                                wire:loading.class="disabled" wire:loading.attr="disabled">
-                        </div>
-                        <div class="form-text">
-                            {{ trans('helper.min') }} : -90,
-                            {{ trans('helper.max') }} : 90
-                        </div>
-                        @error('form.latitude')
-                            <div class="form-text text-danger">{{ $message }}</div>
-                        @enderror
-                    </div> --}}
-
-                    {{-- <div class="col-sm-6">
-                        <label class="form-label" for="longitude">
-                            {{ trans('validation.attributes.longitude') }}
-                        </label>
-                        <div class="input-group">
-                            <div class="input-group-text">
-                                <span class="fas fa-globe fa-fw "></span>
-                            </div>
-                            <input type="number" class="form-control" id="longitude" name="longitude"
-                                min="-180" max="180" step="0.0000001"
-                                placeholder="{{ trans('index.ex') . '. -8.6648246' }}" wire:model="form.longitude"
-                                wire:offline.class="disabled" wire:offline.attr="disabled"
-                                wire:loading.class="disabled" wire:loading.attr="disabled">
-                        </div>
-                        <div class="form-text">
-                            {{ trans('helper.min') }} : -180,
-                            {{ trans('helper.max') }} : 180
-                        </div>
-                        @error('form.longitude')
-                            <div class="form-text text-danger">{{ $message }}</div>
-                        @enderror
-                    </div> --}}
-
-                    <div class="col-sm-6">
-                        <label class="form-label" for="address">
-                            {{ trans('property.address') }}
-                        </label>
-                        <div class="input-group">
-                            <div class="input-group-text">
-                                <span class="fas fa-map-location-dot fa-fw "></span>
-                            </div>
-                            <input type="text" class="form-control" id="address" name="address" minlength="1"
-                                maxlength="100" placeholder="{{ trans('index.ex') . '. Jalan Raya Canggu I No 1' }}"
-                                wire:model="form.address" wire:offline.class="disabled" wire:offline.attr="disabled"
-                                wire:loading.class="disabled" wire:loading.attr="disabled">
-                        </div>
-                        <div class="form-text">
-                            {{ trans('helper.minlength') }} : 1,
-                            {{ trans('helper.maxlength') }} : 200
-                        </div>
-                        @error('form.address')
-                            <div class="form-text text-danger">{{ $message }}</div>
-                        @enderror
+                        <div class="rounded h-100" id="map" wire:ignore></div>
                     </div>
 
                     <div class="col-sm-6">
-                        <label class="form-label" for="district_id">
-                            {{ trans('validation.attributes.district_id') }}
-                        </label>
-                        <div class="input-group">
-                            <div class="input-group-text">
-                                <span class="fas fa-city fa-fw "></span>
+                        <div class="d-grid gap-3">
+                            <div>
+                                <label class="form-label" for="latitude">
+                                    {{ trans('validation.attributes.latitude') }}
+                                </label>
+                                <div class="input-group">
+                                    <div class="input-group-text">
+                                        <span class="fas fa-globe fa-fw "></span>
+                                    </div>
+                                    <input type="number" class="form-control" id="latitude" name="latitude"
+                                        min="-90" max="90" step="0.0000001"
+                                        placeholder="{{ trans('index.ex') . '. -8.6648246' }}"
+                                        wire:model="form.latitude" wire:offline.class="disabled"
+                                        wire:offline.attr="disabled" wire:loading.class="disabled"
+                                        wire:loading.attr="disabled">
+                                </div>
+                                <div class="form-text">
+                                    {{ trans('helper.min') }} : -90,
+                                    {{ trans('helper.max') }} : 90
+                                </div>
+                                @error('form.latitude')
+                                    <div class="form-text text-danger">{{ $message }}</div>
+                                @enderror
                             </div>
-                            <select class="form-select select2" id="district_id" name="district_id"
-                                wire:key="form.district_id" wire:model.lazy="district_id"
-                                wire:offline.class="disabled" wire:offline.attr="disabled"
-                                wire:loading.class="disabled" wire:loading.attr="disabled">
-                                <option value="">
-                                    {{ trans('index.select') }} {{ trans('validation.attributes.district_id') }}
-                                </option>
-                                @foreach ($this->districts() as $district)
-                                    <option value="{{ $district->id }}" wire:key="district-{{ $district->id }}">
-                                        {{ $district->name }}
-                                    </option>
-                                @endforeach
-                            </select>
-                        </div>
-                        @error('form.district_id')
-                            <div class="form-text text-danger">{{ $message }}</div>
-                        @enderror
-                    </div>
 
-                    <div class="col-sm-6">
-                        <label class="form-label" for="area_id">
-                            {{ trans('validation.attributes.area_id') }}
-                        </label>
-                        <div class="input-group">
-                            <div class="input-group-text">
-                                <span class="fas fa-archway fa-fw "></span>
+                            <div>
+                                <label class="form-label" for="longitude">
+                                    {{ trans('validation.attributes.longitude') }}
+                                </label>
+                                <div class="input-group">
+                                    <div class="input-group-text">
+                                        <span class="fas fa-globe fa-fw "></span>
+                                    </div>
+                                    <input type="number" class="form-control" id="longitude" name="longitude"
+                                        min="-180" max="180" step="0.0000001"
+                                        placeholder="{{ trans('index.ex') . '. -8.6648246' }}"
+                                        wire:model="form.longitude" wire:offline.class="disabled"
+                                        wire:offline.attr="disabled" wire:loading.class="disabled"
+                                        wire:loading.attr="disabled">
+                                </div>
+                                <div class="form-text">
+                                    {{ trans('helper.min') }} : -180,
+                                    {{ trans('helper.max') }} : 180
+                                </div>
+                                @error('form.longitude')
+                                    <div class="form-text text-danger">{{ $message }}</div>
+                                @enderror
                             </div>
-                            <select class="form-select select2" id="area_id" name="area_id"
-                                wire:key="form.area_id" wire:model.lazy="area_id" wire:offline.class="disabled"
-                                wire:offline.attr="disabled" wire:loading.class="disabled"
-                                wire:loading.attr="disabled">
-                                <option value="">
-                                    {{ trans('index.select') }} {{ trans('validation.attributes.area_id') }}
-                                </option>
-                                @foreach ($this->areas() as $area)
-                                    <option value="{{ $area->id }}" wire:key="area-{{ $area->id }}">
-                                        {{ $area->name }}
-                                    </option>
-                                @endforeach
-                            </select>
+
+                            <div>
+                                <label class="form-label" for="address">
+                                    {{ trans('property.address') }}
+                                </label>
+                                <div class="input-group">
+                                    <div class="input-group-text">
+                                        <span class="fas fa-map-location-dot fa-fw "></span>
+                                    </div>
+                                    <input type="text" class="form-control" id="address" name="address"
+                                        minlength="1" maxlength="100"
+                                        placeholder="{{ trans('index.ex') . '. Jalan Raya Canggu I No 1' }}"
+                                        wire:model="form.address" wire:offline.class="disabled"
+                                        wire:offline.attr="disabled" wire:loading.class="disabled"
+                                        wire:loading.attr="disabled">
+                                </div>
+                                <div class="form-text">
+                                    {{ trans('helper.minlength') }} : 1,
+                                    {{ trans('helper.maxlength') }} : 200
+                                </div>
+                                @error('form.address')
+                                    <div class="form-text text-danger">{{ $message }}</div>
+                                @enderror
+                            </div>
+
+                            <div>
+                                <label class="form-label" for="district_id">
+                                    {{ trans('validation.attributes.district_id') }}
+                                </label>
+                                <div class="input-group">
+                                    <div class="input-group-text">
+                                        <span class="fas fa-city fa-fw "></span>
+                                    </div>
+                                    <select class="form-select select2" id="district_id" name="district_id"
+                                        wire:key="form.district_id" wire:model.lazy="district_id"
+                                        wire:offline.class="disabled" wire:offline.attr="disabled"
+                                        wire:loading.class="disabled" wire:loading.attr="disabled">
+                                        <option value="">
+                                            {{ trans('index.select') }}
+                                            {{ trans('validation.attributes.district_id') }}
+                                        </option>
+                                        @foreach ($this->districts() as $district)
+                                            <option value="{{ $district->id }}"
+                                                wire:key="district-{{ $district->id }}">
+                                                {{ $district->name }}
+                                            </option>
+                                        @endforeach
+                                    </select>
+                                </div>
+                                @error('form.district_id')
+                                    <div class="form-text text-danger">{{ $message }}</div>
+                                @enderror
+                            </div>
+
+                            <div>
+                                <label class="form-label" for="area_id">
+                                    {{ trans('validation.attributes.area_id') }}
+                                </label>
+                                <div class="input-group">
+                                    <div class="input-group-text">
+                                        <span class="fas fa-archway fa-fw "></span>
+                                    </div>
+                                    <select class="form-select select2" id="area_id" name="area_id"
+                                        wire:key="form.area_id" wire:model.lazy="area_id"
+                                        wire:offline.class="disabled" wire:offline.attr="disabled"
+                                        wire:loading.class="disabled" wire:loading.attr="disabled">
+                                        <option value="">
+                                            {{ trans('index.select') }} {{ trans('validation.attributes.area_id') }}
+                                        </option>
+                                        @foreach ($this->areas() as $area)
+                                            <option value="{{ $area->id }}" wire:key="area-{{ $area->id }}">
+                                                {{ $area->name }}
+                                            </option>
+                                        @endforeach
+                                    </select>
+                                </div>
+                                @error('form.area_id')
+                                    <div class="form-text text-danger">{{ $message }}</div>
+                                @enderror
+                            </div>
                         </div>
-                        @error('form.area_id')
-                            <div class="form-text text-danger">{{ $message }}</div>
-                        @enderror
                     </div>
                 </div>
 
