@@ -37,10 +37,10 @@ class PropertyEditForm extends Form
     #[Validate('nullable|date|date_format:Y-m-d|after_or_equal:today|before_or_equal:2999-12-31')]
     public ?string $visit_date = '';
 
-    #[Validate('nullable|decimal:0,8|between:-90,90')]
+    #[Validate('required|string')]
     public ?string $latitude = '';
 
-    #[Validate('nullable|decimal:0,8|between:-180,180')]
+    #[Validate('required|string')]
     public ?string $longitude = '';
 
     #[Validate('nullable|string|min:1|max:200')]

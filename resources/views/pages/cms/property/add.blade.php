@@ -338,16 +338,14 @@ new #[Title('Add | Property')] class extends Component {
                                     <div class="input-group-text">
                                         <span class="fas fa-globe fa-fw "></span>
                                     </div>
-                                    <input type="number" class="form-control" id="latitude" name="latitude"
-                                        min="-90" max="90" step="0.0000001"
+                                    <input type="text" class="form-control" id="latitude" name="latitude"
                                         placeholder="{{ trans('index.ex') . '. -8.6648246' }}"
                                         wire:model="form.latitude" wire:offline.class="disabled"
                                         wire:offline.attr="disabled" wire:loading.class="disabled"
                                         wire:loading.attr="disabled">
                                 </div>
                                 <div class="form-text">
-                                    {{ trans('helper.min') }} : -90,
-                                    {{ trans('helper.max') }} : 90
+                                    {{ trans('helper.required') }}
                                 </div>
                                 @error('form.latitude')
                                     <div class="form-text text-danger">{{ $message }}</div>
@@ -362,16 +360,14 @@ new #[Title('Add | Property')] class extends Component {
                                     <div class="input-group-text">
                                         <span class="fas fa-globe fa-fw "></span>
                                     </div>
-                                    <input type="number" class="form-control" id="longitude" name="longitude"
-                                        min="-180" max="180" step="0.0000001"
+                                    <input type="text" class="form-control" id="longitude" name="longitude"
                                         placeholder="{{ trans('index.ex') . '. -8.6648246' }}"
                                         wire:model="form.longitude" wire:offline.class="disabled"
                                         wire:offline.attr="disabled" wire:loading.class="disabled"
                                         wire:loading.attr="disabled">
                                 </div>
                                 <div class="form-text">
-                                    {{ trans('helper.min') }} : -180,
-                                    {{ trans('helper.max') }} : 180
+                                    {{ trans('helper.required') }}
                                 </div>
                                 @error('form.longitude')
                                     <div class="form-text text-danger">{{ $message }}</div>

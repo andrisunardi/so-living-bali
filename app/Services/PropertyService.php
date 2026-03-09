@@ -6,6 +6,7 @@ use App\Models\Property;
 use Illuminate\Support\Arr;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Str;
+use Yaza\LaravelGoogleDriveStorage\Gdrive;
 
 class PropertyService
 {
@@ -82,7 +83,9 @@ class PropertyService
             $data['image_url'] = null;
         }
 
-        $data['slug'] = Str::slug($data['code']);
+        $data['slug'] = Str::slug($data['name']);
+
+        Gdrive::makeDir($data['code']);
 
         Arr::pull($data, 'image');
 
@@ -99,7 +102,7 @@ class PropertyService
             $data['image_url'] = null;
         }
 
-        $data['slug'] = Str::slug($data['code']);
+        $data['slug'] = Str::slug($data['name']);
 
         Arr::pull($data, 'image');
 
