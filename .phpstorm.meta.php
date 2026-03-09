@@ -4265,7 +4265,7 @@ namespace PHPSTORM_META {
 'CONTACT_WHATSAPP','CONTACT_EMAIL','GHL_APP_URL','GHL_OAUTH_URL','GHL_CLIENT_ID',
 'GHL_CLIENT_SECRET','GHL_GRANT_TYPE','GHL_REDIRECT_URI','GHL_USER_TYPE','GHL_LOCATION_ID',
 'FILESYSTEM_CLOUD','GOOGLE_DRIVE_CLIENT_ID','GOOGLE_DRIVE_CLIENT_SECRET','GOOGLE_DRIVE_REFRESH_TOKEN','GOOGLE_DRIVE_ACCESS_TOKEN',
-'GOOGLE_DRIVE_FOLDER',);
+'GOOGLE_DRIVE_FOLDER','GOOGLE_AUTHORIZATION_CODE',);
         
                 expectedArguments(\Illuminate\Support\Facades\Gate::has(), 0, argumentsSet('auth'));
     expectedArguments(\Illuminate\Support\Facades\Gate::allows(), 0, argumentsSet('auth'));

@@ -134,6 +134,8 @@ class PropertyService
 
             Arr::pull($data, 'image');
 
+            Gdrive::renameDir($property->code, $data['code']);
+
             $property->update($data);
             $property->refresh();
 

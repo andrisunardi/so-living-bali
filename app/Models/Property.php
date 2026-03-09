@@ -20,6 +20,8 @@ use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
 use Illuminate\Database\Eloquent\SoftDeletes;
 use Illuminate\Support\Carbon;
+use Illuminate\Support\Facades\Storage;
+use Illuminate\Support\Str;
 use Spatie\Activitylog\LogOptions;
 use Spatie\Activitylog\Traits\LogsActivity;
 
@@ -349,6 +351,18 @@ class Property extends Model
             ->logOnlyDirty()
             ->dontSubmitEmptyLogs()
             ->setDescriptionForEvent(fn (string $eventName) => ":subject.name has been {$eventName} by :causer.name");
+    }
+
+    public function getImageUrlAttribute(?string $value = null): string
+    {
+        if ($value) {
+            $url = Storage::disk('google')->url($value);
+            $id = Str::after($url, 'id=');
+
+            return "https://drive.google.com/thumbnail?id={$id}&sz=w1000";
+        }
+
+        return '';
     }
 
     public function getCreatedAtAttribute(string $value): Carbon
