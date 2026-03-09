@@ -27352,6 +27352,14 @@ namespace Spatie\LaravelIgnition\Facades {
             }
     }
 
+namespace Yaza\LaravelGoogleDriveStorage\Facades {
+    /**
+     * @see \Yaza\LaravelGoogleDriveStorage\LaravelGoogleDriveStorage
+     */
+    class LaravelGoogleDriveStorage {
+            }
+    }
+
 namespace Illuminate\Support {
     /**
      * @template TKey of array-key
@@ -32771,6 +32779,7 @@ namespace  {
     class Livewire extends \Livewire\Livewire {}
     class LogViewer extends \Opcodes\LogViewer\Facades\LogViewer {}
     class Flare extends \Spatie\LaravelIgnition\Facades\Flare {}
+    class LaravelGoogleDriveStorage extends \Yaza\LaravelGoogleDriveStorage\Facades\LaravelGoogleDriveStorage {}
 }
 
 

@@ -339,15 +339,16 @@ new #[Title('Property')] class extends Component {
                                         {{ $property->id }}
                                     </a>
                                 </td>
-                                <td class="text-center">
+                                <td class="text-center p-0">
                                     @if ($property->image_url)
-                                        <a draggable="false" href="{{ $property->image_url }}" target="_blank">
+                                        <a draggable="false"
+                                            href="https://drive.google.com/thumbnail?id=1e6cFoGpP6y11tGbXAAUEO1m3L_Fp-rQl&sz=w1000"
+                                            target="_blank">
                                             <div class="ratio ratio-1x1">
-                                                <img draggable="false"
-                                                    class="img-fluid w-100 h-100 rounded-circle object-fit-cover"
-                                                    src="{{ $property->image_url }}"
+                                                <img draggable="false" class="img-fluid w-100 h-100 object-fit-cover"
+                                                    src="https://drive.google.com/thumbnail?id=1e6cFoGpP6y11tGbXAAUEO1m3L_Fp-rQl&sz=w1000"
                                                     alt="{{ trans('page.property') }} - {{ $property->id }}"
-                                                    onerror="asset('images/not-available.png')" />
+                                                    onerror="this.src='{{ asset('images/image-not-available.png') }}'" />
                                             </div>
                                         </a>
                                     @endif

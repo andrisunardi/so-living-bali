@@ -2,7 +2,9 @@
 
 namespace App\Services;
 
+use App\Libraries\Upload;
 use App\Models\Property;
+use Exception;
 use Illuminate\Support\Arr;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Str;
@@ -74,46 +76,80 @@ class PropertyService
         $table = (new Property)->getTable();
         DB::statement("ALTER TABLE {$table} AUTO_INCREMENT = 1");
 
-        $data['availability_date'] = $data['availability_date'] ?: null;
-        $data['visit_date'] = $data['visit_date'] ?: null;
-        $data['latitude'] = $data['latitude'] ?: null;
-        $data['longitude'] = $data['longitude'] ?: null;
+        try {
+            DB::beginTransaction();
 
-        if ($data['image']) {
-            $data['image_url'] = null;
+            $data['availability_date'] = $data['availability_date'] ?: null;
+            $data['visit_date'] = $data['visit_date'] ?: null;
+            $data['latitude'] = $data['latitude'] ?: null;
+            $data['longitude'] = $data['longitude'] ?: null;
+
+            if ($data['image']) {
+                $data['image_url'] = null;
+            }
+
+            $data['slug'] = Str::slug($data['name']);
+
+            Gdrive::makeDir($data['code']);
+
+            if ($data['image'] ?? null) {
+                $data['image_url'] = (new Upload)->image(
+                    image: $data['image'],
+                    directory: 'property/cover',
+                    name: $data['code'],
+                );
+            }
+
+            Arr::pull($data, 'image');
+
+            $property = Property::create($data);
+
+            DB::commit();
+
+            return $property;
+        } catch (Exception $e) {
+            DB::rollBack();
+            throw $e;
         }
-
-        $data['slug'] = Str::slug($data['name']);
-
-        Gdrive::makeDir($data['code']);
-
-        Arr::pull($data, 'image');
-
-        return Property::create($data);
     }
 
     public function update(Property $property, array $data = []): Property
     {
-        $data['availability_date'] = $data['availability_date'] ?: null;
-        $data['visit_date'] = $data['visit_date'] ?: null;
-        $data['latitude'] = $data['latitude'] ?: null;
+        try {
+            DB::beginTransaction();
 
-        if ($data['image']) {
-            $data['image_url'] = null;
+            $data['availability_date'] = $data['availability_date'] ?: null;
+            $data['visit_date'] = $data['visit_date'] ?: null;
+            $data['latitude'] = $data['latitude'] ?: null;
+
+            if ($data['image'] ?? null) {
+                $data['image_url'] = (new Upload)->image(
+                    image: $data['image'],
+                    directory: 'property/cover',
+                    name: $data['code'],
+                );
+            }
+
+            $data['slug'] = Str::slug($data['name']);
+
+            Arr::pull($data, 'image');
+
+            $property->update($data);
+            $property->refresh();
+
+            DB::commit();
+
+            return $property;
+        } catch (Exception $e) {
+            DB::rollBack();
+            throw $e;
         }
-
-        $data['slug'] = Str::slug($data['name']);
-
-        Arr::pull($data, 'image');
-
-        $property->update($data);
-        $property->refresh();
-
-        return $property;
     }
 
     public function delete(Property $property): bool
     {
+        Gdrive::deleteDir($property->code);
+
         return $property->delete();
     }
 }
