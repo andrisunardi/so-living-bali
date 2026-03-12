@@ -130,7 +130,9 @@ class PropertyService
 
             Arr::pull($data, 'image');
 
-            Gdrive::renameDir("property/{$property->code}", "property/{$data['code']}");
+            if ($property->code != $data['code']) {
+                Gdrive::renameDir("property/{$property->code}", "property/{$data['code']}");
+            }
 
             $property->update($data);
             $property->refresh();
