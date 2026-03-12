@@ -15,15 +15,13 @@ class Upload
         string $directory,
         string $name
     ): string {
-        $env = App::environment();
         $disk = Storage::disk('google');
-        $application = Str::slug(config('app.name'));
         $datetime = now()->format('Y-m-d-H-i-s');
 
         $name = Str::slug($name);
         $name = "{$name}-{$datetime}.webp";
 
-        $path = "{$env}/{$application}/{$directory}/{$name}";
+        $path = "{$directory}/{$name}";
 
         if ($image->extension() === 'webp') {
             $disk->put($path, $image->get());
@@ -54,6 +52,6 @@ class Upload
 
         $disk->put($path, $file->get());
 
-        return config('filesystems.disks.google.url')."/{$path}";
+        return config('filesystems.disks.google.url') . "/{$path}";
     }
 }
