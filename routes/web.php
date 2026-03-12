@@ -5,6 +5,15 @@ use App\Http\Middleware\Localization;
 use Illuminate\Support\Facades\App;
 use Illuminate\Support\Facades\Route;
 use Illuminate\Support\Facades\Session;
+use Yaza\LaravelGoogleDriveStorage\Gdrive;
+
+Route::get('/images/{path}', function ($path) {
+    $data = Gdrive::get($path);
+
+    return response($data->file, 200)
+        ->header('Content-Type', $data->ext);
+
+})->where('path', '.*')->name('images');
 
 Route::any('locale/{locale}', function ($locale) {
     Session::put('locale', $locale);

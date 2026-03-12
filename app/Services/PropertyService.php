@@ -41,14 +41,14 @@ class PropertyService
                         ->orWhereRelation('user', 'email', 'like', "%{$search}%");
                 });
             })
-            ->when($userId, fn ($q) => $q->where('user_id', $userId))
-            ->when($districtId, fn ($q) => $q->where('district_id', $districtId))
-            ->when($areaId, fn ($q) => $q->where('area_id', $areaId))
-            ->when($status, fn ($q) => $q->where('status', $status))
-            ->when($startDate, fn ($q) => $q->whereDate('created_at', '>=', $startDate))
-            ->when($endDate, fn ($q) => $q->whereDate('created_at', '<=', $endDate))
-            ->when($random, fn ($q) => $q->inRandomOrder())
-            ->when($trash, fn ($q) => $q->onlyTrashed())
+            ->when($userId, fn($q) => $q->where('user_id', $userId))
+            ->when($districtId, fn($q) => $q->where('district_id', $districtId))
+            ->when($areaId, fn($q) => $q->where('area_id', $areaId))
+            ->when($status, fn($q) => $q->where('status', $status))
+            ->when($startDate, fn($q) => $q->whereDate('created_at', '>=', $startDate))
+            ->when($endDate, fn($q) => $q->whereDate('created_at', '<=', $endDate))
+            ->when($random, fn($q) => $q->inRandomOrder())
+            ->when($trash, fn($q) => $q->onlyTrashed())
             ->orderBy($orderBy, $sortBy)
             ->limit($limit);
 
@@ -84,19 +84,15 @@ class PropertyService
             $data['latitude'] = $data['latitude'] ?: null;
             $data['longitude'] = $data['longitude'] ?: null;
 
-            if ($data['image']) {
-                $data['image_url'] = null;
-            }
-
             $data['slug'] = Str::slug($data['name']);
 
             Gdrive::makeDir($data['code']);
 
             if ($data['image'] ?? null) {
-                $data['image_url'] = (new Upload)->image(
+                $data['image'] = (new Upload)->image(
                     image: $data['image'],
-                    directory: 'property/cover',
-                    name: $data['code'],
+                    directory: "property/{$data['code']}",
+                    name: 'cover',
                 );
             }
 
@@ -125,8 +121,8 @@ class PropertyService
             if ($data['image'] ?? null) {
                 $data['image_url'] = (new Upload)->image(
                     image: $data['image'],
-                    directory: 'property/cover',
-                    name: $data['code'],
+                    directory: "property/{$data['code']}",
+                    name: 'cover',
                 );
             }
 

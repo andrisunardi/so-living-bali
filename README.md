@@ -259,3 +259,31 @@ Pls insert a dropdown list with multiple choice
 •⁠  ⁠Garbage
 •⁠  ⁠Security
 •⁠  ⁠Others : ?
+
+
+use Yaza\LaravelGoogleDriveStorage\Gdrive;
+use Illuminate\Support\Facades\Storage;
+use Illuminate\Support\Str;
+
+    // public function getImageUrlAttribute(): string
+    // {
+    //     if ($this->image) {
+    //         $url = Storage::disk('google')->url($this->image);
+    //         $id = Str::after($url, 'id=');
+
+    //         return "https://drive.google.com/thumbnail?id={$id}";
+    //     }
+
+    //     return '';
+    // }
+
+    // public function getImageAttribute(?string $value = null): string
+    // {
+    //     if (!$value) {
+    //         return '';
+    //     }
+
+    //     $data = Gdrive::get($value);
+
+    //     return "data:{$data->ext};base64," . base64_encode($data->file);
+    // }
