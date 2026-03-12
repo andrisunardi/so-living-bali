@@ -36,10 +36,10 @@ class PropertyAddForm extends Form
     #[Validate('nullable|date|date_format:Y-m-d|after_or_equal:today|before_or_equal:2999-12-31')]
     public string $visit_date = '';
 
-    #[Validate('required|string')]
+    #[Validate('nullable|string')]
     public string $latitude = '';
 
-    #[Validate('required|string')]
+    #[Validate('nullable|string')]
     public string $longitude = '';
 
     #[Validate('nullable|string|min:1|max:200')]
