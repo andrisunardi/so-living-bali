@@ -86,12 +86,12 @@ class PropertyService
 
             $data['slug'] = Str::slug($data['name']);
 
-            Gdrive::makeDir("PROPERTY/{$data['code']}");
+            Gdrive::makeDir("property/{$data['code']}");
 
             if ($data['image'] ?? null) {
                 $data['image_url'] = (new Upload)->image(
                     image: $data['image'],
-                    directory: "PROPERTY/{$data['code']}",
+                    directory: "property/{$data['code']}",
                     name: 'cover',
                 );
             }
@@ -121,7 +121,7 @@ class PropertyService
             if ($data['image'] ?? null) {
                 $data['image_url'] = (new Upload)->image(
                     image: $data['image'],
-                    directory: "PROPERTY/{$data['code']}",
+                    directory: "property/{$data['code']}",
                     name: 'cover',
                 );
             }
@@ -130,7 +130,7 @@ class PropertyService
 
             Arr::pull($data, 'image');
 
-            Gdrive::renameDir("PROPERTY/{$property->code}", "PROPERTY/{$data['code']}");
+            Gdrive::renameDir("property/{$property->code}", "property/{$data['code']}");
 
             $property->update($data);
             $property->refresh();
