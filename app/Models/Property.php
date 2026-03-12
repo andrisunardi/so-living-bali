@@ -348,7 +348,7 @@ class Property extends Model
             ->logFillable()
             ->logOnlyDirty()
             ->dontSubmitEmptyLogs()
-            ->setDescriptionForEvent(fn(string $eventName) => ":subject.name has been {$eventName} by :causer.name");
+            ->setDescriptionForEvent(fn (string $eventName) => ":subject.name has been {$eventName} by :causer.name");
     }
 
     public function getCreatedAtAttribute(string $value): Carbon

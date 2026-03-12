@@ -1,5 +1,44 @@
+<?php
+
+use App\Livewire\Component;
+use App\Services\ContactService;
+use Livewire\Attributes\Title;
+use App\Models\Contact;
+
+new #[Title('Detail | Contact')] class extends Component {
+    public Contact $contact;
+
+    public function mount(Contact $contact): void
+    {
+        $this->contact = $contact;
+        $this->contact->loadCount(['areas']);
+    }
+
+    public function changeActive(): void
+    {
+        $service = new ContactService();
+        $service->active(contact: $this->contact);
+        $this->contact->loadCount(['areas']);
+
+        $this->alertSuccess(title: trans('index.change_active') . ' ' . trans('index.success'), body: trans('page.contact') . ' ' . trans('message.has_been_successfully_changed'));
+    }
+
+    public function delete(): void
+    {
+        $service = new ContactService();
+        $service->delete(contact: $this->contact);
+
+        session()->flash('success', [
+            'title' => trans('index.delete') . ' ' . trans('index.success'),
+            'message' => trans('page.contact') . ' ' . trans('message.has_been_successfully_deleted'),
+        ]);
+
+        $this->redirect(route('cms.contact.index'), navigate: true);
+    }
+};
+?>
+
 @section('title', trans('page.contact'))
-@section('icon', 'fas fa-list')
 
 <div class="container-fluid">
     <div class="card">
@@ -10,8 +49,7 @@
         <div class="card-body">
             <div class="row g-3">
                 <div class="col-auto">
-                    <a draggable="false" class="btn btn-primary w-100" href="{{ route('cms.contact.index') }}"
-                        wire:navigate>
+                    <a draggable="false" class="btn btn-info w-100" href="{{ route('cms.contact.index') }}" wire:navigate>
                         <span class="fas fa-arrow-left fa-fw"></span>
                         {{ trans('index.back') }}
                     </a>
@@ -40,15 +78,6 @@
                             target="_blank">
                             {{ $contact->code }}
                         </a>
-                    </div>
-                </div>
-
-                <div class="row">
-                    <div class="col-sm-5 col-md-4 col-lg-3 col-xl-2">
-                        <div class="fw-bold">{{ trans('field.name') }}</div>
-                    </div>
-                    <div class="col-sm-7 col-md-8 col-lg-9 col-xl-10">
-                        {{ $contact->name }}
                     </div>
                 </div>
 
@@ -128,7 +157,7 @@
 
             <div class="row g-3">
                 @can('contact.edit')
-                    <div class="col-6 col-sm-auto">
+                    <div class="col-auto">
                         <a draggable="false" class="btn btn-success w-100"
                             href="{{ route('cms.contact.edit', ['contact' => $contact]) }}" wire:navigate>
                             <span class="fas fa-edit fa-fw"></span>
@@ -138,17 +167,17 @@
                 @endcan
 
                 @can('contact.delete')
-                    <div class="col-6 col-sm-auto">
-                        <button type="button" class="btn btn-danger w-100" wire:click="delete" wire:key="delete"
+                    <div class="col-auto">
+                        <button type="button" class="btn btn-danger w-100" wire:click="delete"
                             wire:offline.class="disabled" wire:offline.attr="disabled" wire:loading.class="disabled"
                             wire:loading.attr="disabled">
                             <span wire:loading.remove wire:target="delete">
                                 <span class="fas fa-trash fa-fw"></span>
-                                <span>{{ trans('index.delete') }}</span>
+                                {{ trans('index.delete') }}
                             </span>
                             <span wire:loading wire:target="delete" class="w-100">
                                 <span class="spinner-border spinner-border-sm"></span>
-                                <span>{{ trans('index.delete') }}</span>
+                                {{ trans('index.delete') }}
                             </span>
                         </button>
                     </div>
@@ -156,4 +185,6 @@
             </div>
         </div>
     </div>
+
+    <livewire:activity-log :model="$contact" />
 </div>

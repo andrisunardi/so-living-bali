@@ -1,16 +1,59 @@
+<?php
+
+use App\Livewire\Component;
+use App\Livewire\Forms\CMS\Contact\ContactEditForm;
+use App\Models\Contact;
+use Illuminate\Validation\ValidationException;
+use Livewire\Attributes\Title;
+
+new #[Title('Edit | Contact')] class extends Component {
+    public Contact $contact;
+
+    public ContactEditForm $form;
+
+    public function mount(Contact $contact): void
+    {
+        $this->contact = $contact;
+        $this->form->set(contact: $contact);
+    }
+
+    public function resetForm(): void
+    {
+        $this->form->set(contact: $this->contact);
+    }
+
+    public function submit(): void
+    {
+        try {
+            $this->form->submit(contact: $this->contact);
+
+            session()->flash('success', [
+                'title' => trans('index.edit') . ' ' . trans('index.success'),
+                'message' => trans('page.contact') . ' ' . trans('message.has_been_successfully_edited'),
+            ]);
+
+            $this->redirect(route('cms.contact.index'), navigate: true);
+        } catch (ValidationException $e) {
+            $errors = collect($e->validator->errors()->all())->implode('<br>');
+
+            $this->alertError(title: trans('index.edit') . ' ' . trans('index.failed'), body: $errors);
+        }
+    }
+};
+?>
+
 @section('title', trans('page.contact'))
-@section('icon', 'fas fa-edit')
 
 <div class="container-fluid">
     <div class="card">
         <div class="card-header text-bg-success">
             <span class="fas fa-edit fa-fw"></span>
-            {{ trans('index.edit') }} @yield('title')
+            {{ trans('edit') }} @yield('title')
         </div>
         <div class="card-body">
             <div class="row g-3">
                 <div class="col-auto">
-                    <a draggable="false" class="btn btn-primary w-100" href="{{ route('cms.contact.index') }}"
+                    <a draggable="false" class="btn btn-success w-100" href="{{ route('cms.contact.index') }}"
                         wire:navigate>
                         <span class="fas fa-arrow-left fa-fw"></span>
                         {{ trans('index.back') }}
@@ -20,34 +63,10 @@
 
             <hr />
 
+            <x-alert-error />
+
             <form wire:submit.prevent="submit" role="form" autocomplete="off">
                 <div class="row g-3 mb-3">
-                    <div class="col-12">
-                        <label class="form-label" for="code">
-                            {{ trans('validation.attributes.code') }}
-                            <span class="text-danger">*</span>
-                        </label>
-                        <div class="input-group">
-                            <div class="input-group-text">
-                                <span class="fas fa-code fa-fw "></span>
-                            </div>
-                            <input type="text" class="form-control" id="code" name="code" minlength="20"
-                                maxlength="20" placeholder="{{ trans('index.ex') . '. ABCDEFGHIJKLMNOPQRST' }}" required
-                                wire:model="form.code" wire:offline.class="disabled" wire:offline.attr="disabled"
-                                wire:loading.class="disabled" wire:loading.attr="disabled">
-                        </div>
-                        <div class="form-text">
-                            {{ trans('helper.minlength') }} : 20,
-                            {{ trans('helper.maxlength') }} : 20
-                        </div>
-                        <div class="form-text">
-                            {{ trans('helper.contact.code.edit') }}
-                        </div>
-                        @error('form.code')
-                            <div class="form-text text-danger">{{ $message }}</div>
-                        @enderror
-                    </div>
-
                     <div class="col-sm-6">
                         <label class="form-label" for="name">
                             {{ trans('validation.attributes.name') }}
@@ -63,6 +82,7 @@
                                 wire:loading.class="disabled" wire:loading.attr="disabled">
                         </div>
                         <div class="form-text">
+                            {{ trans('helper.required') }},
                             {{ trans('helper.minlength') }} : 1,
                             {{ trans('helper.maxlength') }} : 50
                         </div>
@@ -86,6 +106,7 @@
                                 wire:offline.attr="disabled" wire:loading.class="disabled" wire:loading.attr="disabled">
                         </div>
                         <div class="form-text">
+                            {{ trans('helper.required') }},
                             {{ trans('helper.minlength') }} : 1,
                             {{ trans('helper.maxlength') }} : 50
                         </div>
@@ -109,6 +130,7 @@
                                 wire:loading.class="disabled" wire:loading.attr="disabled">
                         </div>
                         <div class="form-text">
+                            {{ trans('helper.required') }},
                             {{ trans('helper.minlength') }} : 1,
                             {{ trans('helper.maxlength') }} : 50
                         </div>
@@ -132,6 +154,7 @@
                                 wire:loading.class="disabled" wire:loading.attr="disabled">
                         </div>
                         <div class="form-text">
+                            {{ trans('helper.required') }},
                             {{ trans('helper.minlength') }} : 1,
                             {{ trans('helper.maxlength') }} : 20
                         </div>
@@ -148,12 +171,10 @@
                         <button type="submit" class="btn btn-success w-100" wire:offline.class="disabled"
                             wire:offline.attr="disabled" wire:loading.class="disabled" wire:loading.attr="disabled">
                             <span wire:loading.remove wire:target="submit">
-                                <span class="fas fa-save fa-fw"></span>
-                                {{ trans('index.save') }}
+                                <span class="fas fa-save fa-fw"></span> Save
                             </span>
                             <span wire:loading wire:target="submit" class="w-100">
-                                <span class="spinner-border spinner-border-sm"></span>
-                                {{ trans('index.save') }}
+                                <span class="spinner-border spinner-border-sm"></span> Save
                             </span>
                         </button>
                     </div>
@@ -162,12 +183,10 @@
                             wire:offline.class="disabled" wire:offline.attr="disabled" wire:loading.class="disabled"
                             wire:loading.attr="disabled">
                             <span wire:loading.remove wire:target="resetForm">
-                                <span class="fas fa-eraser fa-fw"></span>
-                                {{ trans('index.reset') }}
+                                <span class="fas fa-eraser fa-fw"></span> Reset
                             </span>
                             <span wire:loading wire:target="resetForm" class="w-100">
-                                <span class="spinner-border spinner-border-sm"></span>
-                                {{ trans('index.reset') }}
+                                <span class="spinner-border spinner-border-sm"></span> Reset
                             </span>
                         </button>
                     </div>

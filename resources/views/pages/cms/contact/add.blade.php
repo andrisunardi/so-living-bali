@@ -1,5 +1,39 @@
+<?php
+
+use App\Livewire\Component;
+use App\Livewire\Forms\CMS\Contact\ContactAddForm;
+use Illuminate\Validation\ValidationException;
+use Livewire\Attributes\Title;
+
+new #[Title('Add | Contact')] class extends Component {
+    public ContactAddForm $form;
+
+    public function resetForm(): void
+    {
+        $this->form->reset();
+    }
+
+    public function submit(): void
+    {
+        try {
+            $this->form->submit();
+
+            session()->flash('success', [
+                'title' => trans('index.add') . ' ' . trans('index.success'),
+                'message' => trans('page.contact') . ' ' . trans('message.has_been_successfully_added'),
+            ]);
+
+            $this->redirect(route('cms.contact.index'), navigate: true);
+        } catch (ValidationException $e) {
+            $errors = collect($e->validator->errors()->all())->implode('<br>');
+
+            $this->alertError(title: trans('index.add') . ' ' . trans('index.failed'), body: $errors);
+        }
+    }
+};
+?>
+
 @section('title', trans('page.contact'))
-@section('icon', 'fas fa-plus')
 
 <div class="container-fluid">
     <div class="card">
@@ -19,6 +53,8 @@
             </div>
 
             <hr />
+
+            <x-alert-error />
 
             <form wire:submit.prevent="submit" role="form" autocomplete="off">
                 <div class="row g-3 mb-3">
@@ -63,6 +99,7 @@
                                 wire:loading.class="disabled" wire:loading.attr="disabled">
                         </div>
                         <div class="form-text">
+                            {{ trans('helper.required') }},
                             {{ trans('helper.minlength') }} : 1,
                             {{ trans('helper.maxlength') }} : 50
                         </div>
@@ -86,6 +123,7 @@
                                 wire:offline.attr="disabled" wire:loading.class="disabled" wire:loading.attr="disabled">
                         </div>
                         <div class="form-text">
+                            {{ trans('helper.required') }},
                             {{ trans('helper.minlength') }} : 1,
                             {{ trans('helper.maxlength') }} : 50
                         </div>
@@ -109,6 +147,7 @@
                                 wire:loading.class="disabled" wire:loading.attr="disabled">
                         </div>
                         <div class="form-text">
+                            {{ trans('helper.required') }},
                             {{ trans('helper.minlength') }} : 1,
                             {{ trans('helper.maxlength') }} : 50
                         </div>
@@ -132,6 +171,7 @@
                                 wire:loading.class="disabled" wire:loading.attr="disabled">
                         </div>
                         <div class="form-text">
+                            {{ trans('helper.required') }},
                             {{ trans('helper.minlength') }} : 1,
                             {{ trans('helper.maxlength') }} : 20
                         </div>

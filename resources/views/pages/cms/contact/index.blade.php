@@ -1,5 +1,66 @@
+<?php
+
+use App\Exports\ContactExport;
+use App\Livewire\Component;
+use App\Models\Contact;
+use App\Services\ContactService;
+use Livewire\Attributes\Title;
+use Livewire\Attributes\Url;
+use Maatwebsite\Excel\Facades\Excel;
+use Symfony\Component\HttpFoundation\BinaryFileResponse;
+
+new #[Title('Contact')] class extends Component {
+    #[Url(except: '')]
+    public string $search = '';
+
+    #[Url(except: '')]
+    public string $start_date = '';
+
+    #[Url(except: '')]
+    public string $end_date = '';
+
+    public function updating(): void
+    {
+        $this->resetPage();
+    }
+
+    public function resetFilter(): void
+    {
+        $this->resetPage();
+
+        $this->reset(['search', 'start_date', 'end_date']);
+    }
+
+    public function delete(Contact $contact): void
+    {
+        $service = new ContactService();
+        $service->delete(contact: $contact);
+
+        $this->alertSuccess(title: trans('index.delete') . ' ' . trans('index.success'), body: trans('page.contact') . ' ' . trans('message.has_been_successfully_deleted'));
+    }
+
+    public function contacts(bool $paginate = true): object
+    {
+        $service = new ContactService();
+        $contacts = $service->index(search: $this->search, startDate: $this->start_date, endDate: $this->end_date, paginate: $paginate);
+
+        return $contacts;
+    }
+
+    public function export(): BinaryFileResponse
+    {
+        $this->alertSuccess(title: trans('index.export') . ' ' . trans('index.success'), body: trans('page.contact') . ' ' . trans('message.has_been_successfully_exported'));
+
+        $service = new ContactService();
+        $contacts = $service->index(startDate: $this->start_date, endDate: $this->end_date, orderBy: 'id', sortBy: 'asc', paginate: false);
+        $contacts->loadMissing(['createdBy', 'updatedBy']);
+
+        return Excel::download(new ContactExport(contacts: $contacts), trans('page.contact') . '.xlsx');
+    }
+};
+?>
+
 @section('title', trans('page.contact'))
-@section('icon', 'fas fa-phone')
 
 <div class="container-fluid">
     <div class="card">
@@ -16,23 +77,23 @@
                                 <span class="fas fa-search fa-fw "></span>
                             </div>
                             <input type="search" class="form-control" id="search" name="search" minlength="1"
-                                maxlength="50" placeholder="{{ trans('field.search') }}" wire:key="search"
-                                wire:model.lazy="search" wire:offline.class="disabled" wire:offline.attr="disabled"
-                                wire:loading.class="disabled" wire:loading.attr="disabled">
+                                maxlength="50" placeholder="{{ trans('field.search') }}" wire:model.lazy="search"
+                                wire:offline.class="disabled" wire:offline.attr="disabled" wire:loading.class="disabled"
+                                wire:loading.attr="disabled">
                         </div>
                     </div>
 
                     <div class="col-auto">
-                        <button type="button" class="btn btn-warning" wire:click="resetFilter" wire:key="resetFilter"
+                        <button type="button" class="btn btn-warning" wire:click="resetFilter"
                             wire:offline.class="disabled" wire:offline.attr="disabled" wire:loading.class="disabled"
                             wire:loading.attr="disabled">
                             <span wire:loading.remove wire:target="resetFilter">
                                 <span class="fas fa-eraser fa-fw"></span>
-                                <span>{{ trans('index.reset_filter') }}</span>
+                                {{ trans('index.reset_filter') }}
                             </span>
                             <span wire:loading wire:target="resetFilter" class="w-100">
                                 <span class="spinner-border spinner-border-sm"></span>
-                                <span>{{ trans('index.reset_filter') }}</span>
+                                {{ trans('index.reset_filter') }}
                             </span>
                         </button>
                     </div>
@@ -76,7 +137,7 @@
         <div class="card-body">
             <div class="row g-3">
                 @can('contact.add')
-                    <div class="col col-sm-auto">
+                    <div class="col-auto">
                         <a draggable="false" class="btn btn-primary w-100" href="{{ route('cms.contact.add') }}"
                             wire:navigate>
                             <span class="fas fa-plus fa-fw"></span>
@@ -86,8 +147,8 @@
                 @endcan
 
                 @can('contact.export')
-                    <div class="col col-sm-auto">
-                        <button type="button" class="btn btn-success w-100" wire:click="export" wire:key="export"
+                    <div class="col-auto">
+                        <button type="button" class="btn btn-success w-100" wire:click="export"
                             wire:offline.class="disabled" wire:offline.attr="disabled" wire:loading.class="disabled"
                             wire:loading.attr="disabled">
                             <span wire:loading.remove wire:target="export">
@@ -121,10 +182,18 @@
                         </tr>
                     </thead>
                     <tbody>
-                        @forelse ($contacts as $contact)
+                        @forelse ($this->contacts() as $contact)
                             <tr wire:key="contact-{{ $contact->id }}">
-                                <td class="text-center">{{ $loop->iteration }}</td>
-                                <td class="text-center">{{ $contact->id }}</td>
+                                <td class="text-center">
+                                    {{ ($this->contacts()->currentPage() - 1) * $this->contacts()->perPage() + $loop->iteration }}
+                                </td>
+                                <td class="text-center">
+                                    <a draggable="false"
+                                        href="{{ route('cms.contact.detail', ['contact' => $contact]) }}"
+                                        wire:navigate>
+                                        {{ $contact->id }}
+                                    </a>
+                                </td>
                                 <td>
                                     <a draggable="false"
                                         href="{{ config('constants.ghl.app_url') }}/v2/location/{{ config('constants.ghl.location_id') }}/contacts/detail/{{ $contact->code }}"
@@ -159,8 +228,7 @@
 
                                         @can('contact.delete')
                                             <button type="button" class="btn btn-danger btn-sm"
-                                                wire:click="delete({{ $contact->id }})"
-                                                wire:key="delete({{ $contact->id }})" wire:offline.class="disabled"
+                                                wire:click="delete({{ $contact->id }})" wire:offline.class="disabled"
                                                 wire:offline.attr="disabled" wire:loading.class="disabled"
                                                 wire:loading.attr="disabled">
                                                 <span wire:loading.remove wire:target="delete({{ $contact->id }})">
@@ -188,7 +256,7 @@
                 </table>
             </div>
 
-            {{ $contacts->links('components.layouts.pagination') }}
+            {{ $this->contacts()->links('pagination') }}
         </div>
     </div>
 </div>

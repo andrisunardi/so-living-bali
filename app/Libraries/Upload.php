@@ -52,6 +52,6 @@ class Upload
 
         $disk->put($path, $file->get());
 
-        return config('filesystems.disks.google.url') . "/{$path}";
+        return config('filesystems.disks.google.url')."/{$path}";
     }
 }
