@@ -70,7 +70,7 @@ new #[Title('Area')] class extends Component {
         $service = new AreaService();
         $areas = $service->index(search: $this->search, districtId: $this->district_id, isActive: $this->is_active, paginate: $paginate);
         $areas->loadMissing(['district']);
-        // $areas->loadCount(['properties']);
+        $areas->loadCount(['properties']);
 
         return $areas;
     }
@@ -82,7 +82,7 @@ new #[Title('Area')] class extends Component {
         $service = new AreaService();
         $areas = $service->index(orderBy: 'id', sortBy: 'asc', paginate: false);
         $areas->loadMissing(['district', 'createdBy', 'updatedBy']);
-        // $areas->loadCount(['properties']);
+        $areas->loadCount(['properties']);
 
         return Excel::download(new AreaExport(areas: $areas), trans('page.area') . '.xlsx');
     }
@@ -289,7 +289,13 @@ new #[Title('Area')] class extends Component {
                                         {{ $area->name }}
                                     </a>
                                 </td>
-                                <td class="text-center">0</td>
+                                <td class="text-center">
+                                    <a draggable="false"
+                                        href="{{ route('cms.property.index', ['area_id' => $area->id]) }}"
+                                        wire:navigate>
+                                        {{ $area->properties_count }}
+                                    </a>
+                                </td>
                                 <td>{{ $area->created_at?->isoFormat('HH:mm - ddd, DD MMM YYYY') }}</td>
                                 <td>
                                     @can('area.edit')

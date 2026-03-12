@@ -8,6 +8,7 @@ use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
+use Illuminate\Database\Eloquent\Relations\HasMany;
 use Illuminate\Database\Eloquent\SoftDeletes;
 use Illuminate\Support\Carbon;
 use Spatie\Activitylog\LogOptions;
@@ -31,9 +32,12 @@ use Spatie\Activitylog\Traits\LogsActivity;
  * @property-read \App\Models\User|null $createdBy
  * @property-read \App\Models\User|null $deletedBy
  * @property-read \App\Models\District $district
+ * @property-read \Illuminate\Database\Eloquent\Collection<int, \App\Models\Property> $properties
+ * @property-read int|null $properties_count
  * @property-read \App\Models\User|null $updatedBy
  * @property-read \App\Models\User|null $user
  *
+ * @method static \Database\Factories\AreaFactory factory($count = null, $state = [])
  * @method static Builder<static>|Area inactive()
  * @method static Builder<static>|Area newModelQuery()
  * @method static Builder<static>|Area newQuery()
@@ -54,7 +58,6 @@ use Spatie\Activitylog\Traits\LogsActivity;
  * @method static Builder<static>|Area whereUpdatedBy($value)
  * @method static Builder<static>|Area withTrashed(bool $withTrashed = true)
  * @method static Builder<static>|Area withoutTrashed()
- * @method static \Database\Factories\AreaFactory factory($count = null, $state = [])
  *
  * @mixin \Eloquent
  */
@@ -128,6 +131,11 @@ class Area extends Model
     public function user(): BelongsTo
     {
         return $this->belongsTo(User::class);
+    }
+
+    public function properties(): HasMany
+    {
+        return $this->hasMany(Property::class);
     }
 
     public function createdBy(): BelongsTo

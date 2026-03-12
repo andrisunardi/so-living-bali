@@ -11,14 +11,14 @@ new #[Title('Detail | Area')] class extends Component {
     public function mount(Area $area): void
     {
         $this->area = $area;
-        // $this->area->loadCount(['properties']);
+        $this->area->loadCount(['properties']);
     }
 
     public function changeShow(): void
     {
         $service = new AreaService();
         $service->show(area: $this->area);
-        // $this->area->loadCount(['properties']);
+        $this->area->loadCount(['properties']);
 
         $this->alertSuccess(title: trans('index.change_show') . ' ' . trans('index.success'), body: trans('page.area') . ' ' . trans('message.has_been_successfully_changed'));
     }
@@ -27,7 +27,7 @@ new #[Title('Detail | Area')] class extends Component {
     {
         $service = new AreaService();
         $service->active(area: $this->area);
-        // $this->area->loadCount(['properties']);
+        $this->area->loadCount(['properties']);
 
         $this->alertSuccess(title: trans('index.change_active') . ' ' . trans('index.success'), body: trans('page.area') . ' ' . trans('message.has_been_successfully_changed'));
     }
@@ -156,7 +156,10 @@ new #[Title('Detail | Area')] class extends Component {
                         <div class="fw-bold">{{ trans('index.total') }} {{ trans('page.property') }}</div>
                     </div>
                     <div class="col-sm-7 col-md-8 col-lg-9 col-xl-10">
-                        0
+                        <a draggable="false" href="{{ route('cms.property.index', ['area_id' => $area->id]) }}"
+                            wire:navigate>
+                            {{ $area->properties_count }}
+                        </a>
                     </div>
                 </div>
 
