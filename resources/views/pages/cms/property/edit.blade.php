@@ -270,7 +270,7 @@ new #[Title('Edit | Property')] class extends Component {
                                 <span class="fas fa-calendar fa-fw "></span>
                             </div>
                             <input type="date" class="form-control" id="availability_date"
-                                name="availability_date" min="{{ $order->availability_date?->toDateString() }}" max="2099-12-31"
+                                name="availability_date" min="{{ $property->availability_date?->toDateString() }}" max="2099-12-31"
                                 wire:model="form.availability_date" wire:offline.class="disabled"
                                 wire:offline.attr="disabled" wire:loading.class="disabled"
                                 wire:loading.attr="disabled">
@@ -293,7 +293,7 @@ new #[Title('Edit | Property')] class extends Component {
                                 <span class="fas fa-calendar fa-fw "></span>
                             </div>
                             <input type="date" class="form-control" id="visit_date" name="visit_date"
-                                min="{{ $order->visit_date?->toDateString() }}" max="2099-12-31"
+                                min="{{ $property->visit_date?->toDateString() }}" max="2099-12-31"
                                 @if (!Auth::user()->hasRole('Admin')) disabled @endif wire:model="form.visit_date"
                                 wire:offline.class="disabled" wire:offline.attr="disabled"
                                 wire:loading.class="disabled" wire:loading.attr="disabled">
