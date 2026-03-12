@@ -110,38 +110,39 @@ namespace App\Models{
  * @property int|null $created_by
  * @property int|null $updated_by
  * @property int|null $deleted_by
- * @property Carbon $created_at
- * @property Carbon $updated_at
- * @property Carbon|null $deleted_at
+ * @property \Illuminate\Support\Carbon $created_at
+ * @property \Illuminate\Support\Carbon $updated_at
+ * @property \Illuminate\Support\Carbon|null $deleted_at
  * @property-read \Illuminate\Database\Eloquent\Collection<int, \Spatie\Activitylog\Models\Activity> $activities
  * @property-read int|null $activities_count
- * @property-read \App\Models\User|null $createdBy
- * @property-read \App\Models\User|null $deletedBy
- * @property-read \App\Models\User|null $updatedBy
- * @property-read \App\Models\User|null $user
- * @method static Builder<static>|District inactive()
- * @method static Builder<static>|District newModelQuery()
- * @method static Builder<static>|District newQuery()
- * @method static Builder<static>|District notShown()
- * @method static Builder<static>|District onlyTrashed()
- * @method static Builder<static>|District query()
- * @method static Builder<static>|District show()
- * @method static Builder<static>|District whereCreatedAt($value)
- * @method static Builder<static>|District whereCreatedBy($value)
- * @method static Builder<static>|District whereDeletedAt($value)
- * @method static Builder<static>|District whereDeletedBy($value)
- * @method static Builder<static>|District whereId($value)
- * @method static Builder<static>|District whereIsActive($value)
- * @method static Builder<static>|District whereIsShow($value)
- * @method static Builder<static>|District whereName($value)
- * @method static Builder<static>|District whereUpdatedAt($value)
- * @method static Builder<static>|District whereUpdatedBy($value)
- * @method static Builder<static>|District withTrashed(bool $withTrashed = true)
- * @method static Builder<static>|District withoutTrashed()
  * @property-read \Illuminate\Database\Eloquent\Collection<int, \App\Models\Area> $areas
  * @property-read int|null $areas_count
+ * @property-read \App\Models\User|null $createdBy
+ * @property-read \App\Models\User|null $deletedBy
+ * @property-read \Illuminate\Database\Eloquent\Collection<int, \App\Models\Property> $properties
+ * @property-read int|null $properties_count
+ * @property-read \App\Models\User|null $updatedBy
+ * @property-read \App\Models\User|null $user
  * @method static \Database\Factories\DistrictFactory factory($count = null, $state = [])
- * @mixin \Eloquent
+ * @method static \Illuminate\Database\Eloquent\Builder<static>|District inactive()
+ * @method static \Illuminate\Database\Eloquent\Builder<static>|District newModelQuery()
+ * @method static \Illuminate\Database\Eloquent\Builder<static>|District newQuery()
+ * @method static \Illuminate\Database\Eloquent\Builder<static>|District notShown()
+ * @method static \Illuminate\Database\Eloquent\Builder<static>|District onlyTrashed()
+ * @method static \Illuminate\Database\Eloquent\Builder<static>|District query()
+ * @method static \Illuminate\Database\Eloquent\Builder<static>|District show()
+ * @method static \Illuminate\Database\Eloquent\Builder<static>|District whereCreatedAt($value)
+ * @method static \Illuminate\Database\Eloquent\Builder<static>|District whereCreatedBy($value)
+ * @method static \Illuminate\Database\Eloquent\Builder<static>|District whereDeletedAt($value)
+ * @method static \Illuminate\Database\Eloquent\Builder<static>|District whereDeletedBy($value)
+ * @method static \Illuminate\Database\Eloquent\Builder<static>|District whereId($value)
+ * @method static \Illuminate\Database\Eloquent\Builder<static>|District whereIsActive($value)
+ * @method static \Illuminate\Database\Eloquent\Builder<static>|District whereIsShow($value)
+ * @method static \Illuminate\Database\Eloquent\Builder<static>|District whereName($value)
+ * @method static \Illuminate\Database\Eloquent\Builder<static>|District whereUpdatedAt($value)
+ * @method static \Illuminate\Database\Eloquent\Builder<static>|District whereUpdatedBy($value)
+ * @method static \Illuminate\Database\Eloquent\Builder<static>|District withTrashed(bool $withTrashed = true)
+ * @method static \Illuminate\Database\Eloquent\Builder<static>|District withoutTrashed()
  */
 	class District extends \Eloquent {}
 }

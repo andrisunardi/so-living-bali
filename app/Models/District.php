@@ -28,11 +28,16 @@ use Spatie\Activitylog\Traits\LogsActivity;
  * @property Carbon|null $deleted_at
  * @property-read \Illuminate\Database\Eloquent\Collection<int, \Spatie\Activitylog\Models\Activity> $activities
  * @property-read int|null $activities_count
+ * @property-read \Illuminate\Database\Eloquent\Collection<int, \App\Models\Area> $areas
+ * @property-read int|null $areas_count
  * @property-read \App\Models\User|null $createdBy
  * @property-read \App\Models\User|null $deletedBy
+ * @property-read \Illuminate\Database\Eloquent\Collection<int, \App\Models\Property> $properties
+ * @property-read int|null $properties_count
  * @property-read \App\Models\User|null $updatedBy
  * @property-read \App\Models\User|null $user
  *
+ * @method static \Database\Factories\DistrictFactory factory($count = null, $state = [])
  * @method static Builder<static>|District inactive()
  * @method static Builder<static>|District newModelQuery()
  * @method static Builder<static>|District newQuery()
@@ -52,11 +57,6 @@ use Spatie\Activitylog\Traits\LogsActivity;
  * @method static Builder<static>|District whereUpdatedBy($value)
  * @method static Builder<static>|District withTrashed(bool $withTrashed = true)
  * @method static Builder<static>|District withoutTrashed()
- *
- * @property-read \Illuminate\Database\Eloquent\Collection<int, \App\Models\Area> $areas
- * @property-read int|null $areas_count
- *
- * @method static \Database\Factories\DistrictFactory factory($count = null, $state = [])
  *
  * @mixin \Eloquent
  */
@@ -125,10 +125,10 @@ class District extends Model
         return $this->hasMany(Area::class);
     }
 
-    // public function properties(): HasMany
-    // {
-    //     return $this->hasMany(Property::class);
-    // }
+    public function properties(): HasMany
+    {
+        return $this->hasMany(Property::class);
+    }
 
     public function user(): BelongsTo
     {

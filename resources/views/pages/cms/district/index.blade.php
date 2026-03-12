@@ -59,8 +59,7 @@ new #[Title('District')] class extends Component {
     {
         $service = new DistrictService();
         $districts = $service->index(search: $this->search, isActive: $this->is_active, paginate: $paginate);
-        $districts->loadCount(['areas']);
-        // $districts->loadCount(['areas', 'properties']);
+        $districts->loadCount(['areas', 'properties']);
 
         return $districts;
     }
@@ -71,8 +70,7 @@ new #[Title('District')] class extends Component {
 
         $service = new DistrictService();
         $districts = $service->index(orderBy: 'id', sortBy: 'asc', paginate: false);
-        $districts->loadCount(['areas']);
-        // $districts->loadCount(['areas', 'properties']);
+        $districts->loadCount(['areas', 'properties']);
         $districts->loadMissing(['createdBy', 'updatedBy']);
 
         return Excel::download(new DistrictExport(districts: $districts), trans('page.district') . '.xlsx');
@@ -257,7 +255,13 @@ new #[Title('District')] class extends Component {
                                         {{ $district->areas_count }}
                                     </a>
                                 </td>
-                                <td class="text-center">0</td>
+                                <td class="text-center">
+                                    <a draggable="false"
+                                        href="{{ route('cms.property.index', ['district_id' => $district->id]) }}"
+                                        wire:navigate>
+                                        {{ $district->properties_count }}
+                                    </a>
+                                </td>
                                 <td>{{ $district->created_at?->isoFormat('HH:mm - ddd, DD MMM YYYY') }}</td>
                                 <td>
                                     @can('district.edit')
