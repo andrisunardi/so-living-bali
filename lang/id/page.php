@@ -16,11 +16,12 @@ return [
 
     'contact' => 'Kontak',
     'property' => 'Properti',
+    'property_image' => 'Gambar Properti',
     'article' => 'Artikel',
 
-    'master' => 'Master', // Tetap "Master" karena umum digunakan untuk Data Master
+    'master' => 'Master',
     'area' => 'Area',
-    'district' => 'Kecamatan', // Di Indonesia, padanan "District" paling pas adalah Kecamatan
+    'district' => 'Kecamatan',
 
     'permission' => 'Izin',
     'role' => 'Peran',

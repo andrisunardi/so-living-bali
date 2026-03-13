@@ -1,5 +1,8 @@
 <?php
 
+use Diglactic\Breadcrumbs\Generator;
+use Diglactic\Breadcrumbs\Manager;
+
 return [
 
     // 'view' => 'breadcrumbs::bootstrap5',
@@ -13,8 +16,8 @@ return [
 
     'invalid-named-breadcrumb-exception' => true,
 
-    'manager-class' => Diglactic\Breadcrumbs\Manager::class,
+    'manager-class' => Manager::class,
 
-    'generator-class' => Diglactic\Breadcrumbs\Generator::class,
+    'generator-class' => Generator::class,
 
 ];

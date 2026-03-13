@@ -211,7 +211,7 @@ new #[Title('User')] class extends Component {
     <div class="card mt-3">
         <div class="card-header text-bg-primary">
             <span class="fas fa-table fa-fw"></span>
-            {{ trans('data') }} @yield('title')
+            {{ trans('index.data') }} @yield('title')
         </div>
 
         <div class="card-body">

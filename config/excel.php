@@ -1,6 +1,9 @@
 <?php
 
+use Maatwebsite\Excel\DefaultValueBinder;
 use Maatwebsite\Excel\Excel;
+use Maatwebsite\Excel\Middleware\ConvertEmptyCellValuesToNull;
+use Maatwebsite\Excel\Middleware\TrimCellValue;
 use PhpOffice\PhpSpreadsheet\Reader\Csv;
 
 return [
@@ -68,8 +71,8 @@ return [
 
         'cells' => [
             'middleware' => [
-                \Maatwebsite\Excel\Middleware\TrimCellValue::class,
-                \Maatwebsite\Excel\Middleware\ConvertEmptyCellValuesToNull::class,
+                TrimCellValue::class,
+                ConvertEmptyCellValuesToNull::class,
             ],
         ],
 
@@ -95,7 +98,7 @@ return [
     ],
 
     'value_binder' => [
-        'default' => Maatwebsite\Excel\DefaultValueBinder::class,
+        'default' => DefaultValueBinder::class,
     ],
 
     'cache' => [

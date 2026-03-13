@@ -9,18 +9,32 @@ class PermissionSeeder extends Seeder
 {
     public function run(): void
     {
-        Permission::create(['name' => 'property'])->assignRole('Admin', 'Agent');
-        Permission::create(['name' => 'property.add'])->assignRole('Admin', 'Agent');
-        Permission::create(['name' => 'property.edit'])->assignRole('Admin', 'Agent');
-        Permission::create(['name' => 'property.delete'])->assignRole('Admin');
-        Permission::create(['name' => 'property.detail'])->assignRole('Admin', 'Agent');
-
+        // MODULE
         Permission::create(['name' => 'contact'])->assignRole('Admin');
         Permission::create(['name' => 'contact.add'])->assignRole('Admin');
         Permission::create(['name' => 'contact.edit'])->assignRole('Admin');
         Permission::create(['name' => 'contact.delete'])->assignRole('Admin');
         Permission::create(['name' => 'contact.detail'])->assignRole('Admin');
 
+        Permission::create(['name' => 'article'])->assignRole('Admin');
+        Permission::create(['name' => 'article.add'])->assignRole('Admin');
+        Permission::create(['name' => 'article.edit'])->assignRole('Admin');
+        Permission::create(['name' => 'article.delete'])->assignRole('Admin');
+        Permission::create(['name' => 'article.detail'])->assignRole('Admin');
+
+        Permission::create(['name' => 'property'])->assignRole('Admin', 'Agent');
+        Permission::create(['name' => 'property.add'])->assignRole('Admin', 'Agent');
+        Permission::create(['name' => 'property.edit'])->assignRole('Admin', 'Agent');
+        Permission::create(['name' => 'property.delete'])->assignRole('Admin');
+        Permission::create(['name' => 'property.detail'])->assignRole('Admin', 'Agent');
+
+        Permission::create(['name' => 'property_image'])->assignRole('Admin', 'Agent');
+        Permission::create(['name' => 'property_image.add'])->assignRole('Admin', 'Agent');
+        Permission::create(['name' => 'property_image.edit'])->assignRole('Admin', 'Agent');
+        Permission::create(['name' => 'property_image.delete'])->assignRole('Admin');
+        Permission::create(['name' => 'property_image.detail'])->assignRole('Admin', 'Agent');
+
+        // MASTER
         Permission::create(['name' => 'area'])->assignRole('Admin');
         Permission::create(['name' => 'area.add'])->assignRole('Admin');
         Permission::create(['name' => 'area.edit'])->assignRole('Admin');

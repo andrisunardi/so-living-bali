@@ -3,6 +3,7 @@
 namespace App\Providers;
 
 use App\Models\User;
+use Barryvdh\LaravelIdeHelper\IdeHelperServiceProvider;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Support\Facades\Gate;
 use Illuminate\Support\Facades\Schema;
@@ -16,7 +17,7 @@ class AppServiceProvider extends ServiceProvider
     public function register(): void
     {
         if (app()->isLocal()) {
-            app()->register(\Barryvdh\LaravelIdeHelper\IdeHelperServiceProvider::class);
+            app()->register(IdeHelperServiceProvider::class);
         }
     }
 

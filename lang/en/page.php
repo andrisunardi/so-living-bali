@@ -16,6 +16,7 @@ return [
 
     'contact' => 'Contact',
     'property' => 'Property',
+    'property_image' => 'Property Image',
     'article' => 'Article',
 
     'master' => 'Master',

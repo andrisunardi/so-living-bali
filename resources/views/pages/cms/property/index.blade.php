@@ -95,7 +95,7 @@ new #[Title('Property')] class extends Component {
         $properties = $service->index(orderBy: 'id', sortBy: 'asc', paginate: false);
         $properties->loadMissing(['user', 'district', 'area', 'createdBy', 'updatedBy']);
 
-        return Excel::download(new PropertyExport(properties: $properties), trans('page.orioerty') . '.xlsx');
+        return Excel::download(new PropertyExport(properties: $properties), trans('page.property') . '.xlsx');
     }
 };
 ?>
@@ -268,7 +268,7 @@ new #[Title('Property')] class extends Component {
     <div class="card mt-3">
         <div class="card-header text-bg-primary">
             <span class="fas fa-table fa-fw"></span>
-            {{ trans('data') }} @yield('title')
+            {{ trans('index.data') }} @yield('title')
         </div>
 
         <div class="card-body">

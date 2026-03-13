@@ -13,7 +13,7 @@ new class extends Component {};
         </a>
     </li>
 
-    @canany(['contact', 'property', 'article'])
+    @canany(['contact', 'article', 'property', 'property_image'])
         <li>
             <h6 class="fw-bold text-uppercase border-bottom pb-2 mt-3">
                 <span>{{ trans('page.module') }}</span>
@@ -31,6 +31,16 @@ new class extends Component {};
         </li>
     @endcan
 
+    @can('article')
+        <li class="nav-item">
+            <a draggable="false" class="nav-link {{ Route::is('cms.article.*') ? 'active' : '' }}"
+                href="{{ route('cms.article.index') }}" wire:navigate>
+                <span class="fas fa-newspaper fa-fw"></span>
+                {{ trans('page.article') }}
+            </a>
+        </li>
+    @endcan
+
     @can('property')
         <li class="nav-item">
             <a draggable="false" class="nav-link {{ Route::is('cms.property.*') ? 'active' : '' }}"
@@ -41,12 +51,12 @@ new class extends Component {};
         </li>
     @endcan
 
-    @can('article')
+    @can('property_image')
         <li class="nav-item">
-            <a draggable="false" class="nav-link {{ Route::is('cms.article.*') ? 'active' : '' }}"
-                href="{{ route('cms.article.index') }}" wire:navigate>
-                <span class="fas fa-newspaper fa-fw"></span>
-                {{ trans('page.article') }}
+            <a draggable="false" class="nav-link {{ Route::is('cms.property-image.*') ? 'active' : '' }}"
+                href="{{ route('cms.property-image.index') }}" wire:navigate>
+                <span class="fas fa-images fa-fw"></span>
+                {{ trans('page.property_image') }}
             </a>
         </li>
     @endcan

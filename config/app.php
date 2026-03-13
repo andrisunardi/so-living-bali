@@ -1,6 +1,25 @@
 <?php
 
+use App\Enums\Property\PropertyBedroom;
+use App\Enums\Property\PropertyElectricity;
+use App\Enums\Property\PropertyLivingStyle;
+use App\Enums\Property\PropertyOperationalRisk;
+use App\Enums\Property\PropertyOrientation;
+use App\Enums\Property\PropertyOwnerPriceFlexibility;
+use App\Enums\Property\PropertyPowerBackup;
+use App\Enums\Property\PropertyRentalType;
+use App\Enums\Property\PropertyStatus;
+use App\Enums\Property\PropertyTargetProfile;
+use App\Enums\Property\PropertyType;
+use App\Enums\Property\PropertyWaterSource;
+use Barryvdh\DomPDF\Facade\Pdf;
 use Illuminate\Support\Facades\Facade;
+use Maatwebsite\Excel\Facades\Excel;
+use SimpleSoftwareIO\QrCode\Facades\QrCode;
+use Spatie\Menu\Laravel\Facades\Menu;
+use Spatie\Permission\Middleware\PermissionMiddleware;
+use Spatie\Permission\Middleware\RoleMiddleware;
+use Spatie\Permission\Middleware\RoleOrPermissionMiddleware;
 
 return [
 
@@ -36,27 +55,27 @@ return [
     ],
 
     'aliases' => Facade::defaultAliases()->merge([
-        'PropertyBedroom' => App\Enums\Property\PropertyBedroom::class,
-        'PropertyElectricity' => App\Enums\Property\PropertyElectricity::class,
-        'PropertyLivingStyle' => App\Enums\Property\PropertyLivingStyle::class,
-        'PropertyOperationalRisk' => App\Enums\Property\PropertyOperationalRisk::class,
-        'PropertyOrientation' => App\Enums\Property\PropertyOrientation::class,
-        'PropertyPowerBackup' => App\Enums\Property\PropertyPowerBackup::class,
-        'PropertyOwnerPriceFlexibility' => App\Enums\Property\PropertyOwnerPriceFlexibility::class,
-        'PropertyRentalType' => App\Enums\Property\PropertyRentalType::class,
-        'PropertyStatus' => App\Enums\Property\PropertyStatus::class,
-        'PropertyTargetProfile' => App\Enums\Property\PropertyTargetProfile::class,
-        'PropertyType' => App\Enums\Property\PropertyType::class,
-        'PropertyWaterSource' => App\Enums\Property\PropertyWaterSource::class,
+        'PropertyBedroom' => PropertyBedroom::class,
+        'PropertyElectricity' => PropertyElectricity::class,
+        'PropertyLivingStyle' => PropertyLivingStyle::class,
+        'PropertyOperationalRisk' => PropertyOperationalRisk::class,
+        'PropertyOrientation' => PropertyOrientation::class,
+        'PropertyPowerBackup' => PropertyPowerBackup::class,
+        'PropertyOwnerPriceFlexibility' => PropertyOwnerPriceFlexibility::class,
+        'PropertyRentalType' => PropertyRentalType::class,
+        'PropertyStatus' => PropertyStatus::class,
+        'PropertyTargetProfile' => PropertyTargetProfile::class,
+        'PropertyType' => PropertyType::class,
+        'PropertyWaterSource' => PropertyWaterSource::class,
 
-        'Excel' => Maatwebsite\Excel\Facades\Excel::class,
-        'Menu' => Spatie\Menu\Laravel\Facades\Menu::class,
-        'PDF' => Barryvdh\DomPDF\Facade\Pdf::class,
-        'QrCode' => SimpleSoftwareIO\QrCode\Facades\QrCode::class,
+        'Excel' => Excel::class,
+        'Menu' => Menu::class,
+        'PDF' => Pdf::class,
+        'QrCode' => QrCode::class,
 
-        'permission' => \Spatie\Permission\Middleware\PermissionMiddleware::class,
-        'role_or_permission' => \Spatie\Permission\Middleware\RoleOrPermissionMiddleware::class,
-        'role' => \Spatie\Permission\Middleware\RoleMiddleware::class,
+        'permission' => PermissionMiddleware::class,
+        'role_or_permission' => RoleOrPermissionMiddleware::class,
+        'role' => RoleMiddleware::class,
     ])->toArray(),
 
 ];

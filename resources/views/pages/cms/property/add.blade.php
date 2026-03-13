@@ -307,6 +307,21 @@ new #[Title('Add | Property')] class extends Component {
                         @enderror
 
                         @if ($form->image)
+                            <div>
+                                <div class="alert alert-info w-100" role="alert" wire:loading
+                                    wire:target="form.image">
+                                    {{ trans('message.please_wait_until_the_uploading_finished') }}
+                                </div>
+
+                                <div>
+                                    <img draggable="false" class="img-fluid w-100 rounded" width="100"
+                                        src="{{ $form->image->temporaryUrl() }}" alt="Image Temporary Url"
+                                        onerror="asset('images/image-not-available.png')" />
+                                </div>
+                            </div>
+                        @endif
+
+                        @if ($form->image)
                             <div class="mt-3">
                                 <img draggable="false" class="w-100 h-100 rounded user-select-none pe-none"
                                     src="{{ $form->image->temporaryUrl() }}"

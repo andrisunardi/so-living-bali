@@ -67,6 +67,23 @@ new #[Title('Detail | Property')] class extends Component {
                     </div>
                 </div>
 
+                <div class="row">
+                    <div class="col-sm-5 col-md-4 col-lg-3 col-xl-2">
+                        <div class="fw-bold">Image</div>
+                    </div>
+                    <div class="col-sm-7 col-md-6 col-lg-5 col-xl-4">
+                        @if ($property->image_url)
+                            <a draggable="false" href="{{ route('images', ['path' => $property->image_url]) }}"
+                                target="_blank">
+                                <img draggable="false" class="img-fluid w-100 h-100 rounded mt-2"
+                                    src="{{ route('images', ['path' => $property->image_url]) }}"
+                                    alt="{{ trans('page.property') }} - {{ $property->id }}"
+                                    onerror="this.src='{{ asset('images/image-not-available.png') }}'" />
+                            </a>
+                        @endif
+                    </div>
+                </div>
+
                 <br />
 
                 <h5 class="fw-bold text-uppercase border-bottom pb-3">

@@ -48,6 +48,9 @@ return [
     'user' => 'Pengguna',
     'username' => 'Nama Pengguna',
 
+    'property_id' => 'Properti',
+    'description' => 'Deskripsi',
+    'image_url' => 'URL Gambar',
     'index' => 'Index',
     'index' => 'Index',
     'index' => 'Index',

@@ -18,6 +18,7 @@ class DatabaseSeeder extends Seeder
 
             ContactSeeder::class,
             PropertySeeder::class,
+            PropertyImageSeeder::class,
         ]);
     }
 }

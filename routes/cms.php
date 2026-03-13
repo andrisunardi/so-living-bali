@@ -29,6 +29,13 @@ Route::group(['middleware' => ['auth']], function () {
         ->middleware(['permission:property'])
         ->group(base_path('routes/cms/property.php'));
 
+    // PROPERTY IMAGE
+    Route::prefix('property-image')
+        ->name('property-image.')
+        ->as('property-image.')
+        ->middleware(['permission:property_image'])
+        ->group(base_path('routes/cms/property-image.php'));
+
     // MASTER
     Route::prefix('area')
         ->name('area.')

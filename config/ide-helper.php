@@ -1,5 +1,8 @@
 <?php
 
+use Illuminate\Http\Client\Factory;
+use Illuminate\Http\Client\PendingRequest;
+
 return [
 
     'filename' => '_ide_helper.php',
@@ -65,7 +68,7 @@ return [
     'use_generics_annotations' => true,
 
     'macro_default_return_types' => [
-        Illuminate\Http\Client\Factory::class => Illuminate\Http\Client\PendingRequest::class,
+        Factory::class => PendingRequest::class,
     ],
 
     'additional_relation_types' => [],

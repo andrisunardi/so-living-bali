@@ -21,39 +21,40 @@ namespace App\Models{
  * @property int|null $created_by
  * @property int|null $updated_by
  * @property int|null $deleted_by
- * @property \Illuminate\Support\Carbon $created_at
- * @property \Illuminate\Support\Carbon $updated_at
- * @property \Illuminate\Support\Carbon|null $deleted_at
- * @property-read \Illuminate\Database\Eloquent\Collection<int, \Spatie\Activitylog\Models\Activity> $activities
+ * @property Carbon $created_at
+ * @property Carbon $updated_at
+ * @property Carbon|null $deleted_at
+ * @property-read Collection<int, Activity> $activities
  * @property-read int|null $activities_count
- * @property-read \App\Models\User|null $createdBy
- * @property-read \App\Models\User|null $deletedBy
- * @property-read \App\Models\District $district
- * @property-read \Illuminate\Database\Eloquent\Collection<int, \App\Models\Property> $properties
+ * @property-read User|null $createdBy
+ * @property-read User|null $deletedBy
+ * @property-read District $district
+ * @property-read Collection<int, Property> $properties
  * @property-read int|null $properties_count
- * @property-read \App\Models\User|null $updatedBy
- * @property-read \App\Models\User|null $user
+ * @property-read User|null $updatedBy
+ * @property-read User|null $user
  * @method static \Database\Factories\AreaFactory factory($count = null, $state = [])
- * @method static \Illuminate\Database\Eloquent\Builder<static>|Area inactive()
- * @method static \Illuminate\Database\Eloquent\Builder<static>|Area newModelQuery()
- * @method static \Illuminate\Database\Eloquent\Builder<static>|Area newQuery()
- * @method static \Illuminate\Database\Eloquent\Builder<static>|Area notShown()
- * @method static \Illuminate\Database\Eloquent\Builder<static>|Area onlyTrashed()
- * @method static \Illuminate\Database\Eloquent\Builder<static>|Area query()
- * @method static \Illuminate\Database\Eloquent\Builder<static>|Area show()
- * @method static \Illuminate\Database\Eloquent\Builder<static>|Area whereCreatedAt($value)
- * @method static \Illuminate\Database\Eloquent\Builder<static>|Area whereCreatedBy($value)
- * @method static \Illuminate\Database\Eloquent\Builder<static>|Area whereDeletedAt($value)
- * @method static \Illuminate\Database\Eloquent\Builder<static>|Area whereDeletedBy($value)
- * @method static \Illuminate\Database\Eloquent\Builder<static>|Area whereDistrictId($value)
- * @method static \Illuminate\Database\Eloquent\Builder<static>|Area whereId($value)
- * @method static \Illuminate\Database\Eloquent\Builder<static>|Area whereIsActive($value)
- * @method static \Illuminate\Database\Eloquent\Builder<static>|Area whereIsShow($value)
- * @method static \Illuminate\Database\Eloquent\Builder<static>|Area whereName($value)
- * @method static \Illuminate\Database\Eloquent\Builder<static>|Area whereUpdatedAt($value)
- * @method static \Illuminate\Database\Eloquent\Builder<static>|Area whereUpdatedBy($value)
- * @method static \Illuminate\Database\Eloquent\Builder<static>|Area withTrashed(bool $withTrashed = true)
- * @method static \Illuminate\Database\Eloquent\Builder<static>|Area withoutTrashed()
+ * @method static Builder<static>|Area inactive()
+ * @method static Builder<static>|Area newModelQuery()
+ * @method static Builder<static>|Area newQuery()
+ * @method static Builder<static>|Area notShown()
+ * @method static Builder<static>|Area onlyTrashed()
+ * @method static Builder<static>|Area query()
+ * @method static Builder<static>|Area show()
+ * @method static Builder<static>|Area whereCreatedAt($value)
+ * @method static Builder<static>|Area whereCreatedBy($value)
+ * @method static Builder<static>|Area whereDeletedAt($value)
+ * @method static Builder<static>|Area whereDeletedBy($value)
+ * @method static Builder<static>|Area whereDistrictId($value)
+ * @method static Builder<static>|Area whereId($value)
+ * @method static Builder<static>|Area whereIsActive($value)
+ * @method static Builder<static>|Area whereIsShow($value)
+ * @method static Builder<static>|Area whereName($value)
+ * @method static Builder<static>|Area whereUpdatedAt($value)
+ * @method static Builder<static>|Area whereUpdatedBy($value)
+ * @method static Builder<static>|Area withTrashed(bool $withTrashed = true)
+ * @method static Builder<static>|Area withoutTrashed()
+ * @mixin \Eloquent
  */
 	class Area extends \Eloquent {}
 }
@@ -72,11 +73,11 @@ namespace App\Models{
  * @property Carbon $created_at
  * @property Carbon $updated_at
  * @property Carbon|null $deleted_at
- * @property-read \Illuminate\Database\Eloquent\Collection<int, \Spatie\Activitylog\Models\Activity> $activities
+ * @property-read Collection<int, Activity> $activities
  * @property-read int|null $activities_count
- * @property-read \App\Models\User|null $createdBy
- * @property-read \App\Models\User|null $deletedBy
- * @property-read \App\Models\User|null $updatedBy
+ * @property-read User|null $createdBy
+ * @property-read User|null $deletedBy
+ * @property-read User|null $updatedBy
  * @method static \Database\Factories\ContactFactory factory($count = null, $state = [])
  * @method static \Illuminate\Database\Eloquent\Builder<static>|Contact newModelQuery()
  * @method static \Illuminate\Database\Eloquent\Builder<static>|Contact newQuery()
@@ -114,16 +115,16 @@ namespace App\Models{
  * @property Carbon $created_at
  * @property Carbon $updated_at
  * @property Carbon|null $deleted_at
- * @property-read \Illuminate\Database\Eloquent\Collection<int, \Spatie\Activitylog\Models\Activity> $activities
+ * @property-read Collection<int, Activity> $activities
  * @property-read int|null $activities_count
- * @property-read \Illuminate\Database\Eloquent\Collection<int, \App\Models\Area> $areas
+ * @property-read Collection<int, Area> $areas
  * @property-read int|null $areas_count
- * @property-read \App\Models\User|null $createdBy
- * @property-read \App\Models\User|null $deletedBy
- * @property-read \Illuminate\Database\Eloquent\Collection<int, \App\Models\Property> $properties
+ * @property-read User|null $createdBy
+ * @property-read User|null $deletedBy
+ * @property-read Collection<int, Property> $properties
  * @property-read int|null $properties_count
- * @property-read \App\Models\User|null $updatedBy
- * @property-read \App\Models\User|null $user
+ * @property-read User|null $updatedBy
+ * @property-read User|null $user
  * @method static \Database\Factories\DistrictFactory factory($count = null, $state = [])
  * @method static Builder<static>|District inactive()
  * @method static Builder<static>|District newModelQuery()
@@ -210,14 +211,15 @@ namespace App\Models{
  * @property Carbon $created_at
  * @property Carbon $updated_at
  * @property Carbon|null $deleted_at
- * @property-read \Illuminate\Database\Eloquent\Collection<int, \Spatie\Activitylog\Models\Activity> $activities
+ * @property-read Collection<int, Activity> $activities
  * @property-read int|null $activities_count
- * @property-read \App\Models\Area|null $area
- * @property-read \App\Models\User|null $createdBy
- * @property-read \App\Models\User|null $deletedBy
- * @property-read \App\Models\District|null $district
- * @property-read \App\Models\User|null $updatedBy
- * @property-read \App\Models\User|null $user
+ * @property-read Area|null $area
+ * @property-read User|null $createdBy
+ * @property-read User|null $deletedBy
+ * @property-read District|null $district
+ * @property-read Property|null $images
+ * @property-read User|null $updatedBy
+ * @property-read User|null $user
  * @method static Builder<static>|Property acceptPremium()
  * @method static Builder<static>|Property acceptUpper()
  * @method static Builder<static>|Property afternoon()
@@ -324,6 +326,48 @@ namespace App\Models{
 namespace App\Models{
 /**
  * @property int $id
+ * @property int $property_id
+ * @property string $name
+ * @property string|null $description
+ * @property string|null $image_url
+ * @property int|null $created_by
+ * @property int|null $updated_by
+ * @property int|null $deleted_by
+ * @property Carbon $created_at
+ * @property Carbon $updated_at
+ * @property Carbon|null $deleted_at
+ * @property-read Collection<int, Activity> $activities
+ * @property-read int|null $activities_count
+ * @property-read User|null $createdBy
+ * @property-read User|null $deletedBy
+ * @property-read Property $property
+ * @property-read User|null $updatedBy
+ * @method static \Database\Factories\PropertyImageFactory factory($count = null, $state = [])
+ * @method static \Illuminate\Database\Eloquent\Builder<static>|PropertyImage newModelQuery()
+ * @method static \Illuminate\Database\Eloquent\Builder<static>|PropertyImage newQuery()
+ * @method static \Illuminate\Database\Eloquent\Builder<static>|PropertyImage onlyTrashed()
+ * @method static \Illuminate\Database\Eloquent\Builder<static>|PropertyImage query()
+ * @method static \Illuminate\Database\Eloquent\Builder<static>|PropertyImage whereCreatedAt($value)
+ * @method static \Illuminate\Database\Eloquent\Builder<static>|PropertyImage whereCreatedBy($value)
+ * @method static \Illuminate\Database\Eloquent\Builder<static>|PropertyImage whereDeletedAt($value)
+ * @method static \Illuminate\Database\Eloquent\Builder<static>|PropertyImage whereDeletedBy($value)
+ * @method static \Illuminate\Database\Eloquent\Builder<static>|PropertyImage whereDescription($value)
+ * @method static \Illuminate\Database\Eloquent\Builder<static>|PropertyImage whereId($value)
+ * @method static \Illuminate\Database\Eloquent\Builder<static>|PropertyImage whereImageUrl($value)
+ * @method static \Illuminate\Database\Eloquent\Builder<static>|PropertyImage whereName($value)
+ * @method static \Illuminate\Database\Eloquent\Builder<static>|PropertyImage wherePropertyId($value)
+ * @method static \Illuminate\Database\Eloquent\Builder<static>|PropertyImage whereUpdatedAt($value)
+ * @method static \Illuminate\Database\Eloquent\Builder<static>|PropertyImage whereUpdatedBy($value)
+ * @method static \Illuminate\Database\Eloquent\Builder<static>|PropertyImage withTrashed(bool $withTrashed = true)
+ * @method static \Illuminate\Database\Eloquent\Builder<static>|PropertyImage withoutTrashed()
+ * @mixin \Eloquent
+ */
+	class PropertyImage extends \Eloquent {}
+}
+
+namespace App\Models{
+/**
+ * @property int $id
  * @property string $name
  * @property string $email
  * @property string $phone
@@ -340,17 +384,17 @@ namespace App\Models{
  * @property Carbon $created_at
  * @property Carbon $updated_at
  * @property Carbon|null $deleted_at
- * @property-read \Illuminate\Database\Eloquent\Collection<int, \Spatie\Activitylog\Models\Activity> $activities
+ * @property-read Collection<int, Activity> $activities
  * @property-read int|null $activities_count
  * @property-read User|null $createdBy
  * @property-read User|null $deletedBy
- * @property-read \Illuminate\Database\Eloquent\Collection<int, \Spatie\Permission\Models\Permission> $permissions
+ * @property-read Collection<int, Permission> $permissions
  * @property-read int|null $permissions_count
- * @property-read \Illuminate\Database\Eloquent\Collection<int, User> $properties
+ * @property-read Collection<int, User> $properties
  * @property-read int|null $properties_count
- * @property-read \Illuminate\Database\Eloquent\Collection<int, \Spatie\Permission\Models\Role> $roles
+ * @property-read Collection<int, Role> $roles
  * @property-read int|null $roles_count
- * @property-read \Illuminate\Database\Eloquent\Collection<int, \Laravel\Sanctum\PersonalAccessToken> $tokens
+ * @property-read Collection<int, PersonalAccessToken> $tokens
  * @property-read int|null $tokens_count
  * @property-read User|null $updatedBy
  * @method static Builder<static>|User active()

@@ -225,6 +225,7 @@ return [
         'visit_date' => 'Tanggal Kunjungan',
         'water_source' => 'Sumber Air',
         'when' => 'Kapan',
+        'property_id' => 'Properti',
     ],
 
 ];

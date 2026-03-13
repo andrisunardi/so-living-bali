@@ -199,6 +199,17 @@ new #[Title('Edit | Property')] class extends Component {
                                     alt="{{ trans('index.banner') }} - {{ config('constants.name') }}"
                                     onerror="asset('images/logo.png')">
                             </div>
+                        @elseif ($property->image_url)
+                            <div>
+                                <a draggable="false"
+                                    href="{{ route('images', ['path' => $property->image_url]) }}"
+                                    target="_blank">
+                                    <img draggable="false" class="img-fluid w-100 rounded" width="100"
+                                        src="{{ route('images', ['path' => $property->image_url]) }}"
+                                        alt="{{ trans('page.property') }} - {{ $property->id }}"
+                                        onerror="asset('images/image-not-available.png')" />
+                                </a>
+                            </div>
                         @endif
                     </div>
 
@@ -270,8 +281,8 @@ new #[Title('Edit | Property')] class extends Component {
                                 <span class="fas fa-calendar fa-fw "></span>
                             </div>
                             <input type="date" class="form-control" id="availability_date"
-                                name="availability_date" min="{{ $property->availability_date?->toDateString() }}" max="2099-12-31"
-                                wire:model="form.availability_date" wire:offline.class="disabled"
+                                name="availability_date" min="{{ $property->availability_date?->toDateString() }}"
+                                max="2099-12-31" wire:model="form.availability_date" wire:offline.class="disabled"
                                 wire:offline.attr="disabled" wire:loading.class="disabled"
                                 wire:loading.attr="disabled">
                         </div>

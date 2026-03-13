@@ -1,12 +1,17 @@
 <?php
 
+use Spatie\Permission\DefaultTeamResolver;
+use Spatie\Permission\Models\Permission;
+use Spatie\Permission\Models\Role;
+use Spatie\Permission\WildcardPermission;
+
 return [
 
     'models' => [
 
-        'permission' => Spatie\Permission\Models\Permission::class,
+        'permission' => Permission::class,
 
-        'role' => Spatie\Permission\Models\Role::class,
+        'role' => Role::class,
 
     ],
 
@@ -38,7 +43,7 @@ return [
 
     'teams' => false,
 
-    'team_resolver' => \Spatie\Permission\DefaultTeamResolver::class,
+    'team_resolver' => DefaultTeamResolver::class,
 
     'use_passport_client_credentials' => false,
 
@@ -48,11 +53,11 @@ return [
 
     'enable_wildcard_permission' => false,
 
-    'wildcard_permission' => Spatie\Permission\WildcardPermission::class,
+    'wildcard_permission' => WildcardPermission::class,
 
     'cache' => [
 
-        'expiration_time' => \DateInterval::createFromDateString('24 hours'),
+        'expiration_time' => DateInterval::createFromDateString('24 hours'),
 
         'key' => 'spatie.permission.cache',
 
