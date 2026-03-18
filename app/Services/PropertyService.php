@@ -8,7 +8,6 @@ use Exception;
 use Illuminate\Support\Arr;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Str;
-use Yaza\LaravelGoogleDriveStorage\Gdrive;
 
 class PropertyService
 {
@@ -120,27 +119,30 @@ class PropertyService
             $data['availability_date'] = $data['availability_date'] ?: null;
             $data['visit_date'] = $data['visit_date'] ?: null;
             $data['latitude'] = $data['latitude'] ?: null;
-
-            $folderId = (new GoogleDrive)->renameFolder(
-                folderId: '1h87FQSRUTxhxu1h3QaeYI736UglSxoIK',
-                name: $data['code'],
-            );
-
-            // if ($data['image'] ?? null) {
-            //     $data['image_url'] = (new Upload)->image(
-            //         image: $data['image'],
-            //         directory: "property/{$data['code']}",
-            //         name: 'cover',
-            //     );
-            // }
+            $data['longitude'] = $data['longitude'] ?: null;
 
             $data['slug'] = Str::slug($data['name']);
 
-            Arr::pull($data, 'image');
-
             if ($property->code != $data['code']) {
-                // Gdrive::renameDir("property/{$property->code}", "property/{$data['code']}");
+                $data['folder_id'] = (new GoogleDrive)->renameFolder(
+                    folderId: $property->folder_id,
+                    name: $data['code'],
+                );
             }
+
+            if ($data['image'] ?? null) {
+                (new GoogleDrive)->uploadImage(
+                    image: $data['image'],
+                    name: 'cover',
+                    folderId: $property->id,
+                );
+
+                if ($property->image_url) {
+                    (new GoogleDrive)->delete($property->image_url);
+                }
+            }
+
+            Arr::pull($data, 'image');
 
             $property->update($data);
             $property->refresh();
@@ -156,7 +158,9 @@ class PropertyService
 
     public function delete(Property $property): bool
     {
-        Gdrive::deleteDir($property->code);
+        if ($property->folder_id) {
+            (new GoogleDrive)->delete($property->folder_id);
+        }
 
         return $property->delete();
     }

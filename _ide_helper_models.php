@@ -318,12 +318,12 @@ namespace App\Models{
  * @method static Builder<static>|Property withTrashed(bool $withTrashed = true)
  * @method static Builder<static>|Property withoutTrashed()
  * @method static Builder<static>|Property yearly()
- * @mixin \Eloquent
  * @property string|null $image_path
  * @property string|null $folder_id
  * @property-read string $image
- * @method static \Illuminate\Database\Eloquent\Builder<static>|Property whereFolderId($value)
- * @method static \Illuminate\Database\Eloquent\Builder<static>|Property whereImagePath($value)
+ * @method static Builder<static>|Property whereFolderId($value)
+ * @method static Builder<static>|Property whereImagePath($value)
+ * @mixin \Eloquent
  */
 	class Property extends \Eloquent {}
 }
@@ -432,9 +432,9 @@ namespace App\Models{
  * @method static Builder<static>|User withoutPermission($permissions)
  * @method static Builder<static>|User withoutRole($roles, $guard = null)
  * @method static Builder<static>|User withoutTrashed()
- * @mixin \Eloquent
  * @property string|null $google_refresh_token
- * @method static \Illuminate\Database\Eloquent\Builder<static>|User whereGoogleRefreshToken($value)
+ * @method static Builder<static>|User whereGoogleRefreshToken($value)
+ * @mixin \Eloquent
  */
 	class User extends \Eloquent {}
 }

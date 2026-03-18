@@ -150,4 +150,9 @@ class GoogleDrive
 
         return $file->id;
     }
+
+    public function delete(string $fileId): void
+    {
+        $this->drive->files->delete($fileId);
+    }
 }
