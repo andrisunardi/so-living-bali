@@ -14,6 +14,7 @@
         "diglactic/laravel-breadcrumbs": "^10.0",
         "firebase/php-jwt": "^7.0",
         "garygreen/pretty-routes": "^1.0",
+        "google/apiclient": "^2.19",
         "jantinnerezo/livewire-alert": "^4.0",
         "laravel/envoy": "^2.10",
         "laravel/framework": "^12.0",
