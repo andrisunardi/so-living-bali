@@ -195,6 +195,13 @@ use Spatie\Activitylog\Traits\LogsActivity;
  * @method static Builder<static>|Property withoutTrashed()
  * @method static Builder<static>|Property yearly()
  *
+ * @property string|null $image_path
+ * @property string|null $folder_id
+ * @property-read string $image
+ *
+ * @method static Builder<static>|Property whereFolderId($value)
+ * @method static Builder<static>|Property whereImagePath($value)
+ *
  * @mixin \Eloquent
  */
 class Property extends Model
@@ -267,9 +274,10 @@ class Property extends Model
         'operational_risk',
         'operational_risk_comment',
 
-        'image_url',
+        'image_path',
         'status',
         'slug',
+        'folder_id',
     ];
 
     protected $hidden = [];
@@ -338,9 +346,10 @@ class Property extends Model
             'operational_risk' => PropertyOperationalRisk::class,
             'operational_risk_comment' => 'string',
 
-            'image_url' => 'string',
+            'image_path' => 'string',
             'status' => PropertyStatus::class,
             'slug' => 'string',
+            'folder_id' => 'string',
         ];
     }
 
@@ -362,6 +371,11 @@ class Property extends Model
     public function getUpdatedAtAttribute(string $value): Carbon
     {
         return Carbon::parse($value)->setTimezone(config('app.timezone'));
+    }
+
+    public function getImageAttribute(): string
+    {
+        return "https://lh3.googleusercontent.com/d/{$this->image_path}";
     }
 
     public function scopeOpen(Builder $query): void

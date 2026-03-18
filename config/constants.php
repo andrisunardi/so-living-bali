@@ -27,5 +27,10 @@ return [
         'location_id' => env('GHL_LOCATION_ID'),
     ],
 
+    // FOLDER
+    'folder_id' => [
+        'property' => env('FOLDER_ID_PROPERTY'),
+    ],
+
     'color' => '',
 ];

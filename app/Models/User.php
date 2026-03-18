@@ -86,6 +86,10 @@ use Spatie\Permission\Traits\HasRoles;
  * @method static Builder<static>|User withoutRole($roles, $guard = null)
  * @method static Builder<static>|User withoutTrashed()
  *
+ * @property string|null $google_refresh_token
+ *
+ * @method static Builder<static>|User whereGoogleRefreshToken($value)
+ *
  * @mixin \Eloquent
  */
 class User extends Authenticatable

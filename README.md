@@ -1,22 +1,16 @@
 # long-stay-bali
 Long Stay Bali
 
+Existing Contact At Database
 
-existing contact at database
+Create Contact
+- Check From Phone Number (Unique) Exists
 
-Create contact
-- Check Phone Number Exists
+Whatsapp AI Agent
 
-create new
-phone unique number
-
-whatsapp ai agent
-
-property status pending, on progress, 
-notification i need t he approve, manager will get notification
-it will be online
-
-
+Status Property Pending
+Will Notify And Need To Approve
+Manager Will Get Notification
 
 manual search filter
 location around
@@ -83,7 +77,6 @@ https://tailux.piniastudio.com/tables/advanced-tables
     "isBulkInstallation": false,
     "userId": "Miy4KKYsOGwNJz2ag1Rx"
 }
-
 
 <nav id="navbar">
     <div class="container-md">
@@ -287,3 +280,89 @@ use Illuminate\Support\Str;
 
     //     return "data:{$data->ext};base64," . base64_encode($data->file);
     // }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+delete kl ga kepake
+<?php
+
+namespace App\Http\Controllers;
+
+use App\Libraries\GoogleDrive;
+use Illuminate\Http\Request;
+
+class GoogleDriveController extends Controller
+{
+    public function redirect(GoogleDrive $google)
+    {
+        return redirect($google->getAuthUrl());
+    }
+
+    public function callback(Request $request, GoogleDrive $google)
+    {
+        $google->handleCallback($request->code);
+
+        return redirect('/dashboard')->with('success', 'Google Drive Connected');
+    }
+
+    public function debug(GoogleDrive $google)
+    {
+        return $google->debugAuthUrl();
+    }
+}
+
+Route::get('/google/debug', [GoogleDriveController::class, 'debug']);
+Route::get('/google/redirect', [GoogleDriveController::class,'redirect']);
+Route::get('/google/callback', [GoogleDriveController::class,'callback']);
+
+
+// Route::get('/google/login', function () {
+//     $client = new Client();
+
+//     $client->setClientId(config('services.google.client_id'));
+//     $client->setClientSecret(config('services.google.client_secret'));
+//     $client->setRedirectUri(config('services.google.redirect'));
+
+//     $client->addScope(Drive::DRIVE);
+
+//     $client->setAccessType('offline');
+//     $client->setPrompt('consent');
+
+//     return redirect($client->createAuthUrl());
+
+// });
+
+// Route::get('/google/callback', function () {
+//     $client = new Client();
+
+//     $client->setClientId(config('services.google.client_id'));
+//     $client->setClientSecret(config('services.google.client_secret'));
+//     $client->setRedirectUri(config('services.google.redirect'));
+
+//     $token = $client->fetchAccessTokenWithAuthCode(request('code'));
+
+//     if (isset($token['refresh_token'])) {
+//         Auth::user()->update([
+//             'google_refresh_token' => $token['refresh_token']
+//         ]);
+//     }
+// });
+
+// Route::get('/images/{path}', function ($path) {
+//     $data = Gdrive::get($path);
+
+//     return response($data->file, 200)
+//         ->header('Content-Type', $data->ext);
+
+// })->where('path', '.*')->name('images');

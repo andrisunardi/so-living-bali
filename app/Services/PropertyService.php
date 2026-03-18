@@ -2,7 +2,7 @@
 
 namespace App\Services;
 
-use App\Libraries\Upload;
+use App\Libraries\GoogleDrive;
 use App\Models\Property;
 use Exception;
 use Illuminate\Support\Arr;
@@ -41,14 +41,14 @@ class PropertyService
                         ->orWhereRelation('user', 'email', 'like', "%{$search}%");
                 });
             })
-            ->when($userId, fn($q) => $q->where('user_id', $userId))
-            ->when($districtId, fn($q) => $q->where('district_id', $districtId))
-            ->when($areaId, fn($q) => $q->where('area_id', $areaId))
-            ->when($status, fn($q) => $q->where('status', $status))
-            ->when($startDate, fn($q) => $q->whereDate('created_at', '>=', $startDate))
-            ->when($endDate, fn($q) => $q->whereDate('created_at', '<=', $endDate))
-            ->when($random, fn($q) => $q->inRandomOrder())
-            ->when($trash, fn($q) => $q->onlyTrashed())
+            ->when($userId, fn ($q) => $q->where('user_id', $userId))
+            ->when($districtId, fn ($q) => $q->where('district_id', $districtId))
+            ->when($areaId, fn ($q) => $q->where('area_id', $areaId))
+            ->when($status, fn ($q) => $q->where('status', $status))
+            ->when($startDate, fn ($q) => $q->whereDate('created_at', '>=', $startDate))
+            ->when($endDate, fn ($q) => $q->whereDate('created_at', '<=', $endDate))
+            ->when($random, fn ($q) => $q->inRandomOrder())
+            ->when($trash, fn ($q) => $q->onlyTrashed())
             ->orderBy($orderBy, $sortBy)
             ->limit($limit);
 
@@ -86,12 +86,17 @@ class PropertyService
 
             $data['slug'] = Str::slug($data['name']);
 
+            $data['folder_id'] = (new GoogleDrive)->createFolder(
+                name: $data['code'],
+                parentId: config('constants.folder_id.property'),
+            );
+
             if ($data['image'] ?? null) {
-                // $data['image_url'] = (new Upload)->image(
-                //     image: $data['image'],
-                //     directory: "property/{$data['code']}",
-                //     name: 'cover',
-                // );
+                $data['image_path'] = (new GoogleDrive)->uploadImage(
+                    image: $data['image'],
+                    name: 'cover',
+                    folderId: $data['folder_id'],
+                );
             }
 
             Arr::pull($data, 'image');
@@ -116,13 +121,18 @@ class PropertyService
             $data['visit_date'] = $data['visit_date'] ?: null;
             $data['latitude'] = $data['latitude'] ?: null;
 
-            if ($data['image'] ?? null) {
-                // $data['image_url'] = (new Upload)->image(
-                //     image: $data['image'],
-                //     directory: "property/{$data['code']}",
-                //     name: 'cover',
-                // );
-            }
+            $folderId = (new GoogleDrive)->renameFolder(
+                folderId: '1h87FQSRUTxhxu1h3QaeYI736UglSxoIK',
+                name: $data['code'],
+            );
+
+            // if ($data['image'] ?? null) {
+            //     $data['image_url'] = (new Upload)->image(
+            //         image: $data['image'],
+            //         directory: "property/{$data['code']}",
+            //         name: 'cover',
+            //     );
+            // }
 
             $data['slug'] = Str::slug($data['name']);
 
