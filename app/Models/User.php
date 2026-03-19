@@ -30,8 +30,9 @@ use Spatie\Permission\Traits\HasRoles;
  * @property string $phone
  * @property string $username
  * @property string $password
- * @property string|null $image_url
+ * @property string|null $image_path
  * @property bool $is_active
+ * @property string|null $google_refresh_token
  * @property Carbon|null $email_verified_at
  * @property Carbon|null $phone_verified_at
  * @property int|null $created_by
@@ -47,7 +48,7 @@ use Spatie\Permission\Traits\HasRoles;
  * @property-read User|null $deletedBy
  * @property-read Collection<int, Permission> $permissions
  * @property-read int|null $permissions_count
- * @property-read Collection<int, User> $properties
+ * @property-read Collection<int, Property> $properties
  * @property-read int|null $properties_count
  * @property-read Collection<int, Role> $roles
  * @property-read int|null $roles_count
@@ -70,8 +71,9 @@ use Spatie\Permission\Traits\HasRoles;
  * @method static Builder<static>|User whereDeletedBy($value)
  * @method static Builder<static>|User whereEmail($value)
  * @method static Builder<static>|User whereEmailVerifiedAt($value)
+ * @method static Builder<static>|User whereGoogleRefreshToken($value)
  * @method static Builder<static>|User whereId($value)
- * @method static Builder<static>|User whereImageUrl($value)
+ * @method static Builder<static>|User whereImagePath($value)
  * @method static Builder<static>|User whereIsActive($value)
  * @method static Builder<static>|User whereName($value)
  * @method static Builder<static>|User wherePassword($value)
@@ -85,10 +87,6 @@ use Spatie\Permission\Traits\HasRoles;
  * @method static Builder<static>|User withoutPermission($permissions)
  * @method static Builder<static>|User withoutRole($roles, $guard = null)
  * @method static Builder<static>|User withoutTrashed()
- *
- * @property string|null $google_refresh_token
- *
- * @method static Builder<static>|User whereGoogleRefreshToken($value)
  *
  * @mixin \Eloquent
  */
@@ -108,7 +106,7 @@ class User extends Authenticatable
         'phone',
         'username',
         'password',
-        'image_url',
+        'image_path',
         'phone_verified_at',
         'email_verified_at',
         'is_active',
@@ -130,7 +128,7 @@ class User extends Authenticatable
             'phone' => 'string',
             'username' => 'string',
             'password' => 'hashed',
-            'image_url' => 'string',
+            'image_path' => 'string',
             'phone_verified_at' => 'datetime',
             'email_verified_at' => 'datetime',
             'is_active' => 'boolean',

@@ -199,13 +199,11 @@ new #[Title('Edit | Property')] class extends Component {
                                     alt="{{ trans('index.banner') }} - {{ config('constants.name') }}"
                                     onerror="asset('images/logo.png')">
                             </div>
-                        @elseif ($property->image_url)
-                            <div>
-                                <a draggable="false"
-                                    href="{{ route('images', ['path' => $property->image_url]) }}"
-                                    target="_blank">
+                        @elseif ($property->image_path)
+                            <div class="mt-3">
+                                <a draggable="false" href="{{ $property->image }}" target="_blank">
                                     <img draggable="false" class="img-fluid w-100 rounded" width="100"
-                                        src="{{ route('images', ['path' => $property->image_url]) }}"
+                                        src="{{ $property->image }}"
                                         alt="{{ trans('page.property') }} - {{ $property->id }}"
                                         onerror="asset('images/image-not-available.png')" />
                                 </a>

@@ -15,7 +15,7 @@ class PropertyImageFactory extends Factory
             'property_id' => $property->id,
             'name' => fake()->name(),
             'description' => fake()->paragraph(),
-            'image_url' => fake()->imageUrl(),
+            'image_path' => null,
         ];
     }
 }

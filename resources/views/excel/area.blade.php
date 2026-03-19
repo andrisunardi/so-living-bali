@@ -74,7 +74,7 @@
                     {{ Str::yesNo($area->is_active) }}
                 </td>
                 <td valign="middle" align="center">
-                    {{-- {{ $area->properties_count }} --}}
+                    {{ $area->properties_count }}
                 </td>
                 <td valign="middle" align="left">
                     {{ $area->createdBy?->name }}

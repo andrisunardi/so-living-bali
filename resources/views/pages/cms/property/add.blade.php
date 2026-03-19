@@ -307,7 +307,7 @@ new #[Title('Add | Property')] class extends Component {
                         @enderror
 
                         @if ($form->image)
-                            <div>
+                            <div class="mt-3">
                                 <div class="alert alert-info w-100" role="alert" wire:loading
                                     wire:target="form.image">
                                     {{ trans('message.please_wait_until_the_uploading_finished') }}

@@ -15,7 +15,7 @@ class UserFactory extends Factory
             'phone' => fake()->unique()->phoneNumber(),
             'username' => fake()->unique()->userName(),
             'password' => Hash::make(12345678),
-            'image_url' => fake()->imageUrl(),
+            'image_url' => null,
             'is_active' => fake()->boolean(),
         ];
     }

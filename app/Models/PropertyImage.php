@@ -20,7 +20,7 @@ use Spatie\Activitylog\Traits\LogsActivity;
  * @property int $property_id
  * @property string $name
  * @property string|null $description
- * @property string|null $image_url
+ * @property string|null $image_path
  * @property int|null $created_by
  * @property int|null $updated_by
  * @property int|null $deleted_by
@@ -45,7 +45,7 @@ use Spatie\Activitylog\Traits\LogsActivity;
  * @method static \Illuminate\Database\Eloquent\Builder<static>|PropertyImage whereDeletedBy($value)
  * @method static \Illuminate\Database\Eloquent\Builder<static>|PropertyImage whereDescription($value)
  * @method static \Illuminate\Database\Eloquent\Builder<static>|PropertyImage whereId($value)
- * @method static \Illuminate\Database\Eloquent\Builder<static>|PropertyImage whereImageUrl($value)
+ * @method static \Illuminate\Database\Eloquent\Builder<static>|PropertyImage whereImagePath($value)
  * @method static \Illuminate\Database\Eloquent\Builder<static>|PropertyImage whereName($value)
  * @method static \Illuminate\Database\Eloquent\Builder<static>|PropertyImage wherePropertyId($value)
  * @method static \Illuminate\Database\Eloquent\Builder<static>|PropertyImage whereUpdatedAt($value)
@@ -67,7 +67,7 @@ class PropertyImage extends Model
         'property_id',
         'name',
         'description',
-        'image_url',
+        'image_path',
     ];
 
     protected $hidden = [];
@@ -78,7 +78,7 @@ class PropertyImage extends Model
             'property_id' => 'integer',
             'name' => 'string',
             'description' => 'string',
-            'image_url' => 'string',
+            'image_path' => 'string',
         ];
     }
 

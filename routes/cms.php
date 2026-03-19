@@ -50,6 +50,12 @@ Route::group(['middleware' => ['auth']], function () {
         ->group(base_path('routes/cms/district.php'));
 
     // ACCESS
+    Route::prefix('oauth')
+        ->name('oauth.')
+        ->as('oauth.')
+        ->middleware(['oauth:oauth'])
+        ->group(base_path('routes/cms/oauth.php'));
+
     Route::prefix('permission')
         ->name('permission.')
         ->as('permission.')

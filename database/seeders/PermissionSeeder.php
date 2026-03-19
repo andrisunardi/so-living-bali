@@ -48,6 +48,12 @@ class PermissionSeeder extends Seeder
         Permission::create(['name' => 'district.detail'])->assignRole('Admin');
 
         // ACCESS
+        Permission::create(['name' => 'oauth'])->assignRole('Admin');
+        Permission::create(['name' => 'oauth.add'])->assignRole('Admin');
+        Permission::create(['name' => 'oauth.edit'])->assignRole('Admin');
+        Permission::create(['name' => 'oauth.delete'])->assignRole('Admin');
+        Permission::create(['name' => 'oauth.detail'])->assignRole('Admin');
+
         Permission::create(['name' => 'permission'])->assignRole('Admin');
         Permission::create(['name' => 'permission.add'])->assignRole('Admin');
         Permission::create(['name' => 'permission.edit'])->assignRole('Admin');

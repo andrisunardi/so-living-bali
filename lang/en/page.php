@@ -23,6 +23,7 @@ return [
     'area' => 'Area',
     'district' => 'District',
 
+    'oauth' => 'Oauth',
     'permission' => 'Permission',
     'role' => 'Role',
     'user' => 'User',

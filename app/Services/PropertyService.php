@@ -131,14 +131,14 @@ class PropertyService
             }
 
             if ($data['image'] ?? null) {
-                (new GoogleDrive)->uploadImage(
+                $data['image_path'] = (new GoogleDrive)->uploadImage(
                     image: $data['image'],
                     name: 'cover',
-                    folderId: $property->id,
+                    folderId: $property->folder_id,
                 );
 
-                if ($property->image_url) {
-                    (new GoogleDrive)->delete($property->image_url);
+                if ($property->image_path) {
+                    (new GoogleDrive)->delete($property->image_path);
                 }
             }
 

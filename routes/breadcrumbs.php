@@ -191,6 +191,27 @@ Breadcrumbs::for('cms.district.detail', function (BreadcrumbTrail $trail, $distr
 });
 
 // ACCESS
+// OAUTH
+Breadcrumbs::for('cms.oauth.index', function (BreadcrumbTrail $trail) {
+    $trail->parent('cms.home');
+    $trail->push(trans('page.oauth'), route('cms.oauth.index'), ['icon' => 'fas fa-gears']);
+});
+
+Breadcrumbs::for('cms.oauth.add', function (BreadcrumbTrail $trail) {
+    $trail->parent('cms.oauth.index');
+    $trail->push(trans('index.add'), route('cms.oauth.add'), ['icon' => 'fas fa-plus']);
+});
+
+Breadcrumbs::for('cms.oauth.edit', function (BreadcrumbTrail $trail, $oauth) {
+    $trail->parent('cms.oauth.index');
+    $trail->push(trans('index.edit'), route('cms.oauth.edit', $oauth), ['icon' => 'fas fa-edit']);
+});
+
+Breadcrumbs::for('cms.oauth.detail', function (BreadcrumbTrail $trail, $oauth) {
+    $trail->parent('cms.oauth.index');
+    $trail->push(trans('index.detail'), route('cms.oauth.detail', $oauth), ['icon' => 'fas fa-list']);
+});
+
 // PERMISSION
 Breadcrumbs::for('cms.permission.index', function (BreadcrumbTrail $trail) {
     $trail->parent('cms.home');

@@ -91,9 +91,10 @@ class PropertyFactory extends Factory
             'operational_risk' => fake()->randomElement(PropertyOperationalRisk::cases()),
             'operational_risk_comment' => fake()->text(),
 
-            'image_url' => fake()->imageUrl(),
+            'image_path' => null,
             'status' => fake()->randomElement(PropertyStatus::cases()),
             'slug' => $slug,
+            'folder_id' => null,
         ];
     }
 }

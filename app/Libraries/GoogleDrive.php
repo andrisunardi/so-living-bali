@@ -2,12 +2,12 @@
 
 namespace App\Libraries;
 
+use App\Models\Oauth;
 use Buglinjo\LaravelWebp\Webp;
 use Google\Client;
 use Google\Service\Drive;
 use Google\Service\Drive\DriveFile;
 use Google\Service\Drive\Permission;
-use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Storage;
 use Illuminate\Support\Str;
 use Livewire\Features\SupportFileUploads\TemporaryUploadedFile;
@@ -25,7 +25,8 @@ class GoogleDrive
 
         $client->addScope(Drive::DRIVE);
 
-        $refreshToken = Auth::user()?->google_refresh_token;
+        $oauth = Oauth::where('code', 'GOOGLEDRIVE')->firstOrFail();
+        $refreshToken = $oauth->refresh_token;
 
         if (! $refreshToken) {
             throw new \Exception('Google refresh token not found');

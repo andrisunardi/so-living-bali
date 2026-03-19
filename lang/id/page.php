@@ -23,10 +23,16 @@ return [
     'area' => 'Area',
     'district' => 'Kecamatan',
 
+    'oauth' => 'Oauth',
     'permission' => 'Izin',
     'role' => 'Peran',
     'user' => 'Pengguna',
-    'account' => 'Akun',
+
+    'profile' => 'Profil',
+    'edit_profile' => 'Ubah Profil',
+    'change_password' => 'Ganti Password',
+    'setting' => 'Pengaturan',
+    'activity' => 'Aktivitas',
     'logout' => 'Keluar',
 
 ];

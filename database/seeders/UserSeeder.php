@@ -16,7 +16,7 @@ class UserSeeder extends Seeder
             'phone' => '1234567890',
             'username' => 'admin',
             'password' => Hash::make('12345678'),
-            'image_url' => null,
+            'image_path' => null,
             'is_active' => true,
         ])->assignRole('Admin');
 
@@ -26,7 +26,7 @@ class UserSeeder extends Seeder
             'phone' => '0123456789',
             'username' => 'agent',
             'password' => Hash::make('12345678'),
-            'image_url' => null,
+            'image_path' => null,
             'is_active' => true,
         ])->assignRole('Agent');
     }

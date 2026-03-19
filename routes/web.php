@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\GoHighLevelController;
+use App\Http\Controllers\GoogleController;
 use App\Http\Middleware\Localization;
 use Illuminate\Support\Facades\App;
 use Illuminate\Support\Facades\Route;
@@ -25,3 +26,6 @@ Route::group(['middleware' => [Localization::class]], function () {
 });
 
 Route::get('/oauth', [GoHighLevelController::class, 'oauth']);
+
+Route::get('/google/redirect', [GoogleController::class, 'redirect'])->name('google.redirect');
+Route::get('/google/callback', [GoogleController::class, 'callback'])->name('google.callback');

@@ -155,6 +155,54 @@ namespace App\Models{
  * @property int $id
  * @property string $code
  * @property string $name
+ * @property string $refresh_token
+ * @property string $access_token
+ * @property string $token_type
+ * @property int $expires_in
+ * @property string $scope
+ * @property int $created
+ * @property int|null $created_by
+ * @property int|null $updated_by
+ * @property int|null $deleted_by
+ * @property \Illuminate\Support\Carbon $created_at
+ * @property \Illuminate\Support\Carbon $updated_at
+ * @property \Illuminate\Support\Carbon|null $deleted_at
+ * @property-read \Illuminate\Database\Eloquent\Collection<int, \Spatie\Activitylog\Models\Activity> $activities
+ * @property-read int|null $activities_count
+ * @property-read \App\Models\User|null $createdBy
+ * @property-read \App\Models\User|null $deletedBy
+ * @property-read \App\Models\User|null $updatedBy
+ * @method static \Database\Factories\OauthFactory factory($count = null, $state = [])
+ * @method static \Illuminate\Database\Eloquent\Builder<static>|Oauth newModelQuery()
+ * @method static \Illuminate\Database\Eloquent\Builder<static>|Oauth newQuery()
+ * @method static \Illuminate\Database\Eloquent\Builder<static>|Oauth onlyTrashed()
+ * @method static \Illuminate\Database\Eloquent\Builder<static>|Oauth query()
+ * @method static \Illuminate\Database\Eloquent\Builder<static>|Oauth whereAccessToken($value)
+ * @method static \Illuminate\Database\Eloquent\Builder<static>|Oauth whereCode($value)
+ * @method static \Illuminate\Database\Eloquent\Builder<static>|Oauth whereCreated($value)
+ * @method static \Illuminate\Database\Eloquent\Builder<static>|Oauth whereCreatedAt($value)
+ * @method static \Illuminate\Database\Eloquent\Builder<static>|Oauth whereCreatedBy($value)
+ * @method static \Illuminate\Database\Eloquent\Builder<static>|Oauth whereDeletedAt($value)
+ * @method static \Illuminate\Database\Eloquent\Builder<static>|Oauth whereDeletedBy($value)
+ * @method static \Illuminate\Database\Eloquent\Builder<static>|Oauth whereExpiresIn($value)
+ * @method static \Illuminate\Database\Eloquent\Builder<static>|Oauth whereId($value)
+ * @method static \Illuminate\Database\Eloquent\Builder<static>|Oauth whereName($value)
+ * @method static \Illuminate\Database\Eloquent\Builder<static>|Oauth whereRefreshToken($value)
+ * @method static \Illuminate\Database\Eloquent\Builder<static>|Oauth whereScope($value)
+ * @method static \Illuminate\Database\Eloquent\Builder<static>|Oauth whereTokenType($value)
+ * @method static \Illuminate\Database\Eloquent\Builder<static>|Oauth whereUpdatedAt($value)
+ * @method static \Illuminate\Database\Eloquent\Builder<static>|Oauth whereUpdatedBy($value)
+ * @method static \Illuminate\Database\Eloquent\Builder<static>|Oauth withTrashed(bool $withTrashed = true)
+ * @method static \Illuminate\Database\Eloquent\Builder<static>|Oauth withoutTrashed()
+ */
+	class Oauth extends \Eloquent {}
+}
+
+namespace App\Models{
+/**
+ * @property int $id
+ * @property string $code
+ * @property string $name
  * @property int|null $user_id
  * @property Carbon|null $availability_date
  * @property Carbon|null $visit_date
@@ -202,7 +250,6 @@ namespace App\Models{
  * @property PropertyTargetProfile|null $target_profile
  * @property PropertyOperationalRisk|null $operational_risk
  * @property string|null $operational_risk_comment
- * @property string|null $image_url
  * @property PropertyStatus $status
  * @property string $slug
  * @property int|null $created_by
@@ -334,7 +381,7 @@ namespace App\Models{
  * @property int $property_id
  * @property string $name
  * @property string|null $description
- * @property string|null $image_url
+ * @property string|null $image_path
  * @property int|null $created_by
  * @property int|null $updated_by
  * @property int|null $deleted_by
@@ -358,7 +405,7 @@ namespace App\Models{
  * @method static \Illuminate\Database\Eloquent\Builder<static>|PropertyImage whereDeletedBy($value)
  * @method static \Illuminate\Database\Eloquent\Builder<static>|PropertyImage whereDescription($value)
  * @method static \Illuminate\Database\Eloquent\Builder<static>|PropertyImage whereId($value)
- * @method static \Illuminate\Database\Eloquent\Builder<static>|PropertyImage whereImageUrl($value)
+ * @method static \Illuminate\Database\Eloquent\Builder<static>|PropertyImage whereImagePath($value)
  * @method static \Illuminate\Database\Eloquent\Builder<static>|PropertyImage whereName($value)
  * @method static \Illuminate\Database\Eloquent\Builder<static>|PropertyImage wherePropertyId($value)
  * @method static \Illuminate\Database\Eloquent\Builder<static>|PropertyImage whereUpdatedAt($value)
@@ -378,8 +425,9 @@ namespace App\Models{
  * @property string $phone
  * @property string $username
  * @property string $password
- * @property string|null $image_url
+ * @property string|null $image_path
  * @property bool $is_active
+ * @property string|null $google_refresh_token
  * @property Carbon|null $email_verified_at
  * @property Carbon|null $phone_verified_at
  * @property int|null $created_by
@@ -395,7 +443,7 @@ namespace App\Models{
  * @property-read User|null $deletedBy
  * @property-read Collection<int, Permission> $permissions
  * @property-read int|null $permissions_count
- * @property-read Collection<int, User> $properties
+ * @property-read Collection<int, Property> $properties
  * @property-read int|null $properties_count
  * @property-read Collection<int, Role> $roles
  * @property-read int|null $roles_count
@@ -417,8 +465,9 @@ namespace App\Models{
  * @method static Builder<static>|User whereDeletedBy($value)
  * @method static Builder<static>|User whereEmail($value)
  * @method static Builder<static>|User whereEmailVerifiedAt($value)
+ * @method static Builder<static>|User whereGoogleRefreshToken($value)
  * @method static Builder<static>|User whereId($value)
- * @method static Builder<static>|User whereImageUrl($value)
+ * @method static Builder<static>|User whereImagePath($value)
  * @method static Builder<static>|User whereIsActive($value)
  * @method static Builder<static>|User whereName($value)
  * @method static Builder<static>|User wherePassword($value)
@@ -432,8 +481,6 @@ namespace App\Models{
  * @method static Builder<static>|User withoutPermission($permissions)
  * @method static Builder<static>|User withoutRole($roles, $guard = null)
  * @method static Builder<static>|User withoutTrashed()
- * @property string|null $google_refresh_token
- * @method static Builder<static>|User whereGoogleRefreshToken($value)
  * @mixin \Eloquent
  */
 	class User extends \Eloquent {}

@@ -77,7 +77,6 @@ use Spatie\Activitylog\Traits\LogsActivity;
  * @property PropertyTargetProfile|null $target_profile
  * @property PropertyOperationalRisk|null $operational_risk
  * @property string|null $operational_risk_comment
- * @property string|null $image_url
  * @property PropertyStatus $status
  * @property string $slug
  * @property int|null $created_by

@@ -16,7 +16,7 @@ return new class extends Migration
             $table->string('phone', 20)->unique();
             $table->string('username', 50)->unique();
             $table->string('password', 60);
-            $table->string('image_url', 200)->nullable();
+            $table->string('image_path', 50)->unique()->nullable();
             $table->boolean('is_active')->unsigned()->default(true);
             $table->text('google_refresh_token')->nullable();
             $table->timestamp('email_verified_at')->nullable();
