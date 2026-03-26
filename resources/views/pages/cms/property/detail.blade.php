@@ -486,6 +486,23 @@ new #[Title('Detail | Property')] class extends Component {
 
                 <div class="row">
                     <div class="col-sm-5 col-md-4 col-lg-3 col-xl-2">
+                        <div class="fw-bold">Internet Speedtest Image</div>
+                    </div>
+                    <div class="col-sm-7 col-md-6 col-lg-5 col-xl-4">
+                        @if ($property->internet_speedtest_image_path)
+                            <a draggable="false" href="{{ $property->internet_speedtest_image }}"
+                                target="_blank">
+                                <img draggable="false" class="img-fluid w-100 h-100 rounded mt-2"
+                                    src="{{ $property->internet_speedtest_image }}"
+                                    alt="{{ trans('page.property') }} - {{ $property->id }}"
+                                    onerror="this.src='{{ asset('images/image-not-available.png') }}'" />
+                            </a>
+                        @endif
+                    </div>
+                </div>
+
+                <div class="row">
+                    <div class="col-sm-5 col-md-4 col-lg-3 col-xl-2">
                         <div class="fw-bold">{{ trans('property.power_backup') }}</div>
                     </div>
                     <div class="col-sm-7 col-md-8 col-lg-9 col-xl-10">

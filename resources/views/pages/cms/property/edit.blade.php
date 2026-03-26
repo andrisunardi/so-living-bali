@@ -794,7 +794,7 @@ new #[Title('Edit | Property')] class extends Component {
 
                     <div class="col-sm-6">
                         <label class="form-label" for="minimum_rental_duration_months">
-                            {{ trans('property.minimum_rental_duration_months') }}
+                            {{ trans('property.minimum_rental_duration') }}
                         </label>
                         <div class="input-group">
                             <div class="input-group-text">

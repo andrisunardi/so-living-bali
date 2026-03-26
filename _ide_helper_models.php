@@ -371,10 +371,10 @@ namespace App\Models{
  * @property-read string $image
  * @method static Builder<static>|Property whereFolderId($value)
  * @method static Builder<static>|Property whereImagePath($value)
- * @mixin \Eloquent
  * @property string|null $internet_speedtest_image_path
  * @property-read string $internet_speedtest_image
- * @method static \Illuminate\Database\Eloquent\Builder<static>|Property whereInternetSpeedtestImagePath($value)
+ * @method static Builder<static>|Property whereInternetSpeedtestImagePath($value)
+ * @mixin \Eloquent
  */
 	class Property extends \Eloquent {}
 }
