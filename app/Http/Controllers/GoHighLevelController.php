@@ -33,7 +33,6 @@ class GoHighLevelController extends Controller
         $oauth->token_type = $data['token_type'];
         $oauth->expires_in = $data['expires_in'];
         $oauth->scope = $data['scope'];
-        $oauth->created = $data['created'];
         $oauth->save();
 
         session()->flash('success', [
