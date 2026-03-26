@@ -41,7 +41,7 @@ class GoogleController extends Controller
             abort(400);
         }
 
-        $oauth = Oauth::where('code', 'GOOGLEDRIVE')->firstOrFail();
+        $oauth = Oauth::firstOrCreate(['code' => 'GOOGLEDRIVE']);
         $oauth->refresh_token = $token['refresh_token'];
         $oauth->access_token = $token['access_token'];
         $oauth->token_type = $token['token_type'];
@@ -49,6 +49,11 @@ class GoogleController extends Controller
         $oauth->scope = $token['scope'];
         $oauth->created = $token['created'];
         $oauth->save();
+
+        session()->flash('success', [
+            'title' => trans('index.connect') . ' ' . trans('index.success'),
+            'message' => trans('page.oauth') . ' ' . trans('message.has_been_successfully_connected'),
+        ]);
 
         return redirect()->route('cms.home');
     }

@@ -51,7 +51,7 @@ return [
     'yes' => 'Yes',
 
     'image_temporary_url' => 'Image Temporary Url',
-    'index' => 'Index',
+    'connect' => 'Connect',
     'index' => 'Index',
     'index' => 'Index',
     'index' => 'Index',

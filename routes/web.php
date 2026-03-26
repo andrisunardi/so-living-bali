@@ -24,7 +24,10 @@ Route::group(['middleware' => [Localization::class]], function () {
     Route::prefix('cms')->name('cms.')->as('cms.')->group(base_path('routes/cms.php'));
 });
 
-Route::get('/oauth', [GoHighLevelController::class, 'oauth']);
+Route::prefix('ghl')
+    ->name('ghl.')
+    ->as('ghl.')
+    ->group(base_path('routes/ghl.php'));
 
 Route::prefix('google')
     ->name('google.')
