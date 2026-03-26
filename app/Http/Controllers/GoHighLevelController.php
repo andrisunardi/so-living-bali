@@ -8,7 +8,7 @@ use Illuminate\Support\Facades\Http;
 
 class GoHighLevelController extends Controller
 {
-    public function oauth(Request $request)
+    public function callback(Request $request)
     {
         $code = $request->query('code');
 
@@ -36,8 +36,8 @@ class GoHighLevelController extends Controller
         $oauth->save();
 
         session()->flash('success', [
-            'title' => trans('index.connect') . ' ' . trans('index.success'),
-            'message' => trans('page.oauth') . ' ' . trans('message.has_been_successfully_connected'),
+            'title' => trans('index.connect').' '.trans('index.success'),
+            'message' => trans('page.oauth').' '.trans('message.has_been_successfully_connected'),
         ]);
 
         return redirect()->route('cms.home');

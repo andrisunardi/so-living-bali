@@ -51,8 +51,8 @@ class GoogleController extends Controller
         $oauth->save();
 
         session()->flash('success', [
-            'title' => trans('index.connect') . ' ' . trans('index.success'),
-            'message' => trans('page.oauth') . ' ' . trans('message.has_been_successfully_connected'),
+            'title' => trans('index.connect').' '.trans('index.success'),
+            'message' => trans('page.oauth').' '.trans('message.has_been_successfully_connected'),
         ]);
 
         return redirect()->route('cms.home');

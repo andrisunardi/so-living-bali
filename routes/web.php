@@ -1,6 +1,5 @@
 <?php
 
-use App\Http\Controllers\GoHighLevelController;
 use App\Http\Middleware\Localization;
 use Illuminate\Support\Facades\App;
 use Illuminate\Support\Facades\Route;
@@ -24,10 +23,10 @@ Route::group(['middleware' => [Localization::class]], function () {
     Route::prefix('cms')->name('cms.')->as('cms.')->group(base_path('routes/cms.php'));
 });
 
-Route::prefix('ghl')
-    ->name('ghl.')
-    ->as('ghl.')
-    ->group(base_path('routes/ghl.php'));
+Route::prefix('leadconnector')
+    ->name('leadconnector.')
+    ->as('leadconnector.')
+    ->group(base_path('routes/leadconnector.php'));
 
 Route::prefix('google')
     ->name('google.')
