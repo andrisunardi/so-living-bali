@@ -22,5 +22,6 @@ return [
     'has_been_successfully_exported' => 'has been successfully exported.',
     'has_been_successfully_synced' => 'has been successfully synced.',
     'has_been_successfully_connected' => 'has been successfully connected.',
+    'has_been_successfully_refreshed' => 'has been successfully refreshed.',
 
 ];

@@ -70,6 +70,11 @@ class GoHighLevelController extends Controller
         $oauth->scope = $data['scope'];
         $oauth->save();
 
+        session()->flash('success', [
+            'title' => trans('index.refresh').' '.trans('index.success'),
+            'message' => trans('page.oauth').' '.trans('message.has_been_successfully_refreshed'),
+        ]);
+
         return redirect()->route('cms.home');
     }
 }

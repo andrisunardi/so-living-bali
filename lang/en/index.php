@@ -52,7 +52,7 @@ return [
 
     'image_temporary_url' => 'Image Temporary Url',
     'connect' => 'Connect',
-    'index' => 'Index',
+    'index.refresh' => 'Refresh',
     'index' => 'Index',
     'index' => 'Index',
     'index' => 'Index',
