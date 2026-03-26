@@ -8,7 +8,7 @@ use Illuminate\Support\Facades\Http;
 
 class GoHighLevelController extends Controller
 {
-    public function callback(Request $request)
+    public function oauth(Request $request)
     {
         $code = $request->query('code');
 
