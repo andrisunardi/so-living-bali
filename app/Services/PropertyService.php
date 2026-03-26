@@ -159,7 +159,7 @@ class PropertyService
     public function delete(Property $property): bool
     {
         if ($property->folder_id) {
-            (new GoogleDrive)->delete($property->folder_id);
+            (new GoogleDrive)->delete(fileId: $property->folder_id);
         }
 
         return $property->delete();

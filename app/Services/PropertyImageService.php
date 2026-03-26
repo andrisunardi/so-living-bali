@@ -2,7 +2,7 @@
 
 namespace App\Services;
 
-use App\Libraries\Upload;
+use App\Libraries\GoogleDrive;
 use App\Models\Property;
 use App\Models\PropertyImage;
 use Exception;
@@ -70,10 +70,10 @@ class PropertyImageService
             $property = Property::findOrFail($data['property_id']);
 
             if ($data['image'] ?? null) {
-                $data['image_url'] = (new Upload)->image(
+                $data['image_path'] = (new GoogleDrive)->uploadImage(
                     image: $data['image'],
-                    directory: "property/{$property->code}",
                     name: Str::slug($data['name']),
+                    folderId: $property->folder_id,
                 );
             }
 
@@ -98,11 +98,15 @@ class PropertyImageService
             $property = Property::findOrFail($data['property_id']);
 
             if ($data['image'] ?? null) {
-                $data['image_url'] = (new Upload)->image(
+                $data['image_path'] = (new GoogleDrive)->uploadImage(
                     image: $data['image'],
-                    directory: "property/{$property->code}",
                     name: Str::slug($data['name']),
+                    folderId: $property->folder_id,
                 );
+
+                if ($propertyImage->image_path) {
+                    (new GoogleDrive)->delete($propertyImage->image_path);
+                }
             }
 
             Arr::pull($data, 'image');
@@ -121,6 +125,10 @@ class PropertyImageService
 
     public function delete(PropertyImage $propertyImage): bool
     {
+        if ($propertyImage->image_path) {
+            (new GoogleDrive)->delete(fileId: $propertyImage->image_path);
+        }
+
         return $propertyImage->delete();
     }
 }

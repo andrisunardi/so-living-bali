@@ -53,6 +53,8 @@ use Spatie\Activitylog\Traits\LogsActivity;
  * @method static \Illuminate\Database\Eloquent\Builder<static>|PropertyImage withTrashed(bool $withTrashed = true)
  * @method static \Illuminate\Database\Eloquent\Builder<static>|PropertyImage withoutTrashed()
  *
+ * @property-read string $image
+ *
  * @mixin \Eloquent
  */
 class PropertyImage extends Model
@@ -100,6 +102,11 @@ class PropertyImage extends Model
     public function getUpdatedAtAttribute(string $value): Carbon
     {
         return Carbon::parse($value)->setTimezone(config('app.timezone'));
+    }
+
+    public function getImageAttribute(): string
+    {
+        return "https://lh3.googleusercontent.com/d/{$this->image_path}";
     }
 
     public function property(): BelongsTo

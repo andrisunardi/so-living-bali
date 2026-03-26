@@ -414,6 +414,7 @@ namespace App\Models{
  * @method static \Illuminate\Database\Eloquent\Builder<static>|PropertyImage withTrashed(bool $withTrashed = true)
  * @method static \Illuminate\Database\Eloquent\Builder<static>|PropertyImage withoutTrashed()
  * @mixin \Eloquent
+ * @property-read string $image
  */
 	class PropertyImage extends \Eloquent {}
 }
@@ -481,8 +482,8 @@ namespace App\Models{
  * @method static Builder<static>|User withoutPermission($permissions)
  * @method static Builder<static>|User withoutRole($roles, $guard = null)
  * @method static Builder<static>|User withoutTrashed()
- * @mixin \Eloquent
  * @property string|null $google_refresh_token
+ * @mixin \Eloquent
  */
 	class User extends \Eloquent {}
 }
