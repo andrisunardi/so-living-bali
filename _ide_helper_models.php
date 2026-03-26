@@ -413,8 +413,8 @@ namespace App\Models{
  * @method static \Illuminate\Database\Eloquent\Builder<static>|PropertyImage whereUpdatedBy($value)
  * @method static \Illuminate\Database\Eloquent\Builder<static>|PropertyImage withTrashed(bool $withTrashed = true)
  * @method static \Illuminate\Database\Eloquent\Builder<static>|PropertyImage withoutTrashed()
- * @mixin \Eloquent
  * @property-read string $image
+ * @mixin \Eloquent
  */
 	class PropertyImage extends \Eloquent {}
 }

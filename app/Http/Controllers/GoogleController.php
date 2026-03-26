@@ -38,7 +38,7 @@ class GoogleController extends Controller
         $token = $client->fetchAccessTokenWithAuthCode(request('code'));
 
         if (isset($token['error'])) {
-            abort(508);
+            abort(400);
         }
 
         $oauth = Oauth::where('code', 'GOOGLEDRIVE')->firstOrFail();
