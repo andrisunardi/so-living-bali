@@ -98,6 +98,14 @@ class PropertyService
                 );
             }
 
+            if ($data['internet_speed_test_image'] ?? null) {
+                $data['internet_speed_test_image_path'] = (new GoogleDrive)->uploadImage(
+                    image: $data['internet_speed_test_image'],
+                    name: 'internet-speedtest',
+                    folderId: $data['folder_id'],
+                );
+            }
+
             Arr::pull($data, 'image');
 
             $property = Property::create($data);
@@ -139,6 +147,18 @@ class PropertyService
 
                 if ($property->image_path) {
                     (new GoogleDrive)->delete($property->image_path);
+                }
+            }
+
+            if ($data['internet_speed_test_image'] ?? null) {
+                $data['internet_speed_test_image_path'] = (new GoogleDrive)->uploadImage(
+                    image: $data['internet_speed_test_image'],
+                    name: 'internet-speedtest',
+                    folderId: $property->folder_id,
+                );
+
+                if ($property->internet_speed_test_image_path) {
+                    (new GoogleDrive)->delete($property->internet_speed_test_image_path);
                 }
             }
 

@@ -241,7 +241,7 @@ return [
         'water_source' => 'Water Souce',
         'when' => 'When',
 
-        'index' => 'Index',
+        'internet_speedtest_image' => 'Internet Speedtest Image',
         'index' => 'Index',
         'index' => 'Index',
     ],

@@ -227,9 +227,7 @@ https://tailux.piniastudio.com/tables/advanced-tables
 
 •⁠  ⁠Link of gmaps instead of the  latitude and longitude? Possible?
 
-
 •⁠  ⁠Full Legal Documentation Available : Pls insert a dropdown with multiple choice instead of YES/NO. You will find below the list to use
-•⁠  ⁠Internet speedtest : Can you insert as well the possibility to doxnload a picture of the speed test
 •⁠  ⁠Target profil : pls autorize multiple choice
 
 LEGAL DOCUMENTATION LIST :

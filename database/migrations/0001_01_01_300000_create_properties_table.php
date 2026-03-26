@@ -58,6 +58,7 @@ return new class extends Migration
             $table->text('noise_source_identified')->nullable();
 
             $table->integer('internet_speedtest')->nullable();
+            $table->string('internet_speedtest_image_path', 50)->unique()->nullable();
             $table->boolean('power_backup')->unsigned()->nullable();
             $table->boolean('water_source')->unsigned()->nullable();
             $table->boolean('electricity')->unsigned()->nullable();

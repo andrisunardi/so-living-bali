@@ -372,6 +372,9 @@ namespace App\Models{
  * @method static Builder<static>|Property whereFolderId($value)
  * @method static Builder<static>|Property whereImagePath($value)
  * @mixin \Eloquent
+ * @property string|null $internet_speedtest_image_path
+ * @property-read string $internet_speedtest_image
+ * @method static \Illuminate\Database\Eloquent\Builder<static>|Property whereInternetSpeedtestImagePath($value)
  */
 	class Property extends \Eloquent {}
 }

@@ -50,7 +50,7 @@ return [
     'visit' => 'Visit',
     'yes' => 'Yes',
 
-    'index' => 'Index',
+    'image_temporary_url' => 'Image Temporary Url',
     'index' => 'Index',
     'index' => 'Index',
     'index' => 'Index',

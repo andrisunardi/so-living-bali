@@ -74,6 +74,7 @@ class PropertyFactory extends Factory
             'noise_source_identified' => fake()->text(),
 
             'internet_speedtest' => fake()->numberBetween(1, 100),
+            'internet_speedtest_image_path' => null,
             'power_backup' => fake()->randomElement(PropertyPowerBackup::cases()),
             'water_source' => fake()->randomElement(PropertyWaterSource::cases()),
             'electricity' => fake()->randomElement(PropertyElectricity::cases()),

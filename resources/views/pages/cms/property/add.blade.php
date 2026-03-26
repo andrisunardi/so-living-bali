@@ -291,7 +291,7 @@ new #[Title('Add | Property')] class extends Component {
                         </label>
                         <div class="input-group">
                             <div class="input-group-text">
-                                <span class="fas fa-building fa-fw "></span>
+                                <span class="fas fa-image fa-fw "></span>
                             </div>
                             <input type="file" class="form-control" id="image" name="image"
                                 accept="image/*,capture=camera,image/jpg,image/jpeg,image/png,image/gif,image/webp"
@@ -305,28 +305,17 @@ new #[Title('Add | Property')] class extends Component {
                         @error('form.image')
                             <div class="form-text text-danger">{{ $message }}</div>
                         @enderror
-
                         @if ($form->image)
                             <div class="mt-3">
                                 <div class="alert alert-info w-100" role="alert" wire:loading
                                     wire:target="form.image">
                                     {{ trans('message.please_wait_until_the_uploading_finished') }}
                                 </div>
-
                                 <div>
                                     <img draggable="false" class="img-fluid w-100 rounded" width="100"
                                         src="{{ $form->image->temporaryUrl() }}" alt="Image Temporary Url"
                                         onerror="asset('images/image-not-available.png')" />
                                 </div>
-                            </div>
-                        @endif
-
-                        @if ($form->image)
-                            <div class="mt-3">
-                                <img draggable="false" class="w-100 h-100 rounded user-select-none pe-none"
-                                    src="{{ $form->image->temporaryUrl() }}"
-                                    alt="{{ trans('index.banner') }} - {{ config('constants.name') }}"
-                                    onerror="asset('images/logo.png')">
                             </div>
                         @endif
                     </div>
@@ -1158,6 +1147,45 @@ new #[Title('Add | Property')] class extends Component {
                         @error('form.internet_speedtest')
                             <div class="form-text text-danger">{{ $message }}</div>
                         @enderror
+                    </div>
+
+                    <div class="col-sm-6">
+                        <label class="form-label" for="internet_speedtest_image">
+                            {{ trans('validation.attributes.internet_speedtest_image') }}
+                        </label>
+                        <div class="input-group">
+                            <div class="input-group-text">
+                                <span class="fas fa-image fa-fw "></span>
+                            </div>
+                            <input type="file" class="form-control" id="internet_speedtest_image"
+                                name="internet_speedtest_image"
+                                accept="image/*,capture=camera,image/jpg,image/jpeg,image/png,image/gif,image/webp"
+                                wire:model="form.internet_speedtest_image" wire:offline.class="disabled"
+                                wire:offline.attr="disabled" wire:loading.class="disabled"
+                                wire:loading.attr="disabled">
+                        </div>
+                        <div class="form-text">
+                            {{ trans('helper.format') }} : jpg .jpeg .png .gif .webp,
+                            {{ trans('helper.max_size') }} : 12 MB
+                        </div>
+                        @error('form.internet_speedtest_image')
+                            <div class="form-text text-danger">{{ $message }}</div>
+                        @enderror
+
+                        @if ($form->internet_speedtest_image)
+                            <div class="mt-3">
+                                <div class="alert alert-info w-100" role="alert" wire:loading
+                                    wire:target="form.internet_speedtest_image">
+                                    {{ trans('message.please_wait_until_the_uploading_finished') }}
+                                </div>
+                                <div>
+                                    <img draggable="false" class="img-fluid w-100 rounded" width="100"
+                                        src="{{ $form->internet_speedtest_image->temporaryUrl() }}"
+                                        alt="{{ trans('index.image_temporary_url') }}"
+                                        onerror="asset('images/image-not-available.png')" />
+                                </div>
+                            </div>
+                        @endif
                     </div>
 
                     <div class="col-sm-6">

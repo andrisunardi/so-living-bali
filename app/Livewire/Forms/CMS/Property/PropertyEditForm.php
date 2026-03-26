@@ -133,6 +133,9 @@ class PropertyEditForm extends Form
     #[Validate('nullable|integer|min:0|max:9999999999')]
     public ?int $internet_speedtest = null;
 
+    #[Validate('nullable|image|file|mimes:jpg,jpeg,png,gif,webp|max:12288')]
+    public ?TemporaryUploadedFile $internet_speedtest_image = null;
+
     #[Validate(['nullable', 'integer', new Enum(PropertyPowerBackup::class)])]
     public ?int $power_backup = null;
 

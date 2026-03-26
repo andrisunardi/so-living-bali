@@ -201,6 +201,11 @@ use Spatie\Activitylog\Traits\LogsActivity;
  * @method static Builder<static>|Property whereFolderId($value)
  * @method static Builder<static>|Property whereImagePath($value)
  *
+ * @property string|null $internet_speedtest_image_path
+ * @property-read string $internet_speedtest_image
+ *
+ * @method static Builder<static>|Property whereInternetSpeedtestImagePath($value)
+ *
  * @mixin \Eloquent
  */
 class Property extends Model
@@ -256,6 +261,7 @@ class Property extends Model
         'noise_source_identified',
 
         'internet_speedtest',
+        'internet_speedtest_image_path',
         'power_backup',
         'water_source',
         'electricity',
@@ -328,6 +334,7 @@ class Property extends Model
             'noise_source_identified' => 'string',
 
             'internet_speedtest' => 'integer',
+            'internet_speedtest_image_path' => 'string',
             'power_backup' => PropertyPowerBackup::class,
             'water_source' => PropertyWaterSource::class,
             'electricity' => PropertyElectricity::class,
@@ -375,6 +382,11 @@ class Property extends Model
     public function getImageAttribute(): string
     {
         return "https://lh3.googleusercontent.com/d/{$this->image_path}";
+    }
+
+    public function getInternetSpeedtestImageAttribute(): string
+    {
+        return "https://lh3.googleusercontent.com/d/{$this->internet_speedtest_image_path}";
     }
 
     public function scopeOpen(Builder $query): void
