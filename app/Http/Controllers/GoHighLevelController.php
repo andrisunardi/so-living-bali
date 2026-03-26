@@ -12,7 +12,7 @@ class GoHighLevelController extends Controller
     {
         $code = $request->query('code');
 
-        $response = Http::post(config('constants.ghl.oauth_url'), [
+        $response = Http::asForm()->post(config('constants.ghl.oauth_url'), [
             'client_id' => config('constants.ghl.client_id'),
             'client_secret' => config('constants.ghl.client_secret'),
             'grant_type' => 'authorization_code',
@@ -48,7 +48,7 @@ class GoHighLevelController extends Controller
     {
         $oauth = Oauth::firstOrCreate(['code' => 'GOHIGHLEVEL']);
 
-        $response = Http::post(config('constants.ghl.oauth_url'), [
+        $response = Http::asForm()->post(config('constants.ghl.oauth_url'), [
             'client_id' => config('constants.ghl.client_id'),
             'client_secret' => config('constants.ghl.client_secret'),
             'grant_type' => 'refresh_token',
@@ -56,8 +56,6 @@ class GoHighLevelController extends Controller
             'user_type' => config('constants.ghl.user_type'),
             'redirect_uri' => config('constants.ghl.redirect_uri'),
         ]);
-
-        dd($oauth, $response);
 
         $data = $response->json();
 
