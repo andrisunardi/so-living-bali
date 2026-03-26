@@ -199,14 +199,12 @@ new #[Title('Property')] class extends Component {
                                         {{ $propertyImage->id }}
                                     </a>
                                 </td>
-                                <td class="text-center p-0">
-                                    @if ($propertyImage->image_url)
-                                        <a draggable="false"
-                                            href="{{ route('images', ['path' => $propertyImage->image_url]) }}"
-                                            target="_blank">
+                                <td class="p-0">
+                                    @if ($propertyImage->image_path)
+                                        <a draggable="false" href="{{ $propertyImage->image }}" target="_blank">
                                             <div class="ratio ratio-1x1">
                                                 <img draggable="false" class="img-fluid w-100 h-100 object-fit-cover"
-                                                    src="{{ route('images', ['path' => $propertyImage->image_url]) }}"
+                                                    src="{{ $propertyImage->image }}"
                                                     alt="{{ trans('page.property_image') }} - {{ $propertyImage->id }}"
                                                     onerror="this.src='{{ asset('images/image-not-available.png') }}'" />
                                             </div>

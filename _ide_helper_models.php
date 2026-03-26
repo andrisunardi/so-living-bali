@@ -164,14 +164,14 @@ namespace App\Models{
  * @property int|null $created_by
  * @property int|null $updated_by
  * @property int|null $deleted_by
- * @property \Illuminate\Support\Carbon $created_at
- * @property \Illuminate\Support\Carbon $updated_at
- * @property \Illuminate\Support\Carbon|null $deleted_at
- * @property-read \Illuminate\Database\Eloquent\Collection<int, \Spatie\Activitylog\Models\Activity> $activities
+ * @property Carbon $created_at
+ * @property Carbon $updated_at
+ * @property Carbon|null $deleted_at
+ * @property-read Collection<int, Activity> $activities
  * @property-read int|null $activities_count
- * @property-read \App\Models\User|null $createdBy
- * @property-read \App\Models\User|null $deletedBy
- * @property-read \App\Models\User|null $updatedBy
+ * @property-read User|null $createdBy
+ * @property-read User|null $deletedBy
+ * @property-read User|null $updatedBy
  * @method static \Database\Factories\OauthFactory factory($count = null, $state = [])
  * @method static \Illuminate\Database\Eloquent\Builder<static>|Oauth newModelQuery()
  * @method static \Illuminate\Database\Eloquent\Builder<static>|Oauth newQuery()
@@ -194,6 +194,7 @@ namespace App\Models{
  * @method static \Illuminate\Database\Eloquent\Builder<static>|Oauth whereUpdatedBy($value)
  * @method static \Illuminate\Database\Eloquent\Builder<static>|Oauth withTrashed(bool $withTrashed = true)
  * @method static \Illuminate\Database\Eloquent\Builder<static>|Oauth withoutTrashed()
+ * @mixin \Eloquent
  */
 	class Oauth extends \Eloquent {}
 }
@@ -427,7 +428,6 @@ namespace App\Models{
  * @property string $password
  * @property string|null $image_path
  * @property bool $is_active
- * @property string|null $google_refresh_token
  * @property Carbon|null $email_verified_at
  * @property Carbon|null $phone_verified_at
  * @property int|null $created_by
@@ -482,6 +482,7 @@ namespace App\Models{
  * @method static Builder<static>|User withoutRole($roles, $guard = null)
  * @method static Builder<static>|User withoutTrashed()
  * @mixin \Eloquent
+ * @property string|null $google_refresh_token
  */
 	class User extends \Eloquent {}
 }

@@ -32,7 +32,6 @@ use Spatie\Permission\Traits\HasRoles;
  * @property string $password
  * @property string|null $image_path
  * @property bool $is_active
- * @property string|null $google_refresh_token
  * @property Carbon|null $email_verified_at
  * @property Carbon|null $phone_verified_at
  * @property int|null $created_by
@@ -87,6 +86,8 @@ use Spatie\Permission\Traits\HasRoles;
  * @method static Builder<static>|User withoutPermission($permissions)
  * @method static Builder<static>|User withoutRole($roles, $guard = null)
  * @method static Builder<static>|User withoutTrashed()
+ *
+ * @property string|null $google_refresh_token
  *
  * @mixin \Eloquent
  */

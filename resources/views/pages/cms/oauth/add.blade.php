@@ -27,7 +27,7 @@ new #[Title('Add | Oauth')] class extends Component {
         } catch (ValidationException $e) {
             $errors = collect($e->validator->errors()->all())->implode('<br>');
 
-            $this->alertError(title: trans('index.add').' '.trans('index.failed'), body: $errors);
+            $this->alertError(title: trans('index.add') . ' ' . trans('index.failed'), body: $errors);
         }
     }
 };
@@ -44,8 +44,7 @@ new #[Title('Add | Oauth')] class extends Component {
         <div class="card-body">
             <div class="row g-3">
                 <div class="col-auto">
-                    <a draggable="false" class="btn btn-primary w-100" href="{{ route('cms.oauth.index') }}"
-                        wire:navigate>
+                    <a draggable="false" class="btn btn-primary w-100" href="{{ route('cms.oauth.index') }}" wire:navigate>
                         <span class="fas fa-arrow-left fa-fw"></span>
                         {{ trans('index.back') }}
                     </a>
@@ -59,90 +58,206 @@ new #[Title('Add | Oauth')] class extends Component {
             <form wire:submit.prevent="submit" role="form" autocomplete="off">
                 <div class="row g-3">
                     <div class="col-sm-6">
-                        <label class="form-label" for="name">
-                            {{ trans('validation.attributes.name') }}
-                            <span class="text-danger">*</span>
-                        </label>
-                        <div class="input-group">
-                            <div class="input-group-text">
-                                <span class="fas fa-city fa-fw "></span>
-                            </div>
-                            <input type="text" class="form-control" id="name" name="name" minlength="1"
-                                maxlength="50" placeholder="{{ trans('index.ex') }}. Canggu" required
-                                wire:model="form.name" wire:offline.class="disabled" wire:offline.attr="disabled"
-                                wire:loading.class="disabled" wire:loading.attr="disabled">
-                        </div>
-                        <div class="form-text">
-                            {{ trans('helper.required') }},
-                            {{ trans('helper.minlength') }} : 1,
-                            {{ trans('helper.maxlength') }} : 50,
-                            {{ trans('helper.unique') }}
-                        </div>
-                        @error('form.name')
-                            <div class="form-text text-danger">{{ $message }}</div>
-                        @enderror
-                    </div>
-
-                    <div class="col-sm-6">
-                        <div class="d-flex gap-3">
+                        <div class="d-grid gap-3">
                             <div>
-                                <label class="form-label" for="is_show">
-                                    {{ trans('validation.attributes.is_show') }}
+                                <label class="form-label" for="code">
+                                    {{ trans('validation.attributes.code') }}
                                     <span class="text-danger">*</span>
                                 </label>
-                                <div>
-                                    <div class="form-check form-check-inline">
-                                        <input type="radio" class="form-check-input" id="is_show_1" name="is_show"
-                                            value="1" required wire:key="is_show" wire:model.lazy="form.is_show"
-                                            wire:offline.class="disabled" wire:offline.attr="disabled"
-                                            wire:loading.class="disabled" wire:loading.attr="disabled">
-                                        <label class="form-check-label" for="is_show_1">
-                                            {{ trans('index.yes') }}
-                                        </label>
+                                <div class="input-group">
+                                    <div class="input-group-text">
+                                        <span class="fas fa-code fa-fw "></span>
                                     </div>
-                                    <div class="form-check form-check-inline">
-                                        <input type="radio" class="form-check-input" id="is_show_0" name="is_show"
-                                            value="0" required wire:key="is_show" wire:model.lazy="form.is_show"
-                                            wire:offline.class="disabled" wire:offline.attr="disabled"
-                                            wire:loading.class="disabled" wire:loading.attr="disabled">
-                                        <label class="form-check-label" for="is_show_0">
-                                            {{ trans('index.no') }}
-                                        </label>
-                                    </div>
+                                    <input type="text" class="form-control" id="code" name="code"
+                                        minlength="1" maxlength="20" placeholder="{{ trans('index.ex') }}. Canggu"
+                                        required wire:model="form.code" wire:offline.class="disabled"
+                                        wire:offline.attr="disabled" wire:loading.class="disabled"
+                                        wire:loading.attr="disabled">
                                 </div>
-                                @error('form.is_show')
+                                <div class="form-text">
+                                    {{ trans('helper.required') }},
+                                    {{ trans('helper.minlength') }} : 1,
+                                    {{ trans('helper.maxlength') }} : 20,
+                                    {{ trans('helper.unique') }}
+                                </div>
+                                @error('form.code')
                                     <div class="form-text text-danger">{{ $message }}</div>
                                 @enderror
                             </div>
 
                             <div>
-                                <label class="form-label" for="is_active">
-                                    {{ trans('validation.attributes.is_active') }}
+                                <label class="form-label" for="name">
+                                    {{ trans('validation.attributes.name') }}
                                     <span class="text-danger">*</span>
                                 </label>
-                                <div>
-                                    <div class="form-check form-check-inline">
-                                        <input type="radio" class="form-check-input" id="is_active_1" name="is_active"
-                                            value="1" required wire:key="is_active"
-                                            wire:model.lazy="form.is_active" wire:offline.class="disabled"
-                                            wire:offline.attr="disabled" wire:loading.class="disabled"
-                                            wire:loading.attr="disabled">
-                                        <label class="form-check-label" for="is_active_1">
-                                            {{ trans('index.yes') }}
-                                        </label>
+                                <div class="input-group">
+                                    <div class="input-group-text">
+                                        <span class="fas fa-gears fa-fw "></span>
                                     </div>
-                                    <div class="form-check form-check-inline">
-                                        <input type="radio" class="form-check-input" id="is_active_0" name="is_active"
-                                            value="0" required wire:key="is_active"
-                                            wire:model.lazy="form.is_active" wire:offline.class="disabled"
-                                            wire:offline.attr="disabled" wire:loading.class="disabled"
-                                            wire:loading.attr="disabled">
-                                        <label class="form-check-label" for="is_active_0">
-                                            {{ trans('index.no') }}
-                                        </label>
-                                    </div>
+                                    <input type="text" class="form-control" id="name" name="name"
+                                        minlength="1" maxlength="50" placeholder="{{ trans('index.ex') }}. Canggu"
+                                        required wire:model="form.name" wire:offline.class="disabled"
+                                        wire:offline.attr="disabled" wire:loading.class="disabled"
+                                        wire:loading.attr="disabled">
                                 </div>
-                                @error('form.is_active')
+                                <div class="form-text">
+                                    {{ trans('helper.required') }},
+                                    {{ trans('helper.minlength') }} : 1,
+                                    {{ trans('helper.maxlength') }} : 50,
+                                    {{ trans('helper.unique') }}
+                                </div>
+                                @error('form.name')
+                                    <div class="form-text text-danger">{{ $message }}</div>
+                                @enderror
+                            </div>
+                            <div>
+                                <label class="form-label" for="token_type">
+                                    {{ trans('validation.attributes.token_type') }}
+                                    <span class="text-danger">*</span>
+                                </label>
+                                <div class="input-group">
+                                    <div class="input-group-text">
+                                        <span class="fas fa-tag fa-fw "></span>
+                                    </div>
+                                    <textarea class="form-control" id="token_type" name="token_type" minlength="1" maxlength="65535"
+                                        placeholder="{{ trans('index.ex') }}. Bearer" required wire:model="form.token_type" wire:offline.class="disabled"
+                                        wire:offline.attr="disabled" wire:loading.class="disabled" wire:loading.attr="disabled">
+                                    </textarea>
+                                </div>
+                                <div class="form-text">
+                                    {{ trans('helper.required') }},
+                                    {{ trans('helper.minlength') }} : 1,
+                                    {{ trans('helper.maxlength') }} : 65535,
+                                </div>
+                                @error('form.token_type')
+                                    <div class="form-text text-danger">{{ $message }}</div>
+                                @enderror
+                            </div>
+
+                            <div>
+                                <label class="form-label" for="expires_in">
+                                    {{ trans('validation.attributes.expires_in') }}
+                                    <span class="text-danger">*</span>
+                                </label>
+                                <div class="input-group">
+                                    <div class="input-group-text">
+                                        <span class="fas fa-hourglass fa-fw "></span>
+                                    </div>
+                                    <input type="number" class="form-control" id="expires_in" name="expires_in"
+                                        min="0" max="1000000000" placeholder="{{ trans('index.ex') }}. 3600"
+                                        required wire:model="form.expires_in" wire:offline.class="disabled"
+                                        wire:offline.attr="disabled" wire:loading.class="disabled"
+                                        wire:loading.attr="disabled">
+                                </div>
+                                <div class="form-text">
+                                    {{ trans('helper.required') }},
+                                    {{ trans('helper.min') }} : 0,
+                                    {{ trans('helper.max') }} : 1.000.000.000,
+                                </div>
+                                @error('form.expires_in')
+                                    <div class="form-text text-danger">{{ $message }}</div>
+                                @enderror
+                            </div>
+
+                            <div>
+                                <label class="form-label" for="scope">
+                                    {{ trans('validation.attributes.scope') }}
+                                    <span class="text-danger">*</span>
+                                </label>
+                                <div class="input-group">
+                                    <div class="input-group-text">
+                                        <span class="fas fa-list fa-fw "></span>
+                                    </div>
+                                    <textarea class="form-control" id="scope" name="scope" minlength="1" maxlength="65535"
+                                        placeholder="{{ trans('index.ex') }}. AUTH" required wire:model="form.scope" wire:offline.class="disabled"
+                                        wire:offline.attr="disabled" wire:loading.class="disabled" wire:loading.attr="disabled">
+                                    </textarea>
+                                </div>
+                                <div class="form-text">
+                                    {{ trans('helper.required') }},
+                                    {{ trans('helper.minlength') }} : 1,
+                                    {{ trans('helper.maxlength') }} : 65535,
+                                </div>
+                                @error('form.scope')
+                                    <div class="form-text text-danger">{{ $message }}</div>
+                                @enderror
+                            </div>
+
+                            <div>
+                                <label class="form-label" for="created">
+                                    {{ trans('validation.attributes.created') }}
+                                    <span class="text-danger">*</span>
+                                </label>
+                                <div class="input-group">
+                                    <div class="input-group-text">
+                                        <span class="fas fa-clock fa-fw "></span>
+                                    </div>
+                                    <input type="number" class="form-control" id="created" name="created"
+                                        min="0" max="1000000000" placeholder="{{ trans('index.ex') }}. 1000"
+                                        required wire:model="form.created" wire:offline.class="disabled"
+                                        wire:offline.attr="disabled" wire:loading.class="disabled"
+                                        wire:loading.attr="disabled">
+                                </div>
+                                <div class="form-text">
+                                    {{ trans('helper.required') }},
+                                    {{ trans('helper.min') }} : 0,
+                                    {{ trans('helper.max') }} : 1.000.000.000,
+                                </div>
+                                @error('form.created')
+                                    <div class="form-text text-danger">{{ $message }}</div>
+                                @enderror
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="col-sm-6">
+                        <div class="d-grid gap-3">
+                            <div>
+                                <label class="form-label" for="refresh_token">
+                                    {{ trans('validation.attributes.refresh_token') }}
+                                    <span class="text-danger">*</span>
+                                </label>
+                                <div class="input-group">
+                                    <div class="input-group-text">
+                                        <span class="fas fa-key fa-fw "></span>
+                                    </div>
+                                    <textarea class="form-control" id="refresh_token" name="refresh_token" minlength="1" maxlength="65535"
+                                        placeholder="{{ trans('index.ex') }}. ABC123" required wire:model="form.refresh_token"
+                                        wire:offline.class="disabled" wire:offline.attr="disabled" wire:loading.class="disabled"
+                                        wire:loading.attr="disabled">
+                                    </textarea>
+                                </div>
+                                <div class="form-text">
+                                    {{ trans('helper.required') }},
+                                    {{ trans('helper.minlength') }} : 1,
+                                    {{ trans('helper.maxlength') }} : 65535,
+                                </div>
+                                @error('form.refresh_token')
+                                    <div class="form-text text-danger">{{ $message }}</div>
+                                @enderror
+                            </div>
+
+                            <div>
+                                <label class="form-label" for="access_token">
+                                    {{ trans('validation.attributes.access_token') }}
+                                    <span class="text-danger">*</span>
+                                </label>
+                                <div class="input-group">
+                                    <div class="input-group-text">
+                                        <span class="fas fa-key fa-fw "></span>
+                                    </div>
+                                    <textarea class="form-control" id="access_token" name="access_token" minlength="1" maxlength="65535"
+                                        placeholder="{{ trans('index.ex') }}. ABC123" required wire:model="form.access_token"
+                                        wire:offline.class="disabled" wire:offline.attr="disabled" wire:loading.class="disabled"
+                                        wire:loading.attr="disabled">
+                                    </textarea>
+                                </div>
+                                <div class="form-text">
+                                    {{ trans('helper.required') }},
+                                    {{ trans('helper.minlength') }} : 1,
+                                    {{ trans('helper.maxlength') }} : 65535,
+                                </div>
+                                @error('form.access_token')
                                     <div class="form-text text-danger">{{ $message }}</div>
                                 @enderror
                             </div>

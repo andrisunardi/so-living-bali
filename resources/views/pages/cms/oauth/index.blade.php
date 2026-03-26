@@ -13,12 +13,6 @@ new #[Title('Oauth')] class extends Component {
     #[Url(except: '')]
     public string $search = '';
 
-    #[Url(except: [])]
-    public array $is_show = [];
-
-    #[Url(except: [])]
-    public array $is_active = [];
-
     public function updating(): void
     {
         $this->resetPage();
@@ -28,23 +22,7 @@ new #[Title('Oauth')] class extends Component {
     {
         $this->resetPage();
 
-        $this->reset(['search', 'is_show', 'is_active']);
-    }
-
-    public function changeShow(Oauth $oauth): void
-    {
-        $service = new OauthService();
-        $service->show(oauth: $oauth);
-
-        $this->alertSuccess(title: trans('index.change_show') . ' ' . trans('index.success'), body: trans('page.oauth') . ' ' . trans('message.has_been_successfully_changed'));
-    }
-
-    public function changeActive(Oauth $oauth): void
-    {
-        $service = new OauthService();
-        $service->active(oauth: $oauth);
-
-        $this->alertSuccess(title: trans('index.change_active') . ' ' . trans('index.success'), body: trans('page.oauth') . ' ' . trans('message.has_been_successfully_changed'));
+        $this->reset(['search']);
     }
 
     public function delete(Oauth $oauth): void
@@ -58,8 +36,7 @@ new #[Title('Oauth')] class extends Component {
     public function oauths(bool $paginate = true): object
     {
         $service = new OauthService();
-        $oauths = $service->index(search: $this->search, isActive: $this->is_active, paginate: $paginate);
-        $oauths->loadCount(['areas', 'properties']);
+        $oauths = $service->index(search: $this->search, paginate: $paginate);
 
         return $oauths;
     }
@@ -70,7 +47,6 @@ new #[Title('Oauth')] class extends Component {
 
         $service = new OauthService();
         $oauths = $service->index(orderBy: 'id', sortBy: 'asc', paginate: false);
-        $oauths->loadCount(['areas', 'properties']);
         $oauths->loadMissing(['createdBy', 'updatedBy']);
 
         return Excel::download(new OauthExport(oauths: $oauths), trans('page.oauth') . '.xlsx');
@@ -116,60 +92,6 @@ new #[Title('Oauth')] class extends Component {
                         </button>
                     </div>
                 </div>
-
-                <div class="row g-3">
-                    <div class="col-sm-auto">
-                        <label class="form-label" for="is_show">
-                            {{ trans('field.is_show') }}
-                        </label>
-                        <div>
-                            <div class="form-check">
-                                <input type="checkbox" class="form-check-input" id="is_show_1" name="is_show"
-                                    value="1" wire:model.lazy="is_show" wire:offline.class="disabled"
-                                    wire:offline.attr="disabled" wire:loading.class="disabled"
-                                    wire:loading.attr="disabled">
-                                <label class="form-check-label" for="is_show_1">
-                                    {{ trans('index.yes') }}
-                                </label>
-                            </div>
-                            <div class="form-check">
-                                <input type="checkbox" class="form-check-input" id="is_show_0" name="is_show"
-                                    value="0" wire:model.lazy="is_show" wire:offline.class="disabled"
-                                    wire:offline.attr="disabled" wire:loading.class="disabled"
-                                    wire:loading.attr="disabled">
-                                <label class="form-check-label" for="is_show_0">
-                                    {{ trans('no') }}
-                                </label>
-                            </div>
-                        </div>
-                    </div>
-
-                    <div class="col-sm-auto">
-                        <label class="form-label" for="is_active">
-                            {{ trans('field.is_active') }}
-                        </label>
-                        <div>
-                            <div class="form-check">
-                                <input type="checkbox" class="form-check-input" id="is_active_1" name="is_active"
-                                    value="1" wire:model.lazy="is_active" wire:offline.class="disabled"
-                                    wire:offline.attr="disabled" wire:loading.class="disabled"
-                                    wire:loading.attr="disabled">
-                                <label class="form-check-label" for="is_active_1">
-                                    {{ trans('index.yes') }}
-                                </label>
-                            </div>
-                            <div class="form-check">
-                                <input type="checkbox" class="form-check-input" id="is_active_0" name="is_active"
-                                    value="0" wire:model.lazy="is_active" wire:offline.class="disabled"
-                                    wire:offline.attr="disabled" wire:loading.class="disabled"
-                                    wire:loading.attr="disabled">
-                                <label class="form-check-label" for="is_active_0">
-                                    {{ trans('index.no') }}
-                                </label>
-                            </div>
-                        </div>
-                    </div>
-                </div>
             </div>
         </div>
     </div>
@@ -213,18 +135,19 @@ new #[Title('Oauth')] class extends Component {
             <hr />
 
             <div class="table-responsive border-bottom mb-3">
-                <table
-                    class="table table-striped table-hover table-bordered text-nowrap table-responsive align-middle">
+                <table class="table table-striped table-hover table-bordered text-nowrap table-responsive align-middle">
                     <thead>
                         <tr class="text-center align-middle table-primary">
                             <th width="1%">{{ trans('field.#') }}</th>
                             <th width="1%">{{ trans('field.id') }}</th>
+                            <th width="1%">{{ trans('field.code') }}</th>
                             <th>{{ trans('field.name') }}</th>
-                            <th width="1%">{{ trans('index.total') }} {{ trans('page.area') }}</th>
-                            <th width="1%">{{ trans('index.total') }} {{ trans('page.property') }}</th>
-                            <th width="1%">{{ trans('field.created_at') }}</th>
-                            <th width="1%">{{ trans('field.show') }}</th>
-                            <th width="1%">{{ trans('field.active') }}</th>
+                            <th width="1%">{{ trans('field.refresh_token') }}</th>
+                            <th width="1%">{{ trans('field.access_token') }}</th>
+                            <th width="1%">{{ trans('field.token_type') }}</th>
+                            <th width="1%">{{ trans('field.expires_in') }}</th>
+                            <th width="1%">{{ trans('field.scope') }}</th>
+                            <th width="1%">{{ trans('field.created') }}</th>
                             <th width="1%">{{ trans('field.action') }}</th>
                         </tr>
                     </thead>
@@ -235,84 +158,108 @@ new #[Title('Oauth')] class extends Component {
                                     {{ ($this->oauths()->currentPage() - 1) * $this->oauths()->perPage() + $loop->iteration }}
                                 </td>
                                 <td class="text-center">
-                                    <a draggable="false"
-                                        href="{{ route('cms.oauth.detail', ['oauth' => $oauth]) }}"
+                                    <a draggable="false" href="{{ route('cms.oauth.detail', ['oauth' => $oauth]) }}"
                                         wire:navigate>
                                         {{ $oauth->id }}
                                     </a>
                                 </td>
                                 <td>
-                                    <a draggable="false"
-                                        href="{{ route('cms.oauth.detail', ['oauth' => $oauth]) }}"
+                                    <a draggable="false" href="{{ route('cms.oauth.detail', ['oauth' => $oauth]) }}"
+                                        wire:navigate>
+                                        {{ $oauth->code }}
+                                    </a>
+                                </td>
+                                <td>
+                                    <a draggable="false" href="{{ route('cms.oauth.detail', ['oauth' => $oauth]) }}"
                                         wire:navigate>
                                         {{ $oauth->name }}
                                     </a>
                                 </td>
-                                <td class="text-center">
-                                    <a draggable="false"
-                                        href="{{ route('cms.area.index', ['oauth_id' => $oauth->id]) }}"
-                                        wire:navigate>
-                                        {{ $oauth->areas_count }}
-                                    </a>
-                                </td>
-                                <td class="text-center">
-                                    <a draggable="false"
-                                        href="{{ route('cms.property.index', ['oauth_id' => $oauth->id]) }}"
-                                        wire:navigate>
-                                        {{ $oauth->properties_count }}
-                                    </a>
-                                </td>
-                                <td>{{ $oauth->created_at?->isoFormat('HH:mm - ddd, DD MMM YYYY') }}</td>
                                 <td>
-                                    @can('oauth.edit')
-                                        <div class="form-check form-switch">
-                                            <input class="form-check-input" type="checkbox" role="switch"
-                                                id="is_show_{{ $oauth->id }}" name="is_show" value="1"
-                                                {{ $oauth->is_show ? 'checked' : '' }}
-                                                wire:click="changeShow({{ $oauth->id }})"
-                                                wire:offline.class="disabled" wire:offline.attr="disabled"
-                                                wire:loading.class="disabled" wire:loading.attr="disabled">
-                                            <label
-                                                class="form-check-label text-{{ Str::successDanger($oauth->is_show) }}"
-                                                for="is_show_{{ $oauth->id }}">
-                                                {{ Str::yesNo($oauth->is_show) }}
-                                            </label>
+                                    @if ($oauth->refresh_token)
+                                        <button type="button" class="btn btn-primary btn-sm w-100"
+                                            data-bs-toggle="modal" data-bs-target="#refresh-token-{{ $oauth->id }}">
+                                            <span class="fas fa-folder-open fa-fw"></span>
+                                            {{ trans('index.open') }}
+                                        </button>
+
+                                        <div class="modal fade" id="refresh-token-{{ $oauth->id }}" tabindex="-1">
+                                            <div
+                                                class="modal-dialog modal-dialog-centered modal-dialog-scrollable modal-fullscreen-sm-down">
+                                                <div class="modal-content">
+                                                    <div class="modal-header">
+                                                        <h1 class="modal-title fs-5">
+                                                            <span class="fas fa-file-lines fa-fw"></span>
+                                                            {{ trans('page.oauth') }}
+                                                            {{ trans('field.refresh_token') }}
+                                                        </h1>
+                                                        <button type="button" class="btn-close"
+                                                            data-bs-dismiss="modal">
+                                                        </button>
+                                                    </div>
+                                                    <div class="modal-body">
+                                                        <div class="text-pre-wrap">{!! $oauth->refresh_token !!}</div>
+                                                    </div>
+                                                    <div class="modal-footer">
+                                                        <button type="button" class="btn btn-secondary w-100"
+                                                            data-bs-dismiss="modal">
+                                                            <span class="fas fa-folder-closed fa-fw"></span>
+                                                            {{ trans('index.close') }}
+                                                        </button>
+                                                    </div>
+                                                </div>
+                                            </div>
                                         </div>
-                                    @else
-                                        <span
-                                            class="badge rounded-pill text-bg-{{ Str::successDanger($oauth->is_show) }}">
-                                            {{ Str::yesNo($oauth->is_show) }}
-                                        </span>
-                                    @endcan
+                                    @endif
                                 </td>
                                 <td>
-                                    @can('oauth.edit')
-                                        <div class="form-check form-switch">
-                                            <input class="form-check-input" type="checkbox" role="switch"
-                                                id="is_active_{{ $oauth->id }}" name="is_active" value="1"
-                                                {{ $oauth->is_active ? 'checked' : '' }}
-                                                wire:click="changeActive({{ $oauth->id }})"
-                                                wire:offline.class="disabled" wire:offline.attr="disabled"
-                                                wire:loading.class="disabled" wire:loading.attr="disabled">
-                                            <label
-                                                class="form-check-label text-{{ Str::successDanger($oauth->is_active) }}"
-                                                for="is_active_{{ $oauth->id }}">
-                                                {{ Str::yesNo($oauth->is_active) }}
-                                            </label>
+                                    @if ($oauth->access_token)
+                                        <button type="button" class="btn btn-primary btn-sm w-100"
+                                            data-bs-toggle="modal"
+                                            data-bs-target="#access-token-{{ $oauth->id }}">
+                                            <span class="fas fa-folder-open fa-fw"></span>
+                                            {{ trans('index.open') }}
+                                        </button>
+
+                                        <div class="modal fade" id="access-token-{{ $oauth->id }}"
+                                            tabindex="-1">
+                                            <div
+                                                class="modal-dialog modal-dialog-centered modal-dialog-scrollable modal-fullscreen-sm-down">
+                                                <div class="modal-content">
+                                                    <div class="modal-header">
+                                                        <h1 class="modal-title fs-5">
+                                                            <span class="fas fa-file-lines fa-fw"></span>
+                                                            {{ trans('page.oauth') }}
+                                                            {{ trans('field.access_token') }}
+                                                        </h1>
+                                                        <button type="button" class="btn-close"
+                                                            data-bs-dismiss="modal">
+                                                        </button>
+                                                    </div>
+                                                    <div class="modal-body">
+                                                        <div class="text-pre-wrap">{!! $oauth->access_token !!}</div>
+                                                    </div>
+                                                    <div class="modal-footer">
+                                                        <button type="button" class="btn btn-secondary w-100"
+                                                            data-bs-dismiss="modal">
+                                                            <span class="fas fa-folder-closed fa-fw"></span>
+                                                            {{ trans('index.close') }}
+                                                        </button>
+                                                    </div>
+                                                </div>
+                                            </div>
                                         </div>
-                                    @else
-                                        <span
-                                            class="badge rounded-pill text-bg-{{ Str::successDanger($oauth->is_active) }}">
-                                            {{ Str::yesNo($oauth->is_active) }}
-                                        </span>
-                                    @endcan
+                                    @endif
                                 </td>
+                                <td class="text-center">{{ $oauth->token_type }}</td>
+                                <td class="text-center">{{ $oauth->expires_in }}</td>
+                                <td>{{ $oauth->scope }}</td>
+                                <td class="text-center">{{ $oauth->created }}</td>
                                 <td>
                                     <div class="d-flex gap-2">
                                         @can('oauth.detail')
                                             <a draggable="false" class="btn btn-info btn-sm"
-                                                href="{{ route('cms.oauth.detail', ['oauth' => $oauth]) }}"
-                                                wire:navigate>
+                                                href="{{ route('cms.oauth.detail', ['oauth' => $oauth]) }}" wire:navigate>
                                                 <span class="fas fa-list fa-fw"></span>
                                                 <span>{{ trans('index.detail') }}</span>
                                             </a>
@@ -320,8 +267,7 @@ new #[Title('Oauth')] class extends Component {
 
                                         @can('oauth.edit')
                                             <a draggable="false" class="btn btn-success btn-sm"
-                                                href="{{ route('cms.oauth.edit', ['oauth' => $oauth]) }}"
-                                                wire:navigate>
+                                                href="{{ route('cms.oauth.edit', ['oauth' => $oauth]) }}" wire:navigate>
                                                 <span class="fas fa-edit fa-fw"></span>
                                                 <span>{{ trans('index.edit') }}</span>
                                             </a>

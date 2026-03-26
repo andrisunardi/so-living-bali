@@ -95,6 +95,15 @@ new class extends Component {};
         </li>
     @endcanany
 
+    @can('oauth')
+        <li class="nav-item">
+            <a draggable="false" class="nav-link {{ Route::is('cms.oauth.*') ? 'active' : '' }}"
+                href="{{ route('cms.oauth.index') }}" wire:navigate>
+                <span class="fas fa-gears fa-fw"></span> {{ trans('page.oauth') }}
+            </a>
+        </li>
+    @endcan
+
     @can('permission')
         <li class="nav-item">
             <a draggable="false" class="nav-link {{ Route::is('cms.permission.*') ? 'active' : '' }}"

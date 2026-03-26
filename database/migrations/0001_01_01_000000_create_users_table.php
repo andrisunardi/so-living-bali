@@ -18,7 +18,6 @@ return new class extends Migration
             $table->string('password', 60);
             $table->string('image_path', 50)->unique()->nullable();
             $table->boolean('is_active')->unsigned()->default(true);
-            $table->text('google_refresh_token')->nullable();
             $table->timestamp('email_verified_at')->nullable();
             $table->timestamp('phone_verified_at')->nullable();
             $table->foreignIdFor(User::class, 'created_by')->nullable()->constrained('users')->nullOnDelete();

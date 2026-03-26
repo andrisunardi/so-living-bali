@@ -24,13 +24,13 @@ class OauthAddForm extends Form
     #[Validate('required|string|min:1|max:65535')]
     public string $token_type = '';
 
-    #[Validate('required|integer|min:1|max:9999999999')]
+    #[Validate('required|integer|min:0|max:9999999999')]
     public int $expires_in = 0;
 
     #[Validate('required|string|min:1|max:65535')]
     public string $scope = '';
 
-    #[Validate('required|integer|min:1|max:9999999999')]
+    #[Validate('required|integer|min:0|max:9999999999')]
     public int $created = 0;
 
     public function submit(): Oauth

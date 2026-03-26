@@ -339,7 +339,7 @@ new #[Title('Property')] class extends Component {
                                         {{ $property->id }}
                                     </a>
                                 </td>
-                                <td class="text-center p-0">
+                                <td class="p-0">
                                     @if ($property->image_path)
                                         <a draggable="false" href="{{ $property->image }}" target="_blank">
                                             <div class="ratio ratio-1x1">

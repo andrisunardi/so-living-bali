@@ -11,25 +11,6 @@ new #[Title('Detail | Oauth')] class extends Component {
     public function mount(Oauth $oauth): void
     {
         $this->oauth = $oauth;
-        $this->oauth->loadCount(['areas', 'properties']);
-    }
-
-    public function changeShow(): void
-    {
-        $service = new OauthService();
-        $service->show(oauth: $this->oauth);
-        $this->oauth->loadCount(['areas', 'properties']);
-
-        $this->alertSuccess(title: trans('index.change_show') . ' ' . trans('index.success'), body: trans('page.oauth') . ' ' . trans('message.has_been_successfully_changed'));
-    }
-
-    public function changeActive(): void
-    {
-        $service = new OauthService();
-        $service->active(oauth: $this->oauth);
-        $this->oauth->loadCount(['areas', 'properties']);
-
-        $this->alertSuccess(title: trans('index.change_active') . ' ' . trans('index.success'), body: trans('page.oauth') . ' ' . trans('message.has_been_successfully_changed'));
     }
 
     public function delete(): void
@@ -79,6 +60,15 @@ new #[Title('Detail | Oauth')] class extends Component {
 
                 <div class="row">
                     <div class="col-sm-5 col-md-4 col-lg-3 col-xl-2">
+                        <div class="fw-bold">{{ trans('field.code') }}</div>
+                    </div>
+                    <div class="col-sm-7 col-md-8 col-lg-9 col-xl-10">
+                        {{ $oauth->code }}
+                    </div>
+                </div>
+
+                <div class="row">
+                    <div class="col-sm-5 col-md-4 col-lg-3 col-xl-2">
                         <div class="fw-bold">{{ trans('field.name') }}</div>
                     </div>
                     <div class="col-sm-7 col-md-8 col-lg-9 col-xl-10">
@@ -88,75 +78,55 @@ new #[Title('Detail | Oauth')] class extends Component {
 
                 <div class="row">
                     <div class="col-sm-5 col-md-4 col-lg-3 col-xl-2">
-                        <div class="fw-bold">{{ trans('field.show') }}</div>
+                        <div class="fw-bold">{{ trans('field.refresh_token') }}</div>
                     </div>
                     <div class="col-sm-7 col-md-8 col-lg-9 col-xl-10">
-                        @can('oauth.edit')
-                            <div class="form-check form-switch">
-                                <input class="form-check-input" type="checkbox" role="switch"
-                                    id="is_show_{{ $oauth->id }}" name="is_show" value="1"
-                                    {{ $oauth->is_show ? 'checked' : '' }} wire:click="changeShow({{ $oauth->id }})"
-                                    wire:offline.class="disabled" wire:offline.attr="disabled" wire:loading.class="disabled"
-                                    wire:loading.attr="disabled">
-                                <label class="form-check-label text-{{ Str::successDanger($oauth->is_show) }}"
-                                    for="is_show_{{ $oauth->id }}">
-                                    {{ Str::yesNo($oauth->is_show) }}
-                                </label>
-                            </div>
-                        @else
-                            <span class="badge rounded-pill text-bg-{{ Str::successDanger($oauth->is_show) }}">
-                                {{ Str::yesNo($oauth->is_show) }}
-                            </span>
-                        @endcan
+                        <div class="text-break">{{ $oauth->refresh_token }}</div>
                     </div>
                 </div>
 
                 <div class="row">
                     <div class="col-sm-5 col-md-4 col-lg-3 col-xl-2">
-                        <div class="fw-bold">{{ trans('field.active') }}</div>
+                        <div class="fw-bold">{{ trans('field.access_token') }}</div>
                     </div>
                     <div class="col-sm-7 col-md-8 col-lg-9 col-xl-10">
-                        @can('oauth.edit')
-                            <div class="form-check form-switch">
-                                <input class="form-check-input" type="checkbox" role="switch"
-                                    id="is_active_{{ $oauth->id }}" name="is_active" value="1"
-                                    {{ $oauth->is_active ? 'checked' : '' }}
-                                    wire:click="changeActive({{ $oauth->id }})" wire:offline.class="disabled"
-                                    wire:offline.attr="disabled" wire:loading.class="disabled" wire:loading.attr="disabled">
-                                <label class="form-check-label text-{{ Str::successDanger($oauth->is_active) }}"
-                                    for="is_active_{{ $oauth->id }}">
-                                    {{ Str::yesNo($oauth->is_active) }}
-                                </label>
-                            </div>
-                        @else
-                            <span class="badge rounded-pill text-bg-{{ Str::successDanger($oauth->is_active) }}">
-                                {{ Str::yesNo($oauth->is_active) }}
-                            </span>
-                        @endcan
+                        <div class="text-break">{{ $oauth->access_token }}</div>
                     </div>
                 </div>
 
                 <div class="row">
                     <div class="col-sm-5 col-md-4 col-lg-3 col-xl-2">
-                        <div class="fw-bold">{{ trans('index.total') }} {{ trans('page.area') }}</div>
+                        <div class="fw-bold">{{ trans('field.token_type') }}</div>
                     </div>
                     <div class="col-sm-7 col-md-8 col-lg-9 col-xl-10">
-                        <a draggable="false" href="{{ route('cms.area.index', ['oauth_id' => $oauth->id]) }}"
-                            wire:navigate>
-                            {{ $oauth->areas_count }}
-                        </a>
+                        {{ $oauth->token_type }}
                     </div>
                 </div>
 
                 <div class="row">
                     <div class="col-sm-5 col-md-4 col-lg-3 col-xl-2">
-                        <div class="fw-bold">{{ trans('index.total') }} {{ trans('page.property') }}</div>
+                        <div class="fw-bold">{{ trans('field.expires_in') }}</div>
                     </div>
                     <div class="col-sm-7 col-md-8 col-lg-9 col-xl-10">
-                        <a draggable="false" href="{{ route('cms.property.index', ['oauth_id' => $oauth->id]) }}"
-                            wire:navigate>
-                            {{ $oauth->properties_count }}
-                        </a>
+                        {{ $oauth->expires_in }}
+                    </div>
+                </div>
+
+                <div class="row">
+                    <div class="col-sm-5 col-md-4 col-lg-3 col-xl-2">
+                        <div class="fw-bold">{{ trans('field.scope') }}</div>
+                    </div>
+                    <div class="col-sm-7 col-md-8 col-lg-9 col-xl-10">
+                        {{ $oauth->scope }}
+                    </div>
+                </div>
+
+                <div class="row">
+                    <div class="col-sm-5 col-md-4 col-lg-3 col-xl-2">
+                        <div class="fw-bold">{{ trans('field.created') }}</div>
+                    </div>
+                    <div class="col-sm-7 col-md-8 col-lg-9 col-xl-10">
+                        {{ $oauth->created }}
                     </div>
                 </div>
 

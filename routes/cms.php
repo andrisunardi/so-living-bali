@@ -53,7 +53,7 @@ Route::group(['middleware' => ['auth']], function () {
     Route::prefix('oauth')
         ->name('oauth.')
         ->as('oauth.')
-        ->middleware(['oauth:oauth'])
+        ->middleware(['permission:oauth'])
         ->group(base_path('routes/cms/oauth.php'));
 
     Route::prefix('permission')
