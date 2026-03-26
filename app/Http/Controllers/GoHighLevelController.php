@@ -11,7 +11,7 @@ class GoHighLevelController extends Controller
     {
         $code = $request->query('code');
 
-        $response = Http::post(config('constants.ghl.url'), [
+        $response = Http::post(config('constants.ghl.app_url'), [
             'client_id' => config('constants.ghl.client_id'),
             'client_secret' => config('constants.ghl.client_secret'),
             'grant_type' => config('constants.ghl.grant_type'),

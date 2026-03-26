@@ -236,7 +236,6 @@ LEGAL DOCUMENTATION LIST :
 •⁠  ⁠ID
 •⁠  ⁠Building Permit
 
-
 The CMS doesnt the price and the inclusion
 Could you pls add the price per month (if monthly rental is possible)
 Could you pls add the price per year (if yearly rental is possible)
