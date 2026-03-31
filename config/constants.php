@@ -18,6 +18,7 @@ return [
     // GHL
     'ghl' => [
         'app_url' => env('GHL_APP_URL'),
+        'url' => env('GHL_URL'),
         'oauth_url' => env('GHL_OAUTH_URL'),
         'client_id' => env('GHL_CLIENT_ID'),
         'client_secret' => env('GHL_CLIENT_SECRET'),
@@ -25,6 +26,7 @@ return [
         'redirect_uri' => env('GHL_REDIRECT_URI'),
         'user_type' => env('GHL_USER_TYPE'),
         'location_id' => env('GHL_LOCATION_ID'),
+        'version' => env('GHL_VERSION'),
     ],
 
     // FOLDER
