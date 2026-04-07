@@ -1,5 +1,5 @@
-# long-stay-bali
-Long Stay Bali
+# so-living-bali
+SO Living Bali
 
 Existing Contact At Database
 

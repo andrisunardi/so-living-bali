@@ -1590,7 +1590,7 @@ namespace PHPSTORM_META {
             'filesystems.disks.google.accessToken' => 'NULL',
             'filesystems.disks.google.refreshToken' => 'NULL',
             'filesystems.disks.google.folder' => 'NULL',
-            'filesystems.links./Users/andrisunardi/project/long-stay-bali/public/storage' => 'string',
+            'filesystems.links./Users/andrisunardi/project/so-living-bali/public/storage' => 'string',
             'flare.key' => 'NULL',
             'flare.flare_middleware' => 'array',
             'flare.flare_middleware.Spatie\LaravelIgnition\FlareMiddleware\AddLogs.maximum_number_of_collected_logs' => 'integer',
@@ -2517,7 +2517,7 @@ namespace PHPSTORM_META {
             'filesystems.disks.google.accessToken' => 'NULL',
             'filesystems.disks.google.refreshToken' => 'NULL',
             'filesystems.disks.google.folder' => 'NULL',
-            'filesystems.links./Users/andrisunardi/project/long-stay-bali/public/storage' => 'string',
+            'filesystems.links./Users/andrisunardi/project/so-living-bali/public/storage' => 'string',
             'flare.key' => 'NULL',
             'flare.flare_middleware' => 'array',
             'flare.flare_middleware.Spatie\LaravelIgnition\FlareMiddleware\AddLogs.maximum_number_of_collected_logs' => 'integer',
@@ -3444,7 +3444,7 @@ namespace PHPSTORM_META {
             'filesystems.disks.google.accessToken' => 'NULL',
             'filesystems.disks.google.refreshToken' => 'NULL',
             'filesystems.disks.google.folder' => 'NULL',
-            'filesystems.links./Users/andrisunardi/project/long-stay-bali/public/storage' => 'string',
+            'filesystems.links./Users/andrisunardi/project/so-living-bali/public/storage' => 'string',
             'flare.key' => 'NULL',
             'flare.flare_middleware' => 'array',
             'flare.flare_middleware.Spatie\LaravelIgnition\FlareMiddleware\AddLogs.maximum_number_of_collected_logs' => 'integer',
@@ -3883,9 +3883,9 @@ namespace PHPSTORM_META {
     override(\tap(0), type(0));
     override(\optional(0), type(0));
 
-            registerArgumentsSet('auth', 
+            registerArgumentsSet('auth',
 'downloadLogFile','downloadLogFolder','deleteLogFile','deleteLogFolder',);
-        registerArgumentsSet('configs', 
+        registerArgumentsSet('configs',
 'hashing.driver','hashing.bcrypt.rounds','hashing.bcrypt.verify','hashing.bcrypt.limit','hashing.argon.memory',
 'hashing.argon.threads','hashing.argon.time','hashing.argon.verify','hashing.rehash_on_login','concurrency.default',
 'broadcasting.default','broadcasting.connections.reverb.driver','broadcasting.connections.reverb.key','broadcasting.connections.reverb.secret','broadcasting.connections.reverb.app_id',
@@ -3990,7 +3990,7 @@ namespace PHPSTORM_META {
 'filesystems.disks.public.visibility','filesystems.disks.public.throw','filesystems.disks.public.report','filesystems.disks.s3.driver','filesystems.disks.s3.key',
 'filesystems.disks.s3.secret','filesystems.disks.s3.region','filesystems.disks.s3.bucket','filesystems.disks.s3.url','filesystems.disks.s3.endpoint',
 'filesystems.disks.s3.use_path_style_endpoint','filesystems.disks.s3.throw','filesystems.disks.s3.report','filesystems.disks.google.driver','filesystems.disks.google.clientId',
-'filesystems.disks.google.clientSecret','filesystems.disks.google.accessToken','filesystems.disks.google.refreshToken','filesystems.disks.google.folder','filesystems.links./Users/andrisunardi/project/long-stay-bali/public/storage',
+'filesystems.disks.google.clientSecret','filesystems.disks.google.accessToken','filesystems.disks.google.refreshToken','filesystems.disks.google.folder','filesystems.links./Users/andrisunardi/project/so-living-bali/public/storage',
 'flare.key','flare.flare_middleware','flare.flare_middleware.Spatie\\LaravelIgnition\\FlareMiddleware\\AddLogs.maximum_number_of_collected_logs','flare.flare_middleware.Spatie\\LaravelIgnition\\FlareMiddleware\\AddQueries.maximum_number_of_collected_queries','flare.flare_middleware.Spatie\\LaravelIgnition\\FlareMiddleware\\AddQueries.report_query_bindings',
 'flare.flare_middleware.Spatie\\LaravelIgnition\\FlareMiddleware\\AddJobs.max_chained_job_reporting_depth','flare.flare_middleware.Spatie\\FlareClient\\FlareMiddleware\\CensorRequestBodyFields.censor_fields','flare.flare_middleware.Spatie\\FlareClient\\FlareMiddleware\\CensorRequestHeaders.headers','flare.send_logs_as_events','horizon.name',
 'horizon.domain','horizon.path','horizon.use','horizon.prefix','horizon.middleware',
@@ -4071,12 +4071,12 @@ namespace PHPSTORM_META {
 'telescope.watchers.Laravel\\Telescope\\Watchers\\QueryWatcher.enabled','telescope.watchers.Laravel\\Telescope\\Watchers\\QueryWatcher.ignore_packages','telescope.watchers.Laravel\\Telescope\\Watchers\\QueryWatcher.ignore_paths','telescope.watchers.Laravel\\Telescope\\Watchers\\QueryWatcher.slow','telescope.watchers.Laravel\\Telescope\\Watchers\\RedisWatcher',
 'telescope.watchers.Laravel\\Telescope\\Watchers\\RequestWatcher.enabled','telescope.watchers.Laravel\\Telescope\\Watchers\\RequestWatcher.size_limit','telescope.watchers.Laravel\\Telescope\\Watchers\\RequestWatcher.ignore_http_methods','telescope.watchers.Laravel\\Telescope\\Watchers\\RequestWatcher.ignore_status_codes','telescope.watchers.Laravel\\Telescope\\Watchers\\ScheduleWatcher',
 'telescope.watchers.Laravel\\Telescope\\Watchers\\ViewWatcher','tinker.commands','tinker.alias','tinker.dont_alias','tinker.trust_project',);
-        registerArgumentsSet('middleware', 
+        registerArgumentsSet('middleware',
 'web','api','auth','auth.basic','auth.session',
 'cache.headers','can','guest','password.confirm','precognitive',
 'signed','throttle','verified','localization','role',
 'permission','role_or_permission',);
-        registerArgumentsSet('routes', 
+        registerArgumentsSet('routes',
 'debugbar.openhandler','debugbar.cache.delete','debugbar.queries.explain','debugbar.clockwork','debugbar.assets',
 'debugbar.telescope','pretty-routes.show','horizon.stats.index','horizon.workload.index','horizon.masters.index',
 'horizon.monitoring.index','horizon.monitoring.store','horizon.monitoring-tag.paginate','horizon.monitoring-tag.destroy','horizon.jobs-metrics.index',
@@ -4099,7 +4099,7 @@ namespace PHPSTORM_META {
 'cms.user.edit','cms.user.detail','cms.profile.index','cms.profile.edit-profile','cms.profile.change-password',
 'cms.profile.setting','cms.profile.activity','cms.logout','leadconnector.','leadconnector.',
 'google.redirect','google.callback','storage.local','storage.local.upload',);
-        registerArgumentsSet('views', 
+        registerArgumentsSet('views',
 '0faf4bf7d276cec6b33b9e7b6d49bdce::activity-log','0faf4bf7d276cec6b33b9e7b6d49bdce::alert-error','0faf4bf7d276cec6b33b9e7b6d49bdce::cms.profile.activity-log','0faf4bf7d276cec6b33b9e7b6d49bdce::cms.profile.connection-status','0faf4bf7d276cec6b33b9e7b6d49bdce::cms.profile.form.change-password',
 '0faf4bf7d276cec6b33b9e7b6d49bdce::cms.profile.form.edit-profile','0faf4bf7d276cec6b33b9e7b6d49bdce::cms.profile.menu','0faf4bf7d276cec6b33b9e7b6d49bdce::cms.profile.roles-and-permissions','0faf4bf7d276cec6b33b9e7b6d49bdce::cms.profile.theme-mode','0faf4bf7d276cec6b33b9e7b6d49bdce::cms.profile.user-information',
 '0faf4bf7d276cec6b33b9e7b6d49bdce::home.form','0faf4bf7d276cec6b33b9e7b6d49bdce::home.hero','0faf4bf7d276cec6b33b9e7b6d49bdce::meta','0faf4bf7d276cec6b33b9e7b6d49bdce::navigation','0faf4bf7d276cec6b33b9e7b6d49bdce::network',
@@ -4188,7 +4188,7 @@ namespace PHPSTORM_META {
 'log-viewer::index','notifications::email','pagination::bootstrap-4','pagination::bootstrap-5','pagination::default',
 'pagination::semantic-ui','pagination::simple-bootstrap-4','pagination::simple-bootstrap-5','pagination::simple-default','pagination::simple-tailwind',
 'pagination::tailwind','pretty-routes::routes','telescope::layout',);
-        registerArgumentsSet('translations', 
+        registerArgumentsSet('translations',
 'auth.failed','auth.password','auth.throttle','pagination.previous','pagination.next',
 'passwords.reset','passwords.sent','passwords.throttled','passwords.token','passwords.user',
 'validation.accepted','validation.accepted_if','validation.active_url','validation.after','validation.after_or_equal',
@@ -4284,7 +4284,7 @@ namespace PHPSTORM_META {
 'validation.attributes.target_profile','validation.attributes.token_type','validation.attributes.trade_off_identified','validation.attributes.usability_limitations','validation.attributes.user_id',
 'validation.attributes.username','validation.attributes.view','validation.attributes.visit_date','validation.attributes.water_source','validation.attributes.when',
 'validation.attributes.internet_speedtest_image','validation.attributes.index','language.language',);
-        registerArgumentsSet('env', 
+        registerArgumentsSet('env',
 'APP_NAME','APP_ENV','APP_KEY','APP_DEBUG','APP_URL',
 'APP_TIMEZONE','APP_LOCALE','APP_FALLBACK_LOCALE','APP_FAKER_LOCALE','APP_MAINTENANCE_DRIVER',
 'PHP_CLI_SERVER_WORKERS','BCRYPT_ROUNDS','LOG_CHANNEL','LOG_STACK','LOG_DEPRECATIONS_CHANNEL',
@@ -4301,7 +4301,7 @@ namespace PHPSTORM_META {
 'GHL_CLIENT_ID','GHL_CLIENT_SECRET','GHL_REDIRECT_URI','GHL_USER_TYPE','GHL_LOCATION_ID',
 'GHL_VERSION','GOOGLE_CLIENT_ID','GOOGLE_CLIENT_SECRET','GOOGLE_REDIRECT_URI','GOOGLE_DRIVE_ROOT_FOLDER',
 'FOLDER_ID_PROPERTY',);
-        
+
                 expectedArguments(\Illuminate\Support\Facades\Gate::has(), 0, argumentsSet('auth'));
     expectedArguments(\Illuminate\Support\Facades\Gate::allows(), 0, argumentsSet('auth'));
     expectedArguments(\Illuminate\Support\Facades\Gate::denies(), 0, argumentsSet('auth'));
@@ -4365,5 +4365,5 @@ namespace PHPSTORM_META {
                 expectedArguments(\Illuminate\Contracts\Translation\Translator::get(), 0, argumentsSet('translations'));
                 expectedArguments(\env(), 0, argumentsSet('env'));
                 expectedArguments(\Illuminate\Support\Env::get(), 0, argumentsSet('env'));
-            
+
 }
