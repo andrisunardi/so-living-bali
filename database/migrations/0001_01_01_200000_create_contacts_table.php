@@ -13,7 +13,7 @@ return new class extends Migration
             $table->id();
             $table->string('code', 20)->unique();
             $table->string('name', 50);
-            $table->string('company', 50);
+            $table->string('company', 50)->nullable();
             $table->string('email', 50)->unique();
             $table->string('phone', 20)->unique();
             $table->foreignIdFor(User::class, 'created_by')->nullable()->constrained('users')->nullOnDelete();

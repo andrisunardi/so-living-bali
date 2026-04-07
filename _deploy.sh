@@ -18,7 +18,7 @@ git pull origin main
 echo ""
 
 echo "COMPOSER"
-composer install
+composer install --ignore-platform-reqs
 composer dump-autoload
 echo ""
 
@@ -38,12 +38,12 @@ echo ""
 
 echo "PUBLIC HTML"
 cd public
-cp -r * ~/long-stay-bali.diw.co.id
-cp .htaccess ~/long-stay-bali.diw.co.id/
-cd ~/long-stay-bali.diw.co.id/
+cp -r * ~/public_html
+cp .htaccess ~/public_html/
+cd ~/public_html/
 rm -f index.php
 cp -f server.php index.php
-cd ~/src-long-stay-bali
+cd ~/src
 echo ""
 
 echo "UP"
