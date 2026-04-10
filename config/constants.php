@@ -32,6 +32,7 @@ return [
     // FOLDER
     'folder_id' => [
         'property' => env('FOLDER_ID_PROPERTY'),
+        'user' => env('FOLDER_ID_USER'),
     ],
 
     'color' => '',

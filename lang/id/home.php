@@ -3,7 +3,7 @@
 return [
 
     'hero' => [
-        'title' => 'Long Stay Bali',
+        'title' => 'SO Living Bali',
         'description' => 'Sewa bulanan dan tahunan di Bali. Temukan rumah Anda, hidup lebih baik, tinggal lebih lama.',
     ],
     'form' => [
