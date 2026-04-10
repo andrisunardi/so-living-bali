@@ -261,11 +261,11 @@ new #[Title('Edit | User')] class extends Component {
                                             onerror="asset('images/image-not-available.png')" />
                                     </div>
                                 </div>
-                            @elseif ($user->image_url)
+                            @elseif ($user->image_path)
                                 <div>
-                                    <a draggable="false" href="{{ $user->image_url }}" target="_blank">
+                                    <a draggable="false" href="{{ $user->image }}" target="_blank">
                                         <img draggable="false" class="img-fluid w-100 rounded" width="100"
-                                            src="{{ $user->image_url }}"
+                                            src="{{ $user->image }}"
                                             alt="{{ trans('page.user') }} - {{ $user->id }}"
                                             onerror="asset('images/image-not-available.png')" />
                                     </a>
