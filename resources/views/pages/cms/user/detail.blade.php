@@ -115,10 +115,10 @@ new #[Title('Detail | User')] class extends Component {
                         <div class="fw-bold">{{ trans('field.image') }}</div>
                     </div>
                     <div class="col-sm-7 col-md-6 col-lg-5 col-xl-4">
-                        @if ($user->image_url)
-                            <a draggable="false" href="{{ $user->image_url }}" target="_blank">
+                        @if ($user->image_path)
+                            <a draggable="false" href="{{ $user->image }}" target="_blank">
                                 <img draggable="false" class="img-fluid w-100 h-100 rounded-circle mt-2"
-                                    src="{{ $user->image_url }}" alt="User - {{ $user->id }}"
+                                    src="{{ $user->image }}" alt="User - {{ $user->id }}"
                                     onerror="asset('images/user.png')" />
                             </a>
                         @endif

@@ -2,8 +2,8 @@
 
 namespace App\Services;
 
+use App\Libraries\GoogleDrive;
 use App\Models\User;
-// use App\Utils\Upload;
 use Exception;
 use Illuminate\Support\Arr;
 use Illuminate\Support\Facades\DB;
@@ -77,11 +77,11 @@ class UserService
             DB::beginTransaction();
 
             if ($data['image'] ?? null) {
-                // $data['image_url'] = (new Upload)->image(
-                //     image: $data['image'],
-                //     directory: 'user',
-                //     name: $data['username'].'-'.Str::slug($data['name']),
-                // );
+                $data['image_path'] = (new GoogleDrive)->uploadImage(
+                    image: $data['image'],
+                    name: $data['username'].'-'.Str::slug($data['name']),
+                    folderId: config('constants.folder_id.user'),
+                );
             }
 
             $roles = Role::find($data['role_ids']);
@@ -109,11 +109,15 @@ class UserService
             DB::beginTransaction();
 
             if ($data['image'] ?? null) {
-                // $data['image_url'] = (new Upload)->image(
-                //     image: $data['image'],
-                //     directory: 'user',
-                //     name: $data['username'].'-'.Str::slug($data['name']),
-                // );
+                $data['image_path'] = (new GoogleDrive)->uploadImage(
+                    image: $data['image'],
+                    name: $data['username'].'-'.Str::slug($data['name']),
+                    folderId: config('constants.folder_id.user'),
+                );
+
+                if ($user->image_path) {
+                    (new GoogleDrive)->delete($user->image_path);
+                }
             }
 
             $roles = Role::find($data['role_ids']);
