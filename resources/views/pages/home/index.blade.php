@@ -9,5 +9,7 @@ new #[Title('Home')] class extends Component {};
 @section('title', trans('page.home'))
 
 <div>
-    <livewire:home.hero :title="trans('home.hero.title') ?? null" :description="trans('home.hero.description') ?? null" :image="asset('images/banner/home.jpg')" />
+    <img draggable="false" src="{{ asset('images/banner.png') }}" class="w-100 h-100 object-fit-cover" alt="Banner">
+
+    {{-- <livewire:home.hero :title="trans('home.hero.title') ?? null" :description="trans('home.hero.description') ?? null" :image="asset('images/banner/home.jpg')" /> --}}
 </div>

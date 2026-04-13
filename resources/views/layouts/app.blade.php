@@ -27,7 +27,7 @@
                 @endauth
             @endauth
         @else
-            <livewire:layouts::header />
+            {{-- <livewire:layouts::header /> --}}
         @endif
     @endif
 
@@ -64,7 +64,7 @@
             @endauth
         @else
             @auth
-                <livewire:layouts::footer />
+                {{-- <livewire:layouts::footer /> --}}
             @endauth
         @endif
     @endif
