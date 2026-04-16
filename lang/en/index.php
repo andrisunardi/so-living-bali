@@ -54,7 +54,7 @@ return [
     'connect' => 'Connect',
     'refresh' => 'Refresh',
     'currency' => 'Currency',
-    'index' => 'Index',
+    'list_your_properties' => 'List Your Properties',
     'index' => 'Index',
     'index' => 'Index',
     'index' => 'Index',
