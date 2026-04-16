@@ -77,7 +77,7 @@ new class extends Component {
                 <a draggable="false" href="{{ route('home') }}" wire:navigate>
                     <img draggable="false" class="logo user-select-none pe-none" height="50"
                         src="{{ asset('images/logo.png') }}"
-                        alt="{{ trans('index.logo') }} - {{ config('constants.title') }}" />
+                        alt="{{ trans('index.logo') }} - {{ config('app.name') }}" />
                 </a>
             </div>
 
@@ -86,7 +86,7 @@ new class extends Component {
                 <div class="d-none d-md-flex align-items-center gap-md-3 gap-lg-4 gap-xl-5">
                     @foreach ($this->navigations() as $navigation)
                         <a draggable="false" href="{{ $navigation['url'] }}"
-                            class="navbar-color text-white text-uppercase {{ Route::is($navigation['route']) ? 'fw-bold text-decoration-underline link-offset-3' : '' }}"
+                            class="header-color text-white text-uppercase {{ Route::is($navigation['route']) ? 'fw-bold text-decoration-underline link-offset-3' : '' }}"
                             wire:navigate wire:key="navigation-{{ $navigation['id'] }}">
                             {{ $navigation['name'] }}
                         </a>
@@ -97,7 +97,7 @@ new class extends Component {
             <div class="flex-fill text-end">
                 <div class="dropdown">
                     <a draggable="false" href="javascript:;"
-                        class="navbar-color text-white text-uppercase dropdown-toggle icon-link"
+                        class="header-color text-white text-uppercase dropdown-toggle icon-link"
                         data-bs-toggle="dropdown">
                         <img draggable="false" class="user-select-none pe-none" width="20"
                             src="{{ asset('images/flag/' . app()->getLocale() . '.svg') }}"
@@ -124,41 +124,41 @@ new class extends Component {
             {{-- MOBILE --}}
             <div class="d-flex gap-4 d-lg-none">
                 <a draggable="false" href="javascript:;" data-bs-toggle="offcanvas" data-bs-target="#navigation">
-                    <span class="fas fa-bars navbar-color"></span>
+                    <span class="fas fa-bars header-color"></span>
                 </a>
 
                 <div class="offcanvas offcanvas-end" tabindex="-1" id="navigation">
-                    <div class="offcanvas-header d-flex justify-content-between align-items-center border-bottom">
-                        <div class="offcanvas-title"></div>
-                        <a draggable="false" href="javascript:;" data-bs-dismiss="offcanvas">
-                            <span class="fas fa-times text-white"></span>
-                        </a>
+                    <div class="offcanvas-header">
+                        <div class="offcanvas-title">
+                            <a draggable="false" href="{{ route('home') }}" wire:navigate>
+                                <img draggable="false" class="user-select-none pe-none" height="50"
+                                    src="{{ asset('images/logo/black-tagline.png') }}"
+                                    alt="{{ trans('index.logo') }} - {{ config('app.name') }}" />
+                            </a>
+                        </div>
+                        <button type="button" class="btn-close" data-bs-dismiss="offcanvas"></button>
                     </div>
 
                     <div class="offcanvas-body">
-                        <div class="d-grid gap-4 mt-4">
-                            @foreach ($this->navigations() as $navigation)
-                                <h2 class="h5 fw-bold mb-0" wire:key="navigation-{{ $navigation['id'] }}">
-                                    <a draggable="false" href="{{ $navigation['url'] }}" class="text-white"
-                                        wire:navigate>
-                                        @if (Route::is($navigation['route']))
-                                            <span class="fas fa-caret-right fa-fw"></span>
-                                        @endif
-                                        <span class="text-uppercase">{{ $navigation['name'] }}</span>
-                                    </a>
-                                </h2>
-                            @endforeach
+                        <div class="d-grid gap-4">
+                            <ul class="list-unstyled d-grid gap-4">
+                                @foreach ($this->navigations() as $navigation)
+                                    <li wire:key="navigation-{{ $navigation['id'] }}">
+                                        <a draggable="false" href="{{ $navigation['url'] }}" wire:navigate
+                                            class="d-flex justify-content-between text-body fs-6 {{ Route::is($navigation['route']) ? 'fw-bold' : '' }}">
+                                            <span>{{ $navigation['name'] }}</span>
+                                            <span class="fas fa-angle-right fa-fw"></span>
+                                        </a>
+                                    </li>
+                                @endforeach
+                            </ul>
 
-                            <a draggable="false" class="btn btn-light rounded-5 fw-bold z-1" href="asd"
-                                wire:navigate>
-                                asd
+                            <a draggable="false" class="btn btn-dark rounded-5 fw-bold w-100"
+                                href="{{ route('home') }}" wire:navigate>
+                                <span class="fas fa-arrow-right-to-bracket fa-fw"></span>
+                                {{ trans('index.login') }}
                             </a>
                         </div>
-
-                        <img draggable="false" width="100"
-                            class="position-fixed bottom-0 end-0 img-fluid user-select-none pe-none"
-                            src="{{ asset('images/triangle-white-bottom.png') }}"
-                            alt="Triangle White Bottom - {{ config('constants.title') }}">
                     </div>
                 </div>
             </div>
@@ -168,51 +168,42 @@ new class extends Component {
 </header>
 
 @push('script')
-    {{-- <script>
+    <script>
         function scroll() {
-            const $topbar = $("#topbar");
-            const $navbar = $("#navbar");
+            const $header = $("#header");
             const $logo = $(".logo");
 
-            if (!$navbar.length) return;
+            if (!$header.length) return;
 
             function scroll() {
                 if ($(window).scrollTop() > 100) {
-                    $topbar.addClass("{{ $bgColor }} {{ $textColor }}");
-                    $topbar
-                        .find(".topbar-color")
+                    $header.addClass("bg-white text-black");
+                    $header
+                        .find(".header-color")
                         .removeClass("text-white")
-                        .addClass("{{ $textColor }}");
+                        .addClass("text-black");
 
-                    $navbar.addClass("{{ $bgColor }}");
-                    $navbar
-                        .find(".navbar-color")
+                    $header.addClass("bg-white");
+                    $header
+                        .find(".header-color")
                         .removeClass("text-white")
-                        .addClass("{{ $textColor }}");
-                    $navbar
-                        .find(".reservation")
-                        .removeClass("btn-outline-light")
-                        .addClass("{{ $buttonColor }}");
+                        .addClass("text-black");
 
-                    $logo.attr("src", "{{ $imageBefore }}");
+                    $logo.attr("src", "{{ asset('images/logo/black.png') }}");
                 } else {
-                    $topbar.removeClass("{{ $bgColor }}");
-                    $topbar
-                        .find(".topbar-color")
-                        .removeClass("{{ $textColor }}")
+                    $header.removeClass("bg-white");
+                    $header
+                        .find(".header-color")
+                        .removeClass("text-black")
                         .addClass("text-white");
 
-                    $navbar.removeClass("{{ $bgColor }}");
-                    $navbar
-                        .find(".navbar-color")
-                        .removeClass("{{ $textColor }}")
+                    $header.removeClass("bg-WHITE");
+                    $header
+                        .find(".header-color")
+                        .removeClass("text-black")
                         .addClass("text-white");
-                    $navbar
-                        .find(".reservation")
-                        .removeClass("{{ $buttonColor }}")
-                        .addClass("btn-outline-light");
 
-                    $logo.attr("src", "{{ $imageAfter }}");
+                    $logo.attr("src", "{{ asset('images/logo/white.png') }}");
                 }
             }
 
@@ -222,5 +213,5 @@ new class extends Component {
 
         document.addEventListener("DOMContentLoaded", scroll);
         document.addEventListener("livewire:navigated", scroll);
-    </script> --}}
+    </script>
 @endpush
