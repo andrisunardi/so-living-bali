@@ -14,7 +14,6 @@ use Spatie\Activitylog\LogOptions;
 use Spatie\Activitylog\Models\Activity;
 use Spatie\Activitylog\Traits\LogsActivity;
 
-#[ObservedBy([OauthObserver::class])]
 /**
  * @property int $id
  * @property string $code
@@ -62,6 +61,7 @@ use Spatie\Activitylog\Traits\LogsActivity;
  *
  * @mixin \Eloquent
  */
+#[ObservedBy([OauthObserver::class])]
 class Oauth extends Model
 {
     use HasFactory;

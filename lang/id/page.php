@@ -20,6 +20,7 @@ return [
     'article' => 'Artikel',
 
     'master' => 'Master',
+    'concept' => 'Konsep',
     'area' => 'Area',
     'district' => 'Kecamatan',
 

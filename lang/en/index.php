@@ -55,7 +55,7 @@ return [
     'refresh' => 'Refresh',
     'currency' => 'Currency',
     'list_your_properties' => 'List Your Properties',
-    'index' => 'Index',
+    'search_menu' => 'Search Menu',
     'index' => 'Index',
     'index' => 'Index',
     'index' => 'Index',

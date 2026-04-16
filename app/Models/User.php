@@ -22,7 +22,6 @@ use Spatie\Permission\Models\Permission;
 use Spatie\Permission\Models\Role;
 use Spatie\Permission\Traits\HasRoles;
 
-#[ObservedBy([UserObserver::class])]
 /**
  * @property int $id
  * @property string $name
@@ -32,6 +31,7 @@ use Spatie\Permission\Traits\HasRoles;
  * @property string $password
  * @property string|null $image_path
  * @property bool $is_active
+ * @property string|null $google_refresh_token
  * @property Carbon|null $email_verified_at
  * @property Carbon|null $phone_verified_at
  * @property int|null $created_by
@@ -87,10 +87,9 @@ use Spatie\Permission\Traits\HasRoles;
  * @method static Builder<static>|User withoutRole($roles, $guard = null)
  * @method static Builder<static>|User withoutTrashed()
  *
- * @property string|null $google_refresh_token
- *
  * @mixin \Eloquent
  */
+#[ObservedBy([UserObserver::class])]
 class User extends Authenticatable
 {
     use HasApiTokens;

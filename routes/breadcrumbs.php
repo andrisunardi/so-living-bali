@@ -148,6 +148,27 @@ Breadcrumbs::for('cms.property-image.detail', function (BreadcrumbTrail $trail, 
 });
 
 // MASTER
+// CONCEPT
+Breadcrumbs::for('cms.concept.index', function (BreadcrumbTrail $trail) {
+    $trail->parent('cms.home');
+    $trail->push(trans('page.concept'), route('cms.concept.index'), ['icon' => 'fas fa-lightbulb']);
+});
+
+Breadcrumbs::for('cms.concept.add', function (BreadcrumbTrail $trail) {
+    $trail->parent('cms.concept.index');
+    $trail->push(trans('index.add'), route('cms.concept.add'), ['icon' => 'fas fa-plus']);
+});
+
+Breadcrumbs::for('cms.concept.edit', function (BreadcrumbTrail $trail, $concept) {
+    $trail->parent('cms.concept.index');
+    $trail->push(trans('index.edit'), route('cms.concept.edit', $concept), ['icon' => 'fas fa-edit']);
+});
+
+Breadcrumbs::for('cms.concept.detail', function (BreadcrumbTrail $trail, $concept) {
+    $trail->parent('cms.concept.index');
+    $trail->push(trans('index.detail'), route('cms.concept.detail', $concept), ['icon' => 'fas fa-list']);
+});
+
 // AREA
 Breadcrumbs::for('cms.area.index', function (BreadcrumbTrail $trail) {
     $trail->parent('cms.home');

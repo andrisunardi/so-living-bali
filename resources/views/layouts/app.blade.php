@@ -5,7 +5,7 @@
 <head>
     <x-meta />
 
-    <title>{{ $title ?? View::getSection('title') }} | {{ config('app.name') }}</title>
+    <title>{{ View::getSection('title') ?? $title }} | {{ config('app.name') }}</title>
 
     <x-vendors />
 
@@ -78,6 +78,8 @@
             </span>
         </a>
     @endif
+
+    <livewire:modal.search-menu />
 
     @if (Route::is('cms.*'))
         <script src="{{ asset('js/color-modes.js') }}"></script>

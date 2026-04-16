@@ -32,6 +32,11 @@ new class extends Component {};
             </div>
 
             <div class="d-flex gap-1">
+                <button type="button" class="btn icon-link" data-bs-toggle="modal" data-bs-target="#modal-search-menu">
+                    <span class="fas fa-search fa-fw"></span>
+                    <span class="d-none d-sm-inline">{{ trans('index.search_menu') }}</span>
+                </button>
+
                 <livewire:network />
 
                 <livewire:profile />

@@ -21,40 +21,40 @@ namespace App\Models{
  * @property int|null $created_by
  * @property int|null $updated_by
  * @property int|null $deleted_by
- * @property Carbon $created_at
- * @property Carbon $updated_at
- * @property Carbon|null $deleted_at
- * @property-read Collection<int, Activity> $activities
+ * @property \Illuminate\Support\Carbon $created_at
+ * @property \Illuminate\Support\Carbon $updated_at
+ * @property \Illuminate\Support\Carbon|null $deleted_at
+ * @property-read \Illuminate\Database\Eloquent\Collection<int, \Spatie\Activitylog\Models\Activity> $activities
  * @property-read int|null $activities_count
- * @property-read User|null $createdBy
- * @property-read User|null $deletedBy
- * @property-read District $district
- * @property-read Collection<int, Property> $properties
+ * @property-read \App\Models\User|null $createdBy
+ * @property-read \App\Models\User|null $deletedBy
+ * @property-read \App\Models\District|null $district
+ * @property-read \Illuminate\Database\Eloquent\Collection<int, \App\Models\Property> $properties
  * @property-read int|null $properties_count
- * @property-read User|null $updatedBy
- * @property-read User|null $user
+ * @property-read \App\Models\User|null $updatedBy
+ * @property-read \App\Models\User|null $user
+ * @method static \Illuminate\Database\Eloquent\Builder<static>|Area active()
  * @method static \Database\Factories\AreaFactory factory($count = null, $state = [])
- * @method static Builder<static>|Area inactive()
- * @method static Builder<static>|Area newModelQuery()
- * @method static Builder<static>|Area newQuery()
- * @method static Builder<static>|Area notShown()
- * @method static Builder<static>|Area onlyTrashed()
- * @method static Builder<static>|Area query()
- * @method static Builder<static>|Area show()
- * @method static Builder<static>|Area whereCreatedAt($value)
- * @method static Builder<static>|Area whereCreatedBy($value)
- * @method static Builder<static>|Area whereDeletedAt($value)
- * @method static Builder<static>|Area whereDeletedBy($value)
- * @method static Builder<static>|Area whereDistrictId($value)
- * @method static Builder<static>|Area whereId($value)
- * @method static Builder<static>|Area whereIsActive($value)
- * @method static Builder<static>|Area whereIsShow($value)
- * @method static Builder<static>|Area whereName($value)
- * @method static Builder<static>|Area whereUpdatedAt($value)
- * @method static Builder<static>|Area whereUpdatedBy($value)
- * @method static Builder<static>|Area withTrashed(bool $withTrashed = true)
- * @method static Builder<static>|Area withoutTrashed()
- * @mixin \Eloquent
+ * @method static \Illuminate\Database\Eloquent\Builder<static>|Area inactive()
+ * @method static \Illuminate\Database\Eloquent\Builder<static>|Area newModelQuery()
+ * @method static \Illuminate\Database\Eloquent\Builder<static>|Area newQuery()
+ * @method static \Illuminate\Database\Eloquent\Builder<static>|Area notShown()
+ * @method static \Illuminate\Database\Eloquent\Builder<static>|Area onlyTrashed()
+ * @method static \Illuminate\Database\Eloquent\Builder<static>|Area query()
+ * @method static \Illuminate\Database\Eloquent\Builder<static>|Area show()
+ * @method static \Illuminate\Database\Eloquent\Builder<static>|Area whereCreatedAt($value)
+ * @method static \Illuminate\Database\Eloquent\Builder<static>|Area whereCreatedBy($value)
+ * @method static \Illuminate\Database\Eloquent\Builder<static>|Area whereDeletedAt($value)
+ * @method static \Illuminate\Database\Eloquent\Builder<static>|Area whereDeletedBy($value)
+ * @method static \Illuminate\Database\Eloquent\Builder<static>|Area whereDistrictId($value)
+ * @method static \Illuminate\Database\Eloquent\Builder<static>|Area whereId($value)
+ * @method static \Illuminate\Database\Eloquent\Builder<static>|Area whereIsActive($value)
+ * @method static \Illuminate\Database\Eloquent\Builder<static>|Area whereIsShow($value)
+ * @method static \Illuminate\Database\Eloquent\Builder<static>|Area whereName($value)
+ * @method static \Illuminate\Database\Eloquent\Builder<static>|Area whereUpdatedAt($value)
+ * @method static \Illuminate\Database\Eloquent\Builder<static>|Area whereUpdatedBy($value)
+ * @method static \Illuminate\Database\Eloquent\Builder<static>|Area withTrashed(bool $withTrashed = true)
+ * @method static \Illuminate\Database\Eloquent\Builder<static>|Area withoutTrashed()
  */
 	class Area extends \Eloquent {}
 }
@@ -62,7 +62,59 @@ namespace App\Models{
 namespace App\Models{
 /**
  * @property int $id
- * @property string|null $code
+ * @property string $title
+ * @property string $title_id
+ * @property string $title_zh
+ * @property string $description
+ * @property string $description_id
+ * @property string $description_zh
+ * @property string $icon
+ * @property bool $is_active
+ * @property int|null $created_by
+ * @property int|null $updated_by
+ * @property int|null $deleted_by
+ * @property \Illuminate\Support\Carbon $created_at
+ * @property \Illuminate\Support\Carbon $updated_at
+ * @property \Illuminate\Support\Carbon|null $deleted_at
+ * @property-read \Illuminate\Database\Eloquent\Collection<int, \Spatie\Activitylog\Models\Activity> $activities
+ * @property-read int|null $activities_count
+ * @property-read \App\Models\User|null $createdBy
+ * @property-read \App\Models\User|null $deletedBy
+ * @property-read string $description_title
+ * @property-read string $translate_title
+ * @property-read \App\Models\User|null $updatedBy
+ * @method static \Illuminate\Database\Eloquent\Builder<static>|Concept active()
+ * @method static \Database\Factories\ConceptFactory factory($count = null, $state = [])
+ * @method static \Illuminate\Database\Eloquent\Builder<static>|Concept inactive()
+ * @method static \Illuminate\Database\Eloquent\Builder<static>|Concept newModelQuery()
+ * @method static \Illuminate\Database\Eloquent\Builder<static>|Concept newQuery()
+ * @method static \Illuminate\Database\Eloquent\Builder<static>|Concept onlyTrashed()
+ * @method static \Illuminate\Database\Eloquent\Builder<static>|Concept query()
+ * @method static \Illuminate\Database\Eloquent\Builder<static>|Concept whereCreatedAt($value)
+ * @method static \Illuminate\Database\Eloquent\Builder<static>|Concept whereCreatedBy($value)
+ * @method static \Illuminate\Database\Eloquent\Builder<static>|Concept whereDeletedAt($value)
+ * @method static \Illuminate\Database\Eloquent\Builder<static>|Concept whereDeletedBy($value)
+ * @method static \Illuminate\Database\Eloquent\Builder<static>|Concept whereDescription($value)
+ * @method static \Illuminate\Database\Eloquent\Builder<static>|Concept whereDescriptionId($value)
+ * @method static \Illuminate\Database\Eloquent\Builder<static>|Concept whereDescriptionZh($value)
+ * @method static \Illuminate\Database\Eloquent\Builder<static>|Concept whereIcon($value)
+ * @method static \Illuminate\Database\Eloquent\Builder<static>|Concept whereId($value)
+ * @method static \Illuminate\Database\Eloquent\Builder<static>|Concept whereIsActive($value)
+ * @method static \Illuminate\Database\Eloquent\Builder<static>|Concept whereTitle($value)
+ * @method static \Illuminate\Database\Eloquent\Builder<static>|Concept whereTitleId($value)
+ * @method static \Illuminate\Database\Eloquent\Builder<static>|Concept whereTitleZh($value)
+ * @method static \Illuminate\Database\Eloquent\Builder<static>|Concept whereUpdatedAt($value)
+ * @method static \Illuminate\Database\Eloquent\Builder<static>|Concept whereUpdatedBy($value)
+ * @method static \Illuminate\Database\Eloquent\Builder<static>|Concept withTrashed(bool $withTrashed = true)
+ * @method static \Illuminate\Database\Eloquent\Builder<static>|Concept withoutTrashed()
+ */
+	class Concept extends \Eloquent {}
+}
+
+namespace App\Models{
+/**
+ * @property int $id
+ * @property string $code
  * @property string $name
  * @property string $company
  * @property string $email
@@ -70,21 +122,21 @@ namespace App\Models{
  * @property int|null $created_by
  * @property int|null $updated_by
  * @property int|null $deleted_by
- * @property Carbon $created_at
- * @property Carbon $updated_at
- * @property Carbon|null $deleted_at
- * @property-read Collection<int, Activity> $activities
+ * @property \Illuminate\Support\Carbon $created_at
+ * @property \Illuminate\Support\Carbon $updated_at
+ * @property \Illuminate\Support\Carbon|null $deleted_at
+ * @property-read \Illuminate\Database\Eloquent\Collection<int, \Spatie\Activitylog\Models\Activity> $activities
  * @property-read int|null $activities_count
- * @property-read User|null $createdBy
- * @property-read User|null $deletedBy
- * @property-read User|null $updatedBy
+ * @property-read \App\Models\User|null $createdBy
+ * @property-read \App\Models\User|null $deletedBy
+ * @property-read \App\Models\User|null $updatedBy
  * @method static \Database\Factories\ContactFactory factory($count = null, $state = [])
  * @method static \Illuminate\Database\Eloquent\Builder<static>|Contact newModelQuery()
  * @method static \Illuminate\Database\Eloquent\Builder<static>|Contact newQuery()
  * @method static \Illuminate\Database\Eloquent\Builder<static>|Contact onlyTrashed()
  * @method static \Illuminate\Database\Eloquent\Builder<static>|Contact query()
+ * @method static \Illuminate\Database\Eloquent\Builder<static>|Contact whereCode($value)
  * @method static \Illuminate\Database\Eloquent\Builder<static>|Contact whereCompany($value)
- * @method static \Illuminate\Database\Eloquent\Builder<static>|Contact whereContactId($value)
  * @method static \Illuminate\Database\Eloquent\Builder<static>|Contact whereCreatedAt($value)
  * @method static \Illuminate\Database\Eloquent\Builder<static>|Contact whereCreatedBy($value)
  * @method static \Illuminate\Database\Eloquent\Builder<static>|Contact whereDeletedAt($value)
@@ -97,8 +149,6 @@ namespace App\Models{
  * @method static \Illuminate\Database\Eloquent\Builder<static>|Contact whereUpdatedBy($value)
  * @method static \Illuminate\Database\Eloquent\Builder<static>|Contact withTrashed(bool $withTrashed = true)
  * @method static \Illuminate\Database\Eloquent\Builder<static>|Contact withoutTrashed()
- * @method static \Illuminate\Database\Eloquent\Builder<static>|Contact whereCode($value)
- * @mixin \Eloquent
  */
 	class Contact extends \Eloquent {}
 }
@@ -112,40 +162,40 @@ namespace App\Models{
  * @property int|null $created_by
  * @property int|null $updated_by
  * @property int|null $deleted_by
- * @property Carbon $created_at
- * @property Carbon $updated_at
- * @property Carbon|null $deleted_at
- * @property-read Collection<int, Activity> $activities
+ * @property \Illuminate\Support\Carbon $created_at
+ * @property \Illuminate\Support\Carbon $updated_at
+ * @property \Illuminate\Support\Carbon|null $deleted_at
+ * @property-read \Illuminate\Database\Eloquent\Collection<int, \Spatie\Activitylog\Models\Activity> $activities
  * @property-read int|null $activities_count
- * @property-read Collection<int, Area> $areas
+ * @property-read \Illuminate\Database\Eloquent\Collection<int, \App\Models\Area> $areas
  * @property-read int|null $areas_count
- * @property-read User|null $createdBy
- * @property-read User|null $deletedBy
- * @property-read Collection<int, Property> $properties
+ * @property-read \App\Models\User|null $createdBy
+ * @property-read \App\Models\User|null $deletedBy
+ * @property-read \Illuminate\Database\Eloquent\Collection<int, \App\Models\Property> $properties
  * @property-read int|null $properties_count
- * @property-read User|null $updatedBy
- * @property-read User|null $user
+ * @property-read \App\Models\User|null $updatedBy
+ * @property-read \App\Models\User|null $user
+ * @method static \Illuminate\Database\Eloquent\Builder<static>|District active()
  * @method static \Database\Factories\DistrictFactory factory($count = null, $state = [])
- * @method static Builder<static>|District inactive()
- * @method static Builder<static>|District newModelQuery()
- * @method static Builder<static>|District newQuery()
- * @method static Builder<static>|District notShown()
- * @method static Builder<static>|District onlyTrashed()
- * @method static Builder<static>|District query()
- * @method static Builder<static>|District show()
- * @method static Builder<static>|District whereCreatedAt($value)
- * @method static Builder<static>|District whereCreatedBy($value)
- * @method static Builder<static>|District whereDeletedAt($value)
- * @method static Builder<static>|District whereDeletedBy($value)
- * @method static Builder<static>|District whereId($value)
- * @method static Builder<static>|District whereIsActive($value)
- * @method static Builder<static>|District whereIsShow($value)
- * @method static Builder<static>|District whereName($value)
- * @method static Builder<static>|District whereUpdatedAt($value)
- * @method static Builder<static>|District whereUpdatedBy($value)
- * @method static Builder<static>|District withTrashed(bool $withTrashed = true)
- * @method static Builder<static>|District withoutTrashed()
- * @mixin \Eloquent
+ * @method static \Illuminate\Database\Eloquent\Builder<static>|District inactive()
+ * @method static \Illuminate\Database\Eloquent\Builder<static>|District newModelQuery()
+ * @method static \Illuminate\Database\Eloquent\Builder<static>|District newQuery()
+ * @method static \Illuminate\Database\Eloquent\Builder<static>|District notShown()
+ * @method static \Illuminate\Database\Eloquent\Builder<static>|District onlyTrashed()
+ * @method static \Illuminate\Database\Eloquent\Builder<static>|District query()
+ * @method static \Illuminate\Database\Eloquent\Builder<static>|District show()
+ * @method static \Illuminate\Database\Eloquent\Builder<static>|District whereCreatedAt($value)
+ * @method static \Illuminate\Database\Eloquent\Builder<static>|District whereCreatedBy($value)
+ * @method static \Illuminate\Database\Eloquent\Builder<static>|District whereDeletedAt($value)
+ * @method static \Illuminate\Database\Eloquent\Builder<static>|District whereDeletedBy($value)
+ * @method static \Illuminate\Database\Eloquent\Builder<static>|District whereId($value)
+ * @method static \Illuminate\Database\Eloquent\Builder<static>|District whereIsActive($value)
+ * @method static \Illuminate\Database\Eloquent\Builder<static>|District whereIsShow($value)
+ * @method static \Illuminate\Database\Eloquent\Builder<static>|District whereName($value)
+ * @method static \Illuminate\Database\Eloquent\Builder<static>|District whereUpdatedAt($value)
+ * @method static \Illuminate\Database\Eloquent\Builder<static>|District whereUpdatedBy($value)
+ * @method static \Illuminate\Database\Eloquent\Builder<static>|District withTrashed(bool $withTrashed = true)
+ * @method static \Illuminate\Database\Eloquent\Builder<static>|District withoutTrashed()
  */
 	class District extends \Eloquent {}
 }
@@ -164,14 +214,14 @@ namespace App\Models{
  * @property int|null $created_by
  * @property int|null $updated_by
  * @property int|null $deleted_by
- * @property Carbon $created_at
- * @property Carbon $updated_at
- * @property Carbon|null $deleted_at
- * @property-read Collection<int, Activity> $activities
+ * @property \Illuminate\Support\Carbon $created_at
+ * @property \Illuminate\Support\Carbon $updated_at
+ * @property \Illuminate\Support\Carbon|null $deleted_at
+ * @property-read \Illuminate\Database\Eloquent\Collection<int, \Spatie\Activitylog\Models\Activity> $activities
  * @property-read int|null $activities_count
- * @property-read User|null $createdBy
- * @property-read User|null $deletedBy
- * @property-read User|null $updatedBy
+ * @property-read \App\Models\User|null $createdBy
+ * @property-read \App\Models\User|null $deletedBy
+ * @property-read \App\Models\User|null $updatedBy
  * @method static \Database\Factories\OauthFactory factory($count = null, $state = [])
  * @method static \Illuminate\Database\Eloquent\Builder<static>|Oauth newModelQuery()
  * @method static \Illuminate\Database\Eloquent\Builder<static>|Oauth newQuery()
@@ -194,7 +244,6 @@ namespace App\Models{
  * @method static \Illuminate\Database\Eloquent\Builder<static>|Oauth whereUpdatedBy($value)
  * @method static \Illuminate\Database\Eloquent\Builder<static>|Oauth withTrashed(bool $withTrashed = true)
  * @method static \Illuminate\Database\Eloquent\Builder<static>|Oauth withoutTrashed()
- * @mixin \Eloquent
  */
 	class Oauth extends \Eloquent {}
 }
@@ -205,8 +254,8 @@ namespace App\Models{
  * @property string $code
  * @property string $name
  * @property int|null $user_id
- * @property Carbon|null $availability_date
- * @property Carbon|null $visit_date
+ * @property \Illuminate\Support\Carbon|null $availability_date
+ * @property \Illuminate\Support\Carbon|null $visit_date
  * @property numeric|null $latitude
  * @property numeric|null $longitude
  * @property string|null $address
@@ -221,160 +270,158 @@ namespace App\Models{
  * @property bool $ensuite_bathrooms
  * @property bool $guest_toilet
  * @property bool $storage
- * @property PropertyLivingStyle|null $living_style
+ * @property \App\Enums\Property\PropertyLivingStyle|null $living_style
  * @property bool $full_legal_documentation
  * @property bool $fully_furnished
- * @property PropertyRentalType|null $rental_type
+ * @property \App\Enums\Property\PropertyRentalType|null $rental_type
  * @property int|null $minimum_rental_duration_months
- * @property PropertyOwnerPriceFlexibility|null $owner_price_flexibility
+ * @property \App\Enums\Property\PropertyOwnerPriceFlexibility|null $owner_price_flexibility
  * @property bool $price_coherent_with_upper
  * @property bool $not_directly_exposed_to_main_road
  * @property bool $no_festive_venue_nearby
  * @property bool $no_ongoing
  * @property bool $quiet_access_road
- * @property PropertyOrientation|null $orientation
+ * @property \App\Enums\Property\PropertyOrientation|null $orientation
  * @property string|null $view
  * @property bool $living_area_has_natural_light
  * @property bool $bedroom_1_has_natural_light
  * @property bool $bedroom_2_has_natural_light
  * @property string|null $noise_source_identified
  * @property int|null $internet_speedtest
- * @property PropertyPowerBackup|null $power_backup
- * @property PropertyWaterSource|null $water_source
- * @property PropertyElectricity|null $electricity
+ * @property string|null $internet_speedtest_image_path
+ * @property \App\Enums\Property\PropertyPowerBackup|null $power_backup
+ * @property \App\Enums\Property\PropertyWaterSource|null $water_source
+ * @property \App\Enums\Property\PropertyElectricity|null $electricity
  * @property bool $eligible_for_upper
  * @property bool $eligible_for_premium
  * @property bool $design_driven_property
  * @property string|null $usability_limitations
  * @property bool $trade_off_identified
  * @property string|null $trade_off_description
- * @property PropertyTargetProfile|null $target_profile
- * @property PropertyOperationalRisk|null $operational_risk
+ * @property \App\Enums\Property\PropertyTargetProfile|null $target_profile
+ * @property \App\Enums\Property\PropertyOperationalRisk|null $operational_risk
  * @property string|null $operational_risk_comment
- * @property PropertyStatus $status
+ * @property string|null $image_path
+ * @property \App\Enums\Property\PropertyStatus $status
  * @property string $slug
+ * @property string|null $folder_id
  * @property int|null $created_by
  * @property int|null $updated_by
  * @property int|null $deleted_by
- * @property Carbon $created_at
- * @property Carbon $updated_at
- * @property Carbon|null $deleted_at
- * @property-read Collection<int, Activity> $activities
+ * @property \Illuminate\Support\Carbon $created_at
+ * @property \Illuminate\Support\Carbon $updated_at
+ * @property \Illuminate\Support\Carbon|null $deleted_at
+ * @property-read \Illuminate\Database\Eloquent\Collection<int, \Spatie\Activitylog\Models\Activity> $activities
  * @property-read int|null $activities_count
- * @property-read Area|null $area
- * @property-read User|null $createdBy
- * @property-read User|null $deletedBy
- * @property-read District|null $district
- * @property-read Property|null $images
- * @property-read User|null $updatedBy
- * @property-read User|null $user
- * @method static Builder<static>|Property acceptPremium()
- * @method static Builder<static>|Property acceptUpper()
- * @method static Builder<static>|Property afternoon()
- * @method static Builder<static>|Property both()
- * @method static Builder<static>|Property closed()
- * @method static Builder<static>|Property couple()
- * @method static Builder<static>|Property designLover()
- * @method static Builder<static>|Property eSolar()
- * @method static Builder<static>|Property escalate()
- * @method static \Database\Factories\PropertyFactory factory($count = null, $state = [])
- * @method static Builder<static>|Property family()
- * @method static Builder<static>|Property fixed()
- * @method static Builder<static>|Property generator()
- * @method static Builder<static>|Property high()
- * @method static Builder<static>|Property hybrid()
- * @method static Builder<static>|Property low()
- * @method static Builder<static>|Property medium()
- * @method static Builder<static>|Property mixed()
- * @method static Builder<static>|Property mixedSun()
- * @method static Builder<static>|Property monthly()
- * @method static Builder<static>|Property morning()
- * @method static Builder<static>|Property negotiable()
- * @method static Builder<static>|Property newModelQuery()
- * @method static Builder<static>|Property newQuery()
- * @method static Builder<static>|Property none()
- * @method static Builder<static>|Property onlyTrashed()
- * @method static Builder<static>|Property open()
- * @method static Builder<static>|Property pDAM()
- * @method static Builder<static>|Property pending()
- * @method static Builder<static>|Property query()
- * @method static Builder<static>|Property reject()
- * @method static Builder<static>|Property remoteWorker()
- * @method static Builder<static>|Property solar()
- * @method static Builder<static>|Property standard()
- * @method static Builder<static>|Property wSMixed()
- * @method static Builder<static>|Property well()
- * @method static Builder<static>|Property whereAddress($value)
- * @method static Builder<static>|Property whereAreaId($value)
- * @method static Builder<static>|Property whereAvailabilityDate($value)
- * @method static Builder<static>|Property whereBedroom1HasNaturalLight($value)
- * @method static Builder<static>|Property whereBedroom2HasNaturalLight($value)
- * @method static Builder<static>|Property whereBuildingSize($value)
- * @method static Builder<static>|Property whereCode($value)
- * @method static Builder<static>|Property whereCreatedAt($value)
- * @method static Builder<static>|Property whereCreatedBy($value)
- * @method static Builder<static>|Property whereDeletedAt($value)
- * @method static Builder<static>|Property whereDeletedBy($value)
- * @method static Builder<static>|Property whereDesignDrivenProperty($value)
- * @method static Builder<static>|Property whereDistrictId($value)
- * @method static Builder<static>|Property whereElectricity($value)
- * @method static Builder<static>|Property whereEligibleForPremium($value)
- * @method static Builder<static>|Property whereEligibleForUpper($value)
- * @method static Builder<static>|Property whereEnsuiteBathrooms($value)
- * @method static Builder<static>|Property whereFullLegalDocumentation($value)
- * @method static Builder<static>|Property whereFullyFurnished($value)
- * @method static Builder<static>|Property whereGuestToilet($value)
- * @method static Builder<static>|Property whereId($value)
- * @method static Builder<static>|Property whereImageUrl($value)
- * @method static Builder<static>|Property whereInternetSpeedtest($value)
- * @method static Builder<static>|Property whereLandSize($value)
- * @method static Builder<static>|Property whereLatitude($value)
- * @method static Builder<static>|Property whereLivingAreaHasNaturalLight($value)
- * @method static Builder<static>|Property whereLivingStyle($value)
- * @method static Builder<static>|Property whereLongitude($value)
- * @method static Builder<static>|Property whereMinimumRentalDurationMonths($value)
- * @method static Builder<static>|Property whereName($value)
- * @method static Builder<static>|Property whereNoFestiveVenueNearby($value)
- * @method static Builder<static>|Property whereNoOngoing($value)
- * @method static Builder<static>|Property whereNoiseSourceIdentified($value)
- * @method static Builder<static>|Property whereNotDirectlyExposedToMainRoad($value)
- * @method static Builder<static>|Property whereNumberOfBathrooms($value)
- * @method static Builder<static>|Property whereNumberOfFloors($value)
- * @method static Builder<static>|Property whereOperationalRisk($value)
- * @method static Builder<static>|Property whereOperationalRiskComment($value)
- * @method static Builder<static>|Property whereOrientation($value)
- * @method static Builder<static>|Property whereOutdoorAreaSize($value)
- * @method static Builder<static>|Property whereOwnerPriceFlexibility($value)
- * @method static Builder<static>|Property wherePoolSize($value)
- * @method static Builder<static>|Property wherePowerBackup($value)
- * @method static Builder<static>|Property wherePriceCoherentWithUpper($value)
- * @method static Builder<static>|Property whereQuietAccessRoad($value)
- * @method static Builder<static>|Property whereRentalType($value)
- * @method static Builder<static>|Property whereSlug($value)
- * @method static Builder<static>|Property whereStatus($value)
- * @method static Builder<static>|Property whereStorage($value)
- * @method static Builder<static>|Property whereTargetProfile($value)
- * @method static Builder<static>|Property whereTradeOffDescription($value)
- * @method static Builder<static>|Property whereTradeOffIdentified($value)
- * @method static Builder<static>|Property whereUpdatedAt($value)
- * @method static Builder<static>|Property whereUpdatedBy($value)
- * @method static Builder<static>|Property whereUsabilityLimitations($value)
- * @method static Builder<static>|Property whereUserId($value)
- * @method static Builder<static>|Property whereView($value)
- * @method static Builder<static>|Property whereVisitDate($value)
- * @method static Builder<static>|Property whereWaterSource($value)
- * @method static Builder<static>|Property withTrashed(bool $withTrashed = true)
- * @method static Builder<static>|Property withoutTrashed()
- * @method static Builder<static>|Property yearly()
- * @property string|null $image_path
- * @property string|null $folder_id
+ * @property-read \App\Models\Area|null $area
+ * @property-read \App\Models\User|null $createdBy
+ * @property-read \App\Models\User|null $deletedBy
+ * @property-read \App\Models\District|null $district
  * @property-read string $image
- * @method static Builder<static>|Property whereFolderId($value)
- * @method static Builder<static>|Property whereImagePath($value)
- * @property string|null $internet_speedtest_image_path
  * @property-read string $internet_speedtest_image
- * @method static Builder<static>|Property whereInternetSpeedtestImagePath($value)
- * @mixin \Eloquent
+ * @property-read Property|null $images
+ * @property-read \App\Models\User|null $updatedBy
+ * @property-read \App\Models\User|null $user
+ * @method static \Illuminate\Database\Eloquent\Builder<static>|Property acceptPremium()
+ * @method static \Illuminate\Database\Eloquent\Builder<static>|Property acceptUpper()
+ * @method static \Illuminate\Database\Eloquent\Builder<static>|Property afternoon()
+ * @method static \Illuminate\Database\Eloquent\Builder<static>|Property both()
+ * @method static \Illuminate\Database\Eloquent\Builder<static>|Property closed()
+ * @method static \Illuminate\Database\Eloquent\Builder<static>|Property couple()
+ * @method static \Illuminate\Database\Eloquent\Builder<static>|Property designLover()
+ * @method static \Illuminate\Database\Eloquent\Builder<static>|Property eSolar()
+ * @method static \Illuminate\Database\Eloquent\Builder<static>|Property escalate()
+ * @method static \Database\Factories\PropertyFactory factory($count = null, $state = [])
+ * @method static \Illuminate\Database\Eloquent\Builder<static>|Property family()
+ * @method static \Illuminate\Database\Eloquent\Builder<static>|Property fixed()
+ * @method static \Illuminate\Database\Eloquent\Builder<static>|Property generator()
+ * @method static \Illuminate\Database\Eloquent\Builder<static>|Property high()
+ * @method static \Illuminate\Database\Eloquent\Builder<static>|Property hybrid()
+ * @method static \Illuminate\Database\Eloquent\Builder<static>|Property low()
+ * @method static \Illuminate\Database\Eloquent\Builder<static>|Property medium()
+ * @method static \Illuminate\Database\Eloquent\Builder<static>|Property mixed()
+ * @method static \Illuminate\Database\Eloquent\Builder<static>|Property mixedSun()
+ * @method static \Illuminate\Database\Eloquent\Builder<static>|Property monthly()
+ * @method static \Illuminate\Database\Eloquent\Builder<static>|Property morning()
+ * @method static \Illuminate\Database\Eloquent\Builder<static>|Property negotiable()
+ * @method static \Illuminate\Database\Eloquent\Builder<static>|Property newModelQuery()
+ * @method static \Illuminate\Database\Eloquent\Builder<static>|Property newQuery()
+ * @method static \Illuminate\Database\Eloquent\Builder<static>|Property none()
+ * @method static \Illuminate\Database\Eloquent\Builder<static>|Property onlyTrashed()
+ * @method static \Illuminate\Database\Eloquent\Builder<static>|Property open()
+ * @method static \Illuminate\Database\Eloquent\Builder<static>|Property pDAM()
+ * @method static \Illuminate\Database\Eloquent\Builder<static>|Property pending()
+ * @method static \Illuminate\Database\Eloquent\Builder<static>|Property query()
+ * @method static \Illuminate\Database\Eloquent\Builder<static>|Property reject()
+ * @method static \Illuminate\Database\Eloquent\Builder<static>|Property remoteWorker()
+ * @method static \Illuminate\Database\Eloquent\Builder<static>|Property solar()
+ * @method static \Illuminate\Database\Eloquent\Builder<static>|Property standard()
+ * @method static \Illuminate\Database\Eloquent\Builder<static>|Property wSMixed()
+ * @method static \Illuminate\Database\Eloquent\Builder<static>|Property well()
+ * @method static \Illuminate\Database\Eloquent\Builder<static>|Property whereAddress($value)
+ * @method static \Illuminate\Database\Eloquent\Builder<static>|Property whereAreaId($value)
+ * @method static \Illuminate\Database\Eloquent\Builder<static>|Property whereAvailabilityDate($value)
+ * @method static \Illuminate\Database\Eloquent\Builder<static>|Property whereBedroom1HasNaturalLight($value)
+ * @method static \Illuminate\Database\Eloquent\Builder<static>|Property whereBedroom2HasNaturalLight($value)
+ * @method static \Illuminate\Database\Eloquent\Builder<static>|Property whereBuildingSize($value)
+ * @method static \Illuminate\Database\Eloquent\Builder<static>|Property whereCode($value)
+ * @method static \Illuminate\Database\Eloquent\Builder<static>|Property whereCreatedAt($value)
+ * @method static \Illuminate\Database\Eloquent\Builder<static>|Property whereCreatedBy($value)
+ * @method static \Illuminate\Database\Eloquent\Builder<static>|Property whereDeletedAt($value)
+ * @method static \Illuminate\Database\Eloquent\Builder<static>|Property whereDeletedBy($value)
+ * @method static \Illuminate\Database\Eloquent\Builder<static>|Property whereDesignDrivenProperty($value)
+ * @method static \Illuminate\Database\Eloquent\Builder<static>|Property whereDistrictId($value)
+ * @method static \Illuminate\Database\Eloquent\Builder<static>|Property whereElectricity($value)
+ * @method static \Illuminate\Database\Eloquent\Builder<static>|Property whereEligibleForPremium($value)
+ * @method static \Illuminate\Database\Eloquent\Builder<static>|Property whereEligibleForUpper($value)
+ * @method static \Illuminate\Database\Eloquent\Builder<static>|Property whereEnsuiteBathrooms($value)
+ * @method static \Illuminate\Database\Eloquent\Builder<static>|Property whereFolderId($value)
+ * @method static \Illuminate\Database\Eloquent\Builder<static>|Property whereFullLegalDocumentation($value)
+ * @method static \Illuminate\Database\Eloquent\Builder<static>|Property whereFullyFurnished($value)
+ * @method static \Illuminate\Database\Eloquent\Builder<static>|Property whereGuestToilet($value)
+ * @method static \Illuminate\Database\Eloquent\Builder<static>|Property whereId($value)
+ * @method static \Illuminate\Database\Eloquent\Builder<static>|Property whereImagePath($value)
+ * @method static \Illuminate\Database\Eloquent\Builder<static>|Property whereInternetSpeedtest($value)
+ * @method static \Illuminate\Database\Eloquent\Builder<static>|Property whereInternetSpeedtestImagePath($value)
+ * @method static \Illuminate\Database\Eloquent\Builder<static>|Property whereLandSize($value)
+ * @method static \Illuminate\Database\Eloquent\Builder<static>|Property whereLatitude($value)
+ * @method static \Illuminate\Database\Eloquent\Builder<static>|Property whereLivingAreaHasNaturalLight($value)
+ * @method static \Illuminate\Database\Eloquent\Builder<static>|Property whereLivingStyle($value)
+ * @method static \Illuminate\Database\Eloquent\Builder<static>|Property whereLongitude($value)
+ * @method static \Illuminate\Database\Eloquent\Builder<static>|Property whereMinimumRentalDurationMonths($value)
+ * @method static \Illuminate\Database\Eloquent\Builder<static>|Property whereName($value)
+ * @method static \Illuminate\Database\Eloquent\Builder<static>|Property whereNoFestiveVenueNearby($value)
+ * @method static \Illuminate\Database\Eloquent\Builder<static>|Property whereNoOngoing($value)
+ * @method static \Illuminate\Database\Eloquent\Builder<static>|Property whereNoiseSourceIdentified($value)
+ * @method static \Illuminate\Database\Eloquent\Builder<static>|Property whereNotDirectlyExposedToMainRoad($value)
+ * @method static \Illuminate\Database\Eloquent\Builder<static>|Property whereNumberOfBathrooms($value)
+ * @method static \Illuminate\Database\Eloquent\Builder<static>|Property whereNumberOfFloors($value)
+ * @method static \Illuminate\Database\Eloquent\Builder<static>|Property whereOperationalRisk($value)
+ * @method static \Illuminate\Database\Eloquent\Builder<static>|Property whereOperationalRiskComment($value)
+ * @method static \Illuminate\Database\Eloquent\Builder<static>|Property whereOrientation($value)
+ * @method static \Illuminate\Database\Eloquent\Builder<static>|Property whereOutdoorAreaSize($value)
+ * @method static \Illuminate\Database\Eloquent\Builder<static>|Property whereOwnerPriceFlexibility($value)
+ * @method static \Illuminate\Database\Eloquent\Builder<static>|Property wherePoolSize($value)
+ * @method static \Illuminate\Database\Eloquent\Builder<static>|Property wherePowerBackup($value)
+ * @method static \Illuminate\Database\Eloquent\Builder<static>|Property wherePriceCoherentWithUpper($value)
+ * @method static \Illuminate\Database\Eloquent\Builder<static>|Property whereQuietAccessRoad($value)
+ * @method static \Illuminate\Database\Eloquent\Builder<static>|Property whereRentalType($value)
+ * @method static \Illuminate\Database\Eloquent\Builder<static>|Property whereSlug($value)
+ * @method static \Illuminate\Database\Eloquent\Builder<static>|Property whereStatus($value)
+ * @method static \Illuminate\Database\Eloquent\Builder<static>|Property whereStorage($value)
+ * @method static \Illuminate\Database\Eloquent\Builder<static>|Property whereTargetProfile($value)
+ * @method static \Illuminate\Database\Eloquent\Builder<static>|Property whereTradeOffDescription($value)
+ * @method static \Illuminate\Database\Eloquent\Builder<static>|Property whereTradeOffIdentified($value)
+ * @method static \Illuminate\Database\Eloquent\Builder<static>|Property whereUpdatedAt($value)
+ * @method static \Illuminate\Database\Eloquent\Builder<static>|Property whereUpdatedBy($value)
+ * @method static \Illuminate\Database\Eloquent\Builder<static>|Property whereUsabilityLimitations($value)
+ * @method static \Illuminate\Database\Eloquent\Builder<static>|Property whereUserId($value)
+ * @method static \Illuminate\Database\Eloquent\Builder<static>|Property whereView($value)
+ * @method static \Illuminate\Database\Eloquent\Builder<static>|Property whereVisitDate($value)
+ * @method static \Illuminate\Database\Eloquent\Builder<static>|Property whereWaterSource($value)
+ * @method static \Illuminate\Database\Eloquent\Builder<static>|Property withTrashed(bool $withTrashed = true)
+ * @method static \Illuminate\Database\Eloquent\Builder<static>|Property withoutTrashed()
+ * @method static \Illuminate\Database\Eloquent\Builder<static>|Property yearly()
  */
 	class Property extends \Eloquent {}
 }
@@ -389,15 +436,16 @@ namespace App\Models{
  * @property int|null $created_by
  * @property int|null $updated_by
  * @property int|null $deleted_by
- * @property Carbon $created_at
- * @property Carbon $updated_at
- * @property Carbon|null $deleted_at
- * @property-read Collection<int, Activity> $activities
+ * @property \Illuminate\Support\Carbon $created_at
+ * @property \Illuminate\Support\Carbon $updated_at
+ * @property \Illuminate\Support\Carbon|null $deleted_at
+ * @property-read \Illuminate\Database\Eloquent\Collection<int, \Spatie\Activitylog\Models\Activity> $activities
  * @property-read int|null $activities_count
- * @property-read User|null $createdBy
- * @property-read User|null $deletedBy
- * @property-read Property $property
- * @property-read User|null $updatedBy
+ * @property-read \App\Models\User|null $createdBy
+ * @property-read \App\Models\User|null $deletedBy
+ * @property-read string $image
+ * @property-read \App\Models\Property|null $property
+ * @property-read \App\Models\User|null $updatedBy
  * @method static \Database\Factories\PropertyImageFactory factory($count = null, $state = [])
  * @method static \Illuminate\Database\Eloquent\Builder<static>|PropertyImage newModelQuery()
  * @method static \Illuminate\Database\Eloquent\Builder<static>|PropertyImage newQuery()
@@ -416,8 +464,6 @@ namespace App\Models{
  * @method static \Illuminate\Database\Eloquent\Builder<static>|PropertyImage whereUpdatedBy($value)
  * @method static \Illuminate\Database\Eloquent\Builder<static>|PropertyImage withTrashed(bool $withTrashed = true)
  * @method static \Illuminate\Database\Eloquent\Builder<static>|PropertyImage withoutTrashed()
- * @property-read string $image
- * @mixin \Eloquent
  */
 	class PropertyImage extends \Eloquent {}
 }
@@ -432,61 +478,60 @@ namespace App\Models{
  * @property string $password
  * @property string|null $image_path
  * @property bool $is_active
- * @property Carbon|null $email_verified_at
- * @property Carbon|null $phone_verified_at
+ * @property string|null $google_refresh_token
+ * @property \Illuminate\Support\Carbon|null $email_verified_at
+ * @property \Illuminate\Support\Carbon|null $phone_verified_at
  * @property int|null $created_by
  * @property int|null $updated_by
  * @property int|null $deleted_by
  * @property string|null $remember_token
- * @property Carbon $created_at
- * @property Carbon $updated_at
- * @property Carbon|null $deleted_at
- * @property-read Collection<int, Activity> $activities
+ * @property \Illuminate\Support\Carbon $created_at
+ * @property \Illuminate\Support\Carbon $updated_at
+ * @property \Illuminate\Support\Carbon|null $deleted_at
+ * @property-read \Illuminate\Database\Eloquent\Collection<int, \Spatie\Activitylog\Models\Activity> $activities
  * @property-read int|null $activities_count
  * @property-read User|null $createdBy
  * @property-read User|null $deletedBy
- * @property-read Collection<int, Permission> $permissions
+ * @property-read \Illuminate\Database\Eloquent\Collection<int, \Spatie\Permission\Models\Permission> $permissions
  * @property-read int|null $permissions_count
- * @property-read Collection<int, Property> $properties
+ * @property-read \Illuminate\Database\Eloquent\Collection<int, \App\Models\Property> $properties
  * @property-read int|null $properties_count
- * @property-read Collection<int, Role> $roles
+ * @property-read \Illuminate\Database\Eloquent\Collection<int, \Spatie\Permission\Models\Role> $roles
  * @property-read int|null $roles_count
- * @property-read Collection<int, PersonalAccessToken> $tokens
+ * @property-read \Illuminate\Database\Eloquent\Collection<int, \Laravel\Sanctum\PersonalAccessToken> $tokens
  * @property-read int|null $tokens_count
  * @property-read User|null $updatedBy
- * @method static Builder<static>|User active()
+ * @method static \Illuminate\Database\Eloquent\Builder<static>|User active()
  * @method static \Database\Factories\UserFactory factory($count = null, $state = [])
- * @method static Builder<static>|User inactive()
- * @method static Builder<static>|User newModelQuery()
- * @method static Builder<static>|User newQuery()
- * @method static Builder<static>|User onlyTrashed()
- * @method static Builder<static>|User permission($permissions, $without = false)
- * @method static Builder<static>|User query()
- * @method static Builder<static>|User role($roles, $guard = null, $without = false)
- * @method static Builder<static>|User whereCreatedAt($value)
- * @method static Builder<static>|User whereCreatedBy($value)
- * @method static Builder<static>|User whereDeletedAt($value)
- * @method static Builder<static>|User whereDeletedBy($value)
- * @method static Builder<static>|User whereEmail($value)
- * @method static Builder<static>|User whereEmailVerifiedAt($value)
- * @method static Builder<static>|User whereGoogleRefreshToken($value)
- * @method static Builder<static>|User whereId($value)
- * @method static Builder<static>|User whereImagePath($value)
- * @method static Builder<static>|User whereIsActive($value)
- * @method static Builder<static>|User whereName($value)
- * @method static Builder<static>|User wherePassword($value)
- * @method static Builder<static>|User wherePhone($value)
- * @method static Builder<static>|User wherePhoneVerifiedAt($value)
- * @method static Builder<static>|User whereRememberToken($value)
- * @method static Builder<static>|User whereUpdatedAt($value)
- * @method static Builder<static>|User whereUpdatedBy($value)
- * @method static Builder<static>|User whereUsername($value)
- * @method static Builder<static>|User withTrashed(bool $withTrashed = true)
- * @method static Builder<static>|User withoutPermission($permissions)
- * @method static Builder<static>|User withoutRole($roles, $guard = null)
- * @method static Builder<static>|User withoutTrashed()
- * @property string|null $google_refresh_token
- * @mixin \Eloquent
+ * @method static \Illuminate\Database\Eloquent\Builder<static>|User inactive()
+ * @method static \Illuminate\Database\Eloquent\Builder<static>|User newModelQuery()
+ * @method static \Illuminate\Database\Eloquent\Builder<static>|User newQuery()
+ * @method static \Illuminate\Database\Eloquent\Builder<static>|User onlyTrashed()
+ * @method static \Illuminate\Database\Eloquent\Builder<static>|User permission($permissions, $without = false)
+ * @method static \Illuminate\Database\Eloquent\Builder<static>|User query()
+ * @method static \Illuminate\Database\Eloquent\Builder<static>|User role($roles, $guard = null, $without = false)
+ * @method static \Illuminate\Database\Eloquent\Builder<static>|User whereCreatedAt($value)
+ * @method static \Illuminate\Database\Eloquent\Builder<static>|User whereCreatedBy($value)
+ * @method static \Illuminate\Database\Eloquent\Builder<static>|User whereDeletedAt($value)
+ * @method static \Illuminate\Database\Eloquent\Builder<static>|User whereDeletedBy($value)
+ * @method static \Illuminate\Database\Eloquent\Builder<static>|User whereEmail($value)
+ * @method static \Illuminate\Database\Eloquent\Builder<static>|User whereEmailVerifiedAt($value)
+ * @method static \Illuminate\Database\Eloquent\Builder<static>|User whereGoogleRefreshToken($value)
+ * @method static \Illuminate\Database\Eloquent\Builder<static>|User whereId($value)
+ * @method static \Illuminate\Database\Eloquent\Builder<static>|User whereImagePath($value)
+ * @method static \Illuminate\Database\Eloquent\Builder<static>|User whereIsActive($value)
+ * @method static \Illuminate\Database\Eloquent\Builder<static>|User whereName($value)
+ * @method static \Illuminate\Database\Eloquent\Builder<static>|User wherePassword($value)
+ * @method static \Illuminate\Database\Eloquent\Builder<static>|User wherePhone($value)
+ * @method static \Illuminate\Database\Eloquent\Builder<static>|User wherePhoneVerifiedAt($value)
+ * @method static \Illuminate\Database\Eloquent\Builder<static>|User whereRememberToken($value)
+ * @method static \Illuminate\Database\Eloquent\Builder<static>|User whereUpdatedAt($value)
+ * @method static \Illuminate\Database\Eloquent\Builder<static>|User whereUpdatedBy($value)
+ * @method static \Illuminate\Database\Eloquent\Builder<static>|User whereUsername($value)
+ * @method static \Illuminate\Database\Eloquent\Builder<static>|User withTrashed(bool $withTrashed = true)
+ * @method static \Illuminate\Database\Eloquent\Builder<static>|User withoutPermission($permissions)
+ * @method static \Illuminate\Database\Eloquent\Builder<static>|User withoutRole($roles, $guard = null)
+ * @method static \Illuminate\Database\Eloquent\Builder<static>|User withoutTrashed()
  */
 	class User extends \Eloquent {}
 }

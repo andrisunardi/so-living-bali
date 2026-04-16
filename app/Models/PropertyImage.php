@@ -14,7 +14,6 @@ use Spatie\Activitylog\LogOptions;
 use Spatie\Activitylog\Models\Activity;
 use Spatie\Activitylog\Traits\LogsActivity;
 
-#[ObservedBy([PropertyImageObserver::class])]
 /**
  * @property int $id
  * @property int $property_id
@@ -31,7 +30,8 @@ use Spatie\Activitylog\Traits\LogsActivity;
  * @property-read int|null $activities_count
  * @property-read User|null $createdBy
  * @property-read User|null $deletedBy
- * @property-read Property $property
+ * @property-read string $image
+ * @property-read Property|null $property
  * @property-read User|null $updatedBy
  *
  * @method static \Database\Factories\PropertyImageFactory factory($count = null, $state = [])
@@ -53,10 +53,9 @@ use Spatie\Activitylog\Traits\LogsActivity;
  * @method static \Illuminate\Database\Eloquent\Builder<static>|PropertyImage withTrashed(bool $withTrashed = true)
  * @method static \Illuminate\Database\Eloquent\Builder<static>|PropertyImage withoutTrashed()
  *
- * @property-read string $image
- *
  * @mixin \Eloquent
  */
+#[ObservedBy([PropertyImageObserver::class])]
 class PropertyImage extends Model
 {
     use HasFactory;

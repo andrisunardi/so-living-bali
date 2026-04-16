@@ -25,7 +25,6 @@ use Spatie\Activitylog\LogOptions;
 use Spatie\Activitylog\Models\Activity;
 use Spatie\Activitylog\Traits\LogsActivity;
 
-#[ObservedBy([PropertyObserver::class])]
 /**
  * @property int $id
  * @property string $code
@@ -65,6 +64,7 @@ use Spatie\Activitylog\Traits\LogsActivity;
  * @property bool $bedroom_2_has_natural_light
  * @property string|null $noise_source_identified
  * @property int|null $internet_speedtest
+ * @property string|null $internet_speedtest_image_path
  * @property PropertyPowerBackup|null $power_backup
  * @property PropertyWaterSource|null $water_source
  * @property PropertyElectricity|null $electricity
@@ -77,8 +77,10 @@ use Spatie\Activitylog\Traits\LogsActivity;
  * @property PropertyTargetProfile|null $target_profile
  * @property PropertyOperationalRisk|null $operational_risk
  * @property string|null $operational_risk_comment
+ * @property string|null $image_path
  * @property PropertyStatus $status
  * @property string $slug
+ * @property string|null $folder_id
  * @property int|null $created_by
  * @property int|null $updated_by
  * @property int|null $deleted_by
@@ -91,6 +93,8 @@ use Spatie\Activitylog\Traits\LogsActivity;
  * @property-read User|null $createdBy
  * @property-read User|null $deletedBy
  * @property-read District|null $district
+ * @property-read string $image
+ * @property-read string $internet_speedtest_image
  * @property-read Property|null $images
  * @property-read User|null $updatedBy
  * @property-read User|null $user
@@ -148,12 +152,14 @@ use Spatie\Activitylog\Traits\LogsActivity;
  * @method static Builder<static>|Property whereEligibleForPremium($value)
  * @method static Builder<static>|Property whereEligibleForUpper($value)
  * @method static Builder<static>|Property whereEnsuiteBathrooms($value)
+ * @method static Builder<static>|Property whereFolderId($value)
  * @method static Builder<static>|Property whereFullLegalDocumentation($value)
  * @method static Builder<static>|Property whereFullyFurnished($value)
  * @method static Builder<static>|Property whereGuestToilet($value)
  * @method static Builder<static>|Property whereId($value)
- * @method static Builder<static>|Property whereImageUrl($value)
+ * @method static Builder<static>|Property whereImagePath($value)
  * @method static Builder<static>|Property whereInternetSpeedtest($value)
+ * @method static Builder<static>|Property whereInternetSpeedtestImagePath($value)
  * @method static Builder<static>|Property whereLandSize($value)
  * @method static Builder<static>|Property whereLatitude($value)
  * @method static Builder<static>|Property whereLivingAreaHasNaturalLight($value)
@@ -194,20 +200,9 @@ use Spatie\Activitylog\Traits\LogsActivity;
  * @method static Builder<static>|Property withoutTrashed()
  * @method static Builder<static>|Property yearly()
  *
- * @property string|null $image_path
- * @property string|null $folder_id
- * @property-read string $image
- *
- * @method static Builder<static>|Property whereFolderId($value)
- * @method static Builder<static>|Property whereImagePath($value)
- *
- * @property string|null $internet_speedtest_image_path
- * @property-read string $internet_speedtest_image
- *
- * @method static Builder<static>|Property whereInternetSpeedtestImagePath($value)
- *
  * @mixin \Eloquent
  */
+#[ObservedBy([PropertyObserver::class])]
 class Property extends Model
 {
     use HasFactory;

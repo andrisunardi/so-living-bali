@@ -16,7 +16,6 @@ use Spatie\Activitylog\LogOptions;
 use Spatie\Activitylog\Models\Activity;
 use Spatie\Activitylog\Traits\LogsActivity;
 
-#[ObservedBy([DistrictObserver::class])]
 /**
  * @property int $id
  * @property string $name
@@ -39,6 +38,7 @@ use Spatie\Activitylog\Traits\LogsActivity;
  * @property-read User|null $updatedBy
  * @property-read User|null $user
  *
+ * @method static Builder<static>|District active()
  * @method static \Database\Factories\DistrictFactory factory($count = null, $state = [])
  * @method static Builder<static>|District inactive()
  * @method static Builder<static>|District newModelQuery()
@@ -62,6 +62,7 @@ use Spatie\Activitylog\Traits\LogsActivity;
  *
  * @mixin \Eloquent
  */
+#[ObservedBy([DistrictObserver::class])]
 class District extends Model
 {
     use HasFactory;
@@ -115,6 +116,11 @@ class District extends Model
     public function scopeNotShown(Builder $query): void
     {
         $query->where('is_show', false);
+    }
+
+    public function scopeActive(Builder $query): void
+    {
+        $query->where('is_active', true);
     }
 
     public function scopeInactive(Builder $query): void

@@ -3,7 +3,6 @@
 namespace App\Models;
 
 use App\Observers\ContactObserver;
-// use Illuminate\Contracts\Auth\MustVerifyEmail;
 use Illuminate\Database\Eloquent\Attributes\ObservedBy;
 use Illuminate\Database\Eloquent\Collection;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
@@ -15,10 +14,9 @@ use Spatie\Activitylog\LogOptions;
 use Spatie\Activitylog\Models\Activity;
 use Spatie\Activitylog\Traits\LogsActivity;
 
-#[ObservedBy([ContactObserver::class])]
 /**
  * @property int $id
- * @property string|null $code
+ * @property string $code
  * @property string $name
  * @property string $company
  * @property string $email
@@ -40,8 +38,8 @@ use Spatie\Activitylog\Traits\LogsActivity;
  * @method static \Illuminate\Database\Eloquent\Builder<static>|Contact newQuery()
  * @method static \Illuminate\Database\Eloquent\Builder<static>|Contact onlyTrashed()
  * @method static \Illuminate\Database\Eloquent\Builder<static>|Contact query()
+ * @method static \Illuminate\Database\Eloquent\Builder<static>|Contact whereCode($value)
  * @method static \Illuminate\Database\Eloquent\Builder<static>|Contact whereCompany($value)
- * @method static \Illuminate\Database\Eloquent\Builder<static>|Contact whereContactId($value)
  * @method static \Illuminate\Database\Eloquent\Builder<static>|Contact whereCreatedAt($value)
  * @method static \Illuminate\Database\Eloquent\Builder<static>|Contact whereCreatedBy($value)
  * @method static \Illuminate\Database\Eloquent\Builder<static>|Contact whereDeletedAt($value)
@@ -54,10 +52,10 @@ use Spatie\Activitylog\Traits\LogsActivity;
  * @method static \Illuminate\Database\Eloquent\Builder<static>|Contact whereUpdatedBy($value)
  * @method static \Illuminate\Database\Eloquent\Builder<static>|Contact withTrashed(bool $withTrashed = true)
  * @method static \Illuminate\Database\Eloquent\Builder<static>|Contact withoutTrashed()
- * @method static \Illuminate\Database\Eloquent\Builder<static>|Contact whereCode($value)
  *
  * @mixin \Eloquent
  */
+#[ObservedBy([ContactObserver::class])]
 class Contact extends Model
 {
     use HasFactory;
