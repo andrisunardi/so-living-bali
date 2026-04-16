@@ -67,6 +67,30 @@ new class extends Component {
             ],
         ];
     }
+
+    public function currencies(): array
+    {
+        return [
+            [
+                'id' => 1,
+                'code' => 'dollar',
+                'name' => 'Dollar',
+                'image_url' => asset('images/currency/dollar.svg'),
+            ],
+            [
+                'id' => 2,
+                'code' => 'idr',
+                'name' => 'IDR',
+                'image_url' => asset('images/currency/idr.svg'),
+            ],
+            [
+                'id' => 3,
+                'code' => 'yuan',
+                'name' => 'Yuan',
+                'image_url' => asset('images/currency/yuan.svg'),
+            ],
+        ];
+    }
 };
 ?>
 
@@ -101,7 +125,7 @@ new class extends Component {
                         data-bs-toggle="dropdown">
                         <img draggable="false" class="user-select-none pe-none" width="20"
                             src="{{ asset('images/flag/' . app()->getLocale() . '.svg') }}"
-                            alt="{{ trans('index.flag') }} - {{ app()->getLocale() }} - {{ config('constants.title') }}" />
+                            alt="{{ trans('index.flag') }} - {{ app()->getLocale() }} - {{ config('app.name') }}" />
                         <span>{{ app()->getLocale() }}</span>
                     </a>
                     <ul class="dropdown-menu dropdown-menu-end mt-3">
@@ -111,7 +135,7 @@ new class extends Component {
                                     href="{{ route('locale', ['locale' => $language['code']]) }}">
                                     <img draggable="false" class="user-select-none pe-none" width="20"
                                         src="{{ $language['image_url'] }}"
-                                        alt="{{ trans('index.flag') }} {{ $language['code'] }} - {{ config('constants.title') }}" />
+                                        alt="{{ trans('index.flag') }} {{ $language['code'] }} - {{ config('app.name') }}" />
                                     <span>{{ $language['name'] }}</span>
                                 </a>
                             </li>
@@ -131,7 +155,7 @@ new class extends Component {
                     <div class="offcanvas-header">
                         <div class="offcanvas-title">
                             <a draggable="false" href="{{ route('home') }}" wire:navigate>
-                                <img draggable="false" class="user-select-none pe-none" height="50"
+                                <img draggable="false" class="user-select-none pe-none" height="100"
                                     src="{{ asset('images/logo/black-tagline.png') }}"
                                     alt="{{ trans('index.logo') }} - {{ config('app.name') }}" />
                             </a>
@@ -152,6 +176,61 @@ new class extends Component {
                                     </li>
                                 @endforeach
                             </ul>
+
+                            <div class="d-flex justify-content-between">
+                                <div>
+                                    <div class="text-secondary small">{{ trans('index.language') }}</div>
+                                    <div class="dropdown">
+                                        <a draggable="false" role="button" class="text-body dropdown-toggle icon-link"
+                                            data-bs-toggle="dropdown">
+                                            <img draggable="false" class="user-select-none pe-none" width="25"
+                                                src="{{ asset('images/flag/' . app()->getLocale() . '.svg') }}"
+                                                alt="{{ trans('index.flag') }} - {{ app()->getLocale() }} - {{ config('app.name') }}" />
+                                            <span class="fw-bold text-uppercase">{{ app()->getLocale() }}</span>
+                                        </a>
+                                        <ul class="dropdown-menu mt-2">
+                                            @foreach ($this->languages() as $language)
+                                                <li wire:key="language-{{ $language['id'] }}">
+                                                    <a draggable="false" class="dropdown-item icon-link"
+                                                        href="{{ route('locale', ['locale' => $language['code']]) }}">
+                                                        <img draggable="false" class="user-select-none pe-none"
+                                                            width="25" src="{{ $language['image_url'] }}"
+                                                            alt="{{ trans('index.flag') }} {{ $language['code'] }} - {{ config('app.name') }}" />
+                                                        <span>{{ $language['name'] }}</span>
+                                                    </a>
+                                                </li>
+                                            @endforeach
+                                        </ul>
+                                    </div>
+                                </div>
+
+                                <div>
+                                    <div class="text-secondary small">{{ trans('index.currency') }}</div>
+                                    <div class="dropdown">
+                                        <a draggable="false" role="button" class="text-body dropdown-toggle icon-link"
+                                            data-bs-toggle="dropdown">
+                                            <img draggable="false" class="user-select-none pe-none" width="25"
+                                                src="{{ asset('images/currency/' . (Session::get('currency') ?? 'dollar') . '.svg') }}"
+                                                alt="{{ trans('index.currency') }} - {{ Session::get('currency') ?? 'dollar' }} - {{ config('app.name') }}" />
+                                            <span
+                                                class="fw-bold text-uppercase">{{ Session::get('currency') ?? 'Dollar' }}</span>
+                                        </a>
+                                        <ul class="dropdown-menu mt-2">
+                                            @foreach ($this->currencies() as $currency)
+                                                <li wire:key="currency-{{ $currency['id'] }}">
+                                                    <a draggable="false" class="dropdown-item icon-link"
+                                                        href="{{ route('currency', ['currency' => $currency['code']]) }}">
+                                                        <img draggable="false" class="user-select-none pe-none"
+                                                            width="25" src="{{ $currency['image_url'] }}"
+                                                            alt="{{ trans('index.flag') }} {{ $currency['code'] }} - {{ config('app.name') }}" />
+                                                        <span>{{ $currency['name'] }}</span>
+                                                    </a>
+                                                </li>
+                                            @endforeach
+                                        </ul>
+                                    </div>
+                                </div>
+                            </div>
 
                             <a draggable="false" class="btn btn-dark rounded-5 fw-bold w-100"
                                 href="{{ route('home') }}" wire:navigate>

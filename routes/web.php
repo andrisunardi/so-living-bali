@@ -12,6 +12,12 @@ Route::any('locale/{locale}', function ($locale) {
     return redirect()->back();
 })->name('locale');
 
+Route::any('currency/{currency}', function ($currency) {
+    Session::put('currency', $currency);
+
+    return redirect()->back();
+})->name('currency');
+
 Route::group(['middleware' => [Localization::class]], function () {
     Route::livewire('/', 'pages::home')->name('home');
 
