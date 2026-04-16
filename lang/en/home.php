@@ -3,7 +3,7 @@
 return [
 
     'hero' => [
-        'title' => 'SO Living Bali',
+        'title' => 'Living Bali, Live Better Stay Longer',
         'description' => 'Monthly and yearly rentals in Bali Find your home, live better, stay longer.',
     ],
     'form' => [
