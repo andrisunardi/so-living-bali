@@ -16,7 +16,7 @@ class ConceptSeeder extends Seeder
             'description' => 'Homes selected for monthly and yearly living',
             'description_id' => 'Rumah-rumah yang dipilih untuk hunian bulanan dan tahunan.',
             'description_zh' => '为每月和每年居住而选择的房屋',
-            'icon' => 'fas fa-file-signature fa-fw',
+            'icon' => 'fas fa-clock',
         ]);
 
         Concept::create([
@@ -26,7 +26,7 @@ class ConceptSeeder extends Seeder
             'description' => 'Support beyond the property, from daily needs to practical setups.',
             'description_id' => 'Dukungan di luar properti, mulai dari kebutuhan sehari-hari hingga pengaturan praktis.',
             'description_zh' => '除了房产本身，我们还提供从日常生活需求到实际布置等方面的支持。',
-            'icon' => 'fas fa-toolbox fa-fw',
+            'icon' => 'fas fa-screwdriver-wrench',
         ]);
 
         Concept::create([
@@ -36,7 +36,7 @@ class ConceptSeeder extends Seeder
             'description' => 'On the ground knowledge of neighborhoods and long-term living.',
             'description_id' => 'Pengetahuan langsung tentang lingkungan sekitar dan pengalaman hidup jangka panjang.',
             'description_zh' => '对社区和长期居住环境有实际了解。',
-            'icon' => 'fas fa-flag fa-fw',
+            'icon' => 'fas fa-street-view',
         ]);
 
         Concept::create([
@@ -46,7 +46,7 @@ class ConceptSeeder extends Seeder
             'description' => 'A guided, Whatsapp based approach with real people.',
             'description_id' => '通过 WhatsApp 与真人进行指导。',
             'description_zh' => '通过 WhatsApp 与真人进行指导。',
-            'icon' => 'fas fa-user-friends fa-fw',
+            'icon' => 'fas fa-message',
         ]);
     }
 }

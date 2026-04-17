@@ -135,7 +135,7 @@ class Concept extends Model
         return $language[$locale] ?? $this->title;
     }
 
-    public function getDescriptionTitleAttribute(): string
+    public function getTranslateDescriptionAttribute(): string
     {
         $locale = App::getLocale();
         $language = [
