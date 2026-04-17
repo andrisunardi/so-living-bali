@@ -75,19 +75,19 @@ new class extends Component {
                 'id' => 1,
                 'code' => 'usd',
                 'name' => 'USD',
-                'image_url' => asset('images/currency/usd.svg'),
+                'icon' => 'fas fa-dollar-sign',
             ],
             [
                 'id' => 2,
                 'code' => 'idr',
                 'name' => 'IDR',
-                'image_url' => asset('images/currency/idr.svg'),
+                'icon' => 'fas fa-rupiah-sign',
             ],
             [
                 'id' => 3,
-                'code' => 'yuan',
-                'name' => 'Yuan',
-                'image_url' => asset('images/currency/yuan.svg'),
+                'code' => 'cny',
+                'name' => 'CNY',
+                'icon' => 'fas fa-yen-sign',
             ],
         ];
     }
@@ -96,8 +96,8 @@ new class extends Component {
 
 <header id="header" class="fixed-top py-3">
     <div class="container-md">
-        <div class="row align-items-center">
-            <div class="col col-lg-3 col-xl-4 text-start">
+        <div class="row row-cols-2 row-cols-lg-3 align-items-center">
+            <div class="col text-start">
                 <a draggable="false" href="{{ route('home') }}" wire:navigate>
                     <img draggable="false" class="logo user-select-none pe-none" height="50"
                         src="{{ asset('images/logo.png') }}"
@@ -105,7 +105,7 @@ new class extends Component {
                 </a>
             </div>
 
-            <div class="col-lg text-center d-none d-lg-flex align-items-center gap-md-3 gap-lg-4 gap-xl-5">
+            <div class="col text-center d-none d-lg-flex align-items-center gap-lg-3 gap-xl-4">
                 @foreach ($this->navigations() as $navigation)
                     <a draggable="false" href="{{ $navigation['url'] }}"
                         class="header-color text-white {{ Route::is($navigation['route']) ? 'fw-bold' : '' }}"
@@ -115,25 +115,19 @@ new class extends Component {
                 @endforeach
             </div>
 
-            <div class="col-lg-auto text-end d-none d-lg-block">
-                <div class="row">
-                    <div class="col-lg-auto">
-                        <a draggable="false" href="{{ route('home') }}" class="header-color text-white text-center"
-                            wire:navigate>
-                            {{ trans('index.list_your_properties') }}
-                        </a>
-                    </div>
-
+            <div class="col text-end d-none d-lg-block">
+                <div class="row align-items-center justify-content-end">
                     <div class="col-lg-auto">
                         <div>
                             <div class="dropdown">
                                 <a draggable="false" href="javascript:;"
-                                    class="header-color text-white text-uppercase dropdown-toggle icon-link"
-                                    data-bs-toggle="dropdown">
+                                    class="header-color text-white dropdown-toggle icon-link" data-bs-toggle="dropdown">
                                     <img draggable="false" class="user-select-none pe-none" width="20"
                                         src="{{ asset('images/flag/' . app()->getLocale() . '.svg') }}"
                                         alt="{{ trans('index.flag') }} - {{ app()->getLocale() }} - {{ config('app.name') }}" />
-                                    <span>{{ app()->getLocale() }}</span>
+                                    <span class="d-lg-none d-xl-block text-uppercase">
+                                        {{ app()->getLocale() }}
+                                    </span>
                                 </a>
                                 <ul class="dropdown-menu dropdown-menu-end mt-3">
                                     @foreach ($this->languages() as $language)
@@ -154,33 +148,47 @@ new class extends Component {
 
                     <div class="col-lg-auto">
                         <div class="dropdown">
-                            <a draggable="false" href="javascript:;"
-                                class="header-color text-white text-uppercase dropdown-toggle icon-link"
-                                data-bs-toggle="dropdown">
-                                <img draggable="false" class="user-select-none pe-none" width="20"
-                                    src="{{ asset('images/currency/' . (Session::get('currency') ?? 'usd') . '.svg') }}"
-                                    alt="{{ trans('index.currency') }} - {{ Session::get('currency') ?? 'usd' }} - {{ config('app.name') }}" />
-                                <span>{{ Session::get('currency') ?? 'usd' }}</span>
+                            <a draggable="false" role="button"
+                                class="header-color text-white dropdown-toggle icon-link" data-bs-toggle="dropdown">
+                                <span
+                                    class="{{ match (Session::get('currency')) {
+                                        'usd' => 'fas fa-dollar-sign',
+                                        'idr' => 'fas fa-rupiah-sign',
+                                        'cny' => 'fas fa-yen-sign',
+                                        default => 'fas fa-dollar-sign',
+                                    } }} fa-fw">
+                                </span>
+                                <span class="d-lg-none d-xl-block text-uppercase">
+                                    {{ Session::get('currency') ?? 'usd' }}
+                                </span>
                             </a>
                             <ul class="dropdown-menu dropdown-menu-end mt-3">
                                 @foreach ($this->currencies() as $currency)
                                     <li wire:key="currency-{{ $currency['id'] }}">
                                         <a draggable="false" class="dropdown-item icon-link"
-                                            href="{{ route('locale', ['locale' => $currency['code']]) }}">
-                                            <img draggable="false" class="user-select-none pe-none" width="20"
-                                                src="{{ $currency['image_url'] }}"
-                                                alt="{{ trans('index.currency') }} {{ $currency['code'] }} - {{ config('app.name') }}" />
-                                            <span>{{ $currency['name'] }}</span>
+                                            href="{{ route('currency', ['currency' => $currency['code']]) }}">
+                                            <span class="{{ $currency['icon'] }} fa-fw"></span>
+                                            <span class="text-uppercase">{{ $currency['name'] }}</span>
                                         </a>
                                     </li>
                                 @endforeach
                             </ul>
                         </div>
                     </div>
+
+                    <div class="col-lg-auto">
+                        <a draggable="false" class="btn btn-success btn-sm rounded-pill icon-link"
+                            href="{{ route('home') }}" wire:navigate>
+                            <span class="fas fa-pen-to-square fa-fw"></span>
+                            <span class="d-lg-none d-xl-block">
+                                {{ trans('index.list_your_properties') }}
+                            </span>
+                        </a>
+                    </div>
                 </div>
             </div>
 
-            <div class="col-auto d-lg-none">
+            <div class="col text-end d-lg-none">
                 <a draggable="false" href="javascript:;" data-bs-toggle="offcanvas" data-bs-target="#navigation">
                     <span class="fas fa-bars header-color"></span>
                 </a>
@@ -199,24 +207,18 @@ new class extends Component {
                 </div>
 
                 <div class="offcanvas-body">
-                    <div class="d-grid gap-4">
-                        <ul class="list-unstyled d-grid gap-4">
+                    <div class="d-grid gap-5 mt-4">
+                        <ul class="list-unstyled d-grid gap-4 mb-0">
                             @foreach ($this->navigations() as $navigation)
                                 <li wire:key="navigation-{{ $navigation['id'] }}">
                                     <a draggable="false" href="{{ $navigation['url'] }}" wire:navigate
-                                        class="d-flex justify-content-between text-body fs-6 {{ Route::is($navigation['route']) ? 'fw-bold' : '' }}">
+                                        class="d-flex justify-content-between align-items-center text-body {{ Route::is($navigation['route']) ? 'fw-bold' : '' }}">
                                         <span>{{ $navigation['name'] }}</span>
                                         <span class="fas fa-angle-right fa-fw"></span>
                                     </a>
                                 </li>
                             @endforeach
                         </ul>
-
-                        <a draggable="false" class="btn btn-dark rounded-5 fw-bold w-100" href="{{ route('home') }}"
-                            wire:navigate>
-                            <span class="fas fa-pencil fa-fw"></span>
-                            {{ trans('index.list_your_properties') }}
-                        </a>
 
                         <div class="d-flex justify-content-between">
                             <div>
@@ -250,20 +252,24 @@ new class extends Component {
                                 <div class="dropdown">
                                     <a draggable="false" role="button" class="text-body dropdown-toggle icon-link"
                                         data-bs-toggle="dropdown">
-                                        <img draggable="false" class="user-select-none pe-none" width="25"
-                                            src="{{ asset('images/currency/' . (Session::get('currency') ?? 'usd') . '.svg') }}"
-                                            alt="{{ trans('index.currency') }} - {{ Session::get('currency') ?? 'usd' }} - {{ config('app.name') }}" />
                                         <span
-                                            class="fw-bold text-uppercase">{{ Session::get('currency') ?? 'usd' }}</span>
+                                            class="{{ match (Session::get('currency')) {
+                                                'usd' => 'fas fa-dollar-sign',
+                                                'idr' => 'fas fa-rupiah-sign',
+                                                'cny' => 'fas fa-yen-sign',
+                                                default => 'fas fa-dollar-sign',
+                                            } }} fa-fw">
+                                        </span>
+                                        <span class="fw-bold text-uppercase">
+                                            {{ Session::get('currency') ?? 'usd' }}
+                                        </span>
                                     </a>
                                     <ul class="dropdown-menu mt-2">
                                         @foreach ($this->currencies() as $currency)
                                             <li wire:key="currency-{{ $currency['id'] }}">
                                                 <a draggable="false" class="dropdown-item icon-link"
                                                     href="{{ route('currency', ['currency' => $currency['code']]) }}">
-                                                    <img draggable="false" class="user-select-none pe-none"
-                                                        width="25" src="{{ $currency['image_url'] }}"
-                                                        alt="{{ trans('index.flag') }} {{ $currency['code'] }} - {{ config('app.name') }}" />
+                                                    <span class="{{ $currency['icon'] }} fa-fw"></span>
                                                     <span>{{ $currency['name'] }}</span>
                                                 </a>
                                             </li>
@@ -272,6 +278,12 @@ new class extends Component {
                                 </div>
                             </div>
                         </div>
+
+                        <a draggable="false" class="btn btn-success rounded-5 fw-bold w-100"
+                            href="{{ route('home') }}" wire:navigate>
+                            <span class="fas fa-pen-to-square fa-fw"></span>
+                            {{ trans('index.list_your_properties') }}
+                        </a>
                     </div>
                 </div>
             </div>
