@@ -22,12 +22,12 @@
     @if (!View::hasSection('code'))
         @if (Route::is('cms.*'))
             @auth
-                @auth
-                    <livewire:layouts::cms.header />
-                @endauth
+                <livewire:layouts::cms.header />
             @endauth
         @else
-            <livewire:layouts::header />
+            @if (request()->getHost() != 'solivingbali.com')
+                <livewire:layouts::header />
+            @endif
         @endif
     @endif
 
@@ -58,30 +58,31 @@
     @if (!View::hasSection('code'))
         @if (Route::is('cms.*'))
             @auth
-                @auth
-                    <livewire:layouts::cms.footer />
-                @endauth
+                <livewire:layouts::cms.footer />
             @endauth
         @else
-            @auth
+            @if (request()->getHost() != 'solivingbali.com')
                 <livewire:layouts::footer />
-            @endauth
+            @endif
         @endif
     @endif
 
     @if (!Route::is('cms.*'))
-        <a draggable="false" href="https://wa.me/{{ config('constants.contact.whatsapp') }}" target="_blank"
-            class="position-fixed bottom-0 end-0 m-3 d-flex align-items-center justify-content-center z-1">
-            <span class="fa-stack fa-2x">
-                <i class="fas fa-circle fa-stack-2x text-success"></i>
-                <i class="fab fa-whatsapp fa-stack-1x fa-inverse"></i>
-            </span>
-        </a>
+        @if (request()->getHost() != 'solivingbali.com')
+            <a draggable="false" href="https://wa.me/{{ config('constants.contact.whatsapp') }}" target="_blank"
+                class="position-fixed bottom-0 end-0 m-3 d-flex align-items-center justify-content-center z-1">
+                <span class="fa-stack fa-2x">
+                    <i class="fas fa-circle fa-stack-2x text-success"></i>
+                    <i class="fab fa-whatsapp fa-stack-1x fa-inverse"></i>
+                </span>
+            </a>
+        @endif
     @endif
 
-    <livewire:modal.search-menu />
 
     @if (Route::is('cms.*'))
+        <livewire:modal.search-menu />
+
         <script src="{{ asset('js/color-modes.js') }}"></script>
     @endif
 
