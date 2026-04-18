@@ -94,7 +94,7 @@ new class extends Component {
 };
 ?>
 
-<header id="header" class="fixed-top py-3">
+<header id="header" class="fixed-top py-3" data-use-banner="{{ Route::is('home') ? '1' : '0' }}">
     <div class="container-md">
         <div class="row row-cols-2 row-cols-lg-3 align-items-center">
             <div class="col text-start">
@@ -108,8 +108,8 @@ new class extends Component {
             <div class="col text-center d-none d-lg-flex align-items-center gap-lg-3 gap-xl-4">
                 @foreach ($this->navigations() as $navigation)
                     <a draggable="false" href="{{ $navigation['url'] }}"
-                        class="header-color text-white {{ Route::is($navigation['route']) ? 'fw-bold' : '' }}"
-                        wire:navigate wire:key="navigation-{{ $navigation['id'] }}">
+                        class="header-color {{ Route::is($navigation['route']) ? 'fw-bold' : '' }}" wire:navigate
+                        wire:key="navigation-{{ $navigation['id'] }}">
                         {{ $navigation['name'] }}
                     </a>
                 @endforeach
@@ -120,8 +120,8 @@ new class extends Component {
                     <div class="col-lg-auto">
                         <div>
                             <div class="dropdown">
-                                <a draggable="false" href="javascript:;"
-                                    class="header-color text-white dropdown-toggle icon-link" data-bs-toggle="dropdown">
+                                <a draggable="false" href="javascript:;" class="header-color dropdown-toggle icon-link"
+                                    data-bs-toggle="dropdown">
                                     <img draggable="false" class="user-select-none pe-none" width="20"
                                         src="{{ asset('images/flag/' . app()->getLocale() . '.svg') }}"
                                         alt="{{ trans('index.flag') }} - {{ app()->getLocale() }} - {{ config('app.name') }}" />
@@ -148,8 +148,8 @@ new class extends Component {
 
                     <div class="col-lg-auto">
                         <div class="dropdown">
-                            <a draggable="false" role="button"
-                                class="header-color text-white dropdown-toggle icon-link" data-bs-toggle="dropdown">
+                            <a draggable="false" role="button" class="header-color dropdown-toggle icon-link"
+                                data-bs-toggle="dropdown">
                                 <span
                                     class="{{ match (Session::get('currency')) {
                                         'usd' => 'fas fa-dollar-sign',
@@ -190,7 +190,7 @@ new class extends Component {
 
             <div class="col text-end d-lg-none">
                 <a draggable="false" href="javascript:;" data-bs-toggle="offcanvas" data-bs-target="#navigation">
-                    <span class="fas fa-bars header-color"></span>
+                    <span class="fas fa-bars header-color text-black"></span>
                 </a>
             </div>
 
@@ -293,49 +293,42 @@ new class extends Component {
 
 @push('script')
     <script>
-        function scroll() {
+        function initHeader() {
             const $header = $("#header");
             const $logo = $(".logo");
 
             if (!$header.length) return;
 
-            function scroll() {
+            const useBanner = $header.data("use-banner") == 1;
+
+            function handleScroll() {
                 if ($(window).scrollTop() > 100) {
                     $header.addClass("bg-white text-black");
-                    $header
-                        .find(".header-color")
-                        .removeClass("text-white")
-                        .addClass("text-black");
-
-                    $header.addClass("bg-white");
-                    $header
-                        .find(".header-color")
+                    $header.find(".header-color")
                         .removeClass("text-white")
                         .addClass("text-black");
 
                     $logo.attr("src", "{{ asset('images/logo/black.png') }}");
                 } else {
                     $header.removeClass("bg-white");
-                    $header
-                        .find(".header-color")
-                        .removeClass("text-black")
-                        .addClass("text-white");
 
-                    $header.removeClass("bg-WHITE");
-                    $header
-                        .find(".header-color")
-                        .removeClass("text-black")
-                        .addClass("text-white");
+                    $header.find(".header-color")
+                        .removeClass(useBanner ? "text-black" : "text-white")
+                        .addClass(useBanner ? "text-white" : "text-black");
 
-                    $logo.attr("src", "{{ asset('images/logo/white.png') }}");
+                    $logo.attr("src",
+                        useBanner ?
+                        "{{ asset('images/logo/white.png') }}" :
+                        "{{ asset('images/logo/black.png') }}"
+                    );
                 }
             }
 
-            scroll();
-            $(window).off("scroll", scroll).on("scroll", scroll);
+            handleScroll();
+            $(window).off("scroll", handleScroll).on("scroll", handleScroll);
         }
 
-        document.addEventListener("DOMContentLoaded", scroll);
-        document.addEventListener("livewire:navigated", scroll);
+        document.addEventListener("DOMContentLoaded", initHeader);
+        document.addEventListener("livewire:navigated", initHeader);
     </script>
 @endpush
