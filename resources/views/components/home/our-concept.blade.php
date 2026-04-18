@@ -14,7 +14,7 @@ new class extends Component {
 
 <section class="py-5 my-5">
     <div class="container-md">
-        <div class="d-grid gap-5">
+        <div class="d-grid gap-4">
             <div class="row justify-content-center">
                 <div class="col-xl-9">
                     <div class="text-center">

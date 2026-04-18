@@ -56,6 +56,12 @@ Breadcrumbs::for('about', function (BreadcrumbTrail $trail) {
     $trail->push(trans('page.about'), route('about'), ['icon' => 'fas fa-building']);
 });
 
+// CONTACT
+Breadcrumbs::for('contact', function (BreadcrumbTrail $trail) {
+    $trail->parent('home');
+    $trail->push(trans('page.contact'), route('contact'), ['icon' => 'fas fa-phone']);
+});
+
 // CMS
 // HOME
 Breadcrumbs::for('cms.home', function (BreadcrumbTrail $trail) {

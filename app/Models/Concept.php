@@ -65,6 +65,8 @@ use Spatie\Activitylog\Traits\LogsActivity;
  * @method static Builder<static>|Concept withTrashed(bool $withTrashed = true)
  * @method static Builder<static>|Concept withoutTrashed()
  *
+ * @property-read string $translate_description
+ *
  * @mixin \Eloquent
  */
 #[ObservedBy([ConceptObserver::class])]

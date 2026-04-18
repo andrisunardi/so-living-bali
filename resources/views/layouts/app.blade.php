@@ -33,13 +33,13 @@
 
     <main class="flex-grow-1 @if (!Route::is(['home', 'cms.login', 'cms.forgot-password'])) pt-5 my-4 @endif">
         @if (View::hasSection('code'))
-            @if (Request::segment(1) == 'cms')
+            @if (!Route::is('cms.*'))
                 <livewire:layouts::cms.error />
             @else
                 <livewire:layouts::error />
             @endif
         @else
-            @if (Request::segment(1) == 'cms')
+            @if (!Route::is('cms.*'))
                 @if (!Route::is(['cms.home', 'cms.login', 'cms.forgot-password']))
                     {{ Breadcrumbs::render() }}
                 @endif
