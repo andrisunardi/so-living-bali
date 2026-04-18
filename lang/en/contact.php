@@ -8,13 +8,33 @@ return [
         'contact' => 'Prefer a direct approach?',
     ],
     'form' => [
-        'title' => 'Search long-term homes',
-        'button' => 'Find a home',
-        'area' => 'Choose preferred area',
-        'when' => 'Planned move-in',
-        'bedroom' => 'Number of bedrooms',
-        'type' => 'All type',
-        'price_range' => 'Budget range',
+        'success' => [
+            'title' => 'Thank you for contacting us',
+            'body' => "We'll get back to you as soon as possible.",
+        ],
+        'failed' => [
+            'title' => 'Failed to send your message. Please try again later.',
+        ],
+        'label' => [
+            'first_name' => 'First name',
+            'last_name' => 'Last name',
+            'email' => 'Email',
+            'phone' => 'Whatsapp number',
+            'area' => 'Select area',
+            'bedroom' => 'Select number of bedroom',
+            'type' => 'Select period',
+            'message' => 'Message',
+        ],
+        'placeholder' => [
+            'first_name' => 'Enter your first name',
+            'last_name' => 'Enter your last name',
+            'email' => 'Enter your email',
+            'phone' => 'Enter your whatsapp number',
+            'bedroom' => 'Number of bedroom',
+            'type' => 'Rental period',
+            'message' => 'Enter message',
+        ],
+        'submit' => 'Submit Form',
     ],
 
 ];

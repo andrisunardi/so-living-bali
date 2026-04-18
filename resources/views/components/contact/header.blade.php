@@ -7,12 +7,12 @@ new class extends Component {};
 
 <section class="py-5 my-5">
     <div class="container-md">
-        <div class="row">
-            <div class="col-lg-6 col-xl-4">
+        <div class="row g-4">
+            <div class="col-lg-4">
                 @livewire('contact.info')
             </div>
-            <div class="col-lg-7 col-xl-8">
-                {{-- @livewire('contact.form') --}}
+            <div class="col-lg-8 col-xl-7 offset-xl-1">
+                @livewire('contact.form')
             </div>
         </div>
     </div>

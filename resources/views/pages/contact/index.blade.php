@@ -10,4 +10,6 @@ new #[Title('Contact')] class extends Component {};
 
 <div>
     @livewire('contact.header')
+
+    @livewire('contact.maps')
 </div>

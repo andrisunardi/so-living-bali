@@ -13,6 +13,9 @@ return [
     'contact' => [
         'whatsapp' => env('CONTACT_WHATSAPP'),
         'email' => env('CONTACT_EMAIL'),
+        'address' => env('CONTACT_ADDRESS'),
+        'google_maps' => env('CONTACT_GOOGLE_MAPS'),
+        'google_maps_iframe' => env('CONTACT_GOOGLE_MAPS_IFRAME'),
     ],
 
     // GHL

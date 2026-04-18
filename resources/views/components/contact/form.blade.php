@@ -1,0 +1,221 @@
+<?php
+
+use App\Enums\Property\PropertyBedroom;
+use App\Enums\Property\PropertyType;
+use App\Livewire\Component;
+use App\Livewire\Forms\Contact\ContactSubmitForm;
+use App\Services\AreaService;
+use Illuminate\Validation\ValidationException;
+
+new class extends Component {
+    public ContactSubmitForm $form;
+
+    public function resetForm(): void
+    {
+        $this->form->reset();
+    }
+
+    public function submit(): void
+    {
+        try {
+            $this->form->submit();
+
+            $this->alertSuccess(title: trans('contact.form.success.title'), body: trans('contact.form.success.body'));
+
+            $this->form->reset();
+        } catch (ValidationException $e) {
+            $errors = collect($e->validator->errors()->all())->implode('<br>');
+
+            $this->alertError(title: trans('contact.form.failed.title'), body: $errors);
+        }
+    }
+
+    public function areas(): object
+    {
+        $service = new AreaService();
+        return $service->index(isActive: [true], orderBy: 'name', sortBy: 'asc', paginate: false);
+    }
+
+    public function propertyBedrooms(): array
+    {
+        return PropertyBedroom::cases();
+    }
+
+    public function propertyTypes(): array
+    {
+        return PropertyType::cases();
+    }
+};
+?>
+
+<div class="card card-body rounded-5 p-lg-4 p-xl-5">
+
+    <x-alert-error />
+
+    <form wire:submit.prevent="submit" role="form" autocomplete="off">
+        <div class="row g-3 mb-3">
+            <div class="col-sm-6">
+                <label class="form-label" for="first_name">
+                    {{ trans('contact.form.label.first_name') }}
+                    <span class="text-danger">*</span>
+                </label>
+
+                <input type="text" class="form-control rounded-5" id="first_name" name="first_name" minlength="1"
+                    maxlength="50" placeholder="{{ trans('contact.form.placeholder.first_name') }}" required
+                    wire:model="form.name" wire:offline.class="disabled" wire:offline.attr="disabled"
+                    wire:loading.class="disabled" wire:loading.attr="disabled">
+
+                @error('form.first_name')
+                    <div class="form-text text-danger">{{ $message }}</div>
+                @enderror
+            </div>
+
+            <div class="col-sm-6">
+                <label class="form-label" for="last_name">
+                    {{ trans('contact.form.label.last_name') }}
+                    <span class="text-danger">*</span>
+                </label>
+
+                <input type="text" class="form-control rounded-5" id="last_name" name="last_name" minlength="1"
+                    maxlength="50" placeholder="{{ trans('contact.form.placeholder.last_name') }}" required
+                    wire:model="form.name" wire:offline.class="disabled" wire:offline.attr="disabled"
+                    wire:loading.class="disabled" wire:loading.attr="disabled">
+
+                @error('form.last_name')
+                    <div class="form-text text-danger">{{ $message }}</div>
+                @enderror
+            </div>
+
+            <div class="col-sm-6">
+                <label class="form-label" for="email">
+                    {{ trans('contact.form.label.email') }}
+                    <span class="text-danger">*</span>
+                </label>
+
+                <input type="text" class="form-control rounded-5" id="email" name="email" minlength="1"
+                    maxlength="50" placeholder="{{ trans('contact.form.placeholder.email') }}" required
+                    wire:model="form.name" wire:offline.class="disabled" wire:offline.attr="disabled"
+                    wire:loading.class="disabled" wire:loading.attr="disabled">
+
+                @error('form.email')
+                    <div class="form-text text-danger">{{ $message }}</div>
+                @enderror
+            </div>
+
+            <div class="col-sm-6">
+                <label class="form-label" for="phone">
+                    {{ trans('contact.form.label.phone') }}
+                    <span class="text-danger">*</span>
+                </label>
+
+                <input type="text" class="form-control rounded-5" id="phone" name="phone" minlength="1"
+                    maxlength="50" placeholder="{{ trans('contact.form.placeholder.phone') }}" required
+                    wire:model="form.name" wire:offline.class="disabled" wire:offline.attr="disabled"
+                    wire:loading.class="disabled" wire:loading.attr="disabled">
+
+                @error('form.phone')
+                    <div class="form-text text-danger">{{ $message }}</div>
+                @enderror
+            </div>
+
+            <div class="col-sm-3 col-xl-4">
+                <label class="form-label" for="area_id">
+                    {{ trans('contact.form.label.area') }}
+                    <span class="text-danger">*</span>
+                </label>
+
+                <select class="form-select rounded-5" id="area_id" name="area_id"
+                    placeholder="{{ trans('contact.form.placeholder.area') }}" required wire:model="form.area_id"
+                    wire:offline.class="disabled" wire:offline.attr="disabled" wire:loading.class="disabled"
+                    wire:loading.attr="disabled">
+                    <option class="">{{ trans('index.area') }}</option>
+                    @foreach ($this->areas() as $area)
+                        <option value="{{ $area->id }}" wire:key="area-{{ $area->id }}">
+                            {{ $area->name }}
+                        </option>
+                    @endforeach
+                </select>
+
+                @error('form.area_id')
+                    <div class="form-text text-danger">{{ $message }}</div>
+                @enderror
+            </div>
+
+            <div class="col-sm-5 col-xl-4">
+                <label class="form-label" for="bedroom">
+                    {{ trans('contact.form.label.bedroom') }}
+                    <span class="text-danger">*</span>
+                </label>
+
+                <select class="form-select rounded-5" id="bedroom" name="bedroom" required wire:model="form.bedroom"
+                    wire:offline.class="disabled" wire:offline.attr="disabled" wire:loading.class="disabled"
+                    wire:loading.attr="disabled">
+                    <option class="">{{ trans('contact.form.label.bedroom') }}</option>
+                    @foreach ($this->propertyBedrooms() as $propertyBedroom)
+                        <option value="{{ $propertyBedroom->value }}"
+                            wire:key="property-bedroom-{{ $propertyBedroom->value }}">
+                            {{ $propertyBedroom->name }}
+                        </option>
+                    @endforeach
+                </select>
+
+                @error('form.bedroom')
+                    <div class="form-text text-danger">{{ $message }}</div>
+                @enderror
+            </div>
+
+            <div class="col-sm-4">
+                <label class="form-label rounded-5" for="type">
+                    {{ trans('contact.form.label.type') }}
+                    <span class="text-danger">*</span>
+                </label>
+
+                <select class="form-select rounded-5" id="type" name="type" required wire:model="form.type"
+                    wire:offline.class="disabled" wire:offline.attr="disabled" wire:loading.class="disabled"
+                    wire:loading.attr="disabled">
+                    <option class="">{{ trans('contact.form.placeholder.type') }}</option>
+                    @foreach ($this->propertyTypes() as $propertyType)
+                        <option value="{{ $propertyType->value }}"
+                            wire:key="property-type-{{ $propertyType->value }}">
+                            {{ $propertyType->name }}
+                        </option>
+                    @endforeach
+                </select>
+
+                @error('form.type')
+                    <div class="form-text text-danger">{{ $message }}</div>
+                @enderror
+            </div>
+
+            <div class="col-12">
+                <label class="form-label" for="message">
+                    {{ trans('contact.form.label.message') }}
+                    <span class="text-danger">*</span>
+                </label>
+
+                <textarea type="text" class="form-control rounded-5" id="message" name="message" minlength="1"
+                    maxlength="1000" rows="5" placeholder="{{ trans('contact.form.placeholder.message') }}" required
+                    wire:model="form.message" wire:offline.class="disabled" wire:offline.attr="disabled"
+                    wire:loading.class="disabled" wire:loading.attr="disabled"></textarea>
+
+                @error('form.message')
+                    <div class="form-text text-danger">{{ $message }}</div>
+                @enderror
+            </div>
+
+            <div class="col-12">
+                <button type="submit" class="btn btn-success rounded-5 w-100" wire:offline.class="disabled"
+                    wire:offline.attr="disabled" wire:loading.class="disabled" wire:loading.attr="disabled">
+                    <span wire:loading.remove wire:target="submit">
+                        <span class="fas fa-paper-plane fa-fw"></span>
+                        {{ trans('contact.form.submit') }}
+                    </span>
+                    <span wire:loading wire:target="submit" class="w-100">
+                        <span class="spinner-border spinner-border-sm"></span>
+                        {{ trans('contact.form.submit') }}
+                    </span>
+                </button>
+            </div>
+        </div>
+    </form>
+</div>

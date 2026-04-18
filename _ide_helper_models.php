@@ -108,8 +108,8 @@ namespace App\Models{
  * @method static Builder<static>|Concept whereUpdatedBy($value)
  * @method static Builder<static>|Concept withTrashed(bool $withTrashed = true)
  * @method static Builder<static>|Concept withoutTrashed()
- * @mixin \Eloquent
  * @property-read string $translate_description
+ * @mixin \Eloquent
  */
 	class Concept extends \Eloquent {}
 }
