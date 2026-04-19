@@ -37,7 +37,7 @@ class ContactService
                 });
             })
             ->when($districtId, fn ($q) => $q->whereRelation('area', 'district_id', $districtId))
-            ->when($areaId, fn ($q) => $q->where('district_id', $areaId))
+            ->when($areaId, fn ($q) => $q->where('area_id', $areaId))
             ->when($startDate, fn ($q) => $q->whereDate('created_at', '>=', $startDate))
             ->when($endDate, fn ($q) => $q->whereDate('created_at', '<=', $endDate))
             ->when($random, fn ($q) => $q->inRandomOrder())

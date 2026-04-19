@@ -2,6 +2,7 @@
 
 use App\Exports\ContactExport;
 use App\Livewire\Component;
+use App\Models\Area;
 use App\Models\Contact;
 use App\Services\AreaService;
 use App\Services\ContactService;
@@ -27,9 +28,19 @@ new #[Title('Contact')] class extends Component {
     #[Url(except: '')]
     public string $end_date = '';
 
+    public function mount(): void
+    {
+        $this->district_id = Area::find($this->area_id)->district_id ?? '';
+    }
+
     public function updating(): void
     {
         $this->resetPage();
+    }
+
+    public function updated(): void
+    {
+        $this->district_id = Area::find($this->area_id)->district_id ?? '';
     }
 
     public function resetFilter(): void
@@ -125,7 +136,7 @@ new #[Title('Contact')] class extends Component {
                         <label class="form-label" for="district_id">
                             {{ trans('field.district_id') }}
                         </label>
-                        <div class="input-group" wire:ignore>
+                        <div class="input-group">
                             <div class="input-group-text">
                                 <span class="fas fa-city fa-fw "></span>
                             </div>
@@ -145,22 +156,21 @@ new #[Title('Contact')] class extends Component {
                     </div>
 
                     <div class="col-sm-6 col-md">
-                        <label class="form-label" for="district_id">
-                            {{ trans('field.district_id') }}
+                        <label class="form-label" for="area_id">
+                            {{ trans('field.area_id') }}
                         </label>
-                        <div class="input-group" wire:ignore>
+                        <div class="input-group">
                             <div class="input-group-text">
-                                <span class="fas fa-city fa-fw "></span>
+                                <span class="fas fa-archway fa-fw "></span>
                             </div>
-                            <select class="form-select select2" id="district_id" name="district_id"
-                                wire:key="district_id" wire:model.lazy="district_id" wire:offline.class="disabled"
-                                wire:offline.attr="disabled" wire:loading.class="disabled" wire:loading.attr="disabled">
-                                <option value="">{{ trans('index.all') }} {{ trans('page.district') }}</option>
-                                @foreach ($this->districts() as $district)
-                                    <option value="{{ $district->id }}"
-                                        {{ $district->id == $district_id ? 'selected' : '' }}
-                                        wire:key="district-{{ $district->id }}">
-                                        {{ $district->name }}
+                            <select class="form-select select2" id="area_id" name="area_id" wire:key="area_id"
+                                wire:model.lazy="area_id" wire:offline.class="disabled" wire:offline.attr="disabled"
+                                wire:loading.class="disabled" wire:loading.attr="disabled">
+                                <option value="">{{ trans('index.all') }} {{ trans('page.area') }}</option>
+                                @foreach ($this->areas() as $area)
+                                    <option value="{{ $area->id }}" {{ $area->id == $area_id ? 'selected' : '' }}
+                                        wire:key="area-{{ $area->id }}">
+                                        {{ $area->name }}
                                     </option>
                                 @endforeach
                             </select>
@@ -366,3 +376,15 @@ new #[Title('Contact')] class extends Component {
         </div>
     </div>
 </div>
+
+@script
+    <script>
+        $("#district_id").on("change", function() {
+            @this.set("district_id", $(this).val())
+        })
+
+        $("#area_id").on("change", function() {
+            @this.set("area_id", $(this).val())
+        })
+    </script>
+@endscript

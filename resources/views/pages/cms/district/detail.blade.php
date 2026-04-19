@@ -11,14 +11,14 @@ new #[Title('Detail | District')] class extends Component {
     public function mount(District $district): void
     {
         $this->district = $district;
-        $this->district->loadCount(['areas', 'properties']);
+        $this->district->loadCount(['areas', 'contacts', 'properties']);
     }
 
     public function changeShow(): void
     {
         $service = new DistrictService();
         $service->show(district: $this->district);
-        $this->district->loadCount(['areas', 'properties']);
+        $this->district->loadCount(['areas', 'contacts', 'properties']);
 
         $this->alertSuccess(title: trans('index.change_show') . ' ' . trans('index.success'), body: trans('page.district') . ' ' . trans('message.has_been_successfully_changed'));
     }
@@ -27,7 +27,7 @@ new #[Title('Detail | District')] class extends Component {
     {
         $service = new DistrictService();
         $service->active(district: $this->district);
-        $this->district->loadCount(['areas', 'properties']);
+        $this->district->loadCount(['areas', 'contacts', 'properties']);
 
         $this->alertSuccess(title: trans('index.change_active') . ' ' . trans('index.success'), body: trans('page.district') . ' ' . trans('message.has_been_successfully_changed'));
     }
@@ -144,6 +144,18 @@ new #[Title('Detail | District')] class extends Component {
                         <a draggable="false" href="{{ route('cms.area.index', ['district_id' => $district->id]) }}"
                             wire:navigate>
                             {{ $district->areas_count }}
+                        </a>
+                    </div>
+                </div>
+
+                <div class="row">
+                    <div class="col-sm-5 col-md-4 col-lg-3 col-xl-2">
+                        <div class="fw-bold">{{ trans('index.total') }} {{ trans('page.contact') }}</div>
+                    </div>
+                    <div class="col-sm-7 col-md-8 col-lg-9 col-xl-10">
+                        <a draggable="false" href="{{ route('cms.contact.index', ['district_id' => $district->id]) }}"
+                            wire:navigate>
+                            {{ $district->contacts_count }}
                         </a>
                     </div>
                 </div>

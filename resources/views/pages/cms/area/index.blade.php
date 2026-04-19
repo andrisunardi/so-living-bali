@@ -70,7 +70,7 @@ new #[Title('Area')] class extends Component {
         $service = new AreaService();
         $areas = $service->index(search: $this->search, districtId: $this->district_id, isActive: $this->is_active, paginate: $paginate);
         $areas->loadMissing(['district']);
-        $areas->loadCount(['properties']);
+        $areas->loadCount(['contacts', 'properties']);
 
         return $areas;
     }
@@ -82,7 +82,7 @@ new #[Title('Area')] class extends Component {
         $service = new AreaService();
         $areas = $service->index(orderBy: 'id', sortBy: 'asc', paginate: false);
         $areas->loadMissing(['district', 'createdBy', 'updatedBy']);
-        $areas->loadCount(['properties']);
+        $areas->loadCount(['contacts', 'properties']);
 
         return Excel::download(new AreaExport(areas: $areas), trans('page.area') . '.xlsx');
     }
@@ -255,6 +255,7 @@ new #[Title('Area')] class extends Component {
                             <th width="1%">{{ trans('field.id') }}</th>
                             <th width="1%">{{ trans('field.district_id') }}</th>
                             <th>{{ trans('field.name') }}</th>
+                            <th width="1%">{{ trans('index.total') }} {{ trans('page.contact') }}</th>
                             <th width="1%">{{ trans('index.total') }} {{ trans('page.property') }}</th>
                             <th width="1%">{{ trans('field.created_at') }}</th>
                             <th width="1%">{{ trans('field.show') }}</th>
@@ -287,6 +288,13 @@ new #[Title('Area')] class extends Component {
                                     <a draggable="false" href="{{ route('cms.area.detail', ['area' => $area]) }}"
                                         wire:navigate>
                                         {{ $area->name }}
+                                    </a>
+                                </td>
+                                <td class="text-center">
+                                    <a draggable="false"
+                                        href="{{ route('cms.contact.index', ['area_id' => $area->id]) }}"
+                                        wire:navigate>
+                                        {{ $area->contacts_count }}
                                     </a>
                                 </td>
                                 <td class="text-center">

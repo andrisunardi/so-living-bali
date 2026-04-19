@@ -1,20 +1,20 @@
 <table>
     <thead>
         <tr>
-            <th align="center" colspan="11">
+            <th align="center" colspan="12">
                 <b>{{ trans('page.area') }}</b>
             </th>
         </tr>
         <tr>
-            <td colspan="11"></td>
+            <td colspan="12"></td>
         </tr>
         <tr>
-            <th align="center" colspan="11">
+            <th align="center" colspan="12">
                 {{ trans('field.printed_at') }} : {{ now()->isoFormat('LLLL') }}
             </th>
         </tr>
         <tr>
-            <td colspan="11"></td>
+            <td colspan="12"></td>
         </tr>
         <tr>
             <th valign="middle" align="center">
@@ -34,6 +34,9 @@
             </th>
             <th valign="middle" align="center">
                 <b>{{ trans('field.show') }}</b>
+            </th>
+            <th valign="middle" align="center">
+                <b>{{ trans('index.total') }} {{ trans('page.contact') }}</b>
             </th>
             <th valign="middle" align="center">
                 <b>{{ trans('index.total') }} {{ trans('page.property') }}</b>
@@ -74,6 +77,9 @@
                     {{ Str::yesNo($area->is_active) }}
                 </td>
                 <td valign="middle" align="center">
+                    {{ $area->contacts_count }}
+                </td>
+                <td valign="middle" align="center">
                     {{ $area->properties_count }}
                 </td>
                 <td valign="middle" align="left">
@@ -91,7 +97,7 @@
             </tr>
         @empty
             <tr>
-                <td align="center" colspan="11">
+                <td align="center" colspan="12">
                     {{ trans('message.no_data_available') }}
                 </td>
             </tr>
@@ -99,7 +105,7 @@
     </tbody>
     <tfoot>
         <tr>
-            <td colspan="11"></td>
+            <td colspan="12"></td>
         </tr>
     </tfoot>
 </table>
