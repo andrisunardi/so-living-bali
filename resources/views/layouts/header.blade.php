@@ -1,5 +1,6 @@
 <?php
 
+use App\Enums\Currency;
 use App\Livewire\Component;
 
 new class extends Component {
@@ -65,26 +66,7 @@ new class extends Component {
 
     public function currencies(): array
     {
-        return [
-            [
-                'id' => 1,
-                'code' => 'usd',
-                'name' => 'USD',
-                'icon' => 'fas fa-dollar-sign',
-            ],
-            [
-                'id' => 2,
-                'code' => 'idr',
-                'name' => 'IDR',
-                'icon' => 'fas fa-rupiah-sign',
-            ],
-            [
-                'id' => 3,
-                'code' => 'cny',
-                'name' => 'CNY',
-                'icon' => 'fas fa-yen-sign',
-            ],
-        ];
+        return Currency::cases();
     }
 };
 ?>
@@ -146,24 +128,18 @@ new class extends Component {
                             <a draggable="false" role="button" class="header-color dropdown-toggle icon-link"
                                 data-bs-toggle="dropdown">
                                 <span
-                                    class="{{ match (Session::get('currency')) {
-                                        'usd' => 'fas fa-dollar-sign',
-                                        'idr' => 'fas fa-rupiah-sign',
-                                        'cny' => 'fas fa-yen-sign',
-                                        default => 'fas fa-dollar-sign',
-                                    } }} fa-fw">
-                                </span>
+                                    class="{{ Currency::from(Session::get('currency') ?? 'usd')->icon() }} fa-fw"></span>
                                 <span class="d-lg-none d-xl-block text-uppercase">
                                     {{ Session::get('currency') ?? 'usd' }}
                                 </span>
                             </a>
                             <ul class="dropdown-menu dropdown-menu-end mt-3">
                                 @foreach ($this->currencies() as $currency)
-                                    <li wire:key="currency-{{ $currency['id'] }}">
+                                    <li wire:key="currency-{{ $currency->value }}">
                                         <a draggable="false" class="dropdown-item icon-link"
-                                            href="{{ route('currency', ['currency' => $currency['code']]) }}">
-                                            <span class="{{ $currency['icon'] }} fa-fw"></span>
-                                            <span class="text-uppercase">{{ $currency['name'] }}</span>
+                                            href="{{ route('currency', ['currency' => $currency->value]) }}">
+                                            <span class="{{ $currency->icon() }} fa-fw"></span>
+                                            <span class="text-uppercase">{{ $currency->name }}</span>
                                         </a>
                                     </li>
                                 @endforeach
@@ -251,24 +227,18 @@ new class extends Component {
                                     <a draggable="false" role="button" class="text-body dropdown-toggle icon-link"
                                         data-bs-toggle="dropdown">
                                         <span
-                                            class="{{ match (Session::get('currency')) {
-                                                'usd' => 'fas fa-dollar-sign',
-                                                'idr' => 'fas fa-rupiah-sign',
-                                                'cny' => 'fas fa-yen-sign',
-                                                default => 'fas fa-dollar-sign',
-                                            } }} fa-fw">
-                                        </span>
+                                            class="{{ Currency::from(Session::get('currency') ?? 'usd')->icon() }} fa-fw"></span>
                                         <span class="fw-bold text-uppercase">
                                             {{ Session::get('currency') ?? 'usd' }}
                                         </span>
                                     </a>
                                     <ul class="dropdown-menu mt-2">
                                         @foreach ($this->currencies() as $currency)
-                                            <li wire:key="currency-{{ $currency['id'] }}">
+                                            <li wire:key="currency-{{ $currency->value }}">
                                                 <a draggable="false" class="dropdown-item icon-link"
-                                                    href="{{ route('currency', ['currency' => $currency['code']]) }}">
-                                                    <span class="{{ $currency['icon'] }} fa-fw"></span>
-                                                    <span>{{ $currency['name'] }}</span>
+                                                    href="{{ route('currency', ['currency' => $currency->value]) }}">
+                                                    <span class="{{ $currency->icon() }} fa-fw"></span>
+                                                    <span class="text-uppercase">{{ $currency->name }}</span>
                                                 </a>
                                             </li>
                                         @endforeach

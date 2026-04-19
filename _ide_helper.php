@@ -32899,6 +32899,7 @@ namespace  {
     class Validator extends \Illuminate\Support\Facades\Validator {}
     class View extends \Illuminate\Support\Facades\View {}
     class Vite extends \Illuminate\Support\Facades\Vite {}
+    class Currency extends \App\Enums\Currency {}
     class PropertyBedroom extends \App\Enums\Property\PropertyBedroom {}
     class PropertyElectricity extends \App\Enums\Property\PropertyElectricity {}
     class PropertyLivingStyle extends \App\Enums\Property\PropertyLivingStyle {}
