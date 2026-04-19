@@ -111,11 +111,11 @@ new class extends Component {
         </div>
     </div>
 
-    <div class="bg-black py-3 bottom-0">
+    <div class="bg-black text-white py-3">
         <div class="container-md">
             <div class="row justify-content-between align-items-center small">
                 <div class="col-md text-center text-md-start">
-                    &copy; {{ trans('footer.copyright') }} 2025 - {{ now()->year }} &reg;
+                    &copy; {{ trans('footer.copyright') }} {{ now()->year }} &reg;
                     <strong>{{ config('app.name') }}</strong>&trade;
                     <br class="d-sm-none" />
                     {{ trans('footer.all_rights_reserved') }}.
