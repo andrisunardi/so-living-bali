@@ -1,19 +1,19 @@
 <table>
     <thead>
         <tr>
-            <th align="center" colspan="11">
+            <th align="center" colspan="13">
                 <b>{{ trans('page.contact') }}</b>
             </th>
         </tr>
-        <td colspan="11"></td>
+        <td colspan="13"></td>
         </tr>
         <tr>
-            <th align="center" colspan="11">
+            <th align="center" colspan="13">
                 {{ trans('field.printed_at') }} : {{ now()->isoFormat('LLLL') }}
             </th>
         </tr>
         <tr>
-            <td colspan="11"></td>
+            <td colspan="13"></td>
         </tr>
         <tr>
             <th valign="middle" align="center">
@@ -36,6 +36,12 @@
             </th>
             <th valign="middle" align="center">
                 <b>{{ trans('field.phone') }}</b>
+            </th>
+            <th valign="middle" align="center">
+                <b>{{ trans('field.area') }}</b>
+            </th>
+            <th valign="middle" align="center">
+                <b>{{ trans('field.district') }}</b>
             </th>
             <th valign="middle" align="center">
                 <b>{{ trans('field.created_by') }}</b>
@@ -76,6 +82,12 @@
                     {{ $contact->phone }}
                 </td>
                 <td valign="middle" align="left">
+                    {{ $contact->area?->district?->name }}
+                </td>
+                <td valign="middle" align="left">
+                    {{ $contact->area?->name }}
+                </td>
+                <td valign="middle" align="left">
                     {{ $contact->createdBy?->name }}
                 </td>
                 <td valign="middle" align="left">
@@ -90,7 +102,7 @@
             </tr>
         @empty
             <tr>
-                <td align="center" colspan="11">
+                <td align="center" colspan="13">
                     {{ trans('message.no_data_available') }}
                 </td>
             </tr>
@@ -98,7 +110,7 @@
     </tbody>
     <tfoot>
         <tr>
-            <td colspan="11"></td>
+            <td colspan="13"></td>
         </tr>
     </tfoot>
 </table>

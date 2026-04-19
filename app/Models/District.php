@@ -10,6 +10,7 @@ use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
 use Illuminate\Database\Eloquent\Relations\HasMany;
+use Illuminate\Database\Eloquent\Relations\HasManyThrough;
 use Illuminate\Database\Eloquent\SoftDeletes;
 use Illuminate\Support\Carbon;
 use Spatie\Activitylog\LogOptions;
@@ -59,6 +60,9 @@ use Spatie\Activitylog\Traits\LogsActivity;
  * @method static Builder<static>|District whereUpdatedBy($value)
  * @method static Builder<static>|District withTrashed(bool $withTrashed = true)
  * @method static Builder<static>|District withoutTrashed()
+ *
+ * @property-read Collection<int, Contact> $contacts
+ * @property-read int|null $contacts_count
  *
  * @mixin \Eloquent
  */
@@ -136,6 +140,11 @@ class District extends Model
     public function properties(): HasMany
     {
         return $this->hasMany(Property::class);
+    }
+
+    public function contacts(): HasManyThrough
+    {
+        return $this->hasManyThrough(Contact::class, Area::class);
     }
 
     public function user(): BelongsTo

@@ -110,6 +110,35 @@ new #[Title('Detail | Contact')] class extends Component {
 
                 <div class="row">
                     <div class="col-sm-5 col-md-4 col-lg-3 col-xl-2">
+                        <div class="fw-bold">{{ trans('field.district') }}</div>
+                    </div>
+                    <div class="col-sm-7 col-md-8 col-lg-9 col-xl-10">
+                        @if ($contact->area?->district)
+                            <a draggable="false"
+                                href="{{ route('cms.district.detail', ['district' => $contact->area->district]) }}"
+                                wire:navigate>
+                                {{ $contact->area->district->name }}
+                            </a>
+                        @endif
+                    </div>
+                </div>
+
+                <div class="row">
+                    <div class="col-sm-5 col-md-4 col-lg-3 col-xl-2">
+                        <div class="fw-bold">{{ trans('field.area') }}</div>
+                    </div>
+                    <div class="col-sm-7 col-md-8 col-lg-9 col-xl-10">
+                        @if ($contact->area)
+                            <a draggable="false" href="{{ route('cms.area.detail', ['area' => $contact->area]) }}"
+                                wire:navigate>
+                                {{ $contact->area->name }}
+                            </a>
+                        @endif
+                    </div>
+                </div>
+
+                <div class="row">
+                    <div class="col-sm-5 col-md-4 col-lg-3 col-xl-2">
                         <div class="fw-bold">{{ trans('field.created_by') }}</div>
                     </div>
                     <div class="col-sm-7 col-md-8 col-lg-9 col-xl-10">

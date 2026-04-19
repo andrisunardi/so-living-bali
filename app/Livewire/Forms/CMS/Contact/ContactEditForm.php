@@ -25,6 +25,9 @@ class ContactEditForm extends Form
     #[Validate('required|string|min:1|max:20')]
     public string $phone = '';
 
+    #[Validate('nullable|integer|exists:areas,id')]
+    public ?string $area_id = '';
+
     public function set(Contact $contact): void
     {
         $this->contact = $contact;
@@ -33,6 +36,7 @@ class ContactEditForm extends Form
         $this->company = $contact->company;
         $this->email = $contact->email;
         $this->phone = $contact->phone;
+        $this->area_id = $contact->area_id;
     }
 
     public function rules(): array

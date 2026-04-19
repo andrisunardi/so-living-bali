@@ -1,5 +1,6 @@
 <?php
 
+use App\Models\Area;
 use App\Models\User;
 use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
@@ -16,6 +17,7 @@ return new class extends Migration
             $table->string('company', 50)->nullable();
             $table->string('email', 50)->unique();
             $table->string('phone', 20)->unique();
+            $table->foreignIdFor(Area::class)->nullable()->constrained()->nullOnDelete();
             $table->foreignIdFor(User::class, 'created_by')->nullable()->constrained('users')->nullOnDelete();
             $table->foreignIdFor(User::class, 'updated_by')->nullable()->constrained('users')->nullOnDelete();
             $table->foreignIdFor(User::class, 'deleted_by')->nullable()->constrained('users')->nullOnDelete();

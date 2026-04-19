@@ -8,6 +8,7 @@ use Illuminate\Database\Eloquent\Collection;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
+use Illuminate\Database\Eloquent\Relations\HasOne;
 use Illuminate\Database\Eloquent\SoftDeletes;
 use Illuminate\Support\Carbon;
 use Spatie\Activitylog\LogOptions;
@@ -21,6 +22,7 @@ use Spatie\Activitylog\Traits\LogsActivity;
  * @property string $company
  * @property string $email
  * @property string $phone
+ * @property int|null $area_id
  * @property int|null $created_by
  * @property int|null $updated_by
  * @property int|null $deleted_by
@@ -29,8 +31,10 @@ use Spatie\Activitylog\Traits\LogsActivity;
  * @property Carbon|null $deleted_at
  * @property-read Collection<int, Activity> $activities
  * @property-read int|null $activities_count
+ * @property-read Area|null $area
  * @property-read User|null $createdBy
  * @property-read User|null $deletedBy
+ * @property-read District|null $district
  * @property-read User|null $updatedBy
  *
  * @method static \Database\Factories\ContactFactory factory($count = null, $state = [])
@@ -38,6 +42,7 @@ use Spatie\Activitylog\Traits\LogsActivity;
  * @method static \Illuminate\Database\Eloquent\Builder<static>|Contact newQuery()
  * @method static \Illuminate\Database\Eloquent\Builder<static>|Contact onlyTrashed()
  * @method static \Illuminate\Database\Eloquent\Builder<static>|Contact query()
+ * @method static \Illuminate\Database\Eloquent\Builder<static>|Contact whereAreaId($value)
  * @method static \Illuminate\Database\Eloquent\Builder<static>|Contact whereCode($value)
  * @method static \Illuminate\Database\Eloquent\Builder<static>|Contact whereCompany($value)
  * @method static \Illuminate\Database\Eloquent\Builder<static>|Contact whereCreatedAt($value)
@@ -70,6 +75,7 @@ class Contact extends Model
         'company',
         'phone',
         'email',
+        'area_id',
     ];
 
     protected $hidden = [];
@@ -82,6 +88,7 @@ class Contact extends Model
             'company' => 'string',
             'email' => 'string',
             'phone' => 'string',
+            'area_id' => 'integer',
         ];
     }
 
@@ -118,5 +125,15 @@ class Contact extends Model
     public function deletedBy(): BelongsTo
     {
         return $this->belongsTo(User::class, 'deleted_by');
+    }
+
+    public function area(): BelongsTo
+    {
+        return $this->belongsTo(Area::class);
+    }
+
+    public function district(): HasOne
+    {
+        return $this->hasOne(District::class, Area::class);
     }
 }

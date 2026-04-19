@@ -30,6 +30,8 @@ use Spatie\Activitylog\Traits\LogsActivity;
  * @property Carbon|null $deleted_at
  * @property-read Collection<int, Activity> $activities
  * @property-read int|null $activities_count
+ * @property-read Collection<int, Contact> $contacts
+ * @property-read int|null $contacts_count
  * @property-read User|null $createdBy
  * @property-read User|null $deletedBy
  * @property-read District|null $district
@@ -144,6 +146,11 @@ class Area extends Model
     public function properties(): HasMany
     {
         return $this->hasMany(Property::class);
+    }
+
+    public function contacts(): HasMany
+    {
+        return $this->hasMany(Contact::class);
     }
 
     public function createdBy(): BelongsTo

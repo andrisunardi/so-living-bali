@@ -3,7 +3,9 @@
 use App\Exports\ContactExport;
 use App\Livewire\Component;
 use App\Models\Contact;
+use App\Services\AreaService;
 use App\Services\ContactService;
+use App\Services\DistrictService;
 use Livewire\Attributes\Title;
 use Livewire\Attributes\Url;
 use Maatwebsite\Excel\Facades\Excel;
@@ -12,6 +14,12 @@ use Symfony\Component\HttpFoundation\BinaryFileResponse;
 new #[Title('Contact')] class extends Component {
     #[Url(except: '')]
     public string $search = '';
+
+    #[Url(except: '')]
+    public string $district_id = '';
+
+    #[Url(except: '')]
+    public string $area_id = '';
 
     #[Url(except: '')]
     public string $start_date = '';
@@ -28,7 +36,7 @@ new #[Title('Contact')] class extends Component {
     {
         $this->resetPage();
 
-        $this->reset(['search', 'start_date', 'end_date']);
+        $this->reset(['search', 'district_id', 'area_id', 'start_date', 'end_date']);
     }
 
     public function delete(Contact $contact): void
@@ -39,10 +47,23 @@ new #[Title('Contact')] class extends Component {
         $this->alertSuccess(title: trans('index.delete') . ' ' . trans('index.success'), body: trans('page.contact') . ' ' . trans('message.has_been_successfully_deleted'));
     }
 
+    public function districts(): object
+    {
+        $service = new DistrictService();
+        return $service->index(isActive: [true], orderBy: 'name', sortBy: 'asc', paginate: false);
+    }
+
+    public function areas(): object
+    {
+        $service = new AreaService();
+        return $service->index(districtId: $this->district_id, isActive: [true], orderBy: 'name', sortBy: 'asc', paginate: false);
+    }
+
     public function contacts(bool $paginate = true): object
     {
         $service = new ContactService();
-        $contacts = $service->index(search: $this->search, startDate: $this->start_date, endDate: $this->end_date, paginate: $paginate);
+        $contacts = $service->index(search: $this->search, districtId: $this->district_id, areaId: $this->area_id, startDate: $this->start_date, endDate: $this->end_date, paginate: $paginate);
+        $contacts->loadMissing(['area.district']);
 
         return $contacts;
     }
@@ -53,7 +74,7 @@ new #[Title('Contact')] class extends Component {
 
         $service = new ContactService();
         $contacts = $service->index(startDate: $this->start_date, endDate: $this->end_date, orderBy: 'id', sortBy: 'asc', paginate: false);
-        $contacts->loadMissing(['createdBy', 'updatedBy']);
+        $contacts->loadMissing(['area.district', 'createdBy', 'updatedBy']);
 
         return Excel::download(new ContactExport(contacts: $contacts), trans('page.contact') . '.xlsx');
     }
@@ -100,6 +121,52 @@ new #[Title('Contact')] class extends Component {
                 </div>
 
                 <div class="row g-3">
+                    <div class="col-sm-6 col-md">
+                        <label class="form-label" for="district_id">
+                            {{ trans('field.district_id') }}
+                        </label>
+                        <div class="input-group" wire:ignore>
+                            <div class="input-group-text">
+                                <span class="fas fa-city fa-fw "></span>
+                            </div>
+                            <select class="form-select select2" id="district_id" name="district_id"
+                                wire:key="district_id" wire:model.lazy="district_id" wire:offline.class="disabled"
+                                wire:offline.attr="disabled" wire:loading.class="disabled" wire:loading.attr="disabled">
+                                <option value="">{{ trans('index.all') }} {{ trans('page.district') }}</option>
+                                @foreach ($this->districts() as $district)
+                                    <option value="{{ $district->id }}"
+                                        {{ $district->id == $district_id ? 'selected' : '' }}
+                                        wire:key="district-{{ $district->id }}">
+                                        {{ $district->name }}
+                                    </option>
+                                @endforeach
+                            </select>
+                        </div>
+                    </div>
+
+                    <div class="col-sm-6 col-md">
+                        <label class="form-label" for="district_id">
+                            {{ trans('field.district_id') }}
+                        </label>
+                        <div class="input-group" wire:ignore>
+                            <div class="input-group-text">
+                                <span class="fas fa-city fa-fw "></span>
+                            </div>
+                            <select class="form-select select2" id="district_id" name="district_id"
+                                wire:key="district_id" wire:model.lazy="district_id" wire:offline.class="disabled"
+                                wire:offline.attr="disabled" wire:loading.class="disabled" wire:loading.attr="disabled">
+                                <option value="">{{ trans('index.all') }} {{ trans('page.district') }}</option>
+                                @foreach ($this->districts() as $district)
+                                    <option value="{{ $district->id }}"
+                                        {{ $district->id == $district_id ? 'selected' : '' }}
+                                        wire:key="district-{{ $district->id }}">
+                                        {{ $district->name }}
+                                    </option>
+                                @endforeach
+                            </select>
+                        </div>
+                    </div>
+
                     <div class="col-6 col-sm-3 col-lg-auto">
                         <label class="form-label" for="start_date">
                             {{ trans('field.start_date') }}
@@ -119,8 +186,8 @@ new #[Title('Contact')] class extends Component {
                         <div class="input-group">
                             <input type="date" class="form-control" id="end_date" name="end_date" min="2026-01-01"
                                 max="2099-12-12" wire:key="end_date" wire:model.lazy="end_date"
-                                wire:offline.class="disabled" wire:offline.attr="disabled" wire:loading.class="disabled"
-                                wire:loading.attr="disabled">
+                                wire:offline.class="disabled" wire:offline.attr="disabled"
+                                wire:loading.class="disabled" wire:loading.attr="disabled">
                         </div>
                     </div>
                 </div>
@@ -167,16 +234,16 @@ new #[Title('Contact')] class extends Component {
             <hr />
 
             <div class="table-responsive border-bottom mb-3">
-                <table class="table table-striped table-hover table-bordered text-nowrap table-responsive align-middle">
+                <table
+                    class="table table-striped table-hover table-bordered text-nowrap table-responsive align-middle">
                     <thead>
                         <tr class="text-center align-middle table-primary">
                             <th width="1%">{{ trans('field.#') }}</th>
                             <th width="1%">{{ trans('field.id') }}</th>
                             <th width="1%">{{ trans('field.code') }}</th>
-                            <th>{{ trans('field.name') }}</th>
-                            <th>{{ trans('field.company') }}</th>
-                            <th>{{ trans('field.email') }}</th>
-                            <th>{{ trans('field.phone') }}</th>
+                            <th>{{ trans('field.name') }} / {{ trans('field.company') }}</th>
+                            <th>{{ trans('field.email') }} / {{ trans('field.phone') }}</th>
+                            <th>{{ trans('field.district_id') }} / {{ trans('field.area_id') }}</th>
                             <th width="1%">{{ trans('field.created_at') }}</th>
                             <th width="1%">{{ trans('field.action') }}</th>
                         </tr>
@@ -201,10 +268,49 @@ new #[Title('Contact')] class extends Component {
                                         {{ $contact->code }}
                                     </a>
                                 </td>
-                                <td>{{ $contact->name }}</td>
-                                <td>{{ $contact->company }}</td>
-                                <td>{{ $contact->email }}</td>
-                                <td>{{ $contact->phone }}</td>
+                                <td>
+                                    <div class="fw-bold">
+                                        {{ $contact->name }}
+                                    </div>
+                                    <div>
+                                        {{ $contact->company }}
+                                    </div>
+                                </td>
+                                <td>
+                                    <div>
+                                        <a draggable="false" href="mailto:{{ $contact->email }}">
+                                            {{ $contact->email }}
+                                        </a>
+                                    </div>
+                                    <div>
+                                        <a draggable="false"
+                                            href="https://api.whatsapp.com/send/?phone={{ $contact->phone }}"
+                                            target="_blank">
+                                            {{ $contact->phone }}
+                                        </a>
+                                    </div>
+                                </td>
+                                <td>
+                                    @if ($contact->area)
+                                        @if ($contact->area->district)
+                                            <div>
+                                                <a draggable="false"
+                                                    href="{{ route('cms.district.detail', ['district' => $contact->area->district]) }}"
+                                                    wire:navigate>
+                                                    {{ $contact->area->district->name }}
+                                                </a>
+                                            </div>
+                                        @endif
+
+                                        <div>
+                                            <a draggable="false"
+                                                href="{{ route('cms.area.detail', ['area' => $contact->area]) }}"
+                                                wire:navigate>
+                                                {{ $contact->area->name }}
+                                            </a>
+                                        </div>
+                                    @endif
+                                </td>
                                 <td>{{ $contact->created_at->isoFormat('HH:mm - ddd, DD MMM YYYY') }}</td>
                                 <td>
                                     <div class="d-flex gap-2">

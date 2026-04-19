@@ -15,6 +15,7 @@ class ContactSeeder extends Seeder
             'company' => 'DIW.co.id',
             'email' => 'account@andrisunardi.com',
             'phone' => '6282298089363',
+            'area_id' => null,
         ]);
 
         Contact::factory()->count(50)->create();

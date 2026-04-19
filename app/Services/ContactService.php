@@ -3,12 +3,15 @@
 namespace App\Services;
 
 use App\Models\Contact;
+use Exception;
 use Illuminate\Support\Facades\DB;
 
 class ContactService
 {
     public function index(
         ?string $search = null,
+        string|int|null $districtId = null,
+        string|int|null $areaId = null,
         ?string $startDate = null,
         ?string $endDate = null,
         bool $random = false,
@@ -28,9 +31,13 @@ class ContactService
                         ->orWhere('name', 'like', "%{$search}%")
                         ->orWhere('company', 'like', "%{$search}%")
                         ->orWhere('email', 'like', "%{$search}%")
-                        ->orWhere('phone', 'like', "%{$search}%");
+                        ->orWhere('phone', 'like', "%{$search}%")
+                        ->orWhereRelation('area.district', 'name', 'like', "%{$search}%")
+                        ->orWhereRelation('district', 'name', 'like', "%{$search}%");
                 });
             })
+            ->when($districtId, fn ($q) => $q->whereRelation('area', 'district_id', $districtId))
+            ->when($areaId, fn ($q) => $q->where('district_id', $areaId))
             ->when($startDate, fn ($q) => $q->whereDate('created_at', '>=', $startDate))
             ->when($endDate, fn ($q) => $q->whereDate('created_at', '<=', $endDate))
             ->when($random, fn ($q) => $q->inRandomOrder())
@@ -62,19 +69,58 @@ class ContactService
         $table = (new Contact)->getTable();
         DB::statement("ALTER TABLE {$table} AUTO_INCREMENT = 1");
 
+        try {
+            DB::beginTransaction();
+
+            $data['area_id'] = $data['area_id'] ?: null;
+
+            $contact = Contact::create($data);
+
+            DB::commit();
+
+            return $contact;
+        } catch (Exception $e) {
+            DB::rollBack();
+            throw $e;
+        }
+
         return Contact::create($data);
     }
 
     public function update(Contact $contact, array $data = []): Contact
     {
-        $contact->update($data);
-        $contact->refresh();
+        try {
+            DB::beginTransaction();
+
+            $data['area_id'] = $data['area_id'] ?: null;
+
+            $contact->update($data);
+            $contact->refresh();
+
+            DB::commit();
+
+            return $contact;
+        } catch (Exception $e) {
+            DB::rollBack();
+            throw $e;
+        }
 
         return $contact;
     }
 
     public function delete(Contact $contact): bool
     {
-        return $contact->delete();
+        try {
+            DB::beginTransaction();
+
+            $contact->delete();
+
+            DB::commit();
+
+            return true;
+        } catch (Exception $e) {
+            DB::rollBack();
+            throw $e;
+        }
     }
 }

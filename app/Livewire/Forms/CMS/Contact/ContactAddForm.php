@@ -24,6 +24,9 @@ class ContactAddForm extends Form
     #[Validate('required|string|min:1|max:20|unique:contacts,phone')]
     public string $phone = '';
 
+    #[Validate('nullable|integer|exists:areas,id')]
+    public string $area_id = '';
+
     public function submit(): Contact
     {
         return (new ContactService)->create(data: $this->validate());

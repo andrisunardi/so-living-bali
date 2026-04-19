@@ -3,6 +3,8 @@
 use App\Livewire\Component;
 use App\Livewire\Forms\CMS\Contact\ContactEditForm;
 use App\Models\Contact;
+use App\Services\AreaService;
+use App\Services\DistrictService;
 use Illuminate\Validation\ValidationException;
 use Livewire\Attributes\Title;
 
@@ -11,10 +13,13 @@ new #[Title('Edit | Contact')] class extends Component {
 
     public ContactEditForm $form;
 
+    public ?string $district_id = '';
+
     public function mount(Contact $contact): void
     {
         $this->contact = $contact;
         $this->form->set(contact: $contact);
+        $this->district_id = $contact->area?->district_id;
     }
 
     public function resetForm(): void
@@ -38,6 +43,18 @@ new #[Title('Edit | Contact')] class extends Component {
 
             $this->alertError(title: trans('index.edit') . ' ' . trans('index.failed'), body: $errors);
         }
+    }
+
+    public function districts(): object
+    {
+        $service = new DistrictService();
+        return $service->index(isActive: [true], orderBy: 'name', sortBy: 'asc', paginate: false);
+    }
+
+    public function areas(): object
+    {
+        $service = new AreaService();
+        return $service->index(districtId: $this->district_id, isActive: [true], orderBy: 'name', sortBy: 'asc', paginate: false);
     }
 };
 ?>
@@ -162,6 +179,61 @@ new #[Title('Edit | Contact')] class extends Component {
                             <div class="form-text text-danger">{{ $message }}</div>
                         @enderror
                     </div>
+
+                    <div class="col-sm-6">
+                        <label class="form-label" for="district_id">
+                            {{ trans('validation.attributes.district_id') }}
+                        </label>
+                        <div class="input-group">
+                            <div class="input-group-text">
+                                <span class="fas fa-city fa-fw "></span>
+                            </div>
+                            <select class="form-select select2" id="district_id" name="district_id"
+                                wire:key="district_id" wire:model.lazy="district_id" wire:offline.class="disabled"
+                                wire:offline.attr="disabled" wire:loading.class="disabled"
+                                wire:loading.attr="disabled">
+                                <option value="">{{ trans('index.select') }} {{ trans('page.district') }}
+                                </option>
+                                @foreach ($this->districts() as $district)
+                                    <option value="{{ $district->id }}"
+                                        {{ $district->id == $district_id ? 'selected' : '' }}
+                                        wire:key="district-{{ $district->id }}">
+                                        {{ $district->name }}
+                                    </option>
+                                @endforeach
+                            </select>
+                        </div>
+                        @error('form.district_id')
+                            <div class="form-text text-danger">{{ $message }}</div>
+                        @enderror
+                    </div>
+
+                    <div class="col-sm-6">
+                        <label class="form-label" for="area_id">
+                            {{ trans('validation.attributes.area_id') }}
+                        </label>
+                        <div class="input-group">
+                            <div class="input-group-text">
+                                <span class="fas fa-archway fa-fw "></span>
+                            </div>
+                            <select class="form-select select2" id="area_id" name="area_id"
+                                wire:key="form.area_id" wire:model.lazy="area_id" wire:offline.class="disabled"
+                                wire:offline.attr="disabled" wire:loading.class="disabled"
+                                wire:loading.attr="disabled">
+                                <option value="">{{ trans('index.select') }} {{ trans('page.area') }}</option>
+                                @foreach ($this->areas() as $area)
+                                    <option value="{{ $area->id }}"
+                                        {{ $area->id == $form->area_id ? 'selected' : '' }}
+                                        wire:key="area-{{ $area->id }}">
+                                        {{ $area->name }}
+                                    </option>
+                                @endforeach
+                            </select>
+                        </div>
+                        @error('form.district_id')
+                            <div class="form-text text-danger">{{ $message }}</div>
+                        @enderror
+                    </div>
                 </div>
 
                 <hr />
@@ -195,3 +267,15 @@ new #[Title('Edit | Contact')] class extends Component {
         </div>
     </div>
 </div>
+
+@script
+    <script>
+        $("#district_id").on("change", function() {
+            @this.set("district_id", $(this).val())
+        })
+
+        $("#area_id").on("change", function() {
+            @this.set("form.area_id", $(this).val())
+        })
+    </script>
+@endscript

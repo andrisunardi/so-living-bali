@@ -73,7 +73,7 @@ new #[Title('Add | Area')] class extends Component {
                             <div class="input-group-text">
                                 <span class="fas fa-city fa-fw "></span>
                             </div>
-                            <select class="form-select select2" id="district_id" name="district_id"
+                            <select class="form-select select2" id="district_id" name="district_id" required
                                 wire:key="form.district_id" wire:model.lazy="district_id" wire:offline.class="disabled"
                                 wire:offline.attr="disabled" wire:loading.class="disabled" wire:loading.attr="disabled">
                                 <option value="">{{ trans('index.select') }} {{ trans('page.district') }}</option>
