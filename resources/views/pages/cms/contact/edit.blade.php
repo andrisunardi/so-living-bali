@@ -1,7 +1,10 @@
 <?php
 
+use App\Enums\Property\PropertyBedroom;
+use App\Enums\Property\PropertyRentalType;
 use App\Livewire\Component;
 use App\Livewire\Forms\CMS\Contact\ContactEditForm;
+use App\Models\Area;
 use App\Models\Contact;
 use App\Services\AreaService;
 use App\Services\DistrictService;
@@ -20,6 +23,11 @@ new #[Title('Edit | Contact')] class extends Component {
         $this->contact = $contact;
         $this->form->set(contact: $contact);
         $this->district_id = $contact->area?->district_id;
+    }
+
+    public function updated(): void
+    {
+        $this->district_id = Area::find($this->form->area_id)->district_id ?? '';
     }
 
     public function resetForm(): void
@@ -55,6 +63,16 @@ new #[Title('Edit | Contact')] class extends Component {
     {
         $service = new AreaService();
         return $service->index(districtId: $this->district_id, isActive: [true], orderBy: 'name', sortBy: 'asc', paginate: false);
+    }
+
+    public function propertyBedrooms(): array
+    {
+        return PropertyBedroom::cases();
+    }
+
+    public function propertyRentalTypes(): array
+    {
+        return PropertyRentalType::cases();
     }
 };
 ?>
@@ -104,6 +122,30 @@ new #[Title('Edit | Contact')] class extends Component {
                             {{ trans('helper.maxlength') }} : 50
                         </div>
                         @error('form.name')
+                            <div class="form-text text-danger">{{ $message }}</div>
+                        @enderror
+                    </div>
+
+                    <div class="col-sm-6">
+                        <label class="form-label" for="first_name">
+                            {{ trans('validation.attributes.first_name') }}
+                            <span class="text-danger">*</span>
+                        </label>
+                        <div class="input-group">
+                            <div class="input-group-text">
+                                <span class="fas fa-user fa-fw "></span>
+                            </div>
+                            <input type="text" class="form-control" id="first_name" name="first_name" minlength="1"
+                                maxlength="25" placeholder="{{ trans('index.ex') . '. John Doe' }}" required
+                                wire:model="form.first_name" wire:offline.class="disabled" wire:offline.attr="disabled"
+                                wire:loading.class="disabled" wire:loading.attr="disabled">
+                        </div>
+                        <div class="form-text">
+                            {{ trans('helper.required') }},
+                            {{ trans('helper.minlength') }} : 1,
+                            {{ trans('helper.maxlength') }} : 25
+                        </div>
+                        @error('form.first_name')
                             <div class="form-text text-danger">{{ $message }}</div>
                         @enderror
                     </div>
@@ -234,6 +276,86 @@ new #[Title('Edit | Contact')] class extends Component {
                             <div class="form-text text-danger">{{ $message }}</div>
                         @enderror
                     </div>
+
+                    <div class="col-sm-6">
+                        <label class="form-label" for="bedroom">
+                            {{ trans('validation.attributes.bedroom') }}
+                        </label>
+                        <div class="input-group">
+                            <div class="input-group-text">
+                                <span class="fas fa-bed fa-fw "></span>
+                            </div>
+                            <select class="form-select select2" id="bedroom" name="bedroom" wire:key="bedroom"
+                                wire:model.lazy="form.bedroom" wire:offline.class="disabled"
+                                wire:offline.attr="disabled" wire:loading.class="disabled"
+                                wire:loading.attr="disabled">
+                                <option value="">
+                                    {{ trans('index.select') }} {{ trans('index.bedroom') }}
+                                </option>
+                                @foreach ($this->propertyBedrooms() as $propertyBedroom)
+                                    <option value="{{ $propertyBedroom->value }}"
+                                        {{ $propertyBedroom->value == $form->bedroom ? 'selected' : '' }}
+                                        wire:key="property-bedroom-{{ $propertyBedroom->value }}">
+                                        {{ $propertyBedroom->description() }}
+                                    </option>
+                                @endforeach
+                            </select>
+                        </div>
+                        @error('form.bedroom')
+                            <div class="form-text text-danger">{{ $message }}</div>
+                        @enderror
+                    </div>
+
+                    <div class="col-sm-6">
+                        <label class="form-label" for="rental_type">
+                            {{ trans('validation.attributes.rental_type') }}
+                        </label>
+                        <div class="input-group">
+                            <div class="input-group-text">
+                                <span class="fas fa-clock fa-fw "></span>
+                            </div>
+                            <select class="form-select select2" id="rental_type" name="rental_type"
+                                wire:key="rental_type" wire:model.lazy="form.rental_type"
+                                wire:offline.class="disabled" wire:offline.attr="disabled"
+                                wire:loading.class="disabled" wire:loading.attr="disabled">
+                                <option value="">
+                                    {{ trans('index.select') }} {{ trans('index.rental_type') }}
+                                </option>
+                                @foreach ($this->propertyRentalTypes() as $propertyRentalType)
+                                    <option value="{{ $propertyRentalType->value }}"
+                                        {{ $propertyRentalType->value == $form->rental_type ? 'selected' : '' }}
+                                        wire:key="property-rental-type-{{ $propertyRentalType->value }}">
+                                        {{ $propertyRentalType->description() }}
+                                    </option>
+                                @endforeach
+                            </select>
+                        </div>
+                        @error('form.rental_type')
+                            <div class="form-text text-danger">{{ $message }}</div>
+                        @enderror
+                    </div>
+
+                    <div class="col-sm-6">
+                        <label class="form-label" for="message">
+                            {{ trans('validation.attributes.message') }}
+                        </label>
+                        <div class="input-group">
+                            <div class="input-group-text">
+                                <span class="fas fa-file-lines fa-fw "></span>
+                            </div>
+                            <textarea class="form-control" id="message" name="message" minlength="1" maxlength="1000"
+                                placeholder="{{ trans('index.ex') . '. Others' }}" wire:model="form.message" wire:offline.class="disabled"
+                                wire:offline.attr="disabled" wire:loading.class="disabled" wire:loading.attr="disabled">
+                            </textarea>
+                        </div>
+                        <div class="form-text">
+                            {{ trans('helper.minlength') }} : 1,
+                            {{ trans('helper.maxlength') }} : 1000
+                        </div>
+                        @error('form.message')
+                            <div class="form-text text-danger">{{ $message }}</div>
+                        @enderror
+                    </div>
                 </div>
 
                 <hr />
@@ -276,6 +398,14 @@ new #[Title('Edit | Contact')] class extends Component {
 
         $("#area_id").on("change", function() {
             @this.set("form.area_id", $(this).val())
+        })
+
+        $("#bedroom").on("change", function() {
+            @this.set("form.bedroom", $(this).val())
+        })
+
+        $("#rental_type").on("change", function() {
+            @this.set("form.rental_type", $(this).val())
         })
     </script>
 @endscript

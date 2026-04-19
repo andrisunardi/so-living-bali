@@ -2,8 +2,11 @@
 
 namespace App\Models;
 
+use App\Enums\Property\PropertyBedroom;
+use App\Enums\Property\PropertyRentalType;
 use App\Observers\ContactObserver;
 use Illuminate\Database\Eloquent\Attributes\ObservedBy;
+use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Database\Eloquent\Collection;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
@@ -19,9 +22,14 @@ use Spatie\Activitylog\Traits\LogsActivity;
  * @property int $id
  * @property string $code
  * @property string $name
+ * @property string $first_name
+ * @property string $last_name
  * @property string $company
  * @property string $email
  * @property string $phone
+ * @property PropertyBedroom|null $bedroom
+ * @property PropertyRentalType|null $rental_type
+ * @property string|null $message
  * @property int|null $area_id
  * @property int|null $created_by
  * @property int|null $updated_by
@@ -37,26 +45,39 @@ use Spatie\Activitylog\Traits\LogsActivity;
  * @property-read District|null $district
  * @property-read User|null $updatedBy
  *
+ * @method static Builder<static>|Contact both()
  * @method static \Database\Factories\ContactFactory factory($count = null, $state = [])
- * @method static \Illuminate\Database\Eloquent\Builder<static>|Contact newModelQuery()
- * @method static \Illuminate\Database\Eloquent\Builder<static>|Contact newQuery()
- * @method static \Illuminate\Database\Eloquent\Builder<static>|Contact onlyTrashed()
- * @method static \Illuminate\Database\Eloquent\Builder<static>|Contact query()
- * @method static \Illuminate\Database\Eloquent\Builder<static>|Contact whereAreaId($value)
- * @method static \Illuminate\Database\Eloquent\Builder<static>|Contact whereCode($value)
- * @method static \Illuminate\Database\Eloquent\Builder<static>|Contact whereCompany($value)
- * @method static \Illuminate\Database\Eloquent\Builder<static>|Contact whereCreatedAt($value)
- * @method static \Illuminate\Database\Eloquent\Builder<static>|Contact whereCreatedBy($value)
- * @method static \Illuminate\Database\Eloquent\Builder<static>|Contact whereDeletedAt($value)
- * @method static \Illuminate\Database\Eloquent\Builder<static>|Contact whereDeletedBy($value)
- * @method static \Illuminate\Database\Eloquent\Builder<static>|Contact whereEmail($value)
- * @method static \Illuminate\Database\Eloquent\Builder<static>|Contact whereId($value)
- * @method static \Illuminate\Database\Eloquent\Builder<static>|Contact whereName($value)
- * @method static \Illuminate\Database\Eloquent\Builder<static>|Contact wherePhone($value)
- * @method static \Illuminate\Database\Eloquent\Builder<static>|Contact whereUpdatedAt($value)
- * @method static \Illuminate\Database\Eloquent\Builder<static>|Contact whereUpdatedBy($value)
- * @method static \Illuminate\Database\Eloquent\Builder<static>|Contact withTrashed(bool $withTrashed = true)
- * @method static \Illuminate\Database\Eloquent\Builder<static>|Contact withoutTrashed()
+ * @method static Builder<static>|Contact fourBedroom()
+ * @method static Builder<static>|Contact monthly()
+ * @method static Builder<static>|Contact newModelQuery()
+ * @method static Builder<static>|Contact newQuery()
+ * @method static Builder<static>|Contact oneBedroom()
+ * @method static Builder<static>|Contact onlyTrashed()
+ * @method static Builder<static>|Contact query()
+ * @method static Builder<static>|Contact studio()
+ * @method static Builder<static>|Contact threeBedroom()
+ * @method static Builder<static>|Contact twoBedroom()
+ * @method static Builder<static>|Contact whereAreaId($value)
+ * @method static Builder<static>|Contact whereBedroom($value)
+ * @method static Builder<static>|Contact whereCode($value)
+ * @method static Builder<static>|Contact whereCompany($value)
+ * @method static Builder<static>|Contact whereCreatedAt($value)
+ * @method static Builder<static>|Contact whereCreatedBy($value)
+ * @method static Builder<static>|Contact whereDeletedAt($value)
+ * @method static Builder<static>|Contact whereDeletedBy($value)
+ * @method static Builder<static>|Contact whereEmail($value)
+ * @method static Builder<static>|Contact whereFirstName($value)
+ * @method static Builder<static>|Contact whereId($value)
+ * @method static Builder<static>|Contact whereLastName($value)
+ * @method static Builder<static>|Contact whereMessage($value)
+ * @method static Builder<static>|Contact whereName($value)
+ * @method static Builder<static>|Contact wherePhone($value)
+ * @method static Builder<static>|Contact whereRentalType($value)
+ * @method static Builder<static>|Contact whereUpdatedAt($value)
+ * @method static Builder<static>|Contact whereUpdatedBy($value)
+ * @method static Builder<static>|Contact withTrashed(bool $withTrashed = true)
+ * @method static Builder<static>|Contact withoutTrashed()
+ * @method static Builder<static>|Contact yearly()
  *
  * @mixin \Eloquent
  */
@@ -72,10 +93,15 @@ class Contact extends Model
     protected $fillable = [
         'code',
         'name',
+        'first_name',
+        'last_name',
         'company',
         'phone',
         'email',
         'area_id',
+        'bedroom',
+        'rental_type',
+        'message',
     ];
 
     protected $hidden = [];
@@ -85,10 +111,15 @@ class Contact extends Model
         return [
             'code' => 'string',
             'name' => 'string',
+            'first_name' => 'string',
+            'last_name' => 'string',
             'company' => 'string',
             'email' => 'string',
             'phone' => 'string',
             'area_id' => 'integer',
+            'bedroom' => PropertyBedroom::class,
+            'rental_type' => PropertyRentalType::class,
+            'message' => 'string',
         ];
     }
 
@@ -110,6 +141,46 @@ class Contact extends Model
     public function getUpdatedAtAttribute(string $value): Carbon
     {
         return Carbon::parse($value)->setTimezone(config('app.timezone'));
+    }
+
+    public function scopeOneBedroom(Builder $query): void
+    {
+        $query->where('bedroom', PropertyBedroom::OneBedroom);
+    }
+
+    public function scopeTwoBedroom(Builder $query): void
+    {
+        $query->where('bedroom', PropertyBedroom::TwoBedroom);
+    }
+
+    public function scopeThreeBedroom(Builder $query): void
+    {
+        $query->where('bedroom', PropertyBedroom::ThreeBedroom);
+    }
+
+    public function scopeFourBedroom(Builder $query): void
+    {
+        $query->where('bedroom', PropertyBedroom::FourBedroom);
+    }
+
+    public function scopeStudio(Builder $query): void
+    {
+        $query->where('bedroom', PropertyBedroom::Studio);
+    }
+
+    public function scopeMonthly(Builder $query): void
+    {
+        $query->where('rental_type', PropertyRentalType::Monthly);
+    }
+
+    public function scopeYearly(Builder $query): void
+    {
+        $query->where('rental_type', PropertyRentalType::Yearly);
+    }
+
+    public function scopeBoth(Builder $query): void
+    {
+        $query->where('rental_type', PropertyRentalType::Both);
     }
 
     public function createdBy(): BelongsTo

@@ -12,6 +12,8 @@ class ContactService
         ?string $search = null,
         string|int|null $districtId = null,
         string|int|null $areaId = null,
+        string|int|null $bedroom = null,
+        string|int|null $rentalType = null,
         ?string $startDate = null,
         ?string $endDate = null,
         bool $random = false,
@@ -29,15 +31,20 @@ class ContactService
                 $query->where(function ($query) use ($search) {
                     $query->where('code', 'like', "%{$search}%")
                         ->orWhere('name', 'like', "%{$search}%")
+                        ->orWhere('first_name', 'like', "%{$search}%")
+                        ->orWhere('last_name', 'like', "%{$search}%")
                         ->orWhere('company', 'like', "%{$search}%")
                         ->orWhere('email', 'like', "%{$search}%")
                         ->orWhere('phone', 'like', "%{$search}%")
+                        ->orWhere('message', 'like', "%{$search}%")
                         ->orWhereRelation('area.district', 'name', 'like', "%{$search}%")
                         ->orWhereRelation('district', 'name', 'like', "%{$search}%");
                 });
             })
             ->when($districtId, fn ($q) => $q->whereRelation('area', 'district_id', $districtId))
             ->when($areaId, fn ($q) => $q->where('area_id', $areaId))
+            ->when($bedroom, fn ($q) => $q->where('bedroom', $bedroom))
+            ->when($rentalType, fn ($q) => $q->where('rental_type', $rentalType))
             ->when($startDate, fn ($q) => $q->whereDate('created_at', '>=', $startDate))
             ->when($endDate, fn ($q) => $q->whereDate('created_at', '<=', $endDate))
             ->when($random, fn ($q) => $q->inRandomOrder())
@@ -72,7 +79,9 @@ class ContactService
         try {
             DB::beginTransaction();
 
-            $data['area_id'] = $data['area_id'] ?: null;
+            $data['area_id'] = $data['area_id'] ?? null ?: null;
+            $data['bedroom'] = $data['bedroom'] ?? null ?: null;
+            $data['rental_type'] = $data['rental_type'] ?? null ?: null;
 
             $contact = Contact::create($data);
 
@@ -92,7 +101,9 @@ class ContactService
         try {
             DB::beginTransaction();
 
-            $data['area_id'] = $data['area_id'] ?: null;
+            $data['area_id'] = $data['area_id'] ?? null ?: null;
+            $data['bedroom'] = $data['bedroom'] ?? null ?: null;
+            $data['rental_type'] = $data['rental_type'] ?? null ?: null;
 
             $contact->update($data);
             $contact->refresh();

@@ -177,12 +177,15 @@ new class extends Component {
                     </div>
 
                     <div class="col-lg-auto">
-                        <a draggable="false" class="btn btn-success btn-sm rounded-pill icon-link"
-                            href="{{ route('home') }}" wire:navigate>
+                        <a draggable="false" class="header-color d-xl-none" href="{{ route('home') }}" wire:navigate>
                             <span class="fas fa-pen-to-square fa-fw"></span>
-                            <span class="d-lg-none d-xl-block">
-                                {{ trans('index.list_your_properties') }}
-                            </span>
+                        </a>
+
+                        <a draggable="false"
+                            class="btn btn-success btn-sm rounded-pill d-none d-xl-inline-flex align-items-center gap-2"
+                            href="{{ route('home') }}" wire:navigate>
+                            <span class="fas fa-pen-to-square"></span>
+                            <span>{{ trans('index.list_your_properties') }}</span>
                         </a>
                     </div>
                 </div>

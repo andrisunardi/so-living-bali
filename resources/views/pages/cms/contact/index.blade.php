@@ -1,5 +1,7 @@
 <?php
 
+use App\Enums\Property\PropertyBedroom;
+use App\Enums\Property\PropertyRentalType;
 use App\Exports\ContactExport;
 use App\Livewire\Component;
 use App\Models\Area;
@@ -21,6 +23,12 @@ new #[Title('Contact')] class extends Component {
 
     #[Url(except: '')]
     public string $area_id = '';
+
+    #[Url(except: '')]
+    public string $bedroom = '';
+
+    #[Url(except: '')]
+    public string $rental_type = '';
 
     #[Url(except: '')]
     public string $start_date = '';
@@ -47,7 +55,7 @@ new #[Title('Contact')] class extends Component {
     {
         $this->resetPage();
 
-        $this->reset(['search', 'district_id', 'area_id', 'start_date', 'end_date']);
+        $this->reset(['search', 'district_id', 'area_id', 'bedroom', 'rental_type', 'start_date', 'end_date']);
     }
 
     public function delete(Contact $contact): void
@@ -70,10 +78,20 @@ new #[Title('Contact')] class extends Component {
         return $service->index(districtId: $this->district_id, isActive: [true], orderBy: 'name', sortBy: 'asc', paginate: false);
     }
 
+    public function propertyBedrooms(): array
+    {
+        return PropertyBedroom::cases();
+    }
+
+    public function propertyRentalTypes(): array
+    {
+        return PropertyRentalType::cases();
+    }
+
     public function contacts(bool $paginate = true): object
     {
         $service = new ContactService();
-        $contacts = $service->index(search: $this->search, districtId: $this->district_id, areaId: $this->area_id, startDate: $this->start_date, endDate: $this->end_date, paginate: $paginate);
+        $contacts = $service->index(search: $this->search, districtId: $this->district_id, areaId: $this->area_id, bedroom: $this->bedroom, rentalType: $this->rental_type, startDate: $this->start_date, endDate: $this->end_date, paginate: $paginate);
         $contacts->loadMissing(['area.district']);
 
         return $contacts;
@@ -132,7 +150,7 @@ new #[Title('Contact')] class extends Component {
                 </div>
 
                 <div class="row g-3">
-                    <div class="col-sm-6 col-md">
+                    <div class="col-sm-6 col-md-4 col-lg-3 col-xl">
                         <label class="form-label" for="district_id">
                             {{ trans('field.district_id') }}
                         </label>
@@ -155,7 +173,7 @@ new #[Title('Contact')] class extends Component {
                         </div>
                     </div>
 
-                    <div class="col-sm-6 col-md">
+                    <div class="col-sm-6 col-md-4 col-lg-3 col-xl">
                         <label class="form-label" for="area_id">
                             {{ trans('field.area_id') }}
                         </label>
@@ -177,6 +195,54 @@ new #[Title('Contact')] class extends Component {
                         </div>
                     </div>
 
+                    <div class="col-sm-6 col-md-4 col-lg-3 col-xl">
+                        <label class="form-label" for="bedroom">
+                            {{ trans('field.bedroom') }}
+                        </label>
+                        <div class="input-group">
+                            <div class="input-group-text">
+                                <span class="fas fa-archway fa-fw "></span>
+                            </div>
+                            <select class="form-select select2" id="bedroom" name="bedroom" wire:key="bedroom"
+                                wire:model.lazy="bedroom" wire:offline.class="disabled" wire:offline.attr="disabled"
+                                wire:loading.class="disabled" wire:loading.attr="disabled">
+                                <option value="">{{ trans('index.all') }} {{ trans('index.bedroom') }}</option>
+                                @foreach ($this->propertyBedrooms() as $propertyBedroom)
+                                    <option value="{{ $propertyBedroom->value }}"
+                                        {{ $propertyBedroom->value == $bedroom ? 'selected' : '' }}
+                                        wire:key="property-bedroom-{{ $propertyBedroom->value }}">
+                                        {{ $propertyBedroom->description() }}
+                                    </option>
+                                @endforeach
+                            </select>
+                        </div>
+                    </div>
+
+                    <div class="col-sm-6 col-md-4 col-lg-3 col-xl">
+                        <label class="form-label" for="rental_type">
+                            {{ trans('field.rental_type') }}
+                        </label>
+                        <div class="input-group">
+                            <div class="input-group-text">
+                                <span class="fas fa-archway fa-fw "></span>
+                            </div>
+                            <select class="form-select select2" id="rental_type" name="rental_type"
+                                wire:key="rental_type" wire:model.lazy="rental_type" wire:offline.class="disabled"
+                                wire:offline.attr="disabled" wire:loading.class="disabled"
+                                wire:loading.attr="disabled">
+                                <option value="">{{ trans('index.all') }} {{ trans('index.rental_type') }}
+                                </option>
+                                @foreach ($this->propertyBedrooms() as $propertyBedroom)
+                                    <option value="{{ $propertyBedroom->value }}"
+                                        {{ $propertyBedroom->value == $rental_type ? 'selected' : '' }}
+                                        wire:key="property-rental-type-{{ $propertyBedroom->value }}">
+                                        {{ $propertyBedroom->description() }}
+                                    </option>
+                                @endforeach
+                            </select>
+                        </div>
+                    </div>
+
                     <div class="col-6 col-sm-3 col-lg-auto">
                         <label class="form-label" for="start_date">
                             {{ trans('field.start_date') }}
@@ -184,8 +250,8 @@ new #[Title('Contact')] class extends Component {
                         <div class="input-group">
                             <input type="date" class="form-control" id="start_date" name="start_date"
                                 min="2026-01-01" max="2099-12-12" wire:key="start_date" wire:model.lazy="start_date"
-                                wire:offline.class="disabled" wire:offline.attr="disabled" wire:loading.class="disabled"
-                                wire:loading.attr="disabled">
+                                wire:offline.class="disabled" wire:offline.attr="disabled"
+                                wire:loading.class="disabled" wire:loading.attr="disabled">
                         </div>
                     </div>
 
@@ -194,8 +260,8 @@ new #[Title('Contact')] class extends Component {
                             {{ trans('field.end_date') }}
                         </label>
                         <div class="input-group">
-                            <input type="date" class="form-control" id="end_date" name="end_date" min="2026-01-01"
-                                max="2099-12-12" wire:key="end_date" wire:model.lazy="end_date"
+                            <input type="date" class="form-control" id="end_date" name="end_date"
+                                min="2026-01-01" max="2099-12-12" wire:key="end_date" wire:model.lazy="end_date"
                                 wire:offline.class="disabled" wire:offline.attr="disabled"
                                 wire:loading.class="disabled" wire:loading.attr="disabled">
                         </div>
@@ -251,9 +317,11 @@ new #[Title('Contact')] class extends Component {
                             <th width="1%">{{ trans('field.#') }}</th>
                             <th width="1%">{{ trans('field.id') }}</th>
                             <th width="1%">{{ trans('field.code') }}</th>
-                            <th>{{ trans('field.name') }} / {{ trans('field.company') }}</th>
+                            <th>{{ trans('field.name') }}</th>
                             <th>{{ trans('field.email') }} / {{ trans('field.phone') }}</th>
                             <th>{{ trans('field.district_id') }} / {{ trans('field.area_id') }}</th>
+                            <th width="1%">{{ trans('field.attribute') }}</th>
+                            <th width="1%">{{ trans('field.message') }}</th>
                             <th width="1%">{{ trans('field.created_at') }}</th>
                             <th width="1%">{{ trans('field.action') }}</th>
                         </tr>
@@ -281,10 +349,9 @@ new #[Title('Contact')] class extends Component {
                                 <td>
                                     <div class="fw-bold">
                                         {{ $contact->name }}
+                                        ({{ $contact->first_name }}, {{ $contact->last_name }})
                                     </div>
-                                    <div>
-                                        {{ $contact->company }}
-                                    </div>
+                                    <div>{{ $contact->company }}</div>
                                 </td>
                                 <td>
                                     <div>
@@ -318,6 +385,58 @@ new #[Title('Contact')] class extends Component {
                                                 wire:navigate>
                                                 {{ $contact->area->name }}
                                             </a>
+                                        </div>
+                                    @endif
+                                </td>
+                                <td>
+                                    @if ($contact->bedroom)
+                                        <div>
+                                            <span class="badge text-bg-primary rounded-pill">
+                                                {{ $contact->bedroom->description() }}
+                                            </span>
+                                        </div>
+                                    @endif
+                                    @if ($contact->rental_type)
+                                        <div>
+                                            <span class="badge text-bg-primary rounded-pill">
+                                                {{ $contact->rental_type->description() }}
+                                            </span>
+                                        </div>
+                                    @endif
+                                </td>
+                                <td>
+                                    @if ($contact->message)
+                                        <button type="button" class="btn btn-primary btn-sm" data-bs-toggle="modal"
+                                            data-bs-target="#contact-{{ $contact->id }}">
+                                            <span class="fas fa-folder-open fa-fw"></span>
+                                            {{ trans('index.open') }}
+                                        </button>
+
+                                        <div class="modal fade" id="contact-{{ $contact->id }}" tabindex="-1">
+                                            <div
+                                                class="modal-dialog modal-dialog-centered modal-dialog-scrollable modal-fullscreen-sm-down">
+                                                <div class="modal-content">
+                                                    <div class="modal-header">
+                                                        <h1 class="modal-title fs-5">
+                                                            <span class="fas fa-file-lines fa-fw"></span>
+                                                            {{ trans('index.contact') }} {{ trans('index.message') }}
+                                                        </h1>
+                                                        <button type="button" class="btn-close"
+                                                            data-bs-dismiss="modal"></button>
+                                                    </div>
+
+                                                    <div class="modal-body">
+                                                        <div class="text-pre-wrap">{!! $contact->message !!}</div>
+                                                    </div>
+                                                    <div class="modal-footer">
+                                                        <button type="button" class="btn btn-secondary w-100"
+                                                            data-bs-dismiss="modal">
+                                                            <span class="fas fa-folder-closed fa-fw"></span>
+                                                            {{ trans('index.close') }}
+                                                        </button>
+                                                    </div>
+                                                </div>
+                                            </div>
                                         </div>
                                     @endif
                                 </td>
@@ -385,6 +504,14 @@ new #[Title('Contact')] class extends Component {
 
         $("#area_id").on("change", function() {
             @this.set("area_id", $(this).val())
+        })
+
+        $("#bedroom").on("change", function() {
+            @this.set("bedroom", $(this).val())
+        })
+
+        $("#rental_type").on("change", function() {
+            @this.set("rental_type", $(this).val())
         })
     </script>
 @endscript

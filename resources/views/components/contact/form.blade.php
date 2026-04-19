@@ -1,7 +1,7 @@
 <?php
 
 use App\Enums\Property\PropertyBedroom;
-use App\Enums\Property\PropertyType;
+use App\Enums\Property\PropertyRentalType;
 use App\Livewire\Component;
 use App\Livewire\Forms\Contact\ContactSubmitForm;
 use App\Services\AreaService;
@@ -41,9 +41,9 @@ new class extends Component {
         return PropertyBedroom::cases();
     }
 
-    public function propertyTypes(): array
+    public function propertyRentalTypes(): array
     {
-        return PropertyType::cases();
+        return PropertyRentalType::cases();
     }
 };
 ?>
@@ -154,7 +154,7 @@ new class extends Component {
                     @foreach ($this->propertyBedrooms() as $propertyBedroom)
                         <option value="{{ $propertyBedroom->value }}"
                             wire:key="property-bedroom-{{ $propertyBedroom->value }}">
-                            {{ $propertyBedroom->name }}
+                            {{ $propertyBedroom->description() }}
                         </option>
                     @endforeach
                 </select>
@@ -174,10 +174,10 @@ new class extends Component {
                     wire:offline.class="disabled" wire:offline.attr="disabled" wire:loading.class="disabled"
                     wire:loading.attr="disabled">
                     <option class="">{{ trans('contact.form.placeholder.type') }}</option>
-                    @foreach ($this->propertyTypes() as $propertyType)
-                        <option value="{{ $propertyType->value }}"
-                            wire:key="property-type-{{ $propertyType->value }}">
-                            {{ $propertyType->name }}
+                    @foreach ($this->propertyRentalTypes() as $propertyRentalType)
+                        <option value="{{ $propertyRentalType->value }}"
+                            wire:key="property-type-{{ $propertyRentalType->value }}">
+                            {{ $propertyRentalType->name }}
                         </option>
                     @endforeach
                 </select>

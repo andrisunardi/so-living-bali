@@ -1,19 +1,19 @@
 <table>
     <thead>
         <tr>
-            <th align="center" colspan="13">
+            <th align="center" colspan="18">
                 <b>{{ trans('page.contact') }}</b>
             </th>
         </tr>
-        <td colspan="13"></td>
+        <td colspan="18"></td>
         </tr>
         <tr>
-            <th align="center" colspan="13">
+            <th align="center" colspan="18">
                 {{ trans('field.printed_at') }} : {{ now()->isoFormat('LLLL') }}
             </th>
         </tr>
         <tr>
-            <td colspan="13"></td>
+            <td colspan="18"></td>
         </tr>
         <tr>
             <th valign="middle" align="center">
@@ -29,6 +29,12 @@
                 <b>{{ trans('field.name') }}</b>
             </th>
             <th valign="middle" align="center">
+                <b>{{ trans('field.first_name') }}</b>
+            </th>
+            <th valign="middle" align="center">
+                <b>{{ trans('field.last_name') }}</b>
+            </th>
+            <th valign="middle" align="center">
                 <b>{{ trans('field.company') }}</b>
             </th>
             <th valign="middle" align="center">
@@ -39,6 +45,15 @@
             </th>
             <th valign="middle" align="center">
                 <b>{{ trans('field.area') }}</b>
+            </th>
+            <th valign="middle" align="center">
+                <b>{{ trans('field.bedroom') }}</b>
+            </th>
+            <th valign="middle" align="center">
+                <b>{{ trans('field.rental_type') }}</b>
+            </th>
+            <th valign="middle" align="center">
+                <b>{{ trans('field.message') }}</b>
             </th>
             <th valign="middle" align="center">
                 <b>{{ trans('field.district') }}</b>
@@ -73,19 +88,34 @@
                     {{ $contact->name }}
                 </td>
                 <td valign="middle" align="left">
+                    {{ $contact->first_name }}
+                </td>
+                <td valign="middle" align="left">
+                    {{ $contact->last_name }}
+                </td>
+                <td valign="middle" align="left">
                     {{ $contact->company }}
                 </td>
                 <td valign="middle" align="left">
                     {{ $contact->email }}
                 </td>
                 <td valign="middle" align="left">
-                    {{ $contact->phone }}
+                    '{{ $contact->phone }}
                 </td>
                 <td valign="middle" align="left">
                     {{ $contact->area?->district?->name }}
                 </td>
                 <td valign="middle" align="left">
                     {{ $contact->area?->name }}
+                </td>
+                <td valign="middle" align="left">
+                    {{ $contact->bedroom?->description() }}
+                </td>
+                <td valign="middle" align="left">
+                    {{ $contact->rental_type?->description() }}
+                </td>
+                <td valign="middle" align="left">
+                    {{ $contact->message }}
                 </td>
                 <td valign="middle" align="left">
                     {{ $contact->createdBy?->name }}
@@ -102,7 +132,7 @@
             </tr>
         @empty
             <tr>
-                <td align="center" colspan="13">
+                <td align="center" colspan="18">
                     {{ trans('message.no_data_available') }}
                 </td>
             </tr>
@@ -110,7 +140,7 @@
     </tbody>
     <tfoot>
         <tr>
-            <td colspan="13"></td>
+            <td colspan="18"></td>
         </tr>
     </tfoot>
 </table>

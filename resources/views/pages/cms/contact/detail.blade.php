@@ -11,14 +11,12 @@ new #[Title('Detail | Contact')] class extends Component {
     public function mount(Contact $contact): void
     {
         $this->contact = $contact;
-        $this->contact->loadCount(['areas']);
     }
 
     public function changeActive(): void
     {
         $service = new ContactService();
         $service->active(contact: $this->contact);
-        $this->contact->loadCount(['areas']);
 
         $this->alertSuccess(title: trans('index.change_active') . ' ' . trans('index.success'), body: trans('page.contact') . ' ' . trans('message.has_been_successfully_changed'));
     }
@@ -83,6 +81,33 @@ new #[Title('Detail | Contact')] class extends Component {
 
                 <div class="row">
                     <div class="col-sm-5 col-md-4 col-lg-3 col-xl-2">
+                        <div class="fw-bold">{{ trans('field.name') }}</div>
+                    </div>
+                    <div class="col-sm-7 col-md-8 col-lg-9 col-xl-10">
+                        {{ $contact->name }}
+                    </div>
+                </div>
+
+                <div class="row">
+                    <div class="col-sm-5 col-md-4 col-lg-3 col-xl-2">
+                        <div class="fw-bold">{{ trans('field.first_name') }}</div>
+                    </div>
+                    <div class="col-sm-7 col-md-8 col-lg-9 col-xl-10">
+                        {{ $contact->first_name }}
+                    </div>
+                </div>
+
+                <div class="row">
+                    <div class="col-sm-5 col-md-4 col-lg-3 col-xl-2">
+                        <div class="fw-bold">{{ trans('field.last_name') }}</div>
+                    </div>
+                    <div class="col-sm-7 col-md-8 col-lg-9 col-xl-10">
+                        {{ $contact->last_name }}
+                    </div>
+                </div>
+
+                <div class="row">
+                    <div class="col-sm-5 col-md-4 col-lg-3 col-xl-2">
                         <div class="fw-bold">{{ trans('field.company') }}</div>
                     </div>
                     <div class="col-sm-7 col-md-8 col-lg-9 col-xl-10">
@@ -110,7 +135,7 @@ new #[Title('Detail | Contact')] class extends Component {
 
                 <div class="row">
                     <div class="col-sm-5 col-md-4 col-lg-3 col-xl-2">
-                        <div class="fw-bold">{{ trans('field.district') }}</div>
+                        <div class="fw-bold">{{ trans('field.district_id') }}</div>
                     </div>
                     <div class="col-sm-7 col-md-8 col-lg-9 col-xl-10">
                         @if ($contact->area?->district)
@@ -125,7 +150,7 @@ new #[Title('Detail | Contact')] class extends Component {
 
                 <div class="row">
                     <div class="col-sm-5 col-md-4 col-lg-3 col-xl-2">
-                        <div class="fw-bold">{{ trans('field.area') }}</div>
+                        <div class="fw-bold">{{ trans('field.area_id') }}</div>
                     </div>
                     <div class="col-sm-7 col-md-8 col-lg-9 col-xl-10">
                         @if ($contact->area)
@@ -134,6 +159,41 @@ new #[Title('Detail | Contact')] class extends Component {
                                 {{ $contact->area->name }}
                             </a>
                         @endif
+                    </div>
+                </div>
+
+                <div class="row">
+                    <div class="col-sm-5 col-md-4 col-lg-3 col-xl-2">
+                        <div class="fw-bold">{{ trans('field.bedroom') }}</div>
+                    </div>
+                    <div class="col-sm-7 col-md-8 col-lg-9 col-xl-10">
+                        @if ($contact->bedroom)
+                            <span class="badge text-bg-primary rounded-pill">
+                                {{ $contact->bedroom->description() }}
+                            </span>
+                        @endif
+                    </div>
+                </div>
+
+                <div class="row">
+                    <div class="col-sm-5 col-md-4 col-lg-3 col-xl-2">
+                        <div class="fw-bold">{{ trans('field.rental_type') }}</div>
+                    </div>
+                    <div class="col-sm-7 col-md-8 col-lg-9 col-xl-10">
+                        @if ($contact->rental_type)
+                            <span class="badge text-bg-primary rounded-pill">
+                                {{ $contact->rental_type->description() }}
+                            </span>
+                        @endif
+                    </div>
+                </div>
+
+                <div class="row">
+                    <div class="col-sm-5 col-md-4 col-lg-3 col-xl-2">
+                        <div class="fw-bold">{{ trans('field.message') }}</div>
+                    </div>
+                    <div class="col-sm-7 col-md-8 col-lg-9 col-xl-10">
+                        {{ $contact->company }}
                     </div>
                 </div>
 

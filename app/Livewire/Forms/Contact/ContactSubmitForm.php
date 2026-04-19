@@ -28,10 +28,10 @@ class ContactSubmitForm extends Form
     public string $area_id = '';
 
     #[Validate(['required', 'integer', new Enum(PropertyBedroom::class)])]
-    public ?int $property_bedroom = null;
+    public ?int $bedroom = null;
 
     #[Validate(['required', 'integer', new Enum(PropertyRentalType::class)])]
-    public ?int $property_rental_type = null;
+    public ?int $rental_type = null;
 
     #[Validate('required|string|min:1|max:1000')]
     public string $message = '';

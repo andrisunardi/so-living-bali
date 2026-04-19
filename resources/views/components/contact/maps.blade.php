@@ -18,7 +18,7 @@ new class extends Component {};
                 </h6>
             </div>
 
-            <iframe class="w-100 rounded-5" height="500" src="{{ config('constants.contact.google_maps_iframe') }}"></iframe>
+            <iframe class="w-100 rounded-5" height="300" src="{{ config('constants.contact.google_maps_iframe') }}"></iframe>
         </div>
     </div>
 </section>
