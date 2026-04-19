@@ -5,7 +5,7 @@ use App\Livewire\Component;
 new class extends Component {};
 ?>
 
-<section class="py-5 my-5">
+<section class="py-5 bg-light">
     <div class="container-md">
         <div class="d-grid gap-3">
             <div>

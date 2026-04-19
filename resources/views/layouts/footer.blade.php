@@ -15,8 +15,8 @@ new class extends Component {
             [
                 'id' => 2,
                 'name' => trans('page.service'),
-                'url' => route('about'),
-                'route' => 'about',
+                'url' => route('service'),
+                'route' => 'service',
             ],
             [
                 'id' => 3,

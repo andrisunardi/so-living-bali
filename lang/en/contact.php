@@ -22,7 +22,7 @@ return [
             'phone' => 'Whatsapp number',
             'area' => 'Select area',
             'bedroom' => 'Select number of bedroom',
-            'type' => 'Select period',
+            'rental_type' => 'Select period',
             'message' => 'Message',
         ],
         'placeholder' => [
@@ -31,7 +31,7 @@ return [
             'email' => 'Enter your email',
             'phone' => 'Enter your whatsapp number',
             'bedroom' => 'Number of bedroom',
-            'type' => 'Rental period',
+            'rental_type' => 'Rental period',
             'message' => 'Enter message',
         ],
         'submit' => 'Submit Form',

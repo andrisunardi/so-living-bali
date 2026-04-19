@@ -12,13 +12,13 @@ new class extends Component {};
     </div>
     <div class="d-grid gap-3">
         <h4 class="lead fw-medium">{{ trans('contact.info.contact') }}</h4>
-        <a draggable="false"
+        <a draggable="false" class="text-body"
             href="https://api.whatsapp.com/send/?phone={{ config('constants.contact.whatsapp') }}&text=Hello, i know from your website solivingbali.com"
             target="_blank">
             <span class="fab fa-whatsapp fa-fw text-success"></span>
             {{ config('constants.contact.whatsapp') }}
         </a>
-        <a draggable="false" href="mailto:{{ config('constants.contact.email') }}" target="_blank">
+        <a draggable="false" class="text-body" href="mailto:{{ config('constants.contact.email') }}">
             <span class="fas fa-envelope fa-fw text-success"></span>
             {{ config('constants.contact.email') }}
         </a>

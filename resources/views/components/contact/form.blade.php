@@ -6,6 +6,7 @@ use App\Livewire\Component;
 use App\Livewire\Forms\Contact\ContactSubmitForm;
 use App\Services\AreaService;
 use Illuminate\Validation\ValidationException;
+use Illuminate\Validation\Exception;
 
 new class extends Component {
     public ContactSubmitForm $form;
@@ -23,6 +24,8 @@ new class extends Component {
             $this->alertSuccess(title: trans('contact.form.success.title'), body: trans('contact.form.success.body'));
 
             $this->form->reset();
+        } catch (Exception $e) {
+            $this->alertError(title: trans('contact.form.failed.title'), body: 'Something went wrong');
         } catch (ValidationException $e) {
             $errors = collect($e->validator->errors()->all())->implode('<br>');
 
@@ -62,7 +65,7 @@ new class extends Component {
 
                 <input type="text" class="form-control rounded-5" id="first_name" name="first_name" minlength="1"
                     maxlength="50" placeholder="{{ trans('contact.form.placeholder.first_name') }}" required
-                    wire:model="form.name" wire:offline.class="disabled" wire:offline.attr="disabled"
+                    wire:model="form.first_name" wire:offline.class="disabled" wire:offline.attr="disabled"
                     wire:loading.class="disabled" wire:loading.attr="disabled">
 
                 @error('form.first_name')
@@ -78,7 +81,7 @@ new class extends Component {
 
                 <input type="text" class="form-control rounded-5" id="last_name" name="last_name" minlength="1"
                     maxlength="50" placeholder="{{ trans('contact.form.placeholder.last_name') }}" required
-                    wire:model="form.name" wire:offline.class="disabled" wire:offline.attr="disabled"
+                    wire:model="form.last_name" wire:offline.class="disabled" wire:offline.attr="disabled"
                     wire:loading.class="disabled" wire:loading.attr="disabled">
 
                 @error('form.last_name')
@@ -94,7 +97,7 @@ new class extends Component {
 
                 <input type="text" class="form-control rounded-5" id="email" name="email" minlength="1"
                     maxlength="50" placeholder="{{ trans('contact.form.placeholder.email') }}" required
-                    wire:model="form.name" wire:offline.class="disabled" wire:offline.attr="disabled"
+                    wire:model="form.email" wire:offline.class="disabled" wire:offline.attr="disabled"
                     wire:loading.class="disabled" wire:loading.attr="disabled">
 
                 @error('form.email')
@@ -108,9 +111,9 @@ new class extends Component {
                     <span class="text-danger">*</span>
                 </label>
 
-                <input type="text" class="form-control rounded-5" id="phone" name="phone" minlength="1"
+                <input type="tel" class="form-control rounded-5" id="phone" name="phone" minlength="1"
                     maxlength="50" placeholder="{{ trans('contact.form.placeholder.phone') }}" required
-                    wire:model="form.name" wire:offline.class="disabled" wire:offline.attr="disabled"
+                    wire:model="form.phone" wire:offline.class="disabled" wire:offline.attr="disabled"
                     wire:loading.class="disabled" wire:loading.attr="disabled">
 
                 @error('form.phone')
@@ -165,24 +168,24 @@ new class extends Component {
             </div>
 
             <div class="col-sm-4">
-                <label class="form-label rounded-5" for="type">
-                    {{ trans('contact.form.label.type') }}
+                <label class="form-label rounded-5" for="rental_type">
+                    {{ trans('contact.form.label.rental_type') }}
                     <span class="text-danger">*</span>
                 </label>
 
-                <select class="form-select rounded-5" id="type" name="type" required wire:model="form.type"
-                    wire:offline.class="disabled" wire:offline.attr="disabled" wire:loading.class="disabled"
-                    wire:loading.attr="disabled">
-                    <option class="">{{ trans('contact.form.placeholder.type') }}</option>
+                <select class="form-select rounded-5" id="rental_type" name="rental_type" required
+                    wire:model="form.rental_type" wire:offline.class="disabled" wire:offline.attr="disabled"
+                    wire:loading.class="disabled" wire:loading.attr="disabled">
+                    <option class="">{{ trans('contact.form.placeholder.rental_type') }}</option>
                     @foreach ($this->propertyRentalTypes() as $propertyRentalType)
                         <option value="{{ $propertyRentalType->value }}"
-                            wire:key="property-type-{{ $propertyRentalType->value }}">
+                            wire:key="property-rental_type-{{ $propertyRentalType->value }}">
                             {{ $propertyRentalType->name }}
                         </option>
                     @endforeach
                 </select>
 
-                @error('form.type')
+                @error('form.rental_type')
                     <div class="form-text text-danger">{{ $message }}</div>
                 @enderror
             </div>
