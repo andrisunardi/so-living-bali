@@ -11,35 +11,30 @@ new class extends Component {
                 'name' => trans('page.home'),
                 'url' => route('home'),
                 'route' => 'home',
-                'is_active' => true,
             ],
             [
                 'id' => 2,
                 'name' => trans('page.service'),
                 'url' => route('about'),
                 'route' => 'about',
-                'is_active' => true,
             ],
             [
                 'id' => 3,
                 'name' => trans('page.about'),
                 'url' => route('about'),
                 'route' => 'about',
-                'is_active' => true,
             ],
             [
                 'id' => 4,
                 'name' => trans('page.article'),
                 'url' => route('article'),
                 'route' => 'article',
-                'is_active' => true,
             ],
             [
                 'id' => 6,
                 'name' => trans('page.contact'),
                 'url' => route('contact'),
                 'route' => 'contact',
-                'is_active' => true,
             ],
         ];
     }
