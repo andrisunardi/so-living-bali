@@ -49,7 +49,7 @@ new class extends Component {
                     <p class="text-light">{{ trans('footer.description') }}</p>
                 </div>
 
-                <div class="col-sm-6 col-lg-2 offset-xl-2">
+                <div class="col-3 col-sm-6 col-lg-2 offset-xl-2">
                     <div class="d-grid gap-3">
                         @foreach ($this->navigations() as $navigation)
                             <div wire:key="navigation-{{ $navigation['id'] }}">
@@ -61,7 +61,7 @@ new class extends Component {
                     </div>
                 </div>
 
-                <div class="col-sm-6 col-lg-4 col-xl-3">
+                <div class="col-9 col-sm-6 col-lg-4 col-xl-3">
                     <div class="d-grid gap-3">
                         <h6>{{ trans('footer.contact_us') }}</h6>
                         <div>
