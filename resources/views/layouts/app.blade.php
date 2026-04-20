@@ -39,19 +39,13 @@
                 <livewire:layouts::error />
             @endif
         @else
-            @if (!Route::is('cms.*'))
+            @if (Route::is('cms.*'))
                 @if (!Route::is(['cms.home', 'cms.login', 'cms.forgot-password']))
                     {{ Breadcrumbs::render() }}
                 @endif
-
-                {{ $slot }}
-            @else
-                @if (!Route::is('home'))
-                    {{ Breadcrumbs::render() }}
-                @endif
-
-                {{ $slot }}
             @endif
+
+            {{ $slot }}
         @endif
     </main>
 

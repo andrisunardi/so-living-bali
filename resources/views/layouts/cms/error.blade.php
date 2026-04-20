@@ -25,12 +25,18 @@ new class extends Component {};
         </div>
 
         <div class="text-body-secondary text-center small">
-            <small>
+            <div class="small">
                 &copy; {{ trans('footer.copyright') }} {{ now()->year }} &reg;
                 <strong>{{ config('app.name') }}</strong>&trade;
-                <br class="d-block d-sm-none" />
                 {{ trans('footer.all_rights_reserved') }}.
-            </small>
+            </div>
+            <div class="small">
+                {{ trans('footer.created_and_designed_by') }}
+                <a draggable="false" href="https://www.diw.co.id" target="_blank">
+                    <img draggable="false" src="{{ asset('images/icon-diw.co.id.png') }}" alt="Icon DIW.co.id"
+                        title="{{ trans('footer.created_and_designed_by') }} DIW.co.id">
+                </a>
+            </div>
         </div>
     </div>
 </main>

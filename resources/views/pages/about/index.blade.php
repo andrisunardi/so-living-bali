@@ -9,4 +9,5 @@ new #[Title('About')] class extends Component {};
 @section('title', trans('page.about'))
 
 <div>
+    
 </div>
