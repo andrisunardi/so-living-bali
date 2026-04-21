@@ -63,7 +63,7 @@ return [
     'design_driven_property' => 'Properti Berbasis Desain (YA / TIDAK)',
     'usability_limitations_identified' => 'Keterbatasan Kegunaan Teridentifikasi',
 
-    'trade_off_or_target_profile' => 'Pertimbangan (Trade-Off) & Profil Target',
+    'trade_off_and_target_profile' => 'Pertimbangan (Trade-Off) & Profil Target',
     'trade_off_identified' => 'Pertimbangan (Trade-Off) Teridentifikasi',
     'if_yes_describe_briefly' => 'Jika YA, Jelaskan Singkat',
     'target_profile' => 'Profil Target (Keluarga / Pasangan / Pekerja Remote / Pecinta Desain)',

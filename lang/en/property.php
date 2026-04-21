@@ -43,7 +43,7 @@ return [
     'orientation' => 'Orientation (Morning / Afternoon / Mixed Sun)',
     'view' => 'View (free text)',
 
-    'light_and_acoustics' => 'light & Acoustics',
+    'light_and_acoustics' => 'Light & Acoustics',
     'living_area_has_natural_light' => 'Living Area Has Natural Light',
     'bedroom_1_has_natural_light' => 'Bedroom 1 Has Natural Light',
     'bedroom_2_has_natural_light' => 'Bedroom 2 Has Natural Light',
@@ -63,7 +63,7 @@ return [
     'design_driven_property' => 'Design-Driven Property (YES / NO)',
     'usability_limitations_identified' => 'Usability Limitations Identified',
 
-    'trade_off_or_target_profile' => 'Trade-Off & Target Profile',
+    'trade_off_and_target_profile' => 'Trade-Off & Target Profile',
     'trade_off_identified' => 'Trade-Off Identified',
     'if_yes_describe_briefly' => 'If YES, Describe Briefly',
     'target_profile' => 'Target Profile (Family / Couple / Remote Worker / Design Lover)',

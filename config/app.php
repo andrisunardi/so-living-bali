@@ -10,6 +10,7 @@ use App\Enums\Property\PropertyOwnerPriceFlexibility;
 use App\Enums\Property\PropertyPowerBackup;
 use App\Enums\Property\PropertyRentalType;
 use App\Enums\Property\PropertyStatus;
+use App\Enums\Property\PropertyTab;
 use App\Enums\Property\PropertyTargetProfile;
 use App\Enums\Property\PropertyType;
 use App\Enums\Property\PropertyWaterSource;
@@ -66,6 +67,7 @@ return [
         'PropertyOwnerPriceFlexibility' => PropertyOwnerPriceFlexibility::class,
         'PropertyRentalType' => PropertyRentalType::class,
         'PropertyStatus' => PropertyStatus::class,
+        'PropertyTab' => PropertyTab::class,
         'PropertyTargetProfile' => PropertyTargetProfile::class,
         'PropertyType' => PropertyType::class,
         'PropertyWaterSource' => PropertyWaterSource::class,

@@ -32909,6 +32909,7 @@ namespace  {
     class PropertyOwnerPriceFlexibility extends \App\Enums\Property\PropertyOwnerPriceFlexibility {}
     class PropertyRentalType extends \App\Enums\Property\PropertyRentalType {}
     class PropertyStatus extends \App\Enums\Property\PropertyStatus {}
+    class PropertyTab extends \App\Enums\Property\PropertyTab {}
     class PropertyTargetProfile extends \App\Enums\Property\PropertyTargetProfile {}
     class PropertyType extends \App\Enums\Property\PropertyType {}
     class PropertyWaterSource extends \App\Enums\Property\PropertyWaterSource {}

@@ -588,7 +588,7 @@ new #[Title('Detail | Property')] class extends Component {
                 <br />
 
                 <h5 class="fw-bold text-uppercase border-bottom pb-3">
-                    {{ trans('property.trade_off_or_target_profile') }}
+                    {{ trans('property.trade_off_and_target_profile') }}
                 </h5>
 
                 <div class="row">
