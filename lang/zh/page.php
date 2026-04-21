@@ -4,7 +4,7 @@ return [
 
     'home' => 'Beranda',
     'service' => 'Layanan',
-    'about' => 'Tentang',
+    'about' => 'Tentang Kami',
 
     'previous_page' => 'Halaman Sebelumnya',
     'login' => 'Masuk',
@@ -22,7 +22,7 @@ return [
     'master' => 'Master',
     'concept' => 'Konsep',
     'area' => 'Area',
-    'district' => 'Distrik',
+    'district' => 'Kecamatan',
 
     'oauth' => 'Oauth',
     'permission' => 'Izin',
@@ -30,11 +30,10 @@ return [
     'user' => 'Pengguna',
 
     'profile' => 'Profil',
-    'edit_profile' => 'Edit Profil',
-    'change_password' => 'Ubah Kata Sandi',
+    'edit_profile' => 'Ubah Profil',
+    'change_password' => 'Ganti Password',
     'setting' => 'Pengaturan',
     'activity' => 'Aktivitas',
     'logout' => 'Keluar',
 
 ];
-

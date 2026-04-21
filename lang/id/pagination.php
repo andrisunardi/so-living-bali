@@ -2,7 +2,11 @@
 
 return [
 
-    'previous' => '&laquo; Sebelumnya',
-    'next' => 'Berikutnya &raquo;',
+    'previous' => 'Sebelumnya',
+    'next' => 'Selanjutnya',
+    'showing' => 'Menampilkan',
+    'results' => 'hasil',
+    'of' => 'dari',
+    'to' => 'ke',
 
 ];

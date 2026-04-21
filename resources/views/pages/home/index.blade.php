@@ -26,6 +26,6 @@ new #[Title('Home')] class extends Component {};
             'image' => asset('images/banner/home.jpg'),
         ])
 
-        @livewire('home.our-concept')
+        @livewire('home.our-values')
     @endif
 </div>

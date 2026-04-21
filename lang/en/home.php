@@ -3,8 +3,8 @@
 return [
 
     'hero' => [
-        'title' => 'Living Bali, Live Better Stay Longer',
-        'description' => 'Monthly and yearly rentals in Bali Find your home, live better, stay longer.',
+        'title' => 'Live Better Stay Longer',
+        'description' => 'Start your monthly and yearly living experience with us.',
     ],
     'form' => [
         'title' => 'Search long-term homes',
@@ -15,11 +15,10 @@ return [
         'type' => 'All type',
         'price_range' => 'Budget range',
     ],
-
-    'our_concept' => [
-        'sub_title' => 'Our Concept',
-        'title' => 'Long-term rentals, supported by real-life services',
-        'description' => 'We combine carefully selected long-term homes with essential lifestyle and concierge services, so you’re supported not only in finding a place, but in living there comfortably.',
+    'our_values' => [
+        'sub_title' => 'Our Values',
+        'title' => 'Spaces Designed for Living, Beyond Short Stays',
+        'description' => 'For longer stays, designed to fit your everyday life in Bali. Where living feels settled at your own pace.',
     ],
 
 ];

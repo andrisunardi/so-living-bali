@@ -4,7 +4,7 @@ use App\Livewire\Component;
 use App\Services\ConceptService;
 
 new class extends Component {
-    public function concepts(): object
+    public function values(): object
     {
         $service = new ConceptService();
         return $service->index(isActive: [true], orderBy: 'id', sortBy: 'asc', paginate: false);
@@ -18,25 +18,25 @@ new class extends Component {
             <div class="row justify-content-center">
                 <div class="col-xl-9">
                     <div class="text-center">
-                        <p class="lead mb-0">{{ trans('home.our_concept.sub_title') }}</p>
-                        <h2 class="display-6 fw-bold">{{ trans('home.our_concept.title') }}</h2>
-                        <p class="small px-sm-5">{{ trans('home.our_concept.description') }}</p>
+                        <p class="lead mb-0">{{ trans('home.our_values.sub_title') }}</p>
+                        <h2 class="display-6 fw-bold">{{ trans('home.our_values.title') }}</h2>
+                        <p class="small px-sm-5">{{ trans('home.our_values.description') }}</p>
                     </div>
                 </div>
             </div>
 
             <div class="row row-cols-1 row-cols-sm-2 row-cols-lg-4 justify-content-end g-3">
-                @foreach ($this->concepts() as $concept)
+                @foreach ($this->values() as $value)
                     <div class="col">
                         <div class="card card-body">
                             <div class="mb-4">
                                 <span class="fa-stack fa-xl">
                                     <i class="fas fa-circle fa-stack-2x fa-inverse text-light"></i>
-                                    <i class="{{ $concept->icon }} fa-stack-1x text-success"></i>
+                                    <i class="{{ $value->icon }} fa-stack-1x text-success"></i>
                                 </span>
                             </div>
-                            <h5 class="card-title">{{ $concept->translate_title }}</h5>
-                            <p class="card-text">{{ $concept->translate_description }}</p>
+                            <h5 class="card-title">{{ $value->translate_title }}</h5>
+                            <p class="card-text">{{ $value->translate_description }}</p>
                         </div>
                     </div>
                 @endforeach
