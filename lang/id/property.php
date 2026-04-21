@@ -27,7 +27,7 @@ return [
     'storage_or_staff_area' => 'Gudang / Area Staf (YA / TIDAK)',
     'living_style' => 'Gaya Ruang Tamu (Terbuka / Tertutup / Campuran)',
 
-    'legal_and_basic_eligibility' => 'Legalitas & Kelayakan Dasar (YA / TIDAK)',
+    'legal_and_basic_eligibility' => 'Legalitas & Kelayakan Dasar',
     'full_legal_documentation_available' => 'Dokumen Hukum Lengkap Tersedia',
     'fully_furnished' => 'Perabotan Lengkap (bukan semi-furnished)',
     'rental_type_accepted' => 'Tipe Sewa yang Diterima (Bulanan / Tahunan / Keduanya)',

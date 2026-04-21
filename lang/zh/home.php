@@ -4,16 +4,16 @@ return [
 
     'hero' => [
         'title' => 'SO Living Bali',
-        'description' => 'Sewa bulanan dan tahunan di Bali. Temukan rumah Anda, hidup lebih baik, tinggal lebih lama.',
+        'description' => '巴厘岛月租和年租。找到您的家，生活更美好，居住更长久。',
     ],
     'form' => [
-        'title' => 'Cari hunian jangka panjang',
-        'button' => 'Cari hunian',
-        'area' => 'Pilih area pilihan',
-        'when' => 'Rencana pindah',
-        'bedroom' => 'Jumlah kamar tidur',
-        'type' => 'Semua tipe',
-        'price_range' => 'Rentang anggaran',
+        'title' => '寻找长期住房',
+        'button' => '搜索住房',
+        'area' => '选择首选区域',
+        'when' => '搬迁计划',
+        'bedroom' => '卧室数量',
+        'type' => '所有类型',
+        'price_range' => '预算范围',
     ],
 
 ];

@@ -27,7 +27,7 @@ return [
     'storage_or_staff_area' => 'Storage / Staff Area (YES / NO)',
     'living_style' => 'Living Style (Open / Closed / Mixed)',
 
-    'legal_and_basic_eligibility' => 'Legal & Basic Eligibility (YES / NO)',
+    'legal_and_basic_eligibility' => 'Legal & Basic Eligibility',
     'full_legal_documentation_available' => 'Full Legal Documentation Available',
     'fully_furnished' => 'Fully Furnished (no semi-furnished)',
     'rental_type_accepted' => 'Rental Type Accepted (Monthly / Yearly / Both)',

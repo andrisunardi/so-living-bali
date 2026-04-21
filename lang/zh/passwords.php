@@ -2,10 +2,10 @@
 
 return [
 
-    'reset' => 'Kata sandi Anda telah diatur ulang.',
-    'sent' => 'Kami telah mengirimkan tautan pengaturan ulang kata sandi ke email Anda.',
-    'throttled' => 'Silakan tunggu sebelum mencoba lagi.',
-    'token' => 'Token pengaturan ulang kata sandi ini tidak valid.',
-    'user' => 'Kami tidak dapat menemukan pengguna dengan alamat email tersebut.',
+    'reset' => '您的密码已重置。',
+    'sent' => '我们已向您的邮箱发送密码重置链接。',
+    'throttled' => '请稍等后再试。',
+    'token' => '此密码重置令牌无效。',
+    'user' => '我们找不到使用该邮箱地址的用户。',
 
 ];

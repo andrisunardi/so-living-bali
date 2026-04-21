@@ -2,7 +2,7 @@
 
 return [
 
-    'previous' => '&laquo; Sebelumnya',
-    'next' => 'Berikutnya &raquo;',
+    'previous' => '« 上一页',
+    'next' => '下一页 »',
 
 ];
