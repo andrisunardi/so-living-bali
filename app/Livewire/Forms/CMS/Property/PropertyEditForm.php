@@ -86,6 +86,27 @@ class PropertyEditForm extends Form
     public bool $full_legal_documentation = false;
 
     #[Validate('nullable|boolean')]
+    public bool $signed_listing_agreement = false;
+
+    #[Validate('nullable|boolean')]
+    public bool $lease_agreement = false;
+
+    #[Validate('nullable|boolean')]
+    public bool $land_certificate = false;
+
+    #[Validate('nullable|boolean')]
+    public bool $owners_id = false;
+
+    #[Validate('nullable|boolean')]
+    public bool $imb = false;
+
+    #[Validate('nullable|boolean')]
+    public bool $pbg = false;
+
+    #[Validate('nullable|boolean')]
+    public bool $slf = false;
+
+    #[Validate('nullable|boolean')]
     public bool $fully_furnished = false;
 
     #[Validate(['nullable', 'integer', new Enum(PropertyRentalType::class)])]
@@ -186,22 +207,34 @@ class PropertyEditForm extends Form
         $this->user_id = $property->user_id;
         $this->availability_date = $property->availability_date?->toDateString();
         $this->visit_date = $property->visit_date?->toDateString();
+
         $this->latitude = $property->latitude;
         $this->longitude = $property->longitude;
         $this->address = $property->address;
         $this->district_id = $property->district_id;
         $this->area_id = $property->area_id;
+
         $this->land_size = $property->land_size;
         $this->building_size = $property->building_size;
         $this->number_of_floors = $property->number_of_floors;
         $this->outdoor_area_size = $property->outdoor_area_size;
-        $this->number_of_bathrooms = $property->number_of_bathrooms;
         $this->pool_size = $property->pool_size;
+
+        $this->number_of_bathrooms = $property->number_of_bathrooms;
         $this->ensuite_bathrooms = $property->ensuite_bathrooms;
         $this->guest_toilet = $property->guest_toilet;
         $this->storage = $property->storage;
         $this->living_style = $property->living_style?->value;
+
         $this->full_legal_documentation = $property->full_legal_documentation;
+        $this->signed_listing_agreement = $property->signed_listing_agreement;
+        $this->lease_agreement = $property->lease_agreement;
+        $this->land_certificate = $property->land_certificate;
+        $this->owners_id = $property->owners_id;
+        $this->imb = $property->imb;
+        $this->pbg = $property->pbg;
+        $this->slf = $property->slf;
+
         $this->fully_furnished = $property->fully_furnished;
         $this->rental_type = $property->rental_type?->value;
         $this->minimum_rental_duration_months = $property->minimum_rental_duration_months;

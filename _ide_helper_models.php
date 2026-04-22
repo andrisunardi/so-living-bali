@@ -286,8 +286,8 @@ namespace App\Models{
  * @property string $code
  * @property string $name
  * @property int|null $user_id
- * @property Carbon|null $availability_date
- * @property Carbon|null $visit_date
+ * @property \Illuminate\Support\Carbon|null $availability_date
+ * @property \Illuminate\Support\Carbon|null $visit_date
  * @property numeric|null $latitude
  * @property numeric|null $longitude
  * @property string|null $address
@@ -302,18 +302,25 @@ namespace App\Models{
  * @property bool $ensuite_bathrooms
  * @property bool $guest_toilet
  * @property bool $storage
- * @property PropertyLivingStyle|null $living_style
+ * @property \App\Enums\Property\PropertyLivingStyle|null $living_style
  * @property bool $full_legal_documentation
+ * @property bool $signed_listing_agreement
+ * @property bool $lease_agreement
+ * @property bool $land_certificate
+ * @property bool $owners_id
+ * @property bool $imb
+ * @property bool $pbg
+ * @property bool $slf
  * @property bool $fully_furnished
- * @property PropertyRentalType|null $rental_type
+ * @property \App\Enums\Property\PropertyRentalType|null $rental_type
  * @property int|null $minimum_rental_duration_months
- * @property PropertyOwnerPriceFlexibility|null $owner_price_flexibility
+ * @property \App\Enums\Property\PropertyOwnerPriceFlexibility|null $owner_price_flexibility
  * @property bool $price_coherent_with_upper
  * @property bool $not_directly_exposed_to_main_road
  * @property bool $no_festive_venue_nearby
  * @property bool $no_ongoing
  * @property bool $quiet_access_road
- * @property PropertyOrientation|null $orientation
+ * @property \App\Enums\Property\PropertyOrientation|null $orientation
  * @property string|null $view
  * @property bool $living_area_has_natural_light
  * @property bool $bedroom_1_has_natural_light
@@ -321,140 +328,146 @@ namespace App\Models{
  * @property string|null $noise_source_identified
  * @property int|null $internet_speedtest
  * @property string|null $internet_speedtest_image_path
- * @property PropertyPowerBackup|null $power_backup
- * @property PropertyWaterSource|null $water_source
- * @property PropertyElectricity|null $electricity
+ * @property \App\Enums\Property\PropertyPowerBackup|null $power_backup
+ * @property \App\Enums\Property\PropertyWaterSource|null $water_source
+ * @property \App\Enums\Property\PropertyElectricity|null $electricity
  * @property bool $eligible_for_upper
  * @property bool $eligible_for_premium
  * @property bool $design_driven_property
  * @property string|null $usability_limitations
  * @property bool $trade_off_identified
  * @property string|null $trade_off_description
- * @property PropertyTargetProfile|null $target_profile
- * @property PropertyOperationalRisk|null $operational_risk
+ * @property \App\Enums\Property\PropertyTargetProfile|null $target_profile
+ * @property \App\Enums\Property\PropertyOperationalRisk|null $operational_risk
  * @property string|null $operational_risk_comment
  * @property string|null $image_path
- * @property PropertyStatus $status
+ * @property \App\Enums\Property\PropertyStatus $status
  * @property string $slug
  * @property string|null $folder_id
  * @property int|null $created_by
  * @property int|null $updated_by
  * @property int|null $deleted_by
- * @property Carbon $created_at
- * @property Carbon $updated_at
- * @property Carbon|null $deleted_at
- * @property-read Collection<int, Activity> $activities
+ * @property \Illuminate\Support\Carbon $created_at
+ * @property \Illuminate\Support\Carbon $updated_at
+ * @property \Illuminate\Support\Carbon|null $deleted_at
+ * @property-read \Illuminate\Database\Eloquent\Collection<int, \Spatie\Activitylog\Models\Activity> $activities
  * @property-read int|null $activities_count
- * @property-read Area|null $area
- * @property-read User|null $createdBy
- * @property-read User|null $deletedBy
- * @property-read District|null $district
+ * @property-read \App\Models\Area|null $area
+ * @property-read \App\Models\User|null $createdBy
+ * @property-read \App\Models\User|null $deletedBy
+ * @property-read \App\Models\District|null $district
  * @property-read string $image
  * @property-read string $internet_speedtest_image
  * @property-read Property|null $images
- * @property-read User|null $updatedBy
- * @property-read User|null $user
- * @method static Builder<static>|Property acceptPremium()
- * @method static Builder<static>|Property acceptUpper()
- * @method static Builder<static>|Property afternoon()
- * @method static Builder<static>|Property both()
- * @method static Builder<static>|Property closed()
- * @method static Builder<static>|Property couple()
- * @method static Builder<static>|Property designLover()
- * @method static Builder<static>|Property eSolar()
- * @method static Builder<static>|Property escalate()
+ * @property-read \App\Models\User|null $updatedBy
+ * @property-read \App\Models\User|null $user
+ * @method static \Illuminate\Database\Eloquent\Builder<static>|Property acceptPremium()
+ * @method static \Illuminate\Database\Eloquent\Builder<static>|Property acceptUpper()
+ * @method static \Illuminate\Database\Eloquent\Builder<static>|Property afternoon()
+ * @method static \Illuminate\Database\Eloquent\Builder<static>|Property both()
+ * @method static \Illuminate\Database\Eloquent\Builder<static>|Property closed()
+ * @method static \Illuminate\Database\Eloquent\Builder<static>|Property couple()
+ * @method static \Illuminate\Database\Eloquent\Builder<static>|Property designLover()
+ * @method static \Illuminate\Database\Eloquent\Builder<static>|Property eSolar()
+ * @method static \Illuminate\Database\Eloquent\Builder<static>|Property escalate()
  * @method static \Database\Factories\PropertyFactory factory($count = null, $state = [])
- * @method static Builder<static>|Property family()
- * @method static Builder<static>|Property fixed()
- * @method static Builder<static>|Property generator()
- * @method static Builder<static>|Property high()
- * @method static Builder<static>|Property hybrid()
- * @method static Builder<static>|Property low()
- * @method static Builder<static>|Property medium()
- * @method static Builder<static>|Property mixed()
- * @method static Builder<static>|Property mixedSun()
- * @method static Builder<static>|Property monthly()
- * @method static Builder<static>|Property morning()
- * @method static Builder<static>|Property negotiable()
- * @method static Builder<static>|Property newModelQuery()
- * @method static Builder<static>|Property newQuery()
- * @method static Builder<static>|Property none()
- * @method static Builder<static>|Property onlyTrashed()
- * @method static Builder<static>|Property open()
- * @method static Builder<static>|Property pDAM()
- * @method static Builder<static>|Property pending()
- * @method static Builder<static>|Property query()
- * @method static Builder<static>|Property reject()
- * @method static Builder<static>|Property remoteWorker()
- * @method static Builder<static>|Property solar()
- * @method static Builder<static>|Property standard()
- * @method static Builder<static>|Property wSMixed()
- * @method static Builder<static>|Property well()
- * @method static Builder<static>|Property whereAddress($value)
- * @method static Builder<static>|Property whereAreaId($value)
- * @method static Builder<static>|Property whereAvailabilityDate($value)
- * @method static Builder<static>|Property whereBedroom1HasNaturalLight($value)
- * @method static Builder<static>|Property whereBedroom2HasNaturalLight($value)
- * @method static Builder<static>|Property whereBuildingSize($value)
- * @method static Builder<static>|Property whereCode($value)
- * @method static Builder<static>|Property whereCreatedAt($value)
- * @method static Builder<static>|Property whereCreatedBy($value)
- * @method static Builder<static>|Property whereDeletedAt($value)
- * @method static Builder<static>|Property whereDeletedBy($value)
- * @method static Builder<static>|Property whereDesignDrivenProperty($value)
- * @method static Builder<static>|Property whereDistrictId($value)
- * @method static Builder<static>|Property whereElectricity($value)
- * @method static Builder<static>|Property whereEligibleForPremium($value)
- * @method static Builder<static>|Property whereEligibleForUpper($value)
- * @method static Builder<static>|Property whereEnsuiteBathrooms($value)
- * @method static Builder<static>|Property whereFolderId($value)
- * @method static Builder<static>|Property whereFullLegalDocumentation($value)
- * @method static Builder<static>|Property whereFullyFurnished($value)
- * @method static Builder<static>|Property whereGuestToilet($value)
- * @method static Builder<static>|Property whereId($value)
- * @method static Builder<static>|Property whereImagePath($value)
- * @method static Builder<static>|Property whereInternetSpeedtest($value)
- * @method static Builder<static>|Property whereInternetSpeedtestImagePath($value)
- * @method static Builder<static>|Property whereLandSize($value)
- * @method static Builder<static>|Property whereLatitude($value)
- * @method static Builder<static>|Property whereLivingAreaHasNaturalLight($value)
- * @method static Builder<static>|Property whereLivingStyle($value)
- * @method static Builder<static>|Property whereLongitude($value)
- * @method static Builder<static>|Property whereMinimumRentalDurationMonths($value)
- * @method static Builder<static>|Property whereName($value)
- * @method static Builder<static>|Property whereNoFestiveVenueNearby($value)
- * @method static Builder<static>|Property whereNoOngoing($value)
- * @method static Builder<static>|Property whereNoiseSourceIdentified($value)
- * @method static Builder<static>|Property whereNotDirectlyExposedToMainRoad($value)
- * @method static Builder<static>|Property whereNumberOfBathrooms($value)
- * @method static Builder<static>|Property whereNumberOfFloors($value)
- * @method static Builder<static>|Property whereOperationalRisk($value)
- * @method static Builder<static>|Property whereOperationalRiskComment($value)
- * @method static Builder<static>|Property whereOrientation($value)
- * @method static Builder<static>|Property whereOutdoorAreaSize($value)
- * @method static Builder<static>|Property whereOwnerPriceFlexibility($value)
- * @method static Builder<static>|Property wherePoolSize($value)
- * @method static Builder<static>|Property wherePowerBackup($value)
- * @method static Builder<static>|Property wherePriceCoherentWithUpper($value)
- * @method static Builder<static>|Property whereQuietAccessRoad($value)
- * @method static Builder<static>|Property whereRentalType($value)
- * @method static Builder<static>|Property whereSlug($value)
- * @method static Builder<static>|Property whereStatus($value)
- * @method static Builder<static>|Property whereStorage($value)
- * @method static Builder<static>|Property whereTargetProfile($value)
- * @method static Builder<static>|Property whereTradeOffDescription($value)
- * @method static Builder<static>|Property whereTradeOffIdentified($value)
- * @method static Builder<static>|Property whereUpdatedAt($value)
- * @method static Builder<static>|Property whereUpdatedBy($value)
- * @method static Builder<static>|Property whereUsabilityLimitations($value)
- * @method static Builder<static>|Property whereUserId($value)
- * @method static Builder<static>|Property whereView($value)
- * @method static Builder<static>|Property whereVisitDate($value)
- * @method static Builder<static>|Property whereWaterSource($value)
- * @method static Builder<static>|Property withTrashed(bool $withTrashed = true)
- * @method static Builder<static>|Property withoutTrashed()
- * @method static Builder<static>|Property yearly()
- * @mixin \Eloquent
+ * @method static \Illuminate\Database\Eloquent\Builder<static>|Property family()
+ * @method static \Illuminate\Database\Eloquent\Builder<static>|Property fixed()
+ * @method static \Illuminate\Database\Eloquent\Builder<static>|Property generator()
+ * @method static \Illuminate\Database\Eloquent\Builder<static>|Property high()
+ * @method static \Illuminate\Database\Eloquent\Builder<static>|Property hybrid()
+ * @method static \Illuminate\Database\Eloquent\Builder<static>|Property low()
+ * @method static \Illuminate\Database\Eloquent\Builder<static>|Property medium()
+ * @method static \Illuminate\Database\Eloquent\Builder<static>|Property mixed()
+ * @method static \Illuminate\Database\Eloquent\Builder<static>|Property mixedSun()
+ * @method static \Illuminate\Database\Eloquent\Builder<static>|Property monthly()
+ * @method static \Illuminate\Database\Eloquent\Builder<static>|Property morning()
+ * @method static \Illuminate\Database\Eloquent\Builder<static>|Property negotiable()
+ * @method static \Illuminate\Database\Eloquent\Builder<static>|Property newModelQuery()
+ * @method static \Illuminate\Database\Eloquent\Builder<static>|Property newQuery()
+ * @method static \Illuminate\Database\Eloquent\Builder<static>|Property none()
+ * @method static \Illuminate\Database\Eloquent\Builder<static>|Property onlyTrashed()
+ * @method static \Illuminate\Database\Eloquent\Builder<static>|Property open()
+ * @method static \Illuminate\Database\Eloquent\Builder<static>|Property pDAM()
+ * @method static \Illuminate\Database\Eloquent\Builder<static>|Property pending()
+ * @method static \Illuminate\Database\Eloquent\Builder<static>|Property query()
+ * @method static \Illuminate\Database\Eloquent\Builder<static>|Property reject()
+ * @method static \Illuminate\Database\Eloquent\Builder<static>|Property remoteWorker()
+ * @method static \Illuminate\Database\Eloquent\Builder<static>|Property solar()
+ * @method static \Illuminate\Database\Eloquent\Builder<static>|Property standard()
+ * @method static \Illuminate\Database\Eloquent\Builder<static>|Property wSMixed()
+ * @method static \Illuminate\Database\Eloquent\Builder<static>|Property well()
+ * @method static \Illuminate\Database\Eloquent\Builder<static>|Property whereAddress($value)
+ * @method static \Illuminate\Database\Eloquent\Builder<static>|Property whereAreaId($value)
+ * @method static \Illuminate\Database\Eloquent\Builder<static>|Property whereAvailabilityDate($value)
+ * @method static \Illuminate\Database\Eloquent\Builder<static>|Property whereBedroom1HasNaturalLight($value)
+ * @method static \Illuminate\Database\Eloquent\Builder<static>|Property whereBedroom2HasNaturalLight($value)
+ * @method static \Illuminate\Database\Eloquent\Builder<static>|Property whereBuildingSize($value)
+ * @method static \Illuminate\Database\Eloquent\Builder<static>|Property whereCode($value)
+ * @method static \Illuminate\Database\Eloquent\Builder<static>|Property whereCreatedAt($value)
+ * @method static \Illuminate\Database\Eloquent\Builder<static>|Property whereCreatedBy($value)
+ * @method static \Illuminate\Database\Eloquent\Builder<static>|Property whereDeletedAt($value)
+ * @method static \Illuminate\Database\Eloquent\Builder<static>|Property whereDeletedBy($value)
+ * @method static \Illuminate\Database\Eloquent\Builder<static>|Property whereDesignDrivenProperty($value)
+ * @method static \Illuminate\Database\Eloquent\Builder<static>|Property whereDistrictId($value)
+ * @method static \Illuminate\Database\Eloquent\Builder<static>|Property whereElectricity($value)
+ * @method static \Illuminate\Database\Eloquent\Builder<static>|Property whereEligibleForPremium($value)
+ * @method static \Illuminate\Database\Eloquent\Builder<static>|Property whereEligibleForUpper($value)
+ * @method static \Illuminate\Database\Eloquent\Builder<static>|Property whereEnsuiteBathrooms($value)
+ * @method static \Illuminate\Database\Eloquent\Builder<static>|Property whereFolderId($value)
+ * @method static \Illuminate\Database\Eloquent\Builder<static>|Property whereFullLegalDocumentation($value)
+ * @method static \Illuminate\Database\Eloquent\Builder<static>|Property whereFullyFurnished($value)
+ * @method static \Illuminate\Database\Eloquent\Builder<static>|Property whereGuestToilet($value)
+ * @method static \Illuminate\Database\Eloquent\Builder<static>|Property whereId($value)
+ * @method static \Illuminate\Database\Eloquent\Builder<static>|Property whereImagePath($value)
+ * @method static \Illuminate\Database\Eloquent\Builder<static>|Property whereImb($value)
+ * @method static \Illuminate\Database\Eloquent\Builder<static>|Property whereInternetSpeedtest($value)
+ * @method static \Illuminate\Database\Eloquent\Builder<static>|Property whereInternetSpeedtestImagePath($value)
+ * @method static \Illuminate\Database\Eloquent\Builder<static>|Property whereLandCertificate($value)
+ * @method static \Illuminate\Database\Eloquent\Builder<static>|Property whereLandSize($value)
+ * @method static \Illuminate\Database\Eloquent\Builder<static>|Property whereLatitude($value)
+ * @method static \Illuminate\Database\Eloquent\Builder<static>|Property whereLeaseAgreement($value)
+ * @method static \Illuminate\Database\Eloquent\Builder<static>|Property whereLivingAreaHasNaturalLight($value)
+ * @method static \Illuminate\Database\Eloquent\Builder<static>|Property whereLivingStyle($value)
+ * @method static \Illuminate\Database\Eloquent\Builder<static>|Property whereLongitude($value)
+ * @method static \Illuminate\Database\Eloquent\Builder<static>|Property whereMinimumRentalDurationMonths($value)
+ * @method static \Illuminate\Database\Eloquent\Builder<static>|Property whereName($value)
+ * @method static \Illuminate\Database\Eloquent\Builder<static>|Property whereNoFestiveVenueNearby($value)
+ * @method static \Illuminate\Database\Eloquent\Builder<static>|Property whereNoOngoing($value)
+ * @method static \Illuminate\Database\Eloquent\Builder<static>|Property whereNoiseSourceIdentified($value)
+ * @method static \Illuminate\Database\Eloquent\Builder<static>|Property whereNotDirectlyExposedToMainRoad($value)
+ * @method static \Illuminate\Database\Eloquent\Builder<static>|Property whereNumberOfBathrooms($value)
+ * @method static \Illuminate\Database\Eloquent\Builder<static>|Property whereNumberOfFloors($value)
+ * @method static \Illuminate\Database\Eloquent\Builder<static>|Property whereOperationalRisk($value)
+ * @method static \Illuminate\Database\Eloquent\Builder<static>|Property whereOperationalRiskComment($value)
+ * @method static \Illuminate\Database\Eloquent\Builder<static>|Property whereOrientation($value)
+ * @method static \Illuminate\Database\Eloquent\Builder<static>|Property whereOutdoorAreaSize($value)
+ * @method static \Illuminate\Database\Eloquent\Builder<static>|Property whereOwnerPriceFlexibility($value)
+ * @method static \Illuminate\Database\Eloquent\Builder<static>|Property whereOwnersId($value)
+ * @method static \Illuminate\Database\Eloquent\Builder<static>|Property wherePbg($value)
+ * @method static \Illuminate\Database\Eloquent\Builder<static>|Property wherePoolSize($value)
+ * @method static \Illuminate\Database\Eloquent\Builder<static>|Property wherePowerBackup($value)
+ * @method static \Illuminate\Database\Eloquent\Builder<static>|Property wherePriceCoherentWithUpper($value)
+ * @method static \Illuminate\Database\Eloquent\Builder<static>|Property whereQuietAccessRoad($value)
+ * @method static \Illuminate\Database\Eloquent\Builder<static>|Property whereRentalType($value)
+ * @method static \Illuminate\Database\Eloquent\Builder<static>|Property whereSignedListingAgreement($value)
+ * @method static \Illuminate\Database\Eloquent\Builder<static>|Property whereSlf($value)
+ * @method static \Illuminate\Database\Eloquent\Builder<static>|Property whereSlug($value)
+ * @method static \Illuminate\Database\Eloquent\Builder<static>|Property whereStatus($value)
+ * @method static \Illuminate\Database\Eloquent\Builder<static>|Property whereStorage($value)
+ * @method static \Illuminate\Database\Eloquent\Builder<static>|Property whereTargetProfile($value)
+ * @method static \Illuminate\Database\Eloquent\Builder<static>|Property whereTradeOffDescription($value)
+ * @method static \Illuminate\Database\Eloquent\Builder<static>|Property whereTradeOffIdentified($value)
+ * @method static \Illuminate\Database\Eloquent\Builder<static>|Property whereUpdatedAt($value)
+ * @method static \Illuminate\Database\Eloquent\Builder<static>|Property whereUpdatedBy($value)
+ * @method static \Illuminate\Database\Eloquent\Builder<static>|Property whereUsabilityLimitations($value)
+ * @method static \Illuminate\Database\Eloquent\Builder<static>|Property whereUserId($value)
+ * @method static \Illuminate\Database\Eloquent\Builder<static>|Property whereView($value)
+ * @method static \Illuminate\Database\Eloquent\Builder<static>|Property whereVisitDate($value)
+ * @method static \Illuminate\Database\Eloquent\Builder<static>|Property whereWaterSource($value)
+ * @method static \Illuminate\Database\Eloquent\Builder<static>|Property withTrashed(bool $withTrashed = true)
+ * @method static \Illuminate\Database\Eloquent\Builder<static>|Property withoutTrashed()
+ * @method static \Illuminate\Database\Eloquent\Builder<static>|Property yearly()
  */
 	class Property extends \Eloquent {}
 }

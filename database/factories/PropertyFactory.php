@@ -55,6 +55,14 @@ class PropertyFactory extends Factory
             'living_style' => fake()->randomElement(PropertyLivingStyle::cases()),
 
             'full_legal_documentation' => fake()->boolean(),
+            'signed_listing_agreement' => fake()->boolean(),
+            'lease_agreement' => fake()->boolean(),
+            'land_certificate' => fake()->boolean(),
+            'owners_id' => fake()->boolean(),
+            'imb' => fake()->boolean(),
+            'pbg' => fake()->boolean(),
+            'slf' => fake()->boolean(),
+
             'fully_furnished' => fake()->boolean(),
             'rental_type' => fake()->randomElement(PropertyRentalType::cases()),
             'minimum_rental_duration_months' => fake()->numberBetween(1, 12),

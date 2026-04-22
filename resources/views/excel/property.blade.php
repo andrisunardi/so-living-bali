@@ -1,20 +1,20 @@
 <table>
     <thead>
         <tr>
-            <th align="center" colspan="7">
+            <th align="center" colspan="14">
                 <b>{{ trans('page.property') }}</b>
             </th>
         </tr>
         <tr>
-            <td colspan="7"></td>
+            <td colspan="14"></td>
         </tr>
         <tr>
-            <th align="center" colspan="7">
+            <th align="center" colspan="14">
                 {{ trans('field.printed_at') }} : {{ now()->isoFormat('LLLL') }}
             </th>
         </tr>
         <tr>
-            <td colspan="7"></td>
+            <td colspan="14"></td>
         </tr>
         <tr>
             <th valign="middle" align="center">
@@ -28,6 +28,21 @@
             </th>
             <th valign="middle" align="center">
                 <b>{{ trans('field.name') }}</b>
+            </th>
+            <th valign="middle" align="center">
+                <b>{{ trans('field.user') }}</b>
+            </th>
+            <th valign="middle" align="center">
+                <b>{{ trans('field.availability_date') }}</b>
+            </th>
+            <th valign="middle" align="center">
+                <b>{{ trans('field.visit_date') }}</b>
+            </th>
+            <th valign="middle" align="center">
+                <b>{{ trans('field.latitude') }}</b>
+            </th>
+            <th valign="middle" align="center">
+                <b>{{ trans('field.longitude') }}</b>
             </th>
             <th valign="middle" align="center">
                 <b>{{ trans('field.address') }}</b>
@@ -62,6 +77,21 @@
                     {{ $property->name }}
                 </td>
                 <td valign="middle">
+                    {{ $property->user?->name }}
+                </td>
+                <td valign="middle">
+                    {{ $property->availability_date?->toDateString() }}
+                </td>
+                <td valign="middle">
+                    {{ $property->visit_date?->toDateString() }}
+                </td>
+                <td valign="middle">
+                    {{ $property->latitude }}
+                </td>
+                <td valign="middle">
+                    {{ $property->longitude }}
+                </td>
+                <td valign="middle">
                     {{ $property->address }}
                 </td>
                 <td valign="middle">
@@ -79,7 +109,7 @@
             </tr>
         @empty
             <tr>
-                <td align="center" colspan="7">
+                <td align="center" colspan="14">
                     {{ trans('message.no_data_available') }}
                 </td>
             </tr>
@@ -87,7 +117,7 @@
     </tbody>
     <tfoot>
         <tr>
-            <td colspan="7"></td>
+            <td colspan="14"></td>
         </tr>
     </tfoot>
 </table>

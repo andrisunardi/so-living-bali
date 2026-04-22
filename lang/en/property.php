@@ -29,6 +29,14 @@ return [
 
     'legal_and_basic_eligibility' => 'Legal & Basic Eligibility',
     'full_legal_documentation_available' => 'Full Legal Documentation Available',
+    'signed_listing_agreement' => 'Signed Listing Agreement',
+    'lease_agreement' => 'Lease Agreement',
+    'land_certificate' => 'Land Certificate',
+    'owners_id' => 'Owner ID',
+    'imb' => 'IMB (Building Construction Permit)',
+    'pbg' => 'PBG (Building Construction Approval)',
+    'slf' => 'SLF (Certificate of Functionality)',
+
     'fully_furnished' => 'Fully Furnished (no semi-furnished)',
     'rental_type_accepted' => 'Rental Type Accepted (Monthly / Yearly / Both)',
     'minimum_rental_duration' => 'Minimum Rental Duration (months)',

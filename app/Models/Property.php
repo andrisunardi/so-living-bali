@@ -48,6 +48,13 @@ use Spatie\Activitylog\Traits\LogsActivity;
  * @property bool $storage
  * @property PropertyLivingStyle|null $living_style
  * @property bool $full_legal_documentation
+ * @property bool $signed_listing_agreement
+ * @property bool $lease_agreement
+ * @property bool $land_certificate
+ * @property bool $owners_id
+ * @property bool $imb
+ * @property bool $pbg
+ * @property bool $slf
  * @property bool $fully_furnished
  * @property PropertyRentalType|null $rental_type
  * @property int|null $minimum_rental_duration_months
@@ -158,10 +165,13 @@ use Spatie\Activitylog\Traits\LogsActivity;
  * @method static Builder<static>|Property whereGuestToilet($value)
  * @method static Builder<static>|Property whereId($value)
  * @method static Builder<static>|Property whereImagePath($value)
+ * @method static Builder<static>|Property whereImb($value)
  * @method static Builder<static>|Property whereInternetSpeedtest($value)
  * @method static Builder<static>|Property whereInternetSpeedtestImagePath($value)
+ * @method static Builder<static>|Property whereLandCertificate($value)
  * @method static Builder<static>|Property whereLandSize($value)
  * @method static Builder<static>|Property whereLatitude($value)
+ * @method static Builder<static>|Property whereLeaseAgreement($value)
  * @method static Builder<static>|Property whereLivingAreaHasNaturalLight($value)
  * @method static Builder<static>|Property whereLivingStyle($value)
  * @method static Builder<static>|Property whereLongitude($value)
@@ -178,11 +188,15 @@ use Spatie\Activitylog\Traits\LogsActivity;
  * @method static Builder<static>|Property whereOrientation($value)
  * @method static Builder<static>|Property whereOutdoorAreaSize($value)
  * @method static Builder<static>|Property whereOwnerPriceFlexibility($value)
+ * @method static Builder<static>|Property whereOwnersId($value)
+ * @method static Builder<static>|Property wherePbg($value)
  * @method static Builder<static>|Property wherePoolSize($value)
  * @method static Builder<static>|Property wherePowerBackup($value)
  * @method static Builder<static>|Property wherePriceCoherentWithUpper($value)
  * @method static Builder<static>|Property whereQuietAccessRoad($value)
  * @method static Builder<static>|Property whereRentalType($value)
+ * @method static Builder<static>|Property whereSignedListingAgreement($value)
+ * @method static Builder<static>|Property whereSlf($value)
  * @method static Builder<static>|Property whereSlug($value)
  * @method static Builder<static>|Property whereStatus($value)
  * @method static Builder<static>|Property whereStorage($value)
@@ -237,6 +251,14 @@ class Property extends Model
         'living_style',
 
         'full_legal_documentation',
+        'signed_listing_agreement',
+        'lease_agreement',
+        'land_certificate',
+        'owners_id',
+        'imb',
+        'pbg',
+        'slf',
+
         'fully_furnished',
         'rental_type',
         'minimum_rental_duration_months',
@@ -310,6 +332,14 @@ class Property extends Model
             'living_style' => PropertyLivingStyle::class,
 
             'full_legal_documentation' => 'boolean',
+            'signed_listing_agreement' => 'boolean',
+            'lease_agreement' => 'boolean',
+            'land_certificate' => 'boolean',
+            'owners_id' => 'boolean',
+            'imb' => 'boolean',
+            'pbg' => 'boolean',
+            'slf' => 'boolean',
+
             'fully_furnished' => 'boolean',
             'rental_type' => PropertyRentalType::class,
             'minimum_rental_duration_months' => 'integer',

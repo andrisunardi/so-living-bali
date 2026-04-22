@@ -85,6 +85,27 @@ class PropertyAddForm extends Form
     public bool $full_legal_documentation = false;
 
     #[Validate('nullable|boolean')]
+    public bool $signed_listing_agreement = false;
+
+    #[Validate('nullable|boolean')]
+    public bool $lease_agreement = false;
+
+    #[Validate('nullable|boolean')]
+    public bool $land_certificate = false;
+
+    #[Validate('nullable|boolean')]
+    public bool $owners_id = false;
+
+    #[Validate('nullable|boolean')]
+    public bool $imb = false;
+
+    #[Validate('nullable|boolean')]
+    public bool $pbg = false;
+
+    #[Validate('nullable|boolean')]
+    public bool $slf = false;
+
+    #[Validate('nullable|boolean')]
     public bool $fully_furnished = false;
 
     #[Validate(['nullable', 'integer', new Enum(PropertyRentalType::class)])]

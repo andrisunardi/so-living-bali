@@ -39,6 +39,14 @@ return new class extends Migration
             $table->boolean('living_style')->unsigned()->nullable();
 
             $table->boolean('full_legal_documentation')->default(false);
+            $table->boolean('signed_listing_agreement')->default(false);
+            $table->boolean('lease_agreement')->default(false);
+            $table->boolean('land_certificate')->default(false);
+            $table->boolean('owners_id')->default(false);
+            $table->boolean('imb')->default(false);
+            $table->boolean('pbg')->default(false);
+            $table->boolean('slf')->default(false);
+
             $table->boolean('fully_furnished')->default(false);
             $table->boolean('rental_type')->unsigned()->nullable();
             $table->integer('minimum_rental_duration_months')->unsigned()->nullable();

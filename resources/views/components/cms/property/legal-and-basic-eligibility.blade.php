@@ -8,12 +8,140 @@
                 name="full_legal_documentation" value="1" {{ $form->full_legal_documentation ? 'checked' : '' }}
                 wire:model.lazy="form.full_legal_documentation" wire:offline.class="disabled"
                 wire:offline.attr="disabled" wire:loading.class="disabled" wire:loading.attr="disabled">
-            <label class="form-check-label text-{{ $form->full_legal_documentation ? 'success' : 'danger' }}"
+            <label class="form-check-label text-{{ Str::successDanger($form->full_legal_documentation) }}"
                 for="full_legal_documentation">
-                {{ $form->full_legal_documentation ? trans('index.yes') : trans('index.no') }}
+                {{ Str::yesNo($form->full_legal_documentation) }}
             </label>
         </div>
         @error('form.full_legal_documentation')
+            <div class="form-text text-danger">{{ $message }}</div>
+        @enderror
+    </div>
+
+    <div class="col-sm-6">
+        <label class="form-label" for="signed_listing_agreement">
+            {{ trans('property.signed_listing_agreement') }}
+        </label>
+        <div class="form-check form-switch">
+            <input class="form-check-input" type="checkbox" role="switch" id="signed_listing_agreement"
+                name="signed_listing_agreement" value="1" {{ $form->signed_listing_agreement ? 'checked' : '' }}
+                wire:model.lazy="form.signed_listing_agreement" wire:offline.class="disabled"
+                wire:offline.attr="disabled" wire:loading.class="disabled" wire:loading.attr="disabled">
+            <label class="form-check-label text-{{ Str::successDanger($form->signed_listing_agreement) }}"
+                for="signed_listing_agreement">
+                {{ Str::yesNo($form->signed_listing_agreement) }}
+            </label>
+        </div>
+        @error('form.signed_listing_agreement')
+            <div class="form-text text-danger">{{ $message }}</div>
+        @enderror
+    </div>
+
+    <div class="col-sm-6">
+        <label class="form-label" for="lease_agreement">
+            {{ trans('property.lease_agreement') }}
+        </label>
+        <div class="form-check form-switch">
+            <input class="form-check-input" type="checkbox" role="switch" id="lease_agreement" name="lease_agreement"
+                value="1" {{ $form->lease_agreement ? 'checked' : '' }} wire:model.lazy="form.lease_agreement"
+                wire:offline.class="disabled" wire:offline.attr="disabled" wire:loading.class="disabled"
+                wire:loading.attr="disabled">
+            <label class="form-check-label text-{{ Str::successDanger($form->lease_agreement) }}"
+                for="lease_agreement">
+                {{ Str::yesNo($form->lease_agreement) }}
+            </label>
+        </div>
+        @error('form.lease_agreement')
+            <div class="form-text text-danger">{{ $message }}</div>
+        @enderror
+    </div>
+
+    <div class="col-sm-6">
+        <label class="form-label" for="land_certificate">
+            {{ trans('property.land_certificate') }}
+        </label>
+        <div class="form-check form-switch">
+            <input class="form-check-input" type="checkbox" role="switch" id="land_certificate" name="land_certificate"
+                value="1" {{ $form->land_certificate ? 'checked' : '' }} wire:model.lazy="form.land_certificate"
+                wire:offline.class="disabled" wire:offline.attr="disabled" wire:loading.class="disabled"
+                wire:loading.attr="disabled">
+            <label class="form-check-label text-{{ Str::successDanger($form->land_certificate) }}"
+                for="land_certificate">
+                {{ Str::yesNo($form->land_certificate) }}
+            </label>
+        </div>
+        @error('form.land_certificate')
+            <div class="form-text text-danger">{{ $message }}</div>
+        @enderror
+    </div>
+
+    <div class="col-sm-6">
+        <label class="form-label" for="owners_id">
+            {{ trans('property.owners_id') }}
+        </label>
+        <div class="form-check form-switch">
+            <input class="form-check-input" type="checkbox" role="switch" id="owners_id" name="owners_id"
+                value="1" {{ $form->owners_id ? 'checked' : '' }} wire:model.lazy="form.owners_id"
+                wire:offline.class="disabled" wire:offline.attr="disabled" wire:loading.class="disabled"
+                wire:loading.attr="disabled">
+            <label class="form-check-label text-{{ Str::successDanger($form->owners_id) }}" for="owners_id">
+                {{ Str::yesNo($form->owners_id) }}
+            </label>
+        </div>
+        @error('form.owners_id')
+            <div class="form-text text-danger">{{ $message }}</div>
+        @enderror
+    </div>
+
+    <div class="col-sm-6">
+        <label class="form-label" for="imb">
+            {{ trans('property.imb') }}
+        </label>
+        <div class="form-check form-switch">
+            <input class="form-check-input" type="checkbox" role="switch" id="imb" name="imb" value="1"
+                {{ $form->imb ? 'checked' : '' }} wire:model.lazy="form.imb" wire:offline.class="disabled"
+                wire:offline.attr="disabled" wire:loading.class="disabled" wire:loading.attr="disabled">
+            <label class="form-check-label text-{{ Str::successDanger($form->imb) }}" for="imb">
+                {{ Str::yesNo($form->imb) }}
+            </label>
+        </div>
+        @error('form.imb')
+            <div class="form-text text-danger">{{ $message }}</div>
+        @enderror
+    </div>
+
+    <div class="col-sm-6">
+        <label class="form-label" for="pbg">
+            {{ trans('property.pbg') }}
+        </label>
+        <div class="form-check form-switch">
+            <input class="form-check-input" type="checkbox" role="switch" id="pbg" name="pbg"
+                value="1" {{ $form->pbg ? 'checked' : '' }} wire:model.lazy="form.pbg"
+                wire:offline.class="disabled" wire:offline.attr="disabled" wire:loading.class="disabled"
+                wire:loading.attr="disabled">
+            <label class="form-check-label text-{{ Str::successDanger($form->pbg) }}" for="pbg">
+                {{ Str::yesNo($form->pbg) }}
+            </label>
+        </div>
+        @error('form.pbg')
+            <div class="form-text text-danger">{{ $message }}</div>
+        @enderror
+    </div>
+
+    <div class="col-sm-6">
+        <label class="form-label" for="slf">
+            {{ trans('property.slf') }}
+        </label>
+        <div class="form-check form-switch">
+            <input class="form-check-input" type="checkbox" role="switch" id="slf" name="slf"
+                value="1" {{ $form->slf ? 'checked' : '' }} wire:model.lazy="form.slf"
+                wire:offline.class="disabled" wire:offline.attr="disabled" wire:loading.class="disabled"
+                wire:loading.attr="disabled">
+            <label class="form-check-label text-{{ Str::successDanger($form->slf) }}" for="slf">
+                {{ Str::yesNo($form->slf) }}
+            </label>
+        </div>
+        @error('form.slf')
             <div class="form-text text-danger">{{ $message }}</div>
         @enderror
     </div>
@@ -23,10 +151,10 @@
             {{ trans('property.fully_furnished') }}
         </label>
         <div class="form-check form-switch">
-            <input class="form-check-input" type="checkbox" role="switch" id="fully_furnished" name="fully_furnished"
-                value="1" {{ $form->fully_furnished ? 'checked' : '' }} wire:model.lazy="form.fully_furnished"
-                wire:offline.class="disabled" wire:offline.attr="disabled" wire:loading.class="disabled"
-                wire:loading.attr="disabled">
+            <input class="form-check-input" type="checkbox" role="switch" id="fully_furnished"
+                name="fully_furnished" value="1" {{ $form->fully_furnished ? 'checked' : '' }}
+                wire:model.lazy="form.fully_furnished" wire:offline.class="disabled" wire:offline.attr="disabled"
+                wire:loading.class="disabled" wire:loading.attr="disabled">
             <label class="form-check-label text-{{ $form->fully_furnished ? 'success' : 'danger' }}"
                 for="fully_furnished">
                 {{ $form->fully_furnished ? trans('index.yes') : trans('index.no') }}

@@ -287,6 +287,85 @@ new #[Title('Detail | Property')] class extends Component {
 
                 <div class="row">
                     <div class="col-sm-5 col-md-4 col-lg-3 col-xl-2">
+                        <div class="fw-bold">{{ trans('property.signed_listing_agreement') }}</div>
+                    </div>
+                    <div class="col-sm-7 col-md-8 col-lg-9 col-xl-10">
+                        <span
+                            class="badge rounded-pill text-bg-{{ Str::successDanger($property->signed_listing_agreement) }}">
+                            {{ Str::yesNo($property->signed_listing_agreement) }}
+                        </span>
+                    </div>
+                </div>
+
+                <div class="row">
+                    <div class="col-sm-5 col-md-4 col-lg-3 col-xl-2">
+                        <div class="fw-bold">{{ trans('property.lease_agreement') }}</div>
+                    </div>
+                    <div class="col-sm-7 col-md-8 col-lg-9 col-xl-10">
+                        <span class="badge rounded-pill text-bg-{{ Str::successDanger($property->lease_agreement) }}">
+                            {{ Str::yesNo($property->lease_agreement) }}
+                        </span>
+                    </div>
+                </div>
+
+                <div class="row">
+                    <div class="col-sm-5 col-md-4 col-lg-3 col-xl-2">
+                        <div class="fw-bold">{{ trans('property.land_certificate') }}</div>
+                    </div>
+                    <div class="col-sm-7 col-md-8 col-lg-9 col-xl-10">
+                        <span
+                            class="badge rounded-pill text-bg-{{ Str::successDanger($property->land_certificate) }}">
+                            {{ Str::yesNo($property->land_certificate) }}
+                        </span>
+                    </div>
+                </div>
+
+                <div class="row">
+                    <div class="col-sm-5 col-md-4 col-lg-3 col-xl-2">
+                        <div class="fw-bold">{{ trans('property.owners_id') }}</div>
+                    </div>
+                    <div class="col-sm-7 col-md-8 col-lg-9 col-xl-10">
+                        <span class="badge rounded-pill text-bg-{{ Str::successDanger($property->owners_id) }}">
+                            {{ Str::yesNo($property->owners_id) }}
+                        </span>
+                    </div>
+                </div>
+
+                <div class="row">
+                    <div class="col-sm-5 col-md-4 col-lg-3 col-xl-2">
+                        <div class="fw-bold">{{ trans('property.imb') }}</div>
+                    </div>
+                    <div class="col-sm-7 col-md-8 col-lg-9 col-xl-10">
+                        <span class="badge rounded-pill text-bg-{{ Str::successDanger($property->imb) }}">
+                            {{ Str::yesNo($property->imb) }}
+                        </span>
+                    </div>
+                </div>
+
+                <div class="row">
+                    <div class="col-sm-5 col-md-4 col-lg-3 col-xl-2">
+                        <div class="fw-bold">{{ trans('property.pbg') }}</div>
+                    </div>
+                    <div class="col-sm-7 col-md-8 col-lg-9 col-xl-10">
+                        <span class="badge rounded-pill text-bg-{{ Str::successDanger($property->pbg) }}">
+                            {{ Str::yesNo($property->pbg) }}
+                        </span>
+                    </div>
+                </div>
+
+                <div class="row">
+                    <div class="col-sm-5 col-md-4 col-lg-3 col-xl-2">
+                        <div class="fw-bold">{{ trans('property.slf') }}</div>
+                    </div>
+                    <div class="col-sm-7 col-md-8 col-lg-9 col-xl-10">
+                        <span class="badge rounded-pill text-bg-{{ Str::successDanger($property->slf) }}">
+                            {{ Str::yesNo($property->slf) }}
+                        </span>
+                    </div>
+                </div>
+
+                <div class="row">
+                    <div class="col-sm-5 col-md-4 col-lg-3 col-xl-2">
                         <div class="fw-bold">{{ trans('property.fully_furnished') }}</div>
                     </div>
                     <div class="col-sm-7 col-md-8 col-lg-9 col-xl-10">
@@ -490,8 +569,7 @@ new #[Title('Detail | Property')] class extends Component {
                     </div>
                     <div class="col-sm-7 col-md-6 col-lg-5 col-xl-4">
                         @if ($property->internet_speedtest_image_path)
-                            <a draggable="false" href="{{ $property->internet_speedtest_image }}"
-                                target="_blank">
+                            <a draggable="false" href="{{ $property->internet_speedtest_image }}" target="_blank">
                                 <img draggable="false" class="img-fluid w-100 h-100 rounded mt-2"
                                     src="{{ $property->internet_speedtest_image }}"
                                     alt="{{ trans('page.property') }} - {{ $property->id }}"

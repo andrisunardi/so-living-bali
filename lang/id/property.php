@@ -29,6 +29,14 @@ return [
 
     'legal_and_basic_eligibility' => 'Legalitas & Kelayakan Dasar',
     'full_legal_documentation_available' => 'Dokumen Hukum Lengkap Tersedia',
+    'signed_listing_agreement' => 'Perjanjian Pencatatan yang Ditandatangani',
+    'lease_agreement' => 'Perjanjian Sewa',
+    'land_certificate' => 'Sertifikat Tanah',
+    'owners_id' => 'ID Pemilik',
+    'imb' => 'IMB (Izin Mendirikan Bangunan)',
+    'pbg' => 'PBG (Persetujuan Bangunan Gedung)',
+    'slf' => 'SLF (Sertifikat Laik Fungsi)',
+
     'fully_furnished' => 'Perabotan Lengkap (bukan semi-furnished)',
     'rental_type_accepted' => 'Tipe Sewa yang Diterima (Bulanan / Tahunan / Keduanya)',
     'minimum_rental_duration' => 'Durasi Sewa Minimum (bulan)',

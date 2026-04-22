@@ -29,6 +29,14 @@ return [
 
     'legal_and_basic_eligibility' => '法律和基本资格',
     'full_legal_documentation_available' => '完整法律文件可用',
+    'signed_listing_agreement' => '已签署的房源协议',
+    'lease_agreement' => '租赁协议',
+    'land_certificate' => '土地证书',
+    'owners_id' => '业主身份证',
+    'imb' => 'IMB (建筑许可证)',
+    'pbg' => 'PBG (建筑物建设许可)',
+    'slf' => 'SLF (功能适用证书)',
+
     'fully_furnished' => '全装修 (非半装修)',
     'rental_type_accepted' => '接受的租赁类型 (月租 / 年租 / 两者)',
     'minimum_rental_duration' => '最短租赁期限 (月)',
