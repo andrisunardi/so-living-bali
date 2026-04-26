@@ -156,4 +156,36 @@ class GoogleDrive
     {
         $this->drive->files->delete($fileId);
     }
+
+    public function listImages(
+        string $folderId,
+        int $pageSize = 10,
+        ?string $pageToken = null
+    ): array {
+        $params = [
+            'q' => "'{$folderId}' in parents and mimeType contains 'image/'",
+            'pageSize' => $pageSize,
+            'fields' => 'nextPageToken, files(id, name, mimeType, thumbnailLink)',
+        ];
+
+        if ($pageToken) {
+            $params['pageToken'] = $pageToken;
+        }
+
+        $response = $this->drive->files->listFiles($params);
+
+        return [
+            'files' => $response->getFiles(),
+            'nextPageToken' => $response->getNextPageToken(),
+        ];
+    }
+
+    public function download(string $fileId): string
+    {
+        $response = $this->drive->files->get($fileId, [
+            'alt' => 'media'
+        ]);
+
+        return $response->getBody()->getContents();
+    }
 }
