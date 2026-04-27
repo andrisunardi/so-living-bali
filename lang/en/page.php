@@ -20,7 +20,7 @@ return [
     'article' => 'Article',
 
     'master' => 'Master',
-    'concept' => 'Concept',
+    'value' => 'Value',
     'area' => 'Area',
     'district' => 'District',
 

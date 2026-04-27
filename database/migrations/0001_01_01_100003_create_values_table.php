@@ -9,14 +9,17 @@ return new class extends Migration
 {
     public function up(): void
     {
-        Schema::create('concepts', function (Blueprint $table) {
+        Schema::create('values', function (Blueprint $table) {
             $table->id();
             $table->string('title', 50)->unique();
             $table->string('title_id', 50)->unique();
             $table->string('title_zh', 50)->unique();
-            $table->string('description', 100);
-            $table->string('description_id', 100);
-            $table->string('description_zh', 100);
+            $table->string('short_description', 100);
+            $table->string('short_description_id', 100);
+            $table->string('short_description_zh', 100);
+            $table->string('description', 1000);
+            $table->string('description_id', 1000);
+            $table->string('description_zh', 1000);
             $table->string('icon', 50);
             $table->boolean('is_active')->unsigned()->default(true);
             $table->foreignIdFor(User::class, 'created_by')->nullable()->constrained('users')->nullOnDelete();
@@ -29,6 +32,6 @@ return new class extends Migration
 
     public function down(): void
     {
-        Schema::dropIfExists('concepts');
+        Schema::dropIfExists('values');
     }
 };

@@ -2,10 +2,10 @@
 
 namespace App\Services;
 
-use App\Models\Concept;
+use App\Models\Value;
 use Illuminate\Support\Facades\DB;
 
-class ConceptService
+class ValueService
 {
     public function index(
         ?string $search = null,
@@ -20,12 +20,15 @@ class ConceptService
         bool $paginate = true,
         int $perPage = 10,
     ): object|int|null {
-        $concepts = Concept::query()
+        $values = Value::query()
             ->when($search, function ($query) use ($search) {
                 $query->where(function ($query) use ($search) {
                     $query->where('title', 'like', "%{$search}%")
                         ->orWhere('title_id', 'like', "%{$search}%")
                         ->orWhere('title_zh', 'like', "%{$search}%")
+                        ->orWhere('short_description', 'like', "%{$search}%")
+                        ->orWhere('short_description_id', 'like', "%{$search}%")
+                        ->orWhere('short_description_zh', 'like', "%{$search}%")
                         ->orWhere('description', 'like', "%{$search}%")
                         ->orWhere('description_id', 'like', "%{$search}%")
                         ->orWhere('description_zh', 'like', "%{$search}%")
@@ -39,51 +42,51 @@ class ConceptService
             ->limit($limit);
 
         if ($first) {
-            return $concepts->first();
+            return $values->first();
         }
 
         if ($count) {
-            return $concepts->count();
+            return $values->count();
         }
 
         if ($paginate) {
-            return $concepts->paginate($perPage);
+            return $values->paginate($perPage);
         }
 
         if ($paginate) {
-            return $concepts->paginate($perPage);
+            return $values->paginate($perPage);
         }
 
-        return $concepts->get();
+        return $values->get();
     }
 
-    public function create(array $data = []): Concept
+    public function create(array $data = []): Value
     {
-        $table = (new Concept)->getTable();
-        DB::statement("ALTER TABLE {$table} AUTO_INCREMENT = 1");
+        $table = (new Value)->getTable();
+        DB::statement("ALTER TABLE `{$table}` AUTO_INCREMENT = 1");
 
-        return Concept::create($data);
+        return Value::create($data);
     }
 
-    public function update(Concept $concept, array $data = []): Concept
+    public function update(Value $value, array $data = []): Value
     {
-        $concept->update($data);
-        $concept->refresh();
+        $value->update($data);
+        $value->refresh();
 
-        return $concept;
+        return $value;
     }
 
-    public function delete(Concept $concept): bool
+    public function delete(Value $value): bool
     {
-        return $concept->delete();
+        return $value->delete();
     }
 
-    public function active(Concept $concept): Concept
+    public function active(Value $value): Value
     {
-        $concept->is_active = ! $concept->is_active;
-        $concept->save();
-        $concept->refresh();
+        $value->is_active = ! $value->is_active;
+        $value->save();
+        $value->refresh();
 
-        return $concept;
+        return $value;
     }
 }

@@ -2,7 +2,7 @@
 
 namespace App\Models;
 
-use App\Observers\ConceptObserver;
+use App\Observers\ValueObserver;
 use Illuminate\Database\Eloquent\Attributes\ObservedBy;
 use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Database\Eloquent\Collection;
@@ -21,6 +21,9 @@ use Spatie\Activitylog\Traits\LogsActivity;
  * @property string $title
  * @property string $title_id
  * @property string $title_zh
+ * @property string $short_description
+ * @property string $short_description_id
+ * @property string $short_description_zh
  * @property string $description
  * @property string $description_id
  * @property string $description_zh
@@ -36,52 +39,57 @@ use Spatie\Activitylog\Traits\LogsActivity;
  * @property-read int|null $activities_count
  * @property-read User|null $createdBy
  * @property-read User|null $deletedBy
- * @property-read string $description_title
+ * @property-read string $translate_description
+ * @property-read string $translate_short_description
  * @property-read string $translate_title
  * @property-read User|null $updatedBy
  *
- * @method static Builder<static>|Concept active()
- * @method static \Database\Factories\ConceptFactory factory($count = null, $state = [])
- * @method static Builder<static>|Concept inactive()
- * @method static Builder<static>|Concept newModelQuery()
- * @method static Builder<static>|Concept newQuery()
- * @method static Builder<static>|Concept onlyTrashed()
- * @method static Builder<static>|Concept query()
- * @method static Builder<static>|Concept whereCreatedAt($value)
- * @method static Builder<static>|Concept whereCreatedBy($value)
- * @method static Builder<static>|Concept whereDeletedAt($value)
- * @method static Builder<static>|Concept whereDeletedBy($value)
- * @method static Builder<static>|Concept whereDescription($value)
- * @method static Builder<static>|Concept whereDescriptionId($value)
- * @method static Builder<static>|Concept whereDescriptionZh($value)
- * @method static Builder<static>|Concept whereIcon($value)
- * @method static Builder<static>|Concept whereId($value)
- * @method static Builder<static>|Concept whereIsActive($value)
- * @method static Builder<static>|Concept whereTitle($value)
- * @method static Builder<static>|Concept whereTitleId($value)
- * @method static Builder<static>|Concept whereTitleZh($value)
- * @method static Builder<static>|Concept whereUpdatedAt($value)
- * @method static Builder<static>|Concept whereUpdatedBy($value)
- * @method static Builder<static>|Concept withTrashed(bool $withTrashed = true)
- * @method static Builder<static>|Concept withoutTrashed()
- *
- * @property-read string $translate_description
+ * @method static Builder<static>|Value active()
+ * @method static \Database\Factories\ValueFactory factory($count = null, $state = [])
+ * @method static Builder<static>|Value inactive()
+ * @method static Builder<static>|Value newModelQuery()
+ * @method static Builder<static>|Value newQuery()
+ * @method static Builder<static>|Value onlyTrashed()
+ * @method static Builder<static>|Value query()
+ * @method static Builder<static>|Value whereCreatedAt($value)
+ * @method static Builder<static>|Value whereCreatedBy($value)
+ * @method static Builder<static>|Value whereDeletedAt($value)
+ * @method static Builder<static>|Value whereDeletedBy($value)
+ * @method static Builder<static>|Value whereDescription($value)
+ * @method static Builder<static>|Value whereDescriptionId($value)
+ * @method static Builder<static>|Value whereDescriptionZh($value)
+ * @method static Builder<static>|Value whereIcon($value)
+ * @method static Builder<static>|Value whereId($value)
+ * @method static Builder<static>|Value whereIsActive($value)
+ * @method static Builder<static>|Value whereShortDescription($value)
+ * @method static Builder<static>|Value whereShortDescriptionId($value)
+ * @method static Builder<static>|Value whereShortDescriptionZh($value)
+ * @method static Builder<static>|Value whereTitle($value)
+ * @method static Builder<static>|Value whereTitleId($value)
+ * @method static Builder<static>|Value whereTitleZh($value)
+ * @method static Builder<static>|Value whereUpdatedAt($value)
+ * @method static Builder<static>|Value whereUpdatedBy($value)
+ * @method static Builder<static>|Value withTrashed(bool $withTrashed = true)
+ * @method static Builder<static>|Value withoutTrashed()
  *
  * @mixin \Eloquent
  */
-#[ObservedBy([ConceptObserver::class])]
-class Concept extends Model
+#[ObservedBy([ValueObserver::class])]
+class Value extends Model
 {
     use HasFactory;
     use LogsActivity;
     use SoftDeletes;
 
-    protected $table = 'concepts';
+    protected $table = 'values';
 
     protected $fillable = [
         'title',
         'title_id',
         'title_zh',
+        'short_description',
+        'short_description_id',
+        'short_description_zh',
         'description',
         'description_id',
         'description_zh',
@@ -97,6 +105,9 @@ class Concept extends Model
             'title' => 'string',
             'title_id' => 'string',
             'title_zh' => 'string',
+            'short_description' => 'string',
+            'short_description_id' => 'string',
+            'short_description_zh' => 'string',
             'description' => 'string',
             'description_id' => 'string',
             'description_zh' => 'string',
@@ -135,6 +146,18 @@ class Concept extends Model
         ];
 
         return $language[$locale] ?? $this->title;
+    }
+
+    public function getTranslateShortDescriptionAttribute(): string
+    {
+        $locale = App::getLocale();
+        $language = [
+            'en' => $this->short_description,
+            'id' => $this->short_description_id,
+            'zh' => $this->short_description_zh,
+        ];
+
+        return $language[$locale] ?? $this->short_description;
     }
 
     public function getTranslateDescriptionAttribute(): string

@@ -20,11 +20,7 @@ new #[Title('Home')] class extends Component {};
             </div>
         </div>
     @else
-        @livewire('home.hero', [
-            'title' => trans('home.hero.title'),
-            'description' => trans('home.hero.description'),
-            'image' => asset('images/banner/home.png'),
-        ])
+        <x-home.hero :title="trans('home.hero.title')" :description="trans('home.hero.description')" :image="asset('images/banner/home.png')," />
 
         @livewire('home.our-values')
     @endif

@@ -248,6 +248,10 @@ return [
         'view' => '视野',
         'visit_date' => '访问日期',
         'water_source' => '水源',
-        'when' => '何时',    ],
+        'when' => '何时',
+        'short_description_id' => '描述ID',
+        'short_description_zh' => '中文描述',
+        'short_description' => '描述',
+    ],
 
 ];

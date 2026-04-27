@@ -74,8 +74,8 @@ new #[Title('Detail | Property')] class extends Component {
                     <div class="col-sm-7 col-md-6 col-lg-5 col-xl-4">
                         @if ($property->image_path)
                             <a draggable="false" href="{{ $property->image }}" target="_blank">
-                                <img draggable="false" class="img-fluid w-100 h-100 rounded mt-2"
-                                    src="{{ $property->image }}"
+                                <img draggable="false" loading="lazy" decoding="async"
+                                    class="img-fluid w-100 h-100 rounded mt-2" src="{{ $property->image }}"
                                     alt="{{ trans('page.property') }} - {{ $property->id }}"
                                     onerror="this.src='{{ asset('images/image-not-available.png') }}'" />
                             </a>
@@ -570,7 +570,8 @@ new #[Title('Detail | Property')] class extends Component {
                     <div class="col-sm-7 col-md-6 col-lg-5 col-xl-4">
                         @if ($property->internet_speedtest_image_path)
                             <a draggable="false" href="{{ $property->internet_speedtest_image }}" target="_blank">
-                                <img draggable="false" class="img-fluid w-100 h-100 rounded mt-2"
+                                <img draggable="false" loading="lazy" decoding="async"
+                                    class="img-fluid w-100 h-100 rounded mt-2"
                                     src="{{ $property->internet_speedtest_image }}"
                                     alt="{{ trans('page.property') }} - {{ $property->id }}"
                                     onerror="this.src='{{ asset('images/image-not-available.png') }}'" />

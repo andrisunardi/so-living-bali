@@ -20,7 +20,7 @@ return [
     'article' => 'Artikel',
 
     'master' => 'Master',
-    'concept' => 'Konsep',
+    'value' => 'Nilai',
     'area' => 'Area',
     'district' => 'Distrik',
 

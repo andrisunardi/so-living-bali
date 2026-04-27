@@ -44,7 +44,8 @@
 
         @if ($form->internet_speedtest_image)
             <div class="mt-3">
-                <img draggable="false" class="w-100 h-100 rounded user-select-none pe-none"
+                <img draggable="false" loading="lazy" decoding="async"
+                    class="w-100 h-100 rounded user-select-none pe-none"
                     src="{{ $form->internet_speedtest_image->temporaryUrl() }}"
                     alt="{{ trans('index.image_temporary_url') }} - {{ config('constants.name') }}"
                     onerror="asset('images/logo.png')">
@@ -52,8 +53,8 @@
         @elseif ($property?->internet_speedtest_image_path)
             <div class="mt-3">
                 <a draggable="false" href="{{ $property->internet_speedtest_image }}" target="_blank">
-                    <img draggable="false" class="img-fluid w-100 rounded" width="100"
-                        src="{{ $property->internet_speedtest_image }}"
+                    <img draggable="false" loading="lazy" decoding="async" class="img-fluid w-100 rounded"
+                        width="100" src="{{ $property->internet_speedtest_image }}"
                         alt="{{ trans('page.property') }} - {{ $property->id }}"
                         onerror="asset('images/image-not-available.png')" />
                 </a>
@@ -114,8 +115,9 @@
         <div>
             @foreach ($this->propertyElectricities() as $propertyElectricity)
                 <div class="form-check form-check-inline" wire:key="electricity-{{ $propertyElectricity->value }}">
-                    <input class="form-check-input" type="radio" id="electricity_{{ $propertyElectricity->value }}"
-                        name="electricity" value="{{ $propertyElectricity->value }}"
+                    <input class="form-check-input" type="radio"
+                        id="electricity_{{ $propertyElectricity->value }}" name="electricity"
+                        value="{{ $propertyElectricity->value }}"
                         {{ $propertyElectricity->value == $form->electricity ? 'checked' : '' }}
                         wire:model.lazy="form.electricity" wire:offline.class="disabled" wire:offline.attr="disabled"
                         wire:loading.class="disabled" wire:loading.attr="disabled">

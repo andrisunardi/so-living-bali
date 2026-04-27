@@ -8,7 +8,7 @@ new class extends Component {};
 <main class="container d-flex justify-content-center align-items-center text-center vh-100 my-sm-5 my-md-auto">
     <div class="d-grid gap-4">
         <div class="d-flex justify-content-center">
-            <img draggable="false" width="100" src="{{ asset('images/logo.png') }}"
+            <img draggable="false" loading="lazy" decoding="async" width="100" src="{{ asset('images/logo.png') }}"
                 alt="Logo - {{ config('app.name') }}">
         </div>
 
@@ -33,7 +33,8 @@ new class extends Component {};
             <div class="small">
                 {{ trans('footer.created_and_designed_by') }}
                 <a draggable="false" href="https://www.diw.co.id" target="_blank">
-                    <img draggable="false" src="{{ asset('images/icon-diw.co.id.png') }}" alt="Icon DIW.co.id"
+                    <img draggable="false" loading="lazy" decoding="async"
+                        src="{{ asset('images/icon-diw.co.id.png') }}" alt="Icon DIW.co.id"
                         title="{{ trans('footer.created_and_designed_by') }} DIW.co.id">
                 </a>
             </div>

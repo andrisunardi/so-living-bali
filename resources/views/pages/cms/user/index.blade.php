@@ -281,7 +281,7 @@ new #[Title('User')] class extends Component {
                                     @if ($user->image_path)
                                         <a draggable="false" href="{{ $user->image }}" target="_blank">
                                             <div class="ratio ratio-1x1">
-                                                <img draggable="false"
+                                                <img draggable="false" loading="lazy" decoding="async"
                                                     class="img-fluid w-100 h-100 rounded-circle object-fit-cover"
                                                     src="{{ $user->image }}"
                                                     alt="{{ trans('page.user') }} - {{ $user->id }}"

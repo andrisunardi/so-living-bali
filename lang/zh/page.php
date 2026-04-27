@@ -20,7 +20,7 @@ return [
     'article' => '文章',
 
     'master' => '主数据',
-    'concept' => '概念',
+    'value' => '价值',
     'area' => '区域',
     'district' => '地区',
 

@@ -190,7 +190,8 @@ new #[Title('Edit | Property Image')] class extends Component {
                                     </div>
 
                                     <div>
-                                        <img draggable="false" class="img-fluid w-100 rounded" width="100"
+                                        <img draggable="false" loading="lazy" decoding="async"
+                                            class="img-fluid w-100 rounded" width="100"
                                             src="{{ $form->image->temporaryUrl() }}" alt="Image Temporary Url"
                                             onerror="asset('images/image-not-available.png')" />
                                     </div>
@@ -198,7 +199,8 @@ new #[Title('Edit | Property Image')] class extends Component {
                             @elseif ($propertyImage->image_path)
                                 <div class="mt-3">
                                     <a draggable="false" href="{{ $propertyImage->image }}" target="_blank">
-                                        <img draggable="false" class="img-fluid w-100 rounded" width="100"
+                                        <img draggable="false" loading="lazy" decoding="async"
+                                            class="img-fluid w-100 rounded" width="100"
                                             src="{{ $propertyImage->image }}"
                                             alt="{{ trans('page.property_image') }} - {{ $propertyImage->id }}"
                                             onerror="asset('images/image-not-available.png')" />

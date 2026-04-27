@@ -14,7 +14,8 @@ new class extends Component {};
             </div>
         </div>
 
-        <img draggable="false" class="w-100 h-100 user-select-none pe-none" src="{{ asset('images/banner/about.png') }}"
+        <img draggable="false" loading="lazy" decoding="async" class="w-100 h-100 user-select-none pe-none"
+            src="{{ asset('images/banner/about.png') }}"
             alt="{{ trans('index.banner') }} - {{ trans('page.about') }} - {{ config('constants.name') }}">
     </div>
 </section>

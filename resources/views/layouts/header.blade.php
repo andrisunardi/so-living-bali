@@ -76,8 +76,8 @@ new class extends Component {
         <div class="row row-cols-2 row-cols-lg-3 align-items-center">
             <div class="col text-start">
                 <a draggable="false" href="{{ route('home') }}" wire:navigate>
-                    <img draggable="false" class="logo user-select-none pe-none" height="50"
-                        src="{{ asset('images/logo.png') }}"
+                    <img draggable="false" loading="lazy" decoding="async" class="logo user-select-none pe-none"
+                        height="50" src="{{ asset('images/logo.png') }}"
                         alt="{{ trans('index.logo') }} - {{ config('app.name') }}" />
                 </a>
             </div>
@@ -99,7 +99,8 @@ new class extends Component {
                             <div class="dropdown">
                                 <a draggable="false" href="javascript:;" class="header-color dropdown-toggle icon-link"
                                     data-bs-toggle="dropdown">
-                                    <img draggable="false" class="user-select-none pe-none" width="20"
+                                    <img draggable="false" loading="lazy" decoding="async"
+                                        class="user-select-none pe-none" width="20"
                                         src="{{ asset('images/flag/' . app()->getLocale() . '.svg') }}"
                                         alt="{{ trans('index.flag') }} - {{ app()->getLocale() }} - {{ config('app.name') }}" />
                                     <span class="d-lg-none d-xl-block text-uppercase">
@@ -111,7 +112,8 @@ new class extends Component {
                                         <li wire:key="language-{{ $language['id'] }}">
                                             <a draggable="false" class="dropdown-item icon-link"
                                                 href="{{ route('locale', ['locale' => $language['code']]) }}">
-                                                <img draggable="false" class="user-select-none pe-none" width="20"
+                                                <img draggable="false" loading="lazy" decoding="async"
+                                                    class="user-select-none pe-none" width="20"
                                                     src="{{ $language['image_url'] }}"
                                                     alt="{{ trans('index.flag') }} {{ $language['code'] }} - {{ config('app.name') }}" />
                                                 <span>{{ $language['name'] }}</span>
@@ -172,8 +174,8 @@ new class extends Component {
                 <div class="offcanvas-header">
                     <div class="offcanvas-title">
                         <a draggable="false" href="{{ route('home') }}" wire:navigate>
-                            <img draggable="false" class="user-select-none pe-none" height="100"
-                                src="{{ asset('images/logo/black-tagline.png') }}"
+                            <img draggable="false" loading="lazy" decoding="async" class="user-select-none pe-none"
+                                height="100" src="{{ asset('images/logo/black-tagline.png') }}"
                                 alt="{{ trans('index.logo') }} - {{ config('app.name') }}" />
                         </a>
                     </div>
@@ -200,7 +202,8 @@ new class extends Component {
                                 <div class="dropdown">
                                     <a draggable="false" role="button" class="text-body dropdown-toggle icon-link"
                                         data-bs-toggle="dropdown">
-                                        <img draggable="false" class="user-select-none pe-none" width="25"
+                                        <img draggable="false" loading="lazy" decoding="async"
+                                            class="user-select-none pe-none" width="25"
                                             src="{{ asset('images/flag/' . app()->getLocale() . '.svg') }}"
                                             alt="{{ trans('index.flag') }} - {{ app()->getLocale() }} - {{ config('app.name') }}" />
                                         <span class="fw-bold text-uppercase">{{ app()->getLocale() }}</span>
@@ -210,8 +213,9 @@ new class extends Component {
                                             <li wire:key="language-{{ $language['id'] }}">
                                                 <a draggable="false" class="dropdown-item icon-link"
                                                     href="{{ route('locale', ['locale' => $language['code']]) }}">
-                                                    <img draggable="false" class="user-select-none pe-none"
-                                                        width="25" src="{{ $language['image_url'] }}"
+                                                    <img draggable="false" loading="lazy" decoding="async"
+                                                        class="user-select-none pe-none" width="25"
+                                                        src="{{ $language['image_url'] }}"
                                                         alt="{{ trans('index.flag') }} {{ $language['code'] }} - {{ config('app.name') }}" />
                                                     <span>{{ $language['name'] }}</span>
                                                 </a>

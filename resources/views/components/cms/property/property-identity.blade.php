@@ -90,9 +90,9 @@
                         <span class="fas fa-calendar fa-fw "></span>
                     </div>
                     <input type="date" class="form-control" id="availability_date" name="availability_date"
-                        min="{{ $property?->availability_date?->toDateString() ?? now()->toDateString() }}" max="2099-12-31" wire:model="form.availability_date"
-                        wire:offline.class="disabled" wire:offline.attr="disabled" wire:loading.class="disabled"
-                        wire:loading.attr="disabled">
+                        min="{{ $property?->availability_date?->toDateString() ?? now()->toDateString() }}"
+                        max="2099-12-31" wire:model="form.availability_date" wire:offline.class="disabled"
+                        wire:offline.attr="disabled" wire:loading.class="disabled" wire:loading.attr="disabled">
                 </div>
                 <div class="form-text">
                     {{ trans('helper.min') }} : {{ trans('index.today') }},
@@ -152,16 +152,17 @@
         @enderror
         @if ($form->image)
             <div class="mt-3">
-                <img draggable="false" class="w-100 h-100 rounded user-select-none pe-none"
-                    src="{{ $form->image->temporaryUrl() }}"
+                <img draggable="false" loading="lazy" decoding="async"
+                    class="w-100 h-100 rounded user-select-none pe-none" src="{{ $form->image->temporaryUrl() }}"
                     alt="{{ trans('index.image_temporary_url') }} - {{ config('constants.name') }}"
                     onerror="asset('images/logo.png')">
             </div>
         @elseif ($property?->image_path)
             <div class="mt-3">
                 <a draggable="false" href="{{ $property->image }}" target="_blank">
-                    <img draggable="false" class="img-fluid w-100 rounded" width="100"
-                        src="{{ $property->image }}" alt="{{ trans('page.property') }} - {{ $property->id }}"
+                    <img draggable="false" loading="lazy" decoding="async" class="img-fluid w-100 rounded"
+                        width="100" src="{{ $property->image }}"
+                        alt="{{ trans('page.property') }} - {{ $property->id }}"
                         onerror="asset('images/image-not-available.png')" />
                 </a>
             </div>

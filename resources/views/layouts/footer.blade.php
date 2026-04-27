@@ -41,8 +41,8 @@ new class extends Component {
             <div class="row g-4">
                 <div class="col-sm-6 col-lg-4 col-xl-3">
                     <a draggable="false" href="{{ route('home') }}" wire:navigate>
-                        <img draggable="false" class="user-select-none pe-none" height="100"
-                            src="{{ asset('images/logo/white-tagline.png') }}"
+                        <img draggable="false" loading="lazy" decoding="async" class="user-select-none pe-none"
+                            height="100" src="{{ asset('images/logo/white-tagline.png') }}"
                             alt="{{ trans('index.logo') }} - {{ config('app.name') }}" />
                     </a>
 
@@ -124,7 +124,8 @@ new class extends Component {
                     <div class="d-flex justify-content-center gap-1">
                         {{ trans('footer.created_and_designed_by') }}
                         <a draggable="false" href="https://www.diw.co.id" target="_blank">
-                            <img draggable="false" src="{{ asset('images/icon-diw.co.id.png') }}" alt="Icon DIW.co.id"
+                            <img draggable="false" loading="lazy" decoding="async"
+                                src="{{ asset('images/icon-diw.co.id.png') }}" alt="Icon DIW.co.id"
                                 title="{{ trans('footer.created_and_designed_by') }} DIW.co.id">
                         </a>
                     </div>

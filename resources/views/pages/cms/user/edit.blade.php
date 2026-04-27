@@ -256,7 +256,8 @@ new #[Title('Edit | User')] class extends Component {
                                     </div>
 
                                     <div>
-                                        <img draggable="false" class="img-fluid w-100 rounded" width="100"
+                                        <img draggable="false" loading="lazy" decoding="async"
+                                            class="img-fluid w-100 rounded" width="100"
                                             src="{{ $form->image->temporaryUrl() }}" alt="Image Temporary"
                                             onerror="asset('images/image-not-available.png')" />
                                     </div>
@@ -264,8 +265,8 @@ new #[Title('Edit | User')] class extends Component {
                             @elseif ($user->image_path)
                                 <div>
                                     <a draggable="false" href="{{ $user->image }}" target="_blank">
-                                        <img draggable="false" class="img-fluid w-100 rounded" width="100"
-                                            src="{{ $user->image }}"
+                                        <img draggable="false" loading="lazy" decoding="async"
+                                            class="img-fluid w-100 rounded" width="100" src="{{ $user->image }}"
                                             alt="{{ trans('page.user') }} - {{ $user->id }}"
                                             onerror="asset('images/image-not-available.png')" />
                                     </a>

@@ -61,8 +61,9 @@ new class extends Component {};
                 <div class="col-auto">
                     @if (Auth::user()->image_url)
                         <a draggable="false" href="{{ Auth::user()->image_url }}" target="_blank">
-                            <img draggable="false" class="rounded-circle" width="100" src="{{ Auth::user()->image_url }}"
-                                alt="User - {{ Auth::user()->id }}" onerror="asset('images/user.png')" />
+                            <img draggable="false" loading="lazy" decoding="async" class="rounded-circle" width="100"
+                                src="{{ Auth::user()->image_url }}" alt="User - {{ Auth::user()->id }}"
+                                onerror="asset('images/user.png')" />
                         </a>
                     @endif
                 </div>

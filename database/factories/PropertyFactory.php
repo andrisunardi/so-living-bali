@@ -95,7 +95,7 @@ class PropertyFactory extends Factory
 
             'trade_off_identified' => fake()->boolean(),
             'trade_off_description' => fake()->text(),
-            'target_profile' => fake()->randomElement(PropertyTargetProfile::cases()),
+            'target_profiles' => [fake()->randomElement(PropertyTargetProfile::cases())],
 
             'operational_risk' => fake()->randomElement(PropertyOperationalRisk::cases()),
             'operational_risk_comment' => fake()->text(),

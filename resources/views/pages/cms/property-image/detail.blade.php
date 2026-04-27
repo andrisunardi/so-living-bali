@@ -99,8 +99,8 @@ new #[Title('Detail | Property Image')] class extends Component {
                     <div class="col-sm-7 col-md-6 col-lg-5 col-xl-4">
                         @if ($propertyImage->image_path)
                             <a draggable="false" href="{{ $propertyImage->image }}" target="_blank">
-                                <img draggable="false" class="img-fluid w-100 h-100 rounded mt-2"
-                                    src="{{ $propertyImage->image }}"
+                                <img draggable="false" loading="lazy" decoding="async"
+                                    class="img-fluid w-100 h-100 rounded mt-2" src="{{ $propertyImage->image }}"
                                     alt="{{ trans('page.property_image') }} - {{ $propertyImage->id }}"
                                     onerror="this.src='{{ asset('images/image-not-available.png') }}'" />
                             </a>

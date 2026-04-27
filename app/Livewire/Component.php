@@ -106,10 +106,10 @@ class Component extends LivewireComponent
                     [
                         'id' => $pageId++,
                         'menu_id' => 2,
-                        'name' => trans('page.concept'),
-                        'icon' => 'fas fa-lightbulb',
-                        'route' => 'cms.concept.index',
-                        'permission' => 'concept',
+                        'name' => trans('page.value'),
+                        'icon' => 'fas fa-gem',
+                        'route' => 'cms.value.index',
+                        'permission' => 'value',
                     ],
                     [
                         'id' => $pageId++,

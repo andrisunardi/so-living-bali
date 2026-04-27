@@ -154,25 +154,25 @@ Breadcrumbs::for('cms.property-image.detail', function (BreadcrumbTrail $trail, 
 });
 
 // MASTER
-// CONCEPT
-Breadcrumbs::for('cms.concept.index', function (BreadcrumbTrail $trail) {
+// VALUE
+Breadcrumbs::for('cms.value.index', function (BreadcrumbTrail $trail) {
     $trail->parent('cms.home');
-    $trail->push(trans('page.concept'), route('cms.concept.index'), ['icon' => 'fas fa-lightbulb']);
+    $trail->push(trans('page.value'), route('cms.value.index'), ['icon' => 'fas fa-gem']);
 });
 
-Breadcrumbs::for('cms.concept.add', function (BreadcrumbTrail $trail) {
-    $trail->parent('cms.concept.index');
-    $trail->push(trans('index.add'), route('cms.concept.add'), ['icon' => 'fas fa-plus']);
+Breadcrumbs::for('cms.value.add', function (BreadcrumbTrail $trail) {
+    $trail->parent('cms.value.index');
+    $trail->push(trans('index.add'), route('cms.value.add'), ['icon' => 'fas fa-plus']);
 });
 
-Breadcrumbs::for('cms.concept.edit', function (BreadcrumbTrail $trail, $concept) {
-    $trail->parent('cms.concept.index');
-    $trail->push(trans('index.edit'), route('cms.concept.edit', $concept), ['icon' => 'fas fa-edit']);
+Breadcrumbs::for('cms.value.edit', function (BreadcrumbTrail $trail, $value) {
+    $trail->parent('cms.value.index');
+    $trail->push(trans('index.edit'), route('cms.value.edit', $value), ['icon' => 'fas fa-edit']);
 });
 
-Breadcrumbs::for('cms.concept.detail', function (BreadcrumbTrail $trail, $concept) {
-    $trail->parent('cms.concept.index');
-    $trail->push(trans('index.detail'), route('cms.concept.detail', $concept), ['icon' => 'fas fa-list']);
+Breadcrumbs::for('cms.value.detail', function (BreadcrumbTrail $trail, $value) {
+    $trail->parent('cms.value.index');
+    $trail->push(trans('index.detail'), route('cms.value.detail', $value), ['icon' => 'fas fa-list']);
 });
 
 // AREA

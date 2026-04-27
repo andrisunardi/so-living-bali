@@ -37,11 +37,11 @@ Route::group(['middleware' => ['auth']], function () {
         ->group(base_path('routes/cms/property-image.php'));
 
     // MASTER
-    Route::prefix('concept')
-        ->name('concept.')
-        ->as('concept.')
-        ->middleware(['permission:concept'])
-        ->group(base_path('routes/cms/concept.php'));
+    Route::prefix('value')
+        ->name('value.')
+        ->as('value.')
+        ->middleware(['permission:value'])
+        ->group(base_path('routes/cms/value.php'));
 
     Route::prefix('area')
         ->name('area.')

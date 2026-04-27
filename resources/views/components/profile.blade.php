@@ -49,7 +49,8 @@ new class extends Component {
             <div class="row align-items-center g-3">
                 <div class="col-3">
                     <div class="ratio ratio-1x1">
-                        <img draggable="false" class="img-fluid w-100 h-100 rounded-circle object-fit-cover"
+                        <img draggable="false" loading="lazy" decoding="async"
+                            class="img-fluid w-100 h-100 rounded-circle object-fit-cover"
                             src="{{ Auth::user()->image_url ?? asset('images/user.png') }}"
                             alt="{{ trans('page.user') }} - {{ Auth::user()->id }}"
                             onerror="this.src='{{ asset('images/user.png') }}'" />
@@ -139,8 +140,8 @@ new class extends Component {
                 <button class="btn btn-outline-body icon-link dropdown-toggle justify-content-between w-100"
                     type="button" data-bs-toggle="dropdown">
                     <span class="d-flex gap-2">
-                        <img draggable="false" class="user-select-none pe-none" width="20"
-                            src="{{ asset('images/flag/' . app()->getLocale() . '.svg') }}"
+                        <img draggable="false" loading="lazy" decoding="async" class="user-select-none pe-none"
+                            width="20" src="{{ asset('images/flag/' . app()->getLocale() . '.svg') }}"
                             alt="{{ trans('index.flag') }} - {{ app()->getLocale() }} - {{ config('constants.title') }}" />
                         <span class="text-uppercase">
                             {{ collect($this->languages())->firstWhere('code', app()->getLocale())['name'] }}
@@ -155,8 +156,8 @@ new class extends Component {
                         <li wire:key="language-{{ $language['id'] }}">
                             <a draggable="false" class="dropdown-item icon-link"
                                 href="{{ route('locale', ['locale' => $language['code']]) }}">
-                                <img draggable="false" class="user-select-none pe-none" width="20"
-                                    src="{{ $language['image_url'] }}"
+                                <img draggable="false" loading="lazy" decoding="async" class="user-select-none pe-none"
+                                    width="20" src="{{ $language['image_url'] }}"
                                     alt="{{ trans('index.flag') }} {{ $language['code'] }} - {{ config('constants.title') }}" />
                                 <span class="text-uppercase">{{ $language['name'] }}</span>
                             </a>

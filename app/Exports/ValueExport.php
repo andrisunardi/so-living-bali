@@ -7,21 +7,21 @@ use Maatwebsite\Excel\Concerns\Exportable;
 use Maatwebsite\Excel\Concerns\FromView;
 use Maatwebsite\Excel\Concerns\ShouldAutoSize;
 
-class ConceptExport implements FromView, ShouldAutoSize
+class ValuetExport implements FromView, ShouldAutoSize
 {
     use Exportable;
 
-    public object $concepts;
+    public object $values;
 
-    public function __construct(object $concepts)
+    public function __construct(object $values)
     {
-        $this->concepts = $concepts;
+        $this->values = $values;
     }
 
     public function view(): View
     {
-        return view('excel.concept', [
-            'concepts' => $this->concepts,
+        return view('excel.value', [
+            'values' => $this->values,
         ]);
     }
 }

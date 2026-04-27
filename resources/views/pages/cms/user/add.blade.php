@@ -248,7 +248,8 @@ new #[Title('Add | User')] class extends Component {
                                     </div>
 
                                     <div>
-                                        <img draggable="false" class="img-fluid w-100 rounded" width="100"
+                                        <img draggable="false" loading="lazy" decoding="async"
+                                            class="img-fluid w-100 rounded" width="100"
                                             src="{{ $form->image->temporaryUrl() }}" alt="Image Temporary Url"
                                             onerror="asset('images/image-not-available.png')" />
                                     </div>

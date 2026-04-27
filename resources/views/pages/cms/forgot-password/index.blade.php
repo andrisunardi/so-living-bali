@@ -170,7 +170,8 @@ new #[Title('Forgot Password')] class extends Component {
             <div class="d-flex justify-content-center gap-1 small mt-2 ">
                 {{ trans('footer.created_and_designed_by') }}
                 <a draggable="false" href="https://www.diw.co.id" target="_blank">
-                    <img draggable="false" src="{{ asset('images/icon-diw.co.id.png') }}" alt="Icon DIW.co.id"
+                    <img draggable="false" loading="lazy" decoding="async"
+                        src="{{ asset('images/icon-diw.co.id.png') }}" alt="Icon DIW.co.id"
                         title="{{ trans('footer.created_and_designed_by') }} DIW.co.id">
                 </a>
             </div>

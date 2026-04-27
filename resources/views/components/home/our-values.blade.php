@@ -1,12 +1,12 @@
 <?php
 
 use App\Livewire\Component;
-use App\Services\ConceptService;
+use App\Services\ValueService;
 
 new class extends Component {
     public function values(): object
     {
-        $service = new ConceptService();
+        $service = new ValueService();
         return $service->index(isActive: [true], orderBy: 'id', sortBy: 'asc', paginate: false);
     }
 };

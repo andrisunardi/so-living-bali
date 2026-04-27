@@ -251,6 +251,9 @@ return [
         'visit_date' => 'Visit Date',
         'water_source' => 'Water Souce',
         'when' => 'When',
+        'short_description_id' => 'Short Description ID',
+        'short_description_zh' => 'Short Description ZH',
+        'short_description' => 'Short Description',
 
         'index' => 'Index',
         'index' => 'Index',

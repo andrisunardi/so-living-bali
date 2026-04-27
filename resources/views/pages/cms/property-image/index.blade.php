@@ -203,7 +203,8 @@ new #[Title('Property')] class extends Component {
                                     @if ($propertyImage->image_path)
                                         <a draggable="false" href="{{ $propertyImage->image }}" target="_blank">
                                             <div class="ratio ratio-1x1">
-                                                <img draggable="false" class="img-fluid w-100 h-100 object-fit-cover"
+                                                <img draggable="false" loading="lazy" decoding="async"
+                                                    class="img-fluid w-100 h-100 object-fit-cover"
                                                     src="{{ $propertyImage->image }}"
                                                     alt="{{ trans('page.property_image') }} - {{ $propertyImage->id }}"
                                                     onerror="this.src='{{ asset('images/image-not-available.png') }}'" />

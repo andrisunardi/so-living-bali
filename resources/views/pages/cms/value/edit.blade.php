@@ -1,38 +1,38 @@
 <?php
 
 use App\Livewire\Component;
-use App\Livewire\Forms\CMS\Concept\ConceptEditForm;
-use App\Models\Concept;
+use App\Livewire\Forms\CMS\Value\ValueEditForm;
+use App\Models\Value;
 use Illuminate\Validation\ValidationException;
 use Livewire\Attributes\Title;
 
-new #[Title('Edit | Concept')] class extends Component {
-    public Concept $concept;
+new #[Title('Edit | Value')] class extends Component {
+    public Value $value;
 
-    public ConceptEditForm $form;
+    public ValueEditForm $form;
 
-    public function mount(Concept $concept): void
+    public function mount(Value $value): void
     {
-        $this->concept = $concept;
-        $this->form->set(concept: $concept);
+        $this->value = $value;
+        $this->form->set(value: $value);
     }
 
     public function resetForm(): void
     {
-        $this->form->set(concept: $this->concept);
+        $this->form->set(value: $this->value);
     }
 
     public function submit(): void
     {
         try {
-            $this->form->submit(concept: $this->concept);
+            $this->form->submit(value: $this->value);
 
             session()->flash('success', [
                 'title' => trans('index.edit') . ' ' . trans('index.success'),
-                'message' => trans('page.concept') . ' ' . trans('message.has_been_successfully_edited'),
+                'message' => trans('page.value') . ' ' . trans('message.has_been_successfully_edited'),
             ]);
 
-            $this->redirect(route('cms.concept.index'), navigate: true);
+            $this->redirect(route('cms.value.index'), navigate: true);
         } catch (ValidationException $e) {
             $errors = collect($e->validator->errors()->all())->implode('<br>');
 
@@ -42,7 +42,7 @@ new #[Title('Edit | Concept')] class extends Component {
 };
 ?>
 
-@section('title', trans('page.concept'))
+@section('title', trans('page.value'))
 
 <div class="container-fluid">
     <div class="card">
@@ -53,8 +53,7 @@ new #[Title('Edit | Concept')] class extends Component {
         <div class="card-body">
             <div class="row g-3">
                 <div class="col-auto">
-                    <a draggable="false" class="btn btn-success w-100" href="{{ route('cms.concept.index') }}"
-                        wire:navigate>
+                    <a draggable="false" class="btn btn-success w-100" href="{{ route('cms.value.index') }}" wire:navigate>
                         <span class="fas fa-arrow-left fa-fw"></span>
                         {{ trans('index.back') }}
                     </a>
@@ -143,6 +142,81 @@ new #[Title('Edit | Concept')] class extends Component {
                     </div>
 
                     <div class="col-sm-4">
+                        <label class="form-label" for="short_description">
+                            {{ trans('validation.attributes.short_description') }}
+                            <span class="text-danger">*</span>
+                        </label>
+                        <div class="input-group">
+                            <div class="input-group-text">
+                                <span class="fas fa-file-text fa-fw "></span>
+                            </div>
+                            <textarea class="form-control" id="short_description" name="short_description" minlength="1" maxlength="100"
+                                placeholder="{{ trans('index.ex') }}. Bearer" required wire:model="form.short_description"
+                                wire:offline.class="disabled" wire:offline.attr="disabled" wire:loading.class="disabled"
+                                wire:loading.attr="disabled">
+                                    </textarea>
+                        </div>
+                        <div class="form-text">
+                            {{ trans('helper.required') }},
+                            {{ trans('helper.minlength') }} : 1,
+                            {{ trans('helper.maxlength') }} : 100,
+                        </div>
+                        @error('form.short_description')
+                            <div class="form-text text-danger">{{ $message }}</div>
+                        @enderror
+                    </div>
+
+                    <div class="col-sm-4">
+                        <label class="form-label" for="short_description_id">
+                            {{ trans('validation.attributes.short_description_id') }}
+                            <span class="text-danger">*</span>
+                        </label>
+                        <div class="input-group">
+                            <div class="input-group-text">
+                                <span class="fas fa-file-text fa-fw "></span>
+                            </div>
+                            <textarea class="form-control" id="short_description_id" name="short_description_id" minlength="1" maxlength="100"
+                                placeholder="{{ trans('index.ex') }}. Bearer" required wire:model="form.short_description_id"
+                                wire:offline.class="disabled" wire:offline.attr="disabled" wire:loading.class="disabled"
+                                wire:loading.attr="disabled">
+                                    </textarea>
+                        </div>
+                        <div class="form-text">
+                            {{ trans('helper.required') }},
+                            {{ trans('helper.minlength') }} : 1,
+                            {{ trans('helper.maxlength') }} : 100,
+                        </div>
+                        @error('form.short_description_id')
+                            <div class="form-text text-danger">{{ $message }}</div>
+                        @enderror
+                    </div>
+
+                    <div class="col-sm-4">
+                        <label class="form-label" for="short_description_zh">
+                            {{ trans('validation.attributes.short_description_zh') }}
+                            <span class="text-danger">*</span>
+                        </label>
+                        <div class="input-group">
+                            <div class="input-group-text">
+                                <span class="fas fa-file-text fa-fw "></span>
+                            </div>
+                            <textarea class="form-control" id="short_description_zh" name="short_description_zh" minlength="1" maxlength="100"
+                                placeholder="{{ trans('index.ex') }}. Bearer" required wire:model="form.short_description_zh"
+                                wire:offline.class="disabled" wire:offline.attr="disabled" wire:loading.class="disabled"
+                                wire:loading.attr="disabled">
+                                    </textarea>
+                        </div>
+                        <div class="form-text">
+                            {{ trans('helper.required') }},
+                            {{ trans('helper.minlength') }} : 1,
+                            {{ trans('helper.maxlength') }} : 100,
+                        </div>
+                        @error('form.short_description_zh')
+                            <div class="form-text text-danger">{{ $message }}</div>
+                        @enderror
+                    </div>
+
+                    <div class="col-sm-4">
                         <label class="form-label" for="description">
                             {{ trans('validation.attributes.description') }}
                             <span class="text-danger">*</span>
@@ -152,8 +226,9 @@ new #[Title('Edit | Concept')] class extends Component {
                                 <span class="fas fa-file-text fa-fw "></span>
                             </div>
                             <textarea class="form-control" id="description" name="description" minlength="1" maxlength="100"
-                                placeholder="{{ trans('index.ex') }}. Bearer" required wire:model="form.description" wire:offline.class="disabled"
-                                wire:offline.attr="disabled" wire:loading.class="disabled" wire:loading.attr="disabled">
+                                placeholder="{{ trans('index.ex') }}. Bearer" required wire:model="form.description"
+                                wire:offline.class="disabled" wire:offline.attr="disabled" wire:loading.class="disabled"
+                                wire:loading.attr="disabled">
                                     </textarea>
                         </div>
                         <div class="form-text">

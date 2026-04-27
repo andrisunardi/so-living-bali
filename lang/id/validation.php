@@ -250,6 +250,9 @@ return [
         'visit_date' => 'Visit Date',
         'water_source' => 'Water Souce',
         'when' => 'When',
+        'short_description_id' => 'Deskripsi Pendek ID',
+        'short_description_zh' => 'Deskripsi Pendek ZH',
+        'short_description' => 'Deskripsi Pendek',
     ],
 
 ];
