@@ -9,7 +9,7 @@ use Livewire\Attributes\Lazy;
 new #[Lazy] class extends Component {
     public array $selectedImages = [];
 
-    public string $rootFolderId;
+    public string $rootFolderId = '13alt2Sqn0xIsndoTa0ZG1jSqns1jsBg3';
 
     public string $currentFolderId;
 
@@ -20,7 +20,7 @@ new #[Lazy] class extends Component {
     public function mount($selectedImages = [])
     {
         $this->selectedImages = $selectedImages;
-        $this->rootFolderId = config('constants.folder_id.property');
+        // $this->rootFolderId = config('constants.folder_id.property');
         $this->currentFolderId = $this->rootFolderId;
         $this->loadFiles();
     }
@@ -107,9 +107,9 @@ new #[Lazy] class extends Component {
         </nav>
     @endif
 
-    <div class="row">
+    <div class="row row-cols-sm-2 row-cols-md-3 row-cols-lg-4 row-cols-xl-5 g-3">
         @foreach ($files as $file)
-            <div class="col-sm-6 col-md-3 mb-3" wire:key="file-{{ $file['id'] }}">
+            <div class="col" wire:key="file-{{ $file['id'] }}">
                 <div class="card h-100 text-center pointer {{ in_array($file['id'], $selectedImages) ? 'bg-primary-subtle' : '' }}"
                     wire:click="open(@js($file))">
                     @if ($file['type'] === 'folder')
