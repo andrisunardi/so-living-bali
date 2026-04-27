@@ -23,7 +23,7 @@ new #[Title('Home')] class extends Component {};
         @livewire('home.hero', [
             'title' => trans('home.hero.title'),
             'description' => trans('home.hero.description'),
-            'image' => asset('images/banner/home.jpg'),
+            'image' => asset('images/banner/home.png'),
         ])
 
         @livewire('home.our-values')
