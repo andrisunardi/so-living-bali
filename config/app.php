@@ -1,6 +1,7 @@
 <?php
 
 use App\Enums\Currency;
+use App\Enums\Language;
 use App\Enums\Property\PropertyBedroom;
 use App\Enums\Property\PropertyElectricity;
 use App\Enums\Property\PropertyLivingStyle;
@@ -58,6 +59,7 @@ return [
 
     'aliases' => Facade::defaultAliases()->merge([
         'Currency' => Currency::class,
+        'Language' => Language::class,
         'PropertyBedroom' => PropertyBedroom::class,
         'PropertyElectricity' => PropertyElectricity::class,
         'PropertyLivingStyle' => PropertyLivingStyle::class,

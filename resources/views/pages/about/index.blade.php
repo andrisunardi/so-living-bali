@@ -14,4 +14,6 @@ new #[Title('About')] class extends Component {};
     <x-about.our-story />
 
     <livewire:about.our-values lazy />
+
+    <x-about.cta />
 </div>

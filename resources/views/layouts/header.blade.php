@@ -1,6 +1,7 @@
 <?php
 
 use App\Enums\Currency;
+use App\Enums\Language;
 use App\Livewire\Component;
 
 new class extends Component {
@@ -42,26 +43,7 @@ new class extends Component {
 
     public function languages(): array
     {
-        return [
-            [
-                'id' => 1,
-                'code' => 'en',
-                'name' => 'English',
-                'image_url' => asset('images/flag/en.svg'),
-            ],
-            [
-                'id' => 2,
-                'code' => 'id',
-                'name' => 'Indonesia',
-                'image_url' => asset('images/flag/id.svg'),
-            ],
-            [
-                'id' => 3,
-                'code' => 'zh',
-                'name' => 'Chinese',
-                'image_url' => asset('images/flag/zh.svg'),
-            ],
-        ];
+        return Language::cases();
     }
 
     public function currencies(): array
@@ -97,7 +79,7 @@ new class extends Component {
                     <div class="col-lg-auto">
                         <div>
                             <div class="dropdown">
-                                <a draggable="false" href="javascript:;" class="header-color dropdown-toggle icon-link"
+                                <a draggable="false" role="button" class="header-color dropdown-toggle icon-link"
                                     data-bs-toggle="dropdown">
                                     <img draggable="false" loading="lazy" decoding="async"
                                         class="user-select-none pe-none" width="20"
@@ -108,15 +90,15 @@ new class extends Component {
                                     </span>
                                 </a>
                                 <ul class="dropdown-menu dropdown-menu-end mt-3">
-                                    @foreach ($this->languages() as $language)
-                                        <li wire:key="language-{{ $language['id'] }}">
+                                    @foreach (Language::cases() as $language)
+                                        <li wire:key="language-{{ $language->value }}">
                                             <a draggable="false" class="dropdown-item icon-link"
-                                                href="{{ route('locale', ['locale' => $language['code']]) }}">
+                                                href="{{ route('locale', ['locale' => $language->value]) }}">
                                                 <img draggable="false" loading="lazy" decoding="async"
                                                     class="user-select-none pe-none" width="20"
-                                                    src="{{ $language['image_url'] }}"
-                                                    alt="{{ trans('index.flag') }} {{ $language['code'] }} - {{ config('app.name') }}" />
-                                                <span>{{ $language['name'] }}</span>
+                                                    src="{{ asset("images/flag/{$language->value}.svg") }}"
+                                                    alt="{{ trans('index.flag') }} {{ $language->value }} - {{ config('app.name') }}" />
+                                                <span>{{ $language->name }}</span>
                                             </a>
                                         </li>
                                     @endforeach
@@ -209,15 +191,15 @@ new class extends Component {
                                         <span class="fw-bold text-uppercase">{{ app()->getLocale() }}</span>
                                     </a>
                                     <ul class="dropdown-menu mt-2">
-                                        @foreach ($this->languages() as $language)
-                                            <li wire:key="language-{{ $language['id'] }}">
+                                        @foreach (Language::cases() as $language)
+                                            <li wire:key="language-{{ $language->value }}">
                                                 <a draggable="false" class="dropdown-item icon-link"
-                                                    href="{{ route('locale', ['locale' => $language['code']]) }}">
+                                                    href="{{ route('locale', ['locale' => $language->value]) }}">
                                                     <img draggable="false" loading="lazy" decoding="async"
                                                         class="user-select-none pe-none" width="25"
-                                                        src="{{ $language['image_url'] }}"
-                                                        alt="{{ trans('index.flag') }} {{ $language['code'] }} - {{ config('app.name') }}" />
-                                                    <span>{{ $language['name'] }}</span>
+                                                        src="{{ asset("images/flag/{$language->value}.svg") }}"
+                                                        alt="{{ trans('index.flag') }} {{ $language->value }} - {{ config('app.name') }}" />
+                                                    <span>{{ $language->name }}</span>
                                                 </a>
                                             </li>
                                         @endforeach

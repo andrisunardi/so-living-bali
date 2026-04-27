@@ -24,4 +24,10 @@ return [
         'title' => 'What We Stand For',
     ],
 
+    'cta' => [
+        'title' => 'Thinking about living in Bali?',
+        'description' => "Share what you're looking for, and we'll help you find a home that fits your way of living",
+        'button_name' => 'Chat with us on Whatsapp',
+    ],
+
 ];

@@ -32900,6 +32900,7 @@ namespace  {
     class View extends \Illuminate\Support\Facades\View {}
     class Vite extends \Illuminate\Support\Facades\Vite {}
     class Currency extends \App\Enums\Currency {}
+    class Language extends \App\Enums\Language {}
     class PropertyBedroom extends \App\Enums\Property\PropertyBedroom {}
     class PropertyElectricity extends \App\Enums\Property\PropertyElectricity {}
     class PropertyLivingStyle extends \App\Enums\Property\PropertyLivingStyle {}
