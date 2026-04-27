@@ -76,6 +76,8 @@ return [
     'if_yes_describe_briefly' => 'If YES, Describe Briefly',
     'target_profiles' => 'Target Profile',
 
+    'price_and_inclusions' => 'Price And Inclusions',
+
     'operational_risk' => 'Operational Risk',
     'operational_risk_level' => 'Low / Medium / High',
     'comments_if_medium_or_high' => 'Comments if Medium or High',

@@ -24,6 +24,8 @@ enum PropertyTab: int
 
     case TradeOffAndTargetProfile = 10;
 
+    case PriceAndInclusions = 11;
+
     public function description(): string
     {
         return match ($this) {
@@ -37,6 +39,7 @@ enum PropertyTab: int
             self::UtilitiesAndTechnical => trans('property.utilities_and_technical'),
             self::DesignLedOrInstagrammable => trans('property.design_led_or_instagrammable'),
             self::TradeOffAndTargetProfile => trans('property.trade_off_and_target_profile'),
+            self::PriceAndInclusions => trans('property.price_and_inclusions'),
         };
     }
 
@@ -53,6 +56,7 @@ enum PropertyTab: int
             self::UtilitiesAndTechnical->value => trans('property.utilities_and_technical'),
             self::DesignLedOrInstagrammable->value => trans('property.design_led_or_instagrammable'),
             self::TradeOffAndTargetProfile->value => trans('property.trade_off_and_target_profile'),
+            self::PriceAndInclusions->value => trans('property.price_and_inclusions'),
         };
     }
 }
