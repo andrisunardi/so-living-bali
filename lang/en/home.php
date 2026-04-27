@@ -6,6 +6,7 @@ return [
         'title' => 'Live Better Stay Longer',
         'description' => 'Start your monthly and yearly living experience with us.',
     ],
+
     'form' => [
         'title' => 'Search long-term homes',
         'button' => 'Find a home',
@@ -15,6 +16,7 @@ return [
         'type' => 'All type',
         'price_range' => 'Budget range',
     ],
+
     'our_values' => [
         'sub_title' => 'Our Values',
         'title' => 'Spaces Designed for Living, Beyond Short Stays',
