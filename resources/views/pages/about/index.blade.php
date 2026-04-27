@@ -9,5 +9,5 @@ new #[Title('About')] class extends Component {};
 @section('title', trans('page.about'))
 
 <div>
-    @livewire('about.header')
+    <x-about.header />
 </div>

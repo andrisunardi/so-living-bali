@@ -14,7 +14,7 @@ return [
 
     'component_layout' => 'layouts::app',
 
-    'component_placeholder' => 'placeholders::skeleton',
+    'component_placeholder' => null,
 
     'make_command' => [
         'type' => 'sfc',

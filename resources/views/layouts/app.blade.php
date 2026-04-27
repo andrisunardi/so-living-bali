@@ -5,7 +5,12 @@
 <head>
     <x-meta />
 
-    <title>{{ View::getSection('title') ?? $title }} | {{ config('app.name') }}</title>
+    <title>
+        @if (!Route::is('home'))
+            {{ View::getSection('title') ?? $title }} |
+        @endif
+        {{ config('constants.meta.title') }}
+    </title>
 
     <x-vendors />
 

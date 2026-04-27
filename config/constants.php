@@ -38,5 +38,10 @@ return [
         'user' => env('FOLDER_ID_USER'),
     ],
 
-    'color' => '',
+    // META
+    'meta' => [
+        'title' => env('META_TITLE'),
+        'description' => env('META_DESCRIPTION'),
+        'color' => env('META_COLOR'),
+    ],
 ];
