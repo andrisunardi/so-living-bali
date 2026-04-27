@@ -32,7 +32,7 @@ class AppServiceProvider extends ServiceProvider
             URL::forceScheme('https');
         }
 
-        LogViewer::auth(fn ($request) => optional($request->user())->hasRole('Admin') ?? false);
+        LogViewer::auth(fn($request) => optional($request->user())->hasRole('Admin') ?? false);
 
         Gate::before(function (User $user) {
             return $user->hasRole('Admin');
@@ -43,7 +43,7 @@ class AppServiceProvider extends ServiceProvider
         });
 
         Str::macro('idr', function ($value) {
-            return 'IDR. '.number_format($value, 0, ',', '.');
+            return 'IDR. ' . number_format($value, 0, ',', '.');
         });
 
         Str::macro('successDanger', function ($value) {
@@ -52,6 +52,14 @@ class AppServiceProvider extends ServiceProvider
 
         Str::macro('yesNo', function ($value) {
             return $value ? trans('index.yes') : trans('index.no');
+        });
+
+        Str::macro('filesize', function ($bytes) {
+            if (!$bytes) return '-';
+            $units = ['B', 'KB', 'MB', 'GB'];
+            $i = floor(log($bytes, 1024));
+
+            return round($bytes / pow(1024, $i), 2) . ' ' . $units[$i];
         });
     }
 }

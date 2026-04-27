@@ -62,7 +62,7 @@ return [
     'visit' => 'Visit',
     'yes' => 'Yes',
 
-    'index' => 'Index',
+    'up' => 'Up',
     'index' => 'Index',
     'index' => 'Index',
     'index' => 'Index',

@@ -165,7 +165,7 @@ class GoogleDrive
         $params = [
             'q' => "'{$folderId}' in parents and mimeType contains 'image/'",
             'pageSize' => $pageSize,
-            'fields' => 'nextPageToken, files(id, name, mimeType, thumbnailLink)',
+            'fields' => 'nextPageToken, files(id, name, mimeType, thumbnailLink, size',
         ];
 
         if ($pageToken) {
@@ -187,5 +187,27 @@ class GoogleDrive
         ]);
 
         return $response->getBody()->getContents();
+    }
+
+    public function listFiles(string $folderId): array
+    {
+        $params = [
+            'q' => "'{$folderId}' in parents",
+            'fields' => 'files(id, name, mimeType, thumbnailLink, size)',
+        ];
+
+        $response = $this->drive->files->listFiles($params);
+
+        return collect($response->getFiles())
+            ->map(fn($file) => [
+                'id' => $file->id,
+                'name' => $file->name,
+                'type' => $file->mimeType === 'application/vnd.google-apps.folder'
+                    ? 'folder'
+                    : 'image',
+                'thumbnail' => $file->thumbnailLink,
+                'size' => $file->size ?? null,
+            ])
+            ->toArray();
     }
 }

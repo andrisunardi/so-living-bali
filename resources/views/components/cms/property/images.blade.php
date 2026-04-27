@@ -7,77 +7,127 @@ use App\Livewire\Component;
 use Livewire\Attributes\Lazy;
 
 new #[Lazy] class extends Component {
-    public array $driveImages = [];
-
     public array $selectedImages = [];
+
+    public string $rootFolderId;
+
+    public string $currentFolderId;
+
+    public array $files = [];
+
+    public array $folderStack = [];
 
     public function mount($selectedImages = [])
     {
         $this->selectedImages = $selectedImages;
-        $this->loadImages();
+        $this->rootFolderId = config('constants.folder_id.property');
+        $this->currentFolderId = $this->rootFolderId;
+        $this->loadFiles();
     }
 
-    public function loadImages()
+    public function loadFiles()
     {
         $google = new GoogleDrive();
-
-        $folderId = config('constants.folder_id.property');
-
-        $this->driveImages = collect($google->listImages($folderId)['files'])
-            ->map(
-                fn($file) => [
-                    'id' => $file->id,
-                    'name' => $file->name,
-                    'thumbnail' => $file->thumbnailLink,
-                ],
-            )
-            ->toArray();
+        $this->files = $google->listFiles($this->currentFolderId);
     }
 
     public function toggleSelect($id)
     {
         if (in_array($id, $this->selectedImages)) {
-            $this->selectedImages = array_values(
-                array_filter(
-                    $this->selectedImages,
-
-                    fn($i) => $i !== $id,
-                ),
-            );
+            $this->selectedImages = array_values(array_filter($this->selectedImages, fn($i) => $i !== $id));
         } else {
             $this->selectedImages[] = $id;
         }
         $this->dispatch('imagesUpdated', images: $this->selectedImages);
     }
+
+    public function open($file)
+    {
+        if ($file['type'] === 'folder') {
+            $this->folderStack[] = [
+                'id' => $this->currentFolderId,
+                'name' => $file['name'],
+            ];
+
+            $this->currentFolderId = $file['id'];
+            $this->currentFolderName = $file['name'];
+
+            $this->loadFiles();
+        } else {
+            $this->toggleSelect($file['id']);
+        }
+    }
+
+    public function goTo($index)
+    {
+        $folder = $this->folderStack[$index];
+
+        $this->currentFolderId = $folder['id'];
+        $this->folderStack = array_slice($this->folderStack, 0, $index);
+
+        $this->loadFiles();
+    }
+
+    public function goRoot()
+    {
+        $this->folderStack = [];
+        $this->currentFolderId = $this->rootFolderId;
+
+        $this->loadFiles();
+    }
 };
 ?>
 
-<div wire:init="loadImages">
-    <div wire:loading>
+<div wire:init="loadFiles">
+    {{-- <div wire:loading>
         Loading images...
-    </div>
+    </div> --}}
 
-    <div wire:loading.remove class="row">
-        @foreach ($driveImages as $file)
-            @php
-                $selected = in_array($file['id'], $selectedImages);
-            @endphp
+    @if (count($folderStack))
+        <nav aria-label="breadcrumb" class="mb-3">
+            <ol class="breadcrumb">
+                <li class="breadcrumb-item">
+                    <a href="#" wire:click.prevent="goRoot">
+                        Root
+                    </a>
+                </li>
 
-            <div class="col-6 col-md-3 mb-3">
-                <div class="card h-100 position-relative" wire:click="toggleSelect('{{ $file['id'] }}')"
-                    style="cursor:pointer; border: {{ $selected ? '3px solid #0d6efd' : '1px solid #ddd' }}">
-                    <img src="{{ $file['thumbnail'] }}" class="card-img-top" style="height:150px; object-fit:cover;">
+                @foreach ($folderStack as $index => $folder)
+                    <li class="breadcrumb-item">
+                        <a href="#" wire:click.prevent="goTo({{ $index }})">
+                            {{ $folder['name'] }}
+                        </a>
+                    </li>
+                @endforeach
 
-                    @if ($selected)
-                        <div class="position-absolute top-0 end-0 m-2 bg-primary text-white rounded-circle px-2">
-                            ✓
+                <li class="breadcrumb-item active">
+                    {{ $currentFolderName ?? 'Folder' }}
+                </li>
+            </ol>
+        </nav>
+    @endif
+
+    <div class="row">
+        @foreach ($files as $file)
+            <div class="col-sm-6 col-md-3 mb-3" wire:key="file-{{ $file['id'] }}">
+                <div class="card h-100 text-center pointer {{ in_array($file['id'], $selectedImages) ? 'bg-primary-subtle' : '' }}"
+                    wire:click="open(@js($file))">
+                    @if ($file['type'] === 'folder')
+                        <div class="ratio ratio-1x1">
+                            <div class="d-flex align-items-center justify-content-center">
+                                <span class="fas fa-folder fa-2x"></span>
+                            </div>
+                        </div>
+                    @else
+                        <div class="ratio ratio-1x1">
+                            <img draggable="false" loading="lazy" decoding="async"
+                                class="img-fluid w-100 h-100 object-fit-cover" src="{{ $file['thumbnail'] }}">
                         </div>
                     @endif
 
-                    <div class="card-body p-2 text-center">
-                        <small class="text-truncate d-block">
-                            {{ $file['name'] }}
-                        </small>
+                    <div class="card-body">
+                        <div class="text-truncate">{{ $file['name'] }}</div>
+                        <div class="small">{{ Str::filesize($file['size']) }}</div>
                     </div>
                 </div>
             </div>

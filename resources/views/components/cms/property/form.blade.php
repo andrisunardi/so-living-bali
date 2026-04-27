@@ -45,6 +45,5 @@
 @endif
 
 @if ($tab == PropertyTab::Images->value)
-    {{-- <x-cms.property.images :property="$property" :form="$form" :type="$type" /> --}}
     <livewire:cms.property.images :selected-images="$form->images ?? []" />
 @endif
