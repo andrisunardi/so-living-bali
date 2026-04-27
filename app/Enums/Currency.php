@@ -4,13 +4,13 @@ namespace App\Enums;
 
 enum Currency: string
 {
+    case IDR = 'idr';
+
     case USD = 'usd';
 
     case AUD = 'aud';
 
     case EUR = 'eur';
-
-    case IDR = 'idr';
 
     case GBP = 'gbp';
 
@@ -21,10 +21,10 @@ enum Currency: string
     public function icon(): string
     {
         return match ($this) {
+            self::IDR => 'fas fa-rupiah-sign',
             self::USD => 'fas fa-dollar-sign',
             self::AUD => 'fas fa-dollar-sign',
             self::EUR => 'fas fa-euro-sign',
-            self::IDR => 'fas fa-rupiah-sign',
             self::GBP => 'fas fa-sterling-sign',
             self::CNY => 'fas fa-yen-sign',
             self::YEN => 'fas fa-yen-sign',

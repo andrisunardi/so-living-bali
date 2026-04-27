@@ -128,9 +128,9 @@ new class extends Component {
                             <a draggable="false" role="button" class="header-color dropdown-toggle icon-link"
                                 data-bs-toggle="dropdown">
                                 <span
-                                    class="{{ Currency::from(Session::get('currency') ?? 'usd')->icon() }} fa-fw"></span>
+                                    class="{{ Currency::from(Session::get('currency') ?? Currency::IDR->value)->icon() }} fa-fw"></span>
                                 <span class="d-lg-none d-xl-block text-uppercase">
-                                    {{ Session::get('currency') ?? 'usd' }}
+                                    {{ Session::get('currency') ?? Currency::IDR->value }}
                                 </span>
                             </a>
                             <ul class="dropdown-menu dropdown-menu-end mt-3">
@@ -227,9 +227,9 @@ new class extends Component {
                                     <a draggable="false" role="button" class="text-body dropdown-toggle icon-link"
                                         data-bs-toggle="dropdown">
                                         <span
-                                            class="{{ Currency::from(Session::get('currency') ?? 'usd')->icon() }} fa-fw"></span>
+                                            class="{{ Currency::from(Session::get('currency') ?? Currency::IDR->value)->icon() }} fa-fw"></span>
                                         <span class="fw-bold text-uppercase">
-                                            {{ Session::get('currency') ?? 'usd' }}
+                                            {{ Session::get('currency') ?? Currency::IDR->value }}
                                         </span>
                                     </a>
                                     <ul class="dropdown-menu mt-2">
