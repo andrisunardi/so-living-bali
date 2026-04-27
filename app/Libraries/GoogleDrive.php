@@ -183,7 +183,7 @@ class GoogleDrive
     public function download(string $fileId): string
     {
         $response = $this->drive->files->get($fileId, [
-            'alt' => 'media'
+            'alt' => 'media',
         ]);
 
         return $response->getBody()->getContents();

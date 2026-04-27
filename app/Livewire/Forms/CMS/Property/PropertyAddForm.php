@@ -183,8 +183,11 @@ class PropertyAddForm extends Form
     #[Validate('nullable|string|min:1|max:65535')]
     public string $trade_off_description = '';
 
-    #[Validate(['nullable', 'integer', new Enum(PropertyTargetProfile::class)])]
-    public ?int $target_profile = null;
+    #[Validate([
+        'target_profiles' => ['nullable', 'array'],
+        'target_profiles.*' => ['integer', new Enum(PropertyTargetProfile::class)],
+    ])]
+    public array $target_profiles = [];
 
     #[Validate(['nullable', 'integer', new Enum(PropertyOperationalRisk::class)])]
     public ?int $operational_risk = null;

@@ -184,8 +184,11 @@ class PropertyEditForm extends Form
     #[Validate('nullable|string|min:0|max:65535')]
     public ?string $trade_off_description = '';
 
-    #[Validate(['nullable', 'integer', new Enum(PropertyTargetProfile::class)])]
-    public ?int $target_profile = null;
+    #[Validate([
+        'target_profiles' => ['nullable', 'array'],
+        'target_profiles.*' => ['integer', new Enum(PropertyTargetProfile::class)],
+    ])]
+    public array $target_profiles = [];
 
     #[Validate(['nullable', 'integer', new Enum(PropertyOperationalRisk::class)])]
     public ?int $operational_risk = null;
@@ -260,7 +263,7 @@ class PropertyEditForm extends Form
         $this->usability_limitations = $property->usability_limitations;
         $this->trade_off_identified = $property->trade_off_identified;
         $this->trade_off_description = $property->trade_off_description;
-        $this->target_profile = $property->target_profile?->value;
+        $this->target_profiles = $property->target_profiles;
         $this->operational_risk = $property->operational_risk?->value;
         $this->operational_risk_comment = $property->operational_risk_comment;
         $this->status = $property->status?->value;

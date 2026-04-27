@@ -79,7 +79,7 @@ return new class extends Migration
 
             $table->boolean('trade_off_identified')->unsigned()->default(false);
             $table->text('trade_off_description')->nullable();
-            $table->boolean('target_profile')->unsigned()->nullable();
+            $table->json('target_profiles')->nullable();
 
             $table->boolean('operational_risk')->unsigned()->nullable();
             $table->text('operational_risk_comment')->nullable();

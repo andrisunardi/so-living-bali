@@ -43,26 +43,26 @@
     @endif
 
     <div class="col-sm-6">
-        <label class="form-label" for="target_profile">
-            {{ trans('property.target_profile') }}
+        <label class="form-label" for="target_profiles">
+            {{ trans('property.target_profiles') }}
         </label>
         <div>
             @foreach ($this->propertyTargetProfiles() as $propertyTargetProfile)
                 <div class="form-check form-check-inline"
-                    wire:key="target-profile-{{ $propertyTargetProfile->value }}">
-                    <input class="form-check-input" type="radio"
-                        id="target_profile_{{ $propertyTargetProfile->value }}" name="target_profile"
+                    wire:key="target-profiles-{{ $propertyTargetProfile->value }}">
+                    <input class="form-check-input" type="checkbox"
+                        id="target_profiles_{{ $propertyTargetProfile->value }}" name="target_profiles"
                         value="{{ $propertyTargetProfile->value }}"
-                        {{ $propertyTargetProfile->value == $form->target_profile ? 'checked' : '' }}
-                        wire:model.lazy="form.target_profile" wire:offline.class="disabled" wire:offline.attr="disabled"
-                        wire:loading.class="disabled" wire:loading.attr="disabled">
-                    <label class="form-check-label" for="target_profile_{{ $propertyTargetProfile->value }}">
+                        {{ $propertyTargetProfile->value == $form->target_profiles ? 'checked' : '' }}
+                        wire:model.lazy="form.target_profiles" wire:offline.class="disabled"
+                        wire:offline.attr="disabled" wire:loading.class="disabled" wire:loading.attr="disabled">
+                    <label class="form-check-label" for="target_profiles_{{ $propertyTargetProfile->value }}">
                         {{ $propertyTargetProfile->description() }}
                     </label>
                 </div>
             @endforeach
         </div>
-        @error('form.target_profile')
+        @error('form.target_profiles')
             <div class="form-text text-danger">{{ $message }}</div>
         @enderror
     </div>

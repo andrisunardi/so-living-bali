@@ -4314,7 +4314,7 @@ namespace PHPSTORM_META {
 'property.bedroom_1_has_natural_light','property.bedroom_2_has_natural_light','property.noise_source_identified','property.utilities_and_technical','property.internet_speedtest',
 'property.power_backup','property.water_source','property.electricity','property.category_assessment','property.eligible_for_upper',
 'property.eligible_for_premium','property.design_led_or_instagrammable','property.design_driven_property','property.usability_limitations_identified','property.trade_off_and_target_profile',
-'property.trade_off_identified','property.if_yes_describe_briefly','property.target_profile','property.operational_risk','property.operational_risk_level',
+'property.trade_off_identified','property.if_yes_describe_briefly','property.target_profiles','property.operational_risk','property.operational_risk_level',
 'property.comments_if_medium_or_high','property.final_decision','property.status','theme.theme','theme.light',
 'theme.dark','theme.auto','validation.attributes.access_token','validation.attributes.address','validation.attributes.area_id',
 'validation.attributes.area','validation.attributes.availability_date','validation.attributes.bedroom_1_has_natural_light','validation.attributes.bedroom_2_has_natural_light','validation.attributes.bedroom',

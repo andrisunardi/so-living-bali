@@ -81,7 +81,7 @@ use Spatie\Activitylog\Traits\LogsActivity;
  * @property string|null $usability_limitations
  * @property bool $trade_off_identified
  * @property string|null $trade_off_description
- * @property PropertyTargetProfile|null $target_profile
+ * @property array<array-key, mixed>|null $target_profiles
  * @property PropertyOperationalRisk|null $operational_risk
  * @property string|null $operational_risk_comment
  * @property string|null $image_path
@@ -200,7 +200,7 @@ use Spatie\Activitylog\Traits\LogsActivity;
  * @method static Builder<static>|Property whereSlug($value)
  * @method static Builder<static>|Property whereStatus($value)
  * @method static Builder<static>|Property whereStorage($value)
- * @method static Builder<static>|Property whereTargetProfile($value)
+ * @method static Builder<static>|Property whereTargetProfiles($value)
  * @method static Builder<static>|Property whereTradeOffDescription($value)
  * @method static Builder<static>|Property whereTradeOffIdentified($value)
  * @method static Builder<static>|Property whereUpdatedAt($value)
@@ -291,7 +291,7 @@ class Property extends Model
 
         'trade_off_identified',
         'trade_off_description',
-        'target_profile',
+        'target_profiles',
 
         'operational_risk',
         'operational_risk_comment',
@@ -372,7 +372,7 @@ class Property extends Model
 
             'trade_off_identified' => 'boolean',
             'trade_off_description' => 'string',
-            'target_profile' => PropertyTargetProfile::class,
+            'target_profiles' => 'json',
 
             'operational_risk' => PropertyOperationalRisk::class,
             'operational_risk_comment' => 'string',

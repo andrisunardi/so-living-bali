@@ -74,7 +74,7 @@ return [
     'trade_off_and_target_profile' => 'Trade-Off & Target Profile',
     'trade_off_identified' => 'Trade-Off Identified',
     'if_yes_describe_briefly' => 'If YES, Describe Briefly',
-    'target_profile' => 'Target Profile (Family / Couple / Remote Worker / Design Lover)',
+    'target_profiles' => 'Target Profile',
 
     'operational_risk' => 'Operational Risk',
     'operational_risk_level' => 'Low / Medium / High',

@@ -74,7 +74,7 @@ return [
     'trade_off_and_target_profile' => '权衡和目标档案',
     'trade_off_identified' => '已识别权衡',
     'if_yes_describe_briefly' => '如果是，请简要描述',
-    'target_profile' => '目标档案 (家庭 / 夫妇 / 远程工作者 / 设计爱好者)',
+    'target_profiles' => '目标档案',
 
     'operational_risk' => '运营风险',
     'operational_risk_level' => '风险级别 (低 / 中 / 高)',

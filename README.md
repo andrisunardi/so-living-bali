@@ -54,3 +54,8 @@ Pls insert a dropdown list with multiple choice
 •⁠ ⁠Garbage
 •⁠ ⁠Security
 •⁠ ⁠Others : ?
+
+    <script src="https://apis.google.com/js/api.js"></script>
+    <script src="https://accounts.google.com/gsi/client"></script>
+
+AIzaSyCQalcuihucVlbQoSulGPlUPh4zWzQPwUI

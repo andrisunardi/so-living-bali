@@ -337,7 +337,7 @@ namespace App\Models{
  * @property string|null $usability_limitations
  * @property bool $trade_off_identified
  * @property string|null $trade_off_description
- * @property \App\Enums\Property\PropertyTargetProfile|null $target_profile
+ * @property array<array-key, mixed>|null $target_profiles
  * @property \App\Enums\Property\PropertyOperationalRisk|null $operational_risk
  * @property string|null $operational_risk_comment
  * @property string|null $image_path
@@ -455,7 +455,7 @@ namespace App\Models{
  * @method static \Illuminate\Database\Eloquent\Builder<static>|Property whereSlug($value)
  * @method static \Illuminate\Database\Eloquent\Builder<static>|Property whereStatus($value)
  * @method static \Illuminate\Database\Eloquent\Builder<static>|Property whereStorage($value)
- * @method static \Illuminate\Database\Eloquent\Builder<static>|Property whereTargetProfile($value)
+ * @method static \Illuminate\Database\Eloquent\Builder<static>|Property whereTargetProfiles($value)
  * @method static \Illuminate\Database\Eloquent\Builder<static>|Property whereTradeOffDescription($value)
  * @method static \Illuminate\Database\Eloquent\Builder<static>|Property whereTradeOffIdentified($value)
  * @method static \Illuminate\Database\Eloquent\Builder<static>|Property whereUpdatedAt($value)

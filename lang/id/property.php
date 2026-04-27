@@ -74,7 +74,7 @@ return [
     'trade_off_and_target_profile' => 'Pertimbangan (Trade-Off) & Profil Target',
     'trade_off_identified' => 'Pertimbangan (Trade-Off) Teridentifikasi',
     'if_yes_describe_briefly' => 'Jika YA, Jelaskan Singkat',
-    'target_profile' => 'Profil Target (Keluarga / Pasangan / Pekerja Remote / Pecinta Desain)',
+    'target_profiles' => 'Profil Target',
 
     'operational_risk' => 'Risiko Operasional',
     'operational_risk_level' => 'Level Risiko (Rendah / Sedang / Tinggi)',
