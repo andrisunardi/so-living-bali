@@ -39,3 +39,12 @@
 @if ($tab == PropertyTab::TradeOffAndTargetProfile->value)
     <x-cms.property.trade-off-and-target-profile :property="$property" :form="$form" :type="$type" />
 @endif
+
+@if ($tab == PropertyTab::PriceAndInclusions->value)
+    <x-cms.property.price-and-inclusions :property="$property" :form="$form" :type="$type" />
+@endif
+
+@if ($tab == PropertyTab::Images->value)
+    {{-- <x-cms.property.images :property="$property" :form="$form" :type="$type" /> --}}
+    <livewire:cms.property.images :selected-images="$form->images ?? []" />
+@endif
