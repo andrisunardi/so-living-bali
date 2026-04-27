@@ -548,44 +548,45 @@ namespace App\Models{
  * @property int|null $created_by
  * @property int|null $updated_by
  * @property int|null $deleted_by
- * @property \Illuminate\Support\Carbon $created_at
- * @property \Illuminate\Support\Carbon $updated_at
- * @property \Illuminate\Support\Carbon|null $deleted_at
- * @property-read \Illuminate\Database\Eloquent\Collection<int, \Spatie\Activitylog\Models\Activity> $activities
+ * @property Carbon $created_at
+ * @property Carbon $updated_at
+ * @property Carbon|null $deleted_at
+ * @property-read Collection<int, Activity> $activities
  * @property-read int|null $activities_count
- * @property-read \App\Models\User|null $createdBy
- * @property-read \App\Models\User|null $deletedBy
+ * @property-read User|null $createdBy
+ * @property-read User|null $deletedBy
  * @property-read string $translate_description
  * @property-read string $translate_short_description
  * @property-read string $translate_title
- * @property-read \App\Models\User|null $updatedBy
- * @method static \Illuminate\Database\Eloquent\Builder<static>|Value active()
+ * @property-read User|null $updatedBy
+ * @method static Builder<static>|Value active()
  * @method static \Database\Factories\ValueFactory factory($count = null, $state = [])
- * @method static \Illuminate\Database\Eloquent\Builder<static>|Value inactive()
- * @method static \Illuminate\Database\Eloquent\Builder<static>|Value newModelQuery()
- * @method static \Illuminate\Database\Eloquent\Builder<static>|Value newQuery()
- * @method static \Illuminate\Database\Eloquent\Builder<static>|Value onlyTrashed()
- * @method static \Illuminate\Database\Eloquent\Builder<static>|Value query()
- * @method static \Illuminate\Database\Eloquent\Builder<static>|Value whereCreatedAt($value)
- * @method static \Illuminate\Database\Eloquent\Builder<static>|Value whereCreatedBy($value)
- * @method static \Illuminate\Database\Eloquent\Builder<static>|Value whereDeletedAt($value)
- * @method static \Illuminate\Database\Eloquent\Builder<static>|Value whereDeletedBy($value)
- * @method static \Illuminate\Database\Eloquent\Builder<static>|Value whereDescription($value)
- * @method static \Illuminate\Database\Eloquent\Builder<static>|Value whereDescriptionId($value)
- * @method static \Illuminate\Database\Eloquent\Builder<static>|Value whereDescriptionZh($value)
- * @method static \Illuminate\Database\Eloquent\Builder<static>|Value whereIcon($value)
- * @method static \Illuminate\Database\Eloquent\Builder<static>|Value whereId($value)
- * @method static \Illuminate\Database\Eloquent\Builder<static>|Value whereIsActive($value)
- * @method static \Illuminate\Database\Eloquent\Builder<static>|Value whereShortDescription($value)
- * @method static \Illuminate\Database\Eloquent\Builder<static>|Value whereShortDescriptionId($value)
- * @method static \Illuminate\Database\Eloquent\Builder<static>|Value whereShortDescriptionZh($value)
- * @method static \Illuminate\Database\Eloquent\Builder<static>|Value whereTitle($value)
- * @method static \Illuminate\Database\Eloquent\Builder<static>|Value whereTitleId($value)
- * @method static \Illuminate\Database\Eloquent\Builder<static>|Value whereTitleZh($value)
- * @method static \Illuminate\Database\Eloquent\Builder<static>|Value whereUpdatedAt($value)
- * @method static \Illuminate\Database\Eloquent\Builder<static>|Value whereUpdatedBy($value)
- * @method static \Illuminate\Database\Eloquent\Builder<static>|Value withTrashed(bool $withTrashed = true)
- * @method static \Illuminate\Database\Eloquent\Builder<static>|Value withoutTrashed()
+ * @method static Builder<static>|Value inactive()
+ * @method static Builder<static>|Value newModelQuery()
+ * @method static Builder<static>|Value newQuery()
+ * @method static Builder<static>|Value onlyTrashed()
+ * @method static Builder<static>|Value query()
+ * @method static Builder<static>|Value whereCreatedAt($value)
+ * @method static Builder<static>|Value whereCreatedBy($value)
+ * @method static Builder<static>|Value whereDeletedAt($value)
+ * @method static Builder<static>|Value whereDeletedBy($value)
+ * @method static Builder<static>|Value whereDescription($value)
+ * @method static Builder<static>|Value whereDescriptionId($value)
+ * @method static Builder<static>|Value whereDescriptionZh($value)
+ * @method static Builder<static>|Value whereIcon($value)
+ * @method static Builder<static>|Value whereId($value)
+ * @method static Builder<static>|Value whereIsActive($value)
+ * @method static Builder<static>|Value whereShortDescription($value)
+ * @method static Builder<static>|Value whereShortDescriptionId($value)
+ * @method static Builder<static>|Value whereShortDescriptionZh($value)
+ * @method static Builder<static>|Value whereTitle($value)
+ * @method static Builder<static>|Value whereTitleId($value)
+ * @method static Builder<static>|Value whereTitleZh($value)
+ * @method static Builder<static>|Value whereUpdatedAt($value)
+ * @method static Builder<static>|Value whereUpdatedBy($value)
+ * @method static Builder<static>|Value withTrashed(bool $withTrashed = true)
+ * @method static Builder<static>|Value withoutTrashed()
+ * @mixin \Eloquent
  */
 	class Value extends \Eloquent {}
 }
