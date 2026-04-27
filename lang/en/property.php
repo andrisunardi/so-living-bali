@@ -78,6 +78,8 @@ return [
 
     'price_and_inclusions' => 'Price And Inclusions',
 
+    'images' => 'Images',
+
     'operational_risk' => 'Operational Risk',
     'operational_risk_level' => 'Low / Medium / High',
     'comments_if_medium_or_high' => 'Comments if Medium or High',

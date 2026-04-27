@@ -78,6 +78,8 @@ return [
 
     'price_and_inclusions' => '价格及包含项目',
 
+    'images' => '画像',
+
     'operational_risk' => '运营风险',
     'operational_risk_level' => '风险级别 (低 / 中 / 高)',
     'comments_if_medium_or_high' => '如果是中等或高风险的评论',

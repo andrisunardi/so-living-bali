@@ -78,6 +78,8 @@ return [
 
     'price_and_inclusions' => 'Harga dan Fasilitas yang Termasuk',
 
+    'images' => 'Gambar',
+
     'operational_risk' => 'Risiko Operasional',
     'operational_risk_level' => 'Level Risiko (Rendah / Sedang / Tinggi)',
     'comments_if_medium_or_high' => 'Komentar jika Sedang atau Tinggi',
