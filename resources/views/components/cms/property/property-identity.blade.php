@@ -130,7 +130,7 @@
         </div>
     </div>
 
-    <div class="col-sm-6">
+    {{-- <div class="col-sm-6">
         <label class="form-label" for="image">
             {{ trans('validation.attributes.image') }}
         </label>
@@ -167,7 +167,7 @@
                 </a>
             </div>
         @endif
-    </div>
+    </div> --}}
 
     <div class="col-12">
         <label class="form-label" for="status">

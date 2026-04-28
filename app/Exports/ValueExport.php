@@ -7,7 +7,7 @@ use Maatwebsite\Excel\Concerns\Exportable;
 use Maatwebsite\Excel\Concerns\FromView;
 use Maatwebsite\Excel\Concerns\ShouldAutoSize;
 
-class ValuetExport implements FromView, ShouldAutoSize
+class ValueExport implements FromView, ShouldAutoSize
 {
     use Exportable;
 
