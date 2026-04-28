@@ -5,13 +5,16 @@ use App\Enums\Language;
 use App\Libraries\GoogleDrive;
 use App\Livewire\Component;
 use Livewire\Attributes\Lazy;
+use Livewire\Attributes\Session;
 
 new #[Lazy] class extends Component {
+    #[Session]
     public array $selectedImages = [];
 
     public string $rootFolderId = '13alt2Sqn0xIsndoTa0ZG1jSqns1jsBg3';
 
-    public string $currentFolderId;
+    #[Session]
+    public ?string $currentFolderId = '';
 
     public array $files = [];
 
@@ -19,9 +22,9 @@ new #[Lazy] class extends Component {
 
     public function mount($selectedImages = [])
     {
-        $this->selectedImages = $selectedImages;
+        $this->selectedImages = $this->selectedImages ?? $selectedImages;
         // $this->rootFolderId = config('constants.folder_id.property');
-        $this->currentFolderId = $this->rootFolderId;
+        $this->currentFolderId = $this->currentFolderId ?: $this->rootFolderId;
         $this->loadFiles();
     }
 
@@ -78,33 +81,60 @@ new #[Lazy] class extends Component {
 };
 ?>
 
-<div wire:init="loadFiles">
-    {{-- <div wire:loading>
-        Loading images...
-    </div> --}}
-
-    @if (count($folderStack))
-        <nav aria-label="breadcrumb" class="mb-3">
-            <ol class="breadcrumb">
+<div>
+    <nav aria-label="breadcrumb" class="mb-3 border-bottom">
+        <ol class="breadcrumb">
+            @if (!count($folderStack))
+                <li class="breadcrumb-item active">
+                    <span class="fas fa-home fa-fw"></span>
+                    {{ trans('page.home') }}
+                </li>
+            @else
                 <li class="breadcrumb-item">
                     <a href="#" wire:click.prevent="goRoot">
-                        Root
+                        <span class="fas fa-home fa-fw"></span>
+                        {{ trans('page.home') }}
                     </a>
                 </li>
-
+                x
                 @foreach ($folderStack as $index => $folder)
-                    <li class="breadcrumb-item">
-                        <a href="#" wire:click.prevent="goTo({{ $index }})">
+                    <li class="breadcrumb-item {{ $loop->last ? 'active' : '' }}">
+                        @if ($loop->last)
                             {{ $folder['name'] }}
-                        </a>
+                        @else
+                            <a href="#" wire:click.prevent="goTo({{ $index }})">
+                                {{ $folder['name'] }}
+                            </a>
+                        @endif
                     </li>
                 @endforeach
+            @endif
+        </ol>
+    </nav>
 
-                <li class="breadcrumb-item active">
-                    {{ $currentFolderName ?? 'Folder' }}
-                </li>
-            </ol>
-        </nav>
+    @if (count($selectedImages))
+        <div class="mb-4">
+            <div class="d-flex flex-wrap gap-3">
+                @foreach ($selectedImages as $index => $imageId)
+                    @php
+                        $file = collect($files)->firstWhere('id', $imageId);
+                    @endphp
+
+                    @if ($file)
+                        <div class="position-relative" style="width: 100px;">
+                            <div class="ratio ratio-1x1">
+                                <img src="{{ $file['thumbnail'] }}" class="img-fluid object-fit-cover rounded">
+                            </div>
+
+                            <span
+                                class="position-absolute top-0 start-0 translate-middle badge rounded-pill bg-primary">
+                                {{ $index + 1 }}
+                            </span>
+                        </div>
+                    @endif
+                @endforeach
+            </div>
+        </div>
     @endif
 
     <div class="row row-cols-sm-2 row-cols-md-3 row-cols-lg-4 row-cols-xl-5 g-3">
