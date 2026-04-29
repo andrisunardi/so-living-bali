@@ -90,7 +90,6 @@ new #[Lazy] class extends Component {
                         {{ trans('page.home') }}
                     </a>
                 </li>
-                x
                 @foreach ($folderStack as $index => $folder)
                     <li class="breadcrumb-item {{ $loop->last ? 'active' : '' }}">
                         @if ($loop->last)
