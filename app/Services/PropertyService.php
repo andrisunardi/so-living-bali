@@ -7,7 +7,6 @@ use App\Models\Property;
 use Exception;
 use Illuminate\Support\Arr;
 use Illuminate\Support\Facades\DB;
-use Illuminate\Support\Facades\Storage;
 use Illuminate\Support\Str;
 use Intervention\Image\Facades\Image;
 
@@ -89,18 +88,18 @@ class PropertyService
 
             $data['slug'] = Str::slug($data['name']);
 
-            $data['folder_id'] = (new GoogleDrive)->createFolder(
-                name: $data['code'],
-                parentId: config('constants.folder_id.property'),
-            );
+            // $data['folder_id'] = (new GoogleDrive)->createFolder(
+            //     name: $data['code'],
+            //     parentId: config('constants.folder_id.property'),
+            // );
 
-            if ($data['internet_speedtest_image'] ?? null) {
-                $data['internet_speedtest_image_path'] = (new GoogleDrive)->uploadImage(
-                    image: $data['internet_speedtest_image'],
-                    name: 'internet-speedtest',
-                    folderId: $data['folder_id'],
-                );
-            }
+            // if ($data['internet_speedtest_image'] ?? null) {
+            //     $data['internet_speedtest_image_path'] = (new GoogleDrive)->uploadImage(
+            //         image: $data['internet_speedtest_image'],
+            //         name: 'internet-speedtest',
+            //         folderId: $data['folder_id'],
+            //     );
+            // }
 
             Arr::pull($data, 'images');
             Arr::pull($data, 'internet_speedtest_image');
@@ -113,7 +112,7 @@ class PropertyService
             $basePath = rtrim(config('constants.assets.path'), '/') . '/property/';
             $baseUrl  = trim(config('constants.assets.url'), '/property');
 
-            foreach ($images as $index => $fileId) {
+            foreach ($images as $fileId) {
                 $content = $google->download($fileId);
 
                 try {
@@ -131,7 +130,7 @@ class PropertyService
 
                     file_put_contents($fullPath, $encoded);
 
-                    $publicPath = $filename;
+                    $publicPath = $baseUrl . $filename;
 
                     $property->images()->create([
                         'name' => $property->name,
@@ -164,36 +163,36 @@ class PropertyService
 
             $data['slug'] = Str::slug($data['name']);
 
-            if ($property->code != $data['code']) {
-                $data['folder_id'] = (new GoogleDrive)->renameFolder(
-                    folderId: $property->folder_id,
-                    name: $data['code'],
-                );
-            }
+            // if ($property->code != $data['code']) {
+            //     $data['folder_id'] = (new GoogleDrive)->renameFolder(
+            //         folderId: $property->folder_id,
+            //         name: $data['code'],
+            //     );
+            // }
 
-            if ($data['image'] ?? null) {
-                $data['image_path'] = (new GoogleDrive)->uploadImage(
-                    image: $data['image'],
-                    name: 'cover',
-                    folderId: $property->folder_id,
-                );
+            // if ($data['image'] ?? null) {
+            //     $data['image_path'] = (new GoogleDrive)->uploadImage(
+            //         image: $data['image'],
+            //         name: 'cover',
+            //         folderId: $property->folder_id,
+            //     );
 
-                if ($property->image_path) {
-                    (new GoogleDrive)->delete($property->image_path);
-                }
-            }
+            //     if ($property->image_path) {
+            //         (new GoogleDrive)->delete($property->image_path);
+            //     }
+            // }
 
-            if ($data['internet_speedtest_image'] ?? null) {
-                $data['internet_speedtest_image_path'] = (new GoogleDrive)->uploadImage(
-                    image: $data['internet_speedtest_image'],
-                    name: 'internet-speedtest',
-                    folderId: $property->folder_id,
-                );
+            // if ($data['internet_speedtest_image'] ?? null) {
+            //     $data['internet_speedtest_image_path'] = (new GoogleDrive)->uploadImage(
+            //         image: $data['internet_speedtest_image'],
+            //         name: 'internet-speedtest',
+            //         folderId: $property->folder_id,
+            //     );
 
-                if ($property->internet_speedtest_image_path) {
-                    (new GoogleDrive)->delete($property->internet_speedtest_image_path);
-                }
-            }
+            //     if ($property->internet_speedtest_image_path) {
+            //         (new GoogleDrive)->delete($property->internet_speedtest_image_path);
+            //     }
+            // }
 
             Arr::pull($data, 'image');
             Arr::pull($data, 'internet_speedtest_image');
@@ -212,9 +211,9 @@ class PropertyService
 
     public function delete(Property $property): bool
     {
-        if ($property->folder_id) {
-            (new GoogleDrive)->delete(fileId: $property->folder_id);
-        }
+        // if ($property->folder_id) {
+        //     (new GoogleDrive)->delete(fileId: $property->folder_id);
+        // }
 
         return $property->delete();
     }
