@@ -4,27 +4,21 @@ use App\Enums\Currency;
 use App\Enums\Language;
 use App\Libraries\GoogleDrive;
 use App\Livewire\Component;
+use Livewire\Attributes\On;
 use Livewire\Attributes\Lazy;
 use Livewire\Attributes\Session;
 
 new #[Lazy] class extends Component {
-    #[Session]
     public array $selectedImages = [];
 
-    public string $rootFolderId = '13alt2Sqn0xIsndoTa0ZG1jSqns1jsBg3';
-
-    #[Session]
-    public ?string $currentFolderId = '';
+    public ?string $currentFolderId = '13alt2Sqn0xIsndoTa0ZG1jSqns1jsBg3';
 
     public array $files = [];
 
     public array $folderStack = [];
 
-    public function mount($selectedImages = [])
+    public function mount()
     {
-        $this->selectedImages = $this->selectedImages ?? $selectedImages;
-        // $this->rootFolderId = config('constants.folder_id.property');
-        $this->currentFolderId = $this->currentFolderId ?: $this->rootFolderId;
         $this->loadFiles();
     }
 

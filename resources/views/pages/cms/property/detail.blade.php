@@ -747,6 +747,31 @@ new #[Title('Detail | Property')] class extends Component {
 
                 <br />
 
+                <h5 class="fw-bold text-uppercase border-bottom pb-3">
+                    {{ trans('property.images') }}
+                </h5>
+
+                {{-- <div class="row">
+                    <div class="col-sm-5 col-md-4 col-lg-3 col-xl-2">
+                        <div class="fw-bold">{{ trans('property.status') }}</div>
+                    </div>
+                    <div class="col-sm-7 col-md-8 col-lg-9 col-xl-10">
+                        <span class="badge rounded-pill text-bg-{{ $property->status->color() }}">
+                            {{ $property->status->description() }}
+                        </span>
+                    </div>
+                </div> --}}
+
+                <div class="gallery">
+                    @foreach ($property->images as $propertyImage)
+                        <img src="{{ asset('images/property/'.$propertyImage->image_url) }}" alt="{{ $propertyImage->name }}"
+                            width="200">
+                            {{ asset($propertyImage->image_url) }}
+                    @endforeach
+                </div>
+
+                <br />
+
                 <div class="row">
                     <div class="col-sm-5 col-md-4 col-lg-3 col-xl-2">
                         <div class="fw-bold">{{ trans('field.created_by') }}</div>

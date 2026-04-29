@@ -44,4 +44,10 @@ return [
         'description' => env('META_DESCRIPTION'),
         'color' => env('META_COLOR'),
     ],
+
+    // ASSETS
+    'assets' => [
+        'path' => env('ASSETS_PATH', public_path('images')),
+        'url'  => env('ASSETS_URL', 'images'),
+    ],
 ];

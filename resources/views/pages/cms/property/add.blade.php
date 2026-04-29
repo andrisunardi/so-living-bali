@@ -28,6 +28,7 @@ new #[Title('Add | Property')] class extends Component {
     public function mount(): void
     {
         $this->form->visit_date = today()->toDateString();
+        $this->dispatch('resetForm');
 
         if (Auth::user()->hasRole('Agent')) {
             $this->form->user_id = Auth::id();

@@ -42,14 +42,14 @@ class PropertyService
                         ->orWhereRelation('user', 'email', 'like', "%{$search}%");
                 });
             })
-            ->when($userId, fn ($q) => $q->where('user_id', $userId))
-            ->when($districtId, fn ($q) => $q->where('district_id', $districtId))
-            ->when($areaId, fn ($q) => $q->where('area_id', $areaId))
-            ->when($status, fn ($q) => $q->where('status', $status))
-            ->when($startDate, fn ($q) => $q->whereDate('created_at', '>=', $startDate))
-            ->when($endDate, fn ($q) => $q->whereDate('created_at', '<=', $endDate))
-            ->when($random, fn ($q) => $q->inRandomOrder())
-            ->when($trash, fn ($q) => $q->onlyTrashed())
+            ->when($userId, fn($q) => $q->where('user_id', $userId))
+            ->when($districtId, fn($q) => $q->where('district_id', $districtId))
+            ->when($areaId, fn($q) => $q->where('area_id', $areaId))
+            ->when($status, fn($q) => $q->where('status', $status))
+            ->when($startDate, fn($q) => $q->whereDate('created_at', '>=', $startDate))
+            ->when($endDate, fn($q) => $q->whereDate('created_at', '<=', $endDate))
+            ->when($random, fn($q) => $q->inRandomOrder())
+            ->when($trash, fn($q) => $q->onlyTrashed())
             ->orderBy($orderBy, $sortBy)
             ->limit($limit);
 
@@ -110,12 +110,11 @@ class PropertyService
             // START REFACTOR NANTI
             $google = new GoogleDrive;
 
+            $basePath = rtrim(config('constants.assets.path'), '/') . '/property/';
+            $baseUrl  = trim(config('constants.assets.url'), '/property');
+
             foreach ($images as $index => $fileId) {
                 $content = $google->download($fileId);
-
-                if (! $content) {
-                    continue;
-                }
 
                 try {
                     $image = Image::make($content);
@@ -125,16 +124,20 @@ class PropertyService
                         $constraint->upsize();
                     });
 
-                    $path = 'properties/'.Str::uuid().'.webp';
+                    $filename = Str::uuid() . '.webp';
+                    $fullPath = $basePath . $filename;
 
-                    Storage::put($path, (string) $image->encode('webp', 70));
+                    $encoded = (string) $image->encode('webp', 70);
+
+                    file_put_contents($fullPath, $encoded);
+
+                    $publicPath = $filename;
 
                     $property->images()->create([
                         'name' => $property->name,
-                        'image_url' => $path,
-                        // 'order' => $index + 1,
+                        'image_url' => $publicPath,
                     ]);
-                } catch (\Throwable $e) {
+                } catch (Exception $e) {
                     DB::rollBack();
                     throw $e;
                 }
