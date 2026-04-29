@@ -18,6 +18,7 @@ use App\Services\UserService;
 use Illuminate\Support\Str;
 use Illuminate\Validation\ValidationException;
 use Livewire\Attributes\Title;
+use Livewire\Attributes\On;
 
 new #[Title('Add | Property')] class extends Component {
     public PropertyAddForm $form;
@@ -41,6 +42,12 @@ new #[Title('Add | Property')] class extends Component {
     public function resetForm(): void
     {
         $this->form->reset();
+    }
+
+    #[On('imagesUpdated')]
+    public function setImages($images): void
+    {
+        $this->form->images = $images;
     }
 
     public function submit(): void

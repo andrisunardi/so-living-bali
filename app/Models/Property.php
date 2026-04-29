@@ -215,6 +215,8 @@ use Spatie\Activitylog\Traits\LogsActivity;
  * @method static Builder<static>|Property withoutTrashed()
  * @method static Builder<static>|Property yearly()
  *
+ * @property-read int|null $images_count
+ *
  * @mixin \Eloquent
  */
 #[ObservedBy([PropertyObserver::class])]

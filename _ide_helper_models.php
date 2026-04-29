@@ -415,6 +415,7 @@ namespace App\Models{
  * @method static Builder<static>|Property withoutTrashed()
  * @method static Builder<static>|Property yearly()
  * @mixin \Eloquent
+ * @property-read int|null $images_count
  */
 	class Property extends \Eloquent {}
 }
@@ -458,6 +459,8 @@ namespace App\Models{
  * @method static \Illuminate\Database\Eloquent\Builder<static>|PropertyImage withTrashed(bool $withTrashed = true)
  * @method static \Illuminate\Database\Eloquent\Builder<static>|PropertyImage withoutTrashed()
  * @mixin \Eloquent
+ * @property string $image_url
+ * @method static \Illuminate\Database\Eloquent\Builder<static>|PropertyImage whereImageUrl($value)
  */
 	class PropertyImage extends \Eloquent {}
 }

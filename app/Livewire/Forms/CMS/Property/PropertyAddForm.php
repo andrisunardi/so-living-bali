@@ -201,6 +201,9 @@ class PropertyAddForm extends Form
     #[Validate(['nullable', 'integer', new Enum(PropertyStatus::class)])]
     public int $status = PropertyStatus::Pending->value;
 
+    #[Validate(['required', 'array', 'min:1'])]
+    public array $images = [];
+
     public function submit(): Property
     {
         return (new PropertyService)->create(data: $this->validate());

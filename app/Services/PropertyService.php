@@ -7,7 +7,9 @@ use App\Models\Property;
 use Exception;
 use Illuminate\Support\Arr;
 use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Facades\Storage;
 use Illuminate\Support\Str;
+use Intervention\Image\Facades\Image;
 
 class PropertyService
 {
@@ -78,6 +80,8 @@ class PropertyService
         try {
             DB::beginTransaction();
 
+            $images = $data['images'];
+
             $data['availability_date'] = $data['availability_date'] ?: null;
             $data['visit_date'] = $data['visit_date'] ?: null;
             $data['latitude'] = $data['latitude'] ?: null;
@@ -90,14 +94,6 @@ class PropertyService
                 parentId: config('constants.folder_id.property'),
             );
 
-            if ($data['image'] ?? null) {
-                $data['image_path'] = (new GoogleDrive)->uploadImage(
-                    image: $data['image'],
-                    name: 'cover',
-                    folderId: $data['folder_id'],
-                );
-            }
-
             if ($data['internet_speedtest_image'] ?? null) {
                 $data['internet_speedtest_image_path'] = (new GoogleDrive)->uploadImage(
                     image: $data['internet_speedtest_image'],
@@ -106,10 +102,43 @@ class PropertyService
                 );
             }
 
-            Arr::pull($data, 'image');
+            Arr::pull($data, 'images');
             Arr::pull($data, 'internet_speedtest_image');
 
             $property = Property::create($data);
+
+            // START REFACTOR NANTI
+            $google = new GoogleDrive;
+
+            foreach ($images as $index => $fileId) {
+                $content = $google->download($fileId);
+
+                if (! $content) {
+                    continue;
+                }
+
+                try {
+                    $image = Image::make($content);
+
+                    $image->resize(1200, null, function ($constraint) {
+                        $constraint->aspectRatio();
+                        $constraint->upsize();
+                    });
+
+                    $path = 'properties/'.Str::uuid().'.webp';
+
+                    Storage::put($path, (string) $image->encode('webp', 70));
+
+                    $property->images()->create([
+                        'name' => $property->name,
+                        'image_url' => $path,
+                        // 'order' => $index + 1,
+                    ]);
+                } catch (\Throwable $e) {
+                    DB::rollBack();
+                    throw $e;
+                }
+            }
 
             DB::commit();
 

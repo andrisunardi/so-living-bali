@@ -157,15 +157,16 @@ class GoogleDrive
         $this->drive->files->delete($fileId);
     }
 
-    public function listImages(
+    public function listFiles(
         string $folderId,
+        bool $isPaginate = false,
         int $pageSize = 10,
         ?string $pageToken = null
     ): array {
         $params = [
-            'q' => "'{$folderId}' in parents and mimeType contains 'image/'",
-            'pageSize' => $pageSize,
-            'fields' => 'nextPageToken, files(id, name, mimeType, thumbnailLink, size',
+            'q' => "'{$folderId}' in parents and (mimeType contains 'image/' or mimeType = 'application/vnd.google-apps.folder')",
+            'pageSize' => $isPaginate ? $pageSize : null,
+            'fields' => 'nextPageToken, files(id, name, mimeType, thumbnailLink, size)',
         ];
 
         if ($pageToken) {
@@ -174,32 +175,8 @@ class GoogleDrive
 
         $response = $this->drive->files->listFiles($params);
 
-        return [
-            'files' => $response->getFiles(),
-            'nextPageToken' => $response->getNextPageToken(),
-        ];
-    }
-
-    public function download(string $fileId): string
-    {
-        $response = $this->drive->files->get($fileId, [
-            'alt' => 'media',
-        ]);
-
-        return $response->getBody()->getContents();
-    }
-
-    public function listFiles(string $folderId): array
-    {
-        $params = [
-            'q' => "'{$folderId}' in parents",
-            'fields' => 'files(id, name, mimeType, thumbnailLink, size)',
-        ];
-
-        $response = $this->drive->files->listFiles($params);
-
         return collect($response->getFiles())
-            ->map(fn($file) => [
+            ->map(fn ($file) => [
                 'id' => $file->id,
                 'name' => $file->name,
                 'type' => $file->mimeType === 'application/vnd.google-apps.folder'
@@ -209,5 +186,16 @@ class GoogleDrive
                 'size' => $file->size ?? null,
             ])
             ->toArray();
+
+        // 'nextPageToken' => $response->getNextPageToken(),
+    }
+
+    public function download(string $fileId): string
+    {
+        $response = $this->drive->files->get($fileId, [
+            'alt' => 'media',
+        ]);
+
+        return $response->getBody()->getContents();
     }
 }

@@ -53,6 +53,10 @@ use Spatie\Activitylog\Traits\LogsActivity;
  * @method static \Illuminate\Database\Eloquent\Builder<static>|PropertyImage withTrashed(bool $withTrashed = true)
  * @method static \Illuminate\Database\Eloquent\Builder<static>|PropertyImage withoutTrashed()
  *
+ * @property string $image_url
+ *
+ * @method static \Illuminate\Database\Eloquent\Builder<static>|PropertyImage whereImageUrl($value)
+ *
  * @mixin \Eloquent
  */
 #[ObservedBy([PropertyImageObserver::class])]
@@ -67,8 +71,7 @@ class PropertyImage extends Model
     protected $fillable = [
         'property_id',
         'name',
-        'description',
-        'image_path',
+        'image_url',
     ];
 
     protected $hidden = [];
@@ -78,8 +81,7 @@ class PropertyImage extends Model
         return [
             'property_id' => 'integer',
             'name' => 'string',
-            'description' => 'string',
-            'image_path' => 'string',
+            'image_url' => 'string',
         ];
     }
 
