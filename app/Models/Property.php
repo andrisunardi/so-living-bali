@@ -407,15 +407,15 @@ class Property extends Model
         return Carbon::parse($value)->setTimezone(config('app.timezone'));
     }
 
-    public function getImageAttribute(): string
-    {
-        return "https://lh3.googleusercontent.com/d/{$this->image_path}";
-    }
+    // public function getImageAttribute(): string
+    // {
+    //     return "https://lh3.googleusercontent.com/d/{$this->image_path}";
+    // }
 
-    public function getInternetSpeedtestImageAttribute(): string
-    {
-        return "https://lh3.googleusercontent.com/d/{$this->internet_speedtest_image_path}";
-    }
+    // public function getInternetSpeedtestImageAttribute(): string
+    // {
+    //     return "https://lh3.googleusercontent.com/d/{$this->internet_speedtest_image_path}";
+    // }
 
     public function scopeOpen(Builder $query): void
     {

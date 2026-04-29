@@ -47,7 +47,7 @@ return [
 
     // ASSETS
     'assets' => [
-        'path' => env('ASSETS_PATH', public_path('images')),
-        'url'  => env('ASSETS_URL', 'images'),
+        'path' => env('ASSETS_PATH', public_path()),
+        'url' => env('ASSETS_URL'),
     ],
 ];

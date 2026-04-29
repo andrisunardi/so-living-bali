@@ -2,13 +2,14 @@
 
 namespace App\Services;
 
-use App\Libraries\GoogleDrive;
+// use App\Libraries\GoogleDrive;
 use App\Models\Property;
 use App\Models\PropertyImage;
 use Exception;
 use Illuminate\Support\Arr;
 use Illuminate\Support\Facades\DB;
-use Illuminate\Support\Str;
+
+// use Illuminate\Support\Str;
 
 class PropertyImageService
 {
@@ -69,13 +70,13 @@ class PropertyImageService
 
             $property = Property::findOrFail($data['property_id']);
 
-            if ($data['image'] ?? null) {
-                $data['image_path'] = (new GoogleDrive)->uploadImage(
-                    image: $data['image'],
-                    name: Str::slug($data['name']),
-                    folderId: $property->folder_id,
-                );
-            }
+            // if ($data['image'] ?? null) {
+            //     $data['image_path'] = (new GoogleDrive)->uploadImage(
+            //         image: $data['image'],
+            //         name: Str::slug($data['name']),
+            //         folderId: $property->folder_id,
+            //     );
+            // }
 
             Arr::pull($data, 'image');
 
@@ -97,17 +98,17 @@ class PropertyImageService
 
             $property = Property::findOrFail($data['property_id']);
 
-            if ($data['image'] ?? null) {
-                $data['image_path'] = (new GoogleDrive)->uploadImage(
-                    image: $data['image'],
-                    name: Str::slug($data['name']),
-                    folderId: $property->folder_id,
-                );
+            // if ($data['image'] ?? null) {
+            //     $data['image_path'] = (new GoogleDrive)->uploadImage(
+            //         image: $data['image'],
+            //         name: Str::slug($data['name']),
+            //         folderId: $property->folder_id,
+            //     );
 
-                if ($propertyImage->image_path) {
-                    (new GoogleDrive)->delete($propertyImage->image_path);
-                }
-            }
+            //     if ($propertyImage->image_path) {
+            //         (new GoogleDrive)->delete($propertyImage->image_path);
+            //     }
+            // }
 
             Arr::pull($data, 'image');
 
@@ -125,9 +126,9 @@ class PropertyImageService
 
     public function delete(PropertyImage $propertyImage): bool
     {
-        if ($propertyImage->image_path) {
-            (new GoogleDrive)->delete(fileId: $propertyImage->image_path);
-        }
+        // if ($propertyImage->image_path) {
+        //     (new GoogleDrive)->delete(fileId: $propertyImage->image_path);
+        // }
 
         return $propertyImage->delete();
     }

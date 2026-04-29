@@ -57,6 +57,10 @@ use Spatie\Activitylog\Traits\LogsActivity;
  *
  * @method static \Illuminate\Database\Eloquent\Builder<static>|PropertyImage whereImageUrl($value)
  *
+ * @property string $position
+ *
+ * @method static \Illuminate\Database\Eloquent\Builder<static>|PropertyImage wherePosition($value)
+ *
  * @mixin \Eloquent
  */
 #[ObservedBy([PropertyImageObserver::class])]
@@ -72,6 +76,7 @@ class PropertyImage extends Model
         'property_id',
         'name',
         'image_url',
+        'position',
     ];
 
     protected $hidden = [];
@@ -82,6 +87,7 @@ class PropertyImage extends Model
             'property_id' => 'integer',
             'name' => 'string',
             'image_url' => 'string',
+            'position' => 'string',
         ];
     }
 
@@ -105,10 +111,10 @@ class PropertyImage extends Model
         return Carbon::parse($value)->setTimezone(config('app.timezone'));
     }
 
-    public function getImageAttribute(): string
-    {
-        return "https://lh3.googleusercontent.com/d/{$this->image_path}";
-    }
+    // public function getImageAttribute(): string
+    // {
+    //     return "https://lh3.googleusercontent.com/d/{$this->image_path}";
+    // }
 
     public function property(): BelongsTo
     {

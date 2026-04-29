@@ -67,7 +67,7 @@ new #[Title('Detail | Property')] class extends Component {
                     </div>
                 </div>
 
-                <div class="row">
+                {{-- <div class="row">
                     <div class="col-sm-5 col-md-4 col-lg-3 col-xl-2">
                         <div class="fw-bold">Image</div>
                     </div>
@@ -81,7 +81,7 @@ new #[Title('Detail | Property')] class extends Component {
                             </a>
                         @endif
                     </div>
-                </div>
+                </div> --}}
 
                 <br />
 
@@ -568,7 +568,7 @@ new #[Title('Detail | Property')] class extends Component {
                         <div class="fw-bold">Internet Speedtest Image</div>
                     </div>
                     <div class="col-sm-7 col-md-6 col-lg-5 col-xl-4">
-                        @if ($property->internet_speedtest_image_path)
+                        {{-- @if ($property->internet_speedtest_image_path)
                             <a draggable="false" href="{{ $property->internet_speedtest_image }}" target="_blank">
                                 <img draggable="false" loading="lazy" decoding="async"
                                     class="img-fluid w-100 h-100 rounded mt-2"
@@ -576,7 +576,7 @@ new #[Title('Detail | Property')] class extends Component {
                                     alt="{{ trans('page.property') }} - {{ $property->id }}"
                                     onerror="this.src='{{ asset('images/image-not-available.png') }}'" />
                             </a>
-                        @endif
+                        @endif --}}
                     </div>
                 </div>
 
@@ -751,7 +751,27 @@ new #[Title('Detail | Property')] class extends Component {
                     {{ trans('property.images') }}
                 </h5>
 
-                {{-- <div class="row">
+                <div class="row row-cols-1 row-cols-sm-2 row-cols-md-3 row-cols-lg-4 row-cols-xl-5 g-3">
+                    @foreach ($property->images as $propertyImage)
+                        <div class="col" wire:key="property-image-{{ $propertyImage->id }}">
+                            <div class="card h-100">
+                                <div class="ratio ratio-1x1">
+                                    <a draggable="false" href="{{ $propertyImage->image_url }}" target="_blank">
+                                        <img draggable="false" loading="lazy" decoding="async"
+                                            class="img-fluid w-100 h-100 object-fit-cover"
+                                            src="{{ $propertyImage->image_url }}">
+                                    </a>
+                                </div>
+                                <div class="card-body">
+                                    <div class="text-truncate">{{ $propertyImage->name }}</div>
+                                    <div class="small">{{ $propertyImage->position }}</div>
+                                </div>
+                            </div>
+                        </div>
+                    @endforeach
+                </div>
+
+                <div class="row">
                     <div class="col-sm-5 col-md-4 col-lg-3 col-xl-2">
                         <div class="fw-bold">{{ trans('property.status') }}</div>
                     </div>
@@ -760,14 +780,6 @@ new #[Title('Detail | Property')] class extends Component {
                             {{ $property->status->description() }}
                         </span>
                     </div>
-                </div> --}}
-
-                <div class="gallery">
-                    @foreach ($property->images as $propertyImage)
-                        <img src="{{ asset('images/property/'.$propertyImage->image_url) }}" alt="{{ $propertyImage->name }}"
-                            width="200">
-                            {{ asset($propertyImage->image_url) }}
-                    @endforeach
                 </div>
 
                 <br />

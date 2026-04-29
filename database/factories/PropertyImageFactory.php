@@ -16,6 +16,7 @@ class PropertyImageFactory extends Factory
             'name' => fake()->name(),
             'description' => fake()->paragraph(),
             'image_path' => null,
+            'position' => 1,
         ];
     }
 }
