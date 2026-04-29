@@ -82,7 +82,7 @@ new #[Title('Property')] class extends Component {
     {
         $service = new PropertyService();
         $properties = $service->index(search: $this->search, userId: $this->user_id, districtId: $this->district_id, areaId: $this->area_id, status: $this->status, startDate: $this->start_date, endDate: $this->end_date, paginate: $paginate);
-        $properties->loadMissing(['user', 'district', 'area']);
+        $properties->loadMissing(['user', 'district', 'area', 'image']);
 
         return $properties;
     }
@@ -93,7 +93,7 @@ new #[Title('Property')] class extends Component {
 
         $service = new PropertyService();
         $properties = $service->index(orderBy: 'id', sortBy: 'asc', paginate: false);
-        $properties->loadMissing(['user', 'district', 'area', 'createdBy', 'updatedBy']);
+        $properties->loadMissing(['user', 'district', 'area', 'image', 'createdBy', 'updatedBy']);
 
         return Excel::download(new PropertyExport(properties: $properties), trans('page.property') . '.xlsx');
     }
@@ -340,12 +340,13 @@ new #[Title('Property')] class extends Component {
                                     </a>
                                 </td>
                                 <td class="p-0">
-                                    @if ($property->image_path)
-                                        <a draggable="false" href="{{ $property->image }}" target="_blank">
+                                    @if ($property->image)
+                                        <a draggable="false" href="{{ $property->image->image_url }}"
+                                            target="_blank">
                                             <div class="ratio ratio-1x1">
                                                 <img draggable="false" loading="lazy" decoding="async"
                                                     class="img-fluid w-100 h-100 object-fit-cover"
-                                                    src="{{ $property->image }}"
+                                                    src="{{ $property->image->image_url }}"
                                                     alt="{{ trans('page.property') }} - {{ $property->id }}"
                                                     onerror="this.src='{{ asset('images/image-not-available.png') }}'" />
                                             </div>
