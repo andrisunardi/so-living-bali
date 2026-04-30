@@ -29,4 +29,12 @@ return [
         'property' => 'Property',
     ],
 
+    'our_services' => [
+        'sub_title' => 'Our Services',
+        'title' => 'Support that makes living effortless',
+        'description' => 'From move-in to daily life, we provide reliable support so you can live comfortably in Bali',
+        'request_a_service' => 'Request a Service',
+        'view_more' => 'View More',
+    ],
+
 ];

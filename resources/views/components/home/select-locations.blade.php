@@ -17,8 +17,8 @@ new #[Lazy] class extends Component {
 ?>
 
 @placeholder
-    <section class="py-5 my-5 bg-light">
-        <div class="container-md">
+    <section class="py-5 bg-light">
+        <div class="container-md py-5">
             <div class="d-grid gap-4">
                 <div class="text-start">
                     <div class="placeholder-glow">
@@ -45,8 +45,8 @@ new #[Lazy] class extends Component {
     </section>
 @endplaceholder
 
-<section class="py-5 my-5 bg-light">
-    <div class="container-md">
+<section class="py-5 bg-light">
+    <div class="container-md py-5">
         <div class="d-grid gap-4">
             <div class="text-start">
                 <h1 class="display-6 fw-medium">{{ trans('home.select_locations.title') }}</h1>

@@ -16,8 +16,8 @@ new #[Lazy] class extends Component {
 ?>
 
 @placeholder
-    <section class="py-5 my-5">
-        <div class="container-md">
+    <section class="py-5">
+        <div class="container-md py-5">
             <div class="d-grid gap-4">
                 <div class="text-center">
                     <div class="placeholder-glow">
@@ -56,8 +56,8 @@ new #[Lazy] class extends Component {
     </section>
 @endplaceholder
 
-<section class="py-5 my-5">
-    <div class="container-md">
+<section class="py-5">
+    <div class="container-md py-5">
         <div class="d-grid gap-4">
             <div class="text-center">
                 <p class="lead mb-0">{{ trans('home.our_values.sub_title') }}</p>
