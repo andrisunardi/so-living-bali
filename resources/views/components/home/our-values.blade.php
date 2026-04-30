@@ -31,7 +31,7 @@ new #[Lazy] class extends Component {
                     </div>
                 </div>
 
-                <div class="row row-cols-1 row-cols-sm-3 row-cols-lg-3 justify-content-end g-3">
+                <div class="row row-cols-1 row-cols-sm-3 row-cols-lg-3 justify-content-end g-4">
                     @for ($i = 0; $i < 6; $i++)
                         <div class="col">
                             <div class="card card-body h-100">
@@ -65,7 +65,7 @@ new #[Lazy] class extends Component {
                 <p class="small px-sm-5">{{ trans('home.our_values.description') }}</p>
             </div>
 
-            <div class="row row-cols-1 row-cols-sm-3 justify-content-end g-3">
+            <div class="row row-cols-1 row-cols-sm-3 justify-content-end g-4">
                 @foreach ($values as $value)
                     <div class="col" wire:key="value-{{ $value->id }}">
                         <div class="card card-body h-100">

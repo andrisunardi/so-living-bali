@@ -460,9 +460,9 @@ namespace App\Models{
  * @method static \Illuminate\Database\Eloquent\Builder<static>|PropertyImage withoutTrashed()
  * @property string $image_url
  * @method static \Illuminate\Database\Eloquent\Builder<static>|PropertyImage whereImageUrl($value)
- * @mixin \Eloquent
  * @property string $position
  * @method static \Illuminate\Database\Eloquent\Builder<static>|PropertyImage wherePosition($value)
+ * @mixin \Eloquent
  */
 	class PropertyImage extends \Eloquent {}
 }

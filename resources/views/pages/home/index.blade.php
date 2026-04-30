@@ -15,5 +15,7 @@ new #[Title('Home')] class extends Component {};
         <x-home.hero :title="trans('home.hero.title')" :description="trans('home.hero.description')" :image="asset('images/banner/home.png')," />
 
         <livewire:home.our-values lazy />
+
+        <livewire:home.select-locations lazy />
     @endif
 </div>

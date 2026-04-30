@@ -23,4 +23,10 @@ return [
         'description' => 'For longer stays, designed to fit your everyday life in Bali. Where living feels settled at your own pace.',
     ],
 
+    'select_locations' => [
+        'title' => 'Now available in select locations',
+        'description' => 'We begin with a limited number of homes, chosen for how people actually live',
+        'property' => 'Property',
+    ],
+
 ];
