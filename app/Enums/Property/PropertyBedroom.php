@@ -12,8 +12,6 @@ enum PropertyBedroom: int
 
     case FourBedroom = 4;
 
-    case Studio = 5;
-
     public function description(): string
     {
         return match ($this) {
@@ -21,7 +19,6 @@ enum PropertyBedroom: int
             self::TwoBedroom => '2 Bedroom',
             self::ThreeBedroom => '3 Bedroom',
             self::FourBedroom => '4 Bedroom',
-            self::Studio => 'Studio',
         };
     }
 
@@ -32,7 +29,6 @@ enum PropertyBedroom: int
             self::TwoBedroom->value => '2 Bedroom',
             self::ThreeBedroom->value => '3 Bedroom',
             self::FourBedroom->value => '4 Bedroom',
-            self::Studio->value => 'Studio',
         };
     }
 }

@@ -18,69 +18,6 @@ use Spatie\Activitylog\LogOptions;
 use Spatie\Activitylog\Models\Activity;
 use Spatie\Activitylog\Traits\LogsActivity;
 
-/**
- * @property int $id
- * @property string $code
- * @property string $name
- * @property string $first_name
- * @property string $last_name
- * @property string $company
- * @property string $email
- * @property string $phone
- * @property PropertyBedroom|null $bedroom
- * @property PropertyRentalType|null $rental_type
- * @property string|null $message
- * @property int|null $area_id
- * @property int|null $created_by
- * @property int|null $updated_by
- * @property int|null $deleted_by
- * @property Carbon $created_at
- * @property Carbon $updated_at
- * @property Carbon|null $deleted_at
- * @property-read Collection<int, Activity> $activities
- * @property-read int|null $activities_count
- * @property-read Area|null $area
- * @property-read User|null $createdBy
- * @property-read User|null $deletedBy
- * @property-read District|null $district
- * @property-read User|null $updatedBy
- *
- * @method static Builder<static>|Contact both()
- * @method static \Database\Factories\ContactFactory factory($count = null, $state = [])
- * @method static Builder<static>|Contact fourBedroom()
- * @method static Builder<static>|Contact monthly()
- * @method static Builder<static>|Contact newModelQuery()
- * @method static Builder<static>|Contact newQuery()
- * @method static Builder<static>|Contact oneBedroom()
- * @method static Builder<static>|Contact onlyTrashed()
- * @method static Builder<static>|Contact query()
- * @method static Builder<static>|Contact studio()
- * @method static Builder<static>|Contact threeBedroom()
- * @method static Builder<static>|Contact twoBedroom()
- * @method static Builder<static>|Contact whereAreaId($value)
- * @method static Builder<static>|Contact whereBedroom($value)
- * @method static Builder<static>|Contact whereCode($value)
- * @method static Builder<static>|Contact whereCompany($value)
- * @method static Builder<static>|Contact whereCreatedAt($value)
- * @method static Builder<static>|Contact whereCreatedBy($value)
- * @method static Builder<static>|Contact whereDeletedAt($value)
- * @method static Builder<static>|Contact whereDeletedBy($value)
- * @method static Builder<static>|Contact whereEmail($value)
- * @method static Builder<static>|Contact whereFirstName($value)
- * @method static Builder<static>|Contact whereId($value)
- * @method static Builder<static>|Contact whereLastName($value)
- * @method static Builder<static>|Contact whereMessage($value)
- * @method static Builder<static>|Contact whereName($value)
- * @method static Builder<static>|Contact wherePhone($value)
- * @method static Builder<static>|Contact whereRentalType($value)
- * @method static Builder<static>|Contact whereUpdatedAt($value)
- * @method static Builder<static>|Contact whereUpdatedBy($value)
- * @method static Builder<static>|Contact withTrashed(bool $withTrashed = true)
- * @method static Builder<static>|Contact withoutTrashed()
- * @method static Builder<static>|Contact yearly()
- *
- * @mixin \Eloquent
- */
 #[ObservedBy([ContactObserver::class])]
 class Contact extends Model
 {
@@ -161,11 +98,6 @@ class Contact extends Model
     public function scopeFourBedroom(Builder $query): void
     {
         $query->where('bedroom', PropertyBedroom::FourBedroom);
-    }
-
-    public function scopeStudio(Builder $query): void
-    {
-        $query->where('bedroom', PropertyBedroom::Studio);
     }
 
     public function scopeMonthly(Builder $query): void
