@@ -15,12 +15,12 @@ Route::group(['middleware' => ['auth']], function () {
         ->middleware(['permission:contact'])
         ->group(base_path('routes/cms/contact.php'));
 
-    // ARTICLE
-    Route::prefix('article')
-        ->name('article.')
-        ->as('article.')
-        ->middleware(['permission:article'])
-        ->group(base_path('routes/cms/article.php'));
+    // GUIDE
+    Route::prefix('guide')
+        ->name('guide.')
+        ->as('guide.')
+        ->middleware(['permission:guide'])
+        ->group(base_path('routes/cms/guide.php'));
 
     // PROPERTY
     Route::prefix('property')

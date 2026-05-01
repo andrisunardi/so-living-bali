@@ -17,7 +17,7 @@ return [
     'contact' => 'Kontak',
     'property' => 'Properti',
     'property_image' => 'Gambar Properti',
-    'article' => 'Artikel',
+    'guide' => 'Guide',
 
     'master' => 'Master',
     'value' => 'Nilai',

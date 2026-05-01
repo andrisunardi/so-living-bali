@@ -75,10 +75,10 @@ class Component extends LivewireComponent
                     [
                         'id' => $pageId++,
                         'menu_id' => 1,
-                        'name' => trans('page.article'),
+                        'name' => trans('page.guide'),
                         'icon' => 'fas fa-newspaper',
-                        'route' => 'cms.article.index',
-                        'permission' => 'article',
+                        'route' => 'cms.guide.index',
+                        'permission' => 'guide',
                     ],
                     [
                         'id' => $pageId++,

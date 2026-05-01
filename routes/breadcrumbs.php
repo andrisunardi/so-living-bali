@@ -90,25 +90,25 @@ Breadcrumbs::for('cms.contact.detail', function (BreadcrumbTrail $trail, $contac
     $trail->push(trans('index.detail'), route('cms.contact.detail', $contact), ['icon' => 'fas fa-list']);
 });
 
-// ARTICLE
-Breadcrumbs::for('cms.article.index', function (BreadcrumbTrail $trail) {
+// GUIDE
+Breadcrumbs::for('cms.guide.index', function (BreadcrumbTrail $trail) {
     $trail->parent('cms.home');
-    $trail->push(trans('page.article'), route('cms.article.index'), ['icon' => 'fas fa-newspaper']);
+    $trail->push(trans('page.guide'), route('cms.guide.index'), ['icon' => 'fas fa-newspaper']);
 });
 
-Breadcrumbs::for('cms.article.add', function (BreadcrumbTrail $trail) {
-    $trail->parent('cms.article.index');
-    $trail->push(trans('index.add'), route('cms.article.add'), ['icon' => 'fas fa-plus']);
+Breadcrumbs::for('cms.guide.add', function (BreadcrumbTrail $trail) {
+    $trail->parent('cms.guide.index');
+    $trail->push(trans('index.add'), route('cms.guide.add'), ['icon' => 'fas fa-plus']);
 });
 
-Breadcrumbs::for('cms.article.edit', function (BreadcrumbTrail $trail, $article) {
-    $trail->parent('cms.article.index');
-    $trail->push(trans('index.edit'), route('cms.article.edit', $article), ['icon' => 'fas fa-edit']);
+Breadcrumbs::for('cms.guide.edit', function (BreadcrumbTrail $trail, $guide) {
+    $trail->parent('cms.guide.index');
+    $trail->push(trans('index.edit'), route('cms.guide.edit', $guide), ['icon' => 'fas fa-edit']);
 });
 
-Breadcrumbs::for('cms.article.detail', function (BreadcrumbTrail $trail, $article) {
-    $trail->parent('cms.article.index');
-    $trail->push(trans('index.detail'), route('cms.article.detail', $article), ['icon' => 'fas fa-list']);
+Breadcrumbs::for('cms.guide.detail', function (BreadcrumbTrail $trail, $guide) {
+    $trail->parent('cms.guide.index');
+    $trail->push(trans('index.detail'), route('cms.guide.detail', $guide), ['icon' => 'fas fa-list']);
 });
 
 // PROPERTY

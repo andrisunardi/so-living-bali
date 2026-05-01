@@ -3,10 +3,10 @@
 use App\Livewire\Component;
 use Livewire\Attributes\Title;
 
-new #[Title('Article')] class extends Component {};
+new #[Title('Guide')] class extends Component {};
 ?>
 
-@section('title', trans('page.article'))
+@section('title', trans('page.guide'))
 
 <div>
 </div>

@@ -17,8 +17,7 @@ return [
     'contact' => '联系',
     'property' => '属性',
     'property_image' => '属性图片',
-    'article' => '文章',
-
+    'guide' => '指南',
     'master' => '主数据',
     'value' => '价值',
     'area' => '区域',

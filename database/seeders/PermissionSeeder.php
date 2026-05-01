@@ -16,11 +16,11 @@ class PermissionSeeder extends Seeder
         Permission::create(['name' => 'contact.delete'])->assignRole('Admin');
         Permission::create(['name' => 'contact.detail'])->assignRole('Admin');
 
-        Permission::create(['name' => 'article'])->assignRole('Admin');
-        Permission::create(['name' => 'article.add'])->assignRole('Admin');
-        Permission::create(['name' => 'article.edit'])->assignRole('Admin');
-        Permission::create(['name' => 'article.delete'])->assignRole('Admin');
-        Permission::create(['name' => 'article.detail'])->assignRole('Admin');
+        Permission::create(['name' => 'guide'])->assignRole('Admin');
+        Permission::create(['name' => 'guide.add'])->assignRole('Admin');
+        Permission::create(['name' => 'guide.edit'])->assignRole('Admin');
+        Permission::create(['name' => 'guide.delete'])->assignRole('Admin');
+        Permission::create(['name' => 'guide.detail'])->assignRole('Admin');
 
         Permission::create(['name' => 'property'])->assignRole('Admin', 'Agent');
         Permission::create(['name' => 'property.add'])->assignRole('Admin', 'Agent');
