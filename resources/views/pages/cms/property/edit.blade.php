@@ -19,6 +19,7 @@ use App\Services\UserService;
 use Illuminate\Support\Str;
 use Illuminate\Validation\ValidationException;
 use Livewire\Attributes\Title;
+use Livewire\Attributes\On;
 
 new #[Title('Edit | Property')] class extends Component {
     public Property $property;
@@ -41,6 +42,12 @@ new #[Title('Edit | Property')] class extends Component {
     public function resetForm(): void
     {
         $this->form->set(property: $this->property);
+    }
+
+    #[On('imagesUpdated')]
+    public function handleImagesUpdated($images): void
+    {
+        $this->form->images = $images;
     }
 
     public function submit(): void

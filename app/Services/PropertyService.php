@@ -162,7 +162,7 @@ class PropertyService
 
             $this->uploadImages(property: $property, images: $data['images']);
 
-            Arr::pull($data, 'image');
+            Arr::pull($data, 'images');
             Arr::pull($data, 'internet_speedtest_image');
 
             $property->update($data);
@@ -218,9 +218,9 @@ class PropertyService
                     file_put_contents($fullPath, $encoded);
 
                     $property->images()->create([
-                        'name' => $property->name,
+                        'name' => '',
                         'image_url' => "{$fullUrl}/{$directory}/{$fileName}",
-                        'file_id' => $position,
+                        'google_file_id' => '',
                         'position' => $position,
                     ]);
                 } catch (Exception $e) {
