@@ -6,13 +6,10 @@ enum PropertyType: int
 {
     case Villa = 1;
 
-    case Apartment = 2;
-
     public function description(): string
     {
         return match ($this) {
             self::Villa => 'Villa',
-            self::Apartment => 'Apartment',
         };
     }
 
