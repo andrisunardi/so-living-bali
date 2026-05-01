@@ -157,7 +157,7 @@ new class extends Component {
                     <div class="offcanvas-title">
                         <a draggable="false" href="{{ route('home') }}" wire:navigate>
                             <img draggable="false" loading="lazy" decoding="async" class="user-select-none pe-none"
-                                height="100" src="{{ asset('images/logo/black-tagline.png') }}"
+                                height="100" src="{{ asset('images/logo/black.png') }}"
                                 alt="{{ trans('index.logo') }} - {{ config('app.name') }}" />
                         </a>
                     </div>
