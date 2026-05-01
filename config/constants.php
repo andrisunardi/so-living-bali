@@ -50,4 +50,12 @@ return [
         'path' => env('ASSETS_PATH', public_path()),
         'url' => env('ASSETS_URL'),
     ],
+
+    // SOCIAL MEDIA
+    'social_media' => [
+        'facebook' => env('SOCIAL_MEDIA_FACEBOOK'),
+        'instagram' => env('SOCIAL_MEDIA_INSTAGRAM'),
+        'tiktok' => env('SOCIAL_MEDIA_TIKTOK'),
+        'linkedin' => env('SOCIAL_MEDIA_LINKEDIN'),
+    ],
 ];

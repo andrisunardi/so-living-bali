@@ -93,17 +93,12 @@ new class extends Component {
                     <div class="d-grid gap-3">
                         <h6>{{ trans('footer.our_social_media') }}</h6>
                         <div class="d-flex gap-3">
-                            <a draggable="false" class="text-light" href="https://www.instagram.com">
-                                <span class="fab fa-instagram fa-fw fa-xl"></span>
-                            </a>
-
-                            <a draggable="false" class="text-light" href="https://www.tiktok.com">
-                                <span class="fab fa-tiktok fa-fw fa-xl"></span>
-                            </a>
-
-                            <a draggable="false" class="text-light" href="https://www.facebook.com">
-                                <span class="fab fa-facebook fa-fw fa-xl"></span>
-                            </a>
+                            @foreach (config('social-medias') as $socialMedia)
+                                <a draggable="false" class="text-light" href="{{ $socialMedia['link'] }}"
+                                    target="_blank">
+                                    <span class="{{ $socialMedia['icon'] }} fa-fw fa-xl"></span>
+                                </a>
+                            @endforeach
                         </div>
                     </div>
                 </div>
