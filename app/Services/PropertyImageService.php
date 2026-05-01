@@ -30,7 +30,7 @@ class PropertyImageService
             ->when($search, function ($query) use ($search) {
                 $query->where(function ($query) use ($search) {
                     $query->where('name', 'like', "%{$search}%")
-                        ->orWhere('description', 'like', "%{$search}%")
+                        ->orWhere('google_file_id', 'like', "%{$search}%")
                         ->orWhereRelation('property', 'code', 'like', "%{$search}%")
                         ->orWhereRelation('property', 'name', 'like', "%{$search}%");
                 });

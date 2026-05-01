@@ -41,14 +41,14 @@ class PropertyService
                         ->orWhereRelation('user', 'email', 'like', "%{$search}%");
                 });
             })
-            ->when($userId, fn ($q) => $q->where('user_id', $userId))
-            ->when($districtId, fn ($q) => $q->where('district_id', $districtId))
-            ->when($areaId, fn ($q) => $q->where('area_id', $areaId))
-            ->when($status, fn ($q) => $q->where('status', $status))
-            ->when($startDate, fn ($q) => $q->whereDate('created_at', '>=', $startDate))
-            ->when($endDate, fn ($q) => $q->whereDate('created_at', '<=', $endDate))
-            ->when($random, fn ($q) => $q->inRandomOrder())
-            ->when($trash, fn ($q) => $q->onlyTrashed())
+            ->when($userId, fn($q) => $q->where('user_id', $userId))
+            ->when($districtId, fn($q) => $q->where('district_id', $districtId))
+            ->when($areaId, fn($q) => $q->where('area_id', $areaId))
+            ->when($status, fn($q) => $q->where('status', $status))
+            ->when($startDate, fn($q) => $q->whereDate('created_at', '>=', $startDate))
+            ->when($endDate, fn($q) => $q->whereDate('created_at', '<=', $endDate))
+            ->when($random, fn($q) => $q->inRandomOrder())
+            ->when($trash, fn($q) => $q->onlyTrashed())
             ->orderBy($orderBy, $sortBy)
             ->limit($limit);
 
@@ -106,46 +106,7 @@ class PropertyService
 
             $property = Property::create($data);
 
-            $google = new GoogleDrive;
-
-            if (count($images)) {
-                $directory = 'images/property';
-                $baseUrl = request()->getSchemeAndHttpHost();
-
-                $assetPath = config('constants.assets.path').'/'.$directory;
-                $assetUrl = config('constants.assets.url');
-
-                $fullUrl = "{$baseUrl}{$assetUrl}";
-
-                foreach ($images as $key => $fileId) {
-                    $content = $google->download($fileId);
-                    $position = $key + 1;
-
-                    try {
-                        $image = Image::make($content);
-
-                        $image->resize(1200, null, function ($constraint) {
-                            $constraint->aspectRatio();
-                            $constraint->upsize();
-                        });
-
-                        $fileName = "{$property->slug}-{$position}.webp";
-                        $fullPath = "{$assetPath}/{$fileName}";
-
-                        $encoded = (string) $image->encode('webp', 70);
-                        file_put_contents($fullPath, $encoded);
-
-                        $property->images()->create([
-                            'name' => $property->name,
-                            'image_url' => "{$fullUrl}/{$directory}/{$fileName}",
-                            'position' => $position,
-                        ]);
-                    } catch (Exception $e) {
-                        DB::rollBack();
-                        throw $e;
-                    }
-                }
-            }
+            $this->uploadImages(property: $property, images: $images);
 
             DB::commit();
 
@@ -199,6 +160,8 @@ class PropertyService
             //     }
             // }
 
+            $this->uploadImages(property: $property, images: $data['images']);
+
             Arr::pull($data, 'image');
             Arr::pull($data, 'internet_speedtest_image');
 
@@ -221,5 +184,52 @@ class PropertyService
         // }
 
         return $property->delete();
+    }
+
+    public function uploadImages(Property $property, array $images = []): Property
+    {
+        $google = new GoogleDrive;
+
+        if (count($images)) {
+            $directory = 'images/property';
+            $baseUrl = request()->getSchemeAndHttpHost();
+
+            $assetPath = config('constants.assets.path') . '/' . $directory;
+            $assetUrl = config('constants.assets.url');
+
+            $fullUrl = "{$baseUrl}{$assetUrl}";
+
+            foreach ($images as $key => $fileId) {
+                $content = $google->download($fileId);
+                $position = $key + 1;
+
+                try {
+                    $image = Image::make($content);
+
+                    $image->resize(1200, null, function ($constraint) {
+                        $constraint->aspectRatio();
+                        $constraint->upsize();
+                    });
+
+                    $fileName = "{$property->slug}-{$position}.webp";
+                    $fullPath = "{$assetPath}/{$fileName}";
+
+                    $encoded = (string) $image->encode('webp', 70);
+                    file_put_contents($fullPath, $encoded);
+
+                    $property->images()->create([
+                        'name' => $property->name,
+                        'image_url' => "{$fullUrl}/{$directory}/{$fileName}",
+                        'file_id' => $position,
+                        'position' => $position,
+                    ]);
+                } catch (Exception $e) {
+                    DB::rollBack();
+                    throw $e;
+                }
+            }
+        }
+
+        return $property;
     }
 }

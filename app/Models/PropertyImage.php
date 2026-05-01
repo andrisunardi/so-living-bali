@@ -75,6 +75,7 @@ class PropertyImage extends Model
     protected $fillable = [
         'property_id',
         'name',
+        'google_file_id',
         'image_url',
         'position',
     ];
@@ -86,6 +87,7 @@ class PropertyImage extends Model
         return [
             'property_id' => 'integer',
             'name' => 'string',
+            'google_file_id' => 'string',
             'image_url' => 'string',
             'position' => 'string',
         ];

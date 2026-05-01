@@ -59,7 +59,7 @@
                     {{ $propertyImage->name }}
                 </td>
                 <td valign="middle" align="left">
-                    {{ $propertyImage->description }}
+                    {{ $propertyImage->google_file_id }}
                 </td>
                 <td valign="middle" align="left">
                     {{ $propertyImage->image_url }}

@@ -15,6 +15,7 @@ return new class extends Migration
             $table->foreignIdFor(Property::class)->constrained()->cascadeOnDelete();
             $table->string('name', 50);
             $table->text('description')->nullable();
+            $table->string('google_file_id', 100);
             $table->string('image_url');
             $table->unsignedTinyInteger('position');
             $table->foreignIdFor(User::class, 'created_by')->nullable()->constrained('users')->nullOnDelete();

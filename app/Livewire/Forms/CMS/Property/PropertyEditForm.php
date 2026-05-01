@@ -196,11 +196,14 @@ class PropertyEditForm extends Form
     #[Validate('nullable|string|min:0|max:65535')]
     public ?string $operational_risk_comment = '';
 
-    #[Validate('nullable|image|file|mimes:jpg,jpeg,png,gif,webp|max:12288')]
-    public ?TemporaryUploadedFile $image = null;
+    // #[Validate('nullable|image|file|mimes:jpg,jpeg,png,gif,webp|max:12288')]
+    // public ?TemporaryUploadedFile $image = null;
 
     #[Validate(['nullable', 'integer', new Enum(PropertyStatus::class)])]
     public int $status = PropertyStatus::Pending->value;
+
+    #[Validate(['required', 'array', 'min:1'])]
+    public array $images = [];
 
     public function set(Property $property): void
     {

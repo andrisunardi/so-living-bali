@@ -16,10 +16,10 @@ class PropertyImageAddForm extends Form
 
     public string $name = '';
 
-    #[Validate('nullable|string|min:1|max:65535')]
-    public string $description = '';
+    #[Validate('required|string|min:1|max:100')]
+    public string $google_file_id = '';
 
-    #[Validate('nullable|image|file|mimes:jpg,jpeg,png,gif,webp|max:12288')]
+    #[Validate('required|image|file|mimes:jpg,jpeg,png,gif,webp|max:12288')]
     public ?TemporaryUploadedFile $image = null;
 
     public function rules(): array
