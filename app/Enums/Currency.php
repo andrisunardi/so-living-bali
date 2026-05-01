@@ -14,10 +14,6 @@ enum Currency: string
 
     case GBP = 'gbp';
 
-    case CNY = 'cny';
-
-    case YEN = 'yen';
-
     public function icon(): string
     {
         return match ($this) {
@@ -26,8 +22,6 @@ enum Currency: string
             self::AUD => 'fas fa-dollar-sign',
             self::EUR => 'fas fa-euro-sign',
             self::GBP => 'fas fa-sterling-sign',
-            self::CNY => 'fas fa-yen-sign',
-            self::YEN => 'fas fa-yen-sign',
         };
     }
 
@@ -39,8 +33,6 @@ enum Currency: string
             self::EUR->value => 'fas fa-euro-sign',
             self::IDR->value => 'fas fa-rupiah-sign',
             self::GBP->value => 'fas fa-sterling-sign',
-            self::CNY->value => 'fas fa-yen-sign',
-            self::YEN->value => 'fas fa-yen-sign',
         };
     }
 }
