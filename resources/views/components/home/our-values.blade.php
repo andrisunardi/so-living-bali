@@ -33,7 +33,7 @@ new #[Lazy] class extends Component {
 
                 <div class="row row-cols-1 row-cols-sm-3 row-cols-lg-3 justify-content-end g-4">
                     @for ($i = 0; $i < 6; $i++)
-                        <div class="col">
+                        <div class="col" wire:key="value-{{ $i }}">
                             <div class="card card-body h-100">
                                 <div class="mb-4">
                                     <div class="placeholder-glow">
@@ -42,8 +42,6 @@ new #[Lazy] class extends Component {
                                 </div>
                                 <div class="placeholder-glow">
                                     <span class="placeholder col-8"></span>
-                                </div>
-                                <div class="placeholder-glow">
                                     <span class="placeholder col-12"></span>
                                     <span class="placeholder col-10"></span>
                                 </div>

@@ -21,46 +21,34 @@ new #[Lazy] class extends Component {
             <div class="d-grid gap-4">
                 <div class="text-center">
                     <div class="placeholder-glow">
-                        <span class="placeholder col-6 placeholder-lg"></span>
+                        <h1 class="display-6 placeholder rounded col-10 col-lg-9 col-xl-7"></h1>
                     </div>
-                    <div class="placeholder-glow mt-2">
-                        <span class="placeholder col-8"></span>
+                    <div class="placeholder-glow">
+                        <p class="small placeholder rounded col-12 col-sm-11 col-lg-8 col-xl-6"></p>
                     </div>
                 </div>
 
                 <div class="row row-cols-1 row-cols-sm-3 justify-content-end g-4">
                     @for ($i = 0; $i < 3; $i++)
-                        <div class="col">
-                            <div class="card h-100">
+                        <div class="col" wire:key="service-{{ $i }}">
+                            <div class="card h-100 placeholder-glow">
                                 <div class="card-body">
                                     <div class="mb-4">
-                                        <div class="placeholder-glow">
-                                            <span class="placeholder rounded-circle"
-                                                style="width: 60px; height: 60px; display: inline-block;"></span>
-                                        </div>
+                                        <span class="placeholder rounded-circle ratio ratio-1x1 w-25"></span>
                                     </div>
-                                    <div class="placeholder-glow">
-                                        <span class="placeholder col-7 placeholder-lg"></span>
-                                    </div>
-                                    <div class="placeholder-glow mt-2">
-                                        <span class="placeholder col-12"></span>
-                                        <span class="placeholder col-8"></span>
-                                    </div>
-                                    <div class="mt-3">
-                                        <div class="placeholder-glow">
-                                            <span class="placeholder col-10"></span>
-                                        </div>
-                                        <div class="placeholder-glow mt-1">
-                                            <span class="placeholder col-8"></span>
-                                        </div>
-                                        <div class="placeholder-glow mt-1">
-                                            <span class="placeholder col-9"></span>
-                                        </div>
-                                    </div>
+                                    <h5 class="card-title placeholder rounded col-8"></h5>
+                                    <p class="card-text placeholder rounded col-12"></p>
+                                    <ul>
+                                        @for ($j = 0; $j < 3; $j++)
+                                            <li wire:key="inclusion-{{ $j }}">
+                                                <span class="placeholder rounded col-12 col-xl-10"></span>
+                                            </li>
+                                        @endfor
+                                    </ul>
                                 </div>
                                 <div class="card-footer bg-white border-0 py-3">
                                     <div class="placeholder-glow">
-                                        <span class="placeholder col-12 rounded-pill" style="height: 38px;"></span>
+                                        <span class="btn rounded-pill placeholder col-12"></span>
                                     </div>
                                 </div>
                             </div>
@@ -70,7 +58,7 @@ new #[Lazy] class extends Component {
 
                 <div class="text-center mt-4">
                     <div class="placeholder-glow">
-                        <span class="placeholder col-3 rounded" style="height: 38px;"></span>
+                        <span class="btn placeholder col-3 col-sm-2 col-xl-1"></span>
                     </div>
                 </div>
             </div>
