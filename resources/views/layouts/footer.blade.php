@@ -46,7 +46,7 @@ new class extends Component {
                 </a>
             </div>
             <div>
-                <h1 class="lead text-light">{{ trans('footer.description') }}</h1>
+                <h1 class="lead text-light px-4 px-sm-0">{{ trans('footer.description') }}</h1>
             </div>
             <div>
                 <div class="d-flex justify-content-center gap-4">
