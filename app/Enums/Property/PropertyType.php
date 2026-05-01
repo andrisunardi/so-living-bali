@@ -17,7 +17,6 @@ enum PropertyType: int
     {
         return match ($value) {
             self::Villa->value => 'Villa',
-            self::Apartment->value => 'Apartment',
         };
     }
 }
