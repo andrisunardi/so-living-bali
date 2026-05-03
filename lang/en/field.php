@@ -73,8 +73,8 @@ return [
     'user' => 'User',
     'username' => 'Username',
 
-    'index' => 'Index',
-    'index' => 'Index',
+    'name_id' => 'Name ID',
+    'name_zh' => 'Name ZH',
     'index' => 'Index',
     'index' => 'Index',
     'index' => 'Index',

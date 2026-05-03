@@ -246,6 +246,8 @@ new #[Title('Guide Category')] class extends Component {
                                         wire:navigate>
                                         {{ $guideCategory->name }}
                                     </a>
+                                    {{ $guideCategory->name_id }}
+                                    {{ $guideCategory->name_zh }}
                                 </td>
                                 <td class="text-center">
                                     {{-- <a draggable="false"

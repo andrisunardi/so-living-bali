@@ -180,6 +180,8 @@ namespace App\Models{
 /**
  * @property int $id
  * @property string $name
+ * @property string $name_id
+ * @property string $name_zh
  * @property bool $is_show
  * @property bool $is_active
  * @property int|null $created_by
@@ -192,6 +194,7 @@ namespace App\Models{
  * @property-read int|null $activities_count
  * @property-read \App\Models\User|null $createdBy
  * @property-read \App\Models\User|null $deletedBy
+ * @property-read string $translate_name
  * @property-read \App\Models\User|null $updatedBy
  * @method static \Illuminate\Database\Eloquent\Builder<static>|GuideCategory active()
  * @method static \Database\Factories\GuideCategoryFactory factory($count = null, $state = [])
@@ -210,6 +213,8 @@ namespace App\Models{
  * @method static \Illuminate\Database\Eloquent\Builder<static>|GuideCategory whereIsActive($value)
  * @method static \Illuminate\Database\Eloquent\Builder<static>|GuideCategory whereIsShow($value)
  * @method static \Illuminate\Database\Eloquent\Builder<static>|GuideCategory whereName($value)
+ * @method static \Illuminate\Database\Eloquent\Builder<static>|GuideCategory whereNameId($value)
+ * @method static \Illuminate\Database\Eloquent\Builder<static>|GuideCategory whereNameZh($value)
  * @method static \Illuminate\Database\Eloquent\Builder<static>|GuideCategory whereUpdatedAt($value)
  * @method static \Illuminate\Database\Eloquent\Builder<static>|GuideCategory whereUpdatedBy($value)
  * @method static \Illuminate\Database\Eloquent\Builder<static>|GuideCategory withTrashed(bool $withTrashed = true)
@@ -503,9 +508,9 @@ namespace App\Models{
  * @method static \Illuminate\Database\Eloquent\Builder<static>|PropertyImage whereImageUrl($value)
  * @property string $position
  * @method static \Illuminate\Database\Eloquent\Builder<static>|PropertyImage wherePosition($value)
- * @mixin \Eloquent
  * @property string $google_file_id
  * @method static \Illuminate\Database\Eloquent\Builder<static>|PropertyImage whereGoogleFileId($value)
+ * @mixin \Eloquent
  */
 	class PropertyImage extends \Eloquent {}
 }

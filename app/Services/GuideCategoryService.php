@@ -24,7 +24,9 @@ class GuideCategoryService
         $guideCategories = GuideCategory::query()
             ->when($search, function ($query) use ($search) {
                 $query->where(function ($query) use ($search) {
-                    $query->where('name', 'like', "%{$search}%");
+                    $query->where('name', 'like', "%{$search}%")
+                        ->orWhere('name_id', 'like', "%{$search}%")
+                        ->orWhere('name_zh', 'like', "%{$search}%");
                 });
             })
             ->when($isShow, fn ($q) => $q->whereIn('is_show', $isShow))

@@ -11,6 +11,7 @@ use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
 use Illuminate\Database\Eloquent\SoftDeletes;
 use Illuminate\Support\Carbon;
+use Illuminate\Support\Facades\App;
 use Spatie\Activitylog\LogOptions;
 use Spatie\Activitylog\Models\Activity;
 use Spatie\Activitylog\Traits\LogsActivity;
@@ -18,6 +19,8 @@ use Spatie\Activitylog\Traits\LogsActivity;
 /**
  * @property int $id
  * @property string $name
+ * @property string $name_id
+ * @property string $name_zh
  * @property bool $is_show
  * @property bool $is_active
  * @property int|null $created_by
@@ -30,6 +33,7 @@ use Spatie\Activitylog\Traits\LogsActivity;
  * @property-read int|null $activities_count
  * @property-read User|null $createdBy
  * @property-read User|null $deletedBy
+ * @property-read string $translate_name
  * @property-read User|null $updatedBy
  *
  * @method static Builder<static>|GuideCategory active()
@@ -49,6 +53,8 @@ use Spatie\Activitylog\Traits\LogsActivity;
  * @method static Builder<static>|GuideCategory whereIsActive($value)
  * @method static Builder<static>|GuideCategory whereIsShow($value)
  * @method static Builder<static>|GuideCategory whereName($value)
+ * @method static Builder<static>|GuideCategory whereNameId($value)
+ * @method static Builder<static>|GuideCategory whereNameZh($value)
  * @method static Builder<static>|GuideCategory whereUpdatedAt($value)
  * @method static Builder<static>|GuideCategory whereUpdatedBy($value)
  * @method static Builder<static>|GuideCategory withTrashed(bool $withTrashed = true)
@@ -67,6 +73,8 @@ class GuideCategory extends Model
 
     protected $fillable = [
         'name',
+        'name_id',
+        'name_zh',
         'is_show',
         'is_active',
     ];
@@ -77,6 +85,8 @@ class GuideCategory extends Model
     {
         return [
             'name' => 'string',
+            'name_id' => 'string',
+            'name_zh' => 'string',
             'is_show' => 'boolean',
             'is_active' => 'boolean',
         ];
@@ -100,6 +110,18 @@ class GuideCategory extends Model
     public function getUpdatedAtAttribute(string $value): Carbon
     {
         return Carbon::parse($value)->setTimezone(config('app.timezone'));
+    }
+
+    public function getTranslateNameAttribute(): string
+    {
+        $locale = App::getLocale();
+        $language = [
+            'en' => $this->name,
+            'id' => $this->name_id,
+            'zh' => $this->name_zh,
+        ];
+
+        return $language[$locale] ?? $this->name;
     }
 
     public function scopeShow(Builder $query): void

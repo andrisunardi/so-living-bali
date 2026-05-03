@@ -14,9 +14,9 @@ class PropertyImageFactory extends Factory
         return [
             'property_id' => $property->id,
             'name' => fake()->name(),
-            'google_file_id' => null,
-            'image_path' => null,
-            'position' => 1,
+            'google_file_id' => fake()->uuid(),
+            'image_url' => fake()->imageUrl(),
+            'position' => fake()->numberBetween(1, 255),
         ];
     }
 }

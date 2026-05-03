@@ -27,6 +27,12 @@
                 <b>{{ trans('field.name') }}</b>
             </th>
             <th valign="middle" align="center">
+                <b>{{ trans('field.name_id') }}</b>
+            </th>
+            <th valign="middle" align="center">
+                <b>{{ trans('field.name_zh') }}</b>
+            </th>
+            <th valign="middle" align="center">
                 <b>{{ trans('field.show') }}</b>
             </th>
             <th valign="middle" align="center">
@@ -60,6 +66,12 @@
                 </td>
                 <td valign="middle" align="left">
                     {{ $guideCategory->name }}
+                </td>
+                <td valign="middle" align="left">
+                    {{ $guideCategory->name_id }}
+                </td>
+                <td valign="middle" align="left">
+                    {{ $guideCategory->name_zh }}
                 </td>
                 <td valign="middle" align="center">
                     {{ Str::yesNo($guideCategory->is_show) }}
