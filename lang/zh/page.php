@@ -4,7 +4,7 @@ return [
 
     'home' => '首页',
     'service' => '服务',
-    'about' => '关于我们',
+    'about' => '关于',
 
     'previous_page' => '上一页',
     'login' => '登录',
@@ -18,8 +18,10 @@ return [
     'property' => '属性',
     'property_image' => '属性图片',
     'guide' => '指南',
+    'guide_category' => '指南分类',
+
     'master' => '主数据',
-    'value' => '价值',
+    'value' => '值',
     'area' => '区域',
     'district' => '地区',
 
@@ -30,9 +32,9 @@ return [
 
     'profile' => '个人资料',
     'edit_profile' => '编辑个人资料',
-    'change_password' => '更改密码',
+    'change_password' => '修改密码',
     'setting' => '设置',
     'activity' => '活动',
-    'logout' => '退出',
+    'logout' => '退出登录',
 
 ];

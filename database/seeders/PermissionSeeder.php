@@ -22,6 +22,12 @@ class PermissionSeeder extends Seeder
         Permission::create(['name' => 'guide.delete'])->assignRole('Admin');
         Permission::create(['name' => 'guide.detail'])->assignRole('Admin');
 
+        Permission::create(['name' => 'guide_category'])->assignRole('Admin');
+        Permission::create(['name' => 'guide_category.add'])->assignRole('Admin');
+        Permission::create(['name' => 'guide_category.edit'])->assignRole('Admin');
+        Permission::create(['name' => 'guide_category.delete'])->assignRole('Admin');
+        Permission::create(['name' => 'guide_category.detail'])->assignRole('Admin');
+
         Permission::create(['name' => 'property'])->assignRole('Admin', 'Agent');
         Permission::create(['name' => 'property.add'])->assignRole('Admin', 'Agent');
         Permission::create(['name' => 'property.edit'])->assignRole('Admin', 'Agent');

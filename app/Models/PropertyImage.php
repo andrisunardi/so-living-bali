@@ -61,6 +61,10 @@ use Spatie\Activitylog\Traits\LogsActivity;
  *
  * @method static \Illuminate\Database\Eloquent\Builder<static>|PropertyImage wherePosition($value)
  *
+ * @property string $google_file_id
+ *
+ * @method static \Illuminate\Database\Eloquent\Builder<static>|PropertyImage whereGoogleFileId($value)
+ *
  * @mixin \Eloquent
  */
 #[ObservedBy([PropertyImageObserver::class])]

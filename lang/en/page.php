@@ -18,6 +18,7 @@ return [
     'property' => 'Property',
     'property_image' => 'Property Image',
     'guide' => 'Guide',
+    'guide_category' => 'Guide Category',
 
     'master' => 'Master',
     'value' => 'Value',

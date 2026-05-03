@@ -83,6 +83,14 @@ class Component extends LivewireComponent
                     [
                         'id' => $pageId++,
                         'menu_id' => 1,
+                        'name' => trans('page.guide_category'),
+                        'icon' => 'fas fa-tags',
+                        'route' => 'cms.guide-category.index',
+                        'permission' => 'guide_category',
+                    ],
+                    [
+                        'id' => $pageId++,
+                        'menu_id' => 1,
                         'name' => trans('page.property'),
                         'icon' => 'fas fa-building',
                         'route' => 'cms.property.index',

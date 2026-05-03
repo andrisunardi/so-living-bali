@@ -22,6 +22,13 @@ Route::group(['middleware' => ['auth']], function () {
         ->middleware(['permission:guide'])
         ->group(base_path('routes/cms/guide.php'));
 
+    // GUIDE CATEGORY
+    Route::prefix('guide-category')
+        ->name('guide-category.')
+        ->as('guide-category.')
+        ->middleware(['permission:guide_category'])
+        ->group(base_path('routes/cms/guide-category.php'));
+
     // PROPERTY
     Route::prefix('property')
         ->name('property.')

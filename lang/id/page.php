@@ -17,7 +17,8 @@ return [
     'contact' => 'Kontak',
     'property' => 'Properti',
     'property_image' => 'Gambar Properti',
-    'guide' => 'Guide',
+    'guide' => 'Panduan',
+    'guide_category' => 'Kategori Panduan',
 
     'master' => 'Master',
     'value' => 'Nilai',

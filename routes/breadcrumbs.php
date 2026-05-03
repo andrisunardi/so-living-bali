@@ -111,6 +111,27 @@ Breadcrumbs::for('cms.guide.detail', function (BreadcrumbTrail $trail, $guide) {
     $trail->push(trans('index.detail'), route('cms.guide.detail', $guide), ['icon' => 'fas fa-list']);
 });
 
+// GUIDE CATEGORY
+Breadcrumbs::for('cms.guide-category.index', function (BreadcrumbTrail $trail) {
+    $trail->parent('cms.home');
+    $trail->push(trans('page.guide_category'), route('cms.guide-category.index'), ['icon' => 'fas fa-tags']);
+});
+
+Breadcrumbs::for('cms.guide-category.add', function (BreadcrumbTrail $trail) {
+    $trail->parent('cms.guide-category.index');
+    $trail->push(trans('index.add'), route('cms.guide-category.add'), ['icon' => 'fas fa-plus']);
+});
+
+Breadcrumbs::for('cms.guide-category.edit', function (BreadcrumbTrail $trail, $guide) {
+    $trail->parent('cms.guide-category.index');
+    $trail->push(trans('index.edit'), route('cms.guide-category.edit', $guide), ['icon' => 'fas fa-edit']);
+});
+
+Breadcrumbs::for('cms.guide-category.detail', function (BreadcrumbTrail $trail, $guide) {
+    $trail->parent('cms.guide-category.index');
+    $trail->push(trans('index.detail'), route('cms.guide-category.detail', $guide), ['icon' => 'fas fa-list']);
+});
+
 // PROPERTY
 Breadcrumbs::for('cms.property.index', function (BreadcrumbTrail $trail) {
     $trail->parent('cms.home');

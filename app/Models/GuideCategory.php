@@ -2,14 +2,13 @@
 
 namespace App\Models;
 
-use App\Observers\AreaObserver;
+use App\Observers\GuideCategoryObserver;
 use Illuminate\Database\Eloquent\Attributes\ObservedBy;
 use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Database\Eloquent\Collection;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
-use Illuminate\Database\Eloquent\Relations\HasMany;
 use Illuminate\Database\Eloquent\SoftDeletes;
 use Illuminate\Support\Carbon;
 use Spatie\Activitylog\LogOptions;
@@ -18,7 +17,6 @@ use Spatie\Activitylog\Traits\LogsActivity;
 
 /**
  * @property int $id
- * @property int $district_id
  * @property string $name
  * @property bool $is_show
  * @property bool $is_active
@@ -30,52 +28,44 @@ use Spatie\Activitylog\Traits\LogsActivity;
  * @property Carbon|null $deleted_at
  * @property-read Collection<int, Activity> $activities
  * @property-read int|null $activities_count
- * @property-read Collection<int, Contact> $contacts
- * @property-read int|null $contacts_count
  * @property-read User|null $createdBy
  * @property-read User|null $deletedBy
- * @property-read District|null $district
- * @property-read Collection<int, Property> $properties
- * @property-read int|null $properties_count
  * @property-read User|null $updatedBy
- * @property-read User|null $user
  *
- * @method static Builder<static>|Area active()
- * @method static \Database\Factories\AreaFactory factory($count = null, $state = [])
- * @method static Builder<static>|Area inactive()
- * @method static Builder<static>|Area newModelQuery()
- * @method static Builder<static>|Area newQuery()
- * @method static Builder<static>|Area notShown()
- * @method static Builder<static>|Area onlyTrashed()
- * @method static Builder<static>|Area query()
- * @method static Builder<static>|Area show()
- * @method static Builder<static>|Area whereCreatedAt($value)
- * @method static Builder<static>|Area whereCreatedBy($value)
- * @method static Builder<static>|Area whereDeletedAt($value)
- * @method static Builder<static>|Area whereDeletedBy($value)
- * @method static Builder<static>|Area whereDistrictId($value)
- * @method static Builder<static>|Area whereId($value)
- * @method static Builder<static>|Area whereIsActive($value)
- * @method static Builder<static>|Area whereIsShow($value)
- * @method static Builder<static>|Area whereName($value)
- * @method static Builder<static>|Area whereUpdatedAt($value)
- * @method static Builder<static>|Area whereUpdatedBy($value)
- * @method static Builder<static>|Area withTrashed(bool $withTrashed = true)
- * @method static Builder<static>|Area withoutTrashed()
+ * @method static Builder<static>|GuideCategory active()
+ * @method static \Database\Factories\GuideCategoryFactory factory($count = null, $state = [])
+ * @method static Builder<static>|GuideCategory inactive()
+ * @method static Builder<static>|GuideCategory newModelQuery()
+ * @method static Builder<static>|GuideCategory newQuery()
+ * @method static Builder<static>|GuideCategory notShown()
+ * @method static Builder<static>|GuideCategory onlyTrashed()
+ * @method static Builder<static>|GuideCategory query()
+ * @method static Builder<static>|GuideCategory show()
+ * @method static Builder<static>|GuideCategory whereCreatedAt($value)
+ * @method static Builder<static>|GuideCategory whereCreatedBy($value)
+ * @method static Builder<static>|GuideCategory whereDeletedAt($value)
+ * @method static Builder<static>|GuideCategory whereDeletedBy($value)
+ * @method static Builder<static>|GuideCategory whereId($value)
+ * @method static Builder<static>|GuideCategory whereIsActive($value)
+ * @method static Builder<static>|GuideCategory whereIsShow($value)
+ * @method static Builder<static>|GuideCategory whereName($value)
+ * @method static Builder<static>|GuideCategory whereUpdatedAt($value)
+ * @method static Builder<static>|GuideCategory whereUpdatedBy($value)
+ * @method static Builder<static>|GuideCategory withTrashed(bool $withTrashed = true)
+ * @method static Builder<static>|GuideCategory withoutTrashed()
  *
  * @mixin \Eloquent
  */
-#[ObservedBy([AreaObserver::class])]
-class Area extends Model
+#[ObservedBy([GuideCategoryObserver::class])]
+class GuideCategory extends Model
 {
     use HasFactory;
     use LogsActivity;
     use SoftDeletes;
 
-    protected $table = 'areas';
+    protected $table = 'guide_categories';
 
     protected $fillable = [
-        'district_id',
         'name',
         'is_show',
         'is_active',
@@ -86,7 +76,6 @@ class Area extends Model
     protected function casts(): array
     {
         return [
-            'district_id' => 'integer',
             'name' => 'string',
             'is_show' => 'boolean',
             'is_active' => 'boolean',
@@ -133,20 +122,10 @@ class Area extends Model
         $query->where('is_active', false);
     }
 
-    public function district(): BelongsTo
-    {
-        return $this->belongsTo(District::class);
-    }
-
-    public function properties(): HasMany
-    {
-        return $this->hasMany(Property::class);
-    }
-
-    public function contacts(): HasMany
-    {
-        return $this->hasMany(Contact::class);
-    }
+    // public function guides(): HasMany
+    // {
+    //     return $this->hasMany(Guide::class);
+    // }
 
     public function createdBy(): BelongsTo
     {

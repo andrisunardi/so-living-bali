@@ -18,9 +18,13 @@ class DatabaseSeeder extends Seeder
             AreaSeeder::class,
             ValueSeeder::class,
 
-            ContactSeeder::class,
+            GuideCategorySeeder::class,
+            // GuideSeeder::class,
+
             PropertySeeder::class,
             PropertyImageSeeder::class,
+
+            ContactSeeder::class,
         ]);
     }
 }

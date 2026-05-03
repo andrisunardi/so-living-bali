@@ -179,6 +179,48 @@ namespace App\Models{
 namespace App\Models{
 /**
  * @property int $id
+ * @property string $name
+ * @property bool $is_show
+ * @property bool $is_active
+ * @property int|null $created_by
+ * @property int|null $updated_by
+ * @property int|null $deleted_by
+ * @property \Illuminate\Support\Carbon $created_at
+ * @property \Illuminate\Support\Carbon $updated_at
+ * @property \Illuminate\Support\Carbon|null $deleted_at
+ * @property-read \Illuminate\Database\Eloquent\Collection<int, \Spatie\Activitylog\Models\Activity> $activities
+ * @property-read int|null $activities_count
+ * @property-read \App\Models\User|null $createdBy
+ * @property-read \App\Models\User|null $deletedBy
+ * @property-read \App\Models\User|null $updatedBy
+ * @method static \Illuminate\Database\Eloquent\Builder<static>|GuideCategory active()
+ * @method static \Database\Factories\GuideCategoryFactory factory($count = null, $state = [])
+ * @method static \Illuminate\Database\Eloquent\Builder<static>|GuideCategory inactive()
+ * @method static \Illuminate\Database\Eloquent\Builder<static>|GuideCategory newModelQuery()
+ * @method static \Illuminate\Database\Eloquent\Builder<static>|GuideCategory newQuery()
+ * @method static \Illuminate\Database\Eloquent\Builder<static>|GuideCategory notShown()
+ * @method static \Illuminate\Database\Eloquent\Builder<static>|GuideCategory onlyTrashed()
+ * @method static \Illuminate\Database\Eloquent\Builder<static>|GuideCategory query()
+ * @method static \Illuminate\Database\Eloquent\Builder<static>|GuideCategory show()
+ * @method static \Illuminate\Database\Eloquent\Builder<static>|GuideCategory whereCreatedAt($value)
+ * @method static \Illuminate\Database\Eloquent\Builder<static>|GuideCategory whereCreatedBy($value)
+ * @method static \Illuminate\Database\Eloquent\Builder<static>|GuideCategory whereDeletedAt($value)
+ * @method static \Illuminate\Database\Eloquent\Builder<static>|GuideCategory whereDeletedBy($value)
+ * @method static \Illuminate\Database\Eloquent\Builder<static>|GuideCategory whereId($value)
+ * @method static \Illuminate\Database\Eloquent\Builder<static>|GuideCategory whereIsActive($value)
+ * @method static \Illuminate\Database\Eloquent\Builder<static>|GuideCategory whereIsShow($value)
+ * @method static \Illuminate\Database\Eloquent\Builder<static>|GuideCategory whereName($value)
+ * @method static \Illuminate\Database\Eloquent\Builder<static>|GuideCategory whereUpdatedAt($value)
+ * @method static \Illuminate\Database\Eloquent\Builder<static>|GuideCategory whereUpdatedBy($value)
+ * @method static \Illuminate\Database\Eloquent\Builder<static>|GuideCategory withTrashed(bool $withTrashed = true)
+ * @method static \Illuminate\Database\Eloquent\Builder<static>|GuideCategory withoutTrashed()
+ */
+	class GuideCategory extends \Eloquent {}
+}
+
+namespace App\Models{
+/**
+ * @property int $id
  * @property string $code
  * @property string $name
  * @property string $refresh_token
@@ -462,6 +504,8 @@ namespace App\Models{
  * @property string $position
  * @method static \Illuminate\Database\Eloquent\Builder<static>|PropertyImage wherePosition($value)
  * @mixin \Eloquent
+ * @property string $google_file_id
+ * @method static \Illuminate\Database\Eloquent\Builder<static>|PropertyImage whereGoogleFileId($value)
  */
 	class PropertyImage extends \Eloquent {}
 }
