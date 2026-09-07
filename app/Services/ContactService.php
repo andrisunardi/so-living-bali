@@ -85,35 +85,41 @@ class ContactService
         try {
             DB::beginTransaction();
 
-            if (! isset($data['name'])) {
-                $data['name'] = trim("{$data['first_name']} {$data['last_name']}");
+            $contact = Contact::where('email', $data['email'])->orWhere('phone', $data['phone'])->first();
+
+            if (!$contact) {
+                if (! isset($data['name'])) {
+                    $data['name'] = trim("{$data['first_name']} {$data['last_name']}");
+                }
+
+                if (! isset($data['first_name'])) {
+                    $data['first_name'] = Str::before($data['name'], ' ');
+                }
+
+                if (! isset($data['last_name'])) {
+                    $data['last_name'] = Str::after($data['name'], ' ');
+                }
+
+                $contacts = (new GoHighLevel)->createContacts(data: $data);
+
+                $contactId = $contacts['contact']['id'] ?? null;
+
+                if (! ($contactId)) {
+                    throw ValidationException::withMessages([
+                        'api' => [$contacts['message'] ?? 'Error From Go High Level'],
+                    ]);
+                }
+
+                $data['code'] = $contactId;
+
+                Arr::pull($data, 'client_type');
+
+                $contact = Contact::create($data);
             }
 
-            if (! isset($data['first_name'])) {
-                $data['first_name'] = Str::before($data['name'], ' ');
-            }
+            $contactId = $contact->code;
 
-            if (! isset($data['last_name'])) {
-                $data['last_name'] = Str::after($data['name'], ' ');
-            }
-
-            $contacts = (new GoHighLevel)->createContacts(data: $data);
-
-            $contactId = $contacts['contact']['id'] ?? null;
-
-            if (! ($contactId)) {
-                throw ValidationException::withMessages([
-                    'api' => [$contacts['message'] ?? 'Error From Go High Level'],
-                ]);
-            }
-
-            $data['code'] = $contactId;
-
-            // (new GoHighLevel)->createConversationsMessagesInbound(contactId: $contactId, message: $data['message']);
-
-            Arr::pull($data, 'client_type');
-
-            $contact = Contact::create($data);
+            (new GoHighLevel)->createConversationsMessagesInbound(contactId: $contactId, message: $data['message']);
 
             DB::commit();
 
