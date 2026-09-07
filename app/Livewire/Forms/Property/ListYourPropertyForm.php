@@ -14,10 +14,10 @@ class ListYourPropertyForm extends Form
     #[Validate('required|string|min:1|max:50')]
     public string $name = '';
 
-    #[Validate('required|email:rfc,dns|min:1|max:50|unique:contacts,email')]
+    #[Validate('required|email:rfc,dns|min:1|max:50')]
     public string $email = '';
 
-    #[Validate('required|string|min:1|max:20|unique:contacts,phone')]
+    #[Validate('required|string|min:1|max:20')]
     public string $phone = '';
 
     #[Validate(['required', 'integer', new Enum(PropertyRentalType::class)])]

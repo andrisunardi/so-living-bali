@@ -9,6 +9,7 @@ use App\Enums\Property\PropertyStatus;
 use App\Enums\Property\PropertyType;
 use App\Libraries\GoogleDrive;
 use App\Libraries\GoogleMapsUrlParser;
+use App\Models\Contact;
 use App\Models\Property;
 use App\Models\PropertyImage;
 use Exception;
@@ -202,9 +203,17 @@ class PropertyService
 
             $data['availability_date'] = $data['availability_date'] ?: null;
             $data['visit_date'] = $data['visit_date'] ?: null;
-            $data['completion_date'] = $data['completion_date'] ?: null;
             $data['latitude'] = $data['latitude'] ?: null;
             $data['longitude'] = $data['longitude'] ?: null;
+
+            $data['completion_date'] = ($data['completion_date'] ?? null) ?: null;
+            $data['google_maps_url'] = ($data['google_maps_url'] ?? null) ?: null;
+            $data['listing_type'] = ($data['listing_type'] ?? null) ?: null;
+            $data['ownership_type'] = ($data['ownership_type'] ?? null) ?: null;
+            $data['payment_plan_available'] = ($data['payment_plan_available'] ?? false) ?: false;
+            $data['type'] = ($data['type'] ?? PropertyType::Villa) ?: PropertyType::Villa;
+            $data['status'] = ($data['status'] ?? PropertyStatus::Pending) ?: PropertyStatus::Pending;
+            $data['owner_representative_id'] = ($data['owner_representative_id'] ?? null) ?: null;
 
             $data['slug'] = Str::slug($data['name']);
 
@@ -492,7 +501,11 @@ class PropertyService
         $form['email'] = $data['email'];
         $form['phone'] = $data['phone'];
 
-        $contact = (new ContactService)->create(data: $form);
+        $contact = Contact::where('email', $data['email'])->orWhere('phone', $data['phone'])->first();
+
+        if (! $contact) {
+            $contact = (new ContactService)->create(data: $form);
+        }
 
         $id = Property::max('id') + 1;
         $name = $data['name'];
@@ -534,7 +547,7 @@ class PropertyService
             }
         }
 
-        $property = (new PropertyService)->create(data: $data);
+        $property = $this->create(data: $data);
 
         return $property;
     }

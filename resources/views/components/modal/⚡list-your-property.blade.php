@@ -25,7 +25,9 @@ new class extends Component {
 
             $this->alertSuccess(title: trans('index.add') . ' ' . trans('index.success'), body: trans('page.property') . ' ' . trans('message.has_been_successfully_added'));
 
-            $this->dispatch('close-modal-list-your-property');
+            $this->js("bootstrap.Modal.getOrCreateInstance(document.getElementById('modal-list-your-property')).hide()");
+
+            $this->form->reset();
         } catch (ValidationException $e) {
             $errors = collect($e->validator->errors()->all())->implode('<br>');
 
@@ -81,5 +83,12 @@ new class extends Component {
             document.getElementById('modal-list-your-property')
         );
         modal.show();
+    });
+
+    $wire.on('close-modal-list-your-property', () => {
+        const modal = new bootstrap.Modal(
+            document.getElementById('modal-list-your-property')
+        );
+        modal.hide();
     });
 </script>
