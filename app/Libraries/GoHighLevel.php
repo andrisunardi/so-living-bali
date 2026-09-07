@@ -195,6 +195,24 @@ class GoHighLevel
         }
     }
 
+    public function createNotes(string $id, string $notes): array
+    {
+        try {
+            $url = "{$this->baseUrl}/contacts/{$id}/notes";
+
+            $payload = [
+                'body' => $notes,
+            ];
+
+            $response = Http::withHeaders($this->getHeader())->post($url, $payload);
+            $result = $response->json();
+
+            return $result;
+        } catch (Exception $e) {
+            throw $e;
+        }
+    }
+
     public function createConversations(string $contactId): array
     {
         try {
@@ -226,7 +244,7 @@ class GoHighLevel
             $payload = array_filter([
                 'locationId' => $locationId,
                 'contactId' => $contactId,
-                'channel' => 'WebChat',
+                'type' => 'WebChat',
                 'message' => $message,
                 'date' => now()->toDateTimeString(),
             ], fn ($value) => $value !== null);
