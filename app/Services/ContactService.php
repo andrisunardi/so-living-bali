@@ -119,7 +119,9 @@ class ContactService
 
             $contactId = $contact->code;
 
-            (new GoHighLevel)->createConversationsMessagesInbound(contactId: $contactId, message: $data['message']);
+            if (!empty($data['message'])) {
+                (new GoHighLevel)->createConversationsMessagesInbound(contactId: $contactId, message: $data['message']);
+            }
 
             DB::commit();
 
