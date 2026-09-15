@@ -22,7 +22,7 @@ echo ""
 
 echo "📦 COMPOSER"
 php -r "readfile('https://getcomposer.org/installer');" | php -c php.ini
-php composer.phar install --no-dev --no-interaction --prefer-dist --optimize-autoloader
+php composer.phar install --no-dev --no-interaction --prefer-dist --optimize-autoloader --ignore-platform-reqs
 php composer.phar dump-autoload
 echo ""
 
