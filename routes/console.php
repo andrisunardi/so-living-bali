@@ -20,5 +20,7 @@ Artisan::command('logs:clear', function () {
     $this->info('All Laravel logs have been deleted.');
 })->purpose('Delete all Laravel log files');
 
+Schedule::command('generate:sitemap')->daily();
+
 Schedule::command('ghl:refresh-token')->daily();
 Schedule::command('exchange-rate:refresh-currency')->daily();

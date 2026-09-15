@@ -5,7 +5,7 @@
 
 /**
  * A helper file for Laravel, to provide autocomplete information to your IDE
- * Generated for Laravel 12.66.0.
+ * Generated for Laravel 12.69.2.
  *
  * This file should not be included in your code, only analyzed by your IDE!
  *
@@ -27829,6 +27829,7 @@ namespace Illuminate\View {
         /**
          * @see \Livewire\Features\SupportPageComponents\SupportPageComponents::registerLayoutViewMacros()
          * @param mixed $data
+         * @return static
          * @static
          */
         public static function layoutData($data = [])
@@ -27839,6 +27840,7 @@ namespace Illuminate\View {
         /**
          * @see \Livewire\Features\SupportPageComponents\SupportPageComponents::registerLayoutViewMacros()
          * @param mixed $section
+         * @return static
          * @static
          */
         public static function section($section)
@@ -27849,6 +27851,7 @@ namespace Illuminate\View {
         /**
          * @see \Livewire\Features\SupportPageComponents\SupportPageComponents::registerLayoutViewMacros()
          * @param mixed $title
+         * @return static
          * @static
          */
         public static function title($title)
@@ -27859,6 +27862,7 @@ namespace Illuminate\View {
         /**
          * @see \Livewire\Features\SupportPageComponents\SupportPageComponents::registerLayoutViewMacros()
          * @param mixed $slot
+         * @return static
          * @static
          */
         public static function slot($slot)
@@ -27870,6 +27874,7 @@ namespace Illuminate\View {
          * @see \Livewire\Features\SupportPageComponents\SupportPageComponents::registerLayoutViewMacros()
          * @param mixed $view
          * @param mixed $params
+         * @return static
          * @static
          */
         public static function extends($view, $params = [])
@@ -27881,6 +27886,7 @@ namespace Illuminate\View {
          * @see \Livewire\Features\SupportPageComponents\SupportPageComponents::registerLayoutViewMacros()
          * @param mixed $view
          * @param mixed $params
+         * @return static
          * @static
          */
         public static function layout($view, $params = [])
@@ -27891,6 +27897,7 @@ namespace Illuminate\View {
         /**
          * @see \Livewire\Features\SupportPageComponents\SupportPageComponents::registerLayoutViewMacros()
          * @param callable $callback
+         * @return static
          * @static
          */
         public static function response($callback)

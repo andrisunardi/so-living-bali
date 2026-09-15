@@ -87,7 +87,7 @@ class ContactService
 
             $contact = Contact::where('email', $data['email'])->orWhere('phone', $data['phone'])->first();
 
-            if (!$contact) {
+            if (! $contact) {
                 if (! isset($data['name'])) {
                     $data['name'] = trim("{$data['first_name']} {$data['last_name']}");
                 }
@@ -119,7 +119,7 @@ class ContactService
 
             $contactId = $contact->code;
 
-            if (!empty($data['message'])) {
+            if (! empty($data['message'])) {
                 (new GoHighLevel)->createConversationsMessagesInbound(contactId: $contactId, message: $data['message']);
             }
 
