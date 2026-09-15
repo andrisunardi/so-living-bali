@@ -500,6 +500,7 @@ class PropertyService
         $form['name'] = $data['name'];
         $form['email'] = $data['email'];
         $form['phone'] = $data['phone'];
+        $form['tags'] = $data['tags'];
 
         $contact = Contact::where('email', $data['email'])->orWhere('phone', $data['phone'])->first();
 

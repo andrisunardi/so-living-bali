@@ -23,6 +23,9 @@ class ContactSubmitForm extends Form
 
     public function submit(): Contact
     {
-        return (new ContactService)->create(data: $this->validate());
+        $data = $this->validate();
+        $data['tags'] = ['Lead Form'];
+
+        return (new ContactService)->create(data: $data);
     }
 }

@@ -148,6 +148,7 @@ class GoHighLevel
                 'name' => $data['name'] ?? null,
                 'phone' => $data['phone'] ?? null,
                 'email' => $data['email'] ?? null,
+                'tags' => $data['tags'] ?? null,
                 'customFields' => ! empty($customFields) ? $customFields : null,
             ], fn ($value) => $value !== null);
 
@@ -183,6 +184,7 @@ class GoHighLevel
                 'name' => $data['name'] ?? null,
                 'phone' => $data['phone'] ?? null,
                 'email' => $data['email'] ?? null,
+                'tags' => $data['tags'] ?? null,
                 'customFields' => ! empty($customFields) ? $customFields : null,
             ], fn ($value) => $value !== null);
 

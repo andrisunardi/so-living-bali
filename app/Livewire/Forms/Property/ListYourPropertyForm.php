@@ -31,6 +31,9 @@ class ListYourPropertyForm extends Form
 
     public function submit(): Property
     {
-        return (new PropertyService)->list(data: $this->validate());
+        $data = $this->validate();
+        $data['tags'] = ['List My Property'];
+
+        return (new PropertyService)->list(data: $data);
     }
 }

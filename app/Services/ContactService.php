@@ -113,6 +113,7 @@ class ContactService
                 $data['code'] = $contactId;
 
                 Arr::pull($data, 'client_type');
+                Arr::pull($data, 'tags');
 
                 $contact = Contact::create($data);
             }
@@ -156,6 +157,7 @@ class ContactService
             (new GoHighLevel)->updateContacts(id: $contact->code, data: $data);
 
             Arr::pull($data, 'client_type');
+            Arr::pull($data, 'tags');
 
             $contact->update($data);
             $contact->refresh();
