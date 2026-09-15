@@ -30,6 +30,10 @@ echo ""
 # php artisan migrate --force
 # echo ""
 
+echo "🗺️ GENERATE SITEMAP"
+php artisan generate:sitemap
+echo ""
+
 echo "⚡ OPTIMIZE"
 php artisan clear-compiled
 php artisan optimize
