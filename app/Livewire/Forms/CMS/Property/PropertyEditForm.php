@@ -207,8 +207,8 @@ class PropertyEditForm extends Form
     #[Validate('nullable|boolean')]
     public bool $bedroom_2_has_natural_light = false;
 
-    #[Validate('nullable|boolean')]
-    public bool $noise_source_identified = false;
+    #[Validate('nullable|string|min:0|max:65535')]
+    public ?string $noise_source_identified = '';
 
     #[Validate('nullable|integer|min:0|max:9999999999')]
     public ?int $internet_speedtest = null;
