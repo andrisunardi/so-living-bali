@@ -63,7 +63,7 @@ return [
     'storage_or_staff_area' => 'Area Penyimpanan / Staf (YA / TIDAK)',
     'living_style' => 'Gaya Ruang Tamu',
     'living_style_open' => 'Terbuka',
-    'living_style_closed' => 'Tertutup',
+    'living_style_enclosed' => 'Tertutup',
     'living_style_mixed' => 'Campuran',
 
     'legal_and_basic_eligibility' => 'Legalitas & Kelayakan Dasar',

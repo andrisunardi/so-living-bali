@@ -63,7 +63,7 @@ return [
     'storage_or_staff_area' => 'Storage / Staff Area (YES / NO)',
     'living_style' => 'Living Style',
     'living_style_open' => 'Open',
-    'living_style_closed' => 'Closed',
+    'living_style_enclosed' => 'Enclosed',
     'living_style_mixed' => 'Mixed',
 
     'legal_and_basic_eligibility' => 'Legal & Basic Eligibility',

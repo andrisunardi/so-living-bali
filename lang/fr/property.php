@@ -63,7 +63,7 @@ return [
     'storage_or_staff_area' => 'Zone de stockage / personnel (OUI / NON)',
     'living_style' => 'Style de vie',
     'living_style_open' => 'Ouvert',
-    'living_style_closed' => 'Fermé',
+    'living_style_enclosed' => '',
     'living_style_mixed' => 'Mixte',
 
     'legal_and_basic_eligibility' => 'Légalité & Éligibilité de base',

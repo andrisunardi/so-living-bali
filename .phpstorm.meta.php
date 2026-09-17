@@ -4589,7 +4589,7 @@ namespace PHPSTORM_META {
 'property.google_maps_url','property.gps_coordinates','property.address','property.district_or_area','property.size_and_surfaces',
 'property.land_size','property.building_size','property.number_of_floors','property.outdoor_area_size','property.pool_size',
 'property.bathrooms_and_layout','property.number_of_bathrooms','property.ensuite_bathrooms','property.guest_toilet','property.storage_or_staff_area',
-'property.living_style','property.living_style_open','property.living_style_closed','property.living_style_mixed','property.legal_and_basic_eligibility',
+'property.living_style','property.living_style_open','property.living_style_enclosed','property.living_style_mixed','property.legal_and_basic_eligibility',
 'property.legal_documentation','property.full_legal_documentation_available','property.signed_listing_agreement','property.lease_agreement','property.land_certificate',
 'property.owners_id','property.imb','property.pbg','property.slf','property.land_title',
 'property.zoning','property.pbg_status','property.slf_status','property.road_access','property.road_access_width',
