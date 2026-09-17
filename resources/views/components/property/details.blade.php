@@ -46,6 +46,15 @@
 
     <div class="row">
         <div class="col-4">
+            {{ trans('property.living_style') }}
+        </div>
+        <div class="col-8">
+            {{ $property->living_style?->translate() }}
+        </div>
+    </div>
+
+    <div class="row">
+        <div class="col-4">
             {{ trans('property.rental_type') }}
         </div>
         <div class="col-8">
