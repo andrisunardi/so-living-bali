@@ -105,7 +105,7 @@ new #[Lazy] class extends Component {
                         </h1>
 
                         <p class="small">
-                            {{ Str::limit(strip_tags($guide->translate_body), 100) }}
+                            {{ Str::of($guide->translate_body)->htmlEntityDecode()->stripTags()->limit(100) }}
                         </p>
 
                         <a draggable="false" class="text-success" href="{{ route('guide.detail', ['slug' => $guide->slug]) }}"

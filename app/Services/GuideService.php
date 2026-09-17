@@ -3,7 +3,7 @@
 namespace App\Services;
 
 use App\Libraries\GoogleDrive;
-use App\Libraries\GoogleTranslate;
+// use App\Libraries\GoogleTranslate;
 use App\Models\Guide;
 use Exception;
 use Illuminate\Support\Arr;
@@ -85,7 +85,7 @@ class GuideService
 
             $guide = Guide::create($data);
 
-            (new GoogleTranslate)->translateModel($guide);
+            // (new GoogleTranslate)->translateModel($guide);
 
             if ($image) {
                 $this->uploadImage(guide: $guide, fileId: $image);
@@ -113,7 +113,7 @@ class GuideService
 
             $guide->update($data);
 
-            (new GoogleTranslate)->translateModel($guide);
+            // (new GoogleTranslate)->translateModel($guide);
 
             DB::commit();
 
