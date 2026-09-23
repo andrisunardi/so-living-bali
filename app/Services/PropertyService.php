@@ -199,12 +199,12 @@ class PropertyService
         try {
             DB::beginTransaction();
 
-            $images = $data['images'];
+            $images = $data['images'] ?? [];
 
-            $data['availability_date'] = $data['availability_date'] ?: null;
-            $data['visit_date'] = $data['visit_date'] ?: null;
-            $data['latitude'] = $data['latitude'] ?: null;
-            $data['longitude'] = $data['longitude'] ?: null;
+            $data['availability_date'] = ($data['availability_date'] ?? null) ?: null;
+            $data['visit_date'] = ($data['visit_date'] ?? null) ?: null;
+            $data['latitude'] = ($data['latitude'] ?? null) ?: null;
+            $data['longitude'] = ($data['longitude'] ?? null) ?: null;
 
             $data['completion_date'] = ($data['completion_date'] ?? null) ?: null;
             $data['google_maps_url'] = ($data['google_maps_url'] ?? null) ?: null;
@@ -508,18 +508,12 @@ class PropertyService
             $contact = (new ContactService)->create(data: $form);
         }
 
-        $id = Property::max('id') + 1;
+        $code = sprintf('%03d', Property::where('code', 'like', '%LYP%')->max('id') + 1);
         $name = $data['name'];
 
-        $data = [];
-        $data['code'] = "LYP{$id}";
+        $data['code'] = "LYP{$code}";
         $data['name'] = "Property {$name}";
         $data['owner_id'] = $contact->id;
-        $data['images'] = [];
-        $data['availability_date'] = null;
-        $data['visit_date'] = null;
-        $data['latitude'] = null;
-        $data['longitude'] = null;
 
         if (! empty($data['google_maps_url'])) {
             $response = Http::withOptions([
@@ -547,6 +541,10 @@ class PropertyService
                 }
             }
         }
+
+        Arr::pull($data, 'email');
+        Arr::pull($data, 'phone');
+        Arr::pull($data, 'tags');
 
         $property = $this->create(data: $data);
 
