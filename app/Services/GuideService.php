@@ -32,15 +32,12 @@ class GuideService
                 $query->where(function ($query) use ($search) {
                     $query->where('title', 'like', "%{$search}%")
                         ->orWhere('title_id', 'like', "%{$search}%")
-                        ->orWhere('title_zh', 'like', "%{$search}%")
                         ->orWhere('title_fr', 'like', "%{$search}%")
                         ->orWhere('body', 'like', "%{$search}%")
                         ->orWhere('body_id', 'like', "%{$search}%")
-                        ->orWhere('body_zh', 'like', "%{$search}%")
                         ->orWhere('body_fr', 'like', "%{$search}%")
                         ->orWhereRelation('category', 'name', 'like', "%{$search}%")
                         ->orWhereRelation('category', 'name_id', 'like', "%{$search}%")
-                        ->orWhereRelation('category', 'name_zh', 'like', "%{$search}%")
                         ->orWhereRelation('category', 'name_fr', 'like', "%{$search}%");
                 });
             })

@@ -15,9 +15,6 @@ class StandardAddForm extends Form
     #[Validate('required|string|min:1|max:50|unique:standards,title_id')]
     public string $title_id = '';
 
-    #[Validate('required|string|min:1|max:50|unique:standards,title_zh')]
-    public string $title_zh = '';
-
     #[Validate('required|string|min:1|max:50|unique:standards,title_fr')]
     public string $title_fr = '';
 
@@ -26,9 +23,6 @@ class StandardAddForm extends Form
 
     #[Validate('required|string|min:1|max:1000')]
     public string $description_id = '';
-
-    #[Validate('required|string|min:1|max:1000')]
-    public string $description_zh = '';
 
     #[Validate('required|string|min:1|max:1000')]
     public string $description_fr = '';

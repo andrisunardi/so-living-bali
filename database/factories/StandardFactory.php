@@ -15,11 +15,9 @@ class StandardFactory extends Factory
         return [
             'title' => fake()->unique()->sentence(),
             'title_id' => (new GoogleTranslate('id'))->translate($title),
-            'title_zh' => (new GoogleTranslate('zh'))->translate($title),
             'title_fr' => (new GoogleTranslate('fr'))->translate($title),
             'description' => fake()->paragraph(),
             'description_id' => (new GoogleTranslate('id'))->translate($description),
-            'description_zh' => (new GoogleTranslate('zh'))->translate($description),
             'description_fr' => (new GoogleTranslate('fr'))->translate($description),
             'icon' => 'fas fa-icons',
             'is_active' => fake()->boolean(),

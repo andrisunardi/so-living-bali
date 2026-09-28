@@ -45,7 +45,6 @@ use Spatie\Activitylog\Traits\LogsActivity;
  * @property string $name
  * @property string|null $description
  * @property string|null $description_id
- * @property string|null $description_zh
  * @property string|null $description_fr
  * @property int|null $user_id
  * @property Carbon|null $availability_date
@@ -348,7 +347,6 @@ class Property extends Model
         'name',
         'description',
         'description_id',
-        'description_zh',
         'description_fr',
         'user_id',
         'availability_date',
@@ -475,7 +473,6 @@ class Property extends Model
             'name' => 'string',
             'description' => 'string',
             'description_id' => 'string',
-            'description_zh' => 'string',
             'description_fr' => 'string',
             'user_id' => 'integer',
             'availability_date' => 'date',
@@ -624,7 +621,6 @@ class Property extends Model
         $language = [
             'en' => $this->description,
             'id' => $this->description_id,
-            'zh' => $this->description_zh,
             'fr' => $this->description_fr,
         ];
 
@@ -666,9 +662,9 @@ class Property extends Model
         $query->where('living_style', PropertyLivingStyle::Open);
     }
 
-    public function scopeClosed(Builder $query): void
+    public function scopeEnclosed(Builder $query): void
     {
-        $query->where('living_style', PropertyLivingStyle::Closed);
+        $query->where('living_style', PropertyLivingStyle::Enclosed);
     }
 
     public function scopeMixed(Builder $query): void

@@ -27,11 +27,9 @@ class StandardService
                 $query->where(function ($query) use ($search) {
                     $query->where('title', 'like', "%{$search}%")
                         ->orWhere('title_id', 'like', "%{$search}%")
-                        ->orWhere('title_zh', 'like', "%{$search}%")
                         ->orWhere('title_fr', 'like', "%{$search}%")
                         ->orWhere('description', 'like', "%{$search}%")
                         ->orWhere('description_id', 'like', "%{$search}%")
-                        ->orWhere('description_zh', 'like', "%{$search}%")
                         ->orWhere('description_fr', 'like', "%{$search}%");
                 });
             })

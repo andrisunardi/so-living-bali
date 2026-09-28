@@ -20,15 +20,12 @@ use Spatie\Activitylog\Traits\LogsActivity;
  * @property int $id
  * @property string $title
  * @property string $title_id
- * @property string $title_zh
  * @property string $title_fr
  * @property string $short_description
  * @property string $short_description_id
- * @property string $short_description_zh
  * @property string $short_description_fr
  * @property string $description
  * @property string $description_id
- * @property string $description_zh
  * @property string $description_fr
  * @property string $icon
  * @property bool $is_active
@@ -92,15 +89,12 @@ class Value extends Model
     protected $fillable = [
         'title',
         'title_id',
-        'title_zh',
         'title_fr',
         'short_description',
         'short_description_id',
-        'short_description_zh',
         'short_description_fr',
         'description',
         'description_id',
-        'description_zh',
         'description_fr',
         'icon',
         'is_active',
@@ -113,15 +107,12 @@ class Value extends Model
         return [
             'title' => 'string',
             'title_id' => 'string',
-            'title_zh' => 'string',
             'title_fr' => 'string',
             'short_description' => 'string',
             'short_description_id' => 'string',
-            'short_description_zh' => 'string',
             'short_description_fr' => 'string',
             'description' => 'string',
             'description_id' => 'string',
-            'description_zh' => 'string',
             'description_fr' => 'string',
             'icon' => 'string',
             'is_active' => 'boolean',
@@ -160,7 +151,6 @@ class Value extends Model
         $language = [
             'en' => $this->title,
             'id' => $this->title_id,
-            'zh' => $this->title_zh,
             'fr' => $this->title_fr,
         ];
 
@@ -173,7 +163,6 @@ class Value extends Model
         $language = [
             'en' => $this->short_description,
             'id' => $this->short_description_id,
-            'zh' => $this->short_description_zh,
             'fr' => $this->short_description_fr,
         ];
 
@@ -186,7 +175,6 @@ class Value extends Model
         $language = [
             'en' => $this->description,
             'id' => $this->description_id,
-            'zh' => $this->description_zh,
             'fr' => $this->description_fr,
         ];
 

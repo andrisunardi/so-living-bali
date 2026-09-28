@@ -70,7 +70,6 @@ class PropertyService
                         ->orWhere('name', 'like', "%{$search}%")
                         ->orWhere('description', 'like', "%{$search}%")
                         ->orWhere('description_id', 'like', "%{$search}%")
-                        ->orWhere('description_zh', 'like', "%{$search}%")
                         ->orWhere('description_fr', 'like', "%{$search}%")
                         ->orWhere('year_built', 'like', "%{$search}%")
                         ->orWhere('villa_name', 'like', "%{$search}%")

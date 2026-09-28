@@ -21,7 +21,6 @@ use Spatie\Activitylog\Traits\LogsActivity;
  * @property int $id
  * @property string $name
  * @property string $name_id
- * @property string $name_zh
  * @property bool $is_show
  * @property bool $is_active
  * @property int|null $created_by
@@ -81,7 +80,6 @@ class GuideCategory extends Model
     protected $fillable = [
         'name',
         'name_id',
-        'name_zh',
         'name_fr',
         'is_show',
         'is_active',
@@ -94,7 +92,6 @@ class GuideCategory extends Model
         return [
             'name' => 'string',
             'name_id' => 'string',
-            'name_zh' => 'string',
             'name_fr' => 'string',
             'is_show' => 'boolean',
             'is_active' => 'boolean',
@@ -131,7 +128,6 @@ class GuideCategory extends Model
         $language = [
             'en' => $this->name,
             'id' => $this->name_id,
-            'zh' => $this->name_zh,
             'fr' => $this->name_fr,
         ];
 

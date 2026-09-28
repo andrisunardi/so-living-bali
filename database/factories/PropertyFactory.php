@@ -50,7 +50,6 @@ class PropertyFactory extends Factory
             'name' => fake()->name(),
             'description' => fake()->paragraph(),
             'description_id' => (new GoogleTranslate('id'))->translate($description),
-            'description_zh' => (new GoogleTranslate('zh'))->translate($description),
             'description_fr' => (new GoogleTranslate('fr'))->translate($description),
             'user_id' => $user->id,
             'availability_date' => fake()->date(),

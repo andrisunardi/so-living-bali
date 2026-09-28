@@ -20,11 +20,9 @@ use Spatie\Activitylog\Traits\LogsActivity;
  * @property int $id
  * @property string $title
  * @property string $title_id
- * @property string $title_zh
  * @property string $title_fr
  * @property string $description
  * @property string $description_id
- * @property string $description_zh
  * @property string $description_fr
  * @property bool $is_active
  * @property int|null $created_by
@@ -81,11 +79,9 @@ class Standard extends Model
     protected $fillable = [
         'title',
         'title_id',
-        'title_zh',
         'title_fr',
         'description',
         'description_id',
-        'description_zh',
         'description_fr',
         'is_active',
     ];
@@ -97,11 +93,9 @@ class Standard extends Model
         return [
             'title' => 'string',
             'title_id' => 'string',
-            'title_zh' => 'string',
             'title_fr' => 'string',
             'description' => 'string',
             'description_id' => 'string',
-            'description_zh' => 'string',
             'description_fr' => 'string',
             'is_active' => 'boolean',
         ];
@@ -138,7 +132,6 @@ class Standard extends Model
         $language = [
             'en' => $this->title,
             'id' => $this->title_id,
-            'zh' => $this->title_zh,
             'fr' => $this->title_fr,
         ];
 
@@ -151,7 +144,6 @@ class Standard extends Model
         $language = [
             'en' => $this->description,
             'id' => $this->description_id,
-            'zh' => $this->description_zh,
             'fr' => $this->description_fr,
         ];
 

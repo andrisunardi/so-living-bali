@@ -46,9 +46,6 @@ class PropertyEditForm extends Form
     public ?string $description_id = '';
 
     #[Validate('nullable|string|min:1|max:65535')]
-    public ?string $description_zh = '';
-
-    #[Validate('nullable|string|min:1|max:65535')]
     public ?string $description_fr = '';
 
     #[Validate('nullable|integer|exists:users,id')]
@@ -365,7 +362,6 @@ class PropertyEditForm extends Form
         $this->name = $property->name;
         $this->description = $property->description;
         $this->description_id = $property->description_id;
-        $this->description_zh = $property->description_zh;
         $this->description_fr = $property->description_fr;
         $this->trade_off_description = $property->trade_off_description;
         $this->user_id = $property->user_id;

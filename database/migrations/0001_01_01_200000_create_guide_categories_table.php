@@ -13,7 +13,6 @@ return new class extends Migration
             $table->id();
             $table->string('name', 50)->unique();
             $table->string('name_id', 50)->unique();
-            $table->string('name_zh', 50)->unique();
             $table->string('name_fr', 50)->unique();
             $table->boolean('is_show')->unsigned()->default(true);
             $table->boolean('is_active')->unsigned()->default(true);

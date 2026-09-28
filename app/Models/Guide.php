@@ -21,10 +21,8 @@ use Spatie\Activitylog\Traits\LogsActivity;
  * @property int $guide_category_id
  * @property string $title
  * @property string $title_id
- * @property string $title_zh
  * @property string $body
  * @property string $body_id
- * @property string $body_zh
  * @property string $google_file_id
  * @property string $image_url
  * @property bool $is_show
@@ -101,11 +99,9 @@ class Guide extends Model
         'guide_category_id',
         'title',
         'title_id',
-        'title_zh',
         'title_fr',
         'body',
         'body_id',
-        'body_zh',
         'body_fr',
         'google_file_id',
         'image_url',
@@ -123,11 +119,9 @@ class Guide extends Model
             'guide_category_id' => 'integer',
             'title' => 'string',
             'title_id' => 'string',
-            'title_zh' => 'string',
             'title_fr' => 'string',
             'body' => 'string',
             'body_id' => 'string',
-            'body_zh' => 'string',
             'body_fr' => 'string',
             'google_file_id' => 'string',
             'image_url' => 'string',
@@ -169,7 +163,6 @@ class Guide extends Model
         $language = [
             'en' => $this->title,
             'id' => $this->title_id,
-            'zh' => $this->title_zh,
             'fr' => $this->title_fr,
         ];
 
@@ -182,7 +175,6 @@ class Guide extends Model
         $language = [
             'en' => $this->body,
             'id' => $this->body_id,
-            'zh' => $this->body_zh,
             'fr' => $this->body_fr,
         ];
 

@@ -16,10 +16,10 @@ class GuideEditForm extends Form
 
     public string $title = '';
 
+    #[Validate('nullable|string|min:1|max:200')]
     public string $title_id = '';
 
-    public string $title_zh = '';
-
+    #[Validate('nullable|string|min:1|max:200')]
     public string $title_fr = '';
 
     #[Validate('required|string|min:1|max:65535')]
@@ -27,9 +27,6 @@ class GuideEditForm extends Form
 
     #[Validate('nullable|string|min:1|max:65535')]
     public string $body_id = '';
-
-    #[Validate('nullable|string|min:1|max:65535')]
-    public string $body_zh = '';
 
     #[Validate('nullable|string|min:1|max:65535')]
     public string $body_fr = '';
@@ -49,11 +46,9 @@ class GuideEditForm extends Form
         $this->guide_category_id = $guide->guide_category_id;
         $this->title = $guide->title;
         $this->title_id = $guide->title_id;
-        $this->title_zh = $guide->title_zh;
         $this->title_fr = $guide->title_fr;
         $this->body = $guide->body;
         $this->body_id = $guide->body_id;
-        $this->body_zh = $guide->body_zh;
         $this->body_fr = $guide->body_fr;
         $this->is_show = $guide->is_show;
         $this->is_active = $guide->is_active;
@@ -63,9 +58,6 @@ class GuideEditForm extends Form
     {
         return [
             'title' => "required|string|min:1|max:200|unique:guides,title,{$this->guide->id}",
-            'title_id' => "nullable|string|min:1|max:200|unique:guides,title_id,{$this->guide->id}",
-            'title_zh' => "nullable|string|min:1|max:200|unique:guides,title_zh,{$this->guide->id}",
-            'title_fr' => "nullable|string|min:1|max:200|unique:guides,title_fr,{$this->guide->id}",
         ];
     }
 

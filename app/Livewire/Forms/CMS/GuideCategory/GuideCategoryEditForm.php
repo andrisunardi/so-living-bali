@@ -15,8 +15,6 @@ class GuideCategoryEditForm extends Form
 
     public string $name_id = '';
 
-    public string $name_zh = '';
-
     public string $name_fr = '';
 
     #[Validate('required|boolean')]
@@ -30,7 +28,6 @@ class GuideCategoryEditForm extends Form
         $this->guideCategory = $guideCategory;
         $this->name = $guideCategory->name;
         $this->name_id = $guideCategory->name_id;
-        $this->name_zh = $guideCategory->name_zh;
         $this->name_fr = $guideCategory->name_fr;
         $this->is_show = $guideCategory->is_show;
         $this->is_active = $guideCategory->is_active;
@@ -41,7 +38,6 @@ class GuideCategoryEditForm extends Form
         return [
             'name' => "required|string|min:1|max:50|unique:guide_categories,name,{$this->guideCategory->id}",
             'name_id' => "required|string|min:1|max:50|unique:guide_categories,name_id,{$this->guideCategory->id}",
-            'name_zh' => "required|string|min:1|max:50|unique:guide_categories,name_zh,{$this->guideCategory->id}",
             'name_fr' => "required|string|min:1|max:50|unique:guide_categories,name_fr,{$this->guideCategory->id}",
         ];
     }
