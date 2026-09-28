@@ -248,8 +248,6 @@ new #[Title('Guide Category')] class extends Component {
                                     <span>/</span>
                                     {{ $guideCategory->name_id }}
                                     <span>/</span>
-                                    {{ $guideCategory->name_zh }}
-                                    <span>/</span>
                                     {{ $guideCategory->name_fr }}
                                 </td>
                                 <td class="text-center">

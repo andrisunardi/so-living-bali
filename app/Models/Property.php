@@ -331,6 +331,10 @@ use Spatie\Activitylog\Traits\LogsActivity;
  * @method static Builder<static>|Property withoutTrashed()
  * @method static Builder<static>|Property yearly()
  *
+ * @property string|null $description_zh
+ *
+ * @method static Builder<static>|Property enclosed()
+ *
  * @mixin \Eloquent
  */
 #[ObservedBy([PropertyObserver::class])]

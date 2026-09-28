@@ -75,6 +75,10 @@ use Spatie\Activitylog\Traits\LogsActivity;
  * @method static Builder<static>|Value withTrashed(bool $withTrashed = true)
  * @method static Builder<static>|Value withoutTrashed()
  *
+ * @property string $title_zh
+ * @property string $short_description_zh
+ * @property string $description_zh
+ *
  * @mixin \Eloquent
  */
 #[ObservedBy([ValueObserver::class])]

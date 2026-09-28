@@ -205,13 +205,11 @@ new #[Title('Standard')] class extends Component {
                                         {{ $standard->title }}
                                     </a>
                                     <div>{{ $standard->title_id }}</div>
-                                    <div>{{ $standard->title_zh }}</div>
                                     <div>{{ $standard->title_fr }}</div>
                                 </td>
                                 <td>
                                     <div>{{ $standard->description }}</div>
                                     <div>{{ $standard->description_id }}</div>
-                                    <div>{{ $standard->description_zh }}</div>
                                     <div>{{ $standard->description_fr }}</div>
                                 </td>
                                 <td>

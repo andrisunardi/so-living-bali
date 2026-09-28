@@ -66,6 +66,8 @@ use Spatie\Activitylog\Traits\LogsActivity;
  *
  * @method static Builder<static>|GuideCategory whereNameFr($value)
  *
+ * @property string $name_zh
+ *
  * @mixin \Eloquent
  */
 #[ObservedBy([GuideCategoryObserver::class])]

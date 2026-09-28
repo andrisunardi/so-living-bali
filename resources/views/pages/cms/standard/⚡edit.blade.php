@@ -118,31 +118,6 @@ new #[Title('Edit | Standard')] class extends Component {
                     </div>
 
                     <div class="col-sm-6">
-                        <label class="form-label" for="title_zh">
-                            {{ trans('validation.attributes.title_zh') }}
-                            <span class="text-danger">*</span>
-                        </label>
-                        <div class="input-group">
-                            <div class="input-group-text">
-                                <span class="fas fa-font fa-fw "></span>
-                            </div>
-                            <input type="text" class="form-control" id="title_zh" name="title_zh" minlength="1"
-                                maxlength="50" placeholder="{{ trans('index.ex') }}. Canggu" required
-                                wire:model="form.title_zh" wire:offline.class="disabled" wire:offline.attr="disabled"
-                                wire:loading.class="disabled" wire:loading.attr="disabled">
-                        </div>
-                        <div class="form-text">
-                            {{ trans('helper.required') }},
-                            {{ trans('helper.minlength') }} : 1,
-                            {{ trans('helper.maxlength') }} : 50,
-                            {{ trans('helper.unique') }}
-                        </div>
-                        @error('form.title_zh')
-                            <div class="form-text text-danger">{{ $message }}</div>
-                        @enderror
-                    </div>
-
-                    <div class="col-sm-6">
                         <label class="form-label" for="title_fr">
                             {{ trans('validation.attributes.title_fr') }}
                             <span class="text-danger">*</span>
@@ -213,31 +188,6 @@ new #[Title('Edit | Standard')] class extends Component {
                             {{ trans('helper.maxlength') }} : 100,
                         </div>
                         @error('form.description_id')
-                            <div class="form-text text-danger">{{ $message }}</div>
-                        @enderror
-                    </div>
-
-                    <div class="col-sm-6">
-                        <label class="form-label" for="description_zh">
-                            {{ trans('validation.attributes.description_zh') }}
-                            <span class="text-danger">*</span>
-                        </label>
-                        <div class="input-group">
-                            <div class="input-group-text">
-                                <span class="fas fa-file-text fa-fw "></span>
-                            </div>
-                            <textarea class="form-control" id="description_zh" name="description_zh" minlength="1" maxlength="100"
-                                placeholder="{{ trans('index.ex') }}. Bearer" required wire:model="form.description_zh"
-                                wire:offline.class="disabled" wire:offline.attr="disabled" wire:loading.class="disabled"
-                                wire:loading.attr="disabled">
-                                    </textarea>
-                        </div>
-                        <div class="form-text">
-                            {{ trans('helper.required') }},
-                            {{ trans('helper.minlength') }} : 1,
-                            {{ trans('helper.maxlength') }} : 100,
-                        </div>
-                        @error('form.description_zh')
                             <div class="form-text text-danger">{{ $message }}</div>
                         @enderror
                     </div>

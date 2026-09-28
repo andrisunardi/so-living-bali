@@ -84,6 +84,9 @@ use Spatie\Activitylog\Traits\LogsActivity;
  *
  * @method static Builder<static>|Guide whereCounter($value)
  *
+ * @property string $title_zh
+ * @property string $body_zh
+ *
  * @mixin \Eloquent
  */
 #[ObservedBy([GuideObserver::class])]

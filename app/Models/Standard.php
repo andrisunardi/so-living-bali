@@ -65,6 +65,9 @@ use Spatie\Activitylog\Traits\LogsActivity;
  * @method static Builder<static>|Standard withTrashed(bool $withTrashed = true)
  * @method static Builder<static>|Standard withoutTrashed()
  *
+ * @property string $title_zh
+ * @property string $description_zh
+ *
  * @mixin \Eloquent
  */
 #[ObservedBy([StandardObserver::class])]

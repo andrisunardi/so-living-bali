@@ -190,10 +190,8 @@ namespace App\Models{
  * @property int $guide_category_id
  * @property string $title
  * @property string $title_id
- * @property string $title_zh
  * @property string $body
  * @property string $body_id
- * @property string $body_zh
  * @property string $google_file_id
  * @property string $image_url
  * @property bool $is_show
@@ -250,6 +248,8 @@ namespace App\Models{
  * @property int $counter
  * @method static Builder<static>|Guide whereCounter($value)
  * @mixin \Eloquent
+ * @property string $title_zh
+ * @property string $body_zh
  */
 	class Guide extends \Eloquent {}
 }
@@ -259,7 +259,6 @@ namespace App\Models{
  * @property int $id
  * @property string $name
  * @property string $name_id
- * @property string $name_zh
  * @property bool $is_show
  * @property bool $is_active
  * @property int|null $created_by
@@ -302,6 +301,7 @@ namespace App\Models{
  * @property string|null $name_fr
  * @method static Builder<static>|GuideCategory whereNameFr($value)
  * @mixin \Eloquent
+ * @property string $name_zh
  */
 	class GuideCategory extends \Eloquent {}
 }
@@ -362,7 +362,6 @@ namespace App\Models{
  * @property string $name
  * @property string|null $description
  * @property string|null $description_id
- * @property string|null $description_zh
  * @property string|null $description_fr
  * @property int|null $user_id
  * @property Carbon|null $availability_date
@@ -648,6 +647,8 @@ namespace App\Models{
  * @method static Builder<static>|Property withoutTrashed()
  * @method static Builder<static>|Property yearly()
  * @mixin \Eloquent
+ * @property string|null $description_zh
+ * @method static \Illuminate\Database\Eloquent\Builder<static>|Property enclosed()
  */
 	class Property extends \Eloquent {}
 }
@@ -706,11 +707,9 @@ namespace App\Models{
  * @property int $id
  * @property string $title
  * @property string $title_id
- * @property string $title_zh
  * @property string $title_fr
  * @property string $description
  * @property string $description_id
- * @property string $description_zh
  * @property string $description_fr
  * @property bool $is_active
  * @property int|null $created_by
@@ -752,6 +751,8 @@ namespace App\Models{
  * @method static Builder<static>|Standard withTrashed(bool $withTrashed = true)
  * @method static Builder<static>|Standard withoutTrashed()
  * @mixin \Eloquent
+ * @property string $title_zh
+ * @property string $description_zh
  */
 	class Standard extends \Eloquent {}
 }
@@ -830,15 +831,12 @@ namespace App\Models{
  * @property int $id
  * @property string $title
  * @property string $title_id
- * @property string $title_zh
  * @property string $title_fr
  * @property string $short_description
  * @property string $short_description_id
- * @property string $short_description_zh
  * @property string $short_description_fr
  * @property string $description
  * @property string $description_id
- * @property string $description_zh
  * @property string $description_fr
  * @property string $icon
  * @property bool $is_active
@@ -887,6 +885,9 @@ namespace App\Models{
  * @method static Builder<static>|Value withTrashed(bool $withTrashed = true)
  * @method static Builder<static>|Value withoutTrashed()
  * @mixin \Eloquent
+ * @property string $title_zh
+ * @property string $short_description_zh
+ * @property string $description_zh
  */
 	class Value extends \Eloquent {}
 }

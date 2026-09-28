@@ -1,35 +1,32 @@
 <table>
     <thead>
         <tr>
-            <th align="center" colspan="20">
+            <th align="center" colspan="17">
                 <b>{{ trans('page.value') }}</b>
             </th>
         </tr>
         <tr>
-            <td colspan="20"></td>
+            <td colspan="17"></td>
         </tr>
         <tr>
-            <th align="center" colspan="20">
+            <th align="center" colspan="17">
                 {{ trans('field.printed_at') }} : {{ now()->isoFormat('LLLL') }}
             </th>
         </tr>
         <tr>
-            <td colspan="20"></td>
+            <td colspan="17"></td>
         </tr>
         <tr>
             <th align="center"><b>{{ trans('field.#') }}</b></th>
             <th align="center"><b>{{ trans('field.id') }}</b></th>
             <th align="center"><b>{{ trans('field.title') }}</b></th>
             <th align="center"><b>{{ trans('field.title_id') }}</b></th>
-            <th align="center"><b>{{ trans('field.title_zh') }}</b></th>
             <th align="center"><b>{{ trans('field.title_fr') }}</b></th>
             <th align="center"><b>{{ trans('field.short_description') }}</b></th>
             <th align="center"><b>{{ trans('field.short_description_id') }}</b></th>
-            <th align="center"><b>{{ trans('field.short_description_zh') }}</b></th>
             <th align="center"><b>{{ trans('field.short_description_fr') }}</b></th>
             <th align="center"><b>{{ trans('field.description') }}</b></th>
             <th align="center"><b>{{ trans('field.description_id') }}</b></th>
-            <th align="center"><b>{{ trans('field.description_zh') }}</b></th>
             <th align="center"><b>{{ trans('field.description_fr') }}</b></th>
             <th align="center"><b>{{ trans('field.icon') }}</b></th>
             <th align="center"><b>{{ trans('field.active') }}</b></th>
@@ -42,70 +39,27 @@
     <tbody>
         @forelse ($values as $value)
             <tr>
-                <td align="center">
-                    {{ $loop->iteration }}
-                </td>
-                <td align="center">
-                    {{ $value->id }}
-                </td>
-                <td align="left">
-                    {{ $value->title }}
-                </td>
-                <td align="left">
-                    {{ $value->title_id }}
-                </td>
-                <td align="left">
-                    {{ $value->title_zh }}
-                </td>
-                <td align="left">
-                    {{ $value->title_fr }}
-                </td>
-                <td align="left">
-                    {{ $value->short_description }}
-                </td>
-                <td align="left">
-                    {{ $value->short_description_id }}
-                </td>
-                <td align="left">
-                    {{ $value->short_description_zh }}
-                </td>
-                <td align="left">
-                    {{ $value->short_description_fr }}
-                </td>
-                <td align="left">
-                    {{ $value->description }}
-                </td>
-                <td align="left">
-                    {{ $value->description_id }}
-                </td>
-                <td align="left">
-                    {{ $value->description_zh }}
-                </td>
-                <td align="left">
-                    {{ $value->description_fr }}
-                </td>
-                <td align="left">
-                    {{ $value->icon }}
-                </td>
-                <td align="center">
-                    {{ Str::yesNo($value->is_active) }}
-                </td>
-                <td align="left">
-                    {{ $value->createdBy?->name }}
-                </td>
-                <td align="left">
-                    {{ $value->updatedBy?->name }}
-                </td>
-                <td align="left">
-                    {{ $value->created_at }}
-                </td>
-                <td align="left">
-                    {{ $value->updated_at }}
-                </td>
+                <td align="center">{{ $loop->iteration }}</td>
+                <td align="center">{{ $value->id }}</td>
+                <td align="left">{{ $value->title }}</td>
+                <td align="left">{{ $value->title_id }}</td>
+                <td align="left">{{ $value->title_fr }}</td>
+                <td align="left">{{ $value->short_description }}</td>
+                <td align="left">{{ $value->short_description_id }}</td>
+                <td align="left">{{ $value->short_description_fr }}</td>
+                <td align="left">{{ $value->description }}</td>
+                <td align="left">{{ $value->description_id }}</td>
+                <td align="left">{{ $value->description_fr }}</td>
+                <td align="left">{{ $value->icon }}</td>
+                <td align="center">{{ Str::yesNo($value->is_active) }}</td>
+                <td align="left">{{ $value->createdBy?->name }}</td>
+                <td align="left">{{ $value->updatedBy?->name }}</td>
+                <td align="left">{{ $value->created_at }}</td>
+                <td align="left">{{ $value->updated_at }}</td>
             </tr>
         @empty
             <tr>
-                <td align="center" colspan="20">
+                <td align="center" colspan="17">
                     {{ trans('message.no_data_available') }}
                 </td>
             </tr>
@@ -113,7 +67,7 @@
     </tbody>
     <tfoot>
         <tr>
-            <td colspan="20"></td>
+            <td colspan="17"></td>
         </tr>
     </tfoot>
 </table>

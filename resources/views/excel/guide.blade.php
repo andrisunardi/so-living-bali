@@ -1,20 +1,20 @@
 <table>
     <thead>
         <tr>
-            <th align="center" colspan="6">
+            <th align="center" colspan="15">
                 <b>{{ trans('page.guide') }}</b>
             </th>
         </tr>
         <tr>
-            <td colspan="6"></td>
+            <td colspan="15"></td>
         </tr>
         <tr>
-            <th align="center" colspan="6">
+            <th align="center" colspan="15">
                 {{ trans('field.printed_at') }} : {{ now()->isoFormat('LLLL') }}
             </th>
         </tr>
         <tr>
-            <td colspan="6"></td>
+            <td colspan="15"></td>
         </tr>
         <tr>
             <th align="center"><b>{{ trans('field.#') }}</b></th>
@@ -22,7 +22,6 @@
             <th align="center"><b>{{ trans('field.guide_category_id') }}</b></th>
             <th align="center"><b>{{ trans('field.title') }}</b></th>
             <th align="center"><b>{{ trans('field.title_id') }}</b></th>
-            <th align="center"><b>{{ trans('field.title_zh') }}</b></th>
             <th align="center"><b>{{ trans('field.title_fr') }}</b></th>
             <th align="center"><b>{{ trans('field.google_file_id') }}</b></th>
             <th align="center"><b>{{ trans('field.image_url') }}</b></th>
@@ -43,7 +42,7 @@
                 <td align="left">{{ $guide->category?->name }}</td>
                 <td align="left">{{ $guide->title }}</td>
                 <td align="left">{{ $guide->title_id }}</td>
-                <td align="left">{{ $guide->title_zh }}</td>
+                <td align="left">{{ $guide->title_fr }}</td>
                 <td align="left">{{ $guide->google_file_id }}</td>
                 <td align="left">{{ $guide->image_url }}</td>
                 <td align="center">{{ Str::yesNo($guide->is_show) }}</td>
@@ -57,7 +56,7 @@
             </tr>
         @empty
             <tr>
-                <td align="center" colspan="6">
+                <td align="center" colspan="15">
                     {{ trans('message.no_data_available') }}
                 </td>
             </tr>
@@ -65,7 +64,7 @@
     </tbody>
     <tfoot>
         <tr>
-            <td colspan="6"></td>
+            <td colspan="15"></td>
         </tr>
     </tfoot>
 </table>
