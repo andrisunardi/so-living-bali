@@ -51,10 +51,10 @@ class PropertyEditForm extends Form
     #[Validate('nullable|integer|exists:users,id')]
     public ?int $user_id = null;
 
-    #[Validate('nullable|date|date_format:Y-m-d|before_or_equal:2999-12-31')]
-    public ?string $availability_date = '';
+    #[Validate('nullable|date|date_format:Y-m-d|after_or_equal:1901-01-01|before_or_equal:2999-12-31')]
+    public string $availability_date = '';
 
-    #[Validate('nullable|date|date_format:Y-m-d|before_or_equal:2999-12-31')]
+    #[Validate('nullable|date|date_format:Y-m-d|after_or_equal:1901-01-01|before_or_equal:2999-12-31')]
     public ?string $visit_date = '';
 
     #[Validate('nullable|integer|digits:4|min:1901|max:2100')]

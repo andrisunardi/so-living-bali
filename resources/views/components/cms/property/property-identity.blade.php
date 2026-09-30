@@ -90,14 +90,13 @@
                         <span class="fas fa-calendar fa-fw "></span>
                     </div>
                     <input type="date" class="form-control" id="availability_date" name="availability_date"
-                        min="{{ $property?->availability_date?->toDateString() ?? now()->toDateString() }}"
-                        max="2099-12-31" wire:model="form.availability_date" wire:offline.class="disabled"
-                        wire:offline.attr="disabled" wire:loading.class="disabled" wire:loading.attr="disabled">
+                        min="1901-01-01" max="2999-12-31" wire:model="form.availability_date"
+                        wire:offline.class="disabled" wire:offline.attr="disabled" wire:loading.class="disabled"
+                        wire:loading.attr="disabled">
                 </div>
                 <div class="form-text">
-                    {{ trans('helper.min') }} : {{ trans('index.today') }},
-                    {{ trans('helper.max') }} :
-                    {{ Date::parse('2099-12-31')->isoFormat('DD MMMM YYYY') }}
+                    {{ trans('helper.min') }} : 1901-01-01,
+                    {{ trans('helper.max') }} : 2999-12-31
                 </div>
                 @error('form.availability_date')
                     <div class="form-text text-danger">{{ $message }}</div>
@@ -112,16 +111,14 @@
                     <div class="input-group-text">
                         <span class="fas fa-calendar fa-fw "></span>
                     </div>
-                    <input type="date" class="form-control" id="visit_date" name="visit_date"
-                        min="{{ $property?->visit_date?->toDateString() ?? now()->toDateString() }}" max="2099-12-31"
-                        @if (!Auth::user()->hasRole('Admin')) disabled @endif wire:model="form.visit_date"
+                    <input type="date" class="form-control" id="visit_date" name="visit_date" min="1901-01-01"
+                        max="2099-12-31" @if (!Auth::user()->hasRole('Admin')) disabled @endif wire:model="form.visit_date"
                         wire:offline.class="disabled" wire:offline.attr="disabled" wire:loading.class="disabled"
                         wire:loading.attr="disabled">
                 </div>
                 <div class="form-text">
-                    {{ trans('helper.min') }} : {{ trans('index.today') }},
-                    {{ trans('helper.max') }} :
-                    {{ Date::parse('2099-12-31')->isoFormat('DD MMMM YYYY') }}
+                    {{ trans('helper.min') }} : 1901-01-01,
+                    {{ trans('helper.max') }} : 2999-12-31
                 </div>
                 @error('form.visit_date')
                     <div class="form-text text-danger">{{ $message }}</div>
@@ -161,14 +158,13 @@
                             <span class="fas fa-calendar fa-fw "></span>
                         </div>
                         <input type="date" class="form-control" id="completion_date" name="completion_date"
-                            min="{{ $property?->completion_date?->toDateString() ?? now()->toDateString() }}"
-                            max="2099-12-31" required wire:model="form.completion_date" wire:offline.class="disabled"
-                            wire:offline.attr="disabled" wire:loading.class="disabled" wire:loading.attr="disabled">
+                            min="1901-01-01" max="2999-12-31" required wire:model="form.completion_date"
+                            wire:offline.class="disabled" wire:offline.attr="disabled" wire:loading.class="disabled"
+                            wire:loading.attr="disabled">
                     </div>
                     <div class="form-text">
-                        {{ trans('helper.min') }} : {{ trans('index.today') }},
-                        {{ trans('helper.max') }} :
-                        {{ Date::parse('2099-12-31')->isoFormat('DD MMMM YYYY') }}
+                        {{ trans('helper.min') }} : 1901-01-01,
+                        {{ trans('helper.max') }} : 2999-12-31
                     </div>
                     @error('form.completion_date')
                         <div class="form-text text-danger">{{ $message }}</div>
