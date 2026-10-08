@@ -10,8 +10,8 @@ class GuideCategoryFactory extends Factory
     {
         return [
             'name' => fake()->unique()->name(),
-            'name_id' => fake()->unique()->name(),
-            'name_fr' => fake()->unique()->name(),
+            'name_id' => fake()->name(),
+            'name_fr' => fake()->name(),
             'is_show' => fake()->boolean(),
             'is_active' => fake()->boolean(),
         ];

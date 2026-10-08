@@ -9,12 +9,14 @@ return new class extends Migration
 {
     public function up(): void
     {
-        Schema::create('guide_categories', function (Blueprint $table) {
+        Schema::create('faqs', function (Blueprint $table) {
             $table->id();
-            $table->string('name', 50)->unique();
-            $table->string('name_id', 50)->nullable();
-            $table->string('name_fr', 50)->nullable();
-            $table->boolean('is_show')->unsigned()->default(true);
+            $table->string('question', 100)->unique();
+            $table->string('question_id', 100)->nullable();
+            $table->string('question_fr', 100)->nullable();
+            $table->text('answer')->nullable();
+            $table->text('answer_id')->nullable();
+            $table->text('answer_fr')->nullable();
             $table->boolean('is_active')->unsigned()->default(true);
             $table->foreignIdFor(User::class, 'created_by')->nullable()->constrained('users')->nullOnDelete();
             $table->foreignIdFor(User::class, 'updated_by')->nullable()->constrained('users')->nullOnDelete();
@@ -26,6 +28,6 @@ return new class extends Migration
 
     public function down(): void
     {
-        Schema::dropIfExists('guide_categories');
+        Schema::dropIfExists('faqs');
     }
 };

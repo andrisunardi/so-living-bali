@@ -14,11 +14,11 @@ return new class extends Migration
             $table->id();
             $table->foreignIdFor(GuideCategory::class)->constrained()->cascadeOnDelete();
             $table->string('title', 200)->unique();
-            $table->string('title_id', 200)->unique();
-            $table->string('title_fr', 200)->unique();
-            $table->text('body');
-            $table->text('body_id');
-            $table->text('body_fr');
+            $table->string('title_id', 200)->nullable();
+            $table->string('title_fr', 200)->nullable();
+            $table->text('body')->nullable();
+            $table->text('body_id')->nullable();
+            $table->text('body_fr')->nullable();
             $table->string('google_file_id', 100)->nullable();
             $table->string('image_url')->nullable();
             $table->boolean('is_show')->unsigned()->default(true);

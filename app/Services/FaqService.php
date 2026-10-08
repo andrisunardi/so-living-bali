@@ -3,11 +3,11 @@
 namespace App\Services;
 
 // use App\Libraries\GoogleTranslate;
-use App\Models\Standard;
+use App\Models\Faq;
 use Exception;
 use Illuminate\Support\Facades\DB;
 
-class StandardService
+class FaqService
 {
     public function index(
         ?string $search = null,
@@ -22,15 +22,15 @@ class StandardService
         bool $paginate = true,
         int $perPage = 10,
     ): object|int|null {
-        $standards = Standard::query()
+        $faqs = Faq::query()
             ->when($search, function ($query) use ($search) {
                 $query->where(function ($query) use ($search) {
-                    $query->where('title', 'like', "%{$search}%")
-                        ->orWhere('title_id', 'like', "%{$search}%")
-                        ->orWhere('title_fr', 'like', "%{$search}%")
-                        ->orWhere('description', 'like', "%{$search}%")
-                        ->orWhere('description_id', 'like', "%{$search}%")
-                        ->orWhere('description_fr', 'like', "%{$search}%");
+                    $query->where('question', 'like', "%{$search}%")
+                        ->orWhere('question_id', 'like', "%{$search}%")
+                        ->orWhere('question_fr', 'like', "%{$search}%")
+                        ->orWhere('answer', 'like', "%{$search}%")
+                        ->orWhere('answer_id', 'like', "%{$search}%")
+                        ->orWhere('answer_fr', 'like', "%{$search}%");
                 });
             })
             ->when($isActive, fn ($q) => $q->whereIn('is_active', $isActive))
@@ -40,74 +40,74 @@ class StandardService
             ->limit($limit);
 
         if ($first) {
-            return $standards->first();
+            return $faqs->first();
         }
 
         if ($count) {
-            return $standards->count();
+            return $faqs->count();
         }
 
         if ($paginate) {
-            return $standards->paginate($perPage);
+            return $faqs->paginate($perPage);
         }
 
         if ($paginate) {
-            return $standards->paginate($perPage);
+            return $faqs->paginate($perPage);
         }
 
-        return $standards->get();
+        return $faqs->get();
     }
 
-    public function create(array $data = []): Standard
+    public function create(array $data = []): Faq
     {
-        $table = (new Standard)->getTable();
+        $table = (new Faq)->getTable();
         DB::statement("ALTER TABLE `{$table}` AUTO_INCREMENT = 1");
 
         try {
             DB::beginTransaction();
 
-            $standard = Standard::create($data);
+            $faq = Faq::create($data);
 
-            // (new GoogleTranslate)->translateModel($standard);
+            // (new GoogleTranslate)->translateModel($faq);
 
             DB::commit();
 
-            return $standard->refresh();
+            return $faq->refresh();
         } catch (Exception $e) {
             DB::rollBack();
             throw $e;
         }
     }
 
-    public function update(Standard $standard, array $data = []): Standard
+    public function update(Faq $faq, array $data = []): Faq
     {
         try {
             DB::beginTransaction();
 
-            $standard->update($data);
+            $faq->update($data);
 
-            // (new GoogleTranslate)->translateModel($standard);
+            // (new GoogleTranslate)->translateModel($faq);
 
             DB::commit();
 
-            return $standard->refresh();
+            return $faq->refresh();
         } catch (Exception $e) {
             DB::rollBack();
             throw $e;
         }
     }
 
-    public function delete(Standard $standard): bool
+    public function delete(Faq $faq): bool
     {
-        return $standard->delete();
+        return $faq->delete();
     }
 
-    public function active(Standard $standard): Standard
+    public function active(Faq $faq): Faq
     {
-        $standard->is_active = ! $standard->is_active;
-        $standard->save();
-        $standard->refresh();
+        $faq->is_active = ! $faq->is_active;
+        $faq->save();
+        $faq->refresh();
 
-        return $standard;
+        return $faq;
     }
 }

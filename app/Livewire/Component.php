@@ -114,6 +114,14 @@ class Component extends LivewireComponent
                     [
                         'id' => $pageId++,
                         'menu_id' => 2,
+                        'name' => trans('page.faq'),
+                        'icon' => 'fas fa-question',
+                        'route' => 'cms.faq.index',
+                        'permission' => 'faq',
+                    ],
+                    [
+                        'id' => $pageId++,
+                        'menu_id' => 2,
                         'name' => trans('page.standard'),
                         'icon' => 'fas fa-clipboard-check',
                         'route' => 'cms.standard.index',

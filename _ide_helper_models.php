@@ -187,6 +187,56 @@ namespace App\Models{
 namespace App\Models{
 /**
  * @property int $id
+ * @property string $question
+ * @property string|null $question_id
+ * @property string|null $question_fr
+ * @property string|null $answer
+ * @property string|null $answer_id
+ * @property string|null $answer_fr
+ * @property bool $is_active
+ * @property int|null $created_by
+ * @property int|null $updated_by
+ * @property int|null $deleted_by
+ * @property \Illuminate\Support\Carbon $created_at
+ * @property \Illuminate\Support\Carbon $updated_at
+ * @property \Illuminate\Support\Carbon|null $deleted_at
+ * @property-read \Illuminate\Database\Eloquent\Collection<int, \Spatie\Activitylog\Models\Activity> $activities
+ * @property-read int|null $activities_count
+ * @property-read \App\Models\User|null $createdBy
+ * @property-read \App\Models\User|null $deletedBy
+ * @property-read string $translate_answer
+ * @property-read string $translate_question
+ * @property-read \App\Models\User|null $updatedBy
+ * @method static \Illuminate\Database\Eloquent\Builder<static>|Faq active()
+ * @method static \Database\Factories\FaqFactory factory($count = null, $state = [])
+ * @method static \Illuminate\Database\Eloquent\Builder<static>|Faq inactive()
+ * @method static \Illuminate\Database\Eloquent\Builder<static>|Faq newModelQuery()
+ * @method static \Illuminate\Database\Eloquent\Builder<static>|Faq newQuery()
+ * @method static \Illuminate\Database\Eloquent\Builder<static>|Faq onlyTrashed()
+ * @method static \Illuminate\Database\Eloquent\Builder<static>|Faq query()
+ * @method static \Illuminate\Database\Eloquent\Builder<static>|Faq whereAnswer($value)
+ * @method static \Illuminate\Database\Eloquent\Builder<static>|Faq whereAnswerFr($value)
+ * @method static \Illuminate\Database\Eloquent\Builder<static>|Faq whereAnswerId($value)
+ * @method static \Illuminate\Database\Eloquent\Builder<static>|Faq whereCreatedAt($value)
+ * @method static \Illuminate\Database\Eloquent\Builder<static>|Faq whereCreatedBy($value)
+ * @method static \Illuminate\Database\Eloquent\Builder<static>|Faq whereDeletedAt($value)
+ * @method static \Illuminate\Database\Eloquent\Builder<static>|Faq whereDeletedBy($value)
+ * @method static \Illuminate\Database\Eloquent\Builder<static>|Faq whereId($value)
+ * @method static \Illuminate\Database\Eloquent\Builder<static>|Faq whereIsActive($value)
+ * @method static \Illuminate\Database\Eloquent\Builder<static>|Faq whereQuestion($value)
+ * @method static \Illuminate\Database\Eloquent\Builder<static>|Faq whereQuestionFr($value)
+ * @method static \Illuminate\Database\Eloquent\Builder<static>|Faq whereQuestionId($value)
+ * @method static \Illuminate\Database\Eloquent\Builder<static>|Faq whereUpdatedAt($value)
+ * @method static \Illuminate\Database\Eloquent\Builder<static>|Faq whereUpdatedBy($value)
+ * @method static \Illuminate\Database\Eloquent\Builder<static>|Faq withTrashed(bool $withTrashed = true)
+ * @method static \Illuminate\Database\Eloquent\Builder<static>|Faq withoutTrashed()
+ */
+	class Faq extends \Eloquent {}
+}
+
+namespace App\Models{
+/**
+ * @property int $id
  * @property int $guide_category_id
  * @property string $title
  * @property string $title_id
@@ -247,9 +297,9 @@ namespace App\Models{
  * @method static Builder<static>|Guide whereTitleFr($value)
  * @property int $counter
  * @method static Builder<static>|Guide whereCounter($value)
- * @mixin \Eloquent
  * @property string $title_zh
  * @property string $body_zh
+ * @mixin \Eloquent
  */
 	class Guide extends \Eloquent {}
 }
@@ -300,8 +350,8 @@ namespace App\Models{
  * @property-read int|null $guides_count
  * @property string|null $name_fr
  * @method static Builder<static>|GuideCategory whereNameFr($value)
- * @mixin \Eloquent
  * @property string $name_zh
+ * @mixin \Eloquent
  */
 	class GuideCategory extends \Eloquent {}
 }
@@ -646,9 +696,9 @@ namespace App\Models{
  * @method static Builder<static>|Property withTrashed(bool $withTrashed = true)
  * @method static Builder<static>|Property withoutTrashed()
  * @method static Builder<static>|Property yearly()
- * @mixin \Eloquent
  * @property string|null $description_zh
- * @method static \Illuminate\Database\Eloquent\Builder<static>|Property enclosed()
+ * @method static Builder<static>|Property enclosed()
+ * @mixin \Eloquent
  */
 	class Property extends \Eloquent {}
 }
@@ -750,9 +800,9 @@ namespace App\Models{
  * @method static Builder<static>|Standard whereUpdatedBy($value)
  * @method static Builder<static>|Standard withTrashed(bool $withTrashed = true)
  * @method static Builder<static>|Standard withoutTrashed()
- * @mixin \Eloquent
  * @property string $title_zh
  * @property string $description_zh
+ * @mixin \Eloquent
  */
 	class Standard extends \Eloquent {}
 }
@@ -884,10 +934,10 @@ namespace App\Models{
  * @method static Builder<static>|Value whereUpdatedBy($value)
  * @method static Builder<static>|Value withTrashed(bool $withTrashed = true)
  * @method static Builder<static>|Value withoutTrashed()
- * @mixin \Eloquent
  * @property string $title_zh
  * @property string $short_description_zh
  * @property string $description_zh
+ * @mixin \Eloquent
  */
 	class Value extends \Eloquent {}
 }

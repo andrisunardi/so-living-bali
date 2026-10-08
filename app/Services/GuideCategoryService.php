@@ -2,7 +2,7 @@
 
 namespace App\Services;
 
-use App\Libraries\GoogleTranslate;
+// use App\Libraries\GoogleTranslate;
 use App\Models\GuideCategory;
 use Illuminate\Support\Facades\DB;
 
@@ -63,7 +63,7 @@ class GuideCategoryService
 
         $guideCategory = GuideCategory::create($data);
 
-        (new GoogleTranslate)->translateModel($guideCategory);
+        // (new GoogleTranslate)->translateModel($guideCategory);
 
         return $guideCategory;
     }
@@ -72,7 +72,7 @@ class GuideCategoryService
     {
         $guideCategory->update($data);
 
-        (new GoogleTranslate)->translateModel($guideCategory);
+        // (new GoogleTranslate)->translateModel($guideCategory);
 
         return $guideCategory->refresh();
     }

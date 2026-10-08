@@ -112,7 +112,7 @@ new #[Title('Add | Guide')] class extends Component {
                                 <span class="fas fa-newspaper fa-fw "></span>
                             </div>
                             <input type="text" class="form-control" id="title" name="title" minlength="1"
-                                maxlength="200" placeholder="{{ trans('index.ex') }}. Canggu" required
+                                maxlength="200" placeholder="{{ trans('index.ex') }} Canggu" required
                                 wire:model="form.title" wire:offline.class="disabled" wire:offline.attr="disabled"
                                 wire:loading.class="disabled" wire:loading.attr="disabled">
                         </div>
@@ -152,7 +152,7 @@ new #[Title('Add | Guide')] class extends Component {
                                 <span class="fas fa-newspaper fa-fw "></span>
                             </div>
                             <input type="text" class="form-control" id="title_id" name="title_id" minlength="1"
-                                maxlength="200" placeholder="{{ trans('index.ex') }}. Canggu"
+                                maxlength="200" placeholder="{{ trans('index.ex') }} Canggu"
                                 wire:model="form.title_id" wire:offline.class="disabled" wire:offline.attr="disabled"
                                 wire:loading.class="disabled" wire:loading.attr="disabled">
                         </div>
@@ -189,7 +189,7 @@ new #[Title('Add | Guide')] class extends Component {
                                 <span class="fas fa-newspaper fa-fw "></span>
                             </div>
                             <input type="text" class="form-control" id="title_fr" name="title_fr"
-                                minlength="1" maxlength="200" placeholder="{{ trans('index.ex') }}. Canggu"
+                                minlength="1" maxlength="200" placeholder="{{ trans('index.ex') }} Canggu"
                                 wire:model="form.title_fr" wire:offline.class="disabled" wire:offline.attr="disabled"
                                 wire:loading.class="disabled" wire:loading.attr="disabled">
                         </div>

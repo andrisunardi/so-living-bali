@@ -12,10 +12,10 @@ class GuideCategoryAddForm extends Form
     #[Validate('required|string|min:1|max:50|unique:guide_categories,name')]
     public string $name = '';
 
-    #[Validate('required|string|min:1|max:50|unique:guide_categories,name_id')]
+    #[Validate('nullable|string|min:1|max:50')]
     public string $name_id = '';
 
-    #[Validate('required|string|min:1|max:50|unique:guide_categories,name_fr')]
+    #[Validate('nullable|string|min:1|max:50')]
     public string $name_fr = '';
 
     #[Validate('required|boolean')]

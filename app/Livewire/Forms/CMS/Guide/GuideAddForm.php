@@ -21,7 +21,7 @@ class GuideAddForm extends Form
     #[Validate('nullable|string|min:1|max:200')]
     public string $title_fr = '';
 
-    #[Validate('required|string|min:1|max:65535')]
+    #[Validate('nullable|string|min:1|max:65535')]
     public string $body = '';
 
     #[Validate('nullable|string|min:1|max:65535')]

@@ -76,7 +76,7 @@ new #[Title('Edit | Value')] class extends Component {
                                 <span class="fas fa-font fa-fw "></span>
                             </div>
                             <input type="text" class="form-control" id="title" name="title" minlength="1"
-                                maxlength="50" placeholder="{{ trans('index.ex') }}. Canggu" required
+                                maxlength="50" placeholder="{{ trans('index.ex') }} Canggu" required
                                 wire:model="form.title" wire:offline.class="disabled" wire:offline.attr="disabled"
                                 wire:loading.class="disabled" wire:loading.attr="disabled">
                         </div>
@@ -101,7 +101,7 @@ new #[Title('Edit | Value')] class extends Component {
                                 <span class="fas fa-font fa-fw "></span>
                             </div>
                             <input type="text" class="form-control" id="title_id" name="title_id" minlength="1"
-                                maxlength="50" placeholder="{{ trans('index.ex') }}. Canggu" required
+                                maxlength="50" placeholder="{{ trans('index.ex') }} Canggu" required
                                 wire:model="form.title_id" wire:offline.class="disabled" wire:offline.attr="disabled"
                                 wire:loading.class="disabled" wire:loading.attr="disabled">
                         </div>
@@ -126,7 +126,7 @@ new #[Title('Edit | Value')] class extends Component {
                                 <span class="fas fa-font fa-fw "></span>
                             </div>
                             <input type="text" class="form-control" id="title_fr" name="title_fr" minlength="1"
-                                maxlength="50" placeholder="{{ trans('index.ex') }}. Canggu" required
+                                maxlength="50" placeholder="{{ trans('index.ex') }} Canggu" required
                                 wire:model="form.title_fr" wire:offline.class="disabled" wire:offline.attr="disabled"
                                 wire:loading.class="disabled" wire:loading.attr="disabled">
                         </div>
@@ -151,7 +151,7 @@ new #[Title('Edit | Value')] class extends Component {
                                 <span class="fas fa-file-text fa-fw "></span>
                             </div>
                             <textarea class="form-control" id="short_description" name="short_description" minlength="1" maxlength="100"
-                                placeholder="{{ trans('index.ex') }}. Bearer" required wire:model="form.short_description"
+                                placeholder="{{ trans('index.ex') }} Bearer" required wire:model="form.short_description"
                                 wire:offline.class="disabled" wire:offline.attr="disabled" wire:loading.class="disabled"
                                 wire:loading.attr="disabled">
                                     </textarea>
@@ -176,7 +176,7 @@ new #[Title('Edit | Value')] class extends Component {
                                 <span class="fas fa-file-text fa-fw "></span>
                             </div>
                             <textarea class="form-control" id="short_description_id" name="short_description_id" minlength="1" maxlength="100"
-                                placeholder="{{ trans('index.ex') }}. Bearer" required wire:model="form.short_description_id"
+                                placeholder="{{ trans('index.ex') }} Bearer" required wire:model="form.short_description_id"
                                 wire:offline.class="disabled" wire:offline.attr="disabled" wire:loading.class="disabled"
                                 wire:loading.attr="disabled">
                                     </textarea>
@@ -201,7 +201,7 @@ new #[Title('Edit | Value')] class extends Component {
                                 <span class="fas fa-file-text fa-fw "></span>
                             </div>
                             <textarea class="form-control" id="short_description_fr" name="short_description_fr" minlength="1" maxlength="100"
-                                placeholder="{{ trans('index.ex') }}. Bearer" required wire:model="form.short_description_fr"
+                                placeholder="{{ trans('index.ex') }} Bearer" required wire:model="form.short_description_fr"
                                 wire:offline.class="disabled" wire:offline.attr="disabled" wire:loading.class="disabled"
                                 wire:loading.attr="disabled">
                                     </textarea>
@@ -226,7 +226,7 @@ new #[Title('Edit | Value')] class extends Component {
                                 <span class="fas fa-file-text fa-fw "></span>
                             </div>
                             <textarea class="form-control" id="description" name="description" minlength="1" maxlength="100"
-                                placeholder="{{ trans('index.ex') }}. Bearer" required wire:model="form.description"
+                                placeholder="{{ trans('index.ex') }} Bearer" required wire:model="form.description"
                                 wire:offline.class="disabled" wire:offline.attr="disabled" wire:loading.class="disabled"
                                 wire:loading.attr="disabled">
                                     </textarea>
@@ -251,7 +251,7 @@ new #[Title('Edit | Value')] class extends Component {
                                 <span class="fas fa-file-text fa-fw "></span>
                             </div>
                             <textarea class="form-control" id="description_id" name="description_id" minlength="1" maxlength="100"
-                                placeholder="{{ trans('index.ex') }}. Bearer" required wire:model="form.description_id"
+                                placeholder="{{ trans('index.ex') }} Bearer" required wire:model="form.description_id"
                                 wire:offline.class="disabled" wire:offline.attr="disabled" wire:loading.class="disabled"
                                 wire:loading.attr="disabled">
                                     </textarea>
@@ -276,7 +276,7 @@ new #[Title('Edit | Value')] class extends Component {
                                 <span class="fas fa-file-text fa-fw "></span>
                             </div>
                             <textarea class="form-control" id="description_fr" name="description_fr" minlength="1" maxlength="100"
-                                placeholder="{{ trans('index.ex') }}. Bearer" required wire:model="form.description_fr"
+                                placeholder="{{ trans('index.ex') }} Bearer" required wire:model="form.description_fr"
                                 wire:offline.class="disabled" wire:offline.attr="disabled" wire:loading.class="disabled"
                                 wire:loading.attr="disabled">
                                     </textarea>
@@ -301,7 +301,7 @@ new #[Title('Edit | Value')] class extends Component {
                                 <span class="fas fa-icons fa-fw "></span>
                             </div>
                             <input type="text" class="form-control" id="icon" name="icon" minlength="1"
-                                maxlength="50" placeholder="{{ trans('index.ex') }}. Canggu" required
+                                maxlength="50" placeholder="{{ trans('index.ex') }} Canggu" required
                                 wire:model="form.icon" wire:offline.class="disabled" wire:offline.attr="disabled"
                                 wire:loading.class="disabled" wire:loading.attr="disabled">
                         </div>

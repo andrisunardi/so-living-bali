@@ -13,9 +13,11 @@ class GuideCategoryEditForm extends Form
 
     public string $name = '';
 
-    public string $name_id = '';
+    #[Validate('nullable|string|min:1|max:50')]
+    public ?string $name_id = '';
 
-    public string $name_fr = '';
+    #[Validate('nullable|string|min:1|max:50')]
+    public ?string $name_fr = '';
 
     #[Validate('required|boolean')]
     public bool $is_show = true;
@@ -37,8 +39,6 @@ class GuideCategoryEditForm extends Form
     {
         return [
             'name' => "required|string|min:1|max:50|unique:guide_categories,name,{$this->guideCategory->id}",
-            'name_id' => "required|string|min:1|max:50|unique:guide_categories,name_id,{$this->guideCategory->id}",
-            'name_fr' => "required|string|min:1|max:50|unique:guide_categories,name_fr,{$this->guideCategory->id}",
         ];
     }
 

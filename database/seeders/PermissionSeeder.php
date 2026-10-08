@@ -46,6 +46,13 @@ class PermissionSeeder extends Seeder
         Permission::create(['name' => 'property_image.export'])->assignRole('Admin', 'Agent');
 
         // MASTER
+        Permission::create(['name' => 'faq'])->assignRole('Admin');
+        Permission::create(['name' => 'faq.add'])->assignRole('Admin');
+        Permission::create(['name' => 'faq.edit'])->assignRole('Admin');
+        Permission::create(['name' => 'faq.delete'])->assignRole('Admin');
+        Permission::create(['name' => 'faq.detail'])->assignRole('Admin');
+        Permission::create(['name' => 'faq.export'])->assignRole('Admin');
+
         Permission::create(['name' => 'standard'])->assignRole('Admin');
         Permission::create(['name' => 'standard.add'])->assignRole('Admin');
         Permission::create(['name' => 'standard.edit'])->assignRole('Admin');

@@ -18,6 +18,7 @@ class DatabaseSeeder extends Seeder
             AreaSeeder::class,
             ValueSeeder::class,
             StandardSeeder::class,
+            FaqSeeder::class,
 
             GuideCategorySeeder::class,
             GuideSeeder::class,

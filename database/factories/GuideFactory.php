@@ -10,7 +10,7 @@ class GuideFactory extends Factory
 {
     public function definition(): array
     {
-        $guideCategory = GuideCategory::first() ?? GuideCategory::factory()->hotel()->create();
+        $guideCategory = GuideCategory::first() ?? GuideCategory::factory()->create();
 
         $title = fake()->title();
         $slug = Str::slug($title);
@@ -18,8 +18,8 @@ class GuideFactory extends Factory
         return [
             'guide_category_id' => $guideCategory->id,
             'title' => fake()->unique()->sentence(),
-            'title_id' => fake()->unique()->sentence(),
-            'title_fr' => fake()->unique()->sentence(),
+            'title_id' => fake()->sentence(),
+            'title_fr' => fake()->sentence(),
             'body' => fake()->paragraph(),
             'body_id' => fake()->paragraph(),
             'body_fr' => fake()->paragraph(),

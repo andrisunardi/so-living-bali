@@ -68,7 +68,7 @@ new #[Title('Add | Guide Category')] class extends Component {
                                 <span class="fas fa-tags fa-fw "></span>
                             </div>
                             <input type="text" class="form-control" id="name" name="name" minlength="1"
-                                maxlength="50" placeholder="{{ trans('index.ex') }}. News" required
+                                maxlength="50" placeholder="{{ trans('index.ex') }} News" required
                                 wire:model="form.name" wire:offline.class="disabled" wire:offline.attr="disabled"
                                 wire:loading.class="disabled" wire:loading.attr="disabled">
                         </div>
@@ -93,7 +93,7 @@ new #[Title('Add | Guide Category')] class extends Component {
                                 <span class="fas fa-tags fa-fw "></span>
                             </div>
                             <input type="text" class="form-control" id="name_id" name="name_id" minlength="1"
-                                maxlength="50" placeholder="{{ trans('index.ex') }}. News" required
+                                maxlength="50" placeholder="{{ trans('index.ex') }} News" required
                                 wire:model="form.name_id" wire:offline.class="disabled" wire:offline.attr="disabled"
                                 wire:loading.class="disabled" wire:loading.attr="disabled">
                         </div>
@@ -118,7 +118,7 @@ new #[Title('Add | Guide Category')] class extends Component {
                                 <span class="fas fa-tags fa-fw "></span>
                             </div>
                             <input type="text" class="form-control" id="name_fr" name="name_fr" minlength="1"
-                                maxlength="50" placeholder="{{ trans('index.ex') }}. News" required
+                                maxlength="50" placeholder="{{ trans('index.ex') }} News" required
                                 wire:model="form.name_fr" wire:offline.class="disabled" wire:offline.attr="disabled"
                                 wire:loading.class="disabled" wire:loading.attr="disabled">
                         </div>

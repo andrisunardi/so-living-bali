@@ -9,7 +9,7 @@ class AreaFactory extends Factory
 {
     public function definition(): array
     {
-        $district = District::first() ?? District::factory()->hotel()->create();
+        $district = District::first() ?? District::factory()->create();
 
         return [
             'district_id' => $district->id,

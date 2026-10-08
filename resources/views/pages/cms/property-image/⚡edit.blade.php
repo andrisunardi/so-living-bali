@@ -118,7 +118,7 @@ new #[Title('Edit | Property Image')] class extends Component {
                                     </div>
                                     <input type="text" class="form-control" id="name" name="name"
                                         minlength="1" maxlength="50"
-                                        placeholder="{{ trans('index.ex') }}. Master Bedroom" required
+                                        placeholder="{{ trans('index.ex') }} Master Bedroom" required
                                         wire:model="form.name" wire:offline.class="disabled"
                                         wire:offline.attr="disabled" wire:loading.class="disabled"
                                         wire:loading.attr="disabled">
@@ -142,7 +142,7 @@ new #[Title('Edit | Property Image')] class extends Component {
                                         <span class="fas fa-file-lines fa-fw "></span>
                                     </div>
                                     <textarea class="form-control" id="description" name="description" minlength="1" maxlength="65535"
-                                        placeholder="{{ trans('index.ex') }}. Luxury Bedroom" wire:model="form.description" wire:offline.class="disabled"
+                                        placeholder="{{ trans('index.ex') }} Luxury Bedroom" wire:model="form.description" wire:offline.class="disabled"
                                         wire:offline.attr="disabled" wire:loading.class="disabled" wire:loading.attr="disabled">
                                     </textarea>
                                 </div>

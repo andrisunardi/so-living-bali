@@ -77,7 +77,7 @@ new #[Title('Edit | District')] class extends Component {
                                 <span class="fas fa-city fa-fw "></span>
                             </div>
                             <input type="text" class="form-control" id="name" name="name" minlength="1"
-                                maxlength="50" placeholder="{{ trans('index.ex') }}. Canggu" required
+                                maxlength="50" placeholder="{{ trans('index.ex') }} Canggu" required
                                 wire:model="form.name" wire:offline.class="disabled" wire:offline.attr="disabled"
                                 wire:loading.class="disabled" wire:loading.attr="disabled">
                         </div>

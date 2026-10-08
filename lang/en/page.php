@@ -22,6 +22,7 @@ return [
     'guide_category' => 'Guide Category',
 
     'master' => 'Master',
+    'faq' => 'FAQ',
     'standard' => 'Standard',
     'value' => 'Value',
     'area' => 'Area',

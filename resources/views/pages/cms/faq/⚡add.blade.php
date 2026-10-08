@@ -1,12 +1,12 @@
 <?php
 
 use App\Livewire\Component;
-use App\Livewire\Forms\CMS\Standard\StandardAddForm;
+use App\Livewire\Forms\CMS\Faq\FaqAddForm;
 use Illuminate\Validation\ValidationException;
 use Livewire\Attributes\Title;
 
-new #[Title('Add | Standard')] class extends Component {
-    public StandardAddForm $form;
+new #[Title('Add | Faq')] class extends Component {
+    public FaqAddForm $form;
 
     public function resetForm(): void
     {
@@ -20,10 +20,10 @@ new #[Title('Add | Standard')] class extends Component {
 
             session()->flash('success', [
                 'title' => trans('index.add') . ' ' . trans('index.success'),
-                'message' => trans('page.standard') . ' ' . trans('message.has_been_successfully_added'),
+                'message' => trans('page.faq') . ' ' . trans('message.has_been_successfully_added'),
             ]);
 
-            $this->redirect(route('cms.standard.index'), navigate: true);
+            $this->redirect(route('cms.faq.index'), navigate: true);
         } catch (ValidationException $e) {
             $errors = collect($e->validator->errors()->all())->implode('<br>');
 
@@ -33,7 +33,7 @@ new #[Title('Add | Standard')] class extends Component {
 };
 ?>
 
-@section('title', trans('page.standard'))
+@section('title', trans('page.faq'))
 
 <div class="container-fluid">
     <div class="card">
@@ -44,7 +44,7 @@ new #[Title('Add | Standard')] class extends Component {
         <div class="card-body">
             <div class="row g-3">
                 <div class="col-auto">
-                    <a draggable="false" class="btn btn-primary w-100" href="{{ route('cms.standard.index') }}" wire:navigate>
+                    <a draggable="false" class="btn btn-primary w-100" href="{{ route('cms.faq.index') }}" wire:navigate>
                         <span class="fas fa-arrow-left fa-fw"></span>
                         {{ trans('index.back') }}
                     </a>
@@ -58,151 +58,133 @@ new #[Title('Add | Standard')] class extends Component {
             <form wire:submit.prevent="submit" role="form" autocomplete="off">
                 <div class="row g-3">
                     <div class="col-sm-6">
-                        <label class="form-label" for="title">
-                            {{ trans('validation.attributes.title') }}
+                        <label class="form-label" for="question">
+                            {{ trans('validation.attributes.question') }}
                             <span class="text-danger">*</span>
                         </label>
                         <div class="input-group">
                             <div class="input-group-text">
                                 <span class="fas fa-font fa-fw "></span>
                             </div>
-                            <input type="text" class="form-control" id="title" name="title" minlength="1"
-                                maxlength="50" placeholder="{{ trans('index.ex') }} Canggu" required
-                                wire:model="form.title" wire:offline.class="disabled" wire:offline.attr="disabled"
+                            <input type="text" class="form-control" id="question" name="question" minlength="1"
+                                maxlength="100" placeholder="{{ trans('index.ex') }} Question" required
+                                wire:model="form.question" wire:offline.class="disabled" wire:offline.attr="disabled"
                                 wire:loading.class="disabled" wire:loading.attr="disabled">
                         </div>
                         <div class="form-text">
                             {{ trans('helper.required') }},
                             {{ trans('helper.minlength') }} : 1,
-                            {{ trans('helper.maxlength') }} : 50,
+                            {{ trans('helper.maxlength') }} : 100,
                             {{ trans('helper.unique') }}
                         </div>
-                        @error('form.title')
+                        @error('form.question')
                             <div class="form-text text-danger">{{ $message }}</div>
                         @enderror
                     </div>
 
                     <div class="col-sm-6">
-                        <label class="form-label" for="title_id">
-                            {{ trans('validation.attributes.title_id') }}
-                            <span class="text-danger">*</span>
+                        <label class="form-label" for="question_id">
+                            {{ trans('validation.attributes.question_id') }}
                         </label>
                         <div class="input-group">
                             <div class="input-group-text">
                                 <span class="fas fa-font fa-fw "></span>
                             </div>
-                            <input type="text" class="form-control" id="title_id" name="title_id" minlength="1"
-                                maxlength="50" placeholder="{{ trans('index.ex') }} Canggu" required
-                                wire:model="form.title_id" wire:offline.class="disabled" wire:offline.attr="disabled"
+                            <input type="text" class="form-control" id="question_id" name="question_id"
+                                minlength="1" maxlength="100" placeholder="{{ trans('index.ex') }} Question"
+                                wire:model="form.question_id" wire:offline.class="disabled" wire:offline.attr="disabled"
                                 wire:loading.class="disabled" wire:loading.attr="disabled">
                         </div>
                         <div class="form-text">
-                            {{ trans('helper.required') }},
                             {{ trans('helper.minlength') }} : 1,
-                            {{ trans('helper.maxlength') }} : 50,
-                            {{ trans('helper.unique') }}
+                            {{ trans('helper.maxlength') }} : 100
                         </div>
-                        @error('form.title_id')
+                        @error('form.question_id')
                             <div class="form-text text-danger">{{ $message }}</div>
                         @enderror
                     </div>
 
                     <div class="col-sm-6">
-                        <label class="form-label" for="title_fr">
-                            {{ trans('validation.attributes.title_fr') }}
-                            <span class="text-danger">*</span>
+                        <label class="form-label" for="question_fr">
+                            {{ trans('validation.attributes.question_fr') }}
                         </label>
                         <div class="input-group">
                             <div class="input-group-text">
                                 <span class="fas fa-font fa-fw "></span>
                             </div>
-                            <input type="text" class="form-control" id="title_fr" name="title_fr" minlength="1"
-                                maxlength="50" placeholder="{{ trans('index.ex') }} Canggu" required
-                                wire:model="form.title_fr" wire:offline.class="disabled" wire:offline.attr="disabled"
+                            <input type="text" class="form-control" id="question_fr" name="question_fr"
+                                minlength="1" maxlength="100" placeholder="{{ trans('index.ex') }} Question"
+                                wire:model="form.question_fr" wire:offline.class="disabled" wire:offline.attr="disabled"
                                 wire:loading.class="disabled" wire:loading.attr="disabled">
                         </div>
                         <div class="form-text">
-                            {{ trans('helper.required') }},
                             {{ trans('helper.minlength') }} : 1,
-                            {{ trans('helper.maxlength') }} : 50,
-                            {{ trans('helper.unique') }}
+                            {{ trans('helper.maxlength') }} : 100
                         </div>
-                        @error('form.title_fr')
+                        @error('form.question_fr')
                             <div class="form-text text-danger">{{ $message }}</div>
                         @enderror
                     </div>
 
                     <div class="col-sm-6">
-                        <label class="form-label" for="description">
-                            {{ trans('validation.attributes.description') }}
-                            <span class="text-danger">*</span>
+                        <label class="form-label" for="answer">
+                            {{ trans('validation.attributes.answer') }}
                         </label>
                         <div class="input-group">
                             <div class="input-group-text">
                                 <span class="fas fa-file-text fa-fw "></span>
                             </div>
-                            <textarea class="form-control" id="description" name="description" minlength="1" maxlength="100"
-                                placeholder="{{ trans('index.ex') }} Bearer" required wire:model="form.description"
-                                wire:offline.class="disabled" wire:offline.attr="disabled" wire:loading.class="disabled"
-                                wire:loading.attr="disabled">
-                                    </textarea>
+                            <textarea class="form-control" id="answer" name="answer" minlength="1" maxlength="100"
+                                placeholder="{{ trans('index.ex') }} Answer" wire:model="form.answer" wire:offline.class="disabled"
+                                wire:offline.attr="disabled" wire:loading.class="disabled" wire:loading.attr="disabled"></textarea>
                         </div>
                         <div class="form-text">
-                            {{ trans('helper.required') }},
                             {{ trans('helper.minlength') }} : 1,
                             {{ trans('helper.maxlength') }} : 100,
                         </div>
-                        @error('form.description')
+                        @error('form.answer')
                             <div class="form-text text-danger">{{ $message }}</div>
                         @enderror
                     </div>
 
                     <div class="col-sm-6">
-                        <label class="form-label" for="description_id">
-                            {{ trans('validation.attributes.description_id') }}
-                            <span class="text-danger">*</span>
+                        <label class="form-label" for="answer_id">
+                            {{ trans('validation.attributes.answer_id') }}
                         </label>
                         <div class="input-group">
                             <div class="input-group-text">
                                 <span class="fas fa-file-text fa-fw "></span>
                             </div>
-                            <textarea class="form-control" id="description_id" name="description_id" minlength="1" maxlength="100"
-                                placeholder="{{ trans('index.ex') }} Bearer" required wire:model="form.description_id"
-                                wire:offline.class="disabled" wire:offline.attr="disabled" wire:loading.class="disabled"
-                                wire:loading.attr="disabled">
-                                    </textarea>
+                            <textarea class="form-control" id="answer_id" name="answer_id" minlength="1" maxlength="100"
+                                placeholder="{{ trans('index.ex') }} Answer" wire:model="form.answer_id" wire:offline.class="disabled"
+                                wire:offline.attr="disabled" wire:loading.class="disabled" wire:loading.attr="disabled"></textarea>
                         </div>
                         <div class="form-text">
-                            {{ trans('helper.required') }},
                             {{ trans('helper.minlength') }} : 1,
                             {{ trans('helper.maxlength') }} : 100,
                         </div>
-                        @error('form.description_id')
+                        @error('form.answer_id')
                             <div class="form-text text-danger">{{ $message }}</div>
                         @enderror
                     </div>
 
                     <div class="col-sm-6">
-                        <label class="form-label" for="description_fr">
-                            {{ trans('validation.attributes.description_fr') }}
-                            <span class="text-danger">*</span>
+                        <label class="form-label" for="answer_fr">
+                            {{ trans('validation.attributes.answer_fr') }}
                         </label>
                         <div class="input-group">
                             <div class="input-group-text">
                                 <span class="fas fa-file-text fa-fw "></span>
                             </div>
-                            <textarea class="form-control" id="description_fr" name="description_fr" minlength="1" maxlength="100"
-                                placeholder="{{ trans('index.ex') }} Bearer" required wire:model="form.description_fr"
-                                wire:offline.class="disabled" wire:offline.attr="disabled" wire:loading.class="disabled"
-                                wire:loading.attr="disabled">
-                                    </textarea>
+                            <textarea class="form-control" id="answer_fr" name="answer_fr" minlength="1" maxlength="100"
+                                placeholder="{{ trans('index.ex') }} Answer" wire:model="form.answer_fr" wire:offline.class="disabled"
+                                wire:offline.attr="disabled" wire:loading.class="disabled" wire:loading.attr="disabled"></textarea>
                         </div>
                         <div class="form-text">
-                            {{ trans('helper.required') }},
                             {{ trans('helper.minlength') }} : 1,
                             {{ trans('helper.maxlength') }} : 100,
                         </div>
-                        @error('form.description_fr')
+                        @error('form.answer_fr')
                             <div class="form-text text-danger">{{ $message }}</div>
                         @enderror
                     </div>

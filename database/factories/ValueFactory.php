@@ -10,17 +10,17 @@ class ValueFactory extends Factory
     public function definition(): array
     {
         $title = fake()->unique()->sentence();
-        $shortDescription = fake()->unique()->paragraph();
-        $description = fake()->unique()->paragraph();
+        $shortDescription = fake()->paragraph();
+        $description = fake()->paragraph();
 
         return [
-            'title' => fake()->unique()->sentence(),
+            'title' => $title,
             'title_id' => (new GoogleTranslate('id'))->translate($title),
             'title_fr' => (new GoogleTranslate('fr'))->translate($title),
-            'short_description' => fake()->paragraph(),
+            'short_description' => $shortDescription,
             'short_description_id' => (new GoogleTranslate('id'))->translate($shortDescription),
             'short_description_fr' => (new GoogleTranslate('fr'))->translate($shortDescription),
-            'description' => fake()->paragraph(),
+            'description' => $description,
             'description_id' => (new GoogleTranslate('id'))->translate($description),
             'description_fr' => (new GoogleTranslate('fr'))->translate($description),
             'icon' => 'fas fa-icons',

@@ -13,18 +13,20 @@ class StandardEditForm extends Form
 
     public string $title = '';
 
-    public string $title_id = '';
+    #[Validate('nullable|string|min:1|max:50')]
+    public ?string $title_id = '';
 
-    public string $title_fr = '';
-
-    #[Validate('required|string|min:1|max:1000')]
-    public string $description = '';
-
-    #[Validate('required|string|min:1|max:1000')]
-    public string $description_id = '';
+    #[Validate('nullable|string|min:1|max:50')]
+    public ?string $title_fr = '';
 
     #[Validate('required|string|min:1|max:1000')]
-    public string $description_fr = '';
+    public ?string $description = '';
+
+    #[Validate('required|string|min:1|max:1000')]
+    public ?string $description_id = '';
+
+    #[Validate('required|string|min:1|max:1000')]
+    public ?string $description_fr = '';
 
     #[Validate('required|boolean')]
     public bool $is_active = true;
@@ -45,8 +47,6 @@ class StandardEditForm extends Form
     {
         return [
             'title' => "required|string|min:1|max:50|unique:standards,title,{$this->standard->id}",
-            'title_id' => "required|string|min:1|max:50|unique:standards,title_id,{$this->standard->id}",
-            'title_fr' => "required|string|min:1|max:50|unique:standards,title_fr,{$this->standard->id}",
         ];
     }
 

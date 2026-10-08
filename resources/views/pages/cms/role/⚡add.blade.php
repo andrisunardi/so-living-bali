@@ -77,7 +77,7 @@ new #[Title('Add | Role')] class extends Component {
                                         <span class="fas fa-key fa-fw "></span>
                                     </div>
                                     <input type="text" class="form-control" id="name" name="name"
-                                        minlength="1" maxlength="255" placeholder="{{ trans('index.ex') }}. Admin"
+                                        minlength="1" maxlength="255" placeholder="{{ trans('index.ex') }} Admin"
                                         required wire:model="form.name" wire:offline.class="disabled"
                                         wire:offline.attr="disabled" wire:loading.class="disabled"
                                         wire:loading.attr="disabled">
@@ -103,7 +103,7 @@ new #[Title('Add | Role')] class extends Component {
                                         <span class="fas fa-shield fa-fw "></span>
                                     </div>
                                     <input type="text" class="form-control" id="guard_name" name="guard_name"
-                                        minlength="1" maxlength="255" placeholder="{{ trans('index.ex') }}. web"
+                                        minlength="1" maxlength="255" placeholder="{{ trans('index.ex') }} web"
                                         required wire:model="form.guard_name" wire:offline.class="disabled"
                                         wire:offline.attr="disabled" wire:loading.class="disabled"
                                         wire:loading.attr="disabled">

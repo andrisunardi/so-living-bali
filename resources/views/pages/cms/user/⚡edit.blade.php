@@ -91,7 +91,7 @@ new #[Title('Edit | User')] class extends Component {
                                         <span class="fas fa-user fa-fw "></span>
                                     </div>
                                     <input type="text" class="form-control" id="name" name="name"
-                                        minlength="1" maxlength="50" placeholder="{{ trans('index.ex') }}. John Doe"
+                                        minlength="1" maxlength="50" placeholder="{{ trans('index.ex') }} John Doe"
                                         required wire:model="form.name" wire:offline.class="disabled"
                                         wire:offline.attr="disabled" wire:loading.class="disabled"
                                         wire:loading.attr="disabled">
@@ -118,7 +118,7 @@ new #[Title('Edit | User')] class extends Component {
                                     </div>
                                     <input type="email" class="form-control" id="email" name="email"
                                         minlength="1" maxlength="50"
-                                        placeholder="{{ trans('index.ex') }}. johndoe@gmail.com" required
+                                        placeholder="{{ trans('index.ex') }} johndoe@gmail.com" required
                                         wire:model="form.email" wire:offline.class="disabled"
                                         wire:offline.attr="disabled" wire:loading.class="disabled"
                                         wire:loading.attr="disabled">
@@ -145,7 +145,7 @@ new #[Title('Edit | User')] class extends Component {
                                     </div>
                                     <input type="tel" class="form-control" id="phone" name="phone"
                                         minlength="1" maxlength="20"
-                                        placeholder="{{ trans('index.ex') }}. 6281234567890" required
+                                        placeholder="{{ trans('index.ex') }} 6281234567890" required
                                         wire:model="form.phone" wire:offline.class="disabled"
                                         wire:offline.attr="disabled" wire:loading.class="disabled"
                                         wire:loading.attr="disabled">
@@ -171,7 +171,7 @@ new #[Title('Edit | User')] class extends Component {
                                         <span class="fas fa-id-badge fa-fw "></span>
                                     </div>
                                     <input type="text" class="form-control" id="username" name="username"
-                                        minlength="1" maxlength="50" placeholder="{{ trans('index.ex') }}. 012345"
+                                        minlength="1" maxlength="50" placeholder="{{ trans('index.ex') }} 012345"
                                         required wire:model="form.username" wire:offline.class="disabled"
                                         wire:offline.attr="disabled" wire:loading.class="disabled"
                                         wire:loading.attr="disabled">
@@ -197,7 +197,7 @@ new #[Title('Edit | User')] class extends Component {
                                     </div>
                                     <input type="text" class="form-control" id="password" name="password"
                                         minlength="1" maxlength="50"
-                                        placeholder="{{ trans('index.ex') }}. 12345678" wire:model="form.password"
+                                        placeholder="{{ trans('index.ex') }} 12345678" wire:model="form.password"
                                         wire:offline.class="disabled" wire:offline.attr="disabled"
                                         wire:loading.class="disabled" wire:loading.attr="disabled">
 

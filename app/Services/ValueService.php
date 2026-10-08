@@ -2,7 +2,7 @@
 
 namespace App\Services;
 
-use App\Libraries\GoogleTranslate;
+// use App\Libraries\GoogleTranslate;
 use App\Models\Value;
 use Exception;
 use Illuminate\Support\Facades\DB;
@@ -72,7 +72,7 @@ class ValueService
 
             $value = Value::create($data);
 
-            (new GoogleTranslate)->translateModel($value);
+            // (new GoogleTranslate)->translateModel($value);
 
             DB::commit();
 
@@ -90,7 +90,7 @@ class ValueService
 
             $value->update($data);
 
-            (new GoogleTranslate)->translateModel($value);
+            // (new GoogleTranslate)->translateModel($value);
 
             DB::commit();
 

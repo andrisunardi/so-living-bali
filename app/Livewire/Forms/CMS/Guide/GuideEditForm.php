@@ -17,19 +17,19 @@ class GuideEditForm extends Form
     public string $title = '';
 
     #[Validate('nullable|string|min:1|max:200')]
-    public string $title_id = '';
+    public ?string $title_id = '';
 
     #[Validate('nullable|string|min:1|max:200')]
-    public string $title_fr = '';
-
-    #[Validate('required|string|min:1|max:65535')]
-    public string $body = '';
+    public ?string $title_fr = '';
 
     #[Validate('nullable|string|min:1|max:65535')]
-    public string $body_id = '';
+    public ?string $body = '';
 
     #[Validate('nullable|string|min:1|max:65535')]
-    public string $body_fr = '';
+    public ?string $body_id = '';
+
+    #[Validate('nullable|string|min:1|max:65535')]
+    public ?string $body_fr = '';
 
     #[Validate(['nullable', 'array', 'min:0'])]
     public array $image = [];

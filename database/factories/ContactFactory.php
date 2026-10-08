@@ -12,7 +12,7 @@ class ContactFactory extends Factory
 {
     public function definition(): array
     {
-        $area = Area::first() ?? Area::factory()->hotel()->create();
+        $area = Area::first() ?? Area::factory()->create();
 
         return [
             'code' => Str::random(20),

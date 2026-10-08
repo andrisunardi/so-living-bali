@@ -69,7 +69,7 @@ new #[Title('Add | Oauth')] class extends Component {
                                         <span class="fas fa-code fa-fw "></span>
                                     </div>
                                     <input type="text" class="form-control" id="code" name="code"
-                                        minlength="1" maxlength="20" placeholder="{{ trans('index.ex') }}. Canggu"
+                                        minlength="1" maxlength="20" placeholder="{{ trans('index.ex') }} Canggu"
                                         required wire:model="form.code" wire:offline.class="disabled"
                                         wire:offline.attr="disabled" wire:loading.class="disabled"
                                         wire:loading.attr="disabled">
@@ -95,7 +95,7 @@ new #[Title('Add | Oauth')] class extends Component {
                                         <span class="fas fa-gears fa-fw "></span>
                                     </div>
                                     <input type="text" class="form-control" id="name" name="name"
-                                        minlength="1" maxlength="50" placeholder="{{ trans('index.ex') }}. Canggu"
+                                        minlength="1" maxlength="50" placeholder="{{ trans('index.ex') }} Canggu"
                                         required wire:model="form.name" wire:offline.class="disabled"
                                         wire:offline.attr="disabled" wire:loading.class="disabled"
                                         wire:loading.attr="disabled">
@@ -120,7 +120,7 @@ new #[Title('Add | Oauth')] class extends Component {
                                         <span class="fas fa-tag fa-fw "></span>
                                     </div>
                                     <textarea class="form-control" id="token_type" name="token_type" minlength="1" maxlength="65535"
-                                        placeholder="{{ trans('index.ex') }}. Bearer" required wire:model="form.token_type" wire:offline.class="disabled"
+                                        placeholder="{{ trans('index.ex') }} Bearer" required wire:model="form.token_type" wire:offline.class="disabled"
                                         wire:offline.attr="disabled" wire:loading.class="disabled" wire:loading.attr="disabled">
                                     </textarea>
                                 </div>
@@ -144,7 +144,7 @@ new #[Title('Add | Oauth')] class extends Component {
                                         <span class="fas fa-hourglass fa-fw "></span>
                                     </div>
                                     <input type="number" class="form-control" id="expires_in" name="expires_in"
-                                        min="0" max="1000000000" placeholder="{{ trans('index.ex') }}. 3600"
+                                        min="0" max="1000000000" placeholder="{{ trans('index.ex') }} 3600"
                                         required wire:model="form.expires_in" wire:offline.class="disabled"
                                         wire:offline.attr="disabled" wire:loading.class="disabled"
                                         wire:loading.attr="disabled">
@@ -169,7 +169,7 @@ new #[Title('Add | Oauth')] class extends Component {
                                         <span class="fas fa-list fa-fw "></span>
                                     </div>
                                     <textarea class="form-control" id="scope" name="scope" minlength="1" maxlength="65535"
-                                        placeholder="{{ trans('index.ex') }}. AUTH" required wire:model="form.scope" wire:offline.class="disabled"
+                                        placeholder="{{ trans('index.ex') }} AUTH" required wire:model="form.scope" wire:offline.class="disabled"
                                         wire:offline.attr="disabled" wire:loading.class="disabled" wire:loading.attr="disabled">
                                     </textarea>
                                 </div>
@@ -193,7 +193,7 @@ new #[Title('Add | Oauth')] class extends Component {
                                         <span class="fas fa-clock fa-fw "></span>
                                     </div>
                                     <input type="number" class="form-control" id="created" name="created"
-                                        min="0" max="1000000000" placeholder="{{ trans('index.ex') }}. 1000"
+                                        min="0" max="1000000000" placeholder="{{ trans('index.ex') }} 1000"
                                         required wire:model="form.created" wire:offline.class="disabled"
                                         wire:offline.attr="disabled" wire:loading.class="disabled"
                                         wire:loading.attr="disabled">
@@ -222,7 +222,7 @@ new #[Title('Add | Oauth')] class extends Component {
                                         <span class="fas fa-key fa-fw "></span>
                                     </div>
                                     <textarea class="form-control" id="refresh_token" name="refresh_token" minlength="1" maxlength="65535"
-                                        placeholder="{{ trans('index.ex') }}. ABC123" required wire:model="form.refresh_token"
+                                        placeholder="{{ trans('index.ex') }} ABC123" required wire:model="form.refresh_token"
                                         wire:offline.class="disabled" wire:offline.attr="disabled" wire:loading.class="disabled"
                                         wire:loading.attr="disabled">
                                     </textarea>
@@ -247,7 +247,7 @@ new #[Title('Add | Oauth')] class extends Component {
                                         <span class="fas fa-key fa-fw "></span>
                                     </div>
                                     <textarea class="form-control" id="access_token" name="access_token" minlength="1" maxlength="65535"
-                                        placeholder="{{ trans('index.ex') }}. ABC123" required wire:model="form.access_token"
+                                        placeholder="{{ trans('index.ex') }} ABC123" required wire:model="form.access_token"
                                         wire:offline.class="disabled" wire:offline.attr="disabled" wire:loading.class="disabled"
                                         wire:loading.attr="disabled">
                                     </textarea>
