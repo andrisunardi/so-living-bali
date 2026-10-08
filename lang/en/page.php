@@ -4,6 +4,7 @@ return [
 
     'home' => 'Home',
     'properties' => 'Properties',
+    'properties_for_sale' => 'Properties For Sale',
     'service' => 'Service',
     'about' => 'About',
 

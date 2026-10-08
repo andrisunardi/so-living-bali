@@ -2,6 +2,12 @@
 
 return [
 
+    'hero' => [
+        'sub_title' => 'Properties For Sale',
+        'title' => 'Properties for Sale In Bali',
+        'description' => 'A curated collection of distinctive homes and residential properties for sale across Bali. Selected for theit location, quality, legal clarity and long-term residential appeal.',
+    ],
+
     'property_count' => 'Over <b>:count</b> homes in :area',
     'all_areas' => 'all areas',
 

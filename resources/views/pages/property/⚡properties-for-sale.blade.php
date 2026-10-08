@@ -6,7 +6,7 @@ use Livewire\Attributes\On;
 use Livewire\Attributes\Url;
 use App\Services\DistrictService;
 
-new #[Title('Property')] class extends Component {
+new #[Title('Properties For Sale')] class extends Component {
     public string $area = '';
 
     #[Url(except: [])]
@@ -57,23 +57,14 @@ new #[Title('Property')] class extends Component {
 };
 ?>
 
-@section('title', trans('page.property'))
+@section('title', trans('page.properties_for_sale'))
 
 <div>
-    <livewire:property.search />
-
-    <hr />
-
     {{-- prettier-ignore --}}
-    <livewire:property.list
-    :area="$area"
-    :districts="$districts"
-    :areas="$areas"
-    :start-date="$start_date"
-    :end-date="$end_date"
-    :bedrooms="$bedrooms"
-    :living-style="$living_style"
-    :rental-type="$rental_type"
-    :prices="$prices"
-    lazy />
+    <x-property.hero
+    :sub-title="trans('property.hero.sub_title')"
+    :title="trans('property.hero.title')"
+    :description="trans('property.hero.description')"
+    :image="asset('images/hero/property.webp')"
+    />
 </div>
