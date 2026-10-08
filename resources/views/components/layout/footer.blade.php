@@ -5,7 +5,7 @@
                 <div class="col-sm-6 col-lg-4 col-xl-3">
                     <a draggable="false" href="{{ route('home') }}" wire:navigate>
                         <img draggable="false" loading="lazy" decoding="async" class="user-select-none pe-none"
-                            height="100" src="{{ asset('images/logo/footer.png') }}"
+                            height="100" src="{{ asset('images/logo/footer.webp') }}"
                             alt="{{ trans('index.logo') }} - {{ config('app.name') }}" />
                     </a>
 
