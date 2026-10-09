@@ -43,16 +43,10 @@ https://tailux.piniastudio.com/tables/advanced-tables
 
 AIzaSyCQalcuihucVlbQoSulGPlUPh4zWzQPwUI
 
-if (! filter_var($propertyImage->image_url, FILTER_VALIDATE_URL)) {
-$getimagesize[0] = null;
-$getimagesize[1] = null;
-}
-
-$imageInfo = @getimagesize($propertyImage->image_url);
-
-if (! $imageInfo) {
-return null;
-}
+TASKS
+1. CMS Services
+2. Values Add Image
+3. Curreny Di Convert
 
 services
 name
@@ -61,7 +55,18 @@ inclusions
 icon
 image
 
-value
-add image
-
 icon volt
+
+For the French and Indonesian version, we have to translate as well the titles and the Areas in the District (Beach Side/ North side...)
+
+How could we do it?
+As the description, 2 other text boxes (for titles) with automatic translation in French and Indonesian
+
+Today, we got our first listing by "List your property" form on our website.
+1 - we didn t receive any notification. Could you pls set up a notification on the CMS or something else?
+2 - the owner apparently  filled all info in the form (rental type, description, number of bedroom and location). there is a property that has been created but we have only the contact (name and phone number). Where can we find the rest of info?
+3 - when we click on edit, we got systematically THE 500 ERROR MESSAGE? pls fix it today, we need to list it
+4- for the reference, LYPxxx is good bu could you pls use teh LYP001, LYP002, LYP003...
+
+1 - Which dahsboard are you talkig for the notification? is there any dashboard in the CMS?
+2.⁠ ⁠Please fill directly the information from the LIST YOUR PROPERTY form in the new listing in the CMS

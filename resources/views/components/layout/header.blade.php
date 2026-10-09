@@ -24,10 +24,10 @@
                                     {{ trans($navigation['name']) }}
                                 </a>
 
-                                <ul class="dropdown-menu border-color-primary mt-4">
+                                <ul class="dropdown-menu mt-4">
                                     @foreach ($navigation['childrens'] as $children)
                                         <li>
-                                            <a draggable="false" class="dropdown-item text-color-primary"
+                                            <a draggable="false" class="dropdown-item"
                                                 href="{{ route($children['route']) }}" wire:navigate>
                                                 {{ trans($children['name']) }}
                                             </a>
@@ -58,7 +58,7 @@
                                         {{ app()->getLocale() }}
                                     </span>
                                 </a>
-                                <ul class="dropdown-menu dropdown-menu-end mt-3">
+                                <ul class="dropdown-menu dropdown-menu-end mt-4">
                                     @foreach (Language::cases() as $language)
                                         <li wire:key="language-{{ $language->value }}">
                                             <a draggable="false" class="dropdown-item icon-link"
@@ -81,12 +81,11 @@
                                     {{ Session::get('currency') ?? Currency::IDR->value }}
                                 </span>
                             </a>
-                            <ul class="dropdown-menu dropdown-menu-end mt-3">
+                            <ul class="dropdown-menu dropdown-menu-end mt-4">
                                 @foreach (Currency::cases() as $currency)
                                     <li wire:key="currency-{{ $currency->value }}">
                                         <a draggable="false" class="dropdown-item icon-link"
                                             href="{{ route('currency', ['currency' => $currency->value]) }}">
-                                            {{-- <span class="{{ $currency->icon() }} fa-fw"></span> --}}
                                             <span class="text-uppercase">{{ $currency->name }}</span>
                                         </a>
                                     </li>
@@ -123,14 +122,39 @@
                     <div class="d-grid gap-5 mt-4">
                         <ul class="list-unstyled d-grid gap-4 mb-0">
                             @foreach (config('navigations') as $navigation)
-                                <li wire:key="navigation-{{ $navigation['id'] }}">
-                                    <a draggable="false"
-                                        class="d-flex justify-content-between align-items-center text-body {{ Route::is($navigation['route']) ? 'fw-bold' : '' }}"
-                                        href="{{ route($navigation['route']) }}" wire:navigate>
-                                        <span>{{ trans($navigation['name']) }}</span>
-                                        <span class="fas fa-angle-right fa-fw"></span>
-                                    </a>
-                                </li>
+                                @isset($navigation['childrens'])
+                                    <li wire:key="navigation-{{ $navigation['id'] }}" x-data="{ open: false }">
+                                        <a draggable="false"
+                                            class="d-flex justify-content-between align-items-center text-body {{ Route::is($navigation['route']) ? 'fw-bold' : '' }}"
+                                            data-bs-toggle="collapse" href="#navigation-{{ $navigation['id'] }}"
+                                            @click="open = !open">
+                                            <span>{{ trans($navigation['name']) }}</span>
+                                            <span class="fas fa-fw" :class="open ? 'fa-angle-up' : 'fa-angle-down'"></span>
+                                        </a>
+
+                                        <div class="collapse" id="navigation-{{ $navigation['id'] }}" x-show="open">
+                                            <div class="d-grid w-100 gap-3 mt-3">
+                                                @foreach ($navigation['childrens'] as $children)
+                                                    <a draggable="false"
+                                                        class="text-body {{ $loop->first ? 'border-top pt-3' : '' }} border-bottom ps-4 pb-3"
+                                                        href="{{ route($children['route']) }}"
+                                                        wire:key="children-{{ $children['id'] }}" wire:navigate>
+                                                        &bull; {{ trans($children['name']) }}
+                                                    </a>
+                                                @endforeach
+                                            </div>
+                                        </div>
+                                    </li>
+                                @else
+                                    <li wire:key="navigation-{{ $navigation['id'] }}">
+                                        <a draggable="false"
+                                            class="d-flex justify-content-between align-items-center text-body {{ Route::is($navigation['route']) ? 'fw-bold' : '' }}"
+                                            href="{{ route($navigation['route']) }}" wire:navigate>
+                                            <span>{{ trans($navigation['name']) }}</span>
+                                            <span class="fas fa-angle-right fa-fw"></span>
+                                        </a>
+                                    </li>
+                                @endisset
                             @endforeach
                         </ul>
 
@@ -162,9 +186,6 @@
                                 <div class="dropdown">
                                     <a draggable="false" role="button" class="text-body dropdown-toggle icon-link"
                                         data-bs-toggle="dropdown">
-                                        {{-- <span
-                                            class="{{ Currency::from(Session::get('currency') ?? Currency::IDR->value)->icon() }} fa-fw">
-                                        </span> --}}
                                         <span class="fw-bold text-uppercase">
                                             {{ Session::get('currency') ?? Currency::IDR->value }}
                                         </span>
@@ -174,7 +195,6 @@
                                             <li wire:key="currency-{{ $currency->value }}">
                                                 <a draggable="false" class="dropdown-item icon-link"
                                                     href="{{ route('currency', ['currency' => $currency->value]) }}">
-                                                    {{-- <span class="{{ $currency->icon() }} fa-fw"></span> --}}
                                                     <span class="text-uppercase">{{ $currency->name }}</span>
                                                 </a>
                                             </li>
