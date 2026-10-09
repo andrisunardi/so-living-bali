@@ -197,39 +197,40 @@ namespace App\Models{
  * @property int|null $created_by
  * @property int|null $updated_by
  * @property int|null $deleted_by
- * @property \Illuminate\Support\Carbon $created_at
- * @property \Illuminate\Support\Carbon $updated_at
- * @property \Illuminate\Support\Carbon|null $deleted_at
- * @property-read \Illuminate\Database\Eloquent\Collection<int, \Spatie\Activitylog\Models\Activity> $activities
+ * @property Carbon $created_at
+ * @property Carbon $updated_at
+ * @property Carbon|null $deleted_at
+ * @property-read Collection<int, Activity> $activities
  * @property-read int|null $activities_count
- * @property-read \App\Models\User|null $createdBy
- * @property-read \App\Models\User|null $deletedBy
+ * @property-read User|null $createdBy
+ * @property-read User|null $deletedBy
  * @property-read string $translate_answer
  * @property-read string $translate_question
- * @property-read \App\Models\User|null $updatedBy
- * @method static \Illuminate\Database\Eloquent\Builder<static>|Faq active()
+ * @property-read User|null $updatedBy
+ * @method static Builder<static>|Faq active()
  * @method static \Database\Factories\FaqFactory factory($count = null, $state = [])
- * @method static \Illuminate\Database\Eloquent\Builder<static>|Faq inactive()
- * @method static \Illuminate\Database\Eloquent\Builder<static>|Faq newModelQuery()
- * @method static \Illuminate\Database\Eloquent\Builder<static>|Faq newQuery()
- * @method static \Illuminate\Database\Eloquent\Builder<static>|Faq onlyTrashed()
- * @method static \Illuminate\Database\Eloquent\Builder<static>|Faq query()
- * @method static \Illuminate\Database\Eloquent\Builder<static>|Faq whereAnswer($value)
- * @method static \Illuminate\Database\Eloquent\Builder<static>|Faq whereAnswerFr($value)
- * @method static \Illuminate\Database\Eloquent\Builder<static>|Faq whereAnswerId($value)
- * @method static \Illuminate\Database\Eloquent\Builder<static>|Faq whereCreatedAt($value)
- * @method static \Illuminate\Database\Eloquent\Builder<static>|Faq whereCreatedBy($value)
- * @method static \Illuminate\Database\Eloquent\Builder<static>|Faq whereDeletedAt($value)
- * @method static \Illuminate\Database\Eloquent\Builder<static>|Faq whereDeletedBy($value)
- * @method static \Illuminate\Database\Eloquent\Builder<static>|Faq whereId($value)
- * @method static \Illuminate\Database\Eloquent\Builder<static>|Faq whereIsActive($value)
- * @method static \Illuminate\Database\Eloquent\Builder<static>|Faq whereQuestion($value)
- * @method static \Illuminate\Database\Eloquent\Builder<static>|Faq whereQuestionFr($value)
- * @method static \Illuminate\Database\Eloquent\Builder<static>|Faq whereQuestionId($value)
- * @method static \Illuminate\Database\Eloquent\Builder<static>|Faq whereUpdatedAt($value)
- * @method static \Illuminate\Database\Eloquent\Builder<static>|Faq whereUpdatedBy($value)
- * @method static \Illuminate\Database\Eloquent\Builder<static>|Faq withTrashed(bool $withTrashed = true)
- * @method static \Illuminate\Database\Eloquent\Builder<static>|Faq withoutTrashed()
+ * @method static Builder<static>|Faq inactive()
+ * @method static Builder<static>|Faq newModelQuery()
+ * @method static Builder<static>|Faq newQuery()
+ * @method static Builder<static>|Faq onlyTrashed()
+ * @method static Builder<static>|Faq query()
+ * @method static Builder<static>|Faq whereAnswer($value)
+ * @method static Builder<static>|Faq whereAnswerFr($value)
+ * @method static Builder<static>|Faq whereAnswerId($value)
+ * @method static Builder<static>|Faq whereCreatedAt($value)
+ * @method static Builder<static>|Faq whereCreatedBy($value)
+ * @method static Builder<static>|Faq whereDeletedAt($value)
+ * @method static Builder<static>|Faq whereDeletedBy($value)
+ * @method static Builder<static>|Faq whereId($value)
+ * @method static Builder<static>|Faq whereIsActive($value)
+ * @method static Builder<static>|Faq whereQuestion($value)
+ * @method static Builder<static>|Faq whereQuestionFr($value)
+ * @method static Builder<static>|Faq whereQuestionId($value)
+ * @method static Builder<static>|Faq whereUpdatedAt($value)
+ * @method static Builder<static>|Faq whereUpdatedBy($value)
+ * @method static Builder<static>|Faq withTrashed(bool $withTrashed = true)
+ * @method static Builder<static>|Faq withoutTrashed()
+ * @mixin \Eloquent
  */
 	class Faq extends \Eloquent {}
 }

@@ -8,6 +8,20 @@ return [
         'description' => 'A curated collection of distinctive homes and residential properties for sale across Bali. Selected for theit location, quality, legal clarity and long-term residential appeal.',
     ],
 
+    'cta' => [
+        'title' => 'Talk to us about your move',
+        'description' => "We'll help you find the right home and support you every step of the way.",
+        'button' => 'Contact Us',
+    ],
+
+    'villa' => 'Villa',
+    'apartment' => 'Apartment',
+    'land' => 'Land',
+    'commercial' => 'Commercial',
+    'hotel' => 'Hotel',
+    'villa_complex' => 'Villa Complex',
+    'other' => 'Other',
+
     'property_count' => 'Over <b>:count</b> homes in :area',
     'all_areas' => 'all areas',
 

@@ -32,6 +32,9 @@ return [
         'minimum_price' => 'Minimum Price',
         'maximum_price' => 'Maximum Price',
 
+        'property_type' => 'Property type',
+        'ownership' => 'Ownership',
+
         'button' => 'Find a home',
     ],
 

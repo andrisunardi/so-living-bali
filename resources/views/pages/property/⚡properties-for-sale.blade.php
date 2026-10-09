@@ -22,16 +22,20 @@ new #[Title('Properties For Sale')] class extends Component {
     public ?string $end_date = null;
 
     #[Url(except: [])]
-    public array $bedrooms = [];
+    public array $types = [];
 
     #[Url(except: null)]
-    public ?int $living_style = null;
-
-    #[Url(except: null)]
-    public ?int $rental_type = null;
+    public ?int $ownership = null;
 
     #[Url(except: [])]
-    public array $prices = [];
+    public array $prices = [
+        'min' => 40000000,
+        'max' => 2500000000,
+    ];
+
+    public int $price_min = 40000000;
+
+    public int $price_max = 2500000000;
 
     public function mount(): void
     {
@@ -54,6 +58,35 @@ new #[Title('Properties For Sale')] class extends Component {
 
         return $districts;
     }
+
+    public function changeTypes(?int $value = null): void
+    {
+        $this->dispatch('keep-type-dropdown-open');
+
+        if (!$value) {
+            $this->reset('types');
+
+            return;
+        }
+
+        $this->types = in_array($value, $this->types) ? array_values(array_diff($this->types, [$value])) : [...$this->types, $value];
+    }
+
+    public function changeOwnership(?int $ownership = null): void
+    {
+        $this->ownership = $ownership;
+        $this->dispatch('ownership-changed', ownership: $this->ownership);
+    }
+
+    public function updatedPrices()
+    {
+        $this->dispatch('keep-price-dropdown-open');
+    }
+
+    public function clearAllPrice(): void
+    {
+        $this->reset(['prices']);
+    }
 };
 ?>
 
@@ -66,5 +99,25 @@ new #[Title('Properties For Sale')] class extends Component {
     :title="trans('property.hero.title')"
     :description="trans('property.hero.description')"
     :image="asset('images/hero/property.webp')"
+    />
+
+    {{-- prettier-ignore --}}
+    <x-property.search
+    :area="$area"
+    :districts="$districts"
+    :areas="$areas"
+    :list-districts="$this->districts()"
+    :types="$types"
+    :ownership="$ownership"
+    :prices="$prices"
+    :price-min="$price_min"
+    :price-max="$price_max"
+    />
+
+    {{-- prettier-ignore --}}
+    <x-property.cta
+    :image="asset('images/banner/property.png')"
+    :button-name="trans('property.cta.button')"
+    :button-link="route('contact')"
     />
 </div>

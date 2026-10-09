@@ -2,6 +2,8 @@
 
 namespace App\Enums\Property;
 
+use Illuminate\Support\Str;
+
 enum PropertyType: int
 {
     case Villa = 1;
@@ -17,4 +19,9 @@ enum PropertyType: int
     case VillaComplex = 6;
 
     case Other = 7;
+
+    public function description(): string
+    {
+        return __('property.'.Str::snake($this->name));
+    }
 }

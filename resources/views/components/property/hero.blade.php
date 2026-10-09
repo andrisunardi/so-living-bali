@@ -13,7 +13,7 @@
 
     <div class="position-absolute top-0 start-0 w-100 h-100 bg-dark opacity-50"></div>
 
-    <div class="position-relative">
+    <div class="position-relative pb-5">
         <div class="container-md">
             <div class="row align-items-center min-vh-100">
                 <div class="col-lg-7 text-white">
