@@ -17,14 +17,18 @@ new #[Lazy] class extends Component {
 ?>
 
 @placeholder
-    <section class="py-5 bg-light">
+    <section class="py-5 bg-light placeholder-glow">
         <div class="container-md py-5">
             <div class="d-flex flex-column gap-4">
-                <div class="text-start">
-                    <div class="placeholder-glow">
-                        <span class="placeholder col-3 mb-2"></span>
-                        <span class="placeholder col-6 placeholder-lg mb-2"></span>
-                        <span class="placeholder col-4"></span>
+                <div>
+                    <div>
+                        <p class="lead mb-1 placeholder col-2 col-lg-1"></p>
+                    </div>
+                    <div>
+                        <h1 class="display-6 fw-medium placeholder col-12 col-lg-9 col-xl-7 placeholder-lg"></h1>
+                    </div>
+                    <div>
+                        <p class="small text-muted placeholder col-11 col-lg-8 col-xl-6"></p>
                     </div>
                 </div>
 
@@ -73,7 +77,7 @@ new #[Lazy] class extends Component {
 <section class="py-5 bg-light">
     <div class="container-md py-5">
         <div class="d-flex flex-column gap-4">
-            <div class="text-start">
+            <div>
                 <p class="lead mb-0">{{ trans('home.guides.sub_title') }}</p>
                 <h1 class="display-6 fw-medium">{{ trans('home.guides.title') }}</h1>
                 <p class="small text-muted">{{ trans('home.guides.description') }}</p>
@@ -108,8 +112,8 @@ new #[Lazy] class extends Component {
                             {{ Str::limit(strip_tags(html_entity_decode($guide->translate_body)), 100) }}
                         </p>
 
-                        <a draggable="false" class="text-success" href="{{ route('guide.detail', ['slug' => $guide->slug]) }}"
-                            wire:navigate>
+                        <a draggable="false" class="text-success"
+                            href="{{ route('guide.detail', ['slug' => $guide->slug]) }}" wire:navigate>
                             {{ trans('home.guides.read_more') }}
                             <span class="fas fa-chevron-right fa-fw fa-xs"></span>
                         </a>

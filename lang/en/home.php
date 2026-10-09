@@ -67,6 +67,12 @@ return [
         'all_category' => 'All Category',
     ],
 
+    'faqs' => [
+        'sub_title' => 'FAQ',
+        'title' => 'Frequently Asked Questions',
+        'description' => 'Quick answers to common inquiries regarding property listings, viewings, and rental agreements.',
+    ],
+
     'cta' => [
         'title' => 'Talk to us about your move',
         'description' => "We'll help you find the right home and support you every step of the way.",

@@ -16,11 +16,32 @@
             <div class="col-auto col-xl-5">
                 <div class="d-none d-lg-flex justify-content-end align-items-center gap-lg-3 gap-xl-4">
                     @foreach (config('navigations') as $navigation)
-                        <a draggable="false" href="{{ route($navigation['route']) }}"
-                            class="header-color {{ Route::is($navigation['route']) ? 'fw-bold' : '' }}" wire:navigate
-                            wire:key="navigation-{{ $navigation['id'] }}" wire:navigate>
-                            {{ trans($navigation['name']) }}
-                        </a>
+                        @isset($navigation['childrens'])
+                            <div class="dropdown-center" wire:key="navigation-{{ $navigation['id'] }}">
+                                <a draggable="false"
+                                    class="header-color {{ Route::is($navigation['route']) ? 'fw-bold' : '' }} dropdown-toggle"
+                                    data-bs-toggle="dropdown" role="button">
+                                    {{ trans($navigation['name']) }}
+                                </a>
+
+                                <ul class="dropdown-menu border-color-primary mt-4">
+                                    @foreach ($navigation['childrens'] as $children)
+                                        <li>
+                                            <a draggable="false" class="dropdown-item text-color-primary"
+                                                href="{{ route($children['route']) }}" wire:navigate>
+                                                {{ trans($children['name']) }}
+                                            </a>
+                                        </li>
+                                    @endforeach
+                                </ul>
+                            </div>
+                        @else
+                            <a draggable="false" href="{{ route($navigation['route']) }}"
+                                class="header-color {{ Route::is($navigation['route']) ? 'fw-bold' : '' }}"
+                                wire:key="navigation-{{ $navigation['id'] }}" wire:navigate>
+                                {{ trans($navigation['name']) }}
+                            </a>
+                        @endisset
                     @endforeach
                 </div>
             </div>
@@ -56,10 +77,7 @@
                         <div class="dropdown">
                             <a draggable="false" role="button" class="header-color dropdown-toggle icon-link"
                                 data-bs-toggle="dropdown">
-                                {{-- <span
-                                    class="{{ Currency::from(Session::get('currency') ?? Currency::IDR->value)->icon() }} fa-fw">
-                                </span> --}}
-                                <span class="d-lg-none d-xl-block text-uppercase">
+                                <span class="text-uppercase">
                                     {{ Session::get('currency') ?? Currency::IDR->value }}
                                 </span>
                             </a>

@@ -6,7 +6,7 @@
 
 <section>
     <div class="position-relative">
-        <div class="bg-light py-5"></div>
+        <div class="bg-white py-5"></div>
         <div class="bg-dark py-5"></div>
 
         <div class="container-md position-absolute top-50 start-50 translate-middle w-100 px-3">

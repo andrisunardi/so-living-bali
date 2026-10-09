@@ -78,5 +78,7 @@ return [
     'mixed' => 'Mixed',
     'freehold' => 'Freehold',
     'leasehold' => 'Leasehold',
+    'for_rent' => 'For Rent',
+    'for_sales' => 'For Sales',
 
 ];
