@@ -4,27 +4,27 @@ return [
 
     'hero' => [
         'title' => 'Votre vie à Bali, en toute simplicité',
-        'description' => 'Commencez votre expérience de vie mensuelle et annuelle avec nous',
+        'description' => 'Commencez votre expérience de séjour mensuel et annuel avec nous',
     ],
 
     'search' => [
         'title' => 'Rechercher des logements longue durée',
 
         'area' => 'Zone',
-        'area_title' => 'Destinations suggérées',
-        'area_placeholder' => 'Choisir la zone préférée',
+        'area_title' => 'Sélectionner un emplacement',
+        'area_description' => 'Choisissez votre zone préférée',
 
-        'bedroom' => 'Chambre',
+        'bedroom' => 'Chambres',
         'bedroom_placeholder' => 'Nombre de chambres',
 
         'living_style' => 'Style de vie',
-        'living_style_placeholder' => 'Sélectionner le style de vie',
+        'living_style_placeholder' => 'Sélectionner un style de vie',
 
         'when' => 'Emménagement prévu',
         'type' => 'Tous les types',
 
-        'price_title' => 'Fourchette de prix',
-        'price_description' => 'Choisir le coût total de la période',
+        'price_title' => 'Gamme de prix',
+        'price_description' => 'Choisissez la période de coût total',
         'clear_all' => 'Tout effacer',
         'price' => 'Fourchette de prix',
         'from' => 'De',
@@ -32,41 +32,50 @@ return [
         'minimum_price' => 'Prix minimum',
         'maximum_price' => 'Prix maximum',
 
+        'property_type' => 'Type de propriété',
+        'ownership' => 'Type de propriété / Bail',
+
         'button' => 'Trouver un logement',
     ],
 
     'our_values' => [
-        'sub_title' => 'Nos Valeurs',
-        'title' => 'Des Espaces Conçus pour Vivre, Au-delà des Courts Séjours',
-        'description' => "Pour des séjours plus longs, conçus pour s'adapter à votre vie quotidienne à Bali. Où vivre se sent établi à votre propre rythme.",
+        'sub_title' => 'Nos valeurs',
+        'title' => 'Des espaces conçus pour vivre, au-delà des courts séjours',
+        'description' => 'Pour les séjours prolongés, conçus pour s\'adapter à votre vie quotidienne à Bali. Un endroit où l\'on se sent chez soi, à son propre rythme.',
     ],
 
     'select_locations' => [
-        'title' => 'Explorez les Nouvelles Annonces, Disponibles Maintenant',
-        'description' => 'Chaque maison sélectionnée selon la façon dont les gens vivent vraiment.',
+        'title' => 'Explorez les nouvelles annonces disponibles',
+        'description' => 'Chaque maison est sélectionnée selon le véritable mode de vie de ses occupants.',
         'property' => 'Propriété',
     ],
 
     'our_services' => [
-        'sub_title' => 'Nos Services',
-        'title' => 'Un soutien qui rend la vie sans effort',
-        'description' => "De l'emménagement à la vie quotidienne, nous fournissons un soutien fiable pour que vous puissiez vivre confortablement à Bali",
+        'sub_title' => 'Nos services',
+        'title' => 'Un accompagnement qui facilite votre quotidien',
+        'description' => 'De l\'emménagement à la vie de tous les jours, nous vous offrons un soutien fiable pour vivre confortablement à Bali',
         'request_a_service' => 'Demander un service',
-        'view_more' => 'Voir plus',
+        'view_more' => 'En savoir plus',
     ],
 
     'guides' => [
         'sub_title' => 'Guides',
-        'title' => 'Comprendre la vie à Bali, rendu plus simple',
-        'description' => 'Des conseils pratiques pour vous aider à naviguer dans la vie longue durée, les choix de location et où vivre',
+        'title' => 'Comprendre la vie à Bali, en toute simplicité',
+        'description' => 'Des conseils pratiques pour vous guider dans votre installation à long terme, vos choix de location et la sélection de votre quartier',
         'read_more' => 'Lire la suite',
-        'another_guide' => 'Un autre guide',
+        'another_guide' => 'Autre guide',
         'all_category' => 'Toutes les catégories',
     ],
 
+    'faqs' => [
+        'sub_title' => 'FAQ',
+        'title' => 'Foire aux questions',
+        'description' => 'Réponses rapides aux questions fréquentes concernant les annonces, les visites et les contrats de location.',
+    ],
+
     'cta' => [
-        'title' => 'Parlez-nous de votre déménagement',
-        'description' => 'Nous vous aiderons à trouver le bon logement et vous soutiendrons à chaque étape.',
+        'title' => 'Parlez-nous de votre projet d\'installation',
+        'description' => 'Nous vous aiderons à trouver le logement idéal et vous accompagnerons à chaque étape.',
         'button' => 'Contactez-nous',
     ],
 

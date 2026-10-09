@@ -3,70 +3,79 @@
 return [
 
     'hero' => [
-        'title' => 'Kehidupan Anda di Bali, Dibuat Lebih Sederhana',
-        'description' => 'Mulai pengalaman tinggal bulanan dan tahunan bersama kami',
+        'title' => 'Hidup Anda di Bali, Jadi Lebih Mudah',
+        'description' => 'Mulai pengalaman hunian bulanan dan tahunan Anda bersama kami',
     ],
 
     'search' => [
-        'title' => 'Cari rumah jangka panjang',
+        'title' => 'Cari hunian jangka panjang',
 
         'area' => 'Area',
-        'area_title' => 'Destinasi yang Disarankan',
-        'area_placeholder' => 'Pilih area yang diinginkan',
+        'area_title' => 'Pilih lokasi',
+        'area_description' => 'Pilih area favorit Anda',
 
         'bedroom' => 'Kamar Tidur',
         'bedroom_placeholder' => 'Jumlah kamar tidur',
 
-        'living_style' => 'Gaya Ruang Tamu',
-        'living_style_placeholder' => 'Pilih gaya ruang tamu',
+        'living_style' => 'Gaya Hunian',
+        'living_style_placeholder' => 'Pilih gaya hunian',
 
-        'when' => 'Rencana pindah masuk',
-        'type' => 'Semua jenis',
+        'when' => 'Rencana pindah',
+        'type' => 'Semua tipe',
 
-        'price_title' => 'Kisaran Harga',
-        'price_description' => 'Pilih total biaya periode',
+        'price_title' => 'Rentang Harga',
+        'price_description' => 'Pilih periode total biaya',
         'clear_all' => 'Hapus semua',
-        'price' => 'Kisaran harga',
+        'price' => 'Rentang harga',
         'from' => 'Dari',
-        'to' => 'Hingga',
+        'to' => 'Sampai',
         'minimum_price' => 'Harga Minimum',
         'maximum_price' => 'Harga Maksimum',
 
-        'button' => 'Temukan rumah',
+        'property_type' => 'Tipe properti',
+        'ownership' => 'Kepemilikan',
+
+        'button' => 'Cari hunian',
     ],
 
     'our_values' => [
         'sub_title' => 'Nilai Kami',
-        'title' => 'Ruang yang Dirancang untuk Kehidupan, Bukan Sekadar Menginap',
-        'description' => 'Untuk tinggal lebih lama, dirancang agar sesuai dengan kehidupan sehari-harimu di Bali. Di mana tinggal terasa nyaman dengan ritme hidupmu sendiri.',
+        'title' => 'Ruang yang Dirancang untuk Ditinggali, Bukan Sekadar Menginap Singkat',
+        'description' => 'Dirancang khusus untuk tinggal lebih lama dan melengkapi keseharian Anda di Bali. Tempat di mana Anda bisa menikmati hidup dengan tenang sesuai ritme Anda sendiri.',
     ],
 
     'select_locations' => [
-        'title' => 'Jelajahi Listing Baru, Tersedia Sekarang',
-        'description' => 'Setiap rumah dipilih berdasarkan cara orang benar-benar hidup.',
+        'title' => 'Jelajahi Properti Terbaru yang Tersedia',
+        'description' => 'Setiap hunian dipilih secara terkurasi sesuai dengan cara orang benar-benar tinggal.',
         'property' => 'Properti',
     ],
 
     'our_services' => [
         'sub_title' => 'Layanan Kami',
-        'title' => 'Dukungan yang membuat hidup terasa mudah',
-        'description' => 'Dari pindah masuk hingga kehidupan sehari-hari, kami memberikan dukungan yang dapat diandalkan agar kamu bisa tinggal nyaman di Bali',
+        'title' => 'Dukungan yang Membuat Hidup Lebih Praktis',
+        'description' => 'Mulai dari proses kepindahan hingga kehidupan sehari-hari, kami memberikan dukungan andal agar Anda dapat tinggal dengan nyaman di Bali',
         'request_a_service' => 'Minta Layanan',
-        'view_more' => 'Lihat Lebih Banyak',
+        'view_more' => 'Lihat Selengkapnya',
     ],
 
     'guides' => [
         'sub_title' => 'Panduan',
-        'title' => 'Memahami kehidupan di Bali, dibuat lebih sederhana',
-        'description' => 'Panduan praktis untuk membantu kamu menavigasi kehidupan jangka panjang, pilihan sewa, dan tempat tinggal',
+        'title' => 'Memahami kehidupan di Bali jadi lebih sederhana',
+        'description' => 'Panduan praktis untuk membantu Anda menjalani kehidupan jangka panjang, menentukan pilihan sewa, dan memilih lokasi tempat tinggal',
         'read_more' => 'Baca Selengkapnya',
         'another_guide' => 'Panduan Lainnya',
         'all_category' => 'Semua Kategori',
     ],
 
+    'faqs' => [
+        'sub_title' => 'FAQ',
+        'title' => 'Pertanyaan yang Sering Diajukan',
+        'description' => 'Jawaban cepat untuk pertanyaan umum seputar daftar properti, jadwal kunjungan, dan perjanjian sewa.',
+    ],
+
     'cta' => [
-        'title' => 'Bicarakan kepindahanmu dengan kami',
-        'description' => 'Kami akan membantu kamu menemukan rumah yang tepat dan mendukungmu di setiap langkah.',
+        'title' => 'Konsultasikan rencana kepindahan Anda dengan kami',
+        'description' => 'Kami akan membantu Anda menemukan hunian yang tepat dan mendampingi Anda di setiap langkahnya.',
         'button' => 'Hubungi Kami',
     ],
 

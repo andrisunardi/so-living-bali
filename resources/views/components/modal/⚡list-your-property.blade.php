@@ -38,10 +38,33 @@ new class extends Component {
 ?>
 
 <div>
-    <a draggable="false" class="header-color d-xl-none" role="button" wire:click="listYourProperty">
-        <span class="fas fa-pen-to-square fa-fw"></span>
-    </a>
+    @if ($sidebar)
+        <button type="button" class="btn btn-success rounded-pill w-100" wire:click="listYourProperty"
+            wire:offline.class="disabled" wire:offline.attr="disabled" wire:loading.class="disabled"
+            wire:loading.attr="disabled">
+            <span wire:loading.remove wire:target="listYourProperty">
+                <span class="fas fa-pen-to-square fa-fw"></span>
+                <span>{{ trans('index.list_your_property') }}</span>
+            </span>
+            <span wire:loading wire:target="listYourProperty" class="w-100">
+                <span class="spinner-border spinner-border-sm"></span>
+                <span>{{ trans('index.list_your_property') }}</span>
+            </span>
+        </button>
+    @else
+        <button type="button" class="btn header-color p-0 border-0 d-xl-none" wire:click="listYourProperty"
+            wire:offline.class="disabled" wire:offline.attr="disabled" wire:loading.class="disabled"
+            wire:loading.attr="disabled">
+            <span wire:loading.remove wire:target="listYourProperty">
+                <span class="fas fa-pen-to-square fa-fw"></span>
+            </span>
+            <span wire:loading wire:target="listYourProperty" class="w-100">
+                <span class="spinner-border spinner-border-sm"></span>
+            </span>
+        </button>
+    @endif
 
+    {{-- DESKTOP --}}
     <button type="button"
         class="btn btn-success rounded-pill d-none d-xl-block {{ $sidebar ? 'fw-bold w-100' : 'btn-sm' }}"
         wire:click="listYourProperty" wire:offline.class="disabled" wire:offline.attr="disabled"
@@ -63,7 +86,7 @@ new class extends Component {
                     <div class="modal-header">
                         <h1 class="modal-title fs-5">
                             <span class="fas fa-pencil fa-fw"></span>
-                            List Your Property
+                            {{ trans('index.list_your_property') }}
                         </h1>
                         <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
                     </div>

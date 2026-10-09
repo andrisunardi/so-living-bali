@@ -4,8 +4,10 @@ return [
 
     'home' => 'Beranda',
     'properties' => 'Properti',
+    'properties_for_rent' => 'Properti Disewakan',
+    'properties_for_sale' => 'Properti Dijual',
     'service' => 'Layanan',
-    'about' => 'Tentang',
+    'about' => 'Tentang Kami',
 
     'previous_page' => 'Halaman Sebelumnya',
     'login' => 'Masuk',
@@ -13,7 +15,7 @@ return [
 
     'report' => 'Laporan',
     'module' => 'Modul',
-    'access' => 'Akses',
+    'access' => 'Hak Akses',
 
     'contact' => 'Kontak',
     'property' => 'Properti',
@@ -21,18 +23,20 @@ return [
     'guide' => 'Panduan',
     'guide_category' => 'Kategori Panduan',
 
-    'master' => 'Master',
-    'value' => 'Nilai',
+    'master' => 'Data Master',
+    'faq' => 'FAQ',
+    'standard' => 'Standar',
+    'value' => 'Nilai Utama',
     'area' => 'Area',
-    'district' => 'Kecamatan',
+    'district' => 'Kecamatan / Wilayah',
 
-    'oauth' => 'Oauth',
-    'permission' => 'Izin',
-    'role' => 'Peran',
+    'oauth' => 'OAuth',
+    'permission' => 'Izin Akses',
+    'role' => 'Peran (Role)',
     'user' => 'Pengguna',
 
     'profile' => 'Profil',
-    'edit_profile' => 'Edit Profil',
+    'edit_profile' => 'Ubah Profil',
     'change_password' => 'Ubah Kata Sandi',
     'setting' => 'Pengaturan',
     'activity' => 'Aktivitas',
