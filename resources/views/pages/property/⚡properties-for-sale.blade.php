@@ -114,6 +114,10 @@ new #[Title('Properties For Sale')] class extends Component {
     :price-max="$price_max"
     />
 
+    <livewire:home.guides lazy />
+
+    <livewire:home.faqs lazy />
+
     {{-- prettier-ignore --}}
     <x-property.cta
     :image="asset('images/banner/property.png')"

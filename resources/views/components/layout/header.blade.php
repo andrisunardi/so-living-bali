@@ -1,4 +1,4 @@
-<header id="header" class="fixed-top py-3" data-use-banner="{{ Route::is('home') ? '1' : '0' }}">
+<header id="header" class="fixed-top py-3" data-use-banner="{{ Route::is('home') || Route::is('property.properties-for-sale') ? '1' : '0' }}">
     <div class="container-md">
         <div class="row justify-content-between align-items-center">
             <div class="col col-xl-3">
@@ -123,16 +123,15 @@
                         <ul class="list-unstyled d-grid gap-4 mb-0">
                             @foreach (config('navigations') as $navigation)
                                 @isset($navigation['childrens'])
-                                    <li wire:key="navigation-{{ $navigation['id'] }}" x-data="{ open: false }">
+                                    <li wire:key="navigation-{{ $navigation['id'] }}">
                                         <a draggable="false"
                                             class="d-flex justify-content-between align-items-center text-body {{ Route::is($navigation['route']) ? 'fw-bold' : '' }}"
-                                            data-bs-toggle="collapse" href="#navigation-{{ $navigation['id'] }}"
-                                            @click="open = !open">
+                                            data-bs-toggle="collapse" href="#navigation-{{ $navigation['id'] }}">
                                             <span>{{ trans($navigation['name']) }}</span>
-                                            <span class="fas fa-fw" :class="open ? 'fa-angle-up' : 'fa-angle-down'"></span>
+                                            <span class="fas fa-angle-down fa-fw"></span>
                                         </a>
 
-                                        <div class="collapse" id="navigation-{{ $navigation['id'] }}" x-show="open">
+                                        <div class="collapse" id="navigation-{{ $navigation['id'] }}">
                                             <div class="d-grid w-100 gap-3 mt-3">
                                                 @foreach ($navigation['childrens'] as $children)
                                                     <a draggable="false"
