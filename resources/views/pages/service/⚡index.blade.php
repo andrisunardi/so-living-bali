@@ -21,7 +21,9 @@ new #[Title('Service')] class extends Component {};
     <livewire:service.our-standard lazy />
 
     {{-- prettier-ignore --}}
-    <x-section.cta
+    <x-sections.cta-full
+    :title="trans('service.cta.title')"
+    :description="trans('service.cta.description')"
     :image-url="asset('images/banner/service.png')"
     :button-name="trans('service.cta.button_name')"
     :button-link="'https://api.whatsapp.com/send/?phone=' .

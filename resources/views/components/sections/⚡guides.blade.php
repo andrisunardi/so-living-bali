@@ -5,6 +5,12 @@ use App\Services\GuideService;
 use Livewire\Attributes\Lazy;
 
 new #[Lazy] class extends Component {
+    public string $subTitle = '';
+
+    public string $title = '';
+
+    public string $description = '';
+
     public object $guides;
 
     public function mount(): void
@@ -21,15 +27,21 @@ new #[Lazy] class extends Component {
         <div class="container-md py-5">
             <div class="d-flex flex-column gap-4">
                 <div>
-                    <div>
-                        <p class="lead mb-1 placeholder col-2 col-lg-1"></p>
-                    </div>
-                    <div>
-                        <h1 class="display-6 fw-medium placeholder col-12 col-lg-9 col-xl-7 placeholder-lg"></h1>
-                    </div>
-                    <div>
-                        <p class="small text-muted placeholder col-11 col-lg-8 col-xl-6"></p>
-                    </div>
+                    @if ($subTitle)
+                        <div>
+                            <p class="lead mb-1 placeholder col-2 col-lg-1"></p>
+                        </div>
+                    @endif
+                    @if ($title)
+                        <div>
+                            <h1 class="display-6 fw-medium placeholder col-12 col-lg-9 col-xl-7 placeholder-lg"></h1>
+                        </div>
+                    @endif
+                    @if ($description)
+                        <div>
+                            <p class="small text-muted placeholder col-11 col-lg-8 col-xl-6"></p>
+                        </div>
+                    @endif
                 </div>
 
                 <div class="row row-cols-1 row-cols-sm-2 row-cols-lg-4 g-4">
@@ -78,9 +90,15 @@ new #[Lazy] class extends Component {
     <div class="container-md py-5">
         <div class="d-flex flex-column gap-4">
             <div>
-                <p class="lead mb-0">{{ trans('home.guides.sub_title') }}</p>
-                <h1 class="display-6 fw-medium">{{ trans('home.guides.title') }}</h1>
-                <p class="small text-muted">{{ trans('home.guides.description') }}</p>
+                @if ($subTitle)
+                    <p class="lead mb-0">{{ $subTitle }}</p>
+                @endif
+                @if ($title)
+                    <h1 class="display-6 fw-medium">{{ $title }}</h1>
+                @endif
+                @if ($description)
+                    <p class="small text-muted">{{ $description }}</p>
+                @endif
             </div>
 
             <div class="row row-cols-1 row-cols-sm-2 row-cols-lg-4 g-4">

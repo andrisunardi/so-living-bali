@@ -14,6 +14,11 @@ return [
         'button' => 'Contact Us',
     ],
 
+    'guides' => [
+        'sub_title' => 'Explore More',
+        'title' => 'Find Your Ideal Property',
+    ],
+
     'villa' => 'Villa',
     'apartment' => 'Apartment',
     'land' => 'Land',

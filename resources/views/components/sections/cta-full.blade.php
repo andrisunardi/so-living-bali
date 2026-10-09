@@ -1,4 +1,6 @@
 @props([
+    'title' => null,
+    'description' => null,
     'imageUrl' => null,
     'buttonName' => null,
     'buttonLink' => null,
@@ -16,10 +18,10 @@
                     <div class="card border-0 shadow rounded-5">
                         <div class="card-body p-4 d-grid gap-4">
                             <h5 class="fw-bold">
-                                {{ trans('about.cta.title') }}
+                                {{ $title }}
                             </h5>
                             <p class="text-muted small">
-                                {{ trans('about.cta.description') }}
+                                {{ $description }}
                             </p>
                             <a draggable="false" class="btn btn-success w-100 rounded-pill" href="{{ $buttonLink }}"
                                 target="_blank">

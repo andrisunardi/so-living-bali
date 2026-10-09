@@ -27,7 +27,7 @@ class GuideService
         bool $paginate = true,
         int $perPage = 10,
     ): object|int|null {
-        $guides = Guide::query()
+        $guides = Guide::with(['category'])
             ->when($search, function ($query) use ($search) {
                 $query->where(function ($query) use ($search) {
                     $query->where('title', 'like', "%{$search}%")

@@ -114,13 +114,19 @@ new #[Title('Properties For Sale')] class extends Component {
     :price-max="$price_max"
     />
 
-    <livewire:home.guides lazy />
+    {{-- prettier-ignore --}}
+    <livewire:sections.guides
+    :sub-title="trans('property.guides.sub_title')"
+    :title="trans('property.guides.title')"
+    lazy />
 
-    <livewire:home.faqs lazy />
+    <livewire:sections.faqs lazy />
 
     {{-- prettier-ignore --}}
-    <x-property.cta
-    :image="asset('images/banner/property.png')"
+    <x-sections.cta
+    :title="trans('property.cta.title')"
+    :description="trans('property.cta.description')"
+    :image-url="asset('images/banner/property.png')"
     :button-name="trans('property.cta.button')"
     :button-link="route('contact')"
     />
