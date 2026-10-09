@@ -168,12 +168,12 @@ use Spatie\Activitylog\Traits\LogsActivity;
  * @method static Builder<static>|Property afternoon()
  * @method static Builder<static>|Property apartment()
  * @method static Builder<static>|Property both()
- * @method static Builder<static>|Property closed()
  * @method static Builder<static>|Property commercial()
  * @method static Builder<static>|Property couple()
  * @method static Builder<static>|Property currencyOther()
  * @method static Builder<static>|Property designLover()
  * @method static Builder<static>|Property eSolar()
+ * @method static Builder<static>|Property enclosed()
  * @method static Builder<static>|Property escalate()
  * @method static \Database\Factories\PropertyFactory factory($count = null, $state = [])
  * @method static Builder<static>|Property family()
@@ -237,7 +237,6 @@ use Spatie\Activitylog\Traits\LogsActivity;
  * @method static Builder<static>|Property whereDescription($value)
  * @method static Builder<static>|Property whereDescriptionFr($value)
  * @method static Builder<static>|Property whereDescriptionId($value)
- * @method static Builder<static>|Property whereDescriptionZh($value)
  * @method static Builder<static>|Property whereDesignDrivenProperty($value)
  * @method static Builder<static>|Property whereDeveloperName($value)
  * @method static Builder<static>|Property whereDistrictId($value)
@@ -330,10 +329,6 @@ use Spatie\Activitylog\Traits\LogsActivity;
  * @method static Builder<static>|Property withTrashed(bool $withTrashed = true)
  * @method static Builder<static>|Property withoutTrashed()
  * @method static Builder<static>|Property yearly()
- *
- * @property string|null $description_zh
- *
- * @method static Builder<static>|Property enclosed()
  *
  * @mixin \Eloquent
  */

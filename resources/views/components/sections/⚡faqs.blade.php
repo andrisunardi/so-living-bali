@@ -80,13 +80,13 @@ new #[Lazy] class extends Component {
         <div class="d-flex flex-column gap-4">
             <div class="text-start">
                 @if ($subTitle)
-                    <p class="lead mb-0">{{ trans('home.faqs.sub_title') }}</p>
+                    <p class="lead mb-0">{{ $subTitle }}</p>
                 @endif
                 @if ($title)
-                    <h1 class="display-6 fw-medium">{{ trans('home.faqs.title') }}</h1>
+                    <h1 class="display-6 fw-medium">{{ $title }}</h1>
                 @endif
                 @if ($description)
-                    <p class="small text-muted">{{ trans('home.faqs.description') }}</p>
+                    <p class="small text-muted">{{ $description }}</p>
                 @endif
             </div>
 

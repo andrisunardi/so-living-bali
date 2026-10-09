@@ -115,6 +115,18 @@ new #[Title('Properties For Sale')] class extends Component {
     />
 
     {{-- prettier-ignore --}}
+    <livewire:property.sale
+    :area="$area"
+    :districts="$districts"
+    :areas="$areas"
+    :start-date="$start_date"
+    :end-date="$end_date"
+    :types="$types"
+    :ownership="$ownership"
+    :prices="$prices"
+    lazy />
+
+    {{-- prettier-ignore --}}
     <livewire:sections.guides
     :sub-title="trans('property.guides.sub_title')"
     :title="trans('property.guides.title')"

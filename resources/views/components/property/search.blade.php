@@ -9,7 +9,7 @@
     'price_max' => 0,
 ])
 
-<section class="translate-middle-y pb-5">
+<section class="translate-middle-y">
     <div class="container-md">
         <div class="card card-body border-0 shadow rounded-4 p-3 p-md-4 bg-white">
             <div class="row g-3 align-items-end">

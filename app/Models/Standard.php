@@ -53,20 +53,15 @@ use Spatie\Activitylog\Traits\LogsActivity;
  * @method static Builder<static>|Standard whereDescription($value)
  * @method static Builder<static>|Standard whereDescriptionFr($value)
  * @method static Builder<static>|Standard whereDescriptionId($value)
- * @method static Builder<static>|Standard whereDescriptionZh($value)
  * @method static Builder<static>|Standard whereId($value)
  * @method static Builder<static>|Standard whereIsActive($value)
  * @method static Builder<static>|Standard whereTitle($value)
  * @method static Builder<static>|Standard whereTitleFr($value)
  * @method static Builder<static>|Standard whereTitleId($value)
- * @method static Builder<static>|Standard whereTitleZh($value)
  * @method static Builder<static>|Standard whereUpdatedAt($value)
  * @method static Builder<static>|Standard whereUpdatedBy($value)
  * @method static Builder<static>|Standard withTrashed(bool $withTrashed = true)
  * @method static Builder<static>|Standard withoutTrashed()
- *
- * @property string $title_zh
- * @property string $description_zh
  *
  * @mixin \Eloquent
  */

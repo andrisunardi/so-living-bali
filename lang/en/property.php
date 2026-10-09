@@ -27,6 +27,9 @@ return [
     'villa_complex' => 'Villa Complex',
     'other' => 'Other',
 
+    'our_selection' => 'Our Selection',
+    'selected_properties' => 'Selected Properties',
+
     'property_count' => 'Over <b>:count</b> homes in :area',
     'all_areas' => 'all areas',
 

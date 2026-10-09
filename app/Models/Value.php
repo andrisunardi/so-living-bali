@@ -58,26 +58,19 @@ use Spatie\Activitylog\Traits\LogsActivity;
  * @method static Builder<static>|Value whereDescription($value)
  * @method static Builder<static>|Value whereDescriptionFr($value)
  * @method static Builder<static>|Value whereDescriptionId($value)
- * @method static Builder<static>|Value whereDescriptionZh($value)
  * @method static Builder<static>|Value whereIcon($value)
  * @method static Builder<static>|Value whereId($value)
  * @method static Builder<static>|Value whereIsActive($value)
  * @method static Builder<static>|Value whereShortDescription($value)
  * @method static Builder<static>|Value whereShortDescriptionFr($value)
  * @method static Builder<static>|Value whereShortDescriptionId($value)
- * @method static Builder<static>|Value whereShortDescriptionZh($value)
  * @method static Builder<static>|Value whereTitle($value)
  * @method static Builder<static>|Value whereTitleFr($value)
  * @method static Builder<static>|Value whereTitleId($value)
- * @method static Builder<static>|Value whereTitleZh($value)
  * @method static Builder<static>|Value whereUpdatedAt($value)
  * @method static Builder<static>|Value whereUpdatedBy($value)
  * @method static Builder<static>|Value withTrashed(bool $withTrashed = true)
  * @method static Builder<static>|Value withoutTrashed()
- *
- * @property string $title_zh
- * @property string $short_description_zh
- * @property string $description_zh
  *
  * @mixin \Eloquent
  */
