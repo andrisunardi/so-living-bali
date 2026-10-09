@@ -8,6 +8,12 @@ return [
         'description' => 'A curated collection of distinctive homes and residential properties for sale across Bali. Selected for theit location, quality, legal clarity and long-term residential appeal.',
     ],
 
+    'overview' => [
+        'sub_title' => 'About Buying In Bali',
+        'title' => 'Properties for Sale In Bali',
+        'description' => 'Bali offers a unique blend of natural beauty, vibrant culture and a welcoming community, making it one of the most desirable places in the world to own a home. Our curated collection includes villas, modern residences, land and exclusive properties in sought-after locations across the island.<br /><br />Whether you are looking for a family home, a second residence or a long-term investment for personal use, our team is here to help you find the right property with clarity and confidence.',
+    ],
+
     'cta' => [
         'title' => 'Talk to us about your move',
         'description' => "We'll help you find the right home and support you every step of the way.",

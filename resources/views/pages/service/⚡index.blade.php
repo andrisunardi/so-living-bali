@@ -10,7 +10,7 @@ new #[Title('Service')] class extends Component {};
 
 <div>
     {{-- prettier-ignore --}}
-    <x-service.overview
+    <x-sections.overview
     :title="trans('service.title')"
     :description="trans('service.description')"
     :image-url="asset('images/service/overview.webp')"

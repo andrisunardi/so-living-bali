@@ -1,9 +1,10 @@
-@props(['title', 'description', 'imageUrl'])
+@props(['subTitle', 'title', 'description', 'imageUrl'])
 
 <section class="py-5">
     <div class="container-md py-5">
         <div class="row align-items-center g-4">
             <div class="col-sm-6 col-lg-5">
+                <h5>{{ $subTitle }}</h5>
                 <h1>{{ $title }}</h1>
                 <p class="mt-4 mt-xl-5">{!! $description !!}</p>
             </div>

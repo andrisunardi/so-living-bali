@@ -15,12 +15,6 @@ new #[Title('Properties For Sale')] class extends Component {
     #[Url(except: [])]
     public array $areas = [];
 
-    #[Url(except: null)]
-    public ?string $start_date = null;
-
-    #[Url(except: null)]
-    public ?string $end_date = null;
-
     #[Url(except: [])]
     public array $types = [];
 
@@ -44,9 +38,6 @@ new #[Title('Properties For Sale')] class extends Component {
             $selectedAreas = $this->districts()->pluck('areas')->flatten()->whereIn('id', $this->areas);
             $this->area = collect()->merge($selectedDistricts->pluck('name'))->merge($selectedAreas->pluck('name'))->unique()->join(', ');
         }
-
-        $this->start_date = $this->start_date ?? today()->toDateString();
-        $this->end_date = $this->end_date ?? today()->toDateString();
     }
 
     // CEK NANTI
@@ -119,12 +110,18 @@ new #[Title('Properties For Sale')] class extends Component {
     :area="$area"
     :districts="$districts"
     :areas="$areas"
-    :start-date="$start_date"
-    :end-date="$end_date"
     :types="$types"
     :ownership="$ownership"
     :prices="$prices"
     lazy />
+
+    {{-- prettier-ignore --}}
+    <x-sections.overview
+    :sub-title="trans('property.overview.sub_title')"
+    :title="trans('property.overview.title')"
+    :description="trans('property.overview.description')"
+    :image-url="asset('images/property/overview.webp')"
+    />
 
     {{-- prettier-ignore --}}
     <livewire:sections.guides

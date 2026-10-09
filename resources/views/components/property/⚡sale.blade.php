@@ -1,6 +1,7 @@
 <?php
 
 use App\Enums\Property\PropertyStatus;
+use App\Enums\Property\PropertyListingType;
 use App\Livewire\Component;
 use App\Services\PropertyService;
 use Livewire\Attributes\Lazy;
@@ -28,9 +29,10 @@ new #[Lazy] class extends Component {
     public function properties(): object
     {
         $statuses = [PropertyStatus::AcceptUpper->value, PropertyStatus::AcceptPremium->value];
+        $listingTypes = [PropertyListingType::ForSale->value, PropertyListingType::ForRentAndSale->value];
 
         $service = new PropertyService();
-        $properties = $service->index(districts: $this->districts, areas: $this->areas, types: $this->types, ownershipType: $this->ownership, prices: $this->prices, statuses: $statuses, paginate: false);
+        $properties = $service->index(districts: $this->districts, areas: $this->areas, types: $this->types, ownershipType: $this->ownership, prices: $this->prices, listingTypes: $listingTypes, statuses: $statuses, paginate: false);
         $properties->loadMissing(['area', 'district', 'image']);
 
         return $properties;
