@@ -8,5 +8,5 @@ enum PropertyCurrency: int
 
     case USD = 2;
 
-    case Other = 3;
+    case EUR = 3;
 }
