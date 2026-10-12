@@ -6,7 +6,7 @@
         </label>
         <div class="input-group">
             <div class="input-group-text">
-                <span class="fas fa-rupiah-sign fa-fw "></span>
+                <span class="{{ PropertyCurrency::from($form->currency ?? 1)->icon() }} fa-fw "></span>
             </div>
             <input type="number" class="form-control" id="sale_price" name="sale_price" min="0" max="100000000000"
                 placeholder="{{ trans('index.ex') }}" required wire:model="form.sale_price"
