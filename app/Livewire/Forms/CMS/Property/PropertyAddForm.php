@@ -292,7 +292,7 @@ class PropertyAddForm extends Form
     public ?int $owner_representative_id = null;
 
     #[Validate(['required', 'integer', new Enum(PropertyListingType::class)])]
-    public ?int $listing_type = null;
+    public ?int $listing_type = PropertyListingType::ForRent->value;
 
     #[Validate('nullable|string|min:1|max:100')]
     public string $reference = '';
@@ -312,7 +312,7 @@ class PropertyAddForm extends Form
     #[Validate(['nullable', 'required_if:ownership_type,'.PropertyOwnershipType::Leasehold->value, 'integer', new Enum(PropertyLeaseExtensionAvailable::class)])]
     public ?int $lease_extension_available = null;
 
-    #[Validate('nullable|required_if:ownership_type,'.PropertyOwnershipType::Leasehold->value.'|string|min:1|max:65535')]
+    #[Validate('nullable|string|min:1|max:65535')]
     public string $lease_extension_terms_or_price = '';
 
     #[Validate('nullable|boolean')]

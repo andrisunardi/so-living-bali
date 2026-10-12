@@ -2,6 +2,7 @@
     <div class="col-sm-6">
         <label class="form-label" for="sale_price">
             {{ trans('property.sale_price') }}
+            <span class="text-danger">*</span>
         </label>
         <div class="input-group">
             <div class="input-group-text">
@@ -102,6 +103,7 @@
         <div class="col-sm-6">
             <label class="form-label" for="lease_extension_available">
                 {{ trans('property.lease_extension_available') }}
+                <span class="text-danger">*</span>
             </label>
             <div>
                 @foreach (PropertyLeaseExtensionAvailable::cases() as $propertyLeaseExtensionAvailable)
