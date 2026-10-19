@@ -85,7 +85,14 @@ class ContactService
         try {
             DB::beginTransaction();
 
-            $contact = Contact::where('email', $data['email'])->orWhere('phone', $data['phone'])->first();
+            $contact = Contact::where(function ($query) use ($data) {
+                $query->when(! empty($data['phone']), function ($q) use ($data) {
+                    $q->orWhere('phone', $data['phone']);
+                })
+                    ->when(! empty($data['email']), function ($q) use ($data) {
+                        $q->orWhere('email', $data['email']);
+                    });
+            })->first();
 
             if (! $contact) {
                 if (! isset($data['name'])) {
