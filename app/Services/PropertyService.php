@@ -262,10 +262,26 @@ class PropertyService
                 $data['completion_date'] = null;
             }
 
+            $monthly = isset($data['monthly_price']) ? (int) str_replace(['.', ','], '', $data['monthly_price']) : 0;
+            $yearly = isset($data['yearly_price']) ? (int) str_replace(['.', ','], '', $data['yearly_price']) : 0;
+            $sale = isset($data['sale_price']) ? (int) str_replace(['.', ','], '', $data['sale_price']) : 0;
+            $arePrice = isset($data['price_per_are']) ? (int) str_replace(['.', ','], '', $data['price_per_are']) : 0;
+
+            Arr::pull($data, 'monthly_price');
+            Arr::pull($data, 'yearly_price');
+            Arr::pull($data, 'sale_price');
+            Arr::pull($data, 'price_per_are');
             Arr::pull($data, 'images');
             Arr::pull($data, 'internet_speedtest_image');
 
             $property = Property::create($data);
+
+            DB::table('properties')->where('id', $property->id)->update([
+                'monthly_price' => DB::raw($monthly),
+                'yearly_price' => DB::raw($yearly),
+                'sale_price' => DB::raw($sale),
+                'price_per_are' => DB::raw($arePrice),
+            ]);
 
             // (new GoogleTranslate)->translateModel($property);
 
@@ -361,15 +377,26 @@ class PropertyService
 
             $this->uploadImages(property: $property, images: $data['images']);
 
+            $monthly = isset($data['monthly_price']) ? (int) str_replace(['.', ','], '', $data['monthly_price']) : 0;
+            $yearly = isset($data['yearly_price']) ? (int) str_replace(['.', ','], '', $data['yearly_price']) : 0;
+            $sale = isset($data['sale_price']) ? (int) str_replace(['.', ','], '', $data['sale_price']) : 0;
+            $arePrice = isset($data['price_per_are']) ? (int) str_replace(['.', ','], '', $data['price_per_are']) : 0;
+
+            Arr::pull($data, 'monthly_price');
+            Arr::pull($data, 'yearly_price');
+            Arr::pull($data, 'sale_price');
+            Arr::pull($data, 'price_per_are');
             Arr::pull($data, 'images');
             Arr::pull($data, 'internet_speedtest_image');
 
-            $data['monthly_price'] = isset($data['monthly_price']) ? (int) str_replace(['.', ','], '', $data['monthly_price']) : 0;
-            $data['yearly_price'] = isset($data['yearly_price']) ? (int) str_replace(['.', ','], '', $data['yearly_price']) : 0;
-            $data['sale_price'] = isset($data['sale_price']) ? (int) str_replace(['.', ','], '', $data['sale_price']) : 0;
-            $data['price_per_are'] = isset($data['price_per_are']) ? (int) str_replace(['.', ','], '', $data['price_per_are']) : 0;
-
             $property->update($data);
+
+            DB::table('properties')->where('id', $property->id)->update([
+                'monthly_price' => DB::raw($monthly),
+                'yearly_price' => DB::raw($yearly),
+                'sale_price' => DB::raw($sale),
+                'price_per_are' => DB::raw($arePrice),
+            ]);
 
             // (new GoogleTranslate)->translateModel($property);
 

@@ -86,16 +86,16 @@ class ContactService
             DB::beginTransaction();
 
             $contact = Contact::where(function ($query) use ($data) {
-                $query->when(!empty($data['phone']), function ($q) use ($data) {
+                $query->when(! empty($data['phone']), function ($q) use ($data) {
                     $q->orWhere('phone', $data['phone']);
                 })
-                ->when(!empty($data['email']), function ($q) use ($data) {
-                    $q->orWhere('email', $data['email']);
-                });
+                    ->when(! empty($data['email']), function ($q) use ($data) {
+                        $q->orWhere('email', $data['email']);
+                    });
             })->first();
 
             if (! isset($data['name'])) {
-                $data['name'] = trim(($data['first_name'] ?? '') . ' ' . ($data['last_name'] ?? ''));
+                $data['name'] = trim(($data['first_name'] ?? '').' '.($data['last_name'] ?? ''));
             }
 
             if (! isset($data['first_name'])) {
@@ -107,18 +107,18 @@ class ContactService
             }
 
             if (! $contact) {
-                $ghlService = new GoHighLevel();
+                $ghlService = new GoHighLevel;
 
-                $searchKeyword = !empty($data['phone']) ? $data['phone'] : ($data['email'] ?? '');
+                $searchKeyword = ! empty($data['phone']) ? $data['phone'] : ($data['email'] ?? '');
 
                 $ghlResponse = [];
                 $ghlContactId = null;
 
-                if (!empty($searchKeyword)) {
+                if (! empty($searchKeyword)) {
                     $ghlResponse = $ghlService->getContacts(query: $searchKeyword, limit: 1);
                     $ghlContacts = $ghlResponse['contacts'] ?? [];
 
-                    if (!empty($ghlContacts)) {
+                    if (! empty($ghlContacts)) {
                         $ghlContactId = $ghlContacts[0]['id'] ?? null;
                     }
                 }
