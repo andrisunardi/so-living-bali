@@ -267,10 +267,11 @@ class PropertyService
             $sale = isset($data['sale_price']) ? (int) str_replace(['.', ','], '', $data['sale_price']) : 0;
             $arePrice = isset($data['price_per_are']) ? (int) str_replace(['.', ','], '', $data['price_per_are']) : 0;
 
-            Arr::pull($data, 'monthly_price');
-            Arr::pull($data, 'yearly_price');
-            Arr::pull($data, 'sale_price');
-            Arr::pull($data, 'price_per_are');
+            $data['monthly_price'] = 0;
+            $data['yearly_price'] = 0;
+            $data['sale_price'] = 0;
+            $data['monthly_price'] = 0;
+
             Arr::pull($data, 'images');
             Arr::pull($data, 'internet_speedtest_image');
 
@@ -382,10 +383,11 @@ class PropertyService
             $sale = isset($data['sale_price']) ? (int) str_replace(['.', ','], '', $data['sale_price']) : 0;
             $arePrice = isset($data['price_per_are']) ? (int) str_replace(['.', ','], '', $data['price_per_are']) : 0;
 
-            Arr::pull($data, 'monthly_price');
-            Arr::pull($data, 'yearly_price');
-            Arr::pull($data, 'sale_price');
-            Arr::pull($data, 'price_per_are');
+            $data['monthly_price'] = 0;
+            $data['yearly_price'] = 0;
+            $data['sale_price'] = 0;
+            $data['monthly_price'] = 0;
+
             Arr::pull($data, 'images');
             Arr::pull($data, 'internet_speedtest_image');
 
