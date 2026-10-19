@@ -86,41 +86,63 @@ class ContactService
             DB::beginTransaction();
 
             $contact = Contact::where(function ($query) use ($data) {
-                $query->when(! empty($data['phone']), function ($q) use ($data) {
+                $query->when(!empty($data['phone']), function ($q) use ($data) {
                     $q->orWhere('phone', $data['phone']);
                 })
-                    ->when(! empty($data['email']), function ($q) use ($data) {
-                        $q->orWhere('email', $data['email']);
-                    });
+                ->when(!empty($data['email']), function ($q) use ($data) {
+                    $q->orWhere('email', $data['email']);
+                });
             })->first();
 
+            if (! isset($data['name'])) {
+                $data['name'] = trim(($data['first_name'] ?? '') . ' ' . ($data['last_name'] ?? ''));
+            }
+
+            if (! isset($data['first_name'])) {
+                $data['first_name'] = Str::before($data['name'], ' ');
+            }
+
+            if (! isset($data['last_name'])) {
+                $data['last_name'] = Str::after($data['name'], ' ');
+            }
+
             if (! $contact) {
-                if (! isset($data['name'])) {
-                    $data['name'] = trim("{$data['first_name']} {$data['last_name']}");
+                $ghlService = new GoHighLevel();
+
+                $searchKeyword = !empty($data['phone']) ? $data['phone'] : ($data['email'] ?? '');
+
+                $ghlResponse = [];
+                $ghlContactId = null;
+
+                if (!empty($searchKeyword)) {
+                    $ghlResponse = $ghlService->getContacts(query: $searchKeyword, limit: 1);
+                    $ghlContacts = $ghlResponse['contacts'] ?? [];
+
+                    if (!empty($ghlContacts)) {
+                        $ghlContactId = $ghlContacts[0]['id'] ?? null;
+                    }
                 }
 
-                if (! isset($data['first_name'])) {
-                    $data['first_name'] = Str::before($data['name'], ' ');
+                if (! $ghlContactId) {
+                    $createdGhl = $ghlService->createContacts(data: $data);
+                    $ghlContactId = $createdGhl['contact']['id'] ?? null;
+
+                    if (! $ghlContactId) {
+                        throw ValidationException::withMessages([
+                            'api' => [$createdGhl['message'] ?? 'Error From Go High Level'],
+                        ]);
+                    }
                 }
 
-                if (! isset($data['last_name'])) {
-                    $data['last_name'] = Str::after($data['name'], ' ');
+                $data['code'] = $ghlContactId;
+
+                if (isset($data['compancy'])) {
+                    $data['company'] = $data['compancy'];
                 }
-
-                $contacts = (new GoHighLevel)->createContacts(data: $data);
-
-                $contactId = $contacts['contact']['id'] ?? null;
-
-                if (! ($contactId)) {
-                    throw ValidationException::withMessages([
-                        'api' => [$contacts['message'] ?? 'Error From Go High Level'],
-                    ]);
-                }
-
-                $data['code'] = $contactId;
 
                 Arr::pull($data, 'client_type');
                 Arr::pull($data, 'tags');
+                Arr::pull($data, 'compancy');
 
                 $contact = Contact::create($data);
             }
