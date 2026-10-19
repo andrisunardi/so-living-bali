@@ -251,10 +251,10 @@ class PropertyAddForm extends Form
     #[Validate('nullable|string|min:1|max:65535')]
     public string $operational_risk_comment = '';
 
-    #[Validate('required|integer|min:0|max:100000000000')]
+    #[Validate('required|integer|min:0')]
     public int $monthly_price = 0;
 
-    #[Validate('required|integer|min:0|max:100000000000')]
+    #[Validate('required|integer|min:0')]
     public int $yearly_price = 0;
 
     #[Validate('nullable|array')]
@@ -324,7 +324,7 @@ class PropertyAddForm extends Form
     #[Validate('nullable|string|min:1|max:100')]
     public string $developer_name = '';
 
-    #[Validate('required|integer|min:0|max:100000000000')]
+    #[Validate('nullable|integer|min:0|max:100000000000')]
     public int $price_per_are = 0;
 
     #[Validate('nullable|string|min:1|max:100')]

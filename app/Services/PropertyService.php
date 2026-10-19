@@ -364,6 +364,11 @@ class PropertyService
             Arr::pull($data, 'images');
             Arr::pull($data, 'internet_speedtest_image');
 
+            $data['monthly_price'] = isset($data['monthly_price']) ? (int) str_replace(['.', ','], '', $data['monthly_price']) : 0;
+            $data['yearly_price'] = isset($data['yearly_price']) ? (int) str_replace(['.', ','], '', $data['yearly_price']) : 0;
+            $data['sale_price'] = isset($data['sale_price']) ? (int) str_replace(['.', ','], '', $data['sale_price']) : 0;
+            $data['price_per_are'] = isset($data['price_per_are']) ? (int) str_replace(['.', ','], '', $data['price_per_are']) : 0;
+
             $property->update($data);
 
             // (new GoogleTranslate)->translateModel($property);
