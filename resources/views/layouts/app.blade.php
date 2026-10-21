@@ -78,6 +78,18 @@
         <script src="https://link.msgsndr.com/js/external-tracking.js" data-tracking-id="tk_84ae764411934cd285ecfc500c5b1762">
         </script>
 
+        <script async src="https://www.googletagmanager.com/gtag/js?id=AW-18510062267"></script>
+        <script>
+            window.dataLayer = window.dataLayer || [];
+
+            function gtag() {
+                dataLayer.push(arguments);
+            }
+            gtag('js', new Date());
+
+            gtag('config', 'AW-18510062267');
+        </script>
+
         {{-- <script src="https://beta.leadconnectorhq.com/loader.js"
             data-resources-url="https://beta.leadconnectorhq.com/chat-widget/loader.js"
             data-widget-id="6a21e1b58cf84918be07acb8"></script> --}}
