@@ -3,6 +3,7 @@
 namespace App\Providers;
 
 use App\Enums\Currency;
+use App\Enums\Property\PropertyCurrency;
 use App\Models\User;
 use Barryvdh\LaravelIdeHelper\IdeHelperServiceProvider;
 use Illuminate\Database\Eloquent\Model;
@@ -52,17 +53,44 @@ class AppServiceProvider extends ServiceProvider
             return 'IDR. '.number_format($value, 0, ',', '.');
         });
 
-        Str::macro('currency', function (float $amount): string {
-            $currency = session('currency', Currency::IDR->value);
-            $rate = Cache::get("currency-{$currency}", 1);
-            $convertedAmount = $amount * $rate;
+        Str::macro('currency', function (float $amount, ?PropertyCurrency $from = null): string {
+            // Resolve the currency the price is stored in (defaults to IDR).
+            $fromCurrency = match ($from) {
+                PropertyCurrency::USD => Currency::USD,
+                PropertyCurrency::EUR => Currency::EUR,
+                default => Currency::IDR,
+            };
 
-            return match ($currency) {
-                Currency::IDR->value => 'Rp '.number_format($convertedAmount, 0, ',', '.'),
-                Currency::USD->value => '$'.number_format($convertedAmount, 2),
-                Currency::AUD->value => 'A$'.number_format($convertedAmount, 2),
-                Currency::EUR->value => '€'.number_format($convertedAmount, 2),
-                Currency::GBP->value => '£'.number_format($convertedAmount, 2),
+            // Resolve the currency the visitor wants to see, falling back to IDR
+            // if the session holds an unknown/stale value.
+            $target = Currency::tryFrom(session('currency', Currency::IDR->value)) ?? Currency::IDR;
+
+            // Cached rates are "how many <currency> per 1 IDR" (IDR is the base).
+            // Normalise the stored amount to IDR first, then convert to the target.
+            $fromRate = $fromCurrency === Currency::IDR
+                ? 1.0
+                : (float) Cache::get("currency-{$fromCurrency->value}", 0);
+            $targetRate = $target === Currency::IDR
+                ? 1.0
+                : (float) Cache::get("currency-{$target->value}", 0);
+
+            // If a required rate is missing, skip conversion rather than show a
+            // wrong number: display the original amount in its own currency.
+            if ($fromRate <= 0 || $targetRate <= 0) {
+                $displayCurrency = $fromCurrency;
+                $convertedAmount = $amount;
+            } else {
+                $displayCurrency = $target;
+                $amountInIdr = $amount / $fromRate;
+                $convertedAmount = $amountInIdr * $targetRate;
+            }
+
+            return match ($displayCurrency) {
+                Currency::IDR => 'Rp '.number_format($convertedAmount, 0, ',', '.'),
+                Currency::USD => '$'.number_format($convertedAmount, 2),
+                Currency::AUD => 'A$'.number_format($convertedAmount, 2),
+                Currency::EUR => '€'.number_format($convertedAmount, 2),
+                Currency::GBP => '£'.number_format($convertedAmount, 2),
             };
         });
 

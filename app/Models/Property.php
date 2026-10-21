@@ -170,11 +170,11 @@ use Spatie\Activitylog\Traits\LogsActivity;
  * @method static Builder<static>|Property both()
  * @method static Builder<static>|Property commercial()
  * @method static Builder<static>|Property couple()
- * @method static Builder<static>|Property currencyOther()
  * @method static Builder<static>|Property designLover()
  * @method static Builder<static>|Property eSolar()
  * @method static Builder<static>|Property enclosed()
  * @method static Builder<static>|Property escalate()
+ * @method static Builder<static>|Property eur()
  * @method static \Database\Factories\PropertyFactory factory($count = null, $state = [])
  * @method static Builder<static>|Property family()
  * @method static Builder<static>|Property fixed()
@@ -816,9 +816,9 @@ class Property extends Model
         $query->where('currency', PropertyCurrency::USD);
     }
 
-    public function scopeCurrencyOther(Builder $query): void
+    public function scopeEur(Builder $query): void
     {
-        $query->where('currency', PropertyCurrency::Other);
+        $query->where('currency', PropertyCurrency::EUR);
     }
 
     public function scopeFreehold(Builder $query): void
