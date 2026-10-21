@@ -194,7 +194,7 @@ new #[Lazy] class extends Component {
                                 <span class="text-secondary">
                                     {{ $property->ownership_type?->description() ?? '-' }}
                                 </span>
-                                <span class="fw-medium">{{ Str::currency($property->sale_price) }}</span>
+                                <span class="fw-medium">{{ Str::currency($property->sale_price, $property->currency) }}</span>
                             </div>
                         </div>
                     </div>

@@ -1,5 +1,6 @@
 <?php
 
+use App\Enums\Currency;
 use App\Http\Middleware\Localization;
 use Illuminate\Support\Facades\App;
 use Illuminate\Support\Facades\Route;
@@ -13,7 +14,10 @@ Route::any('locale/{locale}', function ($locale) {
 })->name('locale');
 
 Route::any('currency/{currency}', function ($currency) {
-    Session::put('currency', $currency);
+    // Only persist known currencies so a stale/invalid value can't break price rendering.
+    if (Currency::tryFrom($currency) !== null) {
+        Session::put('currency', $currency);
+    }
 
     return redirect()->back();
 })->name('currency');
