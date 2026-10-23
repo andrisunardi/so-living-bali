@@ -24,7 +24,9 @@ use App\Enums\Property\PropertyTargetProfile;
 use App\Enums\Property\PropertyType;
 use App\Enums\Property\PropertyWaterSource;
 use App\Models\Property;
+use App\Models\PropertyImage;
 use App\Services\PropertyService;
+use Illuminate\Support\Facades\Cache;
 use Illuminate\Validation\Rules\Enum;
 use Livewire\Attributes\Validate;
 use Livewire\Features\SupportFileUploads\TemporaryUploadedFile;
@@ -498,25 +500,68 @@ class PropertyEditForm extends Form
         $this->status = $property->status?->value;
 
         $this->images = $property->images ? $property->images->sortBy('position')
-            ->map(function ($propertyImage) {
-                $headers = array_change_key_case(get_headers($propertyImage->image_url, true), CASE_LOWER);
-                $getimagesize = getimagesize($propertyImage->image_url);
-
-                return [
-                    'id' => $propertyImage->google_file_id ?: $propertyImage->id,
-                    'name' => $propertyImage->name,
-                    'type' => 'url',
-                    'thumbnail' => $propertyImage->image_url,
-                    'size' => $headers['content-length'] ?? 0,
-                    'resolution' => [
-                        'width' => $getimagesize[0] ?? null,
-                        'height' => $getimagesize[1] ?? null,
-                    ],
-                    'mime' => $getimagesize['mime'] ?? null,
-                ];
-            })
+            ->map(fn (PropertyImage $propertyImage) => $this->imageMetadata($propertyImage))
             ->values()
             ->toArray() : [];
+    }
+
+    private function imageMetadata(PropertyImage $propertyImage): array
+    {
+        $metadata = $this->imageFileMetadata($propertyImage->image_url);
+
+        return [
+            'id' => $propertyImage->google_file_id ?: $propertyImage->id,
+            'name' => $propertyImage->name,
+            'type' => 'url',
+            'thumbnail' => $propertyImage->image_url,
+            'size' => $metadata['size'],
+            'resolution' => [
+                'width' => $metadata['width'],
+                'height' => $metadata['height'],
+            ],
+            'mime' => $metadata['mime'],
+        ];
+    }
+
+    private function imageFileMetadata(string $imageUrl): array
+    {
+        $fallback = ['size' => 0, 'width' => null, 'height' => null, 'mime' => null];
+
+        return Cache::rememberForever('property-image-metadata-'.md5($imageUrl), function () use ($imageUrl, $fallback) {
+            $path = $this->localImagePath($imageUrl);
+
+            if ($path === null || ! is_file($path)) {
+                return $fallback;
+            }
+
+            $dimensions = @getimagesize($path);
+
+            return [
+                'size' => (int) @filesize($path),
+                'width' => $dimensions[0] ?? null,
+                'height' => $dimensions[1] ?? null,
+                'mime' => $dimensions['mime'] ?? null,
+            ];
+        });
+    }
+
+    private function localImagePath(string $imageUrl): ?string
+    {
+        $relativePath = ltrim((string) parse_url($imageUrl, PHP_URL_PATH), '/');
+
+        if ($relativePath === '') {
+            return null;
+        }
+
+        $assetsPath = rtrim((string) config('constants.assets.path', public_path()), '/');
+
+        foreach ([$assetsPath.'/'.$relativePath, public_path($relativePath)] as $candidate) {
+            if (is_file($candidate)) {
+                return $candidate;
+            }
+        }
+
+        return null;
     }
 
     public function rules(): array
