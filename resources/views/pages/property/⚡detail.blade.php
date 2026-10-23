@@ -21,7 +21,7 @@ new #[Title('Property Detail')] class extends Component {
             abort(404);
         }
 
-        $this->property->loadMissing(['area.district', 'image']);
+        $this->property->loadMissing(['area.district', 'district', 'image', 'images']);
 
         $this->monthlyHasInclusions = collect($this->property->monthly_inclusions ?? [])
             ->only(['housekeeper', 'gardener', 'pool_guy', 'internet', 'garbage', 'banjar', 'security', 'electricity', 'others'])
