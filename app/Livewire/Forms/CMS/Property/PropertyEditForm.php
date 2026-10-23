@@ -547,15 +547,27 @@ class PropertyEditForm extends Form
 
     private function localImagePath(string $imageUrl): ?string
     {
-        $relativePath = ltrim((string) parse_url($imageUrl, PHP_URL_PATH), '/');
+        $urlPath = '/'.ltrim((string) parse_url($imageUrl, PHP_URL_PATH), '/');
 
-        if ($relativePath === '') {
+        if ($urlPath === '/') {
             return null;
         }
 
         $assetsPath = rtrim((string) config('constants.assets.path', public_path()), '/');
+        $assetsUrl = '/'.trim((string) config('constants.assets.url', ''), '/');
 
-        foreach ([$assetsPath.'/'.$relativePath, public_path($relativePath)] as $candidate) {
+        // The URL is ASSETS_URL + relative path, while files live under ASSETS_PATH.
+        // Strip the ASSETS_URL prefix so it is not duplicated against ASSETS_PATH.
+        $relativePath = $assetsUrl !== '/' && str_starts_with($urlPath, $assetsUrl.'/')
+            ? substr($urlPath, strlen($assetsUrl) + 1)
+            : ltrim($urlPath, '/');
+
+        $candidates = [
+            $assetsPath.'/'.$relativePath,
+            public_path(ltrim($urlPath, '/')),
+        ];
+
+        foreach ($candidates as $candidate) {
             if (is_file($candidate)) {
                 return $candidate;
             }
