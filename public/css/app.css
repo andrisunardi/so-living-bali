@@ -367,8 +367,25 @@ textarea {
     box-shadow: 0 -0.25rem 0.75rem rgba(0, 0, 0, 0.08);
 }
 
+.slb-sticky.slb-sticky-hidden {
+    transform: translateY(120%);
+    transition: transform 0.3s ease;
+}
+
+.slb-sticky {
+    transition: transform 0.3s ease;
+}
+
+.slb-page.slb-pad-sticky {
+    padding-bottom: 5rem;
+}
+
 @media (min-width: 992px) {
     .slb-sticky {
         display: none !important;
+    }
+
+    .slb-page.slb-pad-sticky {
+        padding-bottom: 0;
     }
 }
