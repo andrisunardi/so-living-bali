@@ -200,4 +200,113 @@
             <div class="form-text text-danger">{{ $message }}</div>
         @enderror
     </div>
+
+    <div class="col-sm-6">
+        <label class="form-label" for="video_tour">
+            {{ trans('property.video_tour') }}
+        </label>
+        <div class="input-group">
+            <div class="input-group-text">
+                <span class="fas fa-video fa-fw "></span>
+            </div>
+            <input type="url" class="form-control" id="video_tour" name="video_tour" maxlength="255"
+                placeholder="https://" wire:model="form.video_tour" wire:offline.class="disabled"
+                wire:offline.attr="disabled" wire:loading.class="disabled" wire:loading.attr="disabled">
+        </div>
+        <div class="form-text">
+            {{ trans('property.video_tour_helper') }}
+        </div>
+        @error('form.video_tour')
+            <div class="form-text text-danger">{{ $message }}</div>
+        @enderror
+    </div>
+
+    <div class="col-sm-6">
+        <label class="form-label" for="floor_plan">
+            {{ trans('property.floor_plan') }}
+        </label>
+        <div class="input-group">
+            <div class="input-group-text">
+                <span class="fas fa-image fa-fw "></span>
+            </div>
+            <input type="url" class="form-control" id="floor_plan" name="floor_plan" maxlength="255"
+                placeholder="https://" wire:model="form.floor_plan" wire:offline.class="disabled"
+                wire:offline.attr="disabled" wire:loading.class="disabled" wire:loading.attr="disabled">
+        </div>
+        <div class="form-text">
+            {{ trans('property.floor_plan_helper') }}
+        </div>
+        @error('form.floor_plan')
+            <div class="form-text text-danger">{{ $message }}</div>
+        @enderror
+    </div>
+
+    <div class="col-12">
+        <label class="form-label">
+            {{ trans('property.nearby') }}
+        </label>
+        @foreach ($form->nearby as $i => $row)
+            <div class="input-group mb-2" wire:key="nearby-{{ $i }}">
+                <div class="input-group-text">
+                    <span class="fas fa-location-dot fa-fw "></span>
+                </div>
+                <input type="text" class="form-control" maxlength="100"
+                    placeholder="{{ trans('property.nearby_place') }}" wire:model="form.nearby.{{ $i }}.place"
+                    wire:offline.class="disabled" wire:offline.attr="disabled" wire:loading.class="disabled"
+                    wire:loading.attr="disabled">
+                <input type="text" class="form-control" maxlength="50"
+                    placeholder="{{ trans('property.nearby_time') }}" wire:model="form.nearby.{{ $i }}.time"
+                    wire:offline.class="disabled" wire:offline.attr="disabled" wire:loading.class="disabled"
+                    wire:loading.attr="disabled">
+                <button type="button" class="btn btn-outline-danger" wire:click="removeNearby({{ $i }})"
+                    wire:offline.class="disabled" wire:offline.attr="disabled" wire:loading.class="disabled"
+                    wire:loading.attr="disabled">
+                    <span class="fas fa-trash fa-fw"></span>
+                </button>
+            </div>
+            @error('form.nearby.' . $i . '.place')
+                <div class="form-text text-danger">{{ $message }}</div>
+            @enderror
+            @error('form.nearby.' . $i . '.time')
+                <div class="form-text text-danger">{{ $message }}</div>
+            @enderror
+        @endforeach
+        <button type="button" class="btn btn-outline-success btn-sm" wire:click="addNearby"
+            wire:offline.class="disabled" wire:offline.attr="disabled" wire:loading.class="disabled"
+            wire:loading.attr="disabled">
+            <span class="fas fa-plus fa-fw"></span>
+            {{ trans('property.add_nearby') }}
+        </button>
+    </div>
+
+    <div class="col-12">
+        <label class="form-label">
+            {{ trans('property.highlights') }}
+        </label>
+        @foreach ($form->highlights as $i => $highlight)
+            <div class="input-group mb-2" wire:key="highlight-{{ $i }}">
+                <div class="input-group-text">
+                    <span class="fas fa-star fa-fw "></span>
+                </div>
+                <input type="text" class="form-control" maxlength="255"
+                    placeholder="{{ trans('property.highlights') }}" wire:model="form.highlights.{{ $i }}"
+                    wire:offline.class="disabled" wire:offline.attr="disabled" wire:loading.class="disabled"
+                    wire:loading.attr="disabled">
+                <button type="button" class="btn btn-outline-danger" wire:click="removeHighlight({{ $i }})"
+                    wire:offline.class="disabled" wire:offline.attr="disabled" wire:loading.class="disabled"
+                    wire:loading.attr="disabled">
+                    <span class="fas fa-trash fa-fw"></span>
+                </button>
+            </div>
+            @error('form.highlights.' . $i)
+                <div class="form-text text-danger">{{ $message }}</div>
+            @enderror
+        @endforeach
+        <button type="button" class="btn btn-outline-success btn-sm" wire:click="addHighlight"
+            wire:offline.class="disabled" wire:offline.attr="disabled" wire:loading.class="disabled"
+            wire:loading.attr="disabled">
+            <span class="fas fa-plus fa-fw"></span>
+            {{ trans('property.add_highlight') }}
+        </button>
+    </div>
 </div>

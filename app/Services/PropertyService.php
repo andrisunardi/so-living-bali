@@ -214,6 +214,17 @@ class PropertyService
             $data['status'] = ($data['status'] ?? PropertyStatus::Pending) ?: PropertyStatus::Pending;
             $data['owner_representative_id'] = ($data['owner_representative_id'] ?? null) ?: null;
 
+            $data['nearby'] = array_values(array_filter(
+                $data['nearby'] ?? [],
+                fn ($row) => filled($row['place'] ?? null) || filled($row['time'] ?? null)
+            )) ?: null;
+            $data['highlights'] = array_values(array_filter(
+                $data['highlights'] ?? [],
+                fn ($value) => filled($value)
+            )) ?: null;
+            $data['video_tour'] = ($data['video_tour'] ?? null) ?: null;
+            $data['floor_plan'] = ($data['floor_plan'] ?? null) ?: null;
+
             $data['slug'] = Str::slug($data['name']);
 
             // $data['folder_id'] = (new GoogleDrive)->createFolder(
@@ -317,6 +328,17 @@ class PropertyService
             $data['completion_date'] = $data['completion_date'] ?: null;
             $data['latitude'] = $data['latitude'] ?: null;
             $data['longitude'] = $data['longitude'] ?: null;
+
+            $data['nearby'] = array_values(array_filter(
+                $data['nearby'] ?? [],
+                fn ($row) => filled($row['place'] ?? null) || filled($row['time'] ?? null)
+            )) ?: null;
+            $data['highlights'] = array_values(array_filter(
+                $data['highlights'] ?? [],
+                fn ($value) => filled($value)
+            )) ?: null;
+            $data['video_tour'] = ($data['video_tour'] ?? null) ?: null;
+            $data['floor_plan'] = ($data['floor_plan'] ?? null) ?: null;
 
             $data['slug'] = Str::slug($data['name']);
 

@@ -59,13 +59,31 @@
     </div>
 </div>
 
-@if ($imageCount > 0)
-    <div class="mt-3">
-        <button type="button" class="btn btn-light-slb rounded-pill" data-bs-toggle="modal"
-            data-bs-target="#sale-gallery">
-            <span class="fas fa-images fa-fw"></span>
-            View all photos
-        </button>
+@if ($imageCount > 0 || filled($property->video_tour) || filled($property->floor_plan))
+    <div class="mt-3 d-flex flex-wrap gap-2">
+        @if ($imageCount > 0)
+            <button type="button" class="btn btn-light-slb rounded-pill" data-bs-toggle="modal"
+                data-bs-target="#sale-gallery">
+                <span class="fas fa-images fa-fw"></span>
+                View all photos
+            </button>
+        @endif
+
+        @if (filled($property->video_tour))
+            <a draggable="false" class="btn btn-light-slb rounded-pill" href="{{ $property->video_tour }}"
+                target="_blank" rel="noopener noreferrer">
+                <span class="fas fa-circle-play fa-fw"></span>
+                {{ trans('property.video_tour') }}
+            </a>
+        @endif
+
+        @if (filled($property->floor_plan))
+            <a draggable="false" class="btn btn-light-slb rounded-pill" href="{{ $property->floor_plan }}"
+                target="_blank" rel="noopener noreferrer">
+                <span class="fas fa-ruler-combined fa-fw"></span>
+                {{ trans('property.floor_plan') }}
+            </a>
+        @endif
     </div>
 @endif
 

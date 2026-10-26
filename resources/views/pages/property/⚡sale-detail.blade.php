@@ -101,10 +101,45 @@ new #[Title('Property For Sale')] class extends Component {
                         <h2 class="h5 fw-semibold text-brand-dark mb-3">Ownership &amp; legal information</h2>
                         <x-property.sale.legal :property="$property" />
                     </div>
+
+                    @if (filled($property->nearby))
+                        <div class="card card-body rounded-4 border-0 bg-brand-soft mt-4">
+                            <h2 class="h5 fw-semibold text-brand-dark mb-3">{{ trans('property.nearby') }}</h2>
+                            <ul class="slb-nearby list-unstyled mb-0">
+                                @foreach ($property->nearby as $place)
+                                    <li class="slb-nearby-item">
+                                        <span class="slb-nearby-place">{{ $place['place'] ?? '' }}</span>
+                                        <span class="slb-nearby-time text-brand">{{ $place['time'] ?? '' }}</span>
+                                    </li>
+                                @endforeach
+                            </ul>
+                        </div>
+                    @endif
                 </div>
             </div>
         </div>
     </section>
+
+    @if (filled($property->highlights))
+        <section class="pb-5">
+            <div class="container-md">
+                <div class="slb-highlight rounded-4 p-4 p-lg-5">
+                    <h2 class="h4 fw-semibold mb-4">{{ trans('property.why_this_property_stands_out') }}</h2>
+                    <div class="row g-4">
+                        @foreach ($property->highlights as $highlight)
+                            <div class="col-md-6 col-lg-4">
+                                <div class="slb-highlight-item d-flex">
+                                    <span
+                                        class="slb-highlight-number text-brand">{{ str_pad($loop->iteration, 2, '0', STR_PAD_LEFT) }}</span>
+                                    <span class="slb-highlight-text">{{ $highlight }}</span>
+                                </div>
+                            </div>
+                        @endforeach
+                    </div>
+                </div>
+            </div>
+        </section>
+    @endif
 
     @if ($property->latitude && $property->longitude)
         <section class="pb-5">

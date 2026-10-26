@@ -194,6 +194,18 @@ return [
     'payment_plan_details' => 'Detail Skema Pembayaran',
     'developer_name' => 'Nama Pengembang (Developer)',
 
+    'nearby' => 'Nearby',
+    'nearby_place' => 'Place',
+    'nearby_time' => 'Travel Time',
+    'add_nearby' => 'Add Nearby Place',
+    'video_tour' => 'Video Tour',
+    'video_tour_helper' => 'Video tour URL',
+    'floor_plan' => 'Floor Plan',
+    'floor_plan_helper' => 'Floor plan image/PDF URL',
+    'highlights' => 'Highlights',
+    'add_highlight' => 'Add Highlight',
+    'why_this_property_stands_out' => 'Why This Property Stands Out',
+
     'price_per_are' => 'Harga Per Are',
     'land_size_in_ares' => 'Luas Tanah (dalam Are)',
     'road_frontage' => 'Lebar Muka Jalan',

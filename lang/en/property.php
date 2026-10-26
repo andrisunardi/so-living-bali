@@ -203,6 +203,18 @@ return [
     'payment_plan_details' => 'Payment Plan Details',
     'developer_name' => 'Developer Name',
 
+    'nearby' => 'Nearby',
+    'nearby_place' => 'Place',
+    'nearby_time' => 'Travel Time',
+    'add_nearby' => 'Add Nearby Place',
+    'video_tour' => 'Video Tour',
+    'video_tour_helper' => 'Video tour URL',
+    'floor_plan' => 'Floor Plan',
+    'floor_plan_helper' => 'Floor plan image/PDF URL',
+    'highlights' => 'Highlights',
+    'add_highlight' => 'Add Highlight',
+    'why_this_property_stands_out' => 'Why This Property Stands Out',
+
     'price_per_are' => 'Price Per Are',
     'land_size_in_ares' => 'Land Size (In Ares)',
     'road_frontage' => 'Road Frontage',

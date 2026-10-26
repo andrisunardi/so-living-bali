@@ -428,6 +428,42 @@ textarea {
     --bs-accordion-btn-focus-box-shadow: 0 0 0 0.25rem rgba(26, 135, 84, 0.2);
 }
 
+.slb-page .slb-nearby .slb-nearby-item {
+    display: flex;
+    justify-content: space-between;
+    align-items: baseline;
+    gap: 1rem;
+    padding: 0.5rem 0;
+    border-bottom: 1px solid var(--slb-line);
+}
+
+.slb-page .slb-nearby .slb-nearby-item:last-child {
+    border-bottom: 0;
+}
+
+.slb-page .slb-nearby .slb-nearby-time {
+    font-weight: 600;
+    white-space: nowrap;
+}
+
+.slb-page .slb-highlight {
+    background-color: var(--slb-sand);
+}
+
+.slb-page .slb-highlight .slb-highlight-item {
+    gap: 0.75rem;
+}
+
+.slb-page .slb-highlight .slb-highlight-number {
+    font-size: 1.5rem;
+    font-weight: 700;
+    line-height: 1.2;
+}
+
+.slb-page .slb-highlight .slb-highlight-text {
+    align-self: center;
+}
+
 .slb-sticky {
     position: fixed;
     left: 0;
