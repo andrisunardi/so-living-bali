@@ -45,6 +45,19 @@ class PropertySaleDetailTest extends TestCase
         $response->assertSee($property->name);
     }
 
+    public function test_for_sale_detail_returns_200_for_second_allowed_status_and_listing_type(): void
+    {
+        $property = $this->createProperty([
+            'status' => PropertyStatus::AcceptPremium,
+            'listing_type' => PropertyListingType::ForRentAndSale,
+        ]);
+
+        $response = $this->get(route('property.sale.detail', ['slug' => $property->slug]));
+
+        $response->assertStatus(200);
+        $response->assertSee($property->name);
+    }
+
     public function test_for_sale_detail_returns_404_for_unknown_slug(): void
     {
         $response = $this->get(route('property.sale.detail', ['slug' => 'non-existent-slug']));

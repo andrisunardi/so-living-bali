@@ -2,7 +2,6 @@
 
 use App\Livewire\Component;
 use App\Livewire\Forms\Contact\ContactSubmitForm;
-use Illuminate\Validation\Exception;
 use Illuminate\Validation\ValidationException;
 
 new class extends Component {
@@ -40,7 +39,7 @@ new class extends Component {
             $errors = collect($e->validator->errors()->all())->implode('<br>');
 
             $this->alertError(title: trans('contact.form.failed.title'), body: $errors);
-        } catch (Exception $e) {
+        } catch (\Throwable $e) {
             $this->alertError(title: trans('contact.form.failed.title'), body: 'Something went wrong');
         }
     }
