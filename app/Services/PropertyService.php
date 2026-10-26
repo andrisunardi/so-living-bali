@@ -438,6 +438,19 @@ class PropertyService
             ->first();
     }
 
+    public function saleDetail(string $slug): ?Property
+    {
+        $statuses = [PropertyStatus::AcceptUpper->value, PropertyStatus::AcceptPremium->value];
+
+        $listingTypes = [PropertyListingType::ForSale->value, PropertyListingType::ForRentAndSale->value];
+
+        return Property::query()
+            ->whereIn('status', $statuses)
+            ->whereIn('listing_type', $listingTypes)
+            ->where('slug', $slug)
+            ->first();
+    }
+
     public function uploadImages(Property $property, array $images = []): void
     {
         $google = new GoogleDrive;
