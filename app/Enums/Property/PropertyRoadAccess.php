@@ -9,4 +9,13 @@ enum PropertyRoadAccess: int
     case Private = 2;
 
     case Shared = 3;
+
+    public function description(): string
+    {
+        return match ($this) {
+            self::Public => 'Public',
+            self::Private => 'Private',
+            self::Shared => 'Shared',
+        };
+    }
 }
