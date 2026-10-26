@@ -1,5 +1,6 @@
 <?php
 
+use App\Enums\Property\PropertyRentalType;
 use App\Enums\Property\PropertyStatus;
 use App\Livewire\Component;
 use App\Services\PropertyService;
@@ -217,13 +218,13 @@ new #[Lazy] class extends Component {
                         </div>
 
                         <div class="mt-3 d-grid gap-2">
-                            @if ($property->monthly_price)
+                            @if ($property->rental_type == PropertyRentalType::Both || $property->rental_type == PropertyRentalType::Monthly)
                                 <div class="d-flex justify-content-between">
                                     <span class="fw-medium">{{ Str::currency($property->monthly_price, $property->currency) }}</span>
                                     <span class="text-secondary">{{ trans('property.per_month') }}</span>
                                 </div>
                             @endif
-                            @if ($property->yearly_price)
+                            @if ($property->rental_type == PropertyRentalType::Both || $property->rental_type == PropertyRentalType::Yearly)
                                 <div class="d-flex justify-content-between">
                                     <span class="fw-medium">{{ Str::currency($property->yearly_price, $property->currency) }}</span>
                                     <span class="text-secondary">{{ trans('property.per_year') }}</span>
