@@ -327,6 +327,25 @@ class PropertyEditForm extends Form
     #[Validate('nullable|string|min:1|max:100')]
     public ?string $developer_name = '';
 
+    #[Validate([
+        'nearby' => ['nullable', 'array'],
+        'nearby.*.place' => ['nullable', 'string', 'max:100'],
+        'nearby.*.time' => ['nullable', 'string', 'max:50'],
+    ])]
+    public array $nearby = [];
+
+    #[Validate('nullable|string|max:255')]
+    public ?string $video_tour = '';
+
+    #[Validate('nullable|string|max:255')]
+    public ?string $floor_plan = '';
+
+    #[Validate([
+        'highlights' => ['nullable', 'array'],
+        'highlights.*' => ['nullable', 'string', 'max:255'],
+    ])]
+    public array $highlights = [];
+
     #[Validate('nullable|integer|min:0|max:100000000000')]
     public ?int $price_per_are = 0;
 
@@ -488,6 +507,10 @@ class PropertyEditForm extends Form
         $this->payment_plan_available = $property->payment_plan_available;
         $this->payment_plan_details = $property->payment_plan_details;
         $this->developer_name = $property->developer_name;
+        $this->nearby = $property->nearby ?? [];
+        $this->video_tour = $property->video_tour;
+        $this->floor_plan = $property->floor_plan;
+        $this->highlights = $property->highlights ?? [];
 
         $this->price_per_are = $property->price_per_are;
         $this->land_size_in_ares = $property->land_size_in_ares;

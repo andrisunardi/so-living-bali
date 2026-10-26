@@ -324,6 +324,25 @@ class PropertyAddForm extends Form
     #[Validate('nullable|string|min:1|max:100')]
     public string $developer_name = '';
 
+    #[Validate([
+        'nearby' => ['nullable', 'array'],
+        'nearby.*.place' => ['nullable', 'string', 'max:100'],
+        'nearby.*.time' => ['nullable', 'string', 'max:50'],
+    ])]
+    public array $nearby = [];
+
+    #[Validate('nullable|string|max:255')]
+    public string $video_tour = '';
+
+    #[Validate('nullable|string|max:255')]
+    public string $floor_plan = '';
+
+    #[Validate([
+        'highlights' => ['nullable', 'array'],
+        'highlights.*' => ['nullable', 'string', 'max:255'],
+    ])]
+    public array $highlights = [];
+
     #[Validate('nullable|integer|min:0|max:100000000000')]
     public int $price_per_are = 0;
 

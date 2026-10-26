@@ -130,6 +130,10 @@ use Spatie\Activitylog\Traits\LogsActivity;
  * @property bool $payment_plan_available
  * @property string|null $payment_plan_details
  * @property string|null $developer_name
+ * @property array<array-key, mixed>|null $nearby
+ * @property string|null $video_tour
+ * @property string|null $floor_plan
+ * @property array<array-key, mixed>|null $highlights
  * @property int $price_per_are
  * @property string|null $land_size_in_ares
  * @property string|null $road_frontage
@@ -244,11 +248,13 @@ use Spatie\Activitylog\Traits\LogsActivity;
  * @method static Builder<static>|Property whereEligibleForPremium($value)
  * @method static Builder<static>|Property whereEligibleForUpper($value)
  * @method static Builder<static>|Property whereEnsuiteBathrooms($value)
+ * @method static Builder<static>|Property whereFloorPlan($value)
  * @method static Builder<static>|Property whereFolderId($value)
  * @method static Builder<static>|Property whereFullLegalDocumentation($value)
  * @method static Builder<static>|Property whereFullyFurnished($value)
  * @method static Builder<static>|Property whereGoogleMapsUrl($value)
  * @method static Builder<static>|Property whereGuestToilet($value)
+ * @method static Builder<static>|Property whereHighlights($value)
  * @method static Builder<static>|Property whereId($value)
  * @method static Builder<static>|Property whereImagePath($value)
  * @method static Builder<static>|Property whereImb($value)
@@ -273,6 +279,7 @@ use Spatie\Activitylog\Traits\LogsActivity;
  * @method static Builder<static>|Property whereMonthlyInclusions($value)
  * @method static Builder<static>|Property whereMonthlyPrice($value)
  * @method static Builder<static>|Property whereName($value)
+ * @method static Builder<static>|Property whereNearby($value)
  * @method static Builder<static>|Property whereNoFestiveVenueNearby($value)
  * @method static Builder<static>|Property whereNoOngoing($value)
  * @method static Builder<static>|Property whereNoiseSourceIdentified($value)
@@ -318,6 +325,7 @@ use Spatie\Activitylog\Traits\LogsActivity;
  * @method static Builder<static>|Property whereUpdatedBy($value)
  * @method static Builder<static>|Property whereUsabilityLimitations($value)
  * @method static Builder<static>|Property whereUserId($value)
+ * @method static Builder<static>|Property whereVideoTour($value)
  * @method static Builder<static>|Property whereView($value)
  * @method static Builder<static>|Property whereVillaName($value)
  * @method static Builder<static>|Property whereVisitDate($value)
@@ -447,6 +455,10 @@ class Property extends Model
         'payment_plan_available',
         'payment_plan_details',
         'developer_name',
+        'nearby',
+        'video_tour',
+        'floor_plan',
+        'highlights',
 
         'price_per_are',
         'land_size_in_ares',
@@ -573,6 +585,10 @@ class Property extends Model
             'payment_plan_available' => 'boolean',
             'payment_plan_details' => 'string',
             'developer_name' => 'string',
+            'nearby' => 'array',
+            'video_tour' => 'string',
+            'floor_plan' => 'string',
+            'highlights' => 'array',
 
             'price_per_are' => 'integer',
             'land_size_in_ares' => 'string',

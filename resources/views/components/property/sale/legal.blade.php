@@ -17,14 +17,18 @@
         $rows['Lease Expiry'] = $property->lease_expiry_date?->isoFormat('DD MMMM YYYY');
         $rows['Remaining Lease'] = $leaseRemaining;
         $rows['Extension'] = $property->lease_extension_available?->description();
-        $rows['Extension Terms'] = $property->lease_extension_terms_or_price;
+        $rows['Extension Terms'] = filled($property->lease_extension_terms_or_price)
+            ? Str::of($property->lease_extension_terms_or_price)->stripTags()->trim()->toString()
+            : null;
     }
 
     if ($isFreehold) {
         $rows['Land Certificate'] = $property->land_title?->description() ?? ($property->land_certificate ? 'Yes' : null);
     }
 
-    $rows['Zoning'] = $property->zoning;
+    $rows['Zoning'] = filled($property->zoning)
+        ? Str::of($property->zoning)->stripTags()->trim()->toString()
+        : null;
     $rows['PBG'] = $property->pbg_status?->description();
     $rows['SLF'] = $property->slf_status?->description();
     $rows['Road Access'] = $property->road_access
