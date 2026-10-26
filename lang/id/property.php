@@ -47,6 +47,7 @@ return [
     'chat_for_check_availability_on_whatsapp' => 'Chat WhatsApp untuk cek ketersediaan',
     'no_description_about_this_property' => 'Tidak Ada Deskripsi Mengenai Properti Ini',
     'bedrooms' => 'Kamar Tidur',
+    'building' => 'Building',
     'bathrooms' => 'Kamar Mandi',
     'type_furnish' => 'Tipe Perabotan',
     'non_furnished' => 'Tanpa Perabotan',

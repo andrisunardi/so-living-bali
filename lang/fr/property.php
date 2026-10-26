@@ -47,6 +47,7 @@ return [
     'chat_for_check_availability_on_whatsapp' => 'Discuter sur WhatsApp pour vérifier la disponibilité',
     'no_description_about_this_property' => 'Aucune description disponible pour cette propriété',
     'bedrooms' => 'Chambres',
+    'building' => 'Building',
     'bathrooms' => 'Salles de bain',
     'type_furnish' => 'Type de meublement',
     'non_furnished' => 'Non meublé',

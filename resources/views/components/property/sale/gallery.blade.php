@@ -10,11 +10,13 @@
     <div class="col-lg-6">
         <a draggable="false" role="button" class="d-block h-100" data-bs-toggle="modal"
             data-bs-target="#sale-gallery">
-            <img draggable="false" loading="lazy" decoding="async"
-                class="slb-card-img rounded-4 user-select-none h-100"
-                src="{{ $property->image?->image_url ?? asset('images/placeholder.png') }}"
-                alt="{{ trans('property.property') }} - {{ $property->name }} - {{ config('constants.meta.title') }}"
-                onerror="this.onerror=null; this.src='/images/placeholder.png';" />
+            <div class="ratio ratio-4x3 h-100 rounded-4 overflow-hidden">
+                <img draggable="false" loading="lazy" decoding="async"
+                    class="slb-card-img user-select-none w-100 h-100"
+                    src="{{ $property->image?->image_url ?? asset('images/placeholder.png') }}"
+                    alt="{{ trans('property.property') }} - {{ $property->name }} - {{ config('constants.meta.title') }}"
+                    onerror="this.onerror=null; this.src='/images/placeholder.png';" />
+            </div>
         </a>
     </div>
     <div class="col-lg-6">
@@ -25,11 +27,13 @@
                         <a draggable="false" role="button" class="position-relative d-block" data-bs-toggle="modal"
                             data-bs-target="#sale-gallery"
                             onclick="setTimeout(() => document.getElementById('sale-gallery-image-{{ $i }}')?.scrollIntoView({ behavior: 'smooth' }), 300)">
-                            <img draggable="false" loading="lazy" decoding="async"
-                                class="slb-card-img rounded-4 user-select-none pe-none"
-                                src="{{ $images[$i]->image_url ?? asset('images/placeholder.png') }}"
-                                alt="{{ trans('property.property') }} - {{ trans('property.image') }} - {{ $property->name }} - {{ config('constants.meta.title') }}"
-                                onerror="this.onerror=null; this.src='/images/placeholder.png';" />
+                            <div class="ratio ratio-4x3 rounded-4 overflow-hidden">
+                                <img draggable="false" loading="lazy" decoding="async"
+                                    class="slb-card-img user-select-none pe-none w-100 h-100"
+                                    src="{{ $images[$i]->image_url ?? asset('images/placeholder.png') }}"
+                                    alt="{{ trans('property.property') }} - {{ trans('property.image') }} - {{ $property->name }} - {{ config('constants.meta.title') }}"
+                                    onerror="this.onerror=null; this.src='/images/placeholder.png';" />
+                            </div>
 
                             @if ($i === 4 && $remainingImages > 0)
                                 <div class="position-absolute top-0 start-0 w-100 h-100 bg-dark opacity-50 rounded-4"></div>
@@ -42,10 +46,12 @@
                             @endif
                         </a>
                     @else
-                        <img draggable="false" loading="lazy" decoding="async"
-                            class="slb-card-img rounded-4 user-select-none pe-none"
-                            src="{{ asset('images/placeholder.png') }}"
-                            alt="{{ trans('property.property') }} - {{ trans('property.image') }} - {{ $property->name }} - {{ config('constants.meta.title') }}" />
+                        <div class="ratio ratio-4x3 rounded-4 overflow-hidden">
+                            <img draggable="false" loading="lazy" decoding="async"
+                                class="slb-card-img user-select-none pe-none w-100 h-100"
+                                src="{{ asset('images/placeholder.png') }}"
+                                alt="{{ trans('property.property') }} - {{ trans('property.image') }} - {{ $property->name }} - {{ config('constants.meta.title') }}" />
+                        </div>
                     @endisset
                 </div>
             @endfor
