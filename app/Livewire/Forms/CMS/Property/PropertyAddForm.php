@@ -331,10 +331,10 @@ class PropertyAddForm extends Form
     ])]
     public array $nearby = [];
 
-    #[Validate('nullable|url|max:255')]
+    #[Validate('nullable|string|max:255')]
     public string $video_tour = '';
 
-    #[Validate('nullable|url|max:255')]
+    #[Validate('nullable|string|max:255')]
     public string $floor_plan = '';
 
     #[Validate([
