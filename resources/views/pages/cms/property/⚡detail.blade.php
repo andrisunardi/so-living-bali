@@ -13,6 +13,11 @@ new #[Title('Detail | Property')] class extends Component {
         $this->property = $property;
     }
 
+    public function rendering(): void
+    {
+        $this->property->loadMissing(['user', 'district', 'area', 'owner', 'ownerRepresentative', 'image', 'images']);
+    }
+
     public function delete(): void
     {
         $service = new PropertyService();

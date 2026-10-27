@@ -17,9 +17,12 @@ new #[Title('Property For Sale')] class extends Component {
             abort(404);
         }
 
-        $this->property->loadMissing(['area.district', 'district', 'image', 'images']);
-
         $service->counter(property: $this->property);
+    }
+
+    public function rendering(): void
+    {
+        $this->property?->loadMissing(['area.district', 'district', 'image', 'images']);
     }
 };
 ?>

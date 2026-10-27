@@ -348,6 +348,8 @@ class Property extends Model
 
     protected $table = 'properties';
 
+    protected $with = ['image'];
+
     protected $fillable = [
         'code',
         'name',
