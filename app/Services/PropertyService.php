@@ -14,6 +14,7 @@ use App\Models\Property;
 use App\Models\PropertyImage;
 use Exception;
 use Illuminate\Support\Arr;
+use Illuminate\Support\Carbon;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Http;
 use Illuminate\Support\Str;
@@ -51,6 +52,7 @@ class PropertyService
         array $statuses = [],
         ?string $startDate = null,
         ?string $endDate = null,
+        ?string $availabilityDate = null,
         // array $availabilityDates = [],
         array $prices = [],
         bool $random = false,
@@ -119,6 +121,11 @@ class PropertyService
             ->when($types, fn ($q) => $q->whereIn('type', $types))
             ->when($status, fn ($q) => $q->where('status', $status))
             ->when($statuses, fn ($q) => $q->whereIn('status', $statuses))
+            ->when($availabilityDate, function ($query) use ($availabilityDate) {
+                $query
+                    ->whereDate('availability_date', '>=', $availabilityDate)
+                    ->whereDate('availability_date', '<=', Carbon::parse($availabilityDate)->addMonths(3)->toDateString());
+            })
             // ->when($startDate, fn($q) => $q->whereDate('availability_date', '>=', $startDate))
             // ->when($endDate, fn($q) => $q->whereDate('availability_date', '<=', $endDate))
             // ->when($availabilityDates, fn($q) => $q->whereBetween('availability_date', $availabilityDates))

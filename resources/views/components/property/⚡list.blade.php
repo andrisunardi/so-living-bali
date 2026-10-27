@@ -50,7 +50,7 @@ new #[Lazy] class extends Component {
         }
 
         $service = new PropertyService();
-        $properties = $service->index(startDate: $this->startDate, endDate: $this->endDate, districts: $this->districts, areas: $this->areas, bedrooms: $this->bedrooms, livingStyle: $this->livingStyle, rentalTypes: $rentalTypes, prices: $this->prices, statuses: $statuses, paginate: false);
+        $properties = $service->index(availabilityDate: $this->startDate, districts: $this->districts, areas: $this->areas, bedrooms: $this->bedrooms, livingStyle: $this->livingStyle, rentalTypes: $rentalTypes, prices: $this->prices, statuses: $statuses, paginate: false);
         $properties->loadMissing(['area', 'district', 'image']);
 
         return $properties;
