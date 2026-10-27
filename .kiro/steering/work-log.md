@@ -10,6 +10,28 @@ A running record of important work and decisions, so a new Kiro session starts w
 - **Scope**: `so-living-bali` repo only.
 - **Sandbox**: PHP can't run here; the user must run `php artisan migrate` / `php artisan test` / `./vendor/bin/pint` locally. After pulling CSS changes, hard-refresh the browser.
 
+## Session (for-sale page client spec) — PRs #24, #25, #26, MERGED
+
+Client sent a full Sales Property Page spec (EN/ID PDF) + a feedback email. Working through it step by step on the for-sale detail page (`pages/property/⚡sale-detail.blade.php` + `components/property/sale/*`). Core rule: **IF NO DATA → DO NOT DISPLAY** (field, label, section).
+
+- **PR #24 — Gallery redesign**: 3-col grid; first cell = Video Tour + Floor Plan tiles (only when URLs exist), then up to 5 photos with +N More Images overlay; `View all photos (N)` pill. Added `property.view_all_photos`.
+- **PR #25 — Hero**: dynamic breadcrumb `Home > Properties for Sale > {area/district} > {type}` (each segment conditional); SEO H1 (CMS name, else built from type/bedroom/location/ownership); prominent price + `IDR x.x Billion` subtitle; tenure badge `LEASEHOLD - N YEARS REMAINING` / `FREEHOLD - {SHM}`; key specs row; CTAs Request Information / Book a Viewing / WhatsApp. Added `property.request_information`, `property.book_a_viewing`.
+- **PR #26 — Client email**: (1) Ownership added as a 5th key detail in hero (Bedrooms/Bathrooms/Building/Land/Ownership). (2) Section-level empty-hiding: Property Details heading, Ownership & Legal card (left col widens to full when legal hidden), About (removed no-description placeholder). (6) Confirmed lease-remaining is auto-calculated from `lease_expiry_date` vs `now()` and never exposes created/listing date. Added `property.ownership`, `about_this_property`, `ownership_and_legal_information`.
+
+### Client email — status of the 6 points
+1. Ownership 5th key detail → DONE (#26).
+2. Empty sections hidden → DONE (#26) for Details/Legal/About; Highlights + Location already conditional.
+3. Nearby automatic → already auto (keyless OSM/Overpass from lat/long), no manual input; keep testing reliability.
+4. Area/Neighborhood descriptions in CMS → NOT YET. Needs a new column `description` (+ `description_id`/`description_fr`) on `districts` and `areas` (longtext/text, nullable), a CMS edit field for each, and auto-display on the property page by the listing's area→district fallback. This is a real CMS feature (not hardcode). Awaiting owner go-ahead on scope (districts + areas both).
+5. FAQ at bottom → already present; to be made fully dynamic + FAQ schema in a later step.
+6. Auto leasehold calc → already satisfied, no listing-date leak.
+
+### DB columns still needed (from the spec) — for owner decision
+- Area/neighborhood descriptions: add `description`/`description_id`/`description_fr` (text, nullable) to `districts` AND `areas` tables (point 4).
+- Property Overview "Living Area": optional new column `living_area_size` (int, m²) on `properties` — currently not shown.
+- Legal "Extension Period": optional new column `lease_extension_period` (string) on `properties` — only `lease_extension_available` + `lease_extension_terms_or_price` exist today.
+- SEO Contextual Content (spec §10): needs a source — either a `seo_contents` table or per-area content; deferred.
+
 ## Session (header Properties dropdown) — PR #22, MERGED
 
 - **PR #22 — Enable Properties dropdown in header**: Uncommented the `childrens` entries on the Properties item in `config/navigations.php` → header now shows a dropdown with For Rent (`property.index`) and For Sales (`property.properties-for-sale`). `components/layout/header.blade.php` already renders `childrens` as a dropdown (desktop) and collapsible group (mobile offcanvas) via `@isset`. Route + `index.for_rent`/`index.for_sales` translations (en/fr/id) already exist. Local: `php artisan optimize:clear` to reload cached config.
