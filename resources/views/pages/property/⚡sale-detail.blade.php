@@ -101,20 +101,6 @@ new #[Title('Property For Sale')] class extends Component {
                         <h2 class="h5 fw-semibold text-success-emphasis mb-3">Ownership &amp; legal information</h2>
                         <x-property.sale.legal :property="$property" />
                     </div>
-
-                    @if (filled($property->nearby))
-                        <div class="card card-body rounded-4 border-0 bg-brand-soft mt-4">
-                            <h2 class="h5 fw-semibold text-brand-dark mb-3">{{ trans('property.nearby') }}</h2>
-                            <ul class="slb-nearby list-unstyled mb-0">
-                                @foreach ($property->nearby as $place)
-                                    <li class="slb-nearby-item">
-                                        <span class="slb-nearby-place">{{ $place['place'] ?? '' }}</span>
-                                        <span class="slb-nearby-time text-brand">{{ $place['time'] ?? '' }}</span>
-                                    </li>
-                                @endforeach
-                            </ul>
-                        </div>
-                    @endif
                 </div>
             </div>
         </div>
@@ -143,7 +129,7 @@ new #[Title('Property For Sale')] class extends Component {
     @if ($property->latitude && $property->longitude)
         <section class="pb-5">
             <div class="container-md">
-                <h2 class="h4 fw-semibold mb-3">Location</h2>
+                <h2 class="h4 fw-semibold mb-3">{{ trans('property.nearby') }}</h2>
                 <x-property.sale.location :property="$property" />
             </div>
         </section>

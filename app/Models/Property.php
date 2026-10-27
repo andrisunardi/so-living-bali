@@ -130,7 +130,6 @@ use Spatie\Activitylog\Traits\LogsActivity;
  * @property bool $payment_plan_available
  * @property string|null $payment_plan_details
  * @property string|null $developer_name
- * @property array<array-key, mixed>|null $nearby
  * @property string|null $video_tour
  * @property string|null $floor_plan
  * @property array<array-key, mixed>|null $highlights
@@ -455,7 +454,6 @@ class Property extends Model
         'payment_plan_available',
         'payment_plan_details',
         'developer_name',
-        'nearby',
         'video_tour',
         'floor_plan',
         'highlights',
@@ -585,7 +583,6 @@ class Property extends Model
             'payment_plan_available' => 'boolean',
             'payment_plan_details' => 'string',
             'developer_name' => 'string',
-            'nearby' => 'array',
             'video_tour' => 'string',
             'floor_plan' => 'string',
             'highlights' => 'array',

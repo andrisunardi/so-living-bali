@@ -63,9 +63,8 @@ class PropertySaleDetailTest extends TestCase
         $property = $this->createProperty([
             'status' => PropertyStatus::AcceptUpper,
             'listing_type' => PropertyListingType::ForSale,
-            'nearby' => [
-                ['place' => 'Canggu Beach', 'time' => '10 minutes'],
-            ],
+            'latitude' => -8.65,
+            'longitude' => 115.13,
             'highlights' => [
                 'Ocean view rooftop',
             ],
@@ -76,12 +75,11 @@ class PropertySaleDetailTest extends TestCase
         $response = $this->get(route('property.sale.detail', ['slug' => $property->slug]));
 
         $response->assertStatus(200);
-        $response->assertSee('Canggu Beach');
-        $response->assertSee('10 minutes');
         $response->assertSee('Ocean view rooftop');
         $response->assertSee('Why This Property Stands Out');
         $response->assertSee('https://example.com/video-tour', false);
         $response->assertSee('https://example.com/floor-plan.pdf', false);
+        $response->assertSee('sale-map');
     }
 
     public function test_for_sale_detail_hides_new_sale_detail_fields_when_empty(): void
@@ -89,7 +87,8 @@ class PropertySaleDetailTest extends TestCase
         $property = $this->createProperty([
             'status' => PropertyStatus::AcceptUpper,
             'listing_type' => PropertyListingType::ForSale,
-            'nearby' => null,
+            'latitude' => null,
+            'longitude' => null,
             'highlights' => null,
             'video_tour' => null,
             'floor_plan' => null,
@@ -101,6 +100,7 @@ class PropertySaleDetailTest extends TestCase
         $response->assertDontSee('Why This Property Stands Out');
         $response->assertDontSee(trans('property.video_tour'));
         $response->assertDontSee(trans('property.floor_plan'));
+        $response->assertDontSee('sale-map');
     }
 
     public function test_for_sale_detail_returns_404_for_unknown_slug(): void

@@ -243,44 +243,6 @@
 
     <div class="col-12">
         <label class="form-label">
-            {{ trans('property.nearby') }}
-        </label>
-        @foreach ($form->nearby as $i => $row)
-            <div class="input-group mb-2" wire:key="nearby-{{ $i }}">
-                <div class="input-group-text">
-                    <span class="fas fa-location-dot fa-fw "></span>
-                </div>
-                <input type="text" class="form-control" maxlength="100"
-                    placeholder="{{ trans('property.nearby_place') }}" wire:model="form.nearby.{{ $i }}.place"
-                    wire:offline.class="disabled" wire:offline.attr="disabled" wire:loading.class="disabled"
-                    wire:loading.attr="disabled">
-                <input type="text" class="form-control" maxlength="50"
-                    placeholder="{{ trans('property.nearby_time') }}" wire:model="form.nearby.{{ $i }}.time"
-                    wire:offline.class="disabled" wire:offline.attr="disabled" wire:loading.class="disabled"
-                    wire:loading.attr="disabled">
-                <button type="button" class="btn btn-outline-danger" wire:click="removeNearby({{ $i }})"
-                    wire:offline.class="disabled" wire:offline.attr="disabled" wire:loading.class="disabled"
-                    wire:loading.attr="disabled">
-                    <span class="fas fa-trash fa-fw"></span>
-                </button>
-            </div>
-            @error('form.nearby.' . $i . '.place')
-                <div class="form-text text-danger">{{ $message }}</div>
-            @enderror
-            @error('form.nearby.' . $i . '.time')
-                <div class="form-text text-danger">{{ $message }}</div>
-            @enderror
-        @endforeach
-        <button type="button" class="btn btn-outline-success btn-sm" wire:click="addNearby"
-            wire:offline.class="disabled" wire:offline.attr="disabled" wire:loading.class="disabled"
-            wire:loading.attr="disabled">
-            <span class="fas fa-plus fa-fw"></span>
-            {{ trans('property.add_nearby') }}
-        </button>
-    </div>
-
-    <div class="col-12">
-        <label class="form-label">
             {{ trans('property.highlights') }}
         </label>
         @foreach ($form->highlights as $i => $highlight)
