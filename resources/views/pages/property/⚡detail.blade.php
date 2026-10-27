@@ -35,6 +35,11 @@ new #[Title('Property Detail')] class extends Component {
 
         $service->counter(property: $this->property);
     }
+
+    public function rendering(): void
+    {
+        $this->property?->loadMissing(['area.district', 'district', 'image', 'images']);
+    }
 };
 ?>
 
