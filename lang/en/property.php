@@ -214,6 +214,9 @@ return [
     'view_all_photos' => 'View All Photos',
     'request_information' => 'Request Information',
     'book_a_viewing' => 'Book a Viewing',
+    'ownership' => 'Ownership',
+    'about_this_property' => 'About This Property',
+    'ownership_and_legal_information' => 'Ownership & Legal Information',
 
     'price_per_are' => 'Price Per Are',
     'land_size_in_ares' => 'Land Size (In Ares)',

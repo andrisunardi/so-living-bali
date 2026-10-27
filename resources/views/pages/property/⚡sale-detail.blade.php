@@ -62,6 +62,35 @@ new #[Title('Property For Sale')] class extends Component {
 
     $h1 = filled($property->name) ? $property->name : $headline;
 
+    $hasDetails = collect([
+        $property->type?->description(),
+        $property->ownership_type?->description(),
+        $property->lease_expiry_date,
+        $property->lease_extension_available?->description(),
+        $property->bedroom?->description(),
+        $property->number_of_bathrooms,
+        $property->land_size,
+        $property->building_size,
+        $property->outdoor_area_size,
+        $property->year_built,
+        $property->fully_furnished ? true : null,
+        $property->pool_size,
+        $property->car_access ? true : null,
+        $property->code,
+    ])->filter()->isNotEmpty();
+
+    $hasLegal = collect([
+        $isLeasehold ? $property->lease_expiry_date : null,
+        $isLeasehold ? $property->lease_extension_available?->description() : null,
+        $isLeasehold ? $property->lease_extension_terms_or_price : null,
+        $isFreehold ? $property->land_title?->description() : null,
+        $isFreehold && $property->land_certificate ? true : null,
+        $property->zoning,
+        $property->pbg_status?->description(),
+        $property->slf_status?->description(),
+        $property->road_access?->description(),
+    ])->filter()->isNotEmpty();
+
     $faqs = [];
     if ($property->ownership_type?->description()) {
         $faqs['Is this property freehold or leasehold?'] = 'This property is offered as '.$property->ownership_type->description().'.';
@@ -119,30 +148,30 @@ new #[Title('Property For Sale')] class extends Component {
     <section class="pb-5">
         <div class="container-md">
             <div class="row g-5">
-                <div class="col-lg-7 col-xl-8">
-                    <h2 class="h4 fw-semibold mb-3">Property details</h2>
-                    <x-property.sale.details :property="$property" />
+                <div class="{{ $hasLegal ? 'col-lg-7 col-xl-8' : 'col-12' }}">
+                    @if ($hasDetails)
+                        <h2 class="h4 fw-semibold mb-3">{{ trans('property.property_details') }}</h2>
+                        <x-property.sale.details :property="$property" />
 
-                    <hr class="my-4" />
+                        <hr class="my-4" />
+                    @endif
 
-                    <h2 class="h4 fw-semibold mb-3">About this property</h2>
-                    <div class="text-body-secondary">
-                        @if ($property->translate_description)
+                    @if ($property->translate_description)
+                        <h2 class="h4 fw-semibold mb-3">{{ trans('property.about_this_property') }}</h2>
+                        <div class="text-body-secondary">
                             {!! $property->translate_description !!}
-                        @else
-                            <span class="fst-italic">
-                                {{ trans('property.no_description_about_this_property') }}
-                            </span>
-                        @endif
-                    </div>
+                        </div>
+                    @endif
                 </div>
 
-                <div class="col-lg-5 col-xl-4">
-                    <div class="card card-body rounded-4 bg-success-subtle border-0">
-                        <h2 class="h5 fw-semibold text-success-emphasis mb-3">Ownership &amp; legal information</h2>
-                        <x-property.sale.legal :property="$property" />
+                @if ($hasLegal)
+                    <div class="col-lg-5 col-xl-4">
+                        <div class="card card-body rounded-4 bg-success-subtle border-0">
+                            <h2 class="h5 fw-semibold text-success-emphasis mb-3">{{ trans('property.ownership_and_legal_information') }}</h2>
+                            <x-property.sale.legal :property="$property" />
+                        </div>
                     </div>
-                </div>
+                @endif
             </div>
         </div>
     </section>
