@@ -30,8 +30,37 @@ new #[Title('Property For Sale')] class extends Component {
 @section('title', $property->name)
 
 @php
+    use App\Enums\Property\PropertyOwnershipType;
+
     $location = $property->area?->name ?? $property->district?->name;
-    $isLeasehold = $property->ownership_type === App\Enums\Property\PropertyOwnershipType::Leasehold;
+    $isLeasehold = $property->ownership_type === PropertyOwnershipType::Leasehold;
+    $isFreehold = $property->ownership_type === PropertyOwnershipType::Freehold;
+
+    $leaseRemainingYears = null;
+    if ($isLeasehold && $property->lease_expiry_date && $property->lease_expiry_date->isFuture()) {
+        $leaseRemainingYears = (int) abs(now()->diffInYears($property->lease_expiry_date));
+    }
+
+    $tenure = null;
+    if ($isLeasehold) {
+        $tenure = $leaseRemainingYears
+            ? strtoupper('Leasehold - '.$leaseRemainingYears.' years remaining')
+            : 'LEASEHOLD';
+    } elseif ($isFreehold) {
+        $tenure = $property->land_title?->description()
+            ? strtoupper('Freehold - '.$property->land_title->description())
+            : 'FREEHOLD';
+    }
+
+    $headline = collect([
+        $property->bedroom?->description() ? $property->bedroom->description().'-Bedroom' : null,
+        $property->type?->description(),
+        'for Sale',
+        $location ? 'in '.$location : null,
+        $property->ownership_type?->description() ? '- '.$property->ownership_type->description() : null,
+    ])->filter()->implode(' ');
+
+    $h1 = filled($property->name) ? $property->name : $headline;
 
     $faqs = [];
     if ($property->ownership_type?->description()) {
@@ -59,8 +88,16 @@ new #[Title('Property For Sale')] class extends Component {
                     <li class="breadcrumb-item">
                         <a class="link-success text-decoration-none" href="{{ route('home') }}" wire:navigate>Home</a>
                     </li>
-                    <li class="breadcrumb-item">Properties for sale</li>
-                    <li class="breadcrumb-item active" aria-current="page">{{ $property->name }}</li>
+                    <li class="breadcrumb-item">
+                        <a class="link-success text-decoration-none" href="{{ route('property.properties-for-sale') }}"
+                            wire:navigate>Properties for Sale</a>
+                    </li>
+                    @if ($location)
+                        <li class="breadcrumb-item">{{ $location }}</li>
+                    @endif
+                    @if ($property->type?->description())
+                        <li class="breadcrumb-item active" aria-current="page">{{ $property->type->description() }}</li>
+                    @endif
                 </ol>
             </nav>
         </div>
@@ -74,6 +111,7 @@ new #[Title('Property For Sale')] class extends Component {
 
     <section class="py-5">
         <div class="container-md">
+            <h1 class="fw-semibold mb-4">{{ $h1 }}</h1>
             <x-property.sale.hero :property="$property" />
         </div>
     </section>
