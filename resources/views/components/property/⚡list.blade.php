@@ -19,10 +19,7 @@ new #[Lazy] class extends Component {
     public array $areas = [];
 
     #[Reactive]
-    public ?string $startDate = null;
-
-    #[Reactive]
-    public ?string $endDate = null;
+    public ?string $availableDate = null;
 
     #[Url(except: [])]
     public array $bedrooms = [];
@@ -50,7 +47,7 @@ new #[Lazy] class extends Component {
         }
 
         $service = new PropertyService();
-        $properties = $service->index(availabilityDate: $this->startDate, districts: $this->districts, areas: $this->areas, bedrooms: $this->bedrooms, livingStyle: $this->livingStyle, rentalTypes: $rentalTypes, prices: $this->prices, statuses: $statuses, paginate: false);
+        $properties = $service->index(availableDate: $this->availableDate, districts: $this->districts, areas: $this->areas, bedrooms: $this->bedrooms, livingStyle: $this->livingStyle, rentalTypes: $rentalTypes, prices: $this->prices, statuses: $statuses, paginate: false);
         $properties->loadMissing(['area', 'district', 'image']);
 
         return $properties;

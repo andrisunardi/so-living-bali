@@ -23,7 +23,7 @@ new class extends Component {
     public object $calendars;
 
     #[Url(except: null)]
-    public ?string $date = null;
+    public ?string $available_date = null;
 
     public ?string $startDate = null;
 
@@ -64,15 +64,15 @@ new class extends Component {
 
         $this->calendars();
 
-        $this->date = $this->date ?? now()->toDateString();
-        $this->startDate = $this->date;
-        $this->endDate = Carbon::parse($this->date)->addMonth();
+        $this->available_date = $this->available_date ?? now()->toDateString();
+        $this->startDate = $this->available_date;
+        $this->endDate = Carbon::parse($this->available_date)->addMonth();
 
         $minimumDate = now()->addMonth()->toDateString();
-        if ($this->rental_type == PropertyRentalType::Yearly->value && Carbon::parse($this->date)->lt($minimumDate)) {
-            $this->date = $minimumDate;
-            $this->startDate = $this->date;
-            $this->endDate = Carbon::parse($this->date)->addMonth();
+        if ($this->rental_type == PropertyRentalType::Yearly->value && Carbon::parse($this->available_date)->lt($minimumDate)) {
+            $this->available_date = $minimumDate;
+            $this->startDate = $this->available_date;
+            $this->endDate = Carbon::parse($this->available_date)->addMonth();
         }
 
         if ($this->rental_type == PropertyRentalType::Monthly->value) {
@@ -82,8 +82,8 @@ new class extends Component {
             $this->price_min = $this->monthly_min;
             $this->price_max = $this->monthly_max;
 
-            $this->startDate = $this->date;
-            $this->endDate = Carbon::parse($this->date)->addMonth();
+            $this->startDate = $this->available_date;
+            $this->endDate = Carbon::parse($this->available_date)->addMonth();
         }
 
         if ($this->rental_type == PropertyRentalType::Yearly->value) {
@@ -93,8 +93,8 @@ new class extends Component {
             $this->price_min = $this->yearly_min;
             $this->price_max = $this->yearly_max;
 
-            $this->startDate = $this->date;
-            $this->endDate = Carbon::parse($this->date)->addYear();
+            $this->startDate = $this->available_date;
+            $this->endDate = Carbon::parse($this->available_date)->addYear();
         }
     }
 
@@ -190,15 +190,15 @@ new class extends Component {
 
         if ($this->rental_type == PropertyRentalType::Monthly->value) {
             $this->month = now()->format('Y-m');
-            $this->date = now()->toDateString();
-            $this->startDate = $this->date;
+            $this->available_date = now()->toDateString();
+            $this->startDate = $this->available_date;
             $this->endDate = Carbon::parse($this->startDate)->addMonth();
         }
 
         if ($this->rental_type == PropertyRentalType::Yearly->value) {
             $this->month = now()->addMonth()->format('Y-m');
-            $this->date = now()->addMonth()->toDateString();
-            $this->startDate = $this->date;
+            $this->available_date = now()->addMonth()->toDateString();
+            $this->startDate = $this->available_date;
             $this->endDate = Carbon::parse($this->startDate)->addYear();
         }
 
@@ -237,8 +237,8 @@ new class extends Component {
     {
         $this->dispatch('keep-when-dropdown-open');
 
-        $this->date = $date;
-        $this->startDate = $this->date;
+        $this->available_date = $date;
+        $this->startDate = $this->available_date;
         $this->endDate = Carbon::parse($this->startDate)->addMonth()->toDateString();
 
         if ($this->rental_type == PropertyRentalType::Yearly->value) {
