@@ -98,6 +98,8 @@ class Guide extends Model
 
     protected $table = 'guides';
 
+    protected $with = ['category'];
+
     protected $fillable = [
         'guide_category_id',
         'title',
