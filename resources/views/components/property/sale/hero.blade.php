@@ -60,10 +60,11 @@
             $property->number_of_bathrooms ? $property->number_of_bathrooms.' '.trans('property.bathrooms') : null,
             $property->building_size ? $property->building_size.' m² '.trans('property.building') : null,
             $property->land_size ? $property->land_size.' m² '.trans('property.land') : null,
+            $property->ownership_type?->description(),
         ])->filter())
 
         @if ($specs->isNotEmpty())
-            <div class="row row-cols-2 row-cols-sm-4 g-3 border-top pt-4 mt-4">
+            <div class="row row-cols-2 row-cols-sm-3 row-cols-lg-5 g-3 border-top pt-4 mt-4">
                 @if ($property->bedroom?->description())
                     <div class="col">
                         <div class="text-body-secondary small text-uppercase">{{ trans('property.bedrooms') }}</div>
@@ -86,6 +87,12 @@
                     <div class="col">
                         <div class="text-body-secondary small text-uppercase">{{ trans('property.land') }}</div>
                         <div class="h4 fw-semibold mb-0">{{ $property->land_size }} m²</div>
+                    </div>
+                @endif
+                @if ($property->ownership_type?->description())
+                    <div class="col">
+                        <div class="text-body-secondary small text-uppercase">{{ trans('property.ownership') }}</div>
+                        <div class="h4 fw-semibold mb-0">{{ $property->ownership_type->description() }}</div>
                     </div>
                 @endif
             </div>
