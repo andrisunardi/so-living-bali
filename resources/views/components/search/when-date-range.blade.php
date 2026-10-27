@@ -17,8 +17,6 @@
             data-bs-toggle="dropdown" data-bs-auto-close="outside" data-bs-display="static">
             <span>
                 {{ Date::parse($startDate)->isoFormat('DD MMM YYYY') }}
-                <span> - </span>
-                {{ Date::parse($endDate)->isoFormat('DD MMM YYYY') }}
             </span>
         </button>
 
@@ -109,8 +107,6 @@
                                     $date = $day->toDateString();
 
                                     $isStart = $date === $startDate;
-                                    $isEnd = $date === $endDate;
-                                    $isInRange = $date > $startDate && $date < $endDate;
 
                                     $isPast = $day->lt(
                                         $rentalType === PropertyRentalType::Yearly->value
@@ -121,18 +117,14 @@
                                     $isToday = $day->isToday();
 
                                     $buttonClass = match (true) {
-                                        $isStart && $isEnd => 'btn-success rounded-pill',
-                                        $isStart => 'btn-success rounded-start-pill rounded-end-0',
-                                        $isEnd => 'btn-success rounded-end-pill rounded-start-0',
-                                        $isInRange => 'btn-success rounded-0 border-0',
+                                        $isStart => 'btn-success rounded-pill',
                                         !$day->isSameMonth($month) => 'border-0 text-secondary text-opacity-50',
                                         $isToday => 'btn-outline-success rounded-pill',
                                         default => 'border-0 text-body',
                                     };
                                 @endphp
 
-                                <td class="p-0 {{ $isInRange ? 'bg-success bg-opacity-25' : '' }}"
-                                    wire:key="day-{{ $date }}">
+                                <td class="p-0" wire:key="day-{{ $date }}">
                                     <button type="button" wire:click="selectDate('{{ $date }}')"
                                         class="btn btn-sm w-100 {{ $buttonClass }}" @disabled($isPast)>
                                         {{ $day->format('d') }}
