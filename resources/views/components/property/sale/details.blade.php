@@ -31,9 +31,11 @@
     $rows = array_filter($rows, fn ($value) => filled($value));
 @endphp
 
-<dl class="slb-dl">
+<ul class="list-group list-group-flush">
     @foreach ($rows as $label => $value)
-        <dt>{{ $label }}</dt>
-        <dd>{{ $value }}</dd>
+        <li class="list-group-item d-flex justify-content-between gap-3 px-0">
+            <span class="text-body-secondary">{{ $label }}</span>
+            <span class="fw-semibold text-end">{{ $value }}</span>
+        </li>
     @endforeach
-</dl>
+</ul>

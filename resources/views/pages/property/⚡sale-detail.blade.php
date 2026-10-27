@@ -48,13 +48,13 @@ new #[Title('Property For Sale')] class extends Component {
     }
 @endphp
 
-<div class="slb-page slb-pad-sticky">
+<div class="pb-5">
     <section class="pt-4 pt-lg-4">
         <div class="container-md">
             <nav aria-label="breadcrumb">
                 <ol class="breadcrumb small mb-0">
                     <li class="breadcrumb-item">
-                        <a class="text-brand text-decoration-none" href="{{ route('home') }}" wire:navigate>Home</a>
+                        <a class="link-success text-decoration-none" href="{{ route('home') }}" wire:navigate>Home</a>
                     </li>
                     <li class="breadcrumb-item">Properties for sale</li>
                     <li class="breadcrumb-item active" aria-current="page">{{ $property->name }}</li>
@@ -85,7 +85,7 @@ new #[Title('Property For Sale')] class extends Component {
                     <hr class="my-4" />
 
                     <h2 class="h4 fw-semibold mb-3">About this property</h2>
-                    <div class="text-mute">
+                    <div class="text-body-secondary">
                         @if ($property->translate_description)
                             {!! $property->translate_description !!}
                         @else
@@ -97,8 +97,8 @@ new #[Title('Property For Sale')] class extends Component {
                 </div>
 
                 <div class="col-lg-5 col-xl-4">
-                    <div class="card card-body rounded-4 bg-brand-soft border-0">
-                        <h2 class="h5 fw-semibold text-brand-dark mb-3">Ownership &amp; legal information</h2>
+                    <div class="card card-body rounded-4 bg-success-subtle border-0">
+                        <h2 class="h5 fw-semibold text-success-emphasis mb-3">Ownership &amp; legal information</h2>
                         <x-property.sale.legal :property="$property" />
                     </div>
 
@@ -123,15 +123,14 @@ new #[Title('Property For Sale')] class extends Component {
     @if (filled($property->highlights))
         <section class="pb-5">
             <div class="container-md">
-                <div class="slb-highlight rounded-4 p-4 p-lg-5">
+                <div class="rounded-4 p-4 p-lg-5 bg-body-tertiary">
                     <h2 class="h4 fw-semibold mb-4">{{ trans('property.why_this_property_stands_out') }}</h2>
                     <div class="row g-4">
                         @foreach ($property->highlights as $highlight)
                             <div class="col-md-6 col-lg-4">
-                                <div class="slb-highlight-item d-flex">
-                                    <span
-                                        class="slb-highlight-number text-brand">{{ str_pad($loop->iteration, 2, '0', STR_PAD_LEFT) }}</span>
-                                    <span class="slb-highlight-text">{{ $highlight }}</span>
+                                <div class="d-flex gap-3">
+                                    <span class="badge rounded-pill text-bg-success fs-6">{{ str_pad($loop->iteration, 2, '0', STR_PAD_LEFT) }}</span>
+                                    <span>{{ $highlight }}</span>
                                 </div>
                             </div>
                         @endforeach
@@ -169,13 +168,13 @@ new #[Title('Property For Sale')] class extends Component {
             <div class="row g-5">
                 <div class="col-lg-7">
                     <h2 class="h4 fw-semibold mb-3">{{ $property->name }} for sale in {{ $location ?? 'Bali' }}</h2>
-                    <p class="text-mute">
+                    <p class="text-body-secondary">
                         {{ $property->name }} is a
                         {{ $property->ownership_type?->description() ? Str::lower($property->ownership_type->description()).' ' : '' }}property
                         for sale{{ $location ? ' in '.$location : '' }}. Explore the full details above and contact our
                         team for pricing, availability and viewings.
                     </p>
-                    <a draggable="false" class="btn btn-outline-slb rounded-pill" href="{{ route('home') }}"
+                    <a draggable="false" class="btn btn-outline-success rounded-pill" href="{{ route('home') }}"
                         wire:navigate>
                         Back to home
                     </a>
@@ -195,7 +194,7 @@ new #[Title('Property For Sale')] class extends Component {
                                     </h3>
                                     <div id="faq-{{ $loop->index }}" class="accordion-collapse collapse"
                                         data-bs-parent="#sale-faq">
-                                        <div class="accordion-body text-mute">{{ $answer }}</div>
+                                        <div class="accordion-body text-body-secondary">{{ $answer }}</div>
                                     </div>
                                 </div>
                             @endforeach
@@ -210,30 +209,6 @@ new #[Title('Property For Sale')] class extends Component {
 </div>
 
 @push('script')
-    <script>
-        (function() {
-            const bar = document.getElementById('sale-sticky-cta');
-
-            if (!bar) {
-                return;
-            }
-
-            const toggleBar = function() {
-                if (window.scrollY > 600) {
-                    bar.classList.remove('slb-sticky-hidden');
-                } else {
-                    bar.classList.add('slb-sticky-hidden');
-                }
-            };
-
-            window.addEventListener('scroll', toggleBar, {
-                passive: true
-            });
-
-            toggleBar();
-        })();
-    </script>
-
     <script type="application/ld+json">
         {!! json_encode([
             '@context' => 'https://schema.org',

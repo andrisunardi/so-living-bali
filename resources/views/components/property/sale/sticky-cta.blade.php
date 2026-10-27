@@ -4,7 +4,7 @@
 
 @php($whatsappText = rawurlencode('Hello, I am interested in '.$property->name.' ('.$property->code.') on solivingbali.com'))
 
-<div class="slb-sticky slb-sticky-hidden d-lg-none p-2" id="sale-sticky-cta">
+<div class="fixed-bottom bg-body border-top d-lg-none p-2" id="sale-sticky-cta">
     <div class="container-md">
         <div class="row g-2">
             <div class="col-4">
@@ -15,14 +15,14 @@
                 </a>
             </div>
             <div class="col-4">
-                <a draggable="false" class="btn btn-slb rounded-pill w-100 btn-sm"
+                <a draggable="false" class="btn btn-success rounded-pill w-100 btn-sm"
                     href="#enquiry"
                     onclick="document.getElementById('interest-more-information')?.click();">
                     Request info
                 </a>
             </div>
             <div class="col-4">
-                <a draggable="false" class="btn btn-outline-slb rounded-pill w-100 btn-sm"
+                <a draggable="false" class="btn btn-outline-success rounded-pill w-100 btn-sm"
                     href="#enquiry"
                     onclick="document.getElementById('interest-booking-a-viewing')?.click();">
                     Book viewing
