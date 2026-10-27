@@ -203,6 +203,8 @@ return [
     'add_highlight' => 'Add Highlight',
     'why_this_property_stands_out' => 'Why This Property Stands Out',
     'view_all_photos' => 'View All Photos',
+    'request_information' => 'Request Information',
+    'book_a_viewing' => 'Book a Viewing',
 
     'price_per_are' => 'Harga Per Are',
     'land_size_in_ares' => 'Luas Tanah (dalam Are)',
