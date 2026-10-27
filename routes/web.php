@@ -34,7 +34,7 @@ Route::group(['middleware' => [Localization::class]], function () {
     Route::livewire('/property', 'pages::property.index')->name('property.index');
     // Route::livewire('/properties-for-sale', 'pages::property.properties-for-sale')->name('property.properties-for-sale');
     Route::livewire('/property/{slug}', 'pages::property.detail')->name('property.detail');
-    Route::livewire('/property-for-sale/{slug}', 'pages::property.sale-detail')->name('property.sale.detail');
+    Route::livewire('/properties-for-sale/{slug}', 'pages::property.sale-detail')->name('property.sale.detail');
 
     Route::livewire('/contact', 'pages::contact')->name('contact');
 
