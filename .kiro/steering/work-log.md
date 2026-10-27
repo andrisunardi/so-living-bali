@@ -10,7 +10,11 @@ A running record of important work and decisions, so a new Kiro session starts w
 - **Scope**: `so-living-bali` repo only.
 - **Sandbox**: PHP can't run here; the user must run `php artisan migrate` / `php artisan test` / `./vendor/bin/pint` locally. After pulling CSS changes, hard-refresh the browser.
 
-## Session (currency fix → for-sale page) — PRs #1–#7, all MERGED
+## Session (currency fix → for-sale page) — PRs #1–#9, all MERGED
+
+- **PR #9 — Rename for-sale URL**: changed the public URL from `/property-for-sale/{slug}` to `/properties-for-sale/{slug}` (plural). Route name `property.sale.detail` is unchanged, so all `route()` references keep working. After pulling, run `php artisan optimize:clear` if route caching is used. Old URL now 404s — consider a 301 redirect if the old URL was indexed/shared.
+- **PR #8 — Kiro steering**: added `.kiro/steering/{project-overview,conventions,work-log}.md`.
+
 
 - **PR #1 — Currency conversion (EUR/USD)**: `Str::currency` was assuming every stored price was IDR. Made it currency-aware (normalize via IDR using cached rates, respects the property's own `PropertyCurrency`), safe fallbacks (no bogus number / no `UnhandledMatchError`), validated the `currency/{currency}` route, hardened `ExchangeRateRefreshCurrency`, fixed a dangling `scopeCurrencyOther` (renamed to `scopeEur`). Added `tests/Unit/CurrencyMacroTest.php`.
 - **PR #2 — Lazy loading error on property detail**: `Model::preventLazyLoading()` is on; the detail page accessed `images` (HasMany) and `district` (direct BelongsTo) that weren't eager-loaded. Added them to `loadMissing(['area.district', 'district', 'image', 'images'])`.
