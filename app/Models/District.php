@@ -13,6 +13,7 @@ use Illuminate\Database\Eloquent\Relations\HasMany;
 use Illuminate\Database\Eloquent\Relations\HasManyThrough;
 use Illuminate\Database\Eloquent\SoftDeletes;
 use Illuminate\Support\Carbon;
+use Illuminate\Support\Facades\App;
 use Spatie\Activitylog\LogOptions;
 use Spatie\Activitylog\Models\Activity;
 use Spatie\Activitylog\Traits\LogsActivity;
@@ -77,6 +78,9 @@ class District extends Model
 
     protected $fillable = [
         'name',
+        'description',
+        'description_id',
+        'description_fr',
         'is_show',
         'is_active',
     ];
@@ -87,9 +91,28 @@ class District extends Model
     {
         return [
             'name' => 'string',
+            'description' => 'string',
+            'description_id' => 'string',
+            'description_fr' => 'string',
             'is_show' => 'boolean',
             'is_active' => 'boolean',
         ];
+    }
+
+    public array $translatable = [
+        'description',
+    ];
+
+    public function getTranslateDescriptionAttribute(): ?string
+    {
+        $locale = App::getLocale();
+        $language = [
+            'en' => $this->description,
+            'id' => $this->description_id,
+            'fr' => $this->description_fr,
+        ];
+
+        return $language[$locale] ?? $this->description;
     }
 
     public function getActivitylogOptions(): LogOptions
