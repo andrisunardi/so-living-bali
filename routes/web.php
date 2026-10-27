@@ -32,7 +32,7 @@ Route::group(['middleware' => [Localization::class]], function () {
     Route::livewire('/guide/{slug}', 'pages::guide.detail')->name('guide.detail');
 
     Route::livewire('/property', 'pages::property.index')->name('property.index');
-    // Route::livewire('/properties-for-sale', 'pages::property.properties-for-sale')->name('property.properties-for-sale');
+    Route::livewire('/properties-for-sale', 'pages::property.properties-for-sale')->name('property.properties-for-sale');
     Route::livewire('/property/{slug}', 'pages::property.detail')->name('property.detail');
     Route::livewire('/properties-for-sale/{slug}', 'pages::property.sale-detail')->name('property.sale.detail');
 
