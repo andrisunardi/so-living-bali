@@ -46,24 +46,25 @@ new class extends Component {
 };
 ?>
 
-<div class="slb-lead p-4 p-lg-5" id="enquiry">
-    <div class="row g-4 g-lg-5">
+<div class="card text-bg-success rounded-4" id="enquiry">
+    <div class="card-body p-4 p-lg-5">
+        <div class="row g-4 g-lg-5">
         <div class="col-lg-5">
-            <h2 class="h3 fw-semibold slb-lead-title">Interested in this property?</h2>
-            <p class="slb-lead-copy mt-3 mb-4">
+            <h2 class="h3 fw-semibold">Interested in this property?</h2>
+            <p class="text-white-50 mt-3 mb-4">
                 Leave your details and our team will get back to you about {{ $propertyName }}.
             </p>
 
-            <ul class="list-unstyled d-grid gap-3 mb-0">
-                <li class="slb-lead-feature d-flex align-items-start gap-3">
+            <ul class="list-unstyled d-grid gap-3 mb-0 text-white">
+                <li class="d-flex align-items-start gap-3">
                     <span class="fas fa-circle-info fa-fw mt-1"></span>
                     <span>Get detailed information and documents for this property.</span>
                 </li>
-                <li class="slb-lead-feature d-flex align-items-start gap-3">
+                <li class="d-flex align-items-start gap-3">
                     <span class="fas fa-calendar-check fa-fw mt-1"></span>
                     <span>Schedule a private viewing at a time that suits you.</span>
                 </li>
-                <li class="slb-lead-feature d-flex align-items-start gap-3">
+                <li class="d-flex align-items-start gap-3">
                     <span class="fab fa-whatsapp fa-fw mt-1"></span>
                     <span>Chat with our team directly on WhatsApp.</span>
                 </li>
@@ -109,7 +110,7 @@ new class extends Component {
                                 <input type="radio" class="btn-check" name="interest"
                                     id="interest-more-information" value="more_information" wire:model="interest"
                                     autocomplete="off">
-                                <label class="btn rounded-pill w-100" for="interest-more-information">
+                                <label class="btn btn-outline-light rounded-pill w-100" for="interest-more-information">
                                     More Information
                                 </label>
                             </div>
@@ -117,7 +118,7 @@ new class extends Component {
                                 <input type="radio" class="btn-check" name="interest"
                                     id="interest-booking-a-viewing" value="booking_a_viewing" wire:model="interest"
                                     autocomplete="off">
-                                <label class="btn rounded-pill w-100" for="interest-booking-a-viewing">
+                                <label class="btn btn-outline-light rounded-pill w-100" for="interest-booking-a-viewing">
                                     Booking a Viewing
                                 </label>
                             </div>
@@ -125,7 +126,7 @@ new class extends Component {
                     </div>
 
                     <div class="col-12">
-                        <button type="submit" class="btn btn-send rounded-pill w-100" wire:loading.attr="disabled"
+                        <button type="submit" class="btn btn-light rounded-pill w-100" wire:loading.attr="disabled"
                             wire:target="submit">
                             <span wire:loading.remove wire:target="submit">
                                 <span class="fas fa-paper-plane fa-fw"></span>
@@ -139,6 +140,7 @@ new class extends Component {
                     </div>
                 </div>
             </form>
+        </div>
         </div>
     </div>
 </div>

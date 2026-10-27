@@ -12,7 +12,7 @@
             data-bs-target="#sale-gallery">
             <div class="ratio ratio-4x3 h-100 rounded-4 overflow-hidden">
                 <img draggable="false" loading="lazy" decoding="async"
-                    class="slb-card-img user-select-none w-100 h-100"
+                    class="object-fit-cover user-select-none w-100 h-100"
                     src="{{ $property->image?->image_url ?? asset('images/placeholder.png') }}"
                     alt="{{ trans('property.property') }} - {{ $property->name }} - {{ config('constants.meta.title') }}"
                     onerror="this.onerror=null; this.src='/images/placeholder.png';" />
@@ -29,7 +29,7 @@
                             onclick="setTimeout(() => document.getElementById('sale-gallery-image-{{ $i }}')?.scrollIntoView({ behavior: 'smooth' }), 300)">
                             <div class="ratio ratio-4x3 rounded-4 overflow-hidden">
                                 <img draggable="false" loading="lazy" decoding="async"
-                                    class="slb-card-img user-select-none pe-none w-100 h-100"
+                                    class="object-fit-cover user-select-none pe-none w-100 h-100"
                                     src="{{ $images[$i]->image_url ?? asset('images/placeholder.png') }}"
                                     alt="{{ trans('property.property') }} - {{ trans('property.image') }} - {{ $property->name }} - {{ config('constants.meta.title') }}"
                                     onerror="this.onerror=null; this.src='/images/placeholder.png';" />
@@ -48,7 +48,7 @@
                     @else
                         <div class="ratio ratio-4x3 rounded-4 overflow-hidden">
                             <img draggable="false" loading="lazy" decoding="async"
-                                class="slb-card-img user-select-none pe-none w-100 h-100"
+                                class="object-fit-cover user-select-none pe-none w-100 h-100"
                                 src="{{ asset('images/placeholder.png') }}"
                                 alt="{{ trans('property.property') }} - {{ trans('property.image') }} - {{ $property->name }} - {{ config('constants.meta.title') }}" />
                         </div>
@@ -62,7 +62,7 @@
 @if ($imageCount > 0 || filled($property->video_tour) || filled($property->floor_plan))
     <div class="mt-3 d-flex flex-wrap gap-2">
         @if ($imageCount > 0)
-            <button type="button" class="btn btn-light-slb rounded-pill" data-bs-toggle="modal"
+            <button type="button" class="btn btn-outline-dark rounded-pill" data-bs-toggle="modal"
                 data-bs-target="#sale-gallery">
                 <span class="fas fa-images fa-fw"></span>
                 View all photos
@@ -70,7 +70,7 @@
         @endif
 
         @if (filled($property->video_tour))
-            <a draggable="false" class="btn btn-light-slb rounded-pill" href="{{ $property->video_tour }}"
+            <a draggable="false" class="btn btn-outline-dark rounded-pill" href="{{ $property->video_tour }}"
                 target="_blank" rel="noopener noreferrer">
                 <span class="fas fa-circle-play fa-fw"></span>
                 {{ trans('property.video_tour') }}
@@ -78,7 +78,7 @@
         @endif
 
         @if (filled($property->floor_plan))
-            <a draggable="false" class="btn btn-light-slb rounded-pill" href="{{ $property->floor_plan }}"
+            <a draggable="false" class="btn btn-outline-dark rounded-pill" href="{{ $property->floor_plan }}"
                 target="_blank" rel="noopener noreferrer">
                 <span class="fas fa-ruler-combined fa-fw"></span>
                 {{ trans('property.floor_plan') }}

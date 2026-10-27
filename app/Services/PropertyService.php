@@ -214,10 +214,6 @@ class PropertyService
             $data['status'] = ($data['status'] ?? PropertyStatus::Pending) ?: PropertyStatus::Pending;
             $data['owner_representative_id'] = ($data['owner_representative_id'] ?? null) ?: null;
 
-            $data['nearby'] = array_values(array_filter(
-                $data['nearby'] ?? [],
-                fn ($row) => filled($row['place'] ?? null) || filled($row['time'] ?? null)
-            )) ?: null;
             $data['highlights'] = array_values(array_filter(
                 $data['highlights'] ?? [],
                 fn ($value) => filled($value)
@@ -329,10 +325,6 @@ class PropertyService
             $data['latitude'] = $data['latitude'] ?: null;
             $data['longitude'] = $data['longitude'] ?: null;
 
-            $data['nearby'] = array_values(array_filter(
-                $data['nearby'] ?? [],
-                fn ($row) => filled($row['place'] ?? null) || filled($row['time'] ?? null)
-            )) ?: null;
             $data['highlights'] = array_values(array_filter(
                 $data['highlights'] ?? [],
                 fn ($value) => filled($value)

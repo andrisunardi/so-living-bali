@@ -195,9 +195,6 @@ return [
     'developer_name' => 'Nama Pengembang (Developer)',
 
     'nearby' => 'Nearby',
-    'nearby_place' => 'Place',
-    'nearby_time' => 'Travel Time',
-    'add_nearby' => 'Add Nearby Place',
     'video_tour' => 'Video Tour',
     'video_tour_helper' => 'Video tour URL',
     'floor_plan' => 'Floor Plan',
