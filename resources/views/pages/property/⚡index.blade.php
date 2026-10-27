@@ -16,10 +16,7 @@ new #[Title('Property')] class extends Component {
     public array $areas = [];
 
     #[Url(except: null)]
-    public ?string $start_date = null;
-
-    #[Url(except: null)]
-    public ?string $end_date = null;
+    public ?string $available_date = null;
 
     #[Url(except: [])]
     public array $bedrooms = [];
@@ -41,8 +38,7 @@ new #[Title('Property')] class extends Component {
             $this->area = collect()->merge($selectedDistricts->pluck('name'))->merge($selectedAreas->pluck('name'))->unique()->join(', ');
         }
 
-        $this->start_date = $this->start_date ?? today()->toDateString();
-        $this->end_date = $this->end_date ?? today()->toDateString();
+        $this->available_date = $this->available_date ?? today()->toDateString();
     }
 
     // CEK NANTI
@@ -69,8 +65,7 @@ new #[Title('Property')] class extends Component {
     :area="$area"
     :districts="$districts"
     :areas="$areas"
-    :start-date="$start_date"
-    :end-date="$end_date"
+    :available-date="$available_date"
     :bedrooms="$bedrooms"
     :living-style="$living_style"
     :rental-type="$rental_type"
