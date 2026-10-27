@@ -10,6 +10,10 @@ A running record of important work and decisions, so a new Kiro session starts w
 - **Scope**: `so-living-bali` repo only.
 - **Sandbox**: PHP can't run here; the user must run `php artisan migrate` / `php artisan test` / `./vendor/bin/pint` locally. After pulling CSS changes, hard-refresh the browser.
 
+## Session (header Properties dropdown) — PR #22, MERGED
+
+- **PR #22 — Enable Properties dropdown in header**: Uncommented the `childrens` entries on the Properties item in `config/navigations.php` → header now shows a dropdown with For Rent (`property.index`) and For Sales (`property.properties-for-sale`). `components/layout/header.blade.php` already renders `childrens` as a dropdown (desktop) and collapsible group (mobile offcanvas) via `@isset`. Route + `index.for_rent`/`index.for_sales` translations (en/fr/id) already exist. Local: `php artisan optimize:clear` to reload cached config.
+
 ## Session (available_date field + 3-month window) — PR #20, MERGED
 
 - **PR #20 — Single `available_date` field on property index + BETWEEN 3-month window (per owner spec)**: Owner's final spec: property.index uses ONE `available_date` form field (the search calendar date), passed to `properties()` → `PropertyService::index(availableDate: $this->available_date)`, filtering `availability_date BETWEEN availableDate AND availableDate + 3 months`. Example: pick 27 Oct 2026 → `BETWEEN 2026-10-27 AND 2027-01-27`. Changes: `pages/property/⚡index.blade.php` replaced `start_date`/`end_date` with one `available_date` (`#[Url]`, default today), passes `:available-date` to the list; `components/property/⚡list.blade.php` `startDate`/`endDate` → single `availableDate` (Reactive), calls `index(availableDate: ...)`; `components/property/⚡search.blade.php` renamed the calendar's `date` property to `available_date` (same `#[Url]` name as index so the selected date flows straight into the filter; `startDate`/`endDate` kept only for calendar highlight display); `PropertyService::index()` param `availabilityDate` → `availableDate`, filter is now `whereBetween`. CMS `startDate`/`endDate` logic untouched.
