@@ -144,7 +144,7 @@ new #[Lazy] class extends Component {
                 @foreach ($this->properties() as $property)
                     <div class="col" wire:key="property-{{ $property['id'] }}">
                         <div class="ratio ratio-16x9 overflow-hidden">
-                            <a draggable="false" href="{{ route('property.detail', ['slug' => $property['slug']]) }}"
+                            <a draggable="false" href="{{ route('property.sale.detail', ['slug' => $property['slug']]) }}"
                                 wire:navigate>
                                 <img draggable="false" loading="lazy" decoding="async"
                                     class="img-fluid w-100 h-100 object-fit-cover rounded user-select-none pe-none"
@@ -163,7 +163,7 @@ new #[Lazy] class extends Component {
 
                         <h1 class="h6 mt-3">
                             <a draggable="false" class="text-body"
-                                href="{{ route('property.detail', ['slug' => $property->slug]) }}" wire:navigate>
+                                href="{{ route('property.sale.detail', ['slug' => $property->slug]) }}" wire:navigate>
                                 {{ $property->name }}
                             </a>
                         </h1>
