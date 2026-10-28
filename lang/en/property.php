@@ -184,10 +184,12 @@ return [
     'images' => 'Images',
 
     'listing_type' => 'Listing Type',
+    'listing_information' => 'Listing Information',
+    'image' => 'Image',
     'listing_types' => [
         'for_rent' => 'For Rent',
-        'for_sale' => 'For Sale',
-        'for_rent_and_sale' => 'For Rent And Sale',
+        'for_sales' => 'For Sale',
+        'for_rent_and_for_sales' => 'For Rent And Sale',
     ],
     'reference' => 'Reference',
 

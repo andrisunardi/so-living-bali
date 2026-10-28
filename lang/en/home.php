@@ -65,6 +65,7 @@ return [
         'read_more' => 'Read More',
         'another_guide' => 'Another Guide',
         'all_category' => 'All Category',
+        'guide' => 'Guide',
     ],
 
     'faqs' => [

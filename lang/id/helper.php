@@ -14,8 +14,12 @@ return [
     'required' => 'Wajib',
     'unique' => 'Unik',
     'default' => 'Default',
-
-    'contact.code.add' => 'Biarkan kosong untuk membuat kontak di GHL.',
-    'contact.code.edit' => 'Mengubah kode ini akan mempengaruhi cara sinkronisasi dengan GHL.',
+    'contact' => [
+        'code' => [
+            'add' => 'Leave blank to create a contact in GHL.',
+            'edit' => 'Changing this code will affect how it syncs with GHL.',
+        ],
+    ],
+    'size' => 'Size',
 
 ];

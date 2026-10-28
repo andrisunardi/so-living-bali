@@ -14,8 +14,12 @@ return [
     'required' => 'Obligatoire',
     'unique' => 'Unique',
     'default' => 'Par défaut',
-
-    'contact.code.add' => 'Laissez vide pour créer un contact dans GHL.',
-    'contact.code.edit' => 'Modifier ce code affectera la façon dont il se synchronise avec GHL.',
+    'contact' => [
+        'code' => [
+            'add' => 'Leave blank to create a contact in GHL.',
+            'edit' => 'Changing this code will affect how it syncs with GHL.',
+        ],
+    ],
+    'size' => 'Size',
 
 ];

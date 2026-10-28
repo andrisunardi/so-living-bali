@@ -7,18 +7,20 @@ return [
         'title' => 'Propriétés à vendre à Bali',
         'description' => 'Une collection exclusive de maisons et de propriétés résidentielles à vendre à travers Bali. Sélectionnées pour leur emplacement, leur qualité, leur clarté juridique et leur potentiel résidentiel à long terme.',
     ],
-
+    'overview' => [
+        'sub_title' => 'About Buying In Bali',
+        'title' => 'Properties for Sale In Bali',
+        'description' => 'Bali offers a unique blend of natural beauty, vibrant culture and a welcoming community, making it one of the most desirable places in the world to own a home. Our curated collection includes villas, modern residences, land and exclusive properties in sought-after locations across the island.<br /><br />Whether you are looking for a family home, a second residence or a long-term investment for personal use, our team is here to help you find the right property with clarity and confidence.',
+    ],
     'cta' => [
         'title' => 'Parlez-nous de votre projet d\'installation',
         'description' => 'Nous vous aiderons à trouver le logement idéal et vous accompagnerons à chaque étape.',
         'button' => 'Contactez-nous',
     ],
-
     'guides' => [
         'sub_title' => 'Explorer plus',
         'title' => 'Trouvez votre propriété idéale',
     ],
-
     'villa' => 'Villa',
     'apartment' => 'Appartement',
     'land' => 'Terrain',
@@ -26,10 +28,10 @@ return [
     'hotel' => 'Hôtel',
     'villa_complex' => 'Complexe de villas',
     'other' => 'Autre',
-
+    'our_selection' => 'Our Selection',
+    'selected_properties' => 'Selected Properties',
     'property_count' => 'Plus de <b>:count</b> logements à :area',
     'all_areas' => 'toutes les zones',
-
     'property' => 'Propriété',
     'per_month' => 'Par mois',
     'per_year' => 'Par an',
@@ -41,7 +43,6 @@ return [
     'more_images' => 'Plus d\'images',
     'whatsapp' => 'WhatsApp',
     'email' => 'E-mail',
-
     'property_details' => 'Détails de la propriété',
     'availability' => 'Disponibilité',
     'chat_for_check_availability_on_whatsapp' => 'Discuter sur WhatsApp pour vérifier la disponibilité',
@@ -53,12 +54,10 @@ return [
     'non_furnished' => 'Non meublé',
     'rental_type' => 'Type de location',
     'minimum_rental_period' => 'Période de location minimale',
-
     'what_this_home_offers' => 'Ce que propose ce logement',
     'monthly' => 'Mensuel',
     'yearly' => 'Annuel',
     'weeks' => 'Semaines',
-
     'property_identity' => 'Identité de la propriété',
     'internal_property_code' => 'Code interne de la propriété',
     'availability_date' => 'Date de disponibilité',
@@ -67,21 +66,18 @@ return [
     'year_built' => 'Année de construction',
     'completion_date' => 'Date d\'achèvement',
     'bedroom' => 'Chambre',
-
     'location' => 'Emplacement',
     'villa_name' => 'Nom de la villa',
     'google_maps_url' => 'Lien Google Maps',
     'gps_coordinates' => 'Coordonnées GPS (Lat / Long) :',
     'address' => 'Adresse',
     'district_or_area' => 'District / Zone ',
-
     'size_and_surfaces' => 'Superficie et surfaces',
     'land_size' => 'Surface du terrain (m²)',
     'building_size' => 'Surface construite (m²)',
     'number_of_floors' => 'Nombre d\'étages',
     'outdoor_area_size' => 'Surface extérieure (m², optionnel)',
     'pool_size' => 'Taille de la piscine (L x l, si applicable)',
-
     'bathrooms_and_layout' => 'Salles de bain et agencement',
     'number_of_bathrooms' => 'Nombre de salles de bain',
     'ensuite_bathrooms' => 'Salles de bain attenantes (OUI / NON)',
@@ -91,7 +87,6 @@ return [
     'living_style_open' => 'Ouvert',
     'living_style_enclosed' => 'Fermé',
     'living_style_mixed' => 'Mixte',
-
     'legal_and_basic_eligibility' => 'Aspects juridiques et éligibilité de base',
     'legal_documentation' => 'Documentation juridique',
     'full_legal_documentation_available' => 'Documentation juridique complète disponible',
@@ -109,13 +104,11 @@ return [
     'road_access' => 'Accès routier',
     'road_access_width' => 'Largeur de l\'accès routier',
     'car_access' => 'Accès voiture',
-
     'fully_furnished' => 'Entièrement meublé',
     'rental_type_accepted' => 'Types de location acceptés',
     'minimum_rental_duration' => 'Durée minimale de location (mois)',
     'owner_price_flexibility' => 'Flexibilité du prix du propriétaire (Fixe / Négociable)',
     'price_coherent_with_upper_or_premium_positioning' => 'Prix cohérent avec un positionnement haut de gamme / Premium',
-
     'environment_and_tranquility' => 'Environnement et tranquillité',
     'not_directly_exposed_to_main_road' => 'Non exposé directement à la route principale',
     'no_festive_venue_nearby' => 'Aucun lieu festif à proximité',
@@ -123,32 +116,26 @@ return [
     'quiet_access_road_or_gang' => 'Route d\'accès ou ruelle calme',
     'orientation' => 'Orientation (Soleil du matin / Après-midi / Mixte)',
     'view' => 'Vue (texte libre)',
-
     'light_and_acoustics' => 'Luminosité et acoustique',
     'living_area_has_natural_light' => 'Espace de vie avec lumière naturelle',
     'bedroom_1_has_natural_light' => 'Chambre 1 avec lumière naturelle',
     'bedroom_2_has_natural_light' => 'Chambre 2 avec lumière naturelle',
     'noise_source_identified' => 'Source de bruit identifiée (le cas échéant)',
-
     'utilities_and_technical' => 'Équipements et détails techniques',
     'internet_speedtest' => 'Test de vitesse Internet (Mbps)',
     'power_backup' => 'Alimentation de secours (Générateur / Solaire / Aucune)',
     'water_source' => 'Source d\'eau',
     'electricity' => 'Électricité',
-
     'category_assessment' => 'Évaluation de la catégorie',
     'eligible_for_upper' => 'Éligible à la gamme supérieure (Upper)',
     'eligible_for_premium' => 'Éligible à la gamme Premium',
-
     'design_led_or_instagrammable' => 'Orienté design / Instagrammable',
     'design_driven_property' => 'Propriété axée sur le design (OUI / NON)',
     'usability_limitations_identified' => 'Limites d\'utilisation identifiées',
-
     'trade_off_and_target_profile' => 'Compromis et profil cible',
     'trade_off_identified' => 'Compromis identifiés',
     'if_yes_describe_briefly' => 'Si OUI, décrivez brièvement',
     'target_profiles' => 'Profil cible',
-
     'price_and_inclusions' => 'Prix et prestations incluses',
     'monthly_price' => 'Prix mensuel',
     'yearly_price' => 'Prix annuel',
@@ -161,7 +148,6 @@ return [
     'banjar' => 'Cotisation Banjar',
     'security' => 'Sécurité',
     'others' => 'Autres',
-
     'owner_and_contact' => 'Propriétaire et contact',
     'owner' => 'Propriétaire',
     'owner_name' => 'Nom du propriétaire',
@@ -171,17 +157,16 @@ return [
     'owner_representative_name' => 'Nom du représentant',
     'owner_representative_phone' => 'Téléphone du représentant',
     'owner_representative_email' => 'E-mail du représentant',
-
     'images' => 'Images',
-
     'listing_type' => 'Type d\'annonce',
+    'listing_information' => 'Listing Information',
+    'image' => 'Image',
     'listing_types' => [
         'for_rent' => 'À louer',
-        'for_sale' => 'À vendre',
-        'for_rent_and_sale' => 'À louer et à vendre',
+        'for_sales' => 'For Sale',
+        'for_rent_and_for_sales' => 'For Rent And Sale',
     ],
     'reference' => 'Référence',
-
     'sale_information' => 'Informations sur la vente',
     'sale_price' => 'Prix de vente',
     'currency' => 'Devise',
@@ -193,7 +178,6 @@ return [
     'payment_plan_available' => 'Plan de paiement disponible',
     'payment_plan_details' => 'Détails du plan de paiement',
     'developer_name' => 'Nom du promoteur',
-
     'nearby' => 'Nearby',
     'video_tour' => 'Video Tour',
     'video_tour_helper' => 'Video tour URL',
@@ -214,21 +198,19 @@ return [
     'about_this_property' => 'About This Property',
     'about_the_area' => 'À propos de :area',
     'ownership_and_legal_information' => 'Ownership & Legal Information',
-
     'price_per_are' => 'Prix par Are',
     'land_size_in_ares' => 'Surface du terrain (en Ares)',
     'road_frontage' => 'Façade sur rue',
     'land_contour' => 'Relief du terrain',
     'subdivision_possible' => 'Division / Parcellaire possible',
     'minimum_purchase_size' => 'Surface minimale d\'achat',
-
     'operational_risk' => 'Risque opérationnel',
     'operational_risk_level' => 'Faible / Moyen / Élevé',
     'comments_if_medium_or_high' => 'Commentaires si Moyen ou Élevé',
     'final_decision' => 'Décision finale',
     'type' => 'Type',
     'status' => 'Statut',
-
     'carpot' => 'Carport / Abri voiture',
     'floors' => 'Étages',
+
 ];
