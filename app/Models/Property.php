@@ -641,6 +641,21 @@ class Property extends Model
         return $language[$locale] ?? $this->description;
     }
 
+    public function getSaleAreaSlugAttribute(): string
+    {
+        $area = $this->area?->name ?? $this->district?->name ?? 'Bali';
+
+        return \Illuminate\Support\Str::slug($area);
+    }
+
+    public function getSaleUrlAttribute(): string
+    {
+        return route('property.sale.detail', [
+            'area' => $this->sale_area_slug,
+            'slug' => $this->slug,
+        ]);
+    }
+
     // public function getImageAttribute(): string
     // {
     //     return "https://lh3.googleusercontent.com/d/{$this->image_path}";

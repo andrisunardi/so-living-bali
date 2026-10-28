@@ -39,7 +39,7 @@ class PropertySaleDetailTest extends TestCase
             'listing_type' => PropertyListingType::ForSale,
         ]);
 
-        $response = $this->get(route('property.sale.detail', ['slug' => $property->slug]));
+        $response = $this->get(route('property.sale.detail', ['area' => 'bali', 'slug' => $property->slug]));
 
         $response->assertStatus(200);
         $response->assertSee($property->name);
@@ -52,7 +52,7 @@ class PropertySaleDetailTest extends TestCase
             'listing_type' => PropertyListingType::ForRentAndSale,
         ]);
 
-        $response = $this->get(route('property.sale.detail', ['slug' => $property->slug]));
+        $response = $this->get(route('property.sale.detail', ['area' => 'bali', 'slug' => $property->slug]));
 
         $response->assertStatus(200);
         $response->assertSee($property->name);
@@ -72,7 +72,7 @@ class PropertySaleDetailTest extends TestCase
             'floor_plan' => 'https://example.com/floor-plan.pdf',
         ]);
 
-        $response = $this->get(route('property.sale.detail', ['slug' => $property->slug]));
+        $response = $this->get(route('property.sale.detail', ['area' => 'bali', 'slug' => $property->slug]));
 
         $response->assertStatus(200);
         $response->assertSee('Ocean view rooftop');
@@ -94,7 +94,7 @@ class PropertySaleDetailTest extends TestCase
             'floor_plan' => null,
         ]);
 
-        $response = $this->get(route('property.sale.detail', ['slug' => $property->slug]));
+        $response = $this->get(route('property.sale.detail', ['area' => 'bali', 'slug' => $property->slug]));
 
         $response->assertStatus(200);
         $response->assertDontSee('Why This Property Stands Out');
@@ -105,7 +105,7 @@ class PropertySaleDetailTest extends TestCase
 
     public function test_for_sale_detail_returns_404_for_unknown_slug(): void
     {
-        $response = $this->get(route('property.sale.detail', ['slug' => 'non-existent-slug']));
+        $response = $this->get(route('property.sale.detail', ['area' => 'bali', 'slug' => 'non-existent-slug']));
 
         $response->assertStatus(404);
     }
@@ -117,7 +117,7 @@ class PropertySaleDetailTest extends TestCase
             'listing_type' => PropertyListingType::ForRent,
         ]);
 
-        $response = $this->get(route('property.sale.detail', ['slug' => $property->slug]));
+        $response = $this->get(route('property.sale.detail', ['area' => 'bali', 'slug' => $property->slug]));
 
         $response->assertStatus(404);
     }
@@ -129,7 +129,7 @@ class PropertySaleDetailTest extends TestCase
             'listing_type' => PropertyListingType::ForSale,
         ]);
 
-        $response = $this->get(route('property.sale.detail', ['slug' => $property->slug]));
+        $response = $this->get(route('property.sale.detail', ['area' => 'bali', 'slug' => $property->slug]));
 
         $response->assertStatus(404);
     }
