@@ -122,10 +122,7 @@ class PropertyService
             ->when($status, fn ($q) => $q->where('status', $status))
             ->when($statuses, fn ($q) => $q->whereIn('status', $statuses))
             ->when($availableDate, function ($query) use ($availableDate) {
-                $query->whereBetween('availability_date', [
-                    $availableDate,
-                    Carbon::parse($availableDate)->addMonths(3)->toDateString(),
-                ]);
+                $query->whereDate('availability_date', '<=', Carbon::parse($availableDate)->addMonths(3)->toDateString());
             })
             // ->when($startDate, fn($q) => $q->whereDate('availability_date', '>=', $startDate))
             // ->when($endDate, fn($q) => $q->whereDate('availability_date', '<=', $endDate))
