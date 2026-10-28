@@ -17,6 +17,15 @@ class AreaEditForm extends Form
 
     public string $name = '';
 
+    #[Validate('nullable|string|max:65535')]
+    public ?string $description = null;
+
+    #[Validate('nullable|string|max:65535')]
+    public ?string $description_id = null;
+
+    #[Validate('nullable|string|max:65535')]
+    public ?string $description_fr = null;
+
     #[Validate('required|boolean')]
     public bool $is_promoted = true;
 
@@ -31,6 +40,9 @@ class AreaEditForm extends Form
         $this->area = $area;
         $this->district_id = $area->district_id;
         $this->name = $area->name;
+        $this->description = $area->description;
+        $this->description_id = $area->description_id;
+        $this->description_fr = $area->description_fr;
         $this->is_promoted = $area->is_promoted;
         $this->is_show = $area->is_show;
         $this->is_active = $area->is_active;

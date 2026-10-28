@@ -15,6 +15,15 @@ class AreaAddForm extends Form
 
     public string $name = '';
 
+    #[Validate('nullable|string|max:65535')]
+    public ?string $description = null;
+
+    #[Validate('nullable|string|max:65535')]
+    public ?string $description_id = null;
+
+    #[Validate('nullable|string|max:65535')]
+    public ?string $description_fr = null;
+
     #[Validate('required|boolean')]
     public bool $is_promoted = true;
 

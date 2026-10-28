@@ -216,6 +216,7 @@ return [
     'book_a_viewing' => 'Book a Viewing',
     'ownership' => 'Ownership',
     'about_this_property' => 'About This Property',
+    'about_the_area' => 'About :area',
     'ownership_and_legal_information' => 'Ownership & Legal Information',
 
     'price_per_are' => 'Price Per Are',
