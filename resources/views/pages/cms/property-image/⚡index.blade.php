@@ -7,8 +7,7 @@ use App\Services\PropertyService;
 use App\Services\PropertyImageService;
 use Livewire\Attributes\Title;
 use Livewire\Attributes\Url;
-use Maatwebsite\Excel\Facades\Excel;
-use Symfony\Component\HttpFoundation\BinaryFileResponse;
+use Symfony\Component\HttpFoundation\StreamedResponse;
 
 new #[Title('Property')] class extends Component {
     #[Url(except: '')]
@@ -52,7 +51,7 @@ new #[Title('Property')] class extends Component {
         return $propertyImages;
     }
 
-    public function export(): BinaryFileResponse
+    public function export(): StreamedResponse
     {
         $this->alertSuccess(title: trans('index.export') . ' ' . trans('index.success'), body: trans('page.property_image') . ' ' . trans('message.has_been_successfully_exported'));
 
@@ -60,7 +59,7 @@ new #[Title('Property')] class extends Component {
         $propertyImages = $service->index(orderBy: 'id', sortBy: 'asc', paginate: false);
         $propertyImages->loadMissing(['property', 'createdBy', 'updatedBy']);
 
-        return Excel::download(new PropertyImageExport(propertyImages: $propertyImages), trans('page.property_image') . '.xlsx');
+        return (new PropertyImageExport(propertyImages: $propertyImages))->download(trans('page.property_image') . '.xlsx');
     }
 };
 ?>

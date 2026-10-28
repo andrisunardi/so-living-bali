@@ -11,8 +11,7 @@ use App\Services\ContactService;
 use App\Services\DistrictService;
 use Livewire\Attributes\Title;
 use Livewire\Attributes\Url;
-use Maatwebsite\Excel\Facades\Excel;
-use Symfony\Component\HttpFoundation\BinaryFileResponse;
+use Symfony\Component\HttpFoundation\StreamedResponse;
 
 new #[Title('Contact')] class extends Component {
     #[Url(except: '')]
@@ -97,7 +96,7 @@ new #[Title('Contact')] class extends Component {
         return $contacts;
     }
 
-    public function export(): BinaryFileResponse
+    public function export(): StreamedResponse
     {
         $this->alertSuccess(title: trans('index.export') . ' ' . trans('index.success'), body: trans('page.contact') . ' ' . trans('message.has_been_successfully_exported'));
 
@@ -105,7 +104,7 @@ new #[Title('Contact')] class extends Component {
         $contacts = $service->index(startDate: $this->start_date, endDate: $this->end_date, orderBy: 'id', sortBy: 'asc', paginate: false);
         $contacts->loadMissing(['owners', 'ownerRepresentatives', 'createdBy', 'updatedBy']);
 
-        return Excel::download(new ContactExport(contacts: $contacts), trans('page.contact') . '.xlsx');
+        return (new ContactExport(contacts: $contacts))->download(trans('page.contact') . '.xlsx');
     }
 };
 ?>

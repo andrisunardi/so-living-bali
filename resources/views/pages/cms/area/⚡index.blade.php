@@ -7,8 +7,7 @@ use App\Services\AreaService;
 use App\Services\DistrictService;
 use Livewire\Attributes\Title;
 use Livewire\Attributes\Url;
-use Maatwebsite\Excel\Facades\Excel;
-use Symfony\Component\HttpFoundation\BinaryFileResponse;
+use Symfony\Component\HttpFoundation\StreamedResponse;
 
 new #[Title('Area')] class extends Component {
     #[Url(except: '')]
@@ -86,7 +85,7 @@ new #[Title('Area')] class extends Component {
         return $areas;
     }
 
-    public function export(): BinaryFileResponse
+    public function export(): StreamedResponse
     {
         $this->alertSuccess(title: trans('index.export') . ' ' . trans('index.success'), body: trans('page.area') . ' ' . trans('message.has_been_successfully_exported'));
 
@@ -95,7 +94,7 @@ new #[Title('Area')] class extends Component {
         $areas->loadMissing(['district', 'createdBy', 'updatedBy']);
         $areas->loadCount(['contacts', 'properties']);
 
-        return Excel::download(new AreaExport(areas: $areas), trans('page.area') . '.xlsx');
+        return (new AreaExport(areas: $areas))->download(trans('page.area') . '.xlsx');
     }
 };
 ?>

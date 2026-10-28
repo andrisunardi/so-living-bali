@@ -26,7 +26,6 @@ use App\Enums\Property\PropertyType;
 use App\Enums\Property\PropertyWaterSource;
 use Barryvdh\DomPDF\Facade\Pdf;
 use Illuminate\Support\Facades\Facade;
-use Maatwebsite\Excel\Facades\Excel;
 use SimpleSoftwareIO\QrCode\Facades\QrCode;
 use Spatie\Menu\Laravel\Facades\Menu;
 use Spatie\Permission\Middleware\PermissionMiddleware;
@@ -92,7 +91,6 @@ return [
         'PropertyType' => PropertyType::class,
         'PropertyWaterSource' => PropertyWaterSource::class,
 
-        'Excel' => Excel::class,
         'Menu' => Menu::class,
         'PDF' => Pdf::class,
         'QrCode' => QrCode::class,

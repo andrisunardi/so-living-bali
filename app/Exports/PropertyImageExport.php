@@ -2,26 +2,45 @@
 
 namespace App\Exports;
 
-use Illuminate\Contracts\View\View;
-use Maatwebsite\Excel\Concerns\Exportable;
-use Maatwebsite\Excel\Concerns\FromView;
-use Maatwebsite\Excel\Concerns\ShouldAutoSize;
+use Spatie\SimpleExcel\SimpleExcelWriter;
+use Symfony\Component\HttpFoundation\StreamedResponse;
 
-class PropertyImageExport implements FromView, ShouldAutoSize
+class PropertyImageExport
 {
-    use Exportable;
+    public function __construct(public object $propertyImages) {}
 
-    public object $propertyImages;
-
-    public function __construct(object $propertyImages)
+    public function download(string $filename): StreamedResponse
     {
-        $this->propertyImages = $propertyImages;
-    }
+        $writer = SimpleExcelWriter::streamDownload($filename);
 
-    public function view(): View
-    {
-        return view('excel.property-image', [
-            'propertyImages' => $this->propertyImages,
+        $writer->addHeader([
+            trans('field.#'),
+            trans('field.id'),
+            trans('field.property_id'),
+            trans('field.name'),
+            trans('field.description'),
+            trans('field.image_url'),
+            trans('field.created_by'),
+            trans('field.updated_by'),
+            trans('field.created_at'),
+            trans('field.updated_at'),
         ]);
+
+        foreach ($this->propertyImages as $index => $propertyImage) {
+            $writer->addRow([
+                $index + 1,
+                $propertyImage->id,
+                $propertyImage->property?->code,
+                $propertyImage->name,
+                $propertyImage->google_file_id,
+                $propertyImage->image_url,
+                $propertyImage->createdBy?->name,
+                $propertyImage->updatedBy?->name,
+                (string) $propertyImage->created_at,
+                (string) $propertyImage->updated_at,
+            ]);
+        }
+
+        return $writer->toBrowser();
     }
 }

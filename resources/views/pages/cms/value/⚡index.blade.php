@@ -6,8 +6,7 @@ use App\Models\Value;
 use App\Services\ValueService;
 use Livewire\Attributes\Title;
 use Livewire\Attributes\Url;
-use Maatwebsite\Excel\Facades\Excel;
-use Symfony\Component\HttpFoundation\BinaryFileResponse;
+use Symfony\Component\HttpFoundation\StreamedResponse;
 
 new #[Title('Value')] class extends Component {
     #[Url(except: '')]
@@ -52,7 +51,7 @@ new #[Title('Value')] class extends Component {
         return $values;
     }
 
-    public function export(): BinaryFileResponse
+    public function export(): StreamedResponse
     {
         $this->alertSuccess(title: trans('index.export') . ' ' . trans('index.success'), body: trans('page.value') . ' ' . trans('message.has_been_successfully_exported'));
 
@@ -60,7 +59,7 @@ new #[Title('Value')] class extends Component {
         $values = $service->index(orderBy: 'id', sortBy: 'asc', paginate: false);
         $values->loadMissing(['createdBy', 'updatedBy']);
 
-        return Excel::download(new ValueExport(values: $values), trans('page.value') . '.xlsx');
+        return (new ValueExport(values: $values))->download(trans('page.value') . '.xlsx');
     }
 };
 ?>

@@ -7,8 +7,7 @@ use App\Services\GuideService;
 use App\Services\GuideCategoryService;
 use Livewire\Attributes\Title;
 use Livewire\Attributes\Url;
-use Maatwebsite\Excel\Facades\Excel;
-use Symfony\Component\HttpFoundation\BinaryFileResponse;
+use Symfony\Component\HttpFoundation\StreamedResponse;
 
 new #[Title('Guide')] class extends Component {
     #[Url(except: '')]
@@ -74,7 +73,7 @@ new #[Title('Guide')] class extends Component {
         return $guides;
     }
 
-    public function export(): BinaryFileResponse
+    public function export(): StreamedResponse
     {
         $this->alertSuccess(title: trans('index.export') . ' ' . trans('index.success'), body: trans('page.guide') . ' ' . trans('message.has_been_successfully_exported'));
 
@@ -82,7 +81,7 @@ new #[Title('Guide')] class extends Component {
         $guides = $service->index(orderBy: 'id', sortBy: 'asc', paginate: false);
         $guides->loadMissing(['category', 'createdBy', 'updatedBy']);
 
-        return Excel::download(new GuideExport(guides: $guides), trans('page.guide') . '.xlsx');
+        return (new GuideExport(guides: $guides))->download(trans('page.guide') . '.xlsx');
     }
 };
 ?>
