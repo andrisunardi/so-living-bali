@@ -10,6 +10,18 @@ A running record of important work and decisions, so a new Kiro session starts w
 - **Scope**: `so-living-bali` repo only.
 - **Sandbox**: PHP can't run here; the user must run `php artisan migrate` / `php artisan test` / `./vendor/bin/pint` locally. After pulling CSS changes, hard-refresh the browser.
 
+> SANDBOX UPDATE: PHP 8.5.12 + Composer 2.8.12 DO run in the current environment (the old libgd.so.3 blocker no longer applies). `php artisan test`, `composer audit`, `composer update`, `php -l` all work here now — use them to verify before shipping. (DB tests: suite uses in-memory sqlite; tests with RefreshDatabase pass. The default stub `tests/Feature/ExampleTest` hits `/` without migrations and fails — pre-existing, unrelated.)
+
+## Session (PHP 8.5 + Excel security) — PRs #35–#38, MERGED
+
+- **PR #35** require.php ^8.5. **PR #36** config.platform.php 8.5.0. **PR #37** regenerated composer.lock on 8.5 (temporarily downgraded maatwebsite/excel 3.1.70→3.1.68 + phpspreadsheet 1.30.7→1.30.0 because 1.30.5-1.30.7 declare php <8.5.0; left 13 CVEs open on purpose).
+- **PR #38 — Replace maatwebsite/excel with spatie/simple-excel**: fixes all 13 advisories (critical SSRF/RCE in phpspreadsheet) and stays 8.5-compatible by dropping phpspreadsheet entirely. All 15 exports rewritten to `SimpleExcelWriter::streamDownload` (`addHeader` + positional `addRow`) preserving the exact columns/row content from the old `excel/*.blade.php` views; title-banner/printed-at rows dropped (unsupported). `PropertyExport` no longer embeds images (phpspreadsheet-only) — image column is now the image URL as text. All 14 CMS `export()` methods now `return (new XExport(...))->download('name.xlsx')` (StreamedResponse). Removed maatwebsite/excel + phpspreadsheet, `config/excel.php`, the Excel facade alias in `config/app.php`, all `resources/views/excel/*`, and dead `ProductExport`. Verified locally on PHP 8.5.12: `composer audit` = no advisories; PropertySaleDetail + CurrencyMacro tests pass (17).
+  - Export pattern to reuse: each `App\Exports\*Export` has `__construct(public object $x)` + `download(string $filename): StreamedResponse` using `SimpleExcelWriter::streamDownload($filename)->addHeader([...])` then `addRow([...])` then `toBrowser()`.
+
+### Deferred (owner hold)
+- 100% test coverage (PHPUnit/Pest/Playwright) — ON HOLD per owner.
+- Other major deps still available but not upgraded (Laravel 12→13, intervention/image 2→4, spatie/permission 6→8, phpunit 11→13, etc.) — do later, one at a time, with tests.
+
 ## Session (for-sale spec completion) — PRs #31, #32, #33, MERGED
 
 - **PR #31 — SEO URL**: for-sale detail URL is now `/property-for-sale/{area}/{slug}` (owner confirmed singular `property-for-sale`). Old `/properties-for-sale/{slug}` 301-redirects to `/property-for-sale/bali/{slug}`. Added `Property::sale_url` + `sale_area_slug` accessors; all links (sale list, similar, breadcrumb, schema) use `sale_url`. `{area}` is cosmetic (resolve still by slug); `mount()` now accepts `{area}`; feature tests updated to pass area+slug. Breadcrumb area segment links to the for-sale list filtered by area/district.
