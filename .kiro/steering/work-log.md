@@ -10,6 +10,15 @@ A running record of important work and decisions, so a new Kiro session starts w
 - **Scope**: `so-living-bali` repo only.
 - **Sandbox**: PHP can't run here; the user must run `php artisan migrate` / `php artisan test` / `./vendor/bin/pint` locally. After pulling CSS changes, hard-refresh the browser.
 
+## Session (for-sale spec completion) — PRs #31, #32, #33, MERGED
+
+- **PR #31 — SEO URL**: for-sale detail URL is now `/property-for-sale/{area}/{slug}` (owner confirmed singular `property-for-sale`). Old `/properties-for-sale/{slug}` 301-redirects to `/property-for-sale/bali/{slug}`. Added `Property::sale_url` + `sale_area_slug` accessors; all links (sale list, similar, breadcrumb, schema) use `sale_url`. `{area}` is cosmetic (resolve still by slug); `mount()` now accepts `{area}`; feature tests updated to pass area+slug. Breadcrumb area segment links to the for-sale list filtered by area/district.
+- **PR #32 — Similar properties (spec §9)**: ranked by relevance (area 8 / district 4 / type 2 / ownership 2 / bedroom 1) over a pool of 50, top 4, instead of random. Ownership/tenure badge per card. Internal-link CTAs: `View more in {area}` (list filtered by area/district) + `View all properties for sale`.
+- **PR #33 — SEO/Schema + FAQ + i18n**: dynamic meta description + OG tags via new `@stack('meta')` in layout head, generated from CMS data. JSON-LD enriched: RealEstateListing (description/bedrooms/bathrooms/address/floorSize/offer), BreadcrumbList matching the visual breadcrumb, new Organization schema, FAQPage schema (only when FAQ visible). Dynamic FAQ expanded (lease remaining/extension/zoning/PBG/SLF, each conditional). i18n'd Similar Properties + Frequently Asked Questions headings; bottom CTA → View all properties for sale. SEO contextual content (spec §10) satisfied by E1 = area description (PR #29) + internal links (PR #32), no new CMS field (owner's call).
+
+### For-sale spec status — essentially complete
+All 12 sections + SEO/AI/Schema + the 6-point client email are implemented. Remaining optional/owner-dependent: richer per-area SEO copy beyond the area description (deferred, E1 chosen); the `Living Area` / `Extension Period` optional columns (not added — only create if the owner wants those exact fields). The for-sale detail URL change needs `php artisan optimize:clear` on deploy (route cache).
+
 ## Session (area descriptions) — PRs #28, #29, MERGED (NOT migrated)
 
 - **PR #28 — DB columns (NOT run)**: migrations `0001_01_01_400000_add_description_to_districts_table` and `0001_01_01_400001_add_description_to_areas_table` (sequential naming, no dates, per owner) add nullable TEXT `description`/`description_id`/`description_fr` after `name` on `districts` and `areas`. Models District+Area got fillable/casts/`$translatable` + `translate_description` accessor. Owner runs migrate/ALTER (owner-only). ALTER SQL handed over in chat.

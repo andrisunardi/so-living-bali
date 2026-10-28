@@ -21,7 +21,7 @@ SO Living Bali is a Laravel real-estate platform for long-stay (monthly/yearly r
 ## Public pages
 
 - Rental detail: `/property/{slug}` → `pages::property.detail`.
-- For-sale detail: `/property-for-sale/{slug}` → route name `property.sale.detail` → `pages::property.sale-detail`. Same foundation as rental detail (resolve slug → fetch property → 404), different (Bootstrap 5.3) design. Service gate: `PropertyService::saleDetail()` (published statuses + sale listing types).
+- For-sale detail: `/property-for-sale/{area}/{slug}` → route name `property.sale.detail` → `pages::property.sale-detail`. `{area}` is a cosmetic SEO segment; resolution is by `{slug}`. Old `/properties-for-sale/{slug}` 301-redirects here. Same foundation as rental detail (resolve slug → fetch property → 404), different (Bootstrap 5.3) design. Service gate: `PropertyService::saleDetail()` (published statuses + sale listing types).
 
 ## Price / currency
 
