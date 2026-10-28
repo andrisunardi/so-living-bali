@@ -10,6 +10,11 @@ A running record of important work and decisions, so a new Kiro session starts w
 - **Scope**: `so-living-bali` repo only.
 - **Sandbox**: PHP can't run here; the user must run `php artisan migrate` / `php artisan test` / `./vendor/bin/pint` locally. After pulling CSS changes, hard-refresh the browser.
 
+## Session (area descriptions) — PRs #28, #29, MERGED (NOT migrated)
+
+- **PR #28 — DB columns (NOT run)**: migrations `0001_01_01_400000_add_description_to_districts_table` and `0001_01_01_400001_add_description_to_areas_table` (sequential naming, no dates, per owner) add nullable TEXT `description`/`description_id`/`description_fr` after `name` on `districts` and `areas`. Models District+Area got fillable/casts/`$translatable` + `translate_description` accessor. Owner runs migrate/ALTER (owner-only). ALTER SQL handed over in chat.
+- **PR #29 — CMS fields + display (point 4 a+b)**: (a) EN/ID/FR description textareas on district+area add/edit pages and their Form objects. (b) new `x-property.sale.area-description` shows the listing's area description (fallback district) on the for-sale detail page after Location, hidden when empty. Added `property.about_the_area`. DEPENDS on the #28 columns — will error if accessed before the owner runs the ALTER/migrate.
+
 ## Session (for-sale page client spec) — PRs #24, #25, #26, MERGED
 
 Client sent a full Sales Property Page spec (EN/ID PDF) + a feedback email. Working through it step by step on the for-sale detail page (`pages/property/⚡sale-detail.blade.php` + `components/property/sale/*`). Core rule: **IF NO DATA → DO NOT DISPLAY** (field, label, section).
