@@ -8,7 +8,7 @@ use Livewire\Attributes\Title;
 new #[Title('Property For Sale')] class extends Component {
     public ?Property $property = null;
 
-    public function mount(string $slug): void
+    public function mount(string $area, string $slug): void
     {
         $service = new PropertyService();
         $this->property = $service->saleDetail(slug: $slug);
@@ -122,7 +122,19 @@ new #[Title('Property For Sale')] class extends Component {
                             wire:navigate>Properties for Sale</a>
                     </li>
                     @if ($location)
-                        <li class="breadcrumb-item">{{ $location }}</li>
+                        <li class="breadcrumb-item">
+                            @if ($property->area)
+                                <a class="link-success text-decoration-none"
+                                    href="{{ route('property.properties-for-sale', ['areas' => [$property->area->id]]) }}"
+                                    wire:navigate>{{ $location }}</a>
+                            @elseif ($property->district)
+                                <a class="link-success text-decoration-none"
+                                    href="{{ route('property.properties-for-sale', ['districts' => [$property->district->id]]) }}"
+                                    wire:navigate>{{ $location }}</a>
+                            @else
+                                {{ $location }}
+                            @endif
+                        </li>
                     @endif
                     @if ($property->type?->description())
                         <li class="breadcrumb-item active" aria-current="page">{{ $property->type->description() }}</li>
@@ -272,7 +284,7 @@ new #[Title('Property For Sale')] class extends Component {
             '@context' => 'https://schema.org',
             '@type' => 'RealEstateListing',
             'name' => $property->name,
-            'url' => route('property.sale.detail', ['slug' => $property->slug]),
+            'url' => $property->sale_url,
             'image' => $property->image?->image_url,
             'offers' => [
                 '@type' => 'Offer',
@@ -297,7 +309,7 @@ new #[Title('Property For Sale')] class extends Component {
                     '@type' => 'ListItem',
                     'position' => 2,
                     'name' => $property->name,
-                    'item' => route('property.sale.detail', ['slug' => $property->slug]),
+                    'item' => $property->sale_url,
                 ],
             ],
         ], JSON_UNESCAPED_SLASHES | JSON_UNESCAPED_UNICODE) !!}

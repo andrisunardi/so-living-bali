@@ -18,7 +18,7 @@
             <div class="col" wire:key="similar-{{ $similar->id }}">
                 <div class="card h-100 border-0 shadow-sm rounded-4 overflow-hidden">
                     <a draggable="false" class="d-block"
-                        href="{{ route('property.sale.detail', ['slug' => $similar->slug]) }}" wire:navigate>
+                        href="{{ $similar->sale_url }}" wire:navigate>
                         <div class="ratio ratio-4x3">
                             <img draggable="false" loading="lazy" decoding="async" class="object-fit-cover w-100 h-100"
                                 src="{{ $similar->image?->image_url ?? asset('images/placeholder.png') }}"
@@ -37,7 +37,7 @@
 
                         <h3 class="h6 mt-2">
                             <a draggable="false" class="text-body text-decoration-none"
-                                href="{{ route('property.sale.detail', ['slug' => $similar->slug]) }}" wire:navigate>
+                                href="{{ $similar->sale_url }}" wire:navigate>
                                 {{ $similar->name }}
                             </a>
                         </h3>
