@@ -3,18 +3,57 @@
 ])
 
 @php
-    $statuses = [App\Enums\Property\PropertyStatus::AcceptUpper->value, App\Enums\Property\PropertyStatus::AcceptPremium->value];
-    $listingTypes = [App\Enums\Property\PropertyListingType::ForSale->value, App\Enums\Property\PropertyListingType::ForRentAndSale->value];
+    use App\Enums\Property\PropertyOwnershipType;
+    use App\Enums\Property\PropertyListingType;
+    use App\Enums\Property\PropertyStatus;
+
+    $statuses = [PropertyStatus::AcceptUpper->value, PropertyStatus::AcceptPremium->value];
+    $listingTypes = [PropertyListingType::ForSale->value, PropertyListingType::ForRentAndSale->value];
 
     $service = new App\Services\PropertyService();
-    $properties = $service->index(listingTypes: $listingTypes, statuses: $statuses, random: true, limit: 8, paginate: false);
-    $properties = $properties->where('id', '!=', $property->id)->take(4);
-    $properties->loadMissing(['area', 'district', 'image']);
+    $pool = $service->index(listingTypes: $listingTypes, statuses: $statuses, limit: 50, paginate: false);
+    $pool = $pool->where('id', '!=', $property->id);
+    $pool->loadMissing(['area', 'district', 'image']);
+
+    $properties = $pool
+        ->sortByDesc(function ($similar) use ($property) {
+            $score = 0;
+            if ($property->area_id && $similar->area_id === $property->area_id) {
+                $score += 8;
+            }
+            if ($property->district_id && $similar->district_id === $property->district_id) {
+                $score += 4;
+            }
+            if ($property->type && $similar->type === $property->type) {
+                $score += 2;
+            }
+            if ($property->ownership_type && $similar->ownership_type === $property->ownership_type) {
+                $score += 2;
+            }
+            if ($property->bedroom && $similar->bedroom === $property->bedroom) {
+                $score += 1;
+            }
+
+            return $score;
+        })
+        ->take(4)
+        ->values();
+
+    $location = $property->area?->name ?? $property->district?->name;
+    $areaFilterUrl = $property->area
+        ? route('property.properties-for-sale', ['areas' => [$property->area->id]])
+        : ($property->district ? route('property.properties-for-sale', ['districts' => [$property->district->id]]) : route('property.properties-for-sale'));
 @endphp
 
 @if ($properties->isNotEmpty())
     <div class="row row-cols-1 row-cols-sm-2 row-cols-lg-4 g-4">
         @foreach ($properties as $similar)
+            @php
+                $similarLeaseYears = null;
+                if ($similar->ownership_type === PropertyOwnershipType::Leasehold && $similar->lease_expiry_date && $similar->lease_expiry_date->isFuture()) {
+                    $similarLeaseYears = (int) abs(now()->diffInYears($similar->lease_expiry_date));
+                }
+            @endphp
             <div class="col" wire:key="similar-{{ $similar->id }}">
                 <div class="card h-100 border-0 shadow-sm rounded-4 overflow-hidden">
                     <a draggable="false" class="d-block"
@@ -42,7 +81,11 @@
                             </a>
                         </h3>
 
-                        <div class="small text-body-secondary">{{ $similar->code }}</div>
+                        @if ($similar->ownership_type?->description())
+                            <span class="badge text-bg-light rounded-pill mt-1">
+                                {{ $similar->ownership_type->description() }}@if ($similarLeaseYears) · {{ $similarLeaseYears }} {{ trans('property.years') }}@endif
+                            </span>
+                        @endif
 
                         @php($specs = collect([
                             $similar->bedroom?->description() ? $similar->bedroom->description().' '.trans('property.bedrooms') : null,
@@ -51,7 +94,7 @@
                         ])->filter())
 
                         @if ($specs->isNotEmpty())
-                            <div class="small text-body-secondary mt-1">{{ $specs->implode(' · ') }}</div>
+                            <div class="small text-body-secondary mt-2">{{ $specs->implode(' · ') }}</div>
                         @endif
 
                         <div class="fw-semibold text-success-emphasis mt-2">
@@ -61,5 +104,19 @@
                 </div>
             </div>
         @endforeach
+    </div>
+
+    <div class="d-flex flex-wrap gap-2 mt-4">
+        @if ($location)
+            <a draggable="false" class="btn btn-outline-success rounded-pill" href="{{ $areaFilterUrl }}" wire:navigate>
+                {{ trans('property.view_more_in_area', ['area' => $location]) }}
+                <span class="fas fa-chevron-right fa-fw fa-xs"></span>
+            </a>
+        @endif
+        <a draggable="false" class="btn btn-outline-dark rounded-pill"
+            href="{{ route('property.properties-for-sale') }}" wire:navigate>
+            {{ trans('property.view_all_properties_for_sale') }}
+            <span class="fas fa-chevron-right fa-fw fa-xs"></span>
+        </a>
     </div>
 @endif
