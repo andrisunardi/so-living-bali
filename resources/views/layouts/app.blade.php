@@ -5,6 +5,8 @@
 <head>
     <x-meta />
 
+    @stack('meta')
+
     <title>
         @if (!Route::is('home'))
             {{ View::getSection('title') ?? $title }} |

@@ -209,6 +209,8 @@ return [
     'years' => 'ans',
     'view_more_in_area' => 'Voir plus à :area',
     'view_all_properties_for_sale' => 'Voir tous les biens à vendre',
+    'similar_properties' => 'Biens similaires',
+    'frequently_asked_questions' => 'Questions fréquentes',
     'about_this_property' => 'About This Property',
     'about_the_area' => 'À propos de :area',
     'ownership_and_legal_information' => 'Ownership & Legal Information',

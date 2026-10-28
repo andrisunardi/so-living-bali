@@ -98,16 +98,46 @@ new #[Title('Property For Sale')] class extends Component {
     if ($isLeasehold && $property->lease_expiry_date) {
         $faqs['What is the lease expiry date?'] = 'The lease expires on '.$property->lease_expiry_date->isoFormat('DD MMMM YYYY').'.';
     }
+    if ($isLeasehold && $leaseRemainingYears) {
+        $faqs['How many years are left on the lease?'] = 'There are approximately '.$leaseRemainingYears.' years remaining on the lease.';
+    }
+    if ($isLeasehold && $property->lease_extension_available?->description()) {
+        $faqs['Can the lease be extended?'] = 'Lease extension: '.$property->lease_extension_available->description().'.';
+    }
     if ($property->zoning) {
-        $faqs['What is the zoning of this property?'] = 'The zoning is '.$property->zoning.'.';
+        $faqs['What is the zoning of this property?'] = 'The zoning is '.Str::of($property->zoning)->stripTags()->trim().'.';
     }
     if ($property->pbg_status?->description()) {
-        $faqs['What is the PBG status?'] = 'The PBG status is '.$property->pbg_status->description().'.';
+        $faqs['Does it have a PBG?'] = 'The PBG status is '.$property->pbg_status->description().'.';
     }
     if ($property->slf_status?->description()) {
-        $faqs['What is the SLF status?'] = 'The SLF status is '.$property->slf_status->description().'.';
+        $faqs['Does it have an SLF?'] = 'The SLF status is '.$property->slf_status->description().'.';
     }
+
+    $metaDescription = collect([
+        $h1.'.',
+        $property->sale_price > 0 ? 'Price '.Str::currency($property->sale_price, $property->currency).'.' : null,
+        $tenure ? Str::of($tenure)->lower()->ucfirst().'.' : null,
+        collect([
+            $property->bedroom?->description() ? $property->bedroom->description().' bedrooms' : null,
+            $property->number_of_bathrooms ? $property->number_of_bathrooms.' bathrooms' : null,
+            $property->building_size ? $property->building_size.' m² building' : null,
+            $property->land_size ? $property->land_size.' m² land' : null,
+        ])->filter()->implode(', ').'.',
+    ])->filter()->implode(' ');
+    $metaDescription = Str::limit(trim(preg_replace('/\s+/', ' ', $metaDescription)), 160);
 @endphp
+
+@push('meta')
+    <meta name="description" content="{{ $metaDescription }}">
+    <meta property="og:title" content="{{ $h1 }}">
+    <meta property="og:description" content="{{ $metaDescription }}">
+    <meta property="og:type" content="website">
+    <meta property="og:url" content="{{ $property->sale_url }}">
+    @if ($property->image?->image_url)
+        <meta property="og:image" content="{{ $property->image->image_url }}">
+    @endif
+@endpush
 
 <div class="pb-5">
     <section class="pt-4 pt-lg-4">
@@ -228,7 +258,7 @@ new #[Title('Property For Sale')] class extends Component {
 
     <section class="pb-5">
         <div class="container-md">
-            <h2 class="h4 fw-semibold mb-4">Similar properties</h2>
+            <h2 class="h4 fw-semibold mb-4">{{ trans('property.similar_properties') }}</h2>
             <x-property.sale.similar :property="$property" />
         </div>
     </section>
@@ -236,23 +266,23 @@ new #[Title('Property For Sale')] class extends Component {
     <section class="pb-5">
         <div class="container-md">
             <div class="row g-5">
-                <div class="col-lg-7">
-                    <h2 class="h4 fw-semibold mb-3">{{ $property->name }} for sale in {{ $location ?? 'Bali' }}</h2>
+                <div class="{{ !empty($faqs) ? 'col-lg-7' : 'col-12' }}">
+                    <h2 class="h4 fw-semibold mb-3">{{ $h1 }}</h2>
                     <p class="text-body-secondary">
                         {{ $property->name }} is a
                         {{ $property->ownership_type?->description() ? Str::lower($property->ownership_type->description()).' ' : '' }}property
                         for sale{{ $location ? ' in '.$location : '' }}. Explore the full details above and contact our
                         team for pricing, availability and viewings.
                     </p>
-                    <a draggable="false" class="btn btn-outline-success rounded-pill" href="{{ route('home') }}"
-                        wire:navigate>
-                        Back to home
+                    <a draggable="false" class="btn btn-outline-success rounded-pill"
+                        href="{{ route('property.properties-for-sale') }}" wire:navigate>
+                        {{ trans('property.view_all_properties_for_sale') }}
                     </a>
                 </div>
 
                 @if (!empty($faqs))
                     <div class="col-lg-5">
-                        <h2 class="h4 fw-semibold mb-3">Frequently asked questions</h2>
+                        <h2 class="h4 fw-semibold mb-3">{{ trans('property.frequently_asked_questions') }}</h2>
                         <div class="accordion" id="sale-faq">
                             @foreach ($faqs as $question => $answer)
                                 <div class="accordion-item">
@@ -279,39 +309,93 @@ new #[Title('Property For Sale')] class extends Component {
 </div>
 
 @push('script')
-    <script type="application/ld+json">
-        {!! json_encode([
+    @php
+        $listing = array_filter([
             '@context' => 'https://schema.org',
             '@type' => 'RealEstateListing',
-            'name' => $property->name,
+            'name' => $h1,
             'url' => $property->sale_url,
             'image' => $property->image?->image_url,
+            'description' => $metaDescription,
+            'numberOfBedrooms' => $property->bedroom?->description(),
+            'numberOfBathroomsTotal' => $property->number_of_bathrooms,
+            'address' => array_filter([
+                '@type' => 'PostalAddress',
+                'addressLocality' => $location,
+                'addressRegion' => 'Bali',
+                'addressCountry' => 'ID',
+            ]),
+            'floorSize' => $property->building_size ? [
+                '@type' => 'QuantitativeValue',
+                'value' => $property->building_size,
+                'unitCode' => 'MTK',
+            ] : null,
             'offers' => [
                 '@type' => 'Offer',
                 'price' => $property->sale_price,
                 'priceCurrency' => $property->currency?->name ?? 'IDR',
+                'availability' => 'https://schema.org/InStock',
             ],
-        ], JSON_UNESCAPED_SLASHES | JSON_UNESCAPED_UNICODE) !!}
+        ], fn ($value) => filled($value));
+
+        $breadcrumbItems = collect([
+            ['name' => trans('page.home'), 'item' => route('home')],
+            ['name' => trans('page.properties_for_sale'), 'item' => route('property.properties-for-sale')],
+            $location ? ['name' => $location, 'item' => $property->sale_url] : null,
+            $property->type?->description() ? ['name' => $property->type->description(), 'item' => $property->sale_url] : null,
+        ])->filter()->values()->map(fn ($item, $index) => [
+            '@type' => 'ListItem',
+            'position' => $index + 1,
+            'name' => $item['name'],
+            'item' => $item['item'],
+        ])->all();
+
+        $breadcrumb = [
+            '@context' => 'https://schema.org',
+            '@type' => 'BreadcrumbList',
+            'itemListElement' => $breadcrumbItems,
+        ];
+
+        $organization = [
+            '@context' => 'https://schema.org',
+            '@type' => 'Organization',
+            'name' => config('constants.meta.title'),
+            'url' => config('app.url'),
+            'logo' => asset('images/logo.png'),
+        ];
+
+        $faqSchema = null;
+        if (!empty($faqs)) {
+            $faqSchema = [
+                '@context' => 'https://schema.org',
+                '@type' => 'FAQPage',
+                'mainEntity' => collect($faqs)->map(fn ($answer, $question) => [
+                    '@type' => 'Question',
+                    'name' => $question,
+                    'acceptedAnswer' => [
+                        '@type' => 'Answer',
+                        'text' => $answer,
+                    ],
+                ])->values()->all(),
+            ];
+        }
+    @endphp
+
+    <script type="application/ld+json">
+        {!! json_encode($listing, JSON_UNESCAPED_SLASHES | JSON_UNESCAPED_UNICODE) !!}
     </script>
 
     <script type="application/ld+json">
-        {!! json_encode([
-            '@context' => 'https://schema.org',
-            '@type' => 'BreadcrumbList',
-            'itemListElement' => [
-                [
-                    '@type' => 'ListItem',
-                    'position' => 1,
-                    'name' => 'Home',
-                    'item' => route('home'),
-                ],
-                [
-                    '@type' => 'ListItem',
-                    'position' => 2,
-                    'name' => $property->name,
-                    'item' => $property->sale_url,
-                ],
-            ],
-        ], JSON_UNESCAPED_SLASHES | JSON_UNESCAPED_UNICODE) !!}
+        {!! json_encode($breadcrumb, JSON_UNESCAPED_SLASHES | JSON_UNESCAPED_UNICODE) !!}
     </script>
+
+    <script type="application/ld+json">
+        {!! json_encode($organization, JSON_UNESCAPED_SLASHES | JSON_UNESCAPED_UNICODE) !!}
+    </script>
+
+    @if ($faqSchema)
+        <script type="application/ld+json">
+            {!! json_encode($faqSchema, JSON_UNESCAPED_SLASHES | JSON_UNESCAPED_UNICODE) !!}
+        </script>
+    @endif
 @endpush

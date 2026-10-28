@@ -218,6 +218,8 @@ return [
     'years' => 'years',
     'view_more_in_area' => 'View more in :area',
     'view_all_properties_for_sale' => 'View all properties for sale',
+    'similar_properties' => 'Similar Properties',
+    'frequently_asked_questions' => 'Frequently Asked Questions',
     'about_this_property' => 'About This Property',
     'about_the_area' => 'About :area',
     'ownership_and_legal_information' => 'Ownership & Legal Information',
