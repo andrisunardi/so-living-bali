@@ -6,8 +6,7 @@ use App\Models\Faq;
 use App\Services\FaqService;
 use Livewire\Attributes\Title;
 use Livewire\Attributes\Url;
-use Maatwebsite\Excel\Facades\Excel;
-use Symfony\Component\HttpFoundation\BinaryFileResponse;
+use Symfony\Component\HttpFoundation\StreamedResponse;
 
 new #[Title('Faq')] class extends Component {
     #[Url(except: '')]
@@ -52,7 +51,7 @@ new #[Title('Faq')] class extends Component {
         return $faqs;
     }
 
-    public function export(): BinaryFileResponse
+    public function export(): StreamedResponse
     {
         $this->alertSuccess(title: trans('index.export') . ' ' . trans('index.success'), body: trans('page.faq') . ' ' . trans('message.has_been_successfully_exported'));
 
@@ -60,7 +59,7 @@ new #[Title('Faq')] class extends Component {
         $faqs = $service->index(orderBy: 'id', sortBy: 'asc', paginate: false);
         $faqs->loadMissing(['createdBy', 'updatedBy']);
 
-        return Excel::download(new FaqExport(faqs: $faqs), trans('page.faq') . '.xlsx');
+        return (new FaqExport(faqs: $faqs))->download(trans('page.faq') . '.xlsx');
     }
 };
 ?>

@@ -6,8 +6,7 @@ use App\Models\Standard;
 use App\Services\StandardService;
 use Livewire\Attributes\Title;
 use Livewire\Attributes\Url;
-use Maatwebsite\Excel\Facades\Excel;
-use Symfony\Component\HttpFoundation\BinaryFileResponse;
+use Symfony\Component\HttpFoundation\StreamedResponse;
 
 new #[Title('Standard')] class extends Component {
     #[Url(except: '')]
@@ -52,7 +51,7 @@ new #[Title('Standard')] class extends Component {
         return $standards;
     }
 
-    public function export(): BinaryFileResponse
+    public function export(): StreamedResponse
     {
         $this->alertSuccess(title: trans('index.export') . ' ' . trans('index.success'), body: trans('page.standard') . ' ' . trans('message.has_been_successfully_exported'));
 
@@ -60,7 +59,7 @@ new #[Title('Standard')] class extends Component {
         $standards = $service->index(orderBy: 'id', sortBy: 'asc', paginate: false);
         $standards->loadMissing(['createdBy', 'updatedBy']);
 
-        return Excel::download(new StandardExport(standards: $standards), trans('page.standard') . '.xlsx');
+        return (new StandardExport(standards: $standards))->download(trans('page.standard') . '.xlsx');
     }
 };
 ?>

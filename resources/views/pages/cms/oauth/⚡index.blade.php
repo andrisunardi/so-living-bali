@@ -6,8 +6,7 @@ use App\Models\Oauth;
 use App\Services\OauthService;
 use Livewire\Attributes\Title;
 use Livewire\Attributes\Url;
-use Maatwebsite\Excel\Facades\Excel;
-use Symfony\Component\HttpFoundation\BinaryFileResponse;
+use Symfony\Component\HttpFoundation\StreamedResponse;
 
 new #[Title('Oauth')] class extends Component {
     #[Url(except: '')]
@@ -41,7 +40,7 @@ new #[Title('Oauth')] class extends Component {
         return $oauths;
     }
 
-    public function export(): BinaryFileResponse
+    public function export(): StreamedResponse
     {
         $this->alertSuccess(title: trans('index.export') . ' ' . trans('index.success'), body: trans('page.oauth') . ' ' . trans('message.has_been_successfully_exported'));
 
@@ -49,7 +48,7 @@ new #[Title('Oauth')] class extends Component {
         $oauths = $service->index(orderBy: 'id', sortBy: 'asc', paginate: false);
         $oauths->loadMissing(['createdBy', 'updatedBy']);
 
-        return Excel::download(new OauthExport(oauths: $oauths), trans('page.oauth') . '.xlsx');
+        return (new OauthExport(oauths: $oauths))->download(trans('page.oauth') . '.xlsx');
     }
 };
 ?>

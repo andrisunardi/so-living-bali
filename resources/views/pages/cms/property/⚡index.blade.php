@@ -10,8 +10,7 @@ use App\Services\PropertyService;
 use App\Services\UserService;
 use Livewire\Attributes\Title;
 use Livewire\Attributes\Url;
-use Maatwebsite\Excel\Facades\Excel;
-use Symfony\Component\HttpFoundation\BinaryFileResponse;
+use Symfony\Component\HttpFoundation\StreamedResponse;
 
 new #[Title('Property')] class extends Component {
     #[Url(except: '')]
@@ -87,7 +86,7 @@ new #[Title('Property')] class extends Component {
         return $properties;
     }
 
-    public function export(string $format = 'xlsx'): BinaryFileResponse
+    public function export(string $format = 'xlsx'): StreamedResponse
     {
         $this->alertSuccess(title: trans('index.export') . ' ' . trans('index.success'), body: trans('page.property') . ' ' . trans('message.has_been_successfully_exported'));
 
@@ -96,7 +95,7 @@ new #[Title('Property')] class extends Component {
         $properties = $service->index(search: $this->search, userId: $this->user_id, districtId: $this->district_id, areaId: $this->area_id, status: $this->status, startDate: $this->start_date, endDate: $this->end_date, orderBy: 'id', sortBy: 'asc', paginate: false);
         $properties->loadMissing(['user', 'district', 'area', 'owner', 'ownerRepresentative', 'image', 'images', 'createdBy', 'updatedBy']);
 
-        return Excel::download(new PropertyExport(properties: $properties), trans('page.property') . '.' . $format);
+        return (new PropertyExport(properties: $properties))->download(trans('page.property') . '.' . $format);
     }
 };
 ?>

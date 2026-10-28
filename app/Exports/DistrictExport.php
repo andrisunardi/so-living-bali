@@ -2,26 +2,50 @@
 
 namespace App\Exports;
 
-use Illuminate\Contracts\View\View;
-use Maatwebsite\Excel\Concerns\Exportable;
-use Maatwebsite\Excel\Concerns\FromView;
-use Maatwebsite\Excel\Concerns\ShouldAutoSize;
+use Illuminate\Support\Str;
+use Spatie\SimpleExcel\SimpleExcelWriter;
+use Symfony\Component\HttpFoundation\StreamedResponse;
 
-class DistrictExport implements FromView, ShouldAutoSize
+class DistrictExport
 {
-    use Exportable;
+    public function __construct(public object $districts) {}
 
-    public object $districts;
-
-    public function __construct(object $districts)
+    public function download(string $filename): StreamedResponse
     {
-        $this->districts = $districts;
-    }
+        $writer = SimpleExcelWriter::streamDownload($filename);
 
-    public function view(): View
-    {
-        return view('excel.district', [
-            'districts' => $this->districts,
+        $writer->addHeader([
+            trans('field.#'),
+            trans('field.id'),
+            trans('field.name'),
+            trans('field.show'),
+            trans('field.active'),
+            trans('index.total').' '.trans('page.area'),
+            trans('index.total').' '.trans('page.contact'),
+            trans('index.total').' '.trans('page.property'),
+            trans('field.created_by'),
+            trans('field.updated_by'),
+            trans('field.created_at'),
+            trans('field.updated_at'),
         ]);
+
+        foreach ($this->districts as $index => $district) {
+            $writer->addRow([
+                $index + 1,
+                $district->id,
+                $district->name,
+                Str::yesNo($district->is_show),
+                Str::yesNo($district->is_active),
+                $district->areas_count,
+                $district->contacts_count,
+                $district->properties_count,
+                $district->createdBy?->name,
+                $district->updatedBy?->name,
+                (string) $district->created_at,
+                (string) $district->updated_at,
+            ]);
+        }
+
+        return $writer->toBrowser();
     }
 }

@@ -2,26 +2,50 @@
 
 namespace App\Exports;
 
-use Illuminate\Contracts\View\View;
-use Maatwebsite\Excel\Concerns\Exportable;
-use Maatwebsite\Excel\Concerns\FromView;
-use Maatwebsite\Excel\Concerns\ShouldAutoSize;
+use Illuminate\Support\Str;
+use Spatie\SimpleExcel\SimpleExcelWriter;
+use Symfony\Component\HttpFoundation\StreamedResponse;
 
-class GuideCategoryExport implements FromView, ShouldAutoSize
+class GuideCategoryExport
 {
-    use Exportable;
+    public function __construct(public object $guideCategories) {}
 
-    public object $guideCategories;
-
-    public function __construct(object $guideCategories)
+    public function download(string $filename): StreamedResponse
     {
-        $this->guideCategories = $guideCategories;
-    }
+        $writer = SimpleExcelWriter::streamDownload($filename);
 
-    public function view(): View
-    {
-        return view('excel.guide-category', [
-            'guideCategories' => $this->guideCategories,
+        $writer->addHeader([
+            trans('field.#'),
+            trans('field.id'),
+            trans('field.name'),
+            trans('field.name_id'),
+            trans('field.name_fr'),
+            trans('field.show'),
+            trans('field.active'),
+            trans('index.total').' '.trans('page.guide'),
+            trans('field.created_by'),
+            trans('field.updated_by'),
+            trans('field.created_at'),
+            trans('field.updated_at'),
         ]);
+
+        foreach ($this->guideCategories as $index => $guideCategory) {
+            $writer->addRow([
+                $index + 1,
+                $guideCategory->id,
+                $guideCategory->name,
+                $guideCategory->name_id,
+                $guideCategory->name_fr,
+                Str::yesNo($guideCategory->is_show),
+                Str::yesNo($guideCategory->is_active),
+                $guideCategory->guides_count,
+                $guideCategory->createdBy?->name,
+                $guideCategory->updatedBy?->name,
+                (string) $guideCategory->created_at,
+                (string) $guideCategory->updated_at,
+            ]);
+        }
+
+        return $writer->toBrowser();
     }
 }

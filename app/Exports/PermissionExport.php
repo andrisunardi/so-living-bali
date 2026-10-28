@@ -2,26 +2,43 @@
 
 namespace App\Exports;
 
-use Illuminate\Contracts\View\View;
-use Maatwebsite\Excel\Concerns\Exportable;
-use Maatwebsite\Excel\Concerns\FromView;
-use Maatwebsite\Excel\Concerns\ShouldAutoSize;
+use Spatie\SimpleExcel\SimpleExcelWriter;
+use Symfony\Component\HttpFoundation\StreamedResponse;
 
-class PermissionExport implements FromView, ShouldAutoSize
+class PermissionExport
 {
-    use Exportable;
+    public function __construct(public object $permissions) {}
 
-    public object $permissions;
-
-    public function __construct(object $permissions)
+    public function download(string $filename): StreamedResponse
     {
-        $this->permissions = $permissions;
-    }
+        $writer = SimpleExcelWriter::streamDownload($filename);
 
-    public function view(): View
-    {
-        return view('excel.permission', [
-            'permissions' => $this->permissions,
+        $writer->addHeader([
+            trans('field.#'),
+            trans('field.id'),
+            trans('field.name'),
+            trans('field.guard_name'),
+            trans('field.roles'),
+            trans('index.total').' '.trans('page.permission'),
+            trans('index.total').' '.trans('page.user'),
+            trans('field.created_at'),
+            trans('field.updated_at'),
         ]);
+
+        foreach ($this->permissions as $index => $permission) {
+            $writer->addRow([
+                $index + 1,
+                $permission->id,
+                $permission->name,
+                $permission->guard_name,
+                $permission->roles->pluck('name')->join(', '),
+                $permission->roles_count,
+                $permission->users_count,
+                (string) $permission->created_at,
+                (string) $permission->updated_at,
+            ]);
+        }
+
+        return $writer->toBrowser();
     }
 }

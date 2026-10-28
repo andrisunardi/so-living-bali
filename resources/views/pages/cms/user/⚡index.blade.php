@@ -8,8 +8,7 @@ use App\Services\PermissionService;
 use App\Services\UserService;
 use Livewire\Attributes\Title;
 use Livewire\Attributes\Url;
-use Maatwebsite\Excel\Facades\Excel;
-use Symfony\Component\HttpFoundation\BinaryFileResponse;
+use Symfony\Component\HttpFoundation\StreamedResponse;
 
 new #[Title('User')] class extends Component {
     #[Url(except: '')]
@@ -74,7 +73,7 @@ new #[Title('User')] class extends Component {
         return $users;
     }
 
-    public function export(): BinaryFileResponse
+    public function export(): StreamedResponse
     {
         $this->alertSuccess(title: trans('index.export') . ' ' . trans('index.success'), body: trans('page.user') . ' ' . trans('message.has_been_successfully_exported'));
 
@@ -83,7 +82,7 @@ new #[Title('User')] class extends Component {
         $users->loadCount(['properties', 'roles', 'permissions']);
         $users->loadMissing(['roles', 'createdBy', 'updatedBy']);
 
-        return Excel::download(new UserExport(users: $users), trans('page.user') . '.xlsx');
+        return (new UserExport(users: $users))->download(trans('page.user') . '.xlsx');
     }
 };
 ?>

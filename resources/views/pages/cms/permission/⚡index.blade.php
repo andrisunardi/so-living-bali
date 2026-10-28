@@ -6,9 +6,8 @@ use App\Services\PermissionService;
 use App\Services\RoleService;
 use Livewire\Attributes\Title;
 use Livewire\Attributes\Url;
-use Maatwebsite\Excel\Facades\Excel;
 use Spatie\Permission\Models\Permission;
-use Symfony\Component\HttpFoundation\BinaryFileResponse;
+use Symfony\Component\HttpFoundation\StreamedResponse;
 
 new #[Title('Permission')] class extends Component {
     #[Url(except: '')]
@@ -52,7 +51,7 @@ new #[Title('Permission')] class extends Component {
         return $permissions;
     }
 
-    public function export(): BinaryFileResponse
+    public function export(): StreamedResponse
     {
         $this->alertSuccess(title: trans('index.export') . ' ' . trans('index.success'), body: trans('page.permission') . ' ' . trans('message.has_been_successfully_exported'));
 
@@ -60,7 +59,7 @@ new #[Title('Permission')] class extends Component {
         $permissions = $service->index(guardName: 'web', orderBy: 'id', sortBy: 'asc', paginate: false);
         $permissions->loadCount(['roles', 'users']);
 
-        return Excel::download(new PermissionExport(permissions: $permissions), trans('page.permission') . '.xlsx');
+        return (new PermissionExport(permissions: $permissions))->download(trans('page.permission') . '.xlsx');
     }
 };
 ?>
