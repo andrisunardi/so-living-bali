@@ -7,18 +7,20 @@ return [
         'title' => 'Properti Dijual di Bali',
         'description' => 'Koleksi pilihan hunian dan properti residensial dijual di seluruh Bali. Dipilih berdasarkan lokasi, kualitas, kejelasan legalitas, serta daya tarik hunian jangka panjang.',
     ],
-
+    'overview' => [
+        'sub_title' => 'About Buying In Bali',
+        'title' => 'Properties for Sale In Bali',
+        'description' => 'Bali offers a unique blend of natural beauty, vibrant culture and a welcoming community, making it one of the most desirable places in the world to own a home. Our curated collection includes villas, modern residences, land and exclusive properties in sought-after locations across the island.<br /><br />Whether you are looking for a family home, a second residence or a long-term investment for personal use, our team is here to help you find the right property with clarity and confidence.',
+    ],
     'cta' => [
         'title' => 'Konsultasikan rencana kepindahan Anda dengan kami',
         'description' => 'Kami akan membantu Anda menemukan hunian yang tepat dan mendampingi Anda di setiap langkahnya.',
         'button' => 'Hubungi Kami',
     ],
-
     'guides' => [
         'sub_title' => 'Jelajahi Lebih Lanjut',
         'title' => 'Temukan Properti Impian Anda',
     ],
-
     'villa' => 'Vila',
     'apartment' => 'Apartemen',
     'land' => 'Tanah',
@@ -26,10 +28,10 @@ return [
     'hotel' => 'Hotel',
     'villa_complex' => 'Kompleks Vila',
     'other' => 'Lainnya',
-
+    'our_selection' => 'Our Selection',
+    'selected_properties' => 'Selected Properties',
     'property_count' => 'Lebih dari <b>:count</b> hunian di :area',
     'all_areas' => 'semua area',
-
     'property' => 'Properti',
     'per_month' => 'Per Bulan',
     'per_year' => 'Per Tahun',
@@ -41,7 +43,6 @@ return [
     'more_images' => 'Gambar Lainnya',
     'whatsapp' => 'WhatsApp',
     'email' => 'Email',
-
     'property_details' => 'Detail Properti',
     'availability' => 'Ketersediaan',
     'chat_for_check_availability_on_whatsapp' => 'Chat WhatsApp untuk cek ketersediaan',
@@ -53,12 +54,10 @@ return [
     'non_furnished' => 'Tanpa Perabotan',
     'rental_type' => 'Tipe Sewa',
     'minimum_rental_period' => 'Minimal Periode Sewa',
-
     'what_this_home_offers' => 'Fasilitas Hunian Ini',
     'monthly' => 'Bulanan',
     'yearly' => 'Tahunan',
     'weeks' => 'Minggu',
-
     'property_identity' => 'Identitas Properti',
     'internal_property_code' => 'Kode Internal Properti',
     'availability_date' => 'Tanggal Ketersediaan',
@@ -67,21 +66,18 @@ return [
     'year_built' => 'Tahun Dibangun',
     'completion_date' => 'Tanggal Selesai Pembangunan',
     'bedroom' => 'Kamar Tidur',
-
     'location' => 'Lokasi',
     'villa_name' => 'Nama Vila',
     'google_maps_url' => 'URL Google Maps',
     'gps_coordinates' => 'Koordinat GPS (Lat / Long):',
     'address' => 'Alamat',
     'district_or_area' => 'Kecamatan / Area ',
-
     'size_and_surfaces' => 'Ukuran & Luas Area',
     'land_size' => 'Luas Tanah (m²)',
     'building_size' => 'Luas Bangunan (m²)',
     'number_of_floors' => 'Jumlah Lantai',
     'outdoor_area_size' => 'Luas Area Luar (m², opsional)',
     'pool_size' => 'Ukuran Kolam Renang (P x L, jika ada)',
-
     'bathrooms_and_layout' => 'Kamar Mandi & Tata Letak',
     'number_of_bathrooms' => 'Jumlah Kamar Mandi',
     'ensuite_bathrooms' => 'Kamar Mandi Dalam (YA / TIDAK)',
@@ -91,7 +87,6 @@ return [
     'living_style_open' => 'Terbuka (Open)',
     'living_style_enclosed' => 'Tertutup (Enclosed)',
     'living_style_mixed' => 'Campuran (Mixed)',
-
     'legal_and_basic_eligibility' => 'Legalitas & Kelayakan Dasar',
     'legal_documentation' => 'Dokumentasi Legal',
     'full_legal_documentation_available' => 'Dokumen Legalitas Lengkap Tersedia',
@@ -109,13 +104,11 @@ return [
     'road_access' => 'Akses Jalan',
     'road_access_width' => 'Lebar Akses Jalan',
     'car_access' => 'Akses Mobil',
-
     'fully_furnished' => 'Fully Furnished (Perabotan Lengkap)',
     'rental_type_accepted' => 'Tipe Sewa yang Diterima',
     'minimum_rental_duration' => 'Minimal Durasi Sewa (bulan)',
     'owner_price_flexibility' => 'Fleksibilitas Harga Pemilik (Pass / Nego)',
     'price_coherent_with_upper_or_premium_positioning' => 'Harga Sesuai dengan Posisi Upper / Premium',
-
     'environment_and_tranquility' => 'Lingkungan & Ketenangan',
     'not_directly_exposed_to_main_road' => 'Tidak Berhadapan Langsung dengan Jalan Utama',
     'no_festive_venue_nearby' => 'Tidak Ada Tempat Keramaian / Hiburan di Dekatnya',
@@ -123,32 +116,26 @@ return [
     'quiet_access_road_or_gang' => 'Akses Jalan / Gang Tenang',
     'orientation' => 'Orientasi Sinar Matahari (Pagi / Sore / Campuran)',
     'view' => 'Pemandangan (Teks Bebas)',
-
     'light_and_acoustics' => 'Pencahayaan & Akustik',
     'living_area_has_natural_light' => 'Ruang Keluarga Memiliki Pencahayaan Alami',
     'bedroom_1_has_natural_light' => 'Kamar Tidur 1 Memiliki Pencahayaan Alami',
     'bedroom_2_has_natural_light' => 'Kamar Tidur 2 Memiliki Pencahayaan Alami',
     'noise_source_identified' => 'Sumber Kebisingan Teridentifikasi (jika ada)',
-
     'utilities_and_technical' => 'Fasilitas & Teknis',
     'internet_speedtest' => 'Uji Kecepatan Internet (Mbps)',
     'power_backup' => 'Listrik Cadangan (Genset / Panel Surya / Tidak Ada)',
     'water_source' => 'Sumber Air',
     'electricity' => 'Daya Listrik',
-
     'category_assessment' => 'Penilaian Kategori',
     'eligible_for_upper' => 'Layak untuk Kategori Upper',
     'eligible_for_premium' => 'Layak untuk Kategori Premium',
-
     'design_led_or_instagrammable' => 'Berorientasi Desain / Instagrammable',
     'design_driven_property' => 'Properti Berorientasi Desain (YA / TIDAK)',
     'usability_limitations_identified' => 'Keterbatasan Fungsionalitas Teridentifikasi',
-
     'trade_off_and_target_profile' => 'Kompromi & Profil Target',
     'trade_off_identified' => 'Kompromi Teridentifikasi',
     'if_yes_describe_briefly' => 'Jika YA, Jelaskan Singkat',
     'target_profiles' => 'Profil Target Penyewa / Pembeli',
-
     'price_and_inclusions' => 'Harga & Fasilitas Termasuk',
     'monthly_price' => 'Harga Bulanan',
     'yearly_price' => 'Harga Tahunan',
@@ -161,7 +148,6 @@ return [
     'banjar' => 'Iuran Banjar',
     'security' => 'Keamanan (Security)',
     'others' => 'Lain-lain',
-
     'owner_and_contact' => 'Pemilik & Kontak',
     'owner' => 'Pemilik',
     'owner_name' => 'Nama Pemilik',
@@ -171,17 +157,16 @@ return [
     'owner_representative_name' => 'Nama Perwakilan Pemilik',
     'owner_representative_phone' => 'Nomor HP Perwakilan Pemilik',
     'owner_representative_email' => 'Email Perwakilan Pemilik',
-
     'images' => 'Gambar',
-
     'listing_type' => 'Tipe Listing',
+    'listing_information' => 'Listing Information',
+    'image' => 'Image',
     'listing_types' => [
         'for_rent' => 'Disewakan',
-        'for_sale' => 'Dijual',
-        'for_rent_and_sale' => 'Disewakan dan Dijual',
+        'for_sales' => 'For Sale',
+        'for_rent_and_for_sales' => 'For Rent And Sale',
     ],
     'reference' => 'Referensi',
-
     'sale_information' => 'Informasi Penjualan',
     'sale_price' => 'Harga Jual',
     'currency' => 'Mata Uang',
@@ -193,7 +178,6 @@ return [
     'payment_plan_available' => 'Tersedia Skema Pembayaran Cicilan',
     'payment_plan_details' => 'Detail Skema Pembayaran',
     'developer_name' => 'Nama Pengembang (Developer)',
-
     'nearby' => 'Nearby',
     'video_tour' => 'Video Tour',
     'video_tour_helper' => 'Video tour URL',
@@ -214,21 +198,19 @@ return [
     'about_this_property' => 'About This Property',
     'about_the_area' => 'Tentang :area',
     'ownership_and_legal_information' => 'Ownership & Legal Information',
-
     'price_per_are' => 'Harga Per Are',
     'land_size_in_ares' => 'Luas Tanah (dalam Are)',
     'road_frontage' => 'Lebar Muka Jalan',
     'land_contour' => 'Kontur Tanah',
     'subdivision_possible' => 'Dapat Dipecah / Kavling',
     'minimum_purchase_size' => 'Ukuran Minimal Pembelian',
-
     'operational_risk' => 'Risiko Operasional',
     'operational_risk_level' => 'Rendah / Sedang / Tinggi',
     'comments_if_medium_or_high' => 'Catatan jika Sedang atau Tinggi',
     'final_decision' => 'Keputusan Akhir',
     'type' => 'Tipe',
     'status' => 'Status',
-
     'carpot' => 'Carport',
     'floors' => 'Jumlah Lantai',
+
 ];
