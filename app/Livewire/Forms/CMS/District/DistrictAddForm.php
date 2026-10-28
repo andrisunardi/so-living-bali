@@ -12,6 +12,15 @@ class DistrictAddForm extends Form
     #[Validate('required|string|min:1|max:50|unique:districts,name')]
     public string $name = '';
 
+    #[Validate('nullable|string|max:65535')]
+    public ?string $description = null;
+
+    #[Validate('nullable|string|max:65535')]
+    public ?string $description_id = null;
+
+    #[Validate('nullable|string|max:65535')]
+    public ?string $description_fr = null;
+
     #[Validate('required|boolean')]
     public bool $is_show = true;
 

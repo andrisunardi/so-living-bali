@@ -205,6 +205,8 @@ new #[Title('Property For Sale')] class extends Component {
         </section>
     @endif
 
+    <x-property.sale.area-description :property="$property" />
+
     <section class="pb-5">
         <div class="container-md">
             <livewire:property.sale.enquiry :property-name="$property->name" :property-code="$property->code"

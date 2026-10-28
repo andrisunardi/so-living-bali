@@ -13,6 +13,15 @@ class DistrictEditForm extends Form
 
     public string $name = '';
 
+    #[Validate('nullable|string|max:65535')]
+    public ?string $description = null;
+
+    #[Validate('nullable|string|max:65535')]
+    public ?string $description_id = null;
+
+    #[Validate('nullable|string|max:65535')]
+    public ?string $description_fr = null;
+
     #[Validate('required|boolean')]
     public bool $is_show = true;
 
@@ -23,6 +32,9 @@ class DistrictEditForm extends Form
     {
         $this->district = $district;
         $this->name = $district->name;
+        $this->description = $district->description;
+        $this->description_id = $district->description_id;
+        $this->description_fr = $district->description_fr;
         $this->is_show = $district->is_show;
         $this->is_active = $district->is_active;
     }

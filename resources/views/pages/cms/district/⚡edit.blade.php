@@ -159,6 +159,45 @@ new #[Title('Edit | District')] class extends Component {
                     </div>
                 </div>
 
+                <div class="row g-3 mt-0">
+                    <div class="col-12">
+                        <label class="form-label" for="description">
+                            {{ trans('field.description') }} (EN)
+                        </label>
+                        <textarea class="form-control" id="description" name="description" rows="4"
+                            placeholder="{{ trans('index.ex') }} Canggu is a coastal area known for..."
+                            wire:model="form.description" wire:offline.class="disabled" wire:offline.attr="disabled"
+                            wire:loading.class="disabled" wire:loading.attr="disabled"></textarea>
+                        @error('form.description')
+                            <div class="form-text text-danger">{{ $message }}</div>
+                        @enderror
+                    </div>
+
+                    <div class="col-sm-6">
+                        <label class="form-label" for="description_id">
+                            {{ trans('field.description') }} (ID)
+                        </label>
+                        <textarea class="form-control" id="description_id" name="description_id" rows="4"
+                            wire:model="form.description_id" wire:offline.class="disabled" wire:offline.attr="disabled"
+                            wire:loading.class="disabled" wire:loading.attr="disabled"></textarea>
+                        @error('form.description_id')
+                            <div class="form-text text-danger">{{ $message }}</div>
+                        @enderror
+                    </div>
+
+                    <div class="col-sm-6">
+                        <label class="form-label" for="description_fr">
+                            {{ trans('field.description') }} (FR)
+                        </label>
+                        <textarea class="form-control" id="description_fr" name="description_fr" rows="4"
+                            wire:model="form.description_fr" wire:offline.class="disabled" wire:offline.attr="disabled"
+                            wire:loading.class="disabled" wire:loading.attr="disabled"></textarea>
+                        @error('form.description_fr')
+                            <div class="form-text text-danger">{{ $message }}</div>
+                        @enderror
+                    </div>
+                </div>
+
                 <hr />
 
                 <div class="row">
