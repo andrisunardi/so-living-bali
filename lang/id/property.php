@@ -209,6 +209,8 @@ return [
     'years' => 'tahun',
     'view_more_in_area' => 'Lihat lainnya di :area',
     'view_all_properties_for_sale' => 'Lihat semua properti dijual',
+    'similar_properties' => 'Properti Serupa',
+    'frequently_asked_questions' => 'Pertanyaan yang Sering Diajukan',
     'about_this_property' => 'About This Property',
     'about_the_area' => 'Tentang :area',
     'ownership_and_legal_information' => 'Ownership & Legal Information',
