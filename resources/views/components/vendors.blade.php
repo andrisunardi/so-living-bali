@@ -4,38 +4,39 @@
 
 @include('vendors.bootstrap')
 
-@include('vendors.canvas2image')
+{{-- @include('vendors.canvas2image') --}} {{-- unused: no canvas2image usage anywhere --}}
 
 {{-- @include('vendors.clarity-microsoft-tag') --}}
 
 @include('vendors.flag-icons')
 
-@include('vendors.flatpickr')
-
 @include('vendors.font-awesome')
 
-@include('vendors.html5-qrcode')
+{{-- @include('vendors.html5-qrcode') --}} {{-- unused: no QR scanner markup anywhere --}}
 
 @include('vendors.leaflet')
 
-@include('vendors.lozad')
+{{-- @include('vendors.lozad') --}} {{-- unused: images use native loading="lazy", no data-lozad targets --}}
 
 @include('vendors.nouislider')
 
 @include('vendors.pace')
 
-@include('vendors.panzoom')
-
-@include('vendors.select2')
-
 @include('vendors.sweetalert2')
 
-@include('vendors.swiper')
+{{-- @include('vendors.swiper') --}} {{-- unused: no .swiper / new Swiper anywhere --}}
 
 {{-- @include('vendors.tom-select') --}}
 
 @include('vendors.snowflakes')
 
-@include('vendors.tinymce')
+{{-- CMS-only vendors: heavy editors/pickers/selects not used on the public site. --}}
+@if (Route::is('cms.*'))
+    @include('vendors.flatpickr')
 
-@include('vendors.trix')
+    @include('vendors.select2')
+
+    @include('vendors.tinymce')
+
+    @include('vendors.trix')
+@endif
