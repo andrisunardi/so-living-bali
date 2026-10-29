@@ -23,11 +23,15 @@ use Illuminate\Support\Str;
 use Illuminate\Validation\ValidationException;
 use Livewire\Attributes\On;
 use Livewire\Attributes\Title;
+use Livewire\Attributes\Url;
 
 new #[Title('Edit | Property')] class extends Component {
     public Property $property;
 
     public PropertyEditForm $form;
+
+    #[Url(except: '')]
+    public string $page = '';
 
     public int $tab = PropertyTab::PropertyIndentity->value;
 
@@ -183,7 +187,7 @@ new #[Title('Edit | Property')] class extends Component {
                 'message' => trans('page.property') . ' ' . trans('message.has_been_successfully_edited'),
             ]);
 
-            $this->redirect(route('cms.property.index'), navigate: true);
+            $this->redirect(route('cms.property.index', $this->page ? ['page' => $this->page] : []), navigate: true);
         } catch (ValidationException $e) {
             $errors = collect($e->validator->errors()->all())->implode('<br>');
 
@@ -314,7 +318,7 @@ new #[Title('Edit | Property')] class extends Component {
         <div class="card-body">
             <div class="row g-3">
                 <div class="col-auto">
-                    <a draggable="false" class="btn btn-success w-100" href="{{ route('cms.property.index') }}"
+                    <a draggable="false" class="btn btn-success w-100" href="{{ route('cms.property.index', $page ? ['page' => $page] : []) }}"
                         wire:navigate>
                         <span class="fas fa-arrow-left fa-fw"></span>
                         {{ trans('index.back') }}

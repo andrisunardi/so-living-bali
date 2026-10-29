@@ -487,7 +487,7 @@ new #[Title('Property')] class extends Component {
 
                                         @can('property.edit')
                                             <a draggable="false" class="btn btn-success btn-sm"
-                                                href="{{ route('cms.property.edit', ['property' => $property]) }}"
+                                                href="{{ route('cms.property.edit', ['property' => $property, 'page' => $this->getPage()]) }}"
                                                 wire:navigate>
                                                 <span class="fas fa-edit fa-fw"></span>
                                                 {{ trans('index.edit') }}

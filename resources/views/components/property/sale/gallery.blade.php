@@ -7,10 +7,10 @@
 @php($remainingImages = $imageCount - 5)
 
 <div class="row g-3">
-    <div class="col-lg-6">
-        <a draggable="false" role="button" class="d-block ratio ratio-4x3 rounded-4 overflow-hidden"
+    <div class="col-lg-6 d-flex">
+        <a draggable="false" role="button" class="d-block w-100 rounded-4 overflow-hidden"
             data-bs-toggle="modal" data-bs-target="#sale-gallery">
-            <img draggable="false" loading="lazy" decoding="async" class="object-fit-cover"
+            <img draggable="false" loading="lazy" decoding="async" class="w-100 h-100 object-fit-cover"
                 src="{{ $images[0]->image_url ?? asset('images/placeholder.png') }}"
                 alt="{{ trans('property.property') }} - {{ $property->name }} - {{ config('constants.meta.title') }}"
                 onerror="this.onerror=null; this.src='/images/placeholder.png';">
@@ -22,7 +22,7 @@
             @for ($i = 1; $i <= 4; $i++)
                 <div class="col">
                     @isset($images[$i])
-                        <a draggable="false" role="button" class="d-block position-relative ratio ratio-4x3 rounded-4 overflow-hidden"
+                        <a draggable="false" role="button" class="d-block position-relative ratio ratio-16x9 rounded-4 overflow-hidden"
                             data-bs-toggle="modal" data-bs-target="#sale-gallery">
                             <img draggable="false" loading="lazy" decoding="async" class="object-fit-cover"
                                 src="{{ $images[$i]->image_url ?? asset('images/placeholder.png') }}"
@@ -37,7 +37,7 @@
                             @endif
                         </a>
                     @else
-                        <span class="d-block ratio ratio-4x3 rounded-4 overflow-hidden bg-body-tertiary"></span>
+                        <span class="d-block ratio ratio-16x9 rounded-4 overflow-hidden bg-body-tertiary"></span>
                     @endisset
                 </div>
             @endfor
@@ -45,25 +45,27 @@
     </div>
 </div>
 
-<div class="d-flex flex-wrap justify-content-end gap-2 mt-3">
-    @if (filled($property->video_tour))
-        <a draggable="false" class="btn btn-outline-dark rounded-pill" href="{{ $property->video_tour }}"
-            target="_blank" rel="noopener noreferrer">
-            <span class="fas fa-circle-play fa-fw"></span>
-            {{ trans('property.video_tour') }}
-        </a>
-    @endif
+<div class="d-flex flex-wrap justify-content-between align-items-center gap-2 mt-3">
+    <div class="d-flex flex-wrap gap-2">
+        @if (filled($property->video_tour))
+            <a draggable="false" class="btn btn-outline-success rounded-pill" href="{{ $property->video_tour }}"
+                target="_blank" rel="noopener noreferrer">
+                <span class="fas fa-circle-play fa-fw"></span>
+                {{ trans('property.video_tour') }}
+            </a>
+        @endif
 
-    @if (filled($property->floor_plan))
-        <a draggable="false" class="btn btn-outline-dark rounded-pill" href="{{ $property->floor_plan }}"
-            target="_blank" rel="noopener noreferrer">
-            <span class="fas fa-ruler-combined fa-fw"></span>
-            {{ trans('property.floor_plan') }}
-        </a>
-    @endif
+        @if (filled($property->floor_plan))
+            <a draggable="false" class="btn btn-outline-success rounded-pill" href="{{ $property->floor_plan }}"
+                target="_blank" rel="noopener noreferrer">
+                <span class="fas fa-ruler-combined fa-fw"></span>
+                {{ trans('property.floor_plan') }}
+            </a>
+        @endif
+    </div>
 
     @if ($imageCount > 0)
-        <button type="button" class="btn btn-outline-dark rounded-pill" data-bs-toggle="modal"
+        <button type="button" class="btn btn-outline-dark rounded-pill ms-auto" data-bs-toggle="modal"
             data-bs-target="#sale-gallery">
             <span class="fas fa-table-cells fa-fw"></span>
             {{ trans('property.view_all_photos') }} ({{ $imageCount }})
