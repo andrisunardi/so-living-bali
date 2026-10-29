@@ -135,7 +135,7 @@ new #[Title('Properties For Sale')] class extends Component {
     <x-sections.cta
     :title="trans('property.cta.title')"
     :description="trans('property.cta.description')"
-    :image-url="asset('images/banner/property.png')"
+    :image-url="asset('images/banner/property.webp')"
     :button-name="trans('property.cta.button')"
     :button-link="route('contact')"
     />

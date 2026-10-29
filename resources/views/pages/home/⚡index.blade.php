@@ -40,7 +40,7 @@ new #[Title('Home')] class extends Component {};
     <x-sections.cta
     :title="trans('home.cta.title')"
     :description="trans('home.cta.description')"
-    :image-url="asset('images/banner/home.png')"
+    :image-url="asset('images/banner/home.webp')"
     :button-name="trans('home.cta.button')"
     :button-link="route('contact')"
     />

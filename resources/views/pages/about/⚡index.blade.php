@@ -19,7 +19,7 @@ new #[Title('About')] class extends Component {};
     <x-sections.cta-full
     :title="trans('about.cta.title')"
     :description="trans('about.cta.description')"
-    :image-url="asset('images/banner/about.png')"
+    :image-url="asset('images/banner/about.webp')"
     :button-name="trans('about.cta.button_name')"
     :button-link="'https://api.whatsapp.com/send/?phone=' .
         Str::slug(config('constants.contact.whatsapp'), '') .

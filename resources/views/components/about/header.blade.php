@@ -8,7 +8,7 @@
         </div>
 
         <img draggable="false" loading="lazy" decoding="async" class="img-fluid w-100 h-100 rounded user-select-none pe-none"
-            src="{{ asset('images/banner/about.png') }}"
+            src="{{ asset('images/banner/about.webp') }}"
             alt="{{ trans('index.banner') }} - {{ trans('page.about') }} - {{ config('constants.meta.title') }}">
     </div>
 </section>
