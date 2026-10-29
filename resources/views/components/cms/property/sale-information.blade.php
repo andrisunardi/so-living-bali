@@ -111,7 +111,7 @@
                                 <div class="input-group-text">
                                     <span class="fas fa-calendar fa-fw "></span>
                                 </div>
-                                <input type="date" class="form-control" id="lease_expiry_date"
+                                <input type="text" class="form-control datepicker" id="lease_expiry_date"
                                     name="lease_expiry_date"
                                     min="{{ $property?->lease_expiry_date?->toDateString() ?? now()->toDateString() }}"
                                     max="2099-12-31" wire:model="form.lease_expiry_date" wire:offline.class="disabled"

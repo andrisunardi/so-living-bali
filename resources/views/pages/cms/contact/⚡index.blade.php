@@ -247,7 +247,7 @@ new #[Title('Contact')] class extends Component {
                             {{ trans('field.start_date') }}
                         </label>
                         <div class="input-group">
-                            <input type="date" class="form-control" id="start_date" name="start_date"
+                            <input type="text" class="form-control datepicker" id="start_date" name="start_date"
                                 min="2026-01-01" max="2099-12-12" wire:key="start_date" wire:model.lazy="start_date"
                                 wire:offline.class="disabled" wire:offline.attr="disabled"
                                 wire:loading.class="disabled" wire:loading.attr="disabled">
@@ -259,7 +259,7 @@ new #[Title('Contact')] class extends Component {
                             {{ trans('field.end_date') }}
                         </label>
                         <div class="input-group">
-                            <input type="date" class="form-control" id="end_date" name="end_date"
+                            <input type="text" class="form-control datepicker" id="end_date" name="end_date"
                                 min="2026-01-01" max="2099-12-12" wire:key="end_date" wire:model.lazy="end_date"
                                 wire:offline.class="disabled" wire:offline.attr="disabled"
                                 wire:loading.class="disabled" wire:loading.attr="disabled">

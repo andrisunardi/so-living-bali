@@ -86,4 +86,43 @@ class PropertyPriceFilterTest extends TestCase
         $this->assertTrue($ids->contains($both->id));
         $this->assertFalse($ids->contains($bothAbove->id));
     }
+
+    public function test_rental_list_excludes_for_sale_only_property_with_leftover_rental_type(): void
+    {
+        $forRent = Property::create([
+            'code' => Str::upper(Str::random(8)),
+            'name' => 'Rental Villa',
+            'description' => 'x',
+            'description_id' => 'x',
+            'description_fr' => 'x',
+            'status' => PropertyStatus::AcceptUpper,
+            'listing_type' => PropertyListingType::ForRent,
+            'rental_type' => PropertyRentalType::Monthly->value,
+            'monthly_price' => 80_000_000,
+        ]);
+
+        $forSaleWithLeftoverRental = Property::create([
+            'code' => Str::upper(Str::random(8)),
+            'name' => 'Sale Only Villa',
+            'description' => 'x',
+            'description_id' => 'x',
+            'description_fr' => 'x',
+            'status' => PropertyStatus::AcceptUpper,
+            'listing_type' => PropertyListingType::ForSale,
+            'rental_type' => PropertyRentalType::Monthly->value,
+            'monthly_price' => 80_000_000,
+        ]);
+
+        $service = new PropertyService;
+        $results = $service->index(
+            listingTypes: [PropertyListingType::ForRent->value, PropertyListingType::ForRentAndSale->value],
+            statuses: [PropertyStatus::AcceptUpper->value, PropertyStatus::AcceptPremium->value],
+            paginate: false,
+        );
+
+        $ids = $results->pluck('id');
+
+        $this->assertTrue($ids->contains($forRent->id));
+        $this->assertFalse($ids->contains($forSaleWithLeftoverRental->id));
+    }
 }
