@@ -14,6 +14,18 @@ class PropertySaleDetailTest extends TestCase
 {
     use RefreshDatabase;
 
+    protected function setUp(): void
+    {
+        parent::setUp();
+
+        // Properties for Sale is temporarily disabled at the client's request
+        // (routes commented out in routes/web.php). Re-enable these tests when
+        // the property.sale.detail route is restored.
+        if (! \Illuminate\Support\Facades\Route::has('property.sale.detail')) {
+            $this->markTestSkipped('Properties for Sale is temporarily disabled.');
+        }
+    }
+
     private function createProperty(array $attributes = []): Property
     {
         $code = Str::upper(Str::random(8));
