@@ -27,14 +27,23 @@
             });
         };
 
-        document.addEventListener("DOMContentLoaded", () => window.initDatepickers());
-
-        document.addEventListener("livewire:init", () => {
-            window.initDatepickers();
+        window.registerDatepickerMorphHook = function() {
+            if (window.datepickerMorphHookRegistered) {
+                return;
+            }
+            window.datepickerMorphHookRegistered = true;
 
             Livewire.hook("morph.updated", () => queueMicrotask(() => window.initDatepickers()));
-        });
+        };
 
         document.addEventListener("livewire:navigated", () => window.initDatepickers());
+
+        document.addEventListener("livewire:init", () => window.registerDatepickerMorphHook());
+
+        if (window.Livewire) {
+            window.registerDatepickerMorphHook();
+        }
+
+        window.initDatepickers();
     </script>
 @endpush
