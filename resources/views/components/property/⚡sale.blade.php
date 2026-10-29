@@ -32,7 +32,7 @@ new #[Lazy] class extends Component {
         $listingTypes = [PropertyListingType::ForSale->value, PropertyListingType::ForRentAndSale->value];
 
         $service = new PropertyService();
-        $properties = $service->index(districts: $this->districts, areas: $this->areas, types: $this->types, ownershipType: $this->ownership, prices: $this->prices, listingTypes: $listingTypes, statuses: $statuses, paginate: false);
+        $properties = $service->index(availableDate: today()->toDateString(), districts: $this->districts, areas: $this->areas, types: $this->types, ownershipType: $this->ownership, prices: $this->prices, listingTypes: $listingTypes, statuses: $statuses, paginate: false);
         $properties->loadMissing(['area', 'district', 'image']);
 
         return $properties;
