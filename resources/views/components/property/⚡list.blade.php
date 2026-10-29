@@ -1,5 +1,6 @@
 <?php
 
+use App\Enums\Property\PropertyListingType;
 use App\Enums\Property\PropertyRentalType;
 use App\Enums\Property\PropertyStatus;
 use App\Livewire\Component;
@@ -35,6 +36,7 @@ new #[Lazy] class extends Component {
     public function properties(): object
     {
         $statuses = [PropertyStatus::AcceptUpper->value, PropertyStatus::AcceptPremium->value];
+        $listingTypes = [PropertyListingType::ForRent->value, PropertyListingType::ForRentAndSale->value];
 
         $rentalTypes = [];
 
@@ -47,7 +49,7 @@ new #[Lazy] class extends Component {
         }
 
         $service = new PropertyService();
-        $properties = $service->index(availableDate: $this->availableDate, districts: $this->districts, areas: $this->areas, bedrooms: $this->bedrooms, livingStyle: $this->livingStyle, rentalTypes: $rentalTypes, prices: $this->prices, statuses: $statuses, paginate: false);
+        $properties = $service->index(availableDate: $this->availableDate, districts: $this->districts, areas: $this->areas, bedrooms: $this->bedrooms, livingStyle: $this->livingStyle, rentalTypes: $rentalTypes, listingTypes: $listingTypes, prices: $this->prices, statuses: $statuses, paginate: false);
         $properties->loadMissing(['area', 'district', 'image']);
 
         return $properties;

@@ -89,7 +89,7 @@
                     <div class="input-group-text">
                         <span class="fas fa-calendar fa-fw "></span>
                     </div>
-                    <input type="date" class="form-control" id="availability_date" name="availability_date"
+                    <input type="text" class="form-control datepicker" id="availability_date" name="availability_date"
                         min="1901-01-01" max="2999-12-31" wire:model="form.availability_date"
                         wire:offline.class="disabled" wire:offline.attr="disabled" wire:loading.class="disabled"
                         wire:loading.attr="disabled">
@@ -111,7 +111,7 @@
                     <div class="input-group-text">
                         <span class="fas fa-calendar fa-fw "></span>
                     </div>
-                    <input type="date" class="form-control" id="visit_date" name="visit_date" min="1901-01-01"
+                    <input type="text" class="form-control datepicker" id="visit_date" name="visit_date" min="1901-01-01"
                         max="2099-12-31" @if (!Auth::user()->hasRole('Admin')) disabled @endif wire:model="form.visit_date"
                         wire:offline.class="disabled" wire:offline.attr="disabled" wire:loading.class="disabled"
                         wire:loading.attr="disabled">
@@ -157,7 +157,7 @@
                         <div class="input-group-text">
                             <span class="fas fa-calendar fa-fw "></span>
                         </div>
-                        <input type="date" class="form-control" id="completion_date" name="completion_date"
+                        <input type="text" class="form-control datepicker" id="completion_date" name="completion_date"
                             min="1901-01-01" max="2999-12-31" required wire:model="form.completion_date"
                             wire:offline.class="disabled" wire:offline.attr="disabled" wire:loading.class="disabled"
                             wire:loading.attr="disabled">
