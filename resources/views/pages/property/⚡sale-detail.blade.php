@@ -128,8 +128,9 @@ new #[Title('Property For Sale')] class extends Component {
     $metaDescription = Str::limit(trim(preg_replace('/\s+/', ' ', $metaDescription)), 160);
 @endphp
 
+@section('meta_description', $metaDescription)
+
 @push('meta')
-    <meta name="description" content="{{ $metaDescription }}">
     <meta property="og:title" content="{{ $h1 }}">
     <meta property="og:description" content="{{ $metaDescription }}">
     <meta property="og:type" content="website">
