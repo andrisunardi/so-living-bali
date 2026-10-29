@@ -27,6 +27,13 @@ A running record of important work and decisions, so a new Kiro session starts w
   - Trade-off (acceptable): with `wire:ignore`, a server-side value change (resetForm) won't repaint the field; initial values still render on first paint and the user drives it afterward — standard flatpickr+Livewire pattern.
   - JS still can't run in the sandbox → MUST verify in a browser after deploy: open add/edit property, toggle status to Under Construction and the leasehold switch (confirm completion_date/lease_expiry_date pickers appear and work), pick dates (see dd/mm/yyyy), save, reopen (value persists, stored Y-m-d). Full suite 76 passed, Pint clean.
 
+## Session (flatpickr init timing fix) — PR #50
+
+- **PR #50 — Datepicker wasn't initialising ("ga bisa")**: client reported the picker didn't work. Diagnosis: the PHP data path is CORRECT — `PropertyEditForm::set()` hydrates `availability_date`/`visit_date`/`completion_date`/`lease_expiry_date` as `->toDateString()` (`Y-m-d`), and `PropertyService` create/update receive `Y-m-d` via `wire:model` (validation `date_format:Y-m-d` passes). So NO `->format('Y-m-d')` is needed in JS and the service DOES get the data. The failure was purely JS init timing: the loader relied on `DOMContentLoaded`/`livewire:init` which can have already fired by the time the deferred `@push('script')` block executes at the bottom of body, so `initDatepickers()` never ran. Confirmed every page (public + CMS) uses the same layout `layouts::app` (config/livewire.php `component_layout`), which renders `<x-vendors />` + `@stack('script')` + `@livewireScripts` in that order — so flatpickr loads fine, the issue was only the init trigger.
+  - Fix: call `window.initDatepickers()` DIRECTLY at the end of the pushed script (DOM is already parsed since the block sits before `@livewireScripts` at body end), keep `livewire:navigated` re-init, and register the `morph.updated` hook idempotently (`window.datepickerMorphHookRegistered` guard) via either `livewire:init` or an immediate `if (window.Livewire)` check — no stacking, no dependency on a possibly-missed event. `wire:ignore` wrappers + `data-fp-ready` guard from PR #49 unchanged.
+  - STILL needs a browser smoke test after deploy (JS can't run in sandbox). Full suite 76 passed.
+
+
 
 
 ## Session (price filter not working) — PR #47
