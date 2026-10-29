@@ -85,15 +85,8 @@
                 <label class="form-label" for="availability_date">
                     {{ trans('property.availability_date') }}
                 </label>
-                <div class="input-group" wire:ignore>
-                    <div class="input-group-text">
-                        <span class="fas fa-calendar fa-fw "></span>
-                    </div>
-                    <input type="text" class="form-control datepicker" id="availability_date" name="availability_date"
-                        min="1901-01-01" max="2999-12-31" wire:model="form.availability_date"
-                        wire:offline.class="disabled" wire:offline.attr="disabled" wire:loading.class="disabled"
-                        wire:loading.attr="disabled">
-                </div>
+                <x-form.datepicker model="form.availability_date" id="availability_date" min="1901-01-01"
+                    max="2999-12-31" />
                 <div class="form-text">
                     {{ trans('helper.min') }} : 1901-01-01,
                     {{ trans('helper.max') }} : 2999-12-31
@@ -107,15 +100,8 @@
                 <label class="form-label" for="visit_date">
                     {{ trans('property.date_of_visit') }}
                 </label>
-                <div class="input-group" wire:ignore>
-                    <div class="input-group-text">
-                        <span class="fas fa-calendar fa-fw "></span>
-                    </div>
-                    <input type="text" class="form-control datepicker" id="visit_date" name="visit_date" min="1901-01-01"
-                        max="2099-12-31" @if (!Auth::user()->hasRole('Admin')) disabled @endif wire:model="form.visit_date"
-                        wire:offline.class="disabled" wire:offline.attr="disabled" wire:loading.class="disabled"
-                        wire:loading.attr="disabled">
-                </div>
+                <x-form.datepicker model="form.visit_date" id="visit_date" min="1901-01-01" max="2099-12-31"
+                    :disabled="!Auth::user()->hasRole('Admin')" />
                 <div class="form-text">
                     {{ trans('helper.min') }} : 1901-01-01,
                     {{ trans('helper.max') }} : 2999-12-31
@@ -153,15 +139,8 @@
                         {{ trans('property.completion_date') }}
                         <span class="text-danger">*</span>
                     </label>
-                    <div class="input-group" wire:ignore>
-                        <div class="input-group-text">
-                            <span class="fas fa-calendar fa-fw "></span>
-                        </div>
-                        <input type="text" class="form-control datepicker" id="completion_date" name="completion_date"
-                            min="1901-01-01" max="2999-12-31" required wire:model="form.completion_date"
-                            wire:offline.class="disabled" wire:offline.attr="disabled" wire:loading.class="disabled"
-                            wire:loading.attr="disabled">
-                    </div>
+                    <x-form.datepicker model="form.completion_date" id="completion_date" min="1901-01-01"
+                        max="2999-12-31" :required="true" />
                     <div class="form-text">
                         {{ trans('helper.min') }} : 1901-01-01,
                         {{ trans('helper.max') }} : 2999-12-31
