@@ -195,6 +195,35 @@ class PropertyService
         return $properties->get();
     }
 
+    private function resolveOwnershipType(array $data): ?int
+    {
+        if ($data['has_leasehold'] ?? false) {
+            return PropertyOwnershipType::Leasehold->value;
+        }
+
+        if ($data['has_freehold'] ?? false) {
+            return PropertyOwnershipType::Freehold->value;
+        }
+
+        return null;
+    }
+
+    private function resolveSalePrice(array $data): int
+    {
+        $leasehold = (int) str_replace(['.', ','], '', (string) ($data['leasehold_price'] ?? 0));
+        $freehold = (int) str_replace(['.', ','], '', (string) ($data['freehold_price'] ?? 0));
+
+        if ($data['has_leasehold'] ?? false) {
+            return $leasehold;
+        }
+
+        if ($data['has_freehold'] ?? false) {
+            return $freehold;
+        }
+
+        return 0;
+    }
+
     public function create(array $data = []): Property
     {
         $table = (new Property)->getTable();
@@ -254,13 +283,23 @@ class PropertyService
 
             if ($data['listing_type'] == PropertyListingType::ForRent->value) {
                 $data['ownership_type'] = null;
+                $data['has_leasehold'] = false;
+                $data['has_freehold'] = false;
             }
 
-            if ($data['ownership_type'] != PropertyOwnershipType::Leasehold->value) {
+            if (! ($data['has_leasehold'] ?? false)) {
+                $data['leasehold_price'] = 0;
                 $data['lease_expiry_date'] = null;
                 $data['lease_extension_available'] = null;
                 $data['lease_extension_terms_or_price'] = null;
             }
+
+            if (! ($data['has_freehold'] ?? false)) {
+                $data['freehold_price'] = 0;
+            }
+
+            $data['ownership_type'] = $this->resolveOwnershipType($data);
+            $data['sale_price'] = $this->resolveSalePrice($data);
 
             if (! $data['payment_plan_available']) {
                 $data['payment_plan_details'] = null;
@@ -277,12 +316,15 @@ class PropertyService
             $monthly = isset($data['monthly_price']) ? (int) str_replace(['.', ','], '', $data['monthly_price']) : 0;
             $yearly = isset($data['yearly_price']) ? (int) str_replace(['.', ','], '', $data['yearly_price']) : 0;
             $sale = isset($data['sale_price']) ? (int) str_replace(['.', ','], '', $data['sale_price']) : 0;
+            $leasehold = isset($data['leasehold_price']) ? (int) str_replace(['.', ','], '', $data['leasehold_price']) : 0;
+            $freehold = isset($data['freehold_price']) ? (int) str_replace(['.', ','], '', $data['freehold_price']) : 0;
             $arePrice = isset($data['price_per_are']) ? (int) str_replace(['.', ','], '', $data['price_per_are']) : 0;
 
             $data['monthly_price'] = 0;
             $data['yearly_price'] = 0;
             $data['sale_price'] = 0;
-            $data['monthly_price'] = 0;
+            $data['leasehold_price'] = 0;
+            $data['freehold_price'] = 0;
 
             Arr::pull($data, 'images');
             Arr::pull($data, 'internet_speedtest_image');
@@ -293,6 +335,8 @@ class PropertyService
                 'monthly_price' => DB::raw($monthly),
                 'yearly_price' => DB::raw($yearly),
                 'sale_price' => DB::raw($sale),
+                'leasehold_price' => DB::raw($leasehold),
+                'freehold_price' => DB::raw($freehold),
                 'price_per_are' => DB::raw($arePrice),
             ]);
 
@@ -350,11 +394,25 @@ class PropertyService
                 }
             }
 
-            if ($data['ownership_type'] != PropertyOwnershipType::Leasehold->value) {
+            if ($data['listing_type'] == PropertyListingType::ForRent->value) {
+                $data['ownership_type'] = null;
+                $data['has_leasehold'] = false;
+                $data['has_freehold'] = false;
+            }
+
+            if (! ($data['has_leasehold'] ?? false)) {
+                $data['leasehold_price'] = 0;
                 $data['lease_expiry_date'] = null;
                 $data['lease_extension_available'] = null;
                 $data['lease_extension_terms_or_price'] = null;
             }
+
+            if (! ($data['has_freehold'] ?? false)) {
+                $data['freehold_price'] = 0;
+            }
+
+            $data['ownership_type'] = $this->resolveOwnershipType($data);
+            $data['sale_price'] = $this->resolveSalePrice($data);
 
             if (! $data['payment_plan_available']) {
                 $data['payment_plan_details'] = null;
@@ -400,12 +458,15 @@ class PropertyService
             $monthly = isset($data['monthly_price']) ? (int) str_replace(['.', ','], '', $data['monthly_price']) : 0;
             $yearly = isset($data['yearly_price']) ? (int) str_replace(['.', ','], '', $data['yearly_price']) : 0;
             $sale = isset($data['sale_price']) ? (int) str_replace(['.', ','], '', $data['sale_price']) : 0;
+            $leasehold = isset($data['leasehold_price']) ? (int) str_replace(['.', ','], '', $data['leasehold_price']) : 0;
+            $freehold = isset($data['freehold_price']) ? (int) str_replace(['.', ','], '', $data['freehold_price']) : 0;
             $arePrice = isset($data['price_per_are']) ? (int) str_replace(['.', ','], '', $data['price_per_are']) : 0;
 
             $data['monthly_price'] = 0;
             $data['yearly_price'] = 0;
             $data['sale_price'] = 0;
-            $data['monthly_price'] = 0;
+            $data['leasehold_price'] = 0;
+            $data['freehold_price'] = 0;
 
             Arr::pull($data, 'images');
             Arr::pull($data, 'internet_speedtest_image');
@@ -416,6 +477,8 @@ class PropertyService
                 'monthly_price' => DB::raw($monthly),
                 'yearly_price' => DB::raw($yearly),
                 'sale_price' => DB::raw($sale),
+                'leasehold_price' => DB::raw($leasehold),
+                'freehold_price' => DB::raw($freehold),
                 'price_per_are' => DB::raw($arePrice),
             ]);
 

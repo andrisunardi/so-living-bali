@@ -35,6 +35,7 @@ use Illuminate\Database\Eloquent\Relations\HasOne;
 use Illuminate\Database\Eloquent\SoftDeletes;
 use Illuminate\Support\Carbon;
 use Illuminate\Support\Facades\App;
+use Illuminate\Support\Str;
 use Spatie\Activitylog\LogOptions;
 use Spatie\Activitylog\Models\Activity;
 use Spatie\Activitylog\Traits\LogsActivity;
@@ -124,6 +125,10 @@ use Spatie\Activitylog\Traits\LogsActivity;
  * @property int $sale_price
  * @property PropertyCurrency|null $currency
  * @property PropertyOwnershipType|null $ownership_type
+ * @property bool $has_leasehold
+ * @property int $leasehold_price
+ * @property bool $has_freehold
+ * @property int $freehold_price
  * @property Carbon|null $lease_expiry_date
  * @property PropertyLeaseExtensionAvailable|null $lease_extension_available
  * @property string|null $lease_extension_terms_or_price
@@ -450,6 +455,10 @@ class Property extends Model
         'sale_price',
         'currency',
         'ownership_type',
+        'has_leasehold',
+        'leasehold_price',
+        'has_freehold',
+        'freehold_price',
         'lease_expiry_date',
         'lease_extension_available',
         'lease_extension_terms_or_price',
@@ -579,6 +588,10 @@ class Property extends Model
             'sale_price' => 'integer',
             'currency' => PropertyCurrency::class,
             'ownership_type' => PropertyOwnershipType::class,
+            'has_leasehold' => 'boolean',
+            'leasehold_price' => 'integer',
+            'has_freehold' => 'boolean',
+            'freehold_price' => 'integer',
             'lease_expiry_date' => 'date',
             'lease_extension_available' => PropertyLeaseExtensionAvailable::class,
             'lease_extension_terms_or_price' => 'string',
@@ -645,7 +658,7 @@ class Property extends Model
     {
         $area = $this->area?->name ?? $this->district?->name ?? 'Bali';
 
-        return \Illuminate\Support\Str::slug($area);
+        return Str::slug($area);
     }
 
     public function getSaleUrlAttribute(): string

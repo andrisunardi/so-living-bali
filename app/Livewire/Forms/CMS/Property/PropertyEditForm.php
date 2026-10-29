@@ -300,7 +300,7 @@ class PropertyEditForm extends Form
     #[Validate('nullable|string|min:1|max:100')]
     public ?string $reference = '';
 
-    #[Validate('required|integer|min:0|max:100000000000')]
+    #[Validate('nullable|integer|min:0|max:100000000000')]
     public ?int $sale_price = 0;
 
     #[Validate(['nullable', 'integer', new Enum(PropertyCurrency::class)])]
@@ -309,10 +309,22 @@ class PropertyEditForm extends Form
     #[Validate(['nullable', 'integer', new Enum(PropertyOwnershipType::class)])]
     public ?int $ownership_type = null;
 
-    #[Validate('nullable|required_if:ownership_type,'.PropertyOwnershipType::Leasehold->value.'|date|date_format:Y-m-d|after_or_equal:1901-01-01|before_or_equal:2999-12-31')]
+    #[Validate('nullable|boolean')]
+    public bool $has_leasehold = false;
+
+    #[Validate('nullable|required_if:has_leasehold,1|integer|min:0|max:100000000000')]
+    public ?int $leasehold_price = 0;
+
+    #[Validate('nullable|boolean')]
+    public bool $has_freehold = false;
+
+    #[Validate('nullable|required_if:has_freehold,1|integer|min:0|max:100000000000')]
+    public ?int $freehold_price = 0;
+
+    #[Validate('nullable|required_if:has_leasehold,1|date|date_format:Y-m-d|after_or_equal:1901-01-01|before_or_equal:2999-12-31')]
     public ?string $lease_expiry_date = '';
 
-    #[Validate(['nullable', 'required_if:ownership_type,'.PropertyOwnershipType::Leasehold->value, 'integer', new Enum(PropertyLeaseExtensionAvailable::class)])]
+    #[Validate(['nullable', 'required_if:has_leasehold,1', 'integer', new Enum(PropertyLeaseExtensionAvailable::class)])]
     public ?int $lease_extension_available = null;
 
     #[Validate('nullable|string|min:1|max:65535')]
@@ -494,6 +506,10 @@ class PropertyEditForm extends Form
         $this->sale_price = $property->sale_price;
         $this->currency = $property->currency?->value;
         $this->ownership_type = $property->ownership_type?->value;
+        $this->has_leasehold = $property->has_leasehold;
+        $this->leasehold_price = $property->leasehold_price;
+        $this->has_freehold = $property->has_freehold;
+        $this->freehold_price = $property->freehold_price;
         $this->lease_expiry_date = $property->lease_expiry_date?->toDateString();
         $this->lease_extension_available = $property->lease_extension_available?->value;
         $this->lease_extension_terms_or_price = $property->lease_extension_terms_or_price;

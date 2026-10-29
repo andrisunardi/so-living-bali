@@ -3,8 +3,8 @@
 ])
 
 @php
-    $isLeasehold = $property->ownership_type === App\Enums\Property\PropertyOwnershipType::Leasehold;
-    $isFreehold = $property->ownership_type === App\Enums\Property\PropertyOwnershipType::Freehold;
+    $isLeasehold = $property->has_leasehold;
+    $isFreehold = $property->has_freehold;
 
     $leaseRemaining = null;
     if ($isLeasehold && $property->lease_expiry_date && $property->lease_expiry_date->isFuture()) {

@@ -8,32 +8,35 @@
     $location = $property->area?->name ?? $property->district?->name;
     $whatsappText = rawurlencode('Hello, I am interested in '.$property->name.' ('.$property->code.') on solivingbali.com');
 
-    $isLeasehold = $property->ownership_type === PropertyOwnershipType::Leasehold;
-    $isFreehold = $property->ownership_type === PropertyOwnershipType::Freehold;
+    $isLeasehold = $property->has_leasehold;
+    $isFreehold = $property->has_freehold;
 
     $leaseRemainingYears = null;
     if ($isLeasehold && $property->lease_expiry_date && $property->lease_expiry_date->isFuture()) {
         $leaseRemainingYears = (int) abs(now()->diffInYears($property->lease_expiry_date));
     }
 
-    $tenure = null;
+    $leaseholdTenure = null;
     if ($isLeasehold) {
-        $tenure = $leaseRemainingYears
+        $leaseholdTenure = $leaseRemainingYears
             ? strtoupper('Leasehold - '.$leaseRemainingYears.' years remaining')
             : 'LEASEHOLD';
-    } elseif ($isFreehold) {
-        $tenure = $property->land_title?->description()
+    }
+
+    $freeholdTenure = null;
+    if ($isFreehold) {
+        $freeholdTenure = $property->land_title?->description()
             ? strtoupper('Freehold - '.$property->land_title->description())
             : 'FREEHOLD';
     }
 
-    $priceSubtitle = null;
-    if ($property->currency === App\Enums\Property\PropertyCurrency::IDR && $property->sale_price > 0) {
-        if ($property->sale_price >= 1000000000) {
-            $priceSubtitle = 'IDR '.rtrim(rtrim(number_format($property->sale_price / 1000000000, 1, '.', ''), '0'), '.').' Billion';
-        } elseif ($property->sale_price >= 1000000) {
-            $priceSubtitle = 'IDR '.rtrim(rtrim(number_format($property->sale_price / 1000000, 1, '.', ''), '0'), '.').' Million';
-        }
+    $prices = collect([
+        $isLeasehold ? ['label' => trans('index.leasehold'), 'price' => $property->leasehold_price, 'tenure' => $leaseholdTenure] : null,
+        $isFreehold ? ['label' => trans('index.freehold'), 'price' => $property->freehold_price, 'tenure' => $freeholdTenure] : null,
+    ])->filter(fn ($row) => $row && $row['price'] > 0)->values();
+
+    if ($prices->isEmpty() && $property->sale_price > 0) {
+        $prices = collect([['label' => null, 'price' => $property->sale_price, 'tenure' => $leaseholdTenure ?? $freeholdTenure]]);
     }
 @endphp
 
@@ -55,12 +58,17 @@
             @endif
         </div>
 
+        @php($ownershipLabel = collect([
+            $isLeasehold ? trans('index.leasehold') : null,
+            $isFreehold ? trans('index.freehold') : null,
+        ])->filter()->join(' / ') ?: $property->ownership_type?->description())
+
         @php($specs = collect([
             $property->bedroom?->description() ? $property->bedroom->description().' '.trans('property.bedrooms') : null,
             $property->number_of_bathrooms ? $property->number_of_bathrooms.' '.trans('property.bathrooms') : null,
             $property->building_size ? $property->building_size.' m² '.trans('property.building') : null,
             $property->land_size ? $property->land_size.' m² '.trans('property.land') : null,
-            $property->ownership_type?->description(),
+            $ownershipLabel,
         ])->filter())
 
         @if ($specs->isNotEmpty())
@@ -89,10 +97,10 @@
                         <div class="h4 fw-semibold mb-0">{{ $property->land_size }} m²</div>
                     </div>
                 @endif
-                @if ($property->ownership_type?->description())
+                @if ($ownershipLabel)
                     <div class="col">
                         <div class="text-body-secondary small text-uppercase">{{ trans('property.ownership') }}</div>
-                        <div class="h4 fw-semibold mb-0">{{ $property->ownership_type->description() }}</div>
+                        <div class="h4 fw-semibold mb-0">{{ $ownershipLabel }}</div>
                     </div>
                 @endif
             </div>
@@ -102,20 +110,22 @@
     <div class="col-lg-5 col-xl-4">
         <div class="card border shadow-sm rounded-4 position-sticky" style="top:1.5rem">
             <div class="card-body p-4">
-                <div class="text-body-secondary small text-uppercase">{{ trans('property.sale_price') }}</div>
-                <div class="fs-2 fw-bold text-success-emphasis">
-                    {{ Str::currency($property->sale_price, $property->currency) }}
-                </div>
+                @foreach ($prices as $row)
+                    <div class="@if (! $loop->first) border-top pt-3 mt-3 @endif">
+                        <div class="text-body-secondary small text-uppercase">
+                            {{ $row['label'] ? trans('property.sale_price').' — '.$row['label'] : trans('property.sale_price') }}
+                        </div>
+                        <div class="fs-2 fw-bold text-success-emphasis">
+                            {{ Str::currency($row['price'], $property->currency) }}
+                        </div>
 
-                @if ($priceSubtitle)
-                    <div class="text-body-secondary">{{ $priceSubtitle }}</div>
-                @endif
-
-                @if ($tenure)
-                    <span class="badge text-bg-success rounded-pill mt-3 px-3 py-2">
-                        {{ $tenure }}
-                    </span>
-                @endif
+                        @if ($row['tenure'])
+                            <span class="badge text-bg-success rounded-pill mt-2 px-3 py-2">
+                                {{ $row['tenure'] }}
+                            </span>
+                        @endif
+                    </div>
+                @endforeach
 
                 <div class="d-grid gap-2 mt-4">
                     <a draggable="false" class="btn btn-success rounded-pill"

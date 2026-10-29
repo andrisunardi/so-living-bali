@@ -190,12 +190,30 @@ new #[Lazy] class extends Component {
                         </div>
 
                         <div class="mt-3 d-grid gap-2">
-                            <div class="d-flex justify-content-between">
-                                <span class="text-secondary">
-                                    {{ $property->ownership_type?->description() ?? '-' }}
-                                </span>
-                                <span class="fw-medium">{{ Str::currency($property->sale_price, $property->currency) }}</span>
-                            </div>
+                            @php($cardPrices = collect([
+                                $property->has_leasehold && $property->leasehold_price > 0
+                                    ? ['label' => trans('index.leasehold'), 'price' => $property->leasehold_price]
+                                    : null,
+                                $property->has_freehold && $property->freehold_price > 0
+                                    ? ['label' => trans('index.freehold'), 'price' => $property->freehold_price]
+                                    : null,
+                            ])->filter()->values())
+
+                            @if ($cardPrices->isNotEmpty())
+                                @foreach ($cardPrices as $cardPrice)
+                                    <div class="d-flex justify-content-between">
+                                        <span class="text-secondary">{{ $cardPrice['label'] }}</span>
+                                        <span class="fw-medium">{{ Str::currency($cardPrice['price'], $property->currency) }}</span>
+                                    </div>
+                                @endforeach
+                            @else
+                                <div class="d-flex justify-content-between">
+                                    <span class="text-secondary">
+                                        {{ $property->ownership_type?->description() ?? '-' }}
+                                    </span>
+                                    <span class="fw-medium">{{ Str::currency($property->sale_price, $property->currency) }}</span>
+                                </div>
+                            @endif
                         </div>
                     </div>
                 @endforeach
