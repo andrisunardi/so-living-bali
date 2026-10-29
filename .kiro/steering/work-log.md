@@ -12,6 +12,11 @@ A running record of important work and decisions, so a new Kiro session starts w
 
 > SANDBOX UPDATE: PHP 8.5.12 + Composer 2.8.12 DO run in the current environment (the old libgd.so.3 blocker no longer applies). `php artisan test`, `composer audit`, `composer update`, `php -l` all work here now — use them to verify before shipping. (DB tests: suite uses in-memory sqlite; tests with RefreshDatabase pass. The default stub `tests/Feature/ExampleTest` hits `/` without migrations and fails — pre-existing, unrelated.)
 
+## Session (price filter not working) — PR #47
+
+- **PR #47 — Public price filter never applied (client: IP191 at 186M still shows for a 40–134M monthly range)**: Root cause: `PropertyService::index()` gated every price `whereBetween` on the SINGULAR `$rentalType` param, but the public list (`components/property/⚡list.blade.php`) only ever passes the PLURAL `$rentalTypes` (`[Monthly, Both]` / `[Yearly, Both]`) and leaves `$rentalType` null — so none of the Monthly/Yearly/Both price branches ever fired on the website, and the price range was silently ignored. Fix (service-only, minimal): the Monthly and Yearly price branches now use an effective rental type `($rentalType ?? ($rentalTypes[0] ?? null))`, so they fire when the public list passes the plural array too. The `Both` branch (with its `*12` yearly scaling) still keys off the singular `$rentalType` only (used by callers that pass `Both` explicitly). Did NOT pass the singular `rentalType` from the list, because `index()` also has a `->when($rentalType, where('rental_type', ...))` branch that would then conflict with the `whereIn($rentalTypes)` and drop `Both` properties. Prices are raw rupiah (search defaults monthly 40M–250M, yearly 350M–2.5B), compared directly to `monthly_price`/`yearly_price`; `isset($prices['min'/'max'])` keeps it inert until the slider sets real values. Added `tests/Feature/PropertyPriceFilterTest` (3 tests: excludes above-max incl. the 186M case, excludes below-min, and a `Both` property is filtered by its monthly price). Full suite 75 passed. Local: `php artisan optimize:clear` + hard-refresh.
+
+
 ## Session (client reports: IP146 + 2 CMS updates) — PRs #45, #46
 
 - **PR #45 — IP146 availability + CMS pagination + re-enable for-sale (MERGED)**:

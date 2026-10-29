@@ -143,7 +143,7 @@ class PropertyService
                 fn ($query) => $query->whereDate('availability_date', '<=', $endDate)
             )
             ->when(
-                $rentalType == PropertyRentalType::Monthly->value &&
+                ($rentalType ?? ($rentalTypes[0] ?? null)) == PropertyRentalType::Monthly->value &&
                     isset($prices['min']) && isset($prices['max']),
                 fn ($q) => $q->whereBetween('monthly_price', [
                     $prices['min'],
@@ -151,7 +151,7 @@ class PropertyService
                 ])
             )
             ->when(
-                $rentalType == PropertyRentalType::Yearly->value &&
+                ($rentalType ?? ($rentalTypes[0] ?? null)) == PropertyRentalType::Yearly->value &&
                     isset($prices['min']) && isset($prices['max']),
                 fn ($q) => $q->whereBetween('yearly_price', [
                     $prices['min'],
