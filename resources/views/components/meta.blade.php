@@ -15,8 +15,8 @@
 <meta http-equiv="x-dns-prefetch-control" content="off" />
 <meta http-equiv="Window-Target" content="_top" />
 
-<meta name="viewport"
-    content="width=device-width, height=device-height, user-scalable=no, initial-scale=1.0, minimum-scale=1.0, maximum-scale=1.0, shrink-to-fit=no" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0, shrink-to-fit=no" />
+<meta name="description" content="@yield('meta_description', config('constants.meta.description'))" />
 <meta name="format-detection" content="telephone=no" />
 <meta name="theme-color" content="{{ config('constants.color') }}" />
 <meta name="color-scheme" content="light">
