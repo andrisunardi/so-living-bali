@@ -107,7 +107,7 @@
                                 {{ trans('property.lease_expiry_date') }}
                                 <span class="text-danger">*</span>
                             </label>
-                            <div class="input-group">
+                            <div class="input-group" wire:ignore>
                                 <div class="input-group-text">
                                     <span class="fas fa-calendar fa-fw "></span>
                                 </div>

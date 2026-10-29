@@ -246,7 +246,7 @@ new #[Title('Contact')] class extends Component {
                         <label class="form-label" for="start_date">
                             {{ trans('field.start_date') }}
                         </label>
-                        <div class="input-group">
+                        <div class="input-group" wire:ignore>
                             <input type="text" class="form-control datepicker" id="start_date" name="start_date"
                                 min="2026-01-01" max="2099-12-12" wire:key="start_date" wire:model.lazy="start_date"
                                 wire:offline.class="disabled" wire:offline.attr="disabled"
@@ -258,7 +258,7 @@ new #[Title('Contact')] class extends Component {
                         <label class="form-label" for="end_date">
                             {{ trans('field.end_date') }}
                         </label>
-                        <div class="input-group">
+                        <div class="input-group" wire:ignore>
                             <input type="text" class="form-control datepicker" id="end_date" name="end_date"
                                 min="2026-01-01" max="2099-12-12" wire:key="end_date" wire:model.lazy="end_date"
                                 wire:offline.class="disabled" wire:offline.attr="disabled"
