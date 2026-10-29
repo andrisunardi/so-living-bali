@@ -85,7 +85,7 @@
                 <label class="form-label" for="availability_date">
                     {{ trans('property.availability_date') }}
                 </label>
-                <div class="input-group">
+                <div class="input-group" wire:ignore>
                     <div class="input-group-text">
                         <span class="fas fa-calendar fa-fw "></span>
                     </div>
@@ -107,7 +107,7 @@
                 <label class="form-label" for="visit_date">
                     {{ trans('property.date_of_visit') }}
                 </label>
-                <div class="input-group">
+                <div class="input-group" wire:ignore>
                     <div class="input-group-text">
                         <span class="fas fa-calendar fa-fw "></span>
                     </div>
@@ -153,7 +153,7 @@
                         {{ trans('property.completion_date') }}
                         <span class="text-danger">*</span>
                     </label>
-                    <div class="input-group">
+                    <div class="input-group" wire:ignore>
                         <div class="input-group-text">
                             <span class="fas fa-calendar fa-fw "></span>
                         </div>
