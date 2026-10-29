@@ -195,6 +195,9 @@ return [
 
     'sale_information' => 'Sale Information',
     'sale_price' => 'Sale Price',
+    'leasehold_price' => 'Leasehold Price',
+    'freehold_price' => 'Freehold Price',
+    'ownership_options_helper' => 'A property can be offered as Leasehold and/or Freehold. Enable each option you want to list and set its price.',
     'currency' => 'Currency',
     'ownership_type' => 'Ownership Type',
     'lease_expiry_date' => 'Lease Expiry Date',

@@ -103,6 +103,25 @@ class PropertySaleDetailTest extends TestCase
         $response->assertDontSee('sale-map');
     }
 
+    public function test_for_sale_detail_renders_both_leasehold_and_freehold_prices(): void
+    {
+        $property = $this->createProperty([
+            'status' => PropertyStatus::AcceptUpper,
+            'listing_type' => PropertyListingType::ForSale,
+            'currency' => PropertyCurrency::IDR,
+            'has_leasehold' => true,
+            'leasehold_price' => 3_000_000_000,
+            'has_freehold' => true,
+            'freehold_price' => 7_000_000_000,
+        ]);
+
+        $response = $this->get(route('property.sale.detail', ['area' => 'bali', 'slug' => $property->slug]));
+
+        $response->assertStatus(200);
+        $response->assertSee(trans('index.leasehold'));
+        $response->assertSee(trans('index.freehold'));
+    }
+
     public function test_for_sale_detail_returns_404_for_unknown_slug(): void
     {
         $response = $this->get(route('property.sale.detail', ['area' => 'bali', 'slug' => 'non-existent-slug']));

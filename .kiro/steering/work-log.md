@@ -12,6 +12,26 @@ A running record of important work and decisions, so a new Kiro session starts w
 
 > SANDBOX UPDATE: PHP 8.5.12 + Composer 2.8.12 DO run in the current environment (the old libgd.so.3 blocker no longer applies). `php artisan test`, `composer audit`, `composer update`, `php -l` all work here now — use them to verify before shipping. (DB tests: suite uses in-memory sqlite; tests with RefreshDatabase pass. The default stub `tests/Feature/ExampleTest` hits `/` without migrations and fails — pre-existing, unrelated.)
 
+## Session (client reports: IP146 + 2 CMS updates) — PRs #45, #46
+
+- **PR #45 — IP146 availability + CMS pagination + re-enable for-sale (MERGED)**:
+  - Availability filter: removed `->addMonths(3)` from the `availableDate` filter in `PropertyService::index()`, so a property only shows once its availability date has arrived (or ≤ selected move-in date). NOTE: client later said IP146's *data* was wrong, not the filter — the filter logic was already correct; the real remaining fix was just applying it to the for-sale page.
+  - For-sale listing (`components/property/⚡sale.blade.php`) now passes `availableDate: today()` to `index()` — previously it passed NO availability filter at all, so any property showed regardless of availability date.
+  - Re-enabled the "Properties for Sale" routes (`property.properties-for-sale`, `property.sale.detail`, 301 redirect), the header dropdown (`config/navigations.php`), and un-skipped `PropertySaleDetailTest`. (Client is already seeing this page.)
+  - CMS pagination (client update #2): Edit link now carries `page` (`route('cms.property.edit', ['property' => $p, 'page' => $this->getPage()])`); edit page has `#[Url] public string $page`; `submit()` + Back redirect to `cms.property.index` WITH `page` so saving from page 3 returns to page 3. `getPage()` is from Livewire `WithPagination` (default pageName `page`).
+
+- **PR #46 — Dual leasehold + freehold pricing (client update #1)**: a single for-sale listing can now be offered as Leasehold AND/OR Freehold, each with its own price. Design (owner-approved): keep legacy `ownership_type`/`sale_price`, add 4 new columns; ONE shared currency (IDR).
+  - **Migration `0001_01_01_400002_add_dual_ownership_prices_to_properties_table`** (sequential, no date, per owner convention) adds after `ownership_type`: `has_leasehold` BOOL default 0, `leasehold_price` BIGINT UNSIGNED default 0, `has_freehold` BOOL default 0, `freehold_price` BIGINT UNSIGNED default 0. **Owner runs `php artisan migrate` on the server** (sandbox DB is sqlite only). ALTER SQL + data-backfill SQL handed over in chat.
+  - Model `Property`: added the 4 cols to `$fillable`, `casts()` (`boolean`/`integer`), and PHPDoc.
+  - Both `PropertyAddForm` + `PropertyEditForm`: added `has_leasehold`/`leasehold_price`/`has_freehold`/`freehold_price`; `leasehold_price` `required_if:has_leasehold,1`, `freehold_price` `required_if:has_freehold,1`; lease detail fields (`lease_expiry_date`, `lease_extension_available`) now `required_if:has_leasehold,1` (no longer tied to `ownership_type`); `sale_price` relaxed `required`→`nullable` (now derived). `EditForm::set()` hydrates the 4 new fields.
+  - `PropertyService` create()+update(): new private `resolveOwnershipType()` (leasehold wins, else freehold, else null) + `resolveSalePrice()` (legacy `sale_price` = leasehold price if has_leasehold else freehold). ForRent forces both tenures off. `! has_leasehold` nulls lease fields + zeroes leasehold_price; `! has_freehold` zeroes freehold_price. Both prices parsed + written via the existing `DB::raw` block alongside sale_price.
+  - CMS partial `components/cms/property/sale-information.blade.php`: replaced the single `ownership_type` radio + its leasehold-gated fields with two independent switches (Leasehold / Freehold); each reveals a bordered card with its price (+ lease expiry/extension/terms for leasehold). Currency selector kept (shared). Old single `sale_price` input removed (derived server-side).
+  - Public display: `sale/hero.blade.php` price card loops over the enabled tenures (two price rows + tenure badges), ownership spec shows "Leasehold / Freehold"; falls back to legacy `sale_price` when neither flag set (keeps old listings working). `sale/legal.blade.php` leasehold/freehold sections now driven by `has_leasehold`/`has_freehold`. Listing card `components/property/⚡sale.blade.php` shows both prices when present, else legacy fallback.
+  - New lang keys `property.leasehold_price`/`freehold_price`/`ownership_options_helper` (en/id/fr). Reused existing `index.leasehold`/`index.freehold`.
+  - Verified locally on PHP 8.5.12: full suite 72 passed incl. new `test_for_sale_detail_renders_both_leasehold_and_freehold_prices`; Pint clean.
+  - **Owner local steps**: run the ALTER (or `php artisan migrate`) + optional backfill SQL, then `php artisan optimize:clear`, hard-refresh.
+
+
 ## Session (PHP 8.5 + Excel security) — PRs #35–#38, MERGED
 
 - **PR #35** require.php ^8.5. **PR #36** config.platform.php 8.5.0. **PR #37** regenerated composer.lock on 8.5 (temporarily downgraded maatwebsite/excel 3.1.70→3.1.68 + phpspreadsheet 1.30.7→1.30.0 because 1.30.5-1.30.7 declare php <8.5.0; left 13 CVEs open on purpose).
