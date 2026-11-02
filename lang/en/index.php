@@ -34,7 +34,7 @@ return [
     'failed' => 'Failed',
     'flag' => 'Flag',
     'for_rent' => 'For Rent',
-    'for_sales' => 'For Sales',
+    'for_sales' => 'For Sale',
     'forgot_password' => 'Forgot Password',
     'freehold' => 'Freehold',
     'generate' => 'Generate',

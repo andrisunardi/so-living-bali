@@ -23,4 +23,4 @@ Artisan::command('logs:clear', function () {
 Schedule::command('generate:sitemap')->daily();
 
 Schedule::command('ghl:refresh-token')->daily();
-Schedule::command('exchange-rate:refresh-currency')->daily();
+Schedule::command('exchange-rate:refresh-currency')->hourly();
