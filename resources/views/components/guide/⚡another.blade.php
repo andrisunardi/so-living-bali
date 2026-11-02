@@ -6,7 +6,8 @@ use App\Services\GuideService;
 use Livewire\Attributes\Lazy;
 use Livewire\Attributes\On;
 
-new #[Lazy] class extends Component {
+new #[Lazy] class extends Component
+{
     public object $guideCategories;
 
     public object $guides;
@@ -28,8 +29,8 @@ new #[Lazy] class extends Component {
 
     public function loadGuides(): void
     {
-        $service = new GuideService();
-        $this->guides = $service->index(guideCategoryId: $this->guide_category_id, isShow: [true], isActive: [true], random: true, limit: 12, paginate: false);
+        $service = new GuideService;
+        $this->guides = $service->index(guideCategoryId: $this->guide_category_id, isShow: [true], isActive: [true], random: true, limit: 4, paginate: false);
         $this->guides->loadMissing(['category']);
     }
 };

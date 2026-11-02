@@ -6,11 +6,12 @@ use App\Enums\Property\PropertyStatus;
 use App\Livewire\Component;
 use App\Services\PropertyService;
 use Livewire\Attributes\Lazy;
-use Livewire\Attributes\Reactive;
 use Livewire\Attributes\On;
+use Livewire\Attributes\Reactive;
 use Livewire\Attributes\Url;
 
-new #[Lazy] class extends Component {
+new #[Lazy] class extends Component
+{
     public string $area = '';
 
     #[Url(except: [])]
@@ -48,8 +49,8 @@ new #[Lazy] class extends Component {
             $rentalTypes = [PropertyRentalType::Yearly->value, PropertyRentalType::Both->value];
         }
 
-        $service = new PropertyService();
-        $properties = $service->index(availableDate: $this->availableDate, districts: $this->districts, areas: $this->areas, bedrooms: $this->bedrooms, livingStyle: $this->livingStyle, rentalTypes: $rentalTypes, listingTypes: $listingTypes, prices: $this->prices, statuses: $statuses, paginate: false);
+        $service = new PropertyService;
+        $properties = $service->index(availableDate: $this->availableDate, districts: $this->districts, areas: $this->areas, bedrooms: $this->bedrooms, livingStyle: $this->livingStyle, rentalTypes: $rentalTypes, listingTypes: $listingTypes, prices: $this->prices, statuses: $statuses, paginate: true, perPage: 12);
         $properties->loadMissing(['area', 'district', 'image']);
 
         return $properties;
@@ -59,36 +60,47 @@ new #[Lazy] class extends Component {
     public function handleDistrictsChanged(array $districts = []): void
     {
         $this->districts = $districts;
+        $this->resetPage();
     }
 
     #[On('areas-changed')]
     public function handleAreasChanged(array $areas = []): void
     {
         $this->areas = $areas;
+        $this->resetPage();
     }
 
     #[On('bedrooms-changed')]
     public function handleBedroomsChanged(array $bedrooms = []): void
     {
         $this->bedrooms = $bedrooms;
+        $this->resetPage();
     }
 
     #[On('living-style-changed')]
     public function handleLivingStyleChanged(?int $livingStyle = null): void
     {
         $this->livingStyle = $livingStyle;
+        $this->resetPage();
     }
 
     #[On('rental-type-changed')]
     public function handleRentalTypeChanged(?int $rentalType = null): void
     {
         $this->rentalType = $rentalType;
+        $this->resetPage();
     }
 
     #[On('prices-changed')]
     public function handlePricesChanged(array $prices = []): void
     {
         $this->prices = $prices;
+        $this->resetPage();
+    }
+
+    public function updatedAvailableDate(): void
+    {
+        $this->resetPage();
     }
 };
 ?>
@@ -151,18 +163,19 @@ new #[Lazy] class extends Component {
 
 <section class="py-5">
     <div class="container-md">
+        @php($properties = $this->properties())
         <div class="d-flex flex-column gap-4">
             <div>
                 <p class="mb-0">
                     {!! trans('property.property_count', [
-                        'count' => $this->properties()->count(),
+                        'count' => $properties->total(),
                         'area' => $area ?: 'all areas',
                     ]) !!}
                 </p>
             </div>
 
             <div class="row row-cols-1 row-cols-sm-2 row-cols-lg-3 row-cols-xl-4 g-4">
-                @foreach ($this->properties() as $property)
+                @foreach ($properties as $property)
                     <div class="col" wire:key="property-{{ $property['id'] }}">
                         <div class="ratio ratio-16x9 overflow-hidden">
                             <a draggable="false" href="{{ route('property.detail', ['slug' => $property['slug']]) }}"
@@ -233,6 +246,12 @@ new #[Lazy] class extends Component {
                     </div>
                 @endforeach
             </div>
+
+            @if ($properties->hasPages())
+                <div>
+                    {{ $properties->links('pagination') }}
+                </div>
+            @endif
         </div>
     </div>
 </section>
