@@ -21,7 +21,7 @@ new #[Lazy] class extends Component {
             <div class="d-grid gap-4">
                 <div class="text-center">
                     <div class="placeholder-glow">
-                        <h1 class="display-6 placeholder rounded col-10 col-lg-9 col-xl-7"></h1>
+                        <h2 class="display-6 placeholder rounded col-10 col-lg-9 col-xl-7"></h2>
                     </div>
                     <div class="placeholder-glow">
                         <p class="small placeholder rounded col-12 col-sm-11 col-lg-8 col-xl-6"></p>

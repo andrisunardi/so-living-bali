@@ -49,7 +49,7 @@ new #[Lazy] class extends Component {
     <div class="container-md py-5">
         <div class="d-grid gap-4">
             <div class="text-start">
-                <h1 class="display-6 fw-medium">{{ trans('home.select_locations.title') }}</h1>
+                <h2 class="display-6 fw-medium">{{ trans('home.select_locations.title') }}</h2>
                 <p class="small text-muted">{{ trans('home.select_locations.description') }}</p>
             </div>
 

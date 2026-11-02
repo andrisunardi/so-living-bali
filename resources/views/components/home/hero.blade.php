@@ -19,7 +19,7 @@
                     <div class="row h-100 g-4">
                         <div class="col-lg-6 text-white pt-5">
                             <div class="lead">{{ $title }}</div>
-                            <div class="display-6 fw-bold">{!! $description !!}</div>
+                            <h1 class="display-6 fw-bold">{!! $description !!}</h1>
                         </div>
                         <div class="col-lg-6 col-xl-5 offset-xl-1">
                             <livewire:home.search />

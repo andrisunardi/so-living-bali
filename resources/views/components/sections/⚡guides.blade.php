@@ -34,7 +34,7 @@ new #[Lazy] class extends Component {
                     @endif
                     @if ($title)
                         <div>
-                            <h1 class="display-6 fw-medium placeholder col-12 col-lg-9 col-xl-7 placeholder-lg"></h1>
+                            <h2 class="display-6 fw-medium placeholder col-12 col-lg-9 col-xl-7 placeholder-lg"></h2>
                         </div>
                     @endif
                     @if ($description)
@@ -94,7 +94,7 @@ new #[Lazy] class extends Component {
                     <p class="lead mb-0">{{ $subTitle }}</p>
                 @endif
                 @if ($title)
-                    <h1 class="display-6 fw-medium">{{ $title }}</h1>
+                    <h2 class="display-6 fw-medium">{{ $title }}</h2>
                 @endif
                 @if ($description)
                     <p class="small text-muted">{{ $description }}</p>
@@ -119,12 +119,12 @@ new #[Lazy] class extends Component {
                             {{ $guide->category->translate_name }}
                         </div>
 
-                        <h1 class="h6 text-truncate mt-3">
+                        <h3 class="h6 text-truncate mt-3">
                             <a draggable="false" class="text-body"
                                 href="{{ route('guide.detail', ['slug' => $guide->slug]) }}" wire:navigate>
                                 {{ $guide->translate_title }}
                             </a>
-                        </h1>
+                        </h3>
 
                         <p class="small">
                             {{ Str::limit(strip_tags(html_entity_decode($guide->translate_body)), 100) }}

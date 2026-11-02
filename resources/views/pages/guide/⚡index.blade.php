@@ -20,7 +20,9 @@ new #[Title('Guide')] class extends Component {
 @section('title', trans('page.guide'))
 
 <div>
-    <x-guide.content :guide="$guide" />
+    <h1 class="visually-hidden">{{ trans('page.guide') }} - {{ config('constants.meta.title') }}</h1>
+
+    <x-guide.content :guide="$guide" heading="h2" />
 
     <livewire:guide.another />
 </div>

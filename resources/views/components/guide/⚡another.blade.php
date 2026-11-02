@@ -91,7 +91,7 @@ new #[Lazy] class extends Component {
     <div class="container-md py-5">
         <div class="d-flex flex-column gap-4">
             <div class="text-start">
-                <h1 class="display-6 fw-medium">{{ trans('home.guides.another_guide') }}</h1>
+                <h2 class="display-6 fw-medium">{{ trans('home.guides.another_guide') }}</h2>
             </div>
 
             <livewire:guide.category lazy />
@@ -114,12 +114,12 @@ new #[Lazy] class extends Component {
                             {{ $guide->category->translate_name }}
                         </div>
 
-                        <h1 class="h6 text-truncate mt-3">
+                        <h3 class="h6 text-truncate mt-3">
                             <a draggable="false" class="text-body"
                                 href="{{ route('guide.detail', ['slug' => $guide->slug]) }}" wire:navigate>
                                 {{ $guide->translate_title }}
                             </a>
-                        </h1>
+                        </h3>
 
                         <p class="small">
                             {{ Str::limit(strip_tags($guide->translate_body), 100) }}

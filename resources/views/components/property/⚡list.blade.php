@@ -188,12 +188,12 @@ new #[Lazy] class extends Component {
                             @endif
                         </div>
 
-                        <h1 class="h6 mt-3">
+                        <h2 class="h6 mt-3">
                             <a draggable="false" class="text-body"
                                 href="{{ route('property.detail', ['slug' => $property->slug]) }}" wire:navigate>
                                 {{ $property->name }}
                             </a>
-                        </h1>
+                        </h2>
 
                         <div class="d-flex text-nowrap gap-2">
                             <span class="px-2 py-1 small rounded bg-sand">

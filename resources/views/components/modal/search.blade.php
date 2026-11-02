@@ -20,9 +20,9 @@
     <div class="modal-dialog modal-dialog-centered modal-dialog-scrollable modal-fullscreen-lg-down">
         <div class="modal-content">
             <div class="modal-header">
-                <h1 class="modal-title fs-5">
+                <h2 class="modal-title fs-5">
                     {{ trans('home.search.title') }}
-                </h1>
+                </h2>
                 <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
             </div>
             <div class="modal-body mb-3">
