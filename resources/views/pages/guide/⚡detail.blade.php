@@ -27,7 +27,7 @@ new #[Title('Guide')] class extends Component {
 @section('title', $guide->translate_title)
 
 <div class="py-5 mt-4">
-    <x-guide.content :guide="$guide" />
+    <x-guide.content :guide="$guide" heading="h1" />
 
     <livewire:guide.another />
 </div>

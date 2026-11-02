@@ -1,5 +1,6 @@
 @props([
     'guide' => null,
+    'heading' => 'h2',
 ])
 
 <section class="py-5">
@@ -13,9 +14,9 @@
             <div>
                 <a draggable="false" class="text-body" href="{{ route('guide.detail', ['slug' => $guide->slug]) }}"
                     wire:navigate>
-                    <h1>
+                    <{{ $heading }}>
                         {{ $guide->translate_title }}
-                    </h1>
+                    </{{ $heading }}>
                 </a>
             </div>
             <div>

@@ -84,10 +84,10 @@ new class extends Component {
             <div class="modal-dialog modal-dialog-centered modal-dialog-scrollable modal-fullscreen-lg-down">
                 <div class="modal-content">
                     <div class="modal-header">
-                        <h1 class="modal-title fs-5">
+                        <h2 class="modal-title fs-5">
                             <span class="fas fa-pencil fa-fw"></span>
                             {{ trans('index.list_your_property') }}
-                        </h1>
+                        </h2>
                         <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
                     </div>
 

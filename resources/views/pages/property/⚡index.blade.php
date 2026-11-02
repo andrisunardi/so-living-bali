@@ -56,6 +56,8 @@ new #[Title('Property')] class extends Component {
 @section('title', trans('page.property'))
 
 <div>
+    <h1 class="visually-hidden">{{ trans('page.property') }} - {{ config('constants.meta.title') }}</h1>
+
     <livewire:property.search />
 
     <hr />

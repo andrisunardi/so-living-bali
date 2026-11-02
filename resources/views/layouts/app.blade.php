@@ -14,6 +14,34 @@
         {{ config('constants.meta.title') }}
     </title>
 
+    @unless (Route::is('cms.*'))
+        <script type="application/ld+json">
+            {!! json_encode([
+                '@context' => 'https://schema.org',
+                '@type' => 'Organization',
+                'name' => config('constants.meta.title'),
+                'url' => config('app.url'),
+                'logo' => asset('images/logo/black.png'),
+            ], JSON_UNESCAPED_SLASHES | JSON_UNESCAPED_UNICODE) !!}
+        </script>
+        <script type="application/ld+json">
+            {!! json_encode([
+                '@context' => 'https://schema.org',
+                '@type' => 'WebSite',
+                'name' => config('constants.meta.title'),
+                'url' => config('app.url'),
+                'potentialAction' => [
+                    '@type' => 'SearchAction',
+                    'target' => [
+                        '@type' => 'EntryPoint',
+                        'urlTemplate' => route('property.index') . '?search={search_term_string}',
+                    ],
+                    'query-input' => 'required name=search_term_string',
+                ],
+            ], JSON_UNESCAPED_SLASHES | JSON_UNESCAPED_UNICODE) !!}
+        </script>
+    @endunless
+
     <x-vendors />
 
     @stack('css')

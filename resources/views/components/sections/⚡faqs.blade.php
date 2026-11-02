@@ -33,7 +33,7 @@ new #[Lazy] class extends Component {
                     @endif
                     @if ($title)
                         <div>
-                            <h1 class="display-6 fw-medium placeholder col-12 col-lg-9 col-xl-7 placeholder-lg"></h1>
+                            <h2 class="display-6 fw-medium placeholder col-12 col-lg-9 col-xl-7 placeholder-lg"></h2>
                         </div>
                     @endif
                     @if ($description)
@@ -83,7 +83,7 @@ new #[Lazy] class extends Component {
                     <p class="lead mb-0">{{ $subTitle }}</p>
                 @endif
                 @if ($title)
-                    <h1 class="display-6 fw-medium">{{ $title }}</h1>
+                    <h2 class="display-6 fw-medium">{{ $title }}</h2>
                 @endif
                 @if ($description)
                     <p class="small text-muted">{{ $description }}</p>

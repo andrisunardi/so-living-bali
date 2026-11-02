@@ -1,16 +1,31 @@
 <?php
 
 use App\Enums\Currency;
+use App\Enums\Language;
 use App\Http\Middleware\Localization;
-use Illuminate\Support\Facades\App;
 use Illuminate\Support\Facades\Route;
 use Illuminate\Support\Facades\Session;
 
 Route::any('locale/{locale}', function ($locale) {
-    Session::put('locale', $locale);
-    App::setlocale($locale);
+    $target = Language::tryFrom($locale)?->value ?? config('app.locale');
 
-    return redirect()->back();
+    $previous = url()->previous();
+    $path = trim(parse_url($previous, PHP_URL_PATH) ?? '/', '/');
+
+    $segments = array_values(array_filter(explode('/', $path)));
+
+    if (isset($segments[0]) && Language::tryFrom($segments[0])) {
+        array_shift($segments);
+    }
+
+    $basePath = implode('/', $segments);
+
+    $prefix = $target === config('app.locale') ? '' : $target;
+    $newPath = trim($prefix.'/'.$basePath, '/');
+
+    $query = parse_url($previous, PHP_URL_QUERY);
+
+    return redirect(url($newPath).($query ? '?'.$query : ''));
 })->name('locale');
 
 Route::any('currency/{currency}', function ($currency) {
@@ -22,7 +37,7 @@ Route::any('currency/{currency}', function ($currency) {
     return redirect()->back();
 })->name('currency');
 
-Route::group(['middleware' => [Localization::class]], function () {
+$publicRoutes = function () {
     Route::livewire('/', 'pages::home')->name('home');
 
     Route::livewire('/about', 'pages::about')->name('about');
@@ -39,9 +54,17 @@ Route::group(['middleware' => [Localization::class]], function () {
     Route::redirect('/properties-for-sale/{slug}', '/property-for-sale/bali/{slug}', 301);
 
     Route::livewire('/contact', 'pages::contact')->name('contact');
+};
 
-    Route::prefix('cms')->name('cms.')->as('cms.')->group(base_path('routes/cms.php'));
+Route::middleware([Localization::class])->group(function () use ($publicRoutes) {
+    Route::prefix('{locale?}')
+        ->where(['locale' => '(id|fr)?'])
+        ->group($publicRoutes);
+
+    $publicRoutes();
 });
+
+Route::prefix('cms')->name('cms.')->as('cms.')->group(base_path('routes/cms.php'));
 
 Route::prefix('leadconnector')
     ->name('leadconnector.')
