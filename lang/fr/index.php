@@ -49,6 +49,8 @@ return [
     'list_role' => 'Liste des rôles',
     'list_user' => 'Liste des utilisateurs',
     'list_your_property' => 'Mettre votre bien en location / vente',
+    'list_your_property_empty' => 'Aucune soumission « List Your Property » pour le moment.',
+    'list_your_property_submissions' => 'Soumissions « List Your Property »',
     'log_detailer' => 'Log Detailer',
     'login' => 'Connexion',
     'logo' => 'Logo',
