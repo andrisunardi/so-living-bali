@@ -7,6 +7,7 @@ use App\Enums\Property\PropertyCurrency;
 use App\Models\User;
 use Barryvdh\LaravelIdeHelper\IdeHelperServiceProvider;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Support\Facades\Artisan;
 use Illuminate\Support\Facades\Cache;
 use Illuminate\Support\Facades\Gate;
 use Illuminate\Support\Facades\Schema;
@@ -14,6 +15,7 @@ use Illuminate\Support\Facades\URL;
 use Illuminate\Support\ServiceProvider;
 use Illuminate\Support\Str;
 use Opcodes\LogViewer\Facades\LogViewer;
+use Throwable;
 
 class AppServiceProvider extends ServiceProvider
 {
@@ -69,10 +71,10 @@ class AppServiceProvider extends ServiceProvider
             // Normalise the stored amount to IDR first, then convert to the target.
             $fromRate = $fromCurrency === Currency::IDR
                 ? 1.0
-                : (float) Cache::get("currency-{$fromCurrency->value}", 0);
+                : AppServiceProvider::currencyRate($fromCurrency);
             $targetRate = $target === Currency::IDR
                 ? 1.0
-                : (float) Cache::get("currency-{$target->value}", 0);
+                : AppServiceProvider::currencyRate($target);
 
             // If a required rate is missing, skip conversion rather than show a
             // wrong number: display the original amount in its own currency.
@@ -125,5 +127,32 @@ class AppServiceProvider extends ServiceProvider
 
             return round($bytes / pow(1024, $i), 2).' '.$units[$i];
         });
+    }
+
+    public static function currencyRate(Currency $currency): float
+    {
+        $rate = (float) Cache::get("currency-{$currency->value}", 0);
+
+        if ($rate > 0 || app()->runningUnitTests()) {
+            return $rate;
+        }
+
+        // Self-heal when the scheduled refresh hasn't populated the cache
+        // (e.g. no scheduler cron, or the cache was cleared on deploy).
+        // Guard with a short-lived flag so an API outage can't trigger a
+        // refresh on every request.
+        if (! Cache::has('currency-refresh-attempted')) {
+            Cache::put('currency-refresh-attempted', true, now()->addMinutes(10));
+
+            try {
+                Artisan::call('exchange-rate:refresh-currency');
+            } catch (Throwable) {
+                // Leave the cache empty; the macro falls back to the stored currency.
+            }
+
+            $rate = (float) Cache::get("currency-{$currency->value}", 0);
+        }
+
+        return $rate;
     }
 }
