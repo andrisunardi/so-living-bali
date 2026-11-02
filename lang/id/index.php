@@ -49,6 +49,8 @@ return [
     'list_role' => 'Daftar Peran',
     'list_user' => 'Daftar Pengguna',
     'list_your_property' => 'Daftarkan Properti Anda',
+    'list_your_property_empty' => 'Belum ada pengajuan Daftarkan Properti Anda.',
+    'list_your_property_submissions' => 'Pengajuan Daftarkan Properti Anda',
     'log_detailer' => 'Log Detailer',
     'login' => 'Masuk',
     'logo' => 'Logo',

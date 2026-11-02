@@ -48,6 +48,8 @@ return [
     'list_role' => 'List Role',
     'list_user' => 'List User',
     'list_your_property' => 'List Your Property',
+    'list_your_property_empty' => 'No List Your Property submissions yet.',
+    'list_your_property_submissions' => 'List Your Property Submissions',
     'log_detailer' => 'Log Detailer',
     'login' => 'Login',
     'logo' => 'Logo',
