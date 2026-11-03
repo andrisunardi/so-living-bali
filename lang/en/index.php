@@ -19,6 +19,8 @@ return [
     'change_show' => 'Change Show',
     'clear' => 'Clear',
     'close' => 'Close',
+    'menu' => 'Menu',
+    'loading' => 'Loading',
     'connect' => 'Connect',
     'contact' => 'Contact',
     'currency' => 'Currency',

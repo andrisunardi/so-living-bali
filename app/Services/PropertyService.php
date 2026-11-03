@@ -533,10 +533,29 @@ class PropertyService
             ->first();
     }
 
-    public function mapEmbedUrl(Property $property): ?string
+    public function coordinates(Property $property): ?string
     {
         if ($property->latitude && $property->longitude) {
-            return 'https://maps.google.com/maps?q='.$property->latitude.','.$property->longitude.'&z=15&output=embed';
+            return $property->latitude.','.$property->longitude;
+        }
+
+        if (filled($property->google_maps_url)) {
+            $coordinates = GoogleMapsUrlParser::extractCoordinates($property->google_maps_url);
+
+            if ($coordinates['latitude'] && $coordinates['longitude']) {
+                return $coordinates['latitude'].','.$coordinates['longitude'];
+            }
+        }
+
+        return null;
+    }
+
+    public function mapEmbedUrl(Property $property): ?string
+    {
+        $coordinates = $this->coordinates($property);
+
+        if ($coordinates) {
+            return 'https://maps.google.com/maps?q='.$coordinates.'&z=15&output=embed';
         }
 
         if (filled($property->google_maps_url)) {
@@ -552,11 +571,11 @@ class PropertyService
 
     public function nearby(Property $property): array
     {
-        if (! $property->latitude || ! $property->longitude) {
+        $center = $this->coordinates($property);
+
+        if (! $center) {
             return [];
         }
-
-        $center = $property->latitude.','.$property->longitude;
 
         $categories = [
             ['label' => trans('property.nearby_beaches'), 'query' => 'beach', 'icon' => 'fa-umbrella-beach'],

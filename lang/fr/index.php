@@ -20,6 +20,8 @@ return [
     'change_show' => 'Modifier l\'affichage',
     'clear' => 'Effacer',
     'close' => 'Fermer',
+    'menu' => 'Menu',
+    'loading' => 'Chargement',
     'connect' => 'Se connecter',
     'contact' => 'Contact',
     'currency' => 'Devise',

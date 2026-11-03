@@ -74,7 +74,8 @@ new #[Lazy] class extends Component {
                                             <div
                                                 class="bg-light rounded-circle d-inline-flex align-items-center justify-content-center p-3">
                                                 <img draggable="false" loading="lazy" decoding="async"
-                                                    class="user-select-none pe-none" width="30" height="30"
+                                                    class="user-select-none pe-none object-fit-contain" width="30"
+                                                    height="34"
                                                     src="{{ asset('images/value/icon/' . Str::slug($value->title) . '.png') }}"
                                                     alt="{{ trans('index.value') }} - {{ $value->translate_title }} - {{ config('constants.meta.title') }}">
                                             </div>
