@@ -107,7 +107,7 @@ class PropertySaleDetailTest extends TestCase
         $response->assertDontSee('sale-map');
     }
 
-    public function test_nearby_returns_named_places_sorted_by_distance_from_overpass(): void
+    public function test_nearby_returns_named_places_with_travel_time_sorted_fastest_first(): void
     {
         Http::fake([
             'overpass-api.de/*' => Http::response([
@@ -117,6 +117,8 @@ class PropertySaleDetailTest extends TestCase
                     ['lat' => -8.66, 'lon' => 115.14, 'tags' => []],
                 ],
             ], 200),
+            'router.project-osrm.org/*115.17,-8.7*' => Http::response(['routes' => [['duration' => 900]]], 200),
+            'router.project-osrm.org/*' => Http::response(['routes' => [['duration' => 120]]], 200),
         ]);
 
         $property = $this->createProperty(['latitude' => -8.65, 'longitude' => 115.13]);
@@ -124,8 +126,9 @@ class PropertySaleDetailTest extends TestCase
         $nearby = (new PropertyService)->nearby($property);
 
         $this->assertSame('Near Cafe', $nearby[0]['name']);
+        $this->assertSame('2 '.trans('property.minutes_short'), $nearby[0]['time']);
         $this->assertSame('Far Beach', $nearby[1]['name']);
-        $this->assertStringContainsString('km', $nearby[0]['distance']);
+        $this->assertSame('15 '.trans('property.minutes_short'), $nearby[1]['time']);
     }
 
     public function test_nearby_degrades_gracefully_when_overpass_fails(): void

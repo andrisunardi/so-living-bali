@@ -606,17 +606,50 @@ class PropertyService
             ->filter(fn ($element) => filled($element['tags']['name'] ?? null) && isset($element['lat'], $element['lon']))
             ->map(fn ($element) => [
                 'name' => $element['tags']['name'],
+                'lat' => (float) $element['lat'],
+                'lng' => (float) $element['lon'],
                 'distance' => $this->haversineKm($lat, $lng, (float) $element['lat'], (float) $element['lon']),
             ])
             ->unique('name')
             ->sortBy('distance')
             ->take($limit)
-            ->map(fn ($place) => [
-                'name' => $place['name'],
-                'distance' => number_format($place['distance'], 1).' km',
-            ])
+            ->map(function ($place) use ($lat, $lng) {
+                $minutes = $this->travelTimeMinutes($lat, $lng, $place['lat'], $place['lng']);
+
+                return [
+                    'name' => $place['name'],
+                    'time' => $minutes !== null
+                        ? $minutes.' '.trans('property.minutes_short')
+                        : number_format($place['distance'], 1).' km',
+                    'sort' => $minutes ?? ($place['distance'] * 1000),
+                ];
+            })
+            ->sortBy('sort')
+            ->map(fn ($place) => ['name' => $place['name'], 'time' => $place['time']])
             ->values()
             ->all();
+    }
+
+    private function travelTimeMinutes(float $fromLat, float $fromLng, float $toLat, float $toLng): ?int
+    {
+        try {
+            $response = Http::timeout(4)->get(
+                'https://router.project-osrm.org/route/v1/driving/'.$fromLng.','.$fromLat.';'.$toLng.','.$toLat,
+                ['overview' => 'false']
+            );
+
+            if ($response->successful()) {
+                $seconds = $response->json('routes.0.duration');
+
+                if (is_numeric($seconds)) {
+                    return max(1, (int) ceil($seconds / 60));
+                }
+            }
+        } catch (\Throwable) {
+            return null;
+        }
+
+        return null;
     }
 
     private function haversineKm(float $lat1, float $lng1, float $lat2, float $lng2): float

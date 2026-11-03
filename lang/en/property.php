@@ -209,6 +209,7 @@ return [
     'developer_name' => 'Developer Name',
 
     'nearby' => 'Nearby',
+    'minutes_short' => 'min',
     'approximate_location' => 'Approximate location',
     'video_tour' => 'Video Tour',
     'video_tour_helper' => 'Video tour URL',
