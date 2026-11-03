@@ -239,11 +239,19 @@ new #[Title('Property For Sale')] class extends Component {
         </section>
     @endif
 
-    @if ($property->latitude && $property->longitude)
+    @php
+        $service = new PropertyService();
+        $mapUrl = $service->mapEmbedUrl($property);
+        $nearby = $service->nearby($property);
+    @endphp
+
+    @if ($mapUrl || ! empty($nearby))
         <section class="pb-5">
             <div class="container-md">
-                <h2 class="h4 fw-semibold mb-3">{{ trans('property.nearby') }}</h2>
-                <x-property.sale.location :property="$property" />
+                <h2 class="h4 fw-semibold mb-3">
+                    {{ $location ? trans('property.location').' - '.$location.', Bali' : trans('property.nearby') }}
+                </h2>
+                <x-property.sale.location :map-url="$mapUrl" :nearby="$nearby" :location="$location" />
             </div>
         </section>
     @endif
