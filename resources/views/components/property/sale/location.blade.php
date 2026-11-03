@@ -1,39 +1,60 @@
 @props([
-    'mapUrl' => null,
-    'nearby' => [],
-    'location' => null,
+    'property' => null,
 ])
 
+@php($nearby = collect($property->nearby ?? [])->filter(fn ($row) => filled($row['place'] ?? null)))
+
 <div class="row g-4">
-    @if ($mapUrl)
-        <div class="col-lg-7">
-            <div class="ratio ratio-4x3 rounded-4 overflow-hidden border position-relative">
-                <iframe src="{{ $mapUrl }}" title="{{ $location ? trans('property.map_of').' '.$location : trans('property.nearby') }}"
-                    loading="lazy" referrerpolicy="no-referrer-when-downgrade" class="border-0 w-100 h-100"
-                    allowfullscreen></iframe>
-                <span class="position-absolute bottom-0 start-0 m-2 badge text-bg-light border small fw-normal">
+    @if ($property->latitude && $property->longitude)
+        <div class="{{ $nearby->isNotEmpty() ? 'col-lg-7' : 'col-12' }}">
+            <div class="rounded-4 border overflow-hidden position-relative">
+                <div id="sale-map" class="w-100 ratio ratio-4x3 rounded-4 z-0"></div>
+                <span class="position-absolute bottom-0 start-0 m-2 badge text-bg-light border small fw-normal z-1">
                     {{ trans('property.approximate_location') }}
                 </span>
             </div>
         </div>
     @endif
 
-    @if (! empty($nearby))
-        <div class="{{ $mapUrl ? 'col-lg-5' : 'col-12' }}">
-            <div class="card rounded-4 border overflow-hidden h-100">
-                <ul class="list-group list-group-flush">
-                    @foreach ($nearby as $place)
-                        <li class="list-group-item">
-                            <a draggable="false" class="d-flex align-items-center gap-3 text-decoration-none link-body-emphasis"
-                                href="{{ $place['url'] }}" target="_blank" rel="noopener noreferrer">
-                                <span class="fas {{ $place['icon'] }} fa-fw text-success"></span>
-                                <span class="flex-grow-1">{{ $place['label'] }}</span>
-                                <span class="fas fa-arrow-up-right-from-square fa-fw fa-xs text-body-tertiary"></span>
-                            </a>
-                        </li>
-                    @endforeach
-                </ul>
-            </div>
+    @if ($nearby->isNotEmpty())
+        <div class="{{ $property->latitude && $property->longitude ? 'col-lg-5' : 'col-12' }}">
+            <h3 class="h5 fw-semibold mb-3">{{ trans('property.nearby') }}</h3>
+            <ul class="list-group list-group-flush">
+                @foreach ($nearby as $row)
+                    <li class="list-group-item d-flex justify-content-between align-items-center gap-3 px-0">
+                        <span>{{ $row['place'] }}</span>
+                        @if (filled($row['time'] ?? null))
+                            <span class="fw-semibold text-success text-nowrap">{{ $row['time'] }}</span>
+                        @endif
+                    </li>
+                @endforeach
+            </ul>
         </div>
     @endif
 </div>
+
+@if ($property->latitude && $property->longitude)
+    @script
+        <script>
+            const saleMap = L.map('sale-map', {
+                scrollWheelZoom: false,
+                touchZoom: true,
+                dragging: true,
+                doubleClickZoom: true,
+            }).setView([{{ $property->latitude }}, {{ $property->longitude }}], 15);
+
+            L.tileLayer('https://tile.openstreetmap.org/{z}/{x}/{y}.png', {
+                maxZoom: 19,
+            }).addTo(saleMap);
+
+            L.circle([{{ $property->latitude }}, {{ $property->longitude }}], {
+                color: '#198754',
+                fillColor: '#198754',
+                fillOpacity: 0.5,
+                radius: 500,
+            }).addTo(saleMap);
+
+            saleMap.attributionControl.remove();
+        </script>
+    @endscript
+@endif

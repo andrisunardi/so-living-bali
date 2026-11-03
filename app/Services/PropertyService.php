@@ -248,6 +248,10 @@ class PropertyService
             $data['status'] = ($data['status'] ?? PropertyStatus::Pending) ?: PropertyStatus::Pending;
             $data['owner_representative_id'] = ($data['owner_representative_id'] ?? null) ?: null;
 
+            $data['nearby'] = array_values(array_filter(
+                $data['nearby'] ?? [],
+                fn ($row) => filled($row['place'] ?? null) || filled($row['time'] ?? null)
+            )) ?: null;
             $data['highlights'] = array_values(array_filter(
                 $data['highlights'] ?? [],
                 fn ($value) => filled($value)
@@ -374,6 +378,10 @@ class PropertyService
             $data['latitude'] = $data['latitude'] ?: null;
             $data['longitude'] = $data['longitude'] ?: null;
 
+            $data['nearby'] = array_values(array_filter(
+                $data['nearby'] ?? [],
+                fn ($row) => filled($row['place'] ?? null) || filled($row['time'] ?? null)
+            )) ?: null;
             $data['highlights'] = array_values(array_filter(
                 $data['highlights'] ?? [],
                 fn ($value) => filled($value)
@@ -531,67 +539,6 @@ class PropertyService
             ->whereIn('listing_type', $listingTypes)
             ->where('slug', $slug)
             ->first();
-    }
-
-    public function coordinates(Property $property): ?string
-    {
-        if ($property->latitude && $property->longitude) {
-            return $property->latitude.','.$property->longitude;
-        }
-
-        if (filled($property->google_maps_url)) {
-            $coordinates = GoogleMapsUrlParser::extractCoordinates($property->google_maps_url);
-
-            if ($coordinates['latitude'] && $coordinates['longitude']) {
-                return $coordinates['latitude'].','.$coordinates['longitude'];
-            }
-        }
-
-        return null;
-    }
-
-    public function mapEmbedUrl(Property $property): ?string
-    {
-        $coordinates = $this->coordinates($property);
-
-        if ($coordinates) {
-            return 'https://maps.google.com/maps?q='.$coordinates.'&z=15&output=embed';
-        }
-
-        if (filled($property->google_maps_url)) {
-            $address = GoogleMapsUrlParser::extractAddress($property->google_maps_url);
-
-            if (filled($address)) {
-                return 'https://maps.google.com/maps?q='.urlencode($address).'&z=15&output=embed';
-            }
-        }
-
-        return null;
-    }
-
-    public function nearby(Property $property): array
-    {
-        $center = $this->coordinates($property);
-
-        if (! $center) {
-            return [];
-        }
-
-        $categories = [
-            ['label' => trans('property.nearby_beaches'), 'query' => 'beach', 'icon' => 'fa-umbrella-beach'],
-            ['label' => trans('property.nearby_restaurants'), 'query' => 'restaurant', 'icon' => 'fa-utensils'],
-            ['label' => trans('property.nearby_cafes'), 'query' => 'cafe', 'icon' => 'fa-mug-saucer'],
-            ['label' => trans('property.nearby_supermarkets'), 'query' => 'supermarket', 'icon' => 'fa-cart-shopping'],
-            ['label' => trans('property.nearby_hospitals'), 'query' => 'hospital', 'icon' => 'fa-hospital'],
-            ['label' => trans('property.nearby_schools'), 'query' => 'school', 'icon' => 'fa-graduation-cap'],
-            ['label' => trans('property.nearby_airport'), 'query' => 'airport', 'icon' => 'fa-plane-departure'],
-        ];
-
-        return array_map(fn (array $category) => [
-            'label' => $category['label'],
-            'icon' => $category['icon'],
-            'url' => 'https://www.google.com/maps/search/'.rawurlencode($category['query']).'/@'.$center.',15z',
-        ], $categories);
     }
 
     public function uploadImages(Property $property, array $images = []): void

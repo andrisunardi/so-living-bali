@@ -6,7 +6,6 @@ use App\Enums\Property\PropertyCurrency;
 use App\Enums\Property\PropertyListingType;
 use App\Enums\Property\PropertyStatus;
 use App\Models\Property;
-use App\Services\PropertyService;
 use Illuminate\Foundation\Testing\RefreshDatabase;
 use Illuminate\Support\Str;
 use Tests\TestCase;
@@ -69,6 +68,9 @@ class PropertySaleDetailTest extends TestCase
             'highlights' => [
                 'Ocean view rooftop',
             ],
+            'nearby' => [
+                ['place' => 'Seminyak Beach', 'time' => '10 min'],
+            ],
             'video_tour' => 'https://example.com/video-tour',
             'floor_plan' => 'https://example.com/floor-plan.pdf',
         ]);
@@ -80,8 +82,9 @@ class PropertySaleDetailTest extends TestCase
         $response->assertSee('Why This Property Stands Out');
         $response->assertSee('https://example.com/video-tour', false);
         $response->assertSee('https://example.com/floor-plan.pdf', false);
-        $response->assertSee('maps.google.com/maps?q=-8.6500000,115.1300000', false);
-        $response->assertSee('https://www.google.com/maps/search/', false);
+        $response->assertSee('sale-map');
+        $response->assertSee('Seminyak Beach');
+        $response->assertSee('10 min');
     }
 
     public function test_for_sale_detail_hides_new_sale_detail_fields_when_empty(): void
@@ -92,6 +95,7 @@ class PropertySaleDetailTest extends TestCase
             'latitude' => null,
             'longitude' => null,
             'highlights' => null,
+            'nearby' => null,
             'video_tour' => null,
             'floor_plan' => null,
         ]);
@@ -102,25 +106,7 @@ class PropertySaleDetailTest extends TestCase
         $response->assertDontSee('Why This Property Stands Out');
         $response->assertDontSee(trans('property.video_tour'));
         $response->assertDontSee(trans('property.floor_plan'));
-        $response->assertDontSee('output=embed', false);
-    }
-
-    public function test_coordinates_fall_back_to_google_maps_url_when_lat_lng_missing(): void
-    {
-        $property = $this->createProperty([
-            'latitude' => null,
-            'longitude' => null,
-            'google_maps_url' => 'https://www.google.com/maps/place/Villa/@-8.6591661,115.1451081,17z',
-        ]);
-
-        $service = new PropertyService;
-
-        $this->assertSame('-8.6591661,115.1451081', $service->coordinates($property));
-        $this->assertStringContainsString('maps.google.com/maps?q=-8.6591661,115.1451081', $service->mapEmbedUrl($property));
-
-        $nearby = $service->nearby($property);
-        $this->assertNotEmpty($nearby);
-        $this->assertStringContainsString('@-8.6591661,115.1451081', $nearby[0]['url']);
+        $response->assertDontSee('sale-map');
     }
 
     public function test_for_sale_detail_renders_both_leasehold_and_freehold_prices(): void
