@@ -1,86 +1,39 @@
 @props([
-    'property' => null,
+    'mapUrl' => null,
+    'nearby' => [],
+    'location' => null,
 ])
 
-<div class="d-grid gap-3">
-    <div class="rounded-4 border overflow-hidden">
-        <div id="sale-map" class="w-100 ratio ratio-4x3 rounded-4 z-0"></div>
-    </div>
+<div class="row g-4">
+    @if ($mapUrl)
+        <div class="col-lg-7">
+            <div class="ratio ratio-4x3 rounded-4 overflow-hidden border position-relative">
+                <iframe src="{{ $mapUrl }}" title="{{ $location ? trans('property.map_of').' '.$location : trans('property.nearby') }}"
+                    loading="lazy" referrerpolicy="no-referrer-when-downgrade" class="border-0 w-100 h-100"
+                    allowfullscreen></iframe>
+                <span class="position-absolute bottom-0 start-0 m-2 badge text-bg-light border small fw-normal">
+                    {{ trans('property.approximate_location') }}
+                </span>
+            </div>
+        </div>
+    @endif
 
-    <div id="sale-poi" class="card rounded-4 border overflow-hidden d-none">
-        <ul id="sale-poi-list" class="list-group list-group-flush"></ul>
-    </div>
+    @if (! empty($nearby))
+        <div class="{{ $mapUrl ? 'col-lg-5' : 'col-12' }}">
+            <div class="card rounded-4 border overflow-hidden h-100">
+                <ul class="list-group list-group-flush">
+                    @foreach ($nearby as $place)
+                        <li class="list-group-item">
+                            <a draggable="false" class="d-flex align-items-center gap-3 text-decoration-none link-body-emphasis"
+                                href="{{ $place['url'] }}" target="_blank" rel="noopener noreferrer">
+                                <span class="fas {{ $place['icon'] }} fa-fw text-success"></span>
+                                <span class="flex-grow-1">{{ $place['label'] }}</span>
+                                <span class="fas fa-arrow-up-right-from-square fa-fw fa-xs text-body-tertiary"></span>
+                            </a>
+                        </li>
+                    @endforeach
+                </ul>
+            </div>
+        </div>
+    @endif
 </div>
-
-@script
-    <script>
-        const saleMap = L.map('sale-map', {
-            scrollWheelZoom: false,
-            touchZoom: true,
-            dragging: true,
-            doubleClickZoom: true,
-        }).setView([{{ $property->latitude }}, {{ $property->longitude }}], 15);
-
-        L.tileLayer('https://tile.openstreetmap.org/{z}/{x}/{y}.png', {
-            maxZoom: 19,
-        }).addTo(saleMap);
-
-        L.circle([{{ $property->latitude }}, {{ $property->longitude }}], {
-            color: '#198754',
-            fillColor: '#198754',
-            fillOpacity: 0.5,
-            radius: 500
-        }).addTo(saleMap);
-
-        saleMap.attributionControl.remove();
-
-        (async () => {
-            try {
-                const lat = {{ $property->latitude }};
-                const lng = {{ $property->longitude }};
-                const query = `[out:json][timeout:10];node[amenity~"^(restaurant|cafe|hospital|school)$"](around:1500,${lat},${lng});out 10;`;
-
-                const response = await fetch('https://overpass-api.de/api/interpreter', {
-                    method: 'POST',
-                    headers: { 'Content-Type': 'text/plain' },
-                    body: query,
-                });
-
-                if (!response.ok) {
-                    return;
-                }
-
-                const data = await response.json();
-                const places = (data.elements || [])
-                    .filter((element) => element.tags && element.tags.name)
-                    .slice(0, 6);
-
-                if (!places.length) {
-                    return;
-                }
-
-                const list = document.getElementById('sale-poi-list');
-
-                places.forEach((place) => {
-                    const item = document.createElement('li');
-                    item.className = 'list-group-item d-flex justify-content-between align-items-center';
-
-                    const name = document.createElement('span');
-                    name.textContent = place.tags.name;
-
-                    const badge = document.createElement('span');
-                    badge.className = 'badge rounded-pill text-bg-success text-capitalize';
-                    badge.textContent = place.tags.amenity;
-
-                    item.appendChild(name);
-                    item.appendChild(badge);
-                    list.appendChild(item);
-                });
-
-                document.getElementById('sale-poi').classList.remove('d-none');
-            } catch (error) {
-                return;
-            }
-        })();
-    </script>
-@endscript

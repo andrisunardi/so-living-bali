@@ -79,7 +79,8 @@ class PropertySaleDetailTest extends TestCase
         $response->assertSee('Why This Property Stands Out');
         $response->assertSee('https://example.com/video-tour', false);
         $response->assertSee('https://example.com/floor-plan.pdf', false);
-        $response->assertSee('sale-map');
+        $response->assertSee('maps.google.com/maps?q=-8.6500000,115.1300000', false);
+        $response->assertSee('https://www.google.com/maps/search/', false);
     }
 
     public function test_for_sale_detail_hides_new_sale_detail_fields_when_empty(): void

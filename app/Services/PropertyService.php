@@ -533,6 +533,48 @@ class PropertyService
             ->first();
     }
 
+    public function mapEmbedUrl(Property $property): ?string
+    {
+        if ($property->latitude && $property->longitude) {
+            return 'https://maps.google.com/maps?q='.$property->latitude.','.$property->longitude.'&z=15&output=embed';
+        }
+
+        if (filled($property->google_maps_url)) {
+            $address = GoogleMapsUrlParser::extractAddress($property->google_maps_url);
+
+            if (filled($address)) {
+                return 'https://maps.google.com/maps?q='.urlencode($address).'&z=15&output=embed';
+            }
+        }
+
+        return null;
+    }
+
+    public function nearby(Property $property): array
+    {
+        if (! $property->latitude || ! $property->longitude) {
+            return [];
+        }
+
+        $center = $property->latitude.','.$property->longitude;
+
+        $categories = [
+            ['label' => trans('property.nearby_beaches'), 'query' => 'beach', 'icon' => 'fa-umbrella-beach'],
+            ['label' => trans('property.nearby_restaurants'), 'query' => 'restaurant', 'icon' => 'fa-utensils'],
+            ['label' => trans('property.nearby_cafes'), 'query' => 'cafe', 'icon' => 'fa-mug-saucer'],
+            ['label' => trans('property.nearby_supermarkets'), 'query' => 'supermarket', 'icon' => 'fa-cart-shopping'],
+            ['label' => trans('property.nearby_hospitals'), 'query' => 'hospital', 'icon' => 'fa-hospital'],
+            ['label' => trans('property.nearby_schools'), 'query' => 'school', 'icon' => 'fa-graduation-cap'],
+            ['label' => trans('property.nearby_airport'), 'query' => 'airport', 'icon' => 'fa-plane-departure'],
+        ];
+
+        return array_map(fn (array $category) => [
+            'label' => $category['label'],
+            'icon' => $category['icon'],
+            'url' => 'https://www.google.com/maps/search/'.rawurlencode($category['query']).'/@'.$center.',15z',
+        ], $categories);
+    }
+
     public function uploadImages(Property $property, array $images = []): void
     {
         $google = new GoogleDrive;
