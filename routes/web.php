@@ -49,7 +49,7 @@ $publicRoutes = function () {
     Route::livewire('/property', 'pages::property.index')->name('property.index');
     Route::livewire('/properties-for-sale', 'pages::property.properties-for-sale')->name('property.properties-for-sale');
     Route::livewire('/property/{slug}', 'pages::property.detail')->name('property.detail');
-    Route::livewire('/property-for-sale/{area}/{slug}', 'pages::property.sale-detail')->name('property.sale.detail');
+    Route::livewire('/property-for-sale/{area}/{slug}', 'pages::property.property-for-sale')->name('property.sale.detail');
 
     Route::redirect('/properties-for-sale/{slug}', '/property-for-sale/bali/{slug}', 301);
 
