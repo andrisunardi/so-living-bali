@@ -22,7 +22,7 @@
                 @foreach ($nearby as $place)
                     <li class="list-group-item d-flex justify-content-between align-items-center gap-3 px-0">
                         <span>{{ $place['name'] }}</span>
-                        <span class="fw-semibold text-success text-nowrap">{{ $place['distance'] }}</span>
+                        <span class="fw-semibold text-success text-nowrap">{{ $place['time'] }}</span>
                     </li>
                 @endforeach
             </ul>
