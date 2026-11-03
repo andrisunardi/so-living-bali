@@ -346,13 +346,6 @@ class PropertyEditForm extends Form
     public ?string $floor_plan = '';
 
     #[Validate([
-        'nearby' => ['nullable', 'array'],
-        'nearby.*.place' => ['nullable', 'string', 'max:100'],
-        'nearby.*.time' => ['nullable', 'string', 'max:50'],
-    ])]
-    public array $nearby = [];
-
-    #[Validate([
         'highlights' => ['nullable', 'array'],
         'highlights.*' => ['nullable', 'string', 'max:255'],
     ])]
@@ -525,7 +518,6 @@ class PropertyEditForm extends Form
         $this->developer_name = $property->developer_name;
         $this->video_tour = $property->video_tour;
         $this->floor_plan = $property->floor_plan;
-        $this->nearby = $property->nearby ?? [];
         $this->highlights = $property->highlights ?? [];
 
         $this->price_per_are = $property->price_per_are;

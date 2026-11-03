@@ -15,6 +15,7 @@ use App\Models\PropertyImage;
 use Exception;
 use Illuminate\Support\Arr;
 use Illuminate\Support\Carbon;
+use Illuminate\Support\Facades\Cache;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Http;
 use Illuminate\Support\Str;
@@ -248,10 +249,6 @@ class PropertyService
             $data['status'] = ($data['status'] ?? PropertyStatus::Pending) ?: PropertyStatus::Pending;
             $data['owner_representative_id'] = ($data['owner_representative_id'] ?? null) ?: null;
 
-            $data['nearby'] = array_values(array_filter(
-                $data['nearby'] ?? [],
-                fn ($row) => filled($row['place'] ?? null) || filled($row['time'] ?? null)
-            )) ?: null;
             $data['highlights'] = array_values(array_filter(
                 $data['highlights'] ?? [],
                 fn ($value) => filled($value)
@@ -378,10 +375,6 @@ class PropertyService
             $data['latitude'] = $data['latitude'] ?: null;
             $data['longitude'] = $data['longitude'] ?: null;
 
-            $data['nearby'] = array_values(array_filter(
-                $data['nearby'] ?? [],
-                fn ($row) => filled($row['place'] ?? null) || filled($row['time'] ?? null)
-            )) ?: null;
             $data['highlights'] = array_values(array_filter(
                 $data['highlights'] ?? [],
                 fn ($value) => filled($value)
@@ -539,6 +532,104 @@ class PropertyService
             ->whereIn('listing_type', $listingTypes)
             ->where('slug', $slug)
             ->first();
+    }
+
+    public function nearby(Property $property, int $radius = 3000, int $limit = 8): array
+    {
+        if (! $property->latitude || ! $property->longitude) {
+            return [];
+        }
+
+        $lat = (float) $property->latitude;
+        $lng = (float) $property->longitude;
+
+        $cacheKey = 'nearby-'.round($lat, 4).'-'.round($lng, 4).'-'.$radius.'-'.$limit;
+
+        $cached = Cache::get($cacheKey);
+
+        if (is_array($cached)) {
+            return $cached;
+        }
+
+        $places = $this->fetchNearbyFromOverpass($lat, $lng, $radius, $limit);
+
+        if (! empty($places)) {
+            Cache::put($cacheKey, $places, now()->addDays(7));
+        }
+
+        return $places;
+    }
+
+    private function fetchNearbyFromOverpass(float $lat, float $lng, int $radius, int $limit): array
+    {
+        $filters = [
+            'natural' => 'beach',
+            'leisure' => 'beach_resort',
+            'shop' => 'supermarket',
+            'amenity' => 'hospital',
+            'tourism' => 'attraction',
+        ];
+
+        $clauses = '';
+        foreach ($filters as $key => $value) {
+            $clauses .= 'node(around:'.$radius.','.$lat.','.$lng.')["'.$key.'"="'.$value.'"]["name"];';
+        }
+
+        $query = '[out:json][timeout:15];('.$clauses.');out body '.($limit * 3).';';
+
+        $endpoints = [
+            'https://overpass-api.de/api/interpreter',
+            'https://overpass.kumi.systems/api/interpreter',
+            'https://maps.mail.ru/osm/tools/overpass/api/interpreter',
+        ];
+
+        $elements = [];
+
+        foreach ($endpoints as $endpoint) {
+            try {
+                $response = Http::timeout(6)
+                    ->withHeaders(['User-Agent' => 'SOLivingBali/1.0 (+'.config('app.url').')'])
+                    ->asForm()
+                    ->post($endpoint, ['data' => $query]);
+
+                if ($response->successful()) {
+                    $elements = $response->json('elements', []);
+
+                    break;
+                }
+            } catch (\Throwable) {
+                continue;
+            }
+        }
+
+        return collect($elements)
+            ->filter(fn ($element) => filled($element['tags']['name'] ?? null) && isset($element['lat'], $element['lon']))
+            ->map(fn ($element) => [
+                'name' => $element['tags']['name'],
+                'distance' => $this->haversineKm($lat, $lng, (float) $element['lat'], (float) $element['lon']),
+            ])
+            ->unique('name')
+            ->sortBy('distance')
+            ->take($limit)
+            ->map(fn ($place) => [
+                'name' => $place['name'],
+                'distance' => number_format($place['distance'], 1).' km',
+            ])
+            ->values()
+            ->all();
+    }
+
+    private function haversineKm(float $lat1, float $lng1, float $lat2, float $lng2): float
+    {
+        $earthRadius = 6371;
+
+        $dLat = deg2rad($lat2 - $lat1);
+        $dLng = deg2rad($lng2 - $lng1);
+
+        $a = sin($dLat / 2) ** 2
+            + cos(deg2rad($lat1)) * cos(deg2rad($lat2)) * sin($dLng / 2) ** 2;
+
+        return $earthRadius * 2 * asin(min(1, sqrt($a)));
     }
 
     public function uploadImages(Property $property, array $images = []): void

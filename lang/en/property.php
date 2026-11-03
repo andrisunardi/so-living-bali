@@ -209,9 +209,6 @@ return [
     'developer_name' => 'Developer Name',
 
     'nearby' => 'Nearby',
-    'nearby_place' => 'Place',
-    'nearby_time' => 'Time',
-    'add_nearby' => 'Add Nearby',
     'approximate_location' => 'Approximate location',
     'video_tour' => 'Video Tour',
     'video_tour_helper' => 'Video tour URL',
