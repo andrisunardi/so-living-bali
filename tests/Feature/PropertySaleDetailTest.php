@@ -6,6 +6,7 @@ use App\Enums\Property\PropertyCurrency;
 use App\Enums\Property\PropertyListingType;
 use App\Enums\Property\PropertyStatus;
 use App\Models\Property;
+use App\Services\PropertyService;
 use Illuminate\Foundation\Testing\RefreshDatabase;
 use Illuminate\Support\Str;
 use Tests\TestCase;
@@ -101,7 +102,25 @@ class PropertySaleDetailTest extends TestCase
         $response->assertDontSee('Why This Property Stands Out');
         $response->assertDontSee(trans('property.video_tour'));
         $response->assertDontSee(trans('property.floor_plan'));
-        $response->assertDontSee('sale-map');
+        $response->assertDontSee('output=embed', false);
+    }
+
+    public function test_coordinates_fall_back_to_google_maps_url_when_lat_lng_missing(): void
+    {
+        $property = $this->createProperty([
+            'latitude' => null,
+            'longitude' => null,
+            'google_maps_url' => 'https://www.google.com/maps/place/Villa/@-8.6591661,115.1451081,17z',
+        ]);
+
+        $service = new PropertyService;
+
+        $this->assertSame('-8.6591661,115.1451081', $service->coordinates($property));
+        $this->assertStringContainsString('maps.google.com/maps?q=-8.6591661,115.1451081', $service->mapEmbedUrl($property));
+
+        $nearby = $service->nearby($property);
+        $this->assertNotEmpty($nearby);
+        $this->assertStringContainsString('@-8.6591661,115.1451081', $nearby[0]['url']);
     }
 
     public function test_for_sale_detail_renders_both_leasehold_and_freehold_prices(): void

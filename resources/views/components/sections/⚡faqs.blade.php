@@ -49,7 +49,7 @@ new #[Lazy] class extends Component {
                             <h2 class="accordion-header">
                                 <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse"
                                     data-bs-target="#faq-{{ $i }}" aria-expanded="false"
-                                    aria-controls="faq-{{ $i }}">
+                                    aria-controls="faq-{{ $i }}" aria-label="{{ trans('index.loading') }}">
                                     <span class="placeholder col-11"></span>
                                 </button>
                             </h2>

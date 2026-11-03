@@ -59,7 +59,7 @@
                         <div class="d-flex gap-3">
                             @foreach (config('social-medias') as $socialMedia)
                                 <a draggable="false" class="text-light" href="{{ $socialMedia['link'] }}"
-                                    target="_blank">
+                                    target="_blank" aria-label="{{ $socialMedia['name'] }}">
                                     <span class="{{ $socialMedia['icon'] }} fa-fw fa-xl"></span>
                                 </a>
                             @endforeach

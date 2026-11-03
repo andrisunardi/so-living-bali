@@ -36,7 +36,8 @@ new class extends Component {
                     data-bs-toggle="dropdown" wire:model.live.debounce.500ms="search" wire:offline.class="disabled"
                     wire:offline.attr="disabled">
 
-                <a draggable="false" class="input-group-text rounded-end-5 ps-2" role="button" wire:click="changeText">
+                <a draggable="false" class="input-group-text rounded-end-5 ps-2" role="button" wire:click="changeText"
+                    aria-label="{{ trans('index.close') }}">
                     <span class="fas fa-times fa-sm"></span>
                 </a>
             </div>
@@ -60,7 +61,7 @@ new class extends Component {
             </ul>
         </div>
     @else
-        <a draggable="false" role="button" wire:click="changeText">
+        <a draggable="false" role="button" wire:click="changeText" aria-label="{{ trans('index.search') }}">
             <span class="fa-stack">
                 <i class="fa-solid fa-circle fa-stack-2x fa-inverse"></i>
                 <i class="fa-solid fa-search fa-stack-1x"></i>

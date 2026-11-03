@@ -20,6 +20,8 @@ return [
     'change_show' => 'Ubah Tampilan',
     'clear' => 'Hapus',
     'close' => 'Tutup',
+    'menu' => 'Menu',
+    'loading' => 'Memuat',
     'connect' => 'Hubungkan',
     'contact' => 'Kontak',
     'currency' => 'Mata Uang',

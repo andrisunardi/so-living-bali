@@ -52,7 +52,7 @@
                         <div>
                             <div class="dropdown">
                                 <a draggable="false" role="button" class="header-color dropdown-toggle icon-link"
-                                    data-bs-toggle="dropdown">
+                                    data-bs-toggle="dropdown" aria-label="{{ trans('index.language') }}">
                                     <span class="{{ Language::from(app()->getLocale())->flag() }}"></span>
                                     <span class="d-lg-none d-xl-block text-uppercase">
                                         {{ app()->getLocale() }}
@@ -101,7 +101,8 @@
             </div>
 
             <div class="col-auto text-end d-lg-none">
-                <a draggable="false" href="javascript:;" data-bs-toggle="offcanvas" data-bs-target="#navigation">
+                <a draggable="false" role="button" href="javascript:;" data-bs-toggle="offcanvas"
+                    data-bs-target="#navigation" aria-label="{{ trans('index.menu') }}">
                     <span class="fas fa-bars header-color text-black"></span>
                 </a>
             </div>
