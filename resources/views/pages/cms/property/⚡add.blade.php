@@ -274,17 +274,6 @@ new #[Title('Add | Property')] class extends Component {
         return PropertyTargetProfile::cases();
     }
 
-    public function addNearby(): void
-    {
-        $this->form->nearby[] = ['place' => '', 'time' => ''];
-    }
-
-    public function removeNearby(int $index): void
-    {
-        unset($this->form->nearby[$index]);
-        $this->form->nearby = array_values($this->form->nearby);
-    }
-
     public function addHighlight(): void
     {
         $this->form->highlights[] = '';

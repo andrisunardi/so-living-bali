@@ -24,3 +24,4 @@ Schedule::command('generate:sitemap')->daily();
 
 Schedule::command('ghl:refresh-token')->daily();
 Schedule::command('exchange-rate:refresh-currency')->hourly();
+Schedule::command('nearby:refresh')->weekly();

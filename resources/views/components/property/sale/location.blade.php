@@ -1,12 +1,11 @@
 @props([
     'property' => null,
+    'nearby' => [],
 ])
-
-@php($nearby = collect($property->nearby ?? [])->filter(fn ($row) => filled($row['place'] ?? null)))
 
 <div class="row g-4">
     @if ($property->latitude && $property->longitude)
-        <div class="{{ $nearby->isNotEmpty() ? 'col-lg-7' : 'col-12' }}">
+        <div class="{{ ! empty($nearby) ? 'col-lg-7' : 'col-12' }}">
             <div class="rounded-4 border overflow-hidden position-relative">
                 <div id="sale-map" class="w-100 ratio ratio-4x3 rounded-4 z-0"></div>
                 <span class="position-absolute bottom-0 start-0 m-2 badge text-bg-light border small fw-normal z-1">
@@ -16,16 +15,14 @@
         </div>
     @endif
 
-    @if ($nearby->isNotEmpty())
+    @if (! empty($nearby))
         <div class="{{ $property->latitude && $property->longitude ? 'col-lg-5' : 'col-12' }}">
             <h3 class="h5 fw-semibold mb-3">{{ trans('property.nearby') }}</h3>
             <ul class="list-group list-group-flush">
-                @foreach ($nearby as $row)
+                @foreach ($nearby as $place)
                     <li class="list-group-item d-flex justify-content-between align-items-center gap-3 px-0">
-                        <span>{{ $row['place'] }}</span>
-                        @if (filled($row['time'] ?? null))
-                            <span class="fw-semibold text-success text-nowrap">{{ $row['time'] }}</span>
-                        @endif
+                        <span>{{ $place['name'] }}</span>
+                        <span class="fw-semibold text-success text-nowrap">{{ $place['distance'] }}</span>
                     </li>
                 @endforeach
             </ul>

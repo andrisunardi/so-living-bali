@@ -6,7 +6,9 @@ use App\Enums\Property\PropertyCurrency;
 use App\Enums\Property\PropertyListingType;
 use App\Enums\Property\PropertyStatus;
 use App\Models\Property;
+use App\Services\PropertyService;
 use Illuminate\Foundation\Testing\RefreshDatabase;
+use Illuminate\Support\Facades\Http;
 use Illuminate\Support\Str;
 use Tests\TestCase;
 
@@ -60,6 +62,8 @@ class PropertySaleDetailTest extends TestCase
 
     public function test_for_sale_detail_renders_new_sale_detail_fields_when_present(): void
     {
+        Http::fake(['overpass-api.de/*' => Http::response(['elements' => []], 200)]);
+
         $property = $this->createProperty([
             'status' => PropertyStatus::AcceptUpper,
             'listing_type' => PropertyListingType::ForSale,
@@ -67,9 +71,6 @@ class PropertySaleDetailTest extends TestCase
             'longitude' => 115.13,
             'highlights' => [
                 'Ocean view rooftop',
-            ],
-            'nearby' => [
-                ['place' => 'Seminyak Beach', 'time' => '10 min'],
             ],
             'video_tour' => 'https://example.com/video-tour',
             'floor_plan' => 'https://example.com/floor-plan.pdf',
@@ -83,8 +84,6 @@ class PropertySaleDetailTest extends TestCase
         $response->assertSee('https://example.com/video-tour', false);
         $response->assertSee('https://example.com/floor-plan.pdf', false);
         $response->assertSee('sale-map');
-        $response->assertSee('Seminyak Beach');
-        $response->assertSee('10 min');
     }
 
     public function test_for_sale_detail_hides_new_sale_detail_fields_when_empty(): void
@@ -95,7 +94,6 @@ class PropertySaleDetailTest extends TestCase
             'latitude' => null,
             'longitude' => null,
             'highlights' => null,
-            'nearby' => null,
             'video_tour' => null,
             'floor_plan' => null,
         ]);
@@ -107,6 +105,36 @@ class PropertySaleDetailTest extends TestCase
         $response->assertDontSee(trans('property.video_tour'));
         $response->assertDontSee(trans('property.floor_plan'));
         $response->assertDontSee('sale-map');
+    }
+
+    public function test_nearby_returns_named_places_sorted_by_distance_from_overpass(): void
+    {
+        Http::fake([
+            'overpass-api.de/*' => Http::response([
+                'elements' => [
+                    ['lat' => -8.70, 'lon' => 115.17, 'tags' => ['name' => 'Far Beach']],
+                    ['lat' => -8.651, 'lon' => 115.131, 'tags' => ['name' => 'Near Cafe']],
+                    ['lat' => -8.66, 'lon' => 115.14, 'tags' => []],
+                ],
+            ], 200),
+        ]);
+
+        $property = $this->createProperty(['latitude' => -8.65, 'longitude' => 115.13]);
+
+        $nearby = (new PropertyService)->nearby($property);
+
+        $this->assertSame('Near Cafe', $nearby[0]['name']);
+        $this->assertSame('Far Beach', $nearby[1]['name']);
+        $this->assertStringContainsString('km', $nearby[0]['distance']);
+    }
+
+    public function test_nearby_degrades_gracefully_when_overpass_fails(): void
+    {
+        Http::fake(['*' => Http::response('error', 500)]);
+
+        $property = $this->createProperty(['latitude' => -8.80, 'longitude' => 115.20]);
+
+        $this->assertSame([], (new PropertyService)->nearby($property));
     }
 
     public function test_for_sale_detail_renders_both_leasehold_and_freehold_prices(): void
