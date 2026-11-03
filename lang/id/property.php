@@ -182,6 +182,7 @@ return [
     'payment_plan_details' => 'Detail Skema Pembayaran',
     'developer_name' => 'Nama Pengembang (Developer)',
     'nearby' => 'Sekitar Lokasi',
+    'no_nearby_places' => 'Tidak ada tempat di sekitar yang ditemukan.',
     'minutes_short' => 'mnt',
     'approximate_location' => 'Lokasi perkiraan',
     'video_tour' => 'Video Tour',

@@ -403,7 +403,7 @@ new #[Title('Property For Sale')] class extends Component
         </section>
     @endif
 
-    @if (($property->latitude && $property->longitude) || ! empty($nearby))
+    @if ($property->latitude && $property->longitude)
         <section class="pb-5">
             <div class="container-md">
                 <h2 class="h4 fw-semibold mb-3">

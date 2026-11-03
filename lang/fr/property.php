@@ -182,6 +182,7 @@ return [
     'payment_plan_details' => 'Détails du plan de paiement',
     'developer_name' => 'Nom du promoteur',
     'nearby' => 'À proximité',
+    'no_nearby_places' => 'Aucun lieu à proximité trouvé.',
     'minutes_short' => 'min',
     'approximate_location' => 'Emplacement approximatif',
     'video_tour' => 'Video Tour',

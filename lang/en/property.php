@@ -209,6 +209,7 @@ return [
     'developer_name' => 'Developer Name',
 
     'nearby' => 'Nearby',
+    'no_nearby_places' => 'No nearby places found.',
     'minutes_short' => 'min',
     'approximate_location' => 'Approximate location',
     'video_tour' => 'Video Tour',
