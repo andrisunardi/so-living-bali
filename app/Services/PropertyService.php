@@ -562,20 +562,14 @@ class PropertyService
 
     private function fetchNearbyFromOverpass(float $lat, float $lng, int $radius, int $limit): array
     {
-        $filters = [
-            'natural' => 'beach',
-            'leisure' => 'beach_resort',
-            'shop' => 'supermarket',
-            'amenity' => 'hospital',
-            'tourism' => 'attraction',
-        ];
+        $tags = ['shop', 'amenity', 'tourism', 'leisure', 'natural', 'healthcare'];
 
         $clauses = '';
-        foreach ($filters as $key => $value) {
-            $clauses .= 'node(around:'.$radius.','.$lat.','.$lng.')["'.$key.'"="'.$value.'"]["name"];';
+        foreach ($tags as $tag) {
+            $clauses .= 'node(around:'.$radius.','.$lat.','.$lng.')["'.$tag.'"]["name"];';
         }
 
-        $query = '[out:json][timeout:15];('.$clauses.');out body '.($limit * 3).';';
+        $query = '[out:json][timeout:15];('.$clauses.');out body '.($limit * 6).';';
 
         $endpoints = [
             'https://overpass-api.de/api/interpreter',
