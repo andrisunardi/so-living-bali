@@ -343,6 +343,13 @@ class PropertyAddForm extends Form
     public string $floor_plan = '';
 
     #[Validate([
+        'nearby' => ['nullable', 'array'],
+        'nearby.*.place' => ['nullable', 'string', 'max:100'],
+        'nearby.*.time' => ['nullable', 'string', 'max:50'],
+    ])]
+    public array $nearby = [];
+
+    #[Validate([
         'highlights' => ['nullable', 'array'],
         'highlights.*' => ['nullable', 'string', 'max:255'],
     ])]
