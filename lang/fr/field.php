@@ -21,6 +21,8 @@ return [
     'building_size' => 'Surface du bâtiment',
     'code' => 'Code',
     'company' => 'Entreprise',
+    'job' => 'Emploi',
+    'word' => 'Témoignage',
     'confirm_password' => 'Confirmer le mot de passe',
     'confirm_reset' => 'Confirmer la réinitialisation',
     'contact' => 'Contact',

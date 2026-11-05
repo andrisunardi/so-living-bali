@@ -34,6 +34,17 @@ return [
         'title' => 'Ruang yang Dirancang untuk Ditinggali, Bukan Sekadar Menginap Singkat',
         'description' => 'Dirancang khusus untuk tinggal lebih lama dan melengkapi keseharian Anda di Bali. Tempat di mana Anda bisa menikmati hidup dengan tenang sesuai ritme Anda sendiri.',
     ],
+
+    'testimonials' => [
+        'sub_title' => 'Testimoni',
+        'title' => 'Klien Kami Berbagi Pengalaman Mereka',
+    ],
+
+    'youtube' => [
+        'sub_title' => 'YouTube',
+        'title' => 'Tonton Konten Terbaru dari Channel YouTube Kami',
+        'button' => 'Kunjungi Channel Kami',
+    ],
     'select_locations' => [
         'title' => 'Jelajahi Properti Terbaru yang Tersedia',
         'description' => 'Setiap hunian dipilih secara terkurasi sesuai dengan cara orang benar-benar tinggal.',

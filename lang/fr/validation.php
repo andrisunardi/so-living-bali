@@ -180,6 +180,8 @@ return [
         'building_size' => 'Surface construite',
         'code' => 'Code',
         'company' => 'Société',
+        'job' => 'Emploi',
+        'word' => 'Témoignage',
         'confirm_reset' => 'Confirmer la réinitialisation',
         'created' => 'Créé le',
         'description_fr' => 'Description FR',

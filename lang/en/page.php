@@ -27,6 +27,7 @@ return [
     'faq' => 'FAQ',
     'standard' => 'Standard',
     'value' => 'Value',
+    'testimonial' => 'Testimonial',
     'area' => 'Area',
     'district' => 'District',
 

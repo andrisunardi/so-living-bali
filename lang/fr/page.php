@@ -23,6 +23,7 @@ return [
     'faq' => 'FAQ',
     'standard' => 'Normes',
     'value' => 'Valeurs',
+    'testimonial' => 'Témoignage',
     'area' => 'Zones',
     'district' => 'Districts / Quartiers',
     'oauth' => 'OAuth',

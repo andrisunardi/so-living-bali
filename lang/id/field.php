@@ -21,6 +21,8 @@ return [
     'building_size' => 'Luas Bangunan',
     'code' => 'Kode',
     'company' => 'Perusahaan',
+    'job' => 'Pekerjaan',
+    'word' => 'Kata',
     'confirm_password' => 'Konfirmasi Kata Sandi',
     'confirm_reset' => 'Konfirmasi Atur Ulang',
     'contact' => 'Kontak',

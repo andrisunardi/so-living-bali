@@ -180,6 +180,8 @@ return [
         'building_size' => 'Luas Bangunan',
         'code' => 'Kode',
         'company' => 'Perusahaan',
+        'job' => 'Pekerjaan',
+        'word' => 'Kata',
         'confirm_reset' => 'Konfirmasi Reset',
         'created' => 'Dibuat Pada',
         'description_fr' => 'Deskripsi FR',

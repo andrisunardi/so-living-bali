@@ -180,6 +180,8 @@ return [
         'building_size' => 'Building Size',
         'code' => 'Code',
         'company' => 'Company',
+        'job' => 'Job',
+        'word' => 'Word',
         'confirm_reset' => 'Confirm Reset',
         'created' => 'Created',
         'description_fr' => 'Description FR',

@@ -138,6 +138,14 @@ class Component extends LivewireComponent
                     [
                         'id' => $pageId++,
                         'menu_id' => 2,
+                        'name' => trans('page.testimonial'),
+                        'icon' => 'fas fa-comment-dots',
+                        'route' => 'cms.testimonial.index',
+                        'permission' => 'testimonial',
+                    ],
+                    [
+                        'id' => $pageId++,
+                        'menu_id' => 2,
                         'name' => trans('page.area'),
                         'icon' => 'fas fa-archway',
                         'route' => 'cms.area.index',
