@@ -76,6 +76,12 @@ return [
     // FACEBOOK
     'facebook_id' => env('FACEBOOK_ID'),
 
+    // YOUTUBE
+    'youtube' => [
+        'channel_id' => env('YOUTUBE_CHANNEL_ID'),
+        'channel_url' => env('YOUTUBE_CHANNEL_URL'),
+    ],
+
     // GOOGLE
     'google_analytics_id' => env('GOOGLE_ANALYTICS_ID'),
 ];
