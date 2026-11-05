@@ -167,6 +167,12 @@ class GuideService
 
     public function uploadImage(Guide $guide, array $fileId): Guide
     {
+        $file = $fileId[0] ?? null;
+
+        if (! $file || ($file['type'] ?? null) === 'url') {
+            return $guide;
+        }
+
         $google = new GoogleDrive;
 
         $directory = 'images/guide';
@@ -177,9 +183,13 @@ class GuideService
 
         $fullUrl = "{$baseUrl}{$assetUrl}";
 
-        $content = $google->download($fileId[0]['id']);
+        $content = $google->download($file['id']);
 
         try {
+            if (! is_dir($assetPath)) {
+                mkdir($assetPath, 0755, true);
+            }
+
             $image = Image::make($content);
 
             // $image->resize(1200, null, function ($constraint) {
@@ -193,7 +203,7 @@ class GuideService
             $encoded = (string) $image->encode('webp', 70);
             file_put_contents($fullPath, $encoded);
 
-            $guide->google_file_id = $fileId[0]['id'];
+            $guide->google_file_id = $file['id'];
             $guide->image_url = "{$fullUrl}/{$directory}/{$fileName}";
             $guide->save();
 
