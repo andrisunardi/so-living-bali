@@ -1,12 +1,14 @@
 <?php
 
 use App\Livewire\Component;
-use Livewire\Attributes\Title;
-use Livewire\Attributes\On;
-use Livewire\Attributes\Url;
 use App\Services\DistrictService;
+use App\Services\PropertyService;
+use Livewire\Attributes\On;
+use Livewire\Attributes\Title;
+use Livewire\Attributes\Url;
 
-new #[Title('Properties For Sale')] class extends Component {
+new #[Title('Properties For Sale')] class extends Component
+{
     public string $area = '';
 
     #[Url(except: [])]
@@ -22,17 +24,22 @@ new #[Title('Properties For Sale')] class extends Component {
     public ?int $ownership = null;
 
     #[Url(except: [])]
-    public array $prices = [
-        'min' => 40000000,
-        'max' => 2500000000,
-    ];
+    public array $prices = [];
 
-    public int $price_min = 40000000;
+    public int $price_min = 0;
 
-    public int $price_max = 2500000000;
+    public int $price_max = 0;
 
     public function mount(): void
     {
+        $range = (new PropertyService)->salePriceRange();
+
+        $this->price_min = $range['min'];
+        $this->price_max = $range['max'];
+
+        $this->prices['min'] = $this->prices['min'] ?? $range['min'];
+        $this->prices['max'] = $this->prices['max'] ?? $range['max'];
+
         if ($this->districts || $this->areas) {
             $selectedDistricts = $this->districts()->whereIn('id', $this->districts);
             $selectedAreas = $this->districts()->pluck('areas')->flatten()->whereIn('id', $this->areas);
@@ -43,9 +50,9 @@ new #[Title('Properties For Sale')] class extends Component {
     // CEK NANTI
     public function districts(): object
     {
-        $service = new DistrictService();
+        $service = new DistrictService;
         $districts = $service->index(isShow: [true], isActive: [true], orderBy: 'name', sortBy: 'asc', paginate: false);
-        $districts->loadMissing(['areas' => fn($q) => $q->show()->active()]);
+        $districts->loadMissing(['areas' => fn ($q) => $q->show()->active()]);
 
         return $districts;
     }
@@ -54,7 +61,7 @@ new #[Title('Properties For Sale')] class extends Component {
     {
         $this->dispatch('keep-type-dropdown-open');
 
-        if (!$value) {
+        if (! $value) {
             $this->reset('types');
 
             return;

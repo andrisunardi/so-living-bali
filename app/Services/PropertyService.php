@@ -534,6 +534,41 @@ class PropertyService
             ->first();
     }
 
+    public function salePriceRange(): array
+    {
+        $statuses = [PropertyStatus::AcceptUpper->value, PropertyStatus::AcceptPremium->value];
+        $listingTypes = [PropertyListingType::ForSale->value, PropertyListingType::ForRentAndSale->value];
+
+        $defaultMin = (int) config('constants.property.sale_price_min');
+        $defaultMax = (int) config('constants.property.sale_price_max');
+
+        $prices = Property::query()
+            ->without('image')
+            ->whereIn('status', $statuses)
+            ->whereIn('listing_type', $listingTypes)
+            ->get(['id', 'sale_price', 'leasehold_price', 'freehold_price'])
+            ->flatMap(fn (Property $property) => [
+                (int) $property->sale_price,
+                (int) $property->leasehold_price,
+                (int) $property->freehold_price,
+            ])
+            ->filter(fn (int $price) => $price > 0);
+
+        if ($prices->isEmpty()) {
+            return ['min' => $defaultMin, 'max' => $defaultMax];
+        }
+
+        $min = (int) floor($prices->min() / 1000000) * 1000000;
+        $max = (int) ceil($prices->max() / 1000000) * 1000000;
+
+        if ($min >= $max) {
+            $min = min($min, $defaultMin);
+            $max = max($max, $defaultMax);
+        }
+
+        return ['min' => $min, 'max' => $max];
+    }
+
     public function nearby(Property $property, int $radius = 3000, int $limit = 8): array
     {
         if (! $property->latitude || ! $property->longitude) {
