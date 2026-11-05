@@ -62,6 +62,12 @@ Route::group(['middleware' => ['auth']], function () {
         ->middleware(['permission:value'])
         ->group(base_path('routes/cms/value.php'));
 
+    Route::prefix('testimonial')
+        ->name('testimonial.')
+        ->as('testimonial.')
+        ->middleware(['permission:testimonial'])
+        ->group(base_path('routes/cms/testimonial.php'));
+
     Route::prefix('area')
         ->name('area.')
         ->as('area.')

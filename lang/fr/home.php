@@ -34,6 +34,17 @@ return [
         'title' => 'Des espaces conçus pour vivre, au-delà des courts séjours',
         'description' => 'Pour les séjours prolongés, conçus pour s\'adapter à votre vie quotidienne à Bali. Un endroit où l\'on se sent chez soi, à son propre rythme.',
     ],
+
+    'testimonials' => [
+        'sub_title' => 'Témoignages',
+        'title' => 'Nos clients partagent leur expérience',
+    ],
+
+    'youtube' => [
+        'sub_title' => 'YouTube',
+        'title' => 'Découvrez les derniers contenus de notre chaîne YouTube',
+        'button' => 'Visitez notre chaîne',
+    ],
     'select_locations' => [
         'title' => 'Explorez les nouvelles annonces disponibles',
         'description' => 'Chaque maison est sélectionnée selon le véritable mode de vie de ses occupants.',

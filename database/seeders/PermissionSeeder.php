@@ -67,6 +67,13 @@ class PermissionSeeder extends Seeder
         Permission::create(['name' => 'value.detail'])->assignRole('Admin');
         Permission::create(['name' => 'value.export'])->assignRole('Admin');
 
+        Permission::create(['name' => 'testimonial'])->assignRole('Admin');
+        Permission::create(['name' => 'testimonial.add'])->assignRole('Admin');
+        Permission::create(['name' => 'testimonial.edit'])->assignRole('Admin');
+        Permission::create(['name' => 'testimonial.delete'])->assignRole('Admin');
+        Permission::create(['name' => 'testimonial.detail'])->assignRole('Admin');
+        Permission::create(['name' => 'testimonial.export'])->assignRole('Admin');
+
         Permission::create(['name' => 'area'])->assignRole('Admin');
         Permission::create(['name' => 'area.add'])->assignRole('Admin');
         Permission::create(['name' => 'area.edit'])->assignRole('Admin');

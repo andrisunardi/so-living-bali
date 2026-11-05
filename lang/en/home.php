@@ -44,6 +44,17 @@ return [
         'description' => 'For longer stays, designed to fit your everyday life in Bali. Where living feels settled at your own pace.',
     ],
 
+    'testimonials' => [
+        'sub_title' => 'Testimonials',
+        'title' => 'Our Clients Share Their Experience',
+    ],
+
+    'youtube' => [
+        'sub_title' => 'YouTube',
+        'title' => 'Watch the Newest Content from Our YouTube Channel',
+        'button' => 'Visit Our Channel',
+    ],
+
     'select_locations' => [
         'title' => 'Explore New Listings, Now Available',
         'description' => 'Each home selected for the way people truly live.',

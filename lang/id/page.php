@@ -23,6 +23,7 @@ return [
     'faq' => 'FAQ',
     'standard' => 'Standar',
     'value' => 'Nilai Utama',
+    'testimonial' => 'Testimoni',
     'area' => 'Area',
     'district' => 'Kecamatan / Wilayah',
     'oauth' => 'OAuth',

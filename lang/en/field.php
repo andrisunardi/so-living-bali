@@ -21,6 +21,8 @@ return [
     'building_size' => 'Building Size',
     'code' => 'Code',
     'company' => 'Company',
+    'job' => 'Job',
+    'word' => 'Word',
     'confirm_password' => 'Confirm Password',
     'confirm_reset' => 'Confirm Reset',
     'contact' => 'Contact',

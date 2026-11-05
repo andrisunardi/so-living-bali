@@ -238,6 +238,27 @@ Breadcrumbs::for('cms.value.detail', function (BreadcrumbTrail $trail, $value) {
     $trail->push(trans('index.detail'), route('cms.value.detail', $value), ['icon' => 'fas fa-list']);
 });
 
+// TESTIMONIAL
+Breadcrumbs::for('cms.testimonial.index', function (BreadcrumbTrail $trail) {
+    $trail->parent('cms.home');
+    $trail->push(trans('page.testimonial'), route('cms.testimonial.index'), ['icon' => 'fas fa-comment-dots']);
+});
+
+Breadcrumbs::for('cms.testimonial.add', function (BreadcrumbTrail $trail) {
+    $trail->parent('cms.testimonial.index');
+    $trail->push(trans('index.add'), route('cms.testimonial.add'), ['icon' => 'fas fa-plus']);
+});
+
+Breadcrumbs::for('cms.testimonial.edit', function (BreadcrumbTrail $trail, $testimonial) {
+    $trail->parent('cms.testimonial.index');
+    $trail->push(trans('index.edit'), route('cms.testimonial.edit', $testimonial), ['icon' => 'fas fa-edit']);
+});
+
+Breadcrumbs::for('cms.testimonial.detail', function (BreadcrumbTrail $trail, $testimonial) {
+    $trail->parent('cms.testimonial.index');
+    $trail->push(trans('index.detail'), route('cms.testimonial.detail', $testimonial), ['icon' => 'fas fa-list']);
+});
+
 // AREA
 Breadcrumbs::for('cms.area.index', function (BreadcrumbTrail $trail) {
     $trail->parent('cms.home');
