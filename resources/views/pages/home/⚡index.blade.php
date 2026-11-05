@@ -24,6 +24,8 @@ new #[Title('Home')] class extends Component {};
 
     <livewire:home.testimonials lazy />
 
+    <x-home.youtube />
+
     {{-- prettier-ignore --}}
     <livewire:sections.guides
     :sub-title="trans('home.guides.sub_title')"
