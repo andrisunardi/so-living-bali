@@ -59,6 +59,12 @@ return [
         'url' => env('ASSETS_URL'),
     ],
 
+    // PROPERTY
+    'property' => [
+        'sale_price_min' => (int) env('PROPERTY_SALE_PRICE_MIN', 1500000000),
+        'sale_price_max' => (int) env('PROPERTY_SALE_PRICE_MAX', 40000000000),
+    ],
+
     // SOCIAL MEDIA
     'social_media' => [
         'facebook' => env('SOCIAL_MEDIA_FACEBOOK'),
