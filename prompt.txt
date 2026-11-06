@@ -1,0 +1,67 @@
+Jadi gw ada beberapa task ya kiro
+Dan aturan mutlak gw
+1. jangan design custom dan style manual ya, wajib menggunakan class bootstrap 5.3
+2. ini sudah live dan memakai google adwords dan iklan, harus extra hati-hati, jangan sampai ada error dan bugs, dan perubahan hanya yang sesuai task, di luar itu wajib konfirmasi gw.
+3. selalu optimize website, page speed, dan seo yang benar.
+4. dan ini sudah masuk client minta revisi pakai bahasa inggris, jadi gw akan kasih source kata dia si client, termasuk terjemahan gw, mungkin aja gw salah mengartikannya, kiro bisa bantu gw jawab dan menyelesaikannya.
+
+TASK
+1. Gw berada di home page, kemudian gw click header properties for rent/for sale dropdown, nah ketika gw click, maka kan muncul di property atau properties for sale, lalu gw click lagi di header menu property namun ga ada dropdown, nah gw duga karena wire:navigate, maka ga ke load, tolong di fix ya. Kata Client : "We have noticed a
+This frequent problem with the website. The website seems.
+We click on FOR SALE or FOR RENT then all the website is frozen when we click everywhere (listing, filter criteria...)
+We are obliged to refresh the page then he works
+FIX IT TODAY"
+
+2. Gw cek pakai /log-viewer itu ada error sperti ini tolong di fix ya
+Datetime: 2026-11-05 22:02:28
+Log index 5. Click the button to copy link to this log entry.
+5
+Stack Trace
+Raw
+LogicException
+Unable to prepare route [/] for serialization. Another route has already been assigned name [home].
+in /home/solivingbali/src/vendor/laravel/framework/src/Illuminate/Routing/AbstractRouteCollection.php:257
+
+3. Untuk date of visit di cms, termasuk model, form, resource, dan sebagainya, cukup di hide/comment aja, gw khawatirnya nantinya kepake, tapi yang pasti di cms sudah tidak ada lagi date of visit. ya. Kata Client = "Remove the DATE OF VISIT in the category Property Identity"
+
+4. Kenapa property tersebut tidak muncul di property dan properties-for-sale ? Kata Client : "some villas doesnt appear in the website in FOR SALE AND/OR FOR RENT, IP156/IP172/IP144, pls fix it or tell me why it doesn t appear in our website"
+
+5. Di log-viewer gw juga ketemu ini tolong di fix (abaikan jika gw udah pernah fix ini)
+Cannot assign null to property App\Livewire\Forms\CMS\Property\PropertyAddForm::$price_per_are of type int
+
+6. di log-viewer gw juga ketemu bugs ini, tolong di perbaiki
+Datetime: 2026-11-03 09:02:37
+Log index 120. Click the button to copy link to this log entry.
+120
+Stack Trace
+Raw
+Spatie\LaravelIgnition\Exceptions\ViewException
+foreach() argument must be of type array|object, null given
+in /home/solivingbali/src/storage/framework/views/livewire/views/0c8b7866.blade.php:23
+#0
+
+7. Untuk di cms update seperti kemauan client, pbg dan slf bearti boolean ya? dan pbg slf ini enums, jangan eksekusi dlu ini, kasih tau ke gw maksudnya. Atau maksudnya radio button ga bisa unchecked kalau ga kepake? jika unchecked, apakah radio atau mendingan checkbox? kasih tau ke gw jangna eksusi dlu. Kata Client : "in the category LEGAL & BASIC ELIGIBILITY
+We had :
+•⁠  ⁠PBG : Yes or NO
+•⁠  ⁠SLF : Yes or No
+•⁠  ⁠PBG Status : Available/In Process/Not Available/Not Applicable
+•⁠  ⁠SLF Status : Available/In Process/Not Available/Not Applicable
+We will use the PBG Status and SLF Status only for CMS and Website"
+"I tried but it still doesn t work
+For example : PBG Status : Available/In Process/Not Available/Not Applicable
+If I clicked on Available then I want to be ableto remove it (at this moment, we can only select another option but not remove it)". "⁠  ⁠for all info with choice (to click), give the possibility to remove the choice and let empty (for example: when we have clicked on Available after we cannot remove it)"
+
+8. Ini di hide/comment aja orientation di table properties termasuk di factory, seeder, models, dan sebagainya. Jadi takutnya kepake. Kata client : "⁠remove the Orientation (it s finally useless)"
+
+9. Kategory di form property di hide/comment aja ya, termasuk field-field dibawahnya. Kata Client : "⁠remove this category (USELESS)"
+
+10. Coba cek property IP192 di database localhost so_living_bali, katanya salah flow ?. Coba cek kasih tau ke gw jangan eksusi dlu. Kata Client : "CHECK IP192 FOR RENT
+•⁠  ⁠in the CMS : 900million IDR per year and 90million IDR per month
+•⁠  ⁠we listed for SALE in USD
+•⁠  ⁠The rental price changed and are totally wrong". "Rp.0 Pierre"
+
+11. Emang gw ada backupannya? apakah ada di activity_logs ? Kata Client : "AR124 : the price in the CMS has been erased since your last modification
+Could you pls put back the initial price and the inclusion?"
+
+Total ada 11 task, pelan-pelan kasih tau gw, di ringkas, gw senior developer, tapi gw kesulitan baca dan memahami AI, jadi pake bahasa bayi atau mudah di mengerti.
+
