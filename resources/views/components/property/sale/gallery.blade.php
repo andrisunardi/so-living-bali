@@ -2,7 +2,7 @@
     'property' => null,
 ])
 
-@php($images = $property->images)
+@php($images = $property->images ?? collect())
 @php($imageCount = $images->count())
 @php($remainingImages = $imageCount - 5)
 

@@ -96,7 +96,7 @@
                 @enderror
             </div>
 
-            <div>
+            {{-- <div>
                 <label class="form-label" for="visit_date">
                     {{ trans('property.date_of_visit') }}
                 </label>
@@ -109,7 +109,7 @@
                 @error('form.visit_date')
                     <div class="form-text text-danger">{{ $message }}</div>
                 @enderror
-            </div>
+            </div> --}}
 
             <div>
                 <label class="form-label" for="year_built">

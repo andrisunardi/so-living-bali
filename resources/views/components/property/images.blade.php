@@ -8,7 +8,7 @@
     </div>
     <div class="col-sm-6">
         <div class="row g-3">
-            @php($remainingImages = $property->images->count() - 5)
+            @php($remainingImages = ($property->images ?? collect())->count() - 5)
 
             @for ($i = 1; $i <= 4; $i++)
                 <div class="col-6" wire:key="property-image-{{ $i }}">
@@ -57,7 +57,7 @@
 
                 <div class="modal-body" style="scroll-behavior:smooth;">
                     <div class="d-grid gap-4">
-                        @foreach ($property->images as $key => $propertyImage)
+                        @foreach ($property->images ?? collect() as $key => $propertyImage)
                             <div class="zoom">
                                 <img draggable="false" loading="lazy" decoding="async" class="img-fluid w-100 h-100 rounded"
                                     id="property-image-{{ $key }}"
