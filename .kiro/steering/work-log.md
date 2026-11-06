@@ -2,6 +2,14 @@
 
 A running record of important work and decisions, so a new Kiro session starts with full context. Newest at the top. Keep this updated and ship via push → PR → merge to `main`.
 
+## Session (Task 1 — site freeze after wire:navigate) — PR #80
+
+- **Task 1 — "website freezes / everything unclickable after clicking FOR SALE or FOR RENT, must refresh" (client: FIX IT TODAY)**: ROOT CAUSE = Bootstrap 5.3 overlay side-effects not torn down across a `wire:navigate` SPA swap. When a dropdown/offcanvas/modal (header has the Properties dropdown, the mobile offcanvas `#navigation`, and `<livewire:modal.list-your-property>`) is interacted with and Livewire replaces `<body>`, a leftover `.modal-backdrop`/`.offcanvas-backdrop` (plus `body.modal-open`/`body.offcanvas-backdrop` + inline `overflow`/`padding-right`) stays on the page — an invisible full-screen backdrop that swallows every click → "frozen". Hard refresh rebuilds body from scratch, which is why refresh "fixes" it. Nothing disposed Bootstrap instances or cleared stray backdrops on navigation.
+  - Fix in `resources/views/vendors/bootstrap.blade.php` (JS only, no markup/design change): `disposeOpenOverlays()` (hide open offcanvas/modal/dropdown via `getInstance()?.hide()`) on **`livewire:navigate`** (before swap); `clearStuckOverlays()` (remove `.modal-backdrop`/`.offcanvas-backdrop`, strip `body.modal-open`/`offcanvas-backdrop` + inline overflow/padding-right) + `initTooltips()` on **`livewire:navigated`** (after swap + first load). Per official Livewire v4 docs, body `<script>` re-runs every navigation → listeners registered ONCE behind `window.bootstrapNavigationCleanupRegistered` guard to avoid stacking; `initTooltips()` still runs each navigation. Guarded with `typeof bootstrap === 'undefined'`.
+  - Also folded the old one-time tooltip init (bare top-level `new bootstrap.Tooltip`, never re-ran after navigation) into `initTooltips()`.
+  - Did NOT touch `header.blade.php` `initHeader` (its listener also stacks but is harmless — `.off().on()` scroll re-attach, no freeze — out of scope).
+  - Livewire v4.4.8. Verified: 84 tests pass; blades compile; cleanup JS runs clean under a node smoke-harness. Sandbox has no browser → MUST browser-smoke-test after deploy (mobile hamburger offcanvas → tap link; List Your Property modal → navigate; Properties dropdown → For Sale/For Rent repeatedly + click listing/filters; expect NO freeze, no refresh). Deploy: `php artisan optimize:clear` + hard-refresh once.
+
 ## Session (11 client revisions batch) — PR #78
 
 Client sent 11 revisions. Localhost DB is now 1:1 with live production (user imported it), so IP156/IP172/IP144/IP192/AR124 all resolve and activity_log is complete. Done in ONE branch:
