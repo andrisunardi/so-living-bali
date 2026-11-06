@@ -37,9 +37,9 @@
     <x-cms.property.utilities-and-technical :property="$property" :form="$form" :type="$type" />
 @endif
 
-@if ($tab == PropertyTab::DesignLedOrInstagrammable->value)
+{{-- @if ($tab == PropertyTab::DesignLedOrInstagrammable->value)
     <x-cms.property.design-led-or-instagrammable :property="$property" :form="$form" :type="$type" />
-@endif
+@endif --}}
 
 @if ($tab == PropertyTab::TradeOffAndTargetProfile->value)
     <x-cms.property.trade-off-and-target-profile :property="$property" :form="$form" :type="$type" />

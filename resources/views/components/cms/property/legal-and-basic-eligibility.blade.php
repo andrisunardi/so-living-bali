@@ -110,7 +110,7 @@
         @enderror
     </div>
 
-    <div class="col-sm-6">
+    {{-- <div class="col-sm-6">
         <label class="form-label" for="pbg">
             {{ trans('property.pbg') }}
         </label>
@@ -144,7 +144,7 @@
         @error('form.slf')
             <div class="form-text text-danger">{{ $message }}</div>
         @enderror
-    </div>
+    </div> --}}
 
     <div class="col-sm-6">
         <label class="form-label" for="fully_furnished">
@@ -307,20 +307,22 @@
         <label class="form-label" for="pbg_status">
             {{ trans('property.pbg_status') }}
         </label>
-        <div>
-            @foreach (PropertyPBGStatus::cases() as $propertyPBGStatus)
-                <div class="form-check form-check-inline"
-                    wire:key="owner-price-flexbility-{{ $propertyPBGStatus->value }}">
-                    <input class="form-check-input" type="radio" id="pbg_status_{{ $propertyPBGStatus->value }}"
-                        name="pbg_status" value="{{ $propertyPBGStatus->value }}"
-                        {{ $propertyPBGStatus->value == $form->pbg_status ? 'checked' : '' }}
-                        wire:model.lazy="form.pbg_status" wire:offline.class="disabled" wire:offline.attr="disabled"
-                        wire:loading.class="disabled" wire:loading.attr="disabled">
-                    <label class="form-check-label" for="pbg_status_{{ $propertyPBGStatus->value }}">
+        <div class="input-group">
+            <div class="input-group-text">
+                <span class="fas fa-file-circle-check fa-fw "></span>
+            </div>
+            <select class="form-select select2-delete" id="pbg_status" name="pbg_status"
+                wire:model.lazy="form.pbg_status" wire:offline.class="disabled" wire:offline.attr="disabled"
+                wire:loading.class="disabled" wire:loading.attr="disabled">
+                <option value="">
+                    {{ trans('index.select') }} {{ trans('property.pbg_status') }}
+                </option>
+                @foreach (PropertyPBGStatus::cases() as $propertyPBGStatus)
+                    <option value="{{ $propertyPBGStatus->value }}" wire:key="pbg-status-{{ $propertyPBGStatus->value }}">
                         {{ Str::headline($propertyPBGStatus->name) }}
-                    </label>
-                </div>
-            @endforeach
+                    </option>
+                @endforeach
+            </select>
         </div>
         @error('form.pbg_status')
             <div class="form-text text-danger">{{ $message }}</div>
@@ -331,20 +333,22 @@
         <label class="form-label" for="slf_status">
             {{ trans('property.slf_status') }}
         </label>
-        <div>
-            @foreach (PropertySLFStatus::cases() as $propertySlfStatus)
-                <div class="form-check form-check-inline"
-                    wire:key="owner-price-flexbility-{{ $propertySlfStatus->value }}">
-                    <input class="form-check-input" type="radio" id="slf_status_{{ $propertySlfStatus->value }}"
-                        name="slf_status" value="{{ $propertySlfStatus->value }}"
-                        {{ $propertySlfStatus->value == $form->slf_status ? 'checked' : '' }}
-                        wire:model.lazy="form.slf_status" wire:offline.class="disabled" wire:offline.attr="disabled"
-                        wire:loading.class="disabled" wire:loading.attr="disabled">
-                    <label class="form-check-label" for="slf_status_{{ $propertySlfStatus->value }}">
+        <div class="input-group">
+            <div class="input-group-text">
+                <span class="fas fa-file-circle-check fa-fw "></span>
+            </div>
+            <select class="form-select select2-delete" id="slf_status" name="slf_status"
+                wire:model.lazy="form.slf_status" wire:offline.class="disabled" wire:offline.attr="disabled"
+                wire:loading.class="disabled" wire:loading.attr="disabled">
+                <option value="">
+                    {{ trans('index.select') }} {{ trans('property.slf_status') }}
+                </option>
+                @foreach (PropertySLFStatus::cases() as $propertySlfStatus)
+                    <option value="{{ $propertySlfStatus->value }}" wire:key="slf-status-{{ $propertySlfStatus->value }}">
                         {{ Str::headline($propertySlfStatus->name) }}
-                    </label>
-                </div>
-            @endforeach
+                    </option>
+                @endforeach
+            </select>
         </div>
         @error('form.slf_status')
             <div class="form-text text-danger">{{ $message }}</div>

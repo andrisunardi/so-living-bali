@@ -417,10 +417,10 @@ new #[Title('Property')] class extends Component {
                                         {{ trans('index.availability') }} :
                                         {{ $property->availability_date?->isoFormat('ddd, DD MMM YYYY') }}
                                     </div>
-                                    <div>
+                                    {{-- <div>
                                         {{ trans('index.visit') }} :
                                         {{ $property->visit_date?->isoFormat('ddd, DD MMM YYYY') }}
-                                    </div>
+                                    </div> --}}
                                 </td>
                                 <td>
                                     <div>{{ $property->address }}</div>

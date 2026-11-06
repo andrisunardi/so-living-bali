@@ -302,7 +302,10 @@ new #[Title('Edit | Property')] class extends Component {
 
     public function propertyTabs(): array
     {
-        return PropertyTab::cases();
+        return array_values(array_filter(
+            PropertyTab::cases(),
+            fn (PropertyTab $tab) => $tab !== PropertyTab::DesignLedOrInstagrammable
+        ));
     }
 };
 ?>

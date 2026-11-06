@@ -104,7 +104,7 @@ class PropertyFactory extends Factory
             'no_festive_venue_nearby' => fake()->boolean(),
             'no_ongoing' => fake()->boolean(),
             'quiet_access_road' => fake()->boolean(),
-            'orientation' => fake()->randomElement(PropertyOrientation::cases()),
+            // 'orientation' => fake()->randomElement(PropertyOrientation::cases()),
             'view' => fake()->text(),
 
             'living_area_has_natural_light' => fake()->boolean(),

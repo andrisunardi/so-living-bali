@@ -349,7 +349,7 @@ class PropertyAddForm extends Form
     public array $highlights = [];
 
     #[Validate('nullable|integer|min:0|max:100000000000')]
-    public int $price_per_are = 0;
+    public ?int $price_per_are = 0;
 
     #[Validate('nullable|string|min:1|max:100')]
     public string $land_size_in_ares = '';

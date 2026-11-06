@@ -182,14 +182,14 @@ new #[Title('Detail | Property')] class extends Component {
                     </div>
                 </div>
 
-                <div class="row">
+                {{-- <div class="row">
                     <div class="col-sm-5 col-md-4 col-lg-3 col-xl-2">
                         <div class="fw-bold">{{ trans('property.date_of_visit') }}</div>
                     </div>
                     <div class="col-sm-7 col-md-8 col-lg-9 col-xl-10">
                         {{ $property->visit_date?->isoFormat('DD MMMM YYYY') ?? '-' }}
                     </div>
-                </div>
+                </div> --}}
 
                 <div class="row">
                     <div class="col-sm-5 col-md-4 col-lg-3 col-xl-2">
@@ -554,14 +554,14 @@ new #[Title('Detail | Property')] class extends Component {
                     </div>
                 </div>
 
-                <div class="row">
+                {{-- <div class="row">
                     <div class="col-sm-5 col-md-4 col-lg-3 col-xl-2">
                         <div class="fw-bold">{{ trans('property.orientation') }}</div>
                     </div>
                     <div class="col-sm-7 col-md-8 col-lg-9 col-xl-10">
                         {{ $property->orientation?->description() ?? '-' }}
                     </div>
-                </div>
+                </div> --}}
 
                 <div class="row">
                     <div class="col-sm-5 col-md-4 col-lg-3 col-xl-2">
@@ -723,7 +723,7 @@ new #[Title('Detail | Property')] class extends Component {
 
                 <br />
 
-                <h5 class="fw-bold text-uppercase border-bottom pb-3">
+                {{-- <h5 class="fw-bold text-uppercase border-bottom pb-3">
                     {{ trans('property.design_led_or_instagrammable') }}
                 </h5>
 
@@ -748,7 +748,7 @@ new #[Title('Detail | Property')] class extends Component {
                     </div>
                 </div>
 
-                <br />
+                <br /> --}}
 
                 <h5 class="fw-bold text-uppercase border-bottom pb-3">
                     {{ trans('property.trade_off_and_target_profile') }}
@@ -1069,7 +1069,7 @@ new #[Title('Detail | Property')] class extends Component {
                 </h5>
 
                 <div class="row row-cols-1 row-cols-sm-2 row-cols-md-3 row-cols-lg-4 row-cols-xl-5 g-3">
-                    @foreach ($property->images as $propertyImage)
+                    @foreach ($property->images ?? collect() as $propertyImage)
                         <div class="col" wire:key="property-image-{{ $propertyImage->id }}">
                             <div class="card h-100">
                                 <div class="ratio ratio-1x1">

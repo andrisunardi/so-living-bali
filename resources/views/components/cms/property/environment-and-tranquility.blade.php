@@ -75,7 +75,7 @@
         @enderror
     </div>
 
-    <div class="col-sm-6">
+    {{-- <div class="col-sm-6">
         <label class="form-label" for="orientation">
             {{ trans('property.orientation') }}
         </label>
@@ -96,7 +96,7 @@
         @error('form.orientation')
             <div class="form-text text-danger">{{ $message }}</div>
         @enderror
-    </div>
+    </div> --}}
 
     <div class="col-sm-6">
         <label class="form-label" for="view">
