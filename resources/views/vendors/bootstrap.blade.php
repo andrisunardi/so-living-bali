@@ -2,7 +2,7 @@
     <link href="{{ asset('vendors/bootstrap-5.3.3/css/bootstrap.min.css') }}" rel="stylesheet">
 @endpush
 
-@push('script')
+@assets
     <script src="{{ asset('vendors/bootstrap-5.3.3/js/bootstrap.bundle.min.js') }}"></script>
 
     <script>
@@ -42,17 +42,11 @@
             document.body.style.removeProperty('padding-right');
         }
 
-        initTooltips();
+        document.addEventListener('livewire:navigate', disposeOpenOverlays);
 
-        if (!window.bootstrapNavigationCleanupRegistered) {
-            window.bootstrapNavigationCleanupRegistered = true;
-
-            document.addEventListener('livewire:navigate', disposeOpenOverlays);
-
-            document.addEventListener('livewire:navigated', function() {
-                clearStuckOverlays();
-                initTooltips();
-            });
-        }
+        document.addEventListener('livewire:navigated', function() {
+            clearStuckOverlays();
+            initTooltips();
+        });
     </script>
-@endpush
+@endassets
