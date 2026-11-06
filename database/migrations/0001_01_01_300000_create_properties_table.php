@@ -116,12 +116,19 @@ return new class extends Migration
             $table->unsignedBigInteger('sale_price')->default(0);
             $table->unsignedTinyInteger('currency')->nullable();
             $table->unsignedTinyInteger('ownership_type')->nullable();
+            $table->boolean('has_leasehold')->unsigned()->default(false);
+            $table->unsignedBigInteger('leasehold_price')->default(0);
+            $table->boolean('has_freehold')->unsigned()->default(false);
+            $table->unsignedBigInteger('freehold_price')->default(0);
             $table->date('lease_expiry_date')->nullable();
             $table->unsignedTinyInteger('lease_extension_available')->nullable();
             $table->text('lease_extension_terms_or_price')->nullable();
             $table->boolean('payment_plan_available')->unsigned()->default(false);
             $table->text('payment_plan_details')->nullable();
             $table->string('developer_name', 100)->nullable();
+            $table->string('video_tour')->nullable();
+            $table->string('floor_plan')->nullable();
+            $table->json('highlights')->nullable();
 
             $table->unsignedBigInteger('price_per_are')->default(0);
             $table->string('land_size_in_ares', 100)->nullable();

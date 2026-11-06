@@ -12,6 +12,9 @@ return new class extends Migration
         Schema::create('districts', function (Blueprint $table) {
             $table->id();
             $table->string('name', 50)->unique();
+            $table->text('description')->nullable();
+            $table->text('description_id')->nullable();
+            $table->text('description_fr')->nullable();
             $table->boolean('is_show')->unsigned()->default(true);
             $table->boolean('is_active')->unsigned()->default(true);
             $table->foreignIdFor(User::class, 'created_by')->nullable()->constrained('users')->nullOnDelete();
